@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IPhreeqc", "IPhreeqc.vcproj", "{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unit", "unit\unit.vcproj", "{270BB952-FCB2-4FA8-821E-BB750E83C902}"
+EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test", "test\test.vfproj", "{14BB3A4C-1ADE-4212-8931-6514BF913874}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
+	EndProjectSection
+EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test2", "test2\test2.vfproj", "{0BF09B12-56BE-42FC-B39E-61AE515D8858}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		MemDebug|Win32 = MemDebug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Debug|Win32.Build.0 = Debug|Win32
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.MemDebug|Win32.ActiveCfg = MemDebug|Win32
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.MemDebug|Win32.Build.0 = MemDebug|Win32
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Release|Win32.ActiveCfg = Release|Win32
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Release|Win32.Build.0 = Release|Win32
+		{270BB952-FCB2-4FA8-821E-BB750E83C902}.Debug|Win32.ActiveCfg = Debug|Win32
+		{270BB952-FCB2-4FA8-821E-BB750E83C902}.Debug|Win32.Build.0 = Debug|Win32
+		{270BB952-FCB2-4FA8-821E-BB750E83C902}.MemDebug|Win32.ActiveCfg = MemDebug|Win32
+		{270BB952-FCB2-4FA8-821E-BB750E83C902}.MemDebug|Win32.Build.0 = MemDebug|Win32
+		{270BB952-FCB2-4FA8-821E-BB750E83C902}.Release|Win32.ActiveCfg = Release|Win32
+		{270BB952-FCB2-4FA8-821E-BB750E83C902}.Release|Win32.Build.0 = Release|Win32
+		{14BB3A4C-1ADE-4212-8931-6514BF913874}.Debug|Win32.ActiveCfg = Debug|Win32
+		{14BB3A4C-1ADE-4212-8931-6514BF913874}.Debug|Win32.Build.0 = Debug|Win32
+		{14BB3A4C-1ADE-4212-8931-6514BF913874}.MemDebug|Win32.ActiveCfg = MemDebug|Win32
+		{14BB3A4C-1ADE-4212-8931-6514BF913874}.MemDebug|Win32.Build.0 = MemDebug|Win32
+		{14BB3A4C-1ADE-4212-8931-6514BF913874}.Release|Win32.ActiveCfg = Release|Win32
+		{14BB3A4C-1ADE-4212-8931-6514BF913874}.Release|Win32.Build.0 = Release|Win32
+		{0BF09B12-56BE-42FC-B39E-61AE515D8858}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0BF09B12-56BE-42FC-B39E-61AE515D8858}.Debug|Win32.Build.0 = Debug|Win32
+		{0BF09B12-56BE-42FC-B39E-61AE515D8858}.MemDebug|Win32.ActiveCfg = MemDebug|Win32
+		{0BF09B12-56BE-42FC-B39E-61AE515D8858}.MemDebug|Win32.Build.0 = MemDebug|Win32
+		{0BF09B12-56BE-42FC-B39E-61AE515D8858}.Release|Win32.ActiveCfg = Release|Win32
+		{0BF09B12-56BE-42FC-B39E-61AE515D8858}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
