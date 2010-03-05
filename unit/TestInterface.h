@@ -10,6 +10,7 @@ class TestInterface :
 {
 	CPPUNIT_TEST_SUITE( TestInterface );
 	CPPUNIT_TEST( TestLoadDatabase );
+	CPPUNIT_TEST( TestLoadDatabaseString );
 	CPPUNIT_TEST( TestLoadDatabaseMissingFile );
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
 	CPPUNIT_TEST( TestRun );
@@ -41,6 +42,7 @@ public:
 
 public:
 	void TestLoadDatabase();
+	void TestLoadDatabaseString();
 	void TestLoadDatabaseMissingFile();
 	void TestLoadDatabaseWithErrors();
 	void TestRun();

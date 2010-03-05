@@ -1,11 +1,13 @@
-#ifndef __IPHREEQC_H
-#define __IPHREEQC_H
+#ifndef _INC_IPHREEQC_H
+#define _INC_IPHREEQC_H
 
-#include "Var.h"
+#include "IPhreeqcCallbacks.h"   /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
+#include "CVar.hxx"              /* VRESULT */
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
+
 /**
  *  Load the specified database file into phreeqc.
  *  @param filename The name of the phreeqc database to load.
@@ -373,10 +375,6 @@ void ClearErrors(void);
 void    OutputLines(void);
 
 
-typedef int (*PFN_PRERUN_CALLBACK)(void *cookie);
-typedef int (*PFN_POSTRUN_CALLBACK)(void *cookie);
-typedef int (*PFN_CATCH_CALLBACK)(void *cookie);
-
 int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);
 
 int CatchErrors(PFN_CATCH_CALLBACK pfn, void *cookie);
@@ -387,8 +385,9 @@ const char* GetLastErrorString(void);
 void DebugOutputLines(void);
 #endif
 
+
 #if defined(__cplusplus)
 }
 #endif
 
-#endif  /* __IPHREEQC_H */
+#endif /* _INC_IPHREEQC_H */
