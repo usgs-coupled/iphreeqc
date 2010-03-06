@@ -2,7 +2,7 @@
 #define _INC_IPHREEQC_H
 
 #include "IPhreeqcCallbacks.h"   /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
-#include "CVar.hxx"              /* VRESULT */
+#include "Var.h"                 /* VRESULT */
 
 #if defined(__cplusplus)
 extern "C" {

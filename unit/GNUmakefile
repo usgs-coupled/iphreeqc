@@ -1,7 +1,8 @@
 CPPUNIT             = /z/parkplace/home/charlton
 CC                  = g++
+DEFINES             = -DNDEBUG -DSWIG_SHARED_OBJ -DPHREEQC_CPP -DPHREEQC_CLASS -DUSE_PHRQ_ALLOC
 CFLAGS              = -Wall -O3
-CPPFLAGS            = -DSWIG_SHARED_OBJ -I$(CPPUNIT)/include -I../include -I../src/phreeqcpp -I../src/phreeqcpp/phreeqc
+CPPFLAGS            = $(DEFINES) -I$(CPPUNIT)/include -I../include -I../src -I../src/phreeqcpp -I../src/phreeqcpp/phreeqc
 TARGET_ARCH         =
 FC                  = f95
 FFLAGS              = -fno-second-underscore
@@ -13,7 +14,7 @@ AR                  = ar ruv
 TARGET              = unit
 LDFLAGS             = -L../lib -L$(CPPUNIT)/lib -ldl
 
-VPATH=.:../src:../src/phreeqcpp/phreeqc
+VPATH=.:../src:../src/phreeqcpp:../src/phreeqcpp/phreeqc
 
 %.o: %.f
 	$(FC) $(FFLAGS) $(TARGET_ARCH) -c -o $@ $<
@@ -45,10 +46,41 @@ SOBJS =	\
 		SelectedOutput.o \
 		Var.o \
 		fwrap.o \
-		global.o \
 		module_files.o \
 		module_output.o
-
+		
+PPOBJS = \
+		cxxKinetics.cxx \
+		cxxMix.cxx \
+		dumper.cpp \
+		Exchange.cxx \
+		ExchComp.cxx \
+		GasPhase.cxx \
+		ISolutionComp.cxx \
+		ISolution.cxx \
+		KineticsComp.cxx \
+		NameDouble.cxx \
+		NumKeyword.cxx \
+		Parser.cxx \
+		Phreeqc.cpp \
+		PPassemblageComp.cxx \
+		PPassemblage.cxx \
+		Reaction.cxx \
+		ReadClass.cxx \
+		runner.cpp \
+		Solution.cxx \
+		SolutionIsotope.cxx \
+		SolutionIsotopeList.cxx \
+		SSassemblage.cxx \
+		SSassemblageSS.cxx \
+		StorageBin.cxx \
+		StorageBinList.cpp \
+		SurfaceCharge.cxx \
+		SurfaceComp.cxx \
+		Surface.cxx \
+		System.cxx \
+		Temperature.cxx \
+		Utils.cxx
 
 POBJS =	\
 		advection.o \
@@ -90,7 +122,7 @@ POBJS =	\
 
 all: $(TARGET)
 
-$(TARGET): $(TOBJS) $(POBJS) $(SOBJS)
+$(TARGET): $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS)
 	$(CXX) $(LDFLAGS) -o unit $(TOBJS) $(POBJS) $(SOBJS) -lcppunit
 
 clean:

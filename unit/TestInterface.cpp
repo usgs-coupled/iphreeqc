@@ -3,6 +3,7 @@
 #if defined(_WIN32) || defined(__CYGWIN32__)
 #include <windows.h>
 #else
+#include <stdio.h>
 int DeleteFile(const char* szPathName)
 {
   if (remove(szPathName) == 0) {
