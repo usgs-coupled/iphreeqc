@@ -2024,6 +2024,10 @@
 				RelativePath="src\SelectedOutput.hxx"
 				>
 			</File>
+			<File
+				RelativePath=".\include\Var.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
