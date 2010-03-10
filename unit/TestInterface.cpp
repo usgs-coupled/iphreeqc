@@ -922,16 +922,16 @@ void TestInterface::TestCase2()
 	{
 		::DeleteFile("case2.punch");
 	}
-	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("case2.punch") );
 
 	// clear all flags
 	CPPUNIT_ASSERT_EQUAL( 0,       ::LoadDatabase("phreeqc.dat") );
 	CPPUNIT_ASSERT_EQUAL( FALSE,   punch.in);
 	CPPUNIT_ASSERT_EQUAL( TRUE,    pr.punch);
 
-	CPPUNIT_ASSERT_EQUAL( VR_OK,   SOLUTION(1.0, 1.0, 1.0) );
-	CPPUNIT_ASSERT_EQUAL( VR_OK,   USER_PUNCH("Ca", 10) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,   ::SOLUTION(1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,   ::USER_PUNCH("Ca", 10) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,   ::AccumulateLine("-file case2.punch") ); // force have_punch_name to TRUE (see read_selected_ouput)
 	CPPUNIT_ASSERT_EQUAL( 0,       ::Run(0, 0, 0, 1) );
 	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
@@ -949,11 +949,11 @@ void TestInterface::TestCase2()
 	{
 		::DeleteFile("case2.punch");
 	}
-	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("case2.punch") );
 
-	CPPUNIT_ASSERT_EQUAL( VR_OK,   SOLUTION(1.0, 1.0, 1.0) );
-	CPPUNIT_ASSERT_EQUAL( VR_OK,   USER_PUNCH("Ca", 10) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,   ::SOLUTION(1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,   ::USER_PUNCH("Ca", 10) );
 	CPPUNIT_ASSERT_EQUAL( 0,       ::Run(0, 0, 0, 1) );
 	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( true,    ::FileExists("case2.punch") );
@@ -1016,10 +1016,10 @@ void TestInterface::TestPrintSelectedOutputFalse()
 	}
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(0, 0, 0, 1) );
+	CPPUNIT_ASSERT_EQUAL( 0,  ::Run(0, 0, 0, 1) );
 
 	CPPUNIT_ASSERT_EQUAL( 11, ::GetSelectedOutputColumnCount() );
-	CPPUNIT_ASSERT_EQUAL( 2, ::GetSelectedOutputRowCount() );
+	CPPUNIT_ASSERT_EQUAL( 2,  ::GetSelectedOutputRowCount() );
 }
 
 void TestInterface::TestOutputOnOff()
