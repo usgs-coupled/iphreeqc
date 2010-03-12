@@ -48,39 +48,39 @@ SOBJS =	\
 		fwrap.o \
 		module_files.o \
 		module_output.o
-		
+
 PPOBJS = \
-		cxxKinetics.cxx \
-		cxxMix.cxx \
-		dumper.cpp \
-		Exchange.cxx \
-		ExchComp.cxx \
-		GasPhase.cxx \
-		ISolutionComp.cxx \
-		ISolution.cxx \
-		KineticsComp.cxx \
-		NameDouble.cxx \
-		NumKeyword.cxx \
-		Parser.cxx \
-		Phreeqc.cpp \
-		PPassemblageComp.cxx \
-		PPassemblage.cxx \
-		Reaction.cxx \
-		ReadClass.cxx \
-		runner.cpp \
-		Solution.cxx \
-		SolutionIsotope.cxx \
-		SolutionIsotopeList.cxx \
-		SSassemblage.cxx \
-		SSassemblageSS.cxx \
-		StorageBin.cxx \
-		StorageBinList.cpp \
-		SurfaceCharge.cxx \
-		SurfaceComp.cxx \
-		Surface.cxx \
-		System.cxx \
-		Temperature.cxx \
-		Utils.cxx
+		cxxKinetics.o \
+		cxxMix.o \
+		dumper.o \
+		Exchange.o \
+		ExchComp.o \
+		GasPhase.o \
+		ISolutionComp.o \
+		ISolution.o \
+		KineticsComp.o \
+		NameDouble.o \
+		NumKeyword.o \
+		Parser.o \
+		Phreeqc.o \
+		PPassemblageComp.o \
+		PPassemblage.o \
+		Reaction.o \
+		ReadClass.o \
+		runner.o \
+		Solution.o \
+		SolutionIsotope.o \
+		SolutionIsotopeList.o \
+		SSassemblage.o \
+		SSassemblageSS.o \
+		StorageBin.o \
+		StorageBinList.o \
+		SurfaceCharge.o \
+		SurfaceComp.o \
+		Surface.o \
+		System.o \
+		Temperature.o \
+		Utils.o
 
 POBJS =	\
 		advection.o \
@@ -123,10 +123,10 @@ POBJS =	\
 all: $(TARGET)
 
 $(TARGET): $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS)
-	$(CXX) $(LDFLAGS) -o unit $(TOBJS) $(POBJS) $(SOBJS) -lcppunit
+	$(CXX) $(LDFLAGS) -o unit $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS) -lcppunit
 
 clean:
-	$(RM) $(TOBJS) $(POBJS) $(SOBJS) unit unit.exe *~
+	$(RM) $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS) unit unit.exe *~
 
 
 # TOBJS
@@ -333,3 +333,671 @@ module_output.o: ../src/module_output.c ../src/module_files.h \
   ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/output.h \
   ../src/phreeqcpp/phreeqc/phrqproto.h \
   ../src/phreeqcpp/phreeqc/phqalloc.h
+
+# PPOBJS
+SolutionIsotope.o: ../src/phreeqcpp/SolutionIsotope.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+PPassemblageComp.o: ../src/phreeqcpp/PPassemblageComp.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/PPassemblageComp.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Dictionary.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+KineticsComp.o: ../src/phreeqcpp/KineticsComp.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/KineticsComp.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Dictionary.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+Surface.o: ../src/phreeqcpp/Surface.cxx ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/Surface.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/SurfaceComp.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/SurfaceCharge.h ../src/phreeqcpp/cxxMix.h \
+ ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/phrqproto.h
+Parser.o: ../src/phreeqcpp/Parser.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Phreeqc_class.h
+cxxKinetics.o: ../src/phreeqcpp/cxxKinetics.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/cxxKinetics.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/KineticsComp.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/cxxMix.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+StorageBin.o: ../src/phreeqcpp/StorageBin.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/StorageBin.h \
+ ../src/phreeqcpp/System.h ../src/phreeqcpp/SSassemblage.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/Exchange.h \
+ ../src/phreeqcpp/ExchComp.h ../src/phreeqcpp/GasPhase.h \
+ ../src/phreeqcpp/cxxKinetics.h ../src/phreeqcpp/KineticsComp.h \
+ ../src/phreeqcpp/PPassemblage.h ../src/phreeqcpp/PPassemblageComp.h \
+ ../src/phreeqcpp/SSassemblageSS.h ../src/phreeqcpp/Surface.h \
+ ../src/phreeqcpp/SurfaceComp.h ../src/phreeqcpp/SurfaceCharge.h \
+ ../src/phreeqcpp/cxxMix.h ../src/phreeqcpp/Reaction.h \
+ ../src/phreeqcpp/Temperature.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+Dictionary.o: ../src/phreeqcpp/Dictionary.cxx \
+ ../src/phreeqcpp/Dictionary.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h ../src/phreeqcpp/phreeqc/output.h
+SurfaceComp.o: ../src/phreeqcpp/SurfaceComp.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/SurfaceComp.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Dictionary.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+NameDouble.o: ../src/phreeqcpp/NameDouble.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/Dictionary.h \
+ ../src/phreeqcpp/Solution.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+Exchange.o: ../src/phreeqcpp/Exchange.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/cxxMix.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/Exchange.h ../src/phreeqcpp/ExchComp.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/phrqproto.h
+System.o: ../src/phreeqcpp/System.cxx ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/System.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/SSassemblage.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/Exchange.h \
+ ../src/phreeqcpp/ExchComp.h ../src/phreeqcpp/GasPhase.h \
+ ../src/phreeqcpp/cxxKinetics.h ../src/phreeqcpp/KineticsComp.h \
+ ../src/phreeqcpp/PPassemblage.h ../src/phreeqcpp/PPassemblageComp.h \
+ ../src/phreeqcpp/SSassemblageSS.h ../src/phreeqcpp/Surface.h \
+ ../src/phreeqcpp/SurfaceComp.h ../src/phreeqcpp/SurfaceCharge.h \
+ ../src/phreeqcpp/cxxMix.h ../src/phreeqcpp/Reaction.h \
+ ../src/phreeqcpp/Temperature.h
+ISolution.o: ../src/phreeqcpp/ISolution.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/ISolution.h ../src/phreeqcpp/ISolutionComp.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/Solution.h ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+class_main.o: ../src/phreeqcpp/class_main.cpp ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+runner.o: ../src/phreeqcpp/runner.cpp ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Phreeqc_class.h
+Temperature.o: ../src/phreeqcpp/Temperature.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/Temperature.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/phrqproto.h
+ReadClass.o: ../src/phreeqcpp/ReadClass.cxx ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Solution.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Exchange.h ../src/phreeqcpp/ExchComp.h \
+ ../src/phreeqcpp/Surface.h ../src/phreeqcpp/SurfaceComp.h \
+ ../src/phreeqcpp/SurfaceCharge.h ../src/phreeqcpp/PPassemblage.h \
+ ../src/phreeqcpp/PPassemblageComp.h ../src/phreeqcpp/cxxKinetics.h \
+ ../src/phreeqcpp/KineticsComp.h ../src/phreeqcpp/SSassemblage.h \
+ ../src/phreeqcpp/GasPhase.h ../src/phreeqcpp/Reaction.h \
+ ../src/phreeqcpp/cxxMix.h ../src/phreeqcpp/Temperature.h \
+ ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/phrqproto.h
+SurfaceCharge.o: ../src/phreeqcpp/SurfaceCharge.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/SurfaceCharge.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Dictionary.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+NumKeyword.o: ../src/phreeqcpp/NumKeyword.cxx \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Phreeqc_class.h
+ISolutionComp.o: ../src/phreeqcpp/ISolutionComp.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/ISolutionComp.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h ../src/phreeqcpp/phreeqc/phqalloc.h
+StorageBinList.o: ../src/phreeqcpp/StorageBinList.cpp \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Phreeqc_class.h
+SolutionIsotopeList.o: ../src/phreeqcpp/SolutionIsotopeList.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+cxxMix.o: ../src/phreeqcpp/cxxMix.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/cxxMix.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+Utils.o: ../src/phreeqcpp/Utils.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/phreeqc/output.h
+SAXPhreeqc.o: ../src/phreeqcpp/SAXPhreeqc.cxx \
+ ../src/phreeqcpp/SAXPhreeqc.h ../src/phreeqcpp/SaxPhreeqcHandlers.h \
+ ../src/phreeqcpp/phreeqc/global.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h ../src/phreeqcpp/phreeqc/phrqproto.h \
+ ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/output.h
+ExchComp.o: ../src/phreeqcpp/ExchComp.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/ExchComp.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/Dictionary.h \
+ ../src/phreeqcpp/Solution.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+SSassemblage.o: ../src/phreeqcpp/SSassemblage.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/SSassemblage.h ../src/phreeqcpp/Phreeqc_class.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Parser.h ../src/phreeqcpp/SSassemblageSS.h \
+ ../src/phreeqcpp/cxxMix.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+Solution.o: ../src/phreeqcpp/Solution.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/NameDouble.h ../src/phreeqcpp/cxxMix.h \
+ ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/phrqproto.h
+SSassemblageSS.o: ../src/phreeqcpp/SSassemblageSS.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/SSassemblageSS.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Dictionary.h ../src/phreeqcpp/Solution.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/SolutionIsotopeList.h \
+ ../src/phreeqcpp/SolutionIsotope.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+GasPhase.o: ../src/phreeqcpp/GasPhase.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/GasPhase.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/cxxMix.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+PPassemblage.o: ../src/phreeqcpp/PPassemblage.cxx \
+ ../src/phreeqcpp/Utils.h ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/PPassemblage.h ../src/phreeqcpp/NumKeyword.h \
+ ../src/phreeqcpp/PPassemblageComp.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/cxxMix.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+ ../src/phreeqcpp/phreeqc/phrqproto.h
+Reaction.o: ../src/phreeqcpp/Reaction.cxx ../src/phreeqcpp/Utils.h \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h ../src/phreeqcpp/Reaction.h \
+ ../src/phreeqcpp/NumKeyword.h ../src/phreeqcpp/NameDouble.h \
+ ../src/phreeqcpp/Phreeqc_class.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/phrqproto.h
+Phreeqc.o: ../src/phreeqcpp/Phreeqc.cpp ../src/phreeqcpp/Phreeqc.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h
+dumper.o: ../src/phreeqcpp/dumper.cpp ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/Parser.h \
+ ../src/phreeqcpp/Phreeqc_class.h
+
