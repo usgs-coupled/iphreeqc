@@ -12,7 +12,7 @@ RANLIB              = ranlib
 RM                  = rm -f
 AR                  = ar ruv
 TARGET              = unit
-LDFLAGS             = -L../lib -L$(CPPUNIT)/lib -ldl
+LDFLAGS             = -L$(CPPUNIT)/lib -ldl
 
 VPATH=.:../src:../src/phreeqcpp:../src/phreeqcpp/phreeqc
 
