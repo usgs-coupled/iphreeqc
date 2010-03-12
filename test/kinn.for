@@ -23,7 +23,11 @@
       CALL EQUILIBRIUM_PHASES('calcite', 0.0, 0.010)
       CALL USER_PUNCH('Ca', 10)
 !!!!      CALL OutputLines
-      iresult = Run(.FALSE., .FALSE., .FALSE., .TRUE.)
+      CALL SetOutputOn(.FALSE.)
+      CALL SetErrorOn(.FALSE.)
+      CALL SetLogOn(.FALSE.)
+      CALL SetSelectedOutputOn(.TRUE.)
+      iresult = Run()
       IF (iresult.NE.VR_OK) THEN
         CALL OutputLastError
         STOP

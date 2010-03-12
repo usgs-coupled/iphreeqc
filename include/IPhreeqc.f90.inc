@@ -22,6 +22,14 @@
           END INTERFACE
 
 
+          INTERFACE
+            FUNCTION LoadDatabaseString(INPUT)
+              CHARACTER(LEN=*) :: INPUT
+              INTEGER(KIND=4)  :: LoadDatabaseString
+            END FUNCTION LoadDatabaseString
+          END INTERFACE
+
+
           INTERFACE 
             SUBROUTINE OutputLastError
             END SUBROUTINE OutputLastError
@@ -35,27 +43,55 @@
             END FUNCTION AccumulateLine
           END INTERFACE
 
-
+          
           INTERFACE
-            FUNCTION Run(OUTPUT_ON, ERROR_ON, LOG_ON, SELECTED_ON)
-              LOGICAL(KIND=4) :: OUTPUT_ON
-              LOGICAL(KIND=4) :: ERROR_ON
-              LOGICAL(KIND=4) :: LOG_ON
-              LOGICAL(KIND=4) :: SELECTED_ON
+            FUNCTION Run()
               INTEGER(KIND=4) :: Run
             END FUNCTION Run
           END INTERFACE
 
 
           INTERFACE
-            FUNCTION RunFile(FNAME,OUT_ON,ERR_ON,LOG_ON,SEL_ON)
+            FUNCTION RunFile(FNAME)
               CHARACTER(LEN=*) :: FNAME
-              LOGICAL(KIND=4)  :: OUT_ON
-              LOGICAL(KIND=4)  :: ERR_ON
-              LOGICAL(KIND=4)  :: LOG_ON
-              LOGICAL(KIND=4)  :: SEL_ON
               INTEGER(KIND=4)  :: RunFile
             END FUNCTION RunFile
+          END INTERFACE
+
+
+          INTERFACE
+            FUNCTION RunString(INPUT)
+              CHARACTER(LEN=*) :: INPUT
+              INTEGER(KIND=4)  :: RunString
+            END FUNCTION RunString
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE SetSelectedOutputOn(SEL_ON)
+              LOGICAL(KIND=4)  :: SEL_ON
+            END SUBROUTINE SetSelectedOutputOn
+          END INTERFACE
+
+          
+          INTERFACE
+            SUBROUTINE SetOutputOn(OUT_ON)
+              LOGICAL(KIND=4)  :: OUT_ON
+            END SUBROUTINE SetOutputOn
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE SetErrorOn(ERR_ON)
+              LOGICAL(KIND=4)  :: ERR_ON
+            END SUBROUTINE SetErrorOn
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE SetLogOn(LOG_ON)
+              LOGICAL(KIND=4)  :: LOG_ON
+            END SUBROUTINE SetLogOn
           END INTERFACE
 
 

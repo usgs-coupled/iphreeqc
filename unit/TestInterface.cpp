@@ -171,7 +171,11 @@ void TestInterface::TestRun()
 	int files_on = 0;
 	CPPUNIT_ASSERT_EQUAL(0,     ::LoadDatabase("phreeqc.dat"));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, ::AccumulateLine("solution 12"));
-	CPPUNIT_ASSERT_EQUAL(0,     ::Run(files_on, files_on, files_on, files_on));
+	::SetOutputOn(files_on);
+	::SetErrorOn(files_on);
+	::SetLogOn(files_on);
+	::SetSelectedOutputOn(files_on);
+	CPPUNIT_ASSERT_EQUAL(0,     ::Run());
 }
 
 void TestInterface::TestRunWithErrors()
@@ -197,8 +201,12 @@ void TestInterface::TestRunWithErrors()
 	CPPUNIT_ASSERT_EQUAL(VR_OK, ::AccumulateLine("EQUILIBRIUM_PHASES"));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, ::AccumulateLine("	Fix_H+ -10 HCl	10"));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, ::AccumulateLine("END"));
-	CPPUNIT_ASSERT_EQUAL(1,     ::Run(files_on, files_on, files_on, files_on));
 
+	::SetOutputOn(files_on);
+	::SetErrorOn(files_on);
+	::SetLogOn(files_on);
+	::SetSelectedOutputOn(files_on);
+	CPPUNIT_ASSERT_EQUAL(1,     ::Run());
 
 	const char expected[] =
 		"ERROR: Numerical method failed on all combinations of convergence parameters\n"
@@ -226,7 +234,11 @@ void TestInterface::TestRunFile()
 
 
 	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
-	CPPUNIT_ASSERT_EQUAL(1, ::RunFile("conv_fail.in", 0, 0, 0, 0));
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	CPPUNIT_ASSERT_EQUAL(1, ::RunFile("conv_fail.in"));
 
 	const char expected[] =
 		"ERROR: Numerical method failed on all combinations of convergence parameters\n"
@@ -248,7 +260,12 @@ void TestInterface::TestGetSelectedOutputRowCount()
 	CPPUNIT_ASSERT_EQUAL(VR_OK, SOLUTION(1.0, 1.0, 1.0));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, EQUILIBRIUM_PHASES("calcite", 0.0, 0.010));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, USER_PUNCH("Ca", max));
-	CPPUNIT_ASSERT_EQUAL(0, ::Run(0, 0, 0, 1));
+
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(1);
+	CPPUNIT_ASSERT_EQUAL(0, ::Run());
 	//// CPPUNIT_ASSERT_EQUAL(0, ::Run(1, 1, 1, 1));
 
 	CPPUNIT_ASSERT_EQUAL(3, ::GetSelectedOutputRowCount()); // rows + header
@@ -265,7 +282,11 @@ void TestInterface::TestGetSelectedOutputValue()
 	CPPUNIT_ASSERT_EQUAL(VR_OK, SOLUTION(1.0, 1.0, 1.0));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, EQUILIBRIUM_PHASES("calcite", 0.0, 0.010));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, USER_PUNCH("Ca", max));
-	CPPUNIT_ASSERT_EQUAL(0, ::Run(0, 0, 0, 0));
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	CPPUNIT_ASSERT_EQUAL(0, ::Run());
 
 /*
 EXPECTED selected.out:
@@ -919,7 +940,11 @@ void TestInterface::TestRunWithCallback()
 void TestInterface::TestRunNoDatabaseLoaded()
 {
 	UnLoadDatabase();
-	CPPUNIT_ASSERT_EQUAL( 1,     ::Run(0, 0, 0, 0) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	CPPUNIT_ASSERT_EQUAL( 1,     ::Run() );
 
 	const char expected[] =
 		"ERROR: Run: No database is loaded\n"
@@ -932,7 +957,11 @@ void TestInterface::TestRunNoDatabaseLoaded()
 void TestInterface::TestRunFileNoDatabaseLoaded()
 {
 	UnLoadDatabase();
-	CPPUNIT_ASSERT_EQUAL( 1, ::RunFile("dummy", 0, 0, 0, 0) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	CPPUNIT_ASSERT_EQUAL( 1, ::RunFile("dummy") );
 
 	const char expected[] =
 		"ERROR: RunFile: No database is loaded\n"
@@ -966,12 +995,20 @@ void TestInterface::TestCase1()
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      SOLUTION(1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      USER_PUNCH("Ca", 10) );
-	CPPUNIT_ASSERT_EQUAL( 0,          ::Run(0, 0, 0, 1) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0,          ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( 62,         ::GetSelectedOutputColumnCount() );
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      SOLUTION(1.0, 1.0, 1.0) );
-	CPPUNIT_ASSERT_EQUAL( 0,          ::Run(0, 0, 0, 1) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0,          ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( 62,         ::GetSelectedOutputColumnCount() );
 }
@@ -1005,7 +1042,11 @@ void TestInterface::TestCase2()
 	CPPUNIT_ASSERT_EQUAL( VR_OK,       SOLUTION(1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,       USER_PUNCH("Ca", 10) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,       ::AccumulateLine("-file case2.punch") ); // force have_punch_name to TRUE (see read_selected_ouput)
-	CPPUNIT_ASSERT_EQUAL( 0,           ::Run(0, 0, 0, 1) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0,           ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( (bool)true,  ::FileExists("case2.punch") );
 	CPPUNIT_ASSERT_EQUAL( 62,          ::GetSelectedOutputColumnCount() );
@@ -1026,7 +1067,11 @@ void TestInterface::TestCase2()
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,       SOLUTION(1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,       USER_PUNCH("Ca", 10) );
-	CPPUNIT_ASSERT_EQUAL( 0,           ::Run(0, 0, 0, 1) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0,           ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( (bool)true,  ::FileExists("case2.punch") );
 	CPPUNIT_ASSERT_EQUAL( 62,          ::GetSelectedOutputColumnCount() );
@@ -1066,7 +1111,11 @@ void TestInterface::TestPrintSelectedOutputFalse()
 	CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine("PRINT; -selected_output false \n") );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(0, 0, 0, 1) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 	CPPUNIT_ASSERT_EQUAL( 0, ::GetSelectedOutputColumnCount() );
 	CPPUNIT_ASSERT_EQUAL( 0, ::GetSelectedOutputRowCount() );
@@ -1088,7 +1137,11 @@ void TestInterface::TestPrintSelectedOutputFalse()
 	}
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(0, 0, 0, 1) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 	CPPUNIT_ASSERT_EQUAL( 11, ::GetSelectedOutputColumnCount() );
 	CPPUNIT_ASSERT_EQUAL( 2, ::GetSelectedOutputRowCount() );
@@ -1254,7 +1307,11 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	}
 
 	// run all off
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(0, 0, 0, 0) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists(FILENAME) );
 
 
@@ -1274,7 +1331,11 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	}
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(output_on, error_on, log_on, selected_output_on) );
+	::SetOutputOn(output_on);
+	::SetErrorOn(error_on);
+	::SetLogOn(log_on);
+	::SetSelectedOutputOn(selected_output_on);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists(FILENAME) );
 	CPPUNIT_ASSERT( ::DeleteFile(FILENAME) );
 
@@ -1295,7 +1356,11 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	}
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(0, 0, 0, 0) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists(FILENAME) );
 
 	CPPUNIT_ASSERT_EQUAL( 0, ::LoadDatabase("phreeqc.dat") );
@@ -1313,7 +1378,11 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	}
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(output_on, error_on, log_on, selected_output_on) );
+	::SetOutputOn(output_on);
+	::SetErrorOn(error_on);
+	::SetLogOn(log_on);
+	::SetSelectedOutputOn(selected_output_on);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists(FILENAME) );
 	CPPUNIT_ASSERT( ::DeleteFile(FILENAME) );
 }
@@ -1339,7 +1408,11 @@ TestInterface::TestLongHeadings()
 	oss << "-end" << "\n";
 	CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine(oss.str().c_str()) );
 
-	CPPUNIT_ASSERT_EQUAL( 0, ::Run(0, 0, 0, 0) );
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 	CPPUNIT_ASSERT_EQUAL(2, ::GetSelectedOutputRowCount());
 	CPPUNIT_ASSERT_EQUAL(1, ::GetSelectedOutputColumnCount());

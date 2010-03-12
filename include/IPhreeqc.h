@@ -36,6 +36,17 @@ int     LoadDatabase(const char *filename);
  *  @return The number of errors encountered.
  *  @remarks
  *  Any previous database definitions are cleared.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION LoadDatabaseString(INPUT)
+ *    CHARACTER(LEN=*), INTENT(IN) :: INPUT
+ *    INTEGER :: LoadDatabaseString
+ *  END FUNCTION LoadDatabaseString
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
  */
 int     LoadDatabaseString(const char *input);
 
@@ -80,11 +91,75 @@ void    OutputLastError(void);
 VRESULT AccumulateLine(const char *line);
 
 /**
- *  Runs the accumulated input sent to AccumulateLine.
- *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
- *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
- *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
+ *  Sets the selected_output flag on or off
  *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetSelectedOutputOn(SELECTED_ON)
+ *    LOGICAL, INTENT(IN) :: SELECTED_ON
+ *  END SUBROUTINE SetSelectedOutputOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+void SetSelectedOutputOn(int selected_output_on);
+
+
+/**
+ *  Sets the output flag on or off
+ *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetOutputOn(OUTPUT_ON)
+ *    LOGICAL, INTENT(IN) :: OUTPUT_ON
+ *  END SUBROUTINE SetOutputOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+void SetOutputOn(int output_on);
+
+
+/**
+ *  Sets the error flag on or off
+ *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetErrorOn(ERROR_ON)
+ *    LOGICAL, INTENT(IN) :: ERROR_ON
+ *  END SUBROUTINE SetOutputOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+void SetErrorOn(int error_on);
+
+
+/**
+ *  Sets the log flag on or off
+ *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetLogOn(LOG_ON)
+ *    LOGICAL, INTENT(IN) :: LOG_ON
+ *  END SUBROUTINE SetLogOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+void SetLogOn(int error_on);
+
+
+/**
+ *  Runs the accumulated input sent to AccumulateLine.
  *  @return The number of errors encountered.
  *  @remarks
  *  The accumulated input is cleared upon completion.
@@ -93,57 +168,54 @@ VRESULT AccumulateLine(const char *line);
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION Run(OUTPUT_ON, ERROR_ON, LOG_ON, SELECTED_ON)
- *    LOGICAL, INTENT(IN) :: OUTPUT_ON
- *    LOGICAL, INTENT(IN) :: ERROR_ON
- *    LOGICAL, INTENT(IN) :: LOG_ON
- *    LOGICAL, INTENT(IN) :: SELECTED_ON
+ *  FUNCTION Run()
  *    INTEGER :: Run
  *  END FUNCTION Run
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-int     Run(int output_on, int error_on, int log_on, int selected_output_on);
+int     Run(void);
+
 
 /**
  *  Runs the specified phreeqc input file.
  *  @param filename           The name of the phreeqc input file to run.
- *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
- *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
- *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
- *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
  *  @return The number of errors encountered during the run.
  *  @pre LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION RunFile(FILENAME,OUTPUT_ON,ERROR_ON,LOG_ON,SELECTED_ON)
+ *  FUNCTION RunFile(FILENAME)
  *    CHARACTER(LEN=*)    :: FILENAME
- *    LOGICAL, INTENT(IN) :: OUTPUT_ON
- *    LOGICAL, INTENT(IN) :: ERROR_ON
- *    LOGICAL, INTENT(IN) :: LOG_ON
- *    LOGICAL, INTENT(IN) :: SELECTED_ON
  *    INTEGER :: RunFile
  *  END FUNCTION RunFile
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-int     RunFile(const char *filename, int output_on, int error_on, int log_on, int selected_output_on);
+int     RunFile(const char *filename);
+
 
 /**
- *  Runs the specified phreeqc input file.
+ *  Runs the specified string as input to phreeqc.
  *  @param input              String containing phreeqc input.
- *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
- *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
- *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
- *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
  *  @return The number of errors encountered during the run.
  *  @pre LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION RunString(INPUT)
+ *    CHARACTER(LEN=*)    :: INPUT
+ *    INTEGER :: RunString
+ *  END FUNCTION RunString
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
  */
-int     RunString(const char *input, int output_on, int error_on, int log_on, int selected_output_on);
+int     RunString(const char *input);
 
 
 /**

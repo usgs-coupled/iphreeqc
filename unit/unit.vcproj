@@ -136,7 +136,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="SWIG_SHARED_OBJ;WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="SWIG_SHARED_OBJ;WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -474,40 +474,6 @@
 						>
 						<Tool
 							Name="VCCLCompilerTool"
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\src\global.c"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="MemDebug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
 							CompileAs="2"
 						/>
 					</FileConfiguration>

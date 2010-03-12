@@ -14,8 +14,11 @@
 
 !!      iresult= Runfile('CO2test',
 !!     & .true.,.true.,.true.,.true.)
-      iresult= Runfile('tester',
-     & .true.,.true.,.true.,.true.)
+      CALL SetOutputOn(.TRUE.)
+      CALL SetErrorOn(.TRUE.)
+      CALL SetLogOn(.TRUE.)
+      CALL SetSelectedOutputOn(.TRUE.)
+      iresult= Runfile('tester')
 
       IF (iresult.NE.VR_OK) THEN
         CALL OutputLastError
