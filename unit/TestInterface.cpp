@@ -13,9 +13,12 @@ int DeleteFile(const char* szPathName)
 }
 #endif
 
-#include "../include/IPhreeqc.h"
-#include "../src/CVar.hxx"
-#include "../src/phreeqcns.hxx"
+#include "IPhreeqc.hpp"
+#undef true
+#undef false
+
+#include "IPhreeqc.h"
+#include "CVar.hxx"
 
 #include <iostream>
 #include <cmath>
@@ -25,7 +28,10 @@ bool FileExists(const char *szPathName);
 VRESULT SOLUTION(double C, double Ca, double Na);
 VRESULT EQUILIBRIUM_PHASES(const char* phase, double si, double amount);
 VRESULT USER_PUNCH(const char* element, int max);
-void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on);
+VRESULT SELECTED_OUTPUT(void);
+VRESULT DUMP(void);
+
+void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on);
 
 
 TestInterface::TestInterface()
@@ -114,10 +120,10 @@ void TestInterface::TestLoadDatabaseString()
 
 void TestInterface::TestLoadDatabaseMissingFile()
 {
-	CPPUNIT_ASSERT_EQUAL((bool)false, ::FileExists("missing.file"));
-	CPPUNIT_ASSERT_EQUAL(1,           ::LoadDatabase("missing.file"));
-	CPPUNIT_ASSERT_EQUAL(1,           ::LoadDatabase("missing.file"));
-	CPPUNIT_ASSERT_EQUAL(1,           ::LoadDatabase("missing.file"));
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists("missing.file"));
+	CPPUNIT_ASSERT_EQUAL(1,     ::LoadDatabase("missing.file"));
+	CPPUNIT_ASSERT_EQUAL(1,     ::LoadDatabase("missing.file"));
+	CPPUNIT_ASSERT_EQUAL(1,     ::LoadDatabase("missing.file"));
 
 	const char expected[] =
 		"ERROR: LoadDatabase: Unable to open:\"missing.file\".\n"
@@ -175,6 +181,7 @@ void TestInterface::TestRun()
 	::SetErrorOn(files_on);
 	::SetLogOn(files_on);
 	::SetSelectedOutputOn(files_on);
+	::SetDumpOn(files_on);
 	CPPUNIT_ASSERT_EQUAL(0,     ::Run());
 }
 
@@ -206,6 +213,7 @@ void TestInterface::TestRunWithErrors()
 	::SetErrorOn(files_on);
 	::SetLogOn(files_on);
 	::SetSelectedOutputOn(files_on);
+	::SetDumpOn(files_on);
 	CPPUNIT_ASSERT_EQUAL(1,     ::Run());
 
 	const char expected[] =
@@ -215,7 +223,7 @@ void TestInterface::TestRunWithErrors()
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
-	CPPUNIT_ASSERT_EQUAL((bool)true, ::FileExists(dump_file) );
+	CPPUNIT_ASSERT_EQUAL(true, ::FileExists(dump_file) );
 	CPPUNIT_ASSERT(::DeleteFile(dump_file));
 }
 
@@ -238,6 +246,7 @@ void TestInterface::TestRunFile()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL(1, ::RunFile("conv_fail.in"));
 
 	const char expected[] =
@@ -247,7 +256,7 @@ void TestInterface::TestRunFile()
 
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
 
-	CPPUNIT_ASSERT_EQUAL((bool)true, ::FileExists(dump_file));
+	CPPUNIT_ASSERT_EQUAL(true, ::FileExists(dump_file));
 	CPPUNIT_ASSERT(::DeleteFile(dump_file));
 }
 
@@ -264,9 +273,9 @@ void TestInterface::TestGetSelectedOutputRowCount()
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
-	::SetSelectedOutputOn(1);
+	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL(0, ::Run());
-	//// CPPUNIT_ASSERT_EQUAL(0, ::Run(1, 1, 1, 1));
 
 	CPPUNIT_ASSERT_EQUAL(3, ::GetSelectedOutputRowCount()); // rows + header
 }
@@ -282,10 +291,12 @@ void TestInterface::TestGetSelectedOutputValue()
 	CPPUNIT_ASSERT_EQUAL(VR_OK, SOLUTION(1.0, 1.0, 1.0));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, EQUILIBRIUM_PHASES("calcite", 0.0, 0.010));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, USER_PUNCH("Ca", max));
+
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL(0, ::Run());
 
 /*
@@ -873,53 +884,53 @@ EXPECTED selected.out:
 
 void TestInterface::TestGetSelectedOutputColumnCount()
 {
-// COMMENT: {3/3/2010 4:57:53 PM}	CPPUNIT_ASSERT_EQUAL( 0,     ::LoadDatabase("llnl.dat"));
-// COMMENT: {3/3/2010 4:57:53 PM}	CPPUNIT_ASSERT_EQUAL( 0,     ::GetSelectedOutputColumnCount() );
-// COMMENT: {3/3/2010 4:57:53 PM}	CPPUNIT_ASSERT_EQUAL( VR_OK,   SOLUTION(1.0, 1.0, 1.0) );
-// COMMENT: {3/3/2010 4:57:53 PM}	CPPUNIT_ASSERT_EQUAL( VR_OK,   EQUILIBRIUM_PHASES("calcite", 1.0, 1.0) );
-// COMMENT: {3/3/2010 4:57:53 PM}	CPPUNIT_ASSERT_EQUAL( VR_OK,   USER_PUNCH("Ca", 10) );
-// COMMENT: {3/3/2010 4:57:53 PM}	CPPUNIT_ASSERT_EQUAL( 0,     ::Run(0, 0, 0, 0) );
-// COMMENT: {3/3/2010 4:57:53 PM}	CPPUNIT_ASSERT_EQUAL( 62,    ::GetSelectedOutputColumnCount() );
+	CPPUNIT_ASSERT_EQUAL( 0,     ::LoadDatabase("llnl.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,     ::GetSelectedOutputColumnCount() );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,   SOLUTION(1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,   EQUILIBRIUM_PHASES("calcite", 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,   USER_PUNCH("Ca", 10) );
+	CPPUNIT_ASSERT_EQUAL( 0,     ::Run() );
+	CPPUNIT_ASSERT_EQUAL( 62,    ::GetSelectedOutputColumnCount() );
 }
 
 void TestInterface::TestAddError()
 {
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}	// make sure initialized to empty
-// COMMENT: {3/3/2010 4:58:00 PM}	//
-// COMMENT: {3/3/2010 4:58:00 PM}	const char* err = ::GetLastErrorString();
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(err) );
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}	// make sure initialized to empty
-// COMMENT: {3/3/2010 4:58:00 PM}	//
-// COMMENT: {3/3/2010 4:58:00 PM}	const char *expected = "TESTING AddError\n";
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL(1u, ::AddError(expected));
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}	// check 1
-// COMMENT: {3/3/2010 4:58:00 PM}	//
-// COMMENT: {3/3/2010 4:58:00 PM}	err = ::GetLastErrorString();
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}	// check increment
-// COMMENT: {3/3/2010 4:58:00 PM}	//
-// COMMENT: {3/3/2010 4:58:00 PM}	const char *expected2 = "XXXXXX\n";
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL(2u, ::AddError(expected2));
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}	// check concatenation
-// COMMENT: {3/3/2010 4:58:00 PM}	//
-// COMMENT: {3/3/2010 4:58:00 PM}	err = ::GetLastErrorString();
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL( std::string(expected) + std::string(expected2), std::string(err) );
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}	// clear errors
-// COMMENT: {3/3/2010 4:58:00 PM}	//
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
-// COMMENT: {3/3/2010 4:58:00 PM}
-// COMMENT: {3/3/2010 4:58:00 PM}	// make sure back to empty
-// COMMENT: {3/3/2010 4:58:00 PM}	//
-// COMMENT: {3/3/2010 4:58:00 PM}	err = ::GetLastErrorString();
-// COMMENT: {3/3/2010 4:58:00 PM}	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(err) );
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+
+	// make sure initialized to empty
+	//
+	const char* err = ::GetLastErrorString();
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(err) );
+
+	// make sure initialized to empty
+	//
+	const char *expected = "TESTING AddError\n";
+	CPPUNIT_ASSERT_EQUAL(1u, ::AddError(expected));
+
+	// check 1
+	//
+	err = ::GetLastErrorString();
+	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
+
+	// check increment
+	//
+	const char *expected2 = "XXXXXX\n";
+	CPPUNIT_ASSERT_EQUAL(2u, ::AddError(expected2));
+
+	// check concatenation
+	//
+	err = ::GetLastErrorString();
+	CPPUNIT_ASSERT_EQUAL( std::string(expected) + std::string(expected2), std::string(err) );
+
+
+	// clear errors
+	//
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+
+	// make sure back to empty
+	//
+	err = ::GetLastErrorString();
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(err) );
 }
 
 void TestInterface::TestAccumulateLine()
@@ -944,6 +955,7 @@ void TestInterface::TestRunNoDatabaseLoaded()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 1,     ::Run() );
 
 	const char expected[] =
@@ -961,6 +973,7 @@ void TestInterface::TestRunFileNoDatabaseLoaded()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 1, ::RunFile("dummy") );
 
 	const char expected[] =
@@ -970,7 +983,6 @@ void TestInterface::TestRunFileNoDatabaseLoaded()
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 }
-
 
 void TestInterface::TestCase1()
 {
@@ -985,13 +997,16 @@ void TestInterface::TestCase1()
 	{
 		CPPUNIT_ASSERT(::DeleteFile("selected.out"));
 	}
-	CPPUNIT_ASSERT_EQUAL( (bool)false,    ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("selected.out") );
 
 
 	// clear all flags
-	CPPUNIT_ASSERT_EQUAL( 0,       ::LoadDatabase("phreeqc.dat") );
+	CPPUNIT_ASSERT_EQUAL( 0,          ::LoadDatabase("phreeqc.dat") );
 // COMMENT: {3/4/2010 6:28:53 PM}	CPPUNIT_ASSERT_EQUAL( FALSE,   punch.in);
 // COMMENT: {3/4/2010 6:28:53 PM}	CPPUNIT_ASSERT_EQUAL( TRUE,    pr.punch);
+	CPPUNIT_ASSERT_EQUAL( FALSE,   IPhreeqc::LibraryInstance()->punch.in);
+	CPPUNIT_ASSERT_EQUAL( TRUE,    IPhreeqc::LibraryInstance()->pr.punch);
+
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      SOLUTION(1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      USER_PUNCH("Ca", 10) );
@@ -999,8 +1014,9 @@ void TestInterface::TestCase1()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(1);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0,          ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( 62,         ::GetSelectedOutputColumnCount() );
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      SOLUTION(1.0, 1.0, 1.0) );
@@ -1008,8 +1024,9 @@ void TestInterface::TestCase1()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(1);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0,          ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( 62,         ::GetSelectedOutputColumnCount() );
 }
 
@@ -1031,13 +1048,15 @@ void TestInterface::TestCase2()
 	{
 		::DeleteFile("case2.punch");
 	}
-	CPPUNIT_ASSERT_EQUAL( (bool)false,    ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( (bool)false,    ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("case2.punch") );
 
 	// clear all flags
 	CPPUNIT_ASSERT_EQUAL( 0,       ::LoadDatabase("phreeqc.dat") );
 // COMMENT: {3/4/2010 6:29:02 PM}	CPPUNIT_ASSERT_EQUAL( FALSE,   punch.in);
 // COMMENT: {3/4/2010 6:29:02 PM}	CPPUNIT_ASSERT_EQUAL( TRUE,    pr.punch);
+	CPPUNIT_ASSERT_EQUAL( FALSE,   IPhreeqc::LibraryInstance()->punch.in);
+	CPPUNIT_ASSERT_EQUAL( TRUE,    IPhreeqc::LibraryInstance()->pr.punch);
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,       SOLUTION(1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,       USER_PUNCH("Ca", 10) );
@@ -1046,9 +1065,10 @@ void TestInterface::TestCase2()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(1);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0,           ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( (bool)true,  ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT_EQUAL( false,       ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( true,        ::FileExists("case2.punch") );
 	CPPUNIT_ASSERT_EQUAL( 62,          ::GetSelectedOutputColumnCount() );
 
 
@@ -1062,25 +1082,26 @@ void TestInterface::TestCase2()
 	{
 		::DeleteFile("case2.punch");
 	}
-	CPPUNIT_ASSERT_EQUAL( (bool)false,    ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( (bool)false,    ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("case2.punch") );
 
-	CPPUNIT_ASSERT_EQUAL( VR_OK,       SOLUTION(1.0, 1.0, 1.0) );
-	CPPUNIT_ASSERT_EQUAL( VR_OK,       USER_PUNCH("Ca", 10) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,    SOLUTION(1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,    USER_PUNCH("Ca", 10) );
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(1);
-	CPPUNIT_ASSERT_EQUAL( 0,           ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( (bool)true,  ::FileExists("case2.punch") );
-	CPPUNIT_ASSERT_EQUAL( 62,          ::GetSelectedOutputColumnCount() );
+	::SetDumpOn(0);
+	CPPUNIT_ASSERT_EQUAL( 0,     ::Run() );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( true,  ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT_EQUAL( 62,    ::GetSelectedOutputColumnCount() );
 
 	if (::FileExists("case2.punch"))
 	{
 		::DeleteFile("case2.punch");
 	}
-	CPPUNIT_ASSERT_EQUAL( (bool)false,  ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT_EQUAL( false,  ::FileExists("case2.punch") );
 }
 
 void TestInterface::TestPrintSelectedOutputFalse()
@@ -1091,7 +1112,7 @@ void TestInterface::TestPrintSelectedOutputFalse()
 	{
 		::DeleteFile("selected.out");
 	}
-	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists("selected.out") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("selected.out") );
 
 	CPPUNIT_ASSERT_EQUAL( 0, ::LoadDatabase("phreeqc.dat") );
 
@@ -1099,15 +1120,9 @@ void TestInterface::TestPrintSelectedOutputFalse()
 	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
 
 	// add selected output block
-	{
-		std::ostringstream oss;
-		oss << "SELECTED_OUTPUT" << "\n";
-		oss << "-file selected.out" << "\n";
-		oss << "-totals C Ca Na" << "\n";
-		CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine(oss.str().c_str()) );
-	}
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SELECTED_OUTPUT() );
 
-	// add selected output block
+	// turn off selected output
 	CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine("PRINT; -selected_output false \n") );
 
 	// run
@@ -1115,6 +1130,7 @@ void TestInterface::TestPrintSelectedOutputFalse()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(1);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 	CPPUNIT_ASSERT_EQUAL( 0, ::GetSelectedOutputColumnCount() );
@@ -1128,19 +1144,14 @@ void TestInterface::TestPrintSelectedOutputFalse()
 	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
 
 	// add selected output block
-	{
-		std::ostringstream oss;
-		oss << "SELECTED_OUTPUT" << "\n";
-		oss << "-file selected.out" << "\n";
-		oss << "-totals C Ca Na" << "\n";
-		CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine(oss.str().c_str()) );
-	}
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SELECTED_OUTPUT() );
 
 	// run
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(1);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 	CPPUNIT_ASSERT_EQUAL( 11, ::GetSelectedOutputColumnCount() );
@@ -1149,42 +1160,59 @@ void TestInterface::TestPrintSelectedOutputFalse()
 
 void TestInterface::TestOutputOnOff()
 {
-	int onoff[4];
+	int onoff[5];
 	onoff[0] = 1;  // output_on
 	onoff[1] = 0;  // error_on
 	onoff[2] = 0;  // log_on
 	onoff[3] = 0;  // selected_output_on
-	TestOnOff("phreeqc.out", onoff[0], onoff[1], onoff[2], onoff[3]);
+	onoff[4] = 0;  // dump_on
+	TestOnOff("phreeqc.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 void TestInterface::TestErrorOnOff()
 {
-	int onoff[4];
+	int onoff[5];
 	onoff[0] = 0;  // output_on
 	onoff[1] = 1;  // error_on
 	onoff[2] = 0;  // log_on
 	onoff[3] = 0;  // selected_output_on
-	TestOnOff("phreeqc.err", onoff[0], onoff[1], onoff[2], onoff[3]);
+	onoff[4] = 0;  // dump_on
+	TestOnOff("phreeqc.err", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 void TestInterface::TestLogOnOff()
 {
-	int onoff[4];
+	int onoff[5];
 	onoff[0] = 0;  // output_on
 	onoff[1] = 0;  // error_on
 	onoff[2] = 1;  // log_on
 	onoff[3] = 0;  // selected_output_on
-	TestOnOff("phreeqc.log", onoff[0], onoff[1], onoff[2], onoff[3]);
+	onoff[4] = 0;  // dump_on
+	TestOnOff("phreeqc.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
+
+void
+TestInterface::TestDumpOn()
+{
+	int onoff[5];
+	onoff[0] = 0;  // output_on
+	onoff[1] = 0;  // error_on
+	onoff[2] = 0;  // log_on
+	onoff[3] = 0;  // selected_output_on
+	onoff[4] = 1;  // dump_on
+	TestOnOff("dump.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+}
+
 
 void TestInterface::TestSelOutOnOff()
 {
-	int onoff[4];
+	int onoff[5];
 	onoff[0] = 0;  // output_on
 	onoff[1] = 0;  // error_on
 	onoff[2] = 0;  // log_on
 	onoff[3] = 1;  // selected_output_on
-	TestOnOff("selected.out", onoff[0], onoff[1], onoff[2], onoff[3]);
+	onoff[4] = 0;  // dump_on
+	TestOnOff("selected.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 VRESULT
@@ -1245,6 +1273,28 @@ USER_PUNCH(const char* element, int max)
 	return ::AccumulateLine(oss.str().c_str());
 }
 
+VRESULT
+SELECTED_OUTPUT(void)
+{
+	std::ostringstream oss;
+
+	oss << "SELECTED_OUTPUT" << "\n";
+	oss << "-file selected.out" << "\n";
+	oss << "-totals C Ca Na" << "\n";
+
+	return ::AccumulateLine(oss.str().c_str());
+}
+
+VRESULT
+DUMP(void)
+{
+	std::ostringstream oss;
+	oss << "DUMP" << "\n";
+	oss << "-solution 1" << "\n";
+	return ::AccumulateLine(oss.str().c_str());
+}
+
+
 #if defined(_WIN32) || defined(__CYGWIN32__)
 bool FileExists(const char *szPathName)
 {
@@ -1280,17 +1330,17 @@ bool FileExists(const char *szPathName)
 }
 #endif
 
-void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on)
+void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on)
 {
 	//const char *FILENAME = "phreeqc.out";
 
-	// remove punch files if they exists
+	// remove FILENAME if it exists
 	//
 	if (::FileExists(FILENAME))
 	{
 		::DeleteFile(FILENAME);
 	}
-	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists(FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(FILENAME) );
 
 	CPPUNIT_ASSERT_EQUAL( 0, ::LoadDatabase("phreeqc.dat") );
 
@@ -1298,21 +1348,19 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
 
 	// add selected output block
-	{
-		std::ostringstream oss;
-		oss << "SELECTED_OUTPUT" << "\n";
-		oss << "-file selected.out" << "\n";
-		oss << "-totals C Ca Na" << "\n";
-		CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine(oss.str().c_str()) );
-	}
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SELECTED_OUTPUT() );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP() );
 
 	// run all off
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists(FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(FILENAME) );
 
 
 
@@ -1322,21 +1370,19 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
 
 	// add selected output block
-	{
-		std::ostringstream oss;
-		oss << "SELECTED_OUTPUT" << "\n";
-		oss << "-file selected.out" << "\n";
-		oss << "-totals C Ca Na" << "\n";
-		CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine(oss.str().c_str()) );
-	}
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SELECTED_OUTPUT() );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP() );
 
 	// run
 	::SetOutputOn(output_on);
 	::SetErrorOn(error_on);
 	::SetLogOn(log_on);
 	::SetSelectedOutputOn(selected_output_on);
+	::SetDumpOn(dump_on);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists(FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(FILENAME) );
 	CPPUNIT_ASSERT( ::DeleteFile(FILENAME) );
 
 
@@ -1347,21 +1393,19 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
 
 	// add selected output block
-	{
-		std::ostringstream oss;
-		oss << "SELECTED_OUTPUT" << "\n";
-		oss << "-file selected.out" << "\n";
-		oss << "-totals C Ca Na" << "\n";
-		CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine(oss.str().c_str()) );
-	}
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SELECTED_OUTPUT() );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP() );
 
 	// run
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)false, ::FileExists(FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(FILENAME) );
 
 	CPPUNIT_ASSERT_EQUAL( 0, ::LoadDatabase("phreeqc.dat") );
 
@@ -1369,21 +1413,19 @@ void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, in
 	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
 
 	// add selected output block
-	{
-		std::ostringstream oss;
-		oss << "SELECTED_OUTPUT" << "\n";
-		oss << "-file selected.out" << "\n";
-		oss << "-totals C Ca Na" << "\n";
-		CPPUNIT_ASSERT_EQUAL( VR_OK, ::AccumulateLine(oss.str().c_str()) );
-	}
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SELECTED_OUTPUT() );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP() );
 
 	// run
 	::SetOutputOn(output_on);
 	::SetErrorOn(error_on);
 	::SetLogOn(log_on);
 	::SetSelectedOutputOn(selected_output_on);
+	::SetDumpOn(dump_on);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
-	CPPUNIT_ASSERT_EQUAL( (bool)true, ::FileExists(FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(FILENAME) );
 	CPPUNIT_ASSERT( ::DeleteFile(FILENAME) );
 }
 
@@ -1412,6 +1454,7 @@ TestInterface::TestLongHeadings()
 	::SetErrorOn(0);
 	::SetLogOn(0);
 	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 	CPPUNIT_ASSERT_EQUAL(2, ::GetSelectedOutputRowCount());
@@ -1429,4 +1472,76 @@ TestInterface::TestLongHeadings()
 
 	CPPUNIT_ASSERT( ::GetSelectedOutputValue(1, 1, &v1) == VR_INVALIDCOL );
 	CPPUNIT_ASSERT( ::GetSelectedOutputValue(2, 0, &v1) == VR_INVALIDROW );
+}
+
+void
+TestInterface::TestDatabaseKeyword()
+{
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0); 
+	::SetDumpOn(0);
+	CPPUNIT_ASSERT_EQUAL(1, ::RunFile("dump"));
+
+	const char *expected =
+		"ERROR: Gas not found in PHASES data base, Amm(g).\n"
+		"ERROR: Calculations terminating due to input errors.\n"
+		"Stopping.\n";
+
+	const char* err = ::GetLastErrorString();
+	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
+}
+
+void
+TestInterface::TestDumpString()
+{
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP() );
+
+	// run
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0); 
+	::SetDumpOn(0);
+	::SetDumpStringOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
+
+	const char *expected =
+		"SOLUTION_RAW       1 \n"
+		"  -temp              25\n"
+		"  -total_h           111.0132593403\n"
+		"  -total_o           55.509043478605\n"
+		"  -cb                0.0021723831003929\n"
+		"  -totals\n"
+		"    C(4)   0.0010000000000376\n"
+		"    Ca   0.001000000004331\n"
+		"    H(0)   1.4149476909313e-025\n"
+		"    Na   0.001\n"
+		"  -Isotopes\n"
+		"  -pH                7\n"
+		"  -pe                4\n"
+		"  -mu                0.0028961089894362\n"
+		"  -ah2o              0.99994915105857\n"
+		"  -mass_water        1\n"
+		"  -total_alkalinity  0.00082761690826911\n"
+		"  -activities\n"
+		"    C(-4)   -67.370522674574\n"
+		"    C(4)   -6.4415889265024\n"
+		"    Ca   -3.1040445240857\n"
+		"    E   -4\n"
+		"    H(0)   -25.15\n"
+		"    Na   -3.0255625287599\n"
+		"    O(0)   -42.080044167952\n"
+		"  -gammas\n";
+
+	const char* dump_str = ::GetDumpString();
+	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(dump_str));
 }

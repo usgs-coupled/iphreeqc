@@ -157,6 +157,38 @@ void SetErrorOn(int error_on);
  */
 void SetLogOn(int error_on);
 
+/**
+ *  Sets the dump flag on or off
+ *  @param dump_on             If non-zero turns on output to the <B>DUMP</B> (<B>dump.out</B> if unspecified) file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetDumpOn(DUMP_ON)
+ *    LOGICAL, INTENT(IN) :: DUMP_ON
+ *  END SUBROUTINE SetDumpOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+void SetDumpOn(int dump_on);
+
+/**
+ *  Sets the dump string flag on or off
+ *  @param dump_string_on      If non-zero captures as a string the output defined by the <B>DUMP</B> keyword.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetDumpStringOn(DUMP_STRING_ON)
+ *    LOGICAL, INTENT(IN) :: DUMP_STRING_ON
+ *  END SUBROUTINE SetDumpStringOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+void SetDumpStringOn(int dump_string_on);
+
 
 /**
  *  Runs the accumulated input sent to AccumulateLine.
@@ -452,6 +484,72 @@ int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, 
 int CatchErrors(PFN_CATCH_CALLBACK pfn, void *cookie);
 
 const char* GetLastErrorString(void);
+
+const char* GetLastWarningString(void);
+
+const char* GetDumpString(void);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetDumpLineCount
+ *    INTEGER :: GetDumpLineCount
+ *  END FUNCTION GetDumpLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+int GetDumpLineCount(void);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetDumpLine
+ *    INTEGER,          INTENT(IN)  :: N
+ *    CHARACTER(LEN=*), INTENT(OUT) :: LINE
+ *  END SUBROUTINE GetDumpLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+const char* GetDumpLine(int n);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorLineCount
+ *    INTEGER :: GetErrorLineCount
+ *  END FUNCTION GetErrorLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+int GetErrorLineCount(void);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetErrorLine
+ *    INTEGER,          INTENT(IN)  :: N
+ *    CHARACTER(LEN=*), INTENT(OUT) :: LINE
+ *  END SUBROUTINE GetErrorLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+const char* GetErrorLine(int n);
 
 #if defined(WIN32)
 void DebugOutputLines(void);

@@ -44,7 +44,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="$(DEV_GMP_INC);include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;XX_INVERSE_CL1MP_XX;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(DEV_GMP_INC);include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;XX_INVERSE_CL1MP_XX;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -2014,10 +2014,6 @@
 			</File>
 			<File
 				RelativePath="src\module_files.h"
-				>
-			</File>
-			<File
-				RelativePath="src\phreeqcns.hxx"
 				>
 			</File>
 			<File

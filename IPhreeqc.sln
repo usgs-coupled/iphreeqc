@@ -20,6 +20,11 @@ Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "testf90", "testf90\testf90.
 		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
 	EndProjectSection
 EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_getline", "test_getline\test_getline.vfproj", "{D95AB257-163E-4ABD-8577-94FB8D1EF62C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -57,6 +62,12 @@ Global
 		{29C3C862-28CA-4BF2-BAF5-A8F8ABF15C12}.MemDebug|Win32.Build.0 = Debug|Win32
 		{29C3C862-28CA-4BF2-BAF5-A8F8ABF15C12}.Release|Win32.ActiveCfg = Release|Win32
 		{29C3C862-28CA-4BF2-BAF5-A8F8ABF15C12}.Release|Win32.Build.0 = Release|Win32
+		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.Debug|Win32.Build.0 = Debug|Win32
+		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.MemDebug|Win32.ActiveCfg = Debug|Win32
+		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.MemDebug|Win32.Build.0 = Debug|Win32
+		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.Release|Win32.ActiveCfg = Release|Win32
+		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

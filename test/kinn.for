@@ -27,6 +27,7 @@
       CALL SetErrorOn(.FALSE.)
       CALL SetLogOn(.FALSE.)
       CALL SetSelectedOutputOn(.TRUE.)
+      CALL SetDumpOn(.FALSE.)
       iresult = Run()
       IF (iresult.NE.VR_OK) THEN
         CALL OutputLastError

@@ -43,7 +43,7 @@
             END FUNCTION AccumulateLine
           END INTERFACE
 
-          
+
           INTERFACE
             FUNCTION Run()
               INTEGER(KIND=4) :: Run
@@ -73,7 +73,7 @@
             END SUBROUTINE SetSelectedOutputOn
           END INTERFACE
 
-          
+
           INTERFACE
             SUBROUTINE SetOutputOn(OUT_ON)
               LOGICAL(KIND=4)  :: OUT_ON
@@ -92,6 +92,20 @@
             SUBROUTINE SetLogOn(LOG_ON)
               LOGICAL(KIND=4)  :: LOG_ON
             END SUBROUTINE SetLogOn
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE SetDumpOn(DUMP_ON)
+              LOGICAL(KIND=4)  :: DUMP_ON
+            END SUBROUTINE SetDumpOn
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE SetDumpStringOn(DUMP_STRING_ON)
+              LOGICAL(KIND=4)  :: DUMP_STRING_ON
+            END SUBROUTINE SetDumpStringOn
           END INTERFACE
 
 
@@ -124,4 +138,34 @@
               CHARACTER(LEN=*) :: SVALUE
               INTEGER(KIND=4)  :: GetSelectedOutputValue
             END FUNCTION GetSelectedOutputValue
+          END INTERFACE
+
+
+          INTERFACE
+            FUNCTION GetDumpLineCount()
+              INTEGER(KIND=4)  :: GetDumpLineCount
+            END FUNCTION GetDumpLineCount
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE GetDumpLine(N,LINE)
+              INTEGER(KIND=4)  :: N
+              CHARACTER(LEN=*) :: LINE
+            END SUBROUTINE
+          END INTERFACE
+
+
+          INTERFACE
+            FUNCTION GetErrorLineCount()
+              INTEGER(KIND=4)  :: GetErrorLineCount
+            END FUNCTION GetErrorLineCount
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE GetErrorLine(N,LINE)
+              INTEGER(KIND=4)  :: N
+              CHARACTER(LEN=*) :: LINE
+            END SUBROUTINE
           END INTERFACE
