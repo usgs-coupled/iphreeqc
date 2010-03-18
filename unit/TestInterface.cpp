@@ -1680,4 +1680,15 @@ TestInterface::TestGetDumpLine()
 	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpLine(line++)) );
 #endif
 
+	// remaining lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(-1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(-2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(-3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(-4)) );
 }
