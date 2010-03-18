@@ -1575,3 +1575,109 @@ TestInterface::TestDumpString()
 	const char* dump_str = ::GetDumpString();
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(dump_str));
 }
+
+void
+TestInterface::TestGetDumpLineCount()
+{
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP() );
+
+	// run
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
+	::SetDumpStringOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
+
+	CPPUNIT_ASSERT_EQUAL( 26, ::GetDumpLineCount() );
+}
+
+void
+TestInterface::TestGetDumpLine()
+{
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP() );
+
+	// run
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
+	::SetDumpStringOn(1);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
+
+	CPPUNIT_ASSERT_EQUAL( 26, ::GetDumpLineCount() );
+
+	int line = 0;
+#if defined(_MSC_VER)
+	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003929"),  std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-025"),          std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826911"), std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpLine(line++)) );
+#endif
+
+#if defined(__GNUC__)
+	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003928"),  std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-25"),           std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826912"), std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpLine(line++)) );
+#endif
+
+}
