@@ -3,6 +3,7 @@
 
 #include "IPhreeqcCallbacks.h"   /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
 #include "Var.h"                 /* VRESULT */
+#include <list>
 
 #if defined(__cplusplus)
 extern "C" {
@@ -550,6 +551,39 @@ int GetErrorLineCount(void);
  *  @endhtmlonly
  */
 const char* GetErrorLine(int n);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorLineCount
+ *    INTEGER :: GetErrorLineCount
+ *  END FUNCTION GetErrorLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+int GetComponentCount(void);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorLineCount
+ *    INTEGER :: GetErrorLineCount
+ *  END FUNCTION GetErrorLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+const char* GetComponent(int n);
+
+
+
 
 #if defined(WIN32)
 void DebugOutputLines(void);

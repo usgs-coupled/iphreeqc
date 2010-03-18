@@ -1692,3 +1692,55 @@ TestInterface::TestGetDumpLine()
 	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(-3)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(-4)) );
 }
+
+void
+TestInterface::TestGetComponentCount(void)
+{
+	CPPUNIT_ASSERT_EQUAL( 0, ::LoadDatabase("phreeqc.dat") );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
+
+	// run
+	::SetOutputOn(0);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
+	::SetDumpStringOn(0);
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
+
+
+	CPPUNIT_ASSERT_EQUAL( 4, ::GetComponentCount() );
+}
+
+void
+TestInterface::TestGetComponent(void)
+{
+	CPPUNIT_ASSERT_EQUAL( 0, ::LoadDatabase("phreeqc.dat") );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(1.0, 1.0, 1.0) );
+
+	// run
+	::SetOutputOn(1);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
+	::SetDumpStringOn(0);
+
+	std::cout << "\n";
+	::OutputLines();
+	std::cout << "\n";
+
+	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
+
+
+	CPPUNIT_ASSERT_EQUAL( 4, ::GetComponentCount() );
+
+	CPPUNIT_ASSERT_EQUAL( std::string("Ca"), std::string(::GetComponent(0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("H"),  std::string(::GetComponent(1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Na"), std::string(::GetComponent(2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("O"),  std::string(::GetComponent(3)) );
+}
