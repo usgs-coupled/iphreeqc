@@ -134,16 +134,15 @@ TestCVar.o: TestCVar.cpp TestCVar.h ../src/CVar.hxx ../src/Debug.h \
   ../src/../include/Var.h
 TestInterface.o: TestInterface.cpp TestInterface.h ../include/IPhreeqc.h \
   ../include/Var.h ../src/CVar.hxx ../src/Debug.h ../src/../include/Var.h \
-  ../src/phreeqcns.hxx ../src/phreeqcpp/phreeqc/global.h \
-  ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/phqalloc.h \
-  ../src/phreeqcpp/phreeqc/input.h ../src/phreeqcpp/phreeqc/output.h \
-  ../src/phreeqcpp/phreeqc/phrqproto.h
-TestSelectedOutput.o: TestSelectedOutput.cpp TestSelectedOutput.h \
-  ../src/SelectedOutput.hxx ../src/CVar.hxx ../src/Debug.h \
-  ../src/../include/Var.h ../src/phreeqcns.hxx \
   ../src/phreeqcpp/phreeqc/global.h ../src/phreeqcpp/phreeqc/phrqtype.h \
   ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/input.h \
   ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/phrqproto.h
+TestSelectedOutput.o: TestSelectedOutput.cpp TestSelectedOutput.h \
+  ../src/SelectedOutput.hxx ../src/CVar.hxx ../src/Debug.h \
+  ../src/../include/Var.h ../src/phreeqcpp/phreeqc/global.h \
+  ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/phqalloc.h \
+  ../src/phreeqcpp/phreeqc/input.h ../src/phreeqcpp/phreeqc/output.h \
+  ../src/phreeqcpp/phreeqc/phrqproto.h
 TestVar.o: TestVar.cpp TestVar.h ../include/Var.h
 unit.o: unit.cpp TestVar.h ../include/Var.h TestCVar.h ../src/CVar.hxx \
   ../src/Debug.h ../src/../include/Var.h TestSelectedOutput.h \
@@ -303,20 +302,30 @@ utilities.o: ../src/phreeqcpp/phreeqc/utilities.c \
   ../src/phreeqcpp/phreeqc/phrqproto.h
 
 # SOBJS
-IPhreeqc.o: ../src/IPhreeqc.cpp ../src/phreeqcns.hxx \
-  ../src/phreeqcpp/phreeqc/global.h ../src/phreeqcpp/phreeqc/phrqtype.h \
-  ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/input.h \
-  ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/phrqproto.h \
-  ../src/ErrorReporter.hxx ../src/SelectedOutput.hxx \
-  ../src/CVar.hxx ../src/Debug.h ../src/../include/Var.h \
-  ../src/../include/IPhreeqc.h ../src/../include/Var.h \
-  ../src/module_files.h
+IPhreeqc.o: ../src/IPhreeqc.cpp ../include/IPhreeqc.h \
+ ../include/IPhreeqcCallbacks.h ../include/Var.h ../src/IPhreeqc.hpp \
+ ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
+ ../src/phreeqcpp/phreeqc/sundialstypes.h \
+ ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
+ ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
+ ../src/phreeqcpp/phreeqc/smalldense.h \
+ ../src/phreeqcpp/phreeqc/nvector_serial.h \
+ ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
+ ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
+ ../src/phreeqcpp/phreeqc/p2c.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../src/phreeqcpp/phreeqc/basic.h \
+ ../src/phreeqcpp/phreeqc/pitzer_structures.h \
+ ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
+ ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
+ ../src/phreeqcpp/phreeqc/global_structures.h \
+ ../include/IPhreeqcCallbacks.h ../include/Var.h \
+ ../src/SelectedOutput.hxx ../src/CVar.hxx ../src/Debug.h \
+ ../src/ErrorReporter.hxx
 SelectedOutput.o: ../src/SelectedOutput.cpp ../src/SelectedOutput.hxx \
-  ../src/CVar.hxx ../src/Debug.h ../src/../include/Var.h \
-  ../src/phreeqcns.hxx ../src/phreeqcpp/phreeqc/global.h \
-  ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/phqalloc.h \
-  ../src/phreeqcpp/phreeqc/input.h ../src/phreeqcpp/phreeqc/output.h \
-  ../src/phreeqcpp/phreeqc/phrqproto.h
+ ../src/CVar.hxx ../src/Debug.h ../include/Var.h
 Var.o: ../src/Var.c ../src/../include/Var.h
 fwrap.o: ../src/fwrap.c ../src/phreeqcpp/phreeqc/global.h \
   ../src/phreeqcpp/phreeqc/phrqtype.h ../src/../include/IPhreeqc.h \

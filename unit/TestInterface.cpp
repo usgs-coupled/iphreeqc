@@ -1481,7 +1481,7 @@ TestInterface::TestDatabaseKeyword()
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
-	::SetSelectedOutputOn(0); 
+	::SetSelectedOutputOn(0);
 	::SetDumpOn(0);
 	CPPUNIT_ASSERT_EQUAL(1, ::RunFile("dump"));
 
@@ -1509,12 +1509,13 @@ TestInterface::TestDumpString()
 	::SetOutputOn(0);
 	::SetErrorOn(0);
 	::SetLogOn(0);
-	::SetSelectedOutputOn(0); 
+	::SetSelectedOutputOn(0);
 	::SetDumpOn(0);
 	::SetDumpStringOn(1);
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 	const char *expected =
+#if defined(_MSC_VER)
 		"SOLUTION_RAW       1 \n"
 		"  -temp              25\n"
 		"  -total_h           111.0132593403\n"
@@ -1541,6 +1542,35 @@ TestInterface::TestDumpString()
 		"    Na   -3.0255625287599\n"
 		"    O(0)   -42.080044167952\n"
 		"  -gammas\n";
+#endif
+#if defined(__GNUC__)
+		"SOLUTION_RAW       1 \n"
+		"  -temp              25\n"
+		"  -total_h           111.0132593403\n"
+		"  -total_o           55.509043478605\n"
+		"  -cb                0.0021723831003928\n"
+		"  -totals\n"
+		"    C(4)   0.0010000000000376\n"
+		"    Ca   0.001000000004331\n"
+		"    H(0)   1.4149476909313e-25\n"
+		"    Na   0.001\n"
+		"  -Isotopes\n"
+		"  -pH                7\n"
+		"  -pe                4\n"
+		"  -mu                0.0028961089894362\n"
+		"  -ah2o              0.99994915105857\n"
+		"  -mass_water        1\n"
+		"  -total_alkalinity  0.00082761690826912\n"
+		"  -activities\n"
+		"    C(-4)   -67.370522674574\n"
+		"    C(4)   -6.4415889265024\n"
+		"    Ca   -3.1040445240857\n"
+		"    E   -4\n"
+		"    H(0)   -25.15\n"
+		"    Na   -3.0255625287599\n"
+		"    O(0)   -42.080044167952\n"
+		"  -gammas\n";
+#endif
 
 	const char* dump_str = ::GetDumpString();
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(dump_str));
