@@ -7,6 +7,8 @@
       INTEGER i, j, k, rows, cols
       INTEGER vtype
       CHARACTER(30) svalue
+      CHARACTER(30) comp
+      INTEGER n
       INTEGER len
       REAL*8 dvalue
 
@@ -78,6 +80,14 @@
         PRINT *
 40    CONTINUE
 !!!!45	CONTINUE
+
+      !! test ListComponents
+      n = GetComponentCount()
+      DO i = 1, n
+        CALL GetComponent(i, comp)
+        WRITE (*, *) trim(comp)
+      END DO
+
 
 50    FORMAT(A15,A,$)
 60    FORMAT(1PG15.7E2,A,$)

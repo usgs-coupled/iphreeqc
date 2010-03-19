@@ -4,6 +4,9 @@
       INCLUDE '..\include\IPhreeqc.f90.inc'
       INTEGER iresult
       INTEGER rows, cols
+      CHARACTER(30) comp
+      INTEGER n
+      INTEGER i
 
       iresult = LoadDatabase
      &('wateq4f.dat')
@@ -30,6 +33,7 @@
 
       PRINT*,'Rows= ',rows
       PRINT*,'Cols= ',cols
+            
 
       STOP 'Ok'
       

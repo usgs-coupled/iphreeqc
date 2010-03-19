@@ -169,3 +169,18 @@
               CHARACTER(LEN=*) :: LINE
             END SUBROUTINE
           END INTERFACE
+
+
+          INTERFACE
+            FUNCTION GetComponentCount()
+              INTEGER(KIND=4)  :: GetComponentCount
+            END FUNCTION GetComponentCount
+          END INTERFACE
+
+
+          INTERFACE
+            SUBROUTINE GetComponent(N,COMP)
+              INTEGER(KIND=4)  :: N
+              CHARACTER(LEN=*) :: COMP
+            END SUBROUTINE
+          END INTERFACE
