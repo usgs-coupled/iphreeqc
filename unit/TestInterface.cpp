@@ -1711,7 +1711,7 @@ TestInterface::TestGetComponentCount(void)
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
 
-	CPPUNIT_ASSERT_EQUAL( 4, ::GetComponentCount() );
+	CPPUNIT_ASSERT_EQUAL( 3, ::GetComponentCount() );
 }
 
 void
@@ -1732,16 +1732,16 @@ TestInterface::TestGetComponent(void)
 
 	CPPUNIT_ASSERT_EQUAL( 0, ::Run() );
 
-	CPPUNIT_ASSERT_EQUAL( 4, ::GetComponentCount() );
+	CPPUNIT_ASSERT_EQUAL( 3, ::GetComponentCount() );
 
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(-2)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(-1)) );
 
-	CPPUNIT_ASSERT_EQUAL( std::string("Ca"), std::string(::GetComponent(0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("H"),  std::string(::GetComponent(1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("C"),  std::string(::GetComponent(0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Ca"), std::string(::GetComponent(1)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("Na"), std::string(::GetComponent(2)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("O"),  std::string(::GetComponent(3)) );
 
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(3)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(4)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(5)) );
 }

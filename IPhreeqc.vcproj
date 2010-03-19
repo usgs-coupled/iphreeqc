@@ -248,7 +248,7 @@
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;f90;for;f;fpp"
 			>
 			<File
-				RelativePath="src\fwrap.c"
+				RelativePath=".\src\fwrap.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -282,7 +282,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\src\fwrap2.c"
+				RelativePath=".\src\fwrap2.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -310,7 +310,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\src\fwrap3.c"
+				RelativePath=".\src\fwrap3.cpp"
 				>
 			</File>
 			<File
@@ -318,7 +318,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\module_files.c"
+				RelativePath=".\src\module_files.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -346,7 +346,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="src\module_output.c"
+				RelativePath=".\src\module_output.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -376,6 +376,34 @@
 						AdditionalIncludeDirectories=""
 						PreprocessorDefinitions=""
 						CompileAs="2"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\src\pp_sys.cpp"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MemDebug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
 					/>
 				</FileConfiguration>
 			</File>
