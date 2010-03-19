@@ -3,7 +3,6 @@
 
 #include "IPhreeqcCallbacks.h"   /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
 #include "Var.h"                 /* VRESULT */
-#include <list>
 
 #if defined(__cplusplus)
 extern "C" {
@@ -58,7 +57,7 @@ int     LoadDatabaseString(const char *input);
  */
 void    UnLoadDatabase(void);
 
-/** 
+/**
  *  Output the error messages normally stored in the phreeqc.err file to stdout.
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -464,7 +463,7 @@ void ClearErrors(void);
 */
 
 
-/** 
+/**
  *  Send the accumulated input to stdout. 
  *  This is the input that will be used for the next call to Run.
  *  @par Fortran90 Interface:
@@ -581,8 +580,6 @@ int GetComponentCount(void);
  *  @endhtmlonly
  */
 const char* GetComponent(int n);
-
-
 
 
 #if defined(WIN32)

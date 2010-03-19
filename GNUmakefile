@@ -2,7 +2,6 @@ CC                  = g++
 DEFINES             = -DNDEBUG -DSWIG_SHARED_OBJ -DPHREEQC_CPP -DPHREEQC_CLASS -DUSE_PHRQ_ALLOC
 CFLAGS              = -Wall
 CPPFLAGS            = -O3 $(DEFINES) -Iinclude -Isrc -Isrc/phreeqcpp -Isrc/phreeqcpp/phreeqc
-#CPPFLAGS            = -g -DSWIG_SHARED_OBJ  # debug
 TARGET_ARCH         =
 FC                  = g95
 FFLAGS              = -fno-second-underscore
@@ -28,18 +27,6 @@ VPATH=src:src/phreeqcpp:src/phreeqcpp/phreeqc
 %.o: %.cxx
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<
 
-
-###%.o: %.f
-###	$(FC) -MM $<
-###
-###%.o: %.F
-###	$(FC) -MM $<
-###
-###%.o: %.c
-###	$(CC) -MM $<
-###
-###%.o: %.cxx
-###	$(CXX) -MM $<
 
 OBJS = \
 		advection.o \
@@ -122,57 +109,6 @@ OBJS = \
 		utilities.o \
 		Utils.o \
 		Var.o \
-
-
-POBJS =	\
-		advection.o \
-		basic.o \
-		basicsubs.o \
-		cl1.o \
-		cvdense.o \
-		cvode.o \
-		dense.o \
-		dw.o \
-		input.o \
-		integrate.o \
-		inverse.o \
-		isotopes.o \
-		kinetics.o \
-		mainsubs.o \
-		model.o \
-		nvector.o \
-		nvector_serial.o \
-		p2clib.o \
-		parse.o \
-		phqalloc.o \
-		pitzer.o \
-		pitzer_structures.o \
-		prep.o \
-		print.o \
-		read.o \
-		readtr.o \
-		sit.o \
-		smalldense.o \
-		spread.o \
-		step.o \
-		structures.o \
-		sundialsmath.o \
-		tally.o \
-		tidy.o \
-		transport.o \
-		utilities.o
-
-
-SOBJS =	\
-		IPhreeqc.o \
-		IPhreeqcF.o \
-		SelectedOutput.o \
-		Var.o \
-		fwrap.o \
-		module_files.o \
-		module_output.o \
-		pp_sys.o
-
 
 all: $(TARGET)
 
@@ -1293,9 +1229,9 @@ IPhreeqc.o: src/IPhreeqc.cpp include/IPhreeqc.h \
  src/phreeqcpp/phreeqc/global.h src/phreeqcpp/phreeqc/global_structures.h \
  include/IPhreeqcCallbacks.h src/SelectedOutput.hxx src/CVar.hxx \
  src/ErrorReporter.hxx
-fwrap2.o: src/fwrap2.c include/Var.h src/fwrap.h
-fwrap3.o: src/fwrap3.c include/Var.h src/fwrap.h
-module_output.o: src/module_output.c src/module_files.h src/IPhreeqc.hpp \
+fwrap2.o: src/fwrap2.cpp include/Var.h src/fwrap.h
+fwrap3.o: src/fwrap3.cpp include/Var.h src/fwrap.h
+module_output.o: src/module_output.cpp src/module_files.h src/IPhreeqc.hpp \
  src/phreeqcpp/Phreeqc.h src/phreeqcpp/phreeqc/phrqtype.h \
  src/phreeqcpp/phreeqc/sundialstypes.h src/phreeqcpp/phreeqc/phrqtype.h \
  src/phreeqcpp/phreeqc/nvector.h src/phreeqcpp/phreeqc/sundialstypes.h \
@@ -1313,7 +1249,7 @@ module_output.o: src/module_output.c src/module_files.h src/IPhreeqc.hpp \
  src/CVar.hxx src/Debug.h src/phreeqcpp/phreeqc/output.c \
  src/phreeqcpp/phreeqc/output.h src/phreeqcpp/phreeqc/phrqproto.h \
  src/phreeqcpp/phreeqc/phqalloc.h
-module_files.o: src/module_files.c src/module_files.h \
+module_files.o: src/module_files.cpp src/module_files.h \
  src/phreeqcpp/phreeqc/phreeqc_files.c src/phreeqcpp/Phreeqc.h \
  src/phreeqcpp/phreeqc/phrqtype.h src/phreeqcpp/phreeqc/sundialstypes.h \
  src/phreeqcpp/phreeqc/phrqtype.h src/phreeqcpp/phreeqc/nvector.h \
@@ -1346,8 +1282,8 @@ SelectedOutput.o: src/SelectedOutput.cpp src/phreeqcpp/phreeqc/phrqtype.h \
  src/phreeqcpp/phreeqc/output.h src/phreeqcpp/phreeqc/global.h \
  src/phreeqcpp/phreeqc/global_structures.h src/SelectedOutput.hxx \
  src/CVar.hxx src/Debug.h include/Var.h
-pp_sys.o: src/pp_sys.c
-fwrap.o: src/fwrap.c src/phreeqcpp/phreeqc/phrqtype.h include/IPhreeqc.h \
+pp_sys.o: src/pp_sys.cpp
+fwrap.o: src/fwrap.cpp src/phreeqcpp/phreeqc/phrqtype.h include/IPhreeqc.h \
  include/IPhreeqcCallbacks.h src/CVar.hxx src/Debug.h include/Var.h \
  src/fwrap.h
 Var.o: src/Var.c include/Var.h

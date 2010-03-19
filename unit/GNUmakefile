@@ -327,17 +327,17 @@ IPhreeqc.o: ../src/IPhreeqc.cpp ../include/IPhreeqc.h \
 SelectedOutput.o: ../src/SelectedOutput.cpp ../src/SelectedOutput.hxx \
  ../src/CVar.hxx ../src/Debug.h ../include/Var.h
 Var.o: ../src/Var.c ../src/../include/Var.h
-fwrap.o: ../src/fwrap.c ../src/phreeqcpp/phreeqc/global.h \
+fwrap.o: ../src/fwrap.cpp ../src/phreeqcpp/phreeqc/global.h \
   ../src/phreeqcpp/phreeqc/phrqtype.h ../src/../include/IPhreeqc.h \
   ../src/../include/Var.h
 global.o: ../src/global.c ../src/phreeqcpp/phreeqc/global.h \
   ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/phqalloc.h
-module_files.o: ../src/module_files.c ../src/module_files.h \
+module_files.o: ../src/module_files.cpp ../src/module_files.h \
   ../src/phreeqcpp/phreeqc/phreeqc_files.c \
   ../src/phreeqcpp/phreeqc/global.h ../src/phreeqcpp/phreeqc/phrqtype.h \
   ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/output.h \
   ../src/phreeqcpp/phreeqc/phrqproto.h ../src/phreeqcpp/phreeqc/input.h
-module_output.o: ../src/module_output.c ../src/module_files.h \
+module_output.o: ../src/module_output.cpp ../src/module_files.h \
   ../src/phreeqcpp/phreeqc/output.c ../src/phreeqcpp/phreeqc/global.h \
   ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/output.h \
   ../src/phreeqcpp/phreeqc/phrqproto.h \
