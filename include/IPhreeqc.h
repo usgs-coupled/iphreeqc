@@ -200,14 +200,14 @@ void SetDumpStringOn(int dump_string_on);
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION Run()
- *    INTEGER :: Run
- *  END FUNCTION Run
+ *  FUNCTION RunAccumulated()
+ *    INTEGER :: RunAccumulated
+ *  END FUNCTION RunAccumulated
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-int     Run(void);
+int     RunAccumulated(void);
 
 
 /**
@@ -465,7 +465,7 @@ void ClearErrors(void);
 
 /**
  *  Send the accumulated input to stdout. 
- *  This is the input that will be used for the next call to Run.
+ *  This is the input that will be used for the next call to RunAccumulated.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>

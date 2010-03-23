@@ -30,7 +30,7 @@
       CALL SetLogOn(.FALSE.)
       CALL SetSelectedOutputOn(.TRUE.)
       CALL SetDumpOn(.FALSE.)
-      iresult = Run()
+      iresult = RunAccumulated()
       IF (iresult.NE.VR_OK) THEN
         CALL OutputLastError
         STOP

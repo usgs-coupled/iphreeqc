@@ -45,9 +45,9 @@
 
 
           INTERFACE
-            FUNCTION Run()
-              INTEGER(KIND=4) :: Run
-            END FUNCTION Run
+            FUNCTION RunAccumulated()
+              INTEGER(KIND=4) :: RunAccumulated
+            END FUNCTION RunAccumulated
           END INTERFACE
 
 
