@@ -355,6 +355,14 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\TestIPhreeqc.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TestIPhreeqcLib.cpp"
+				>
+			</File>
+			<File
 				RelativePath="TestSelectedOutput.cpp"
 				>
 				<FileConfiguration
@@ -491,6 +499,14 @@
 				</File>
 				<File
 					RelativePath="..\src\IPhreeqc.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\IPhreeqc2.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\IPhreeqcLib.cpp"
 					>
 				</File>
 				<File
@@ -1464,7 +1480,6 @@
 							>
 							<FileConfiguration
 								Name="Debug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1475,7 +1490,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="Release|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1486,7 +1500,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="MemDebug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1603,7 +1616,6 @@
 							>
 							<FileConfiguration
 								Name="Debug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1614,7 +1626,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="Release|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1625,7 +1636,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="MemDebug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -2215,6 +2225,14 @@
 			</File>
 			<File
 				RelativePath="TestInterface.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestIPhreeqc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestIPhreeqcLib.h"
 				>
 			</File>
 			<File

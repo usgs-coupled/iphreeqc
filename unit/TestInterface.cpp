@@ -1,18 +1,5 @@
 #include "TestInterface.h"
 
-#if defined(_WIN32) || defined(__CYGWIN32__)
-#include <windows.h>
-#else
-#include <stdio.h>
-int DeleteFile(const char* szPathName)
-{
-  if (remove(szPathName) == 0) {
-    return 1;
-  }
-  return 0; // failure
-}
-#endif
-
 #include "IPhreeqc.hpp"
 #undef true
 #undef false
@@ -45,6 +32,9 @@ TestInterface::~TestInterface()
 void TestInterface::TestLoadDatabase()
 {
 	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+#if defined(_WIN32)
+	CPPUNIT_ASSERT_EQUAL(0, ::_fcloseall());
+#endif
 }
 
 void TestInterface::TestLoadDatabaseString()
@@ -138,39 +128,40 @@ void TestInterface::TestLoadDatabaseWithErrors()
 {
 	for (int i = 0; i < 5; ++i)
 	{
-	CPPUNIT_ASSERT_EQUAL(6, ::LoadDatabase("missing_e.dat"));
+		CPPUNIT_ASSERT_EQUAL(true, ::FileExists("missing_e.dat"));
 
-	const char *expected =
-		"ERROR: Could not reduce equation to primary master species, CH4.\n"
-		"ERROR: Could not reduce equation to primary master species, Cu+.\n"
-		"ERROR: Could not reduce equation to primary master species, Fe+3.\n"
-		"ERROR: Could not reduce equation to primary master species, H2.\n"
-		"ERROR: Could not reduce equation to primary master species, Mn+3.\n"
-		"ERROR: Could not reduce equation to primary master species, NH4+.\n"
-		"ERROR: Could not reduce equation to primary master species, N2.\n"
-		"ERROR: Could not reduce equation to primary master species, NO2-.\n"
-		"ERROR: Could not reduce equation to primary master species, O2.\n"
-		"ERROR: Could not reduce equation to primary master species, HS-.\n"
-		"ERROR: Could not reduce equation to secondary master species, e-.\n"
-		"ERROR: Non-master species in secondary reaction, e-.\n"
-		"ERROR: No master species for element e.\n"
-		"ERROR: Could not find primary master species for e.\n"
-		"ERROR: No master species for element e.\n"
-		"ERROR: Could not reduce equation to secondary master species, Hausmannite.\n"
-		"ERROR: Could not reduce equation to secondary master species, Manganite.\n"
-		"ERROR: Could not reduce equation to secondary master species, Pyrite.\n"
-		"ERROR: Could not reduce equation to secondary master species, Pyrolusite.\n"
-		"ERROR: Could not reduce equation to secondary master species, Sulfur.\n"
-		"ERROR: e-, primary master species for E-, not defined.\n"
-		"ERROR: Calculations terminating due to input errors.\n"
-		"Stopping.\n";
+		CPPUNIT_ASSERT_EQUAL(6, ::LoadDatabase("missing_e.dat"));
 
-	const char* err = ::GetLastErrorString();
+		static const char *expected =
+			"ERROR: Could not reduce equation to primary master species, CH4.\n"
+			"ERROR: Could not reduce equation to primary master species, Cu+.\n"
+			"ERROR: Could not reduce equation to primary master species, Fe+3.\n"
+			"ERROR: Could not reduce equation to primary master species, H2.\n"
+			"ERROR: Could not reduce equation to primary master species, Mn+3.\n"
+			"ERROR: Could not reduce equation to primary master species, NH4+.\n"
+			"ERROR: Could not reduce equation to primary master species, N2.\n"
+			"ERROR: Could not reduce equation to primary master species, NO2-.\n"
+			"ERROR: Could not reduce equation to primary master species, O2.\n"
+			"ERROR: Could not reduce equation to primary master species, HS-.\n"
+			"ERROR: Could not reduce equation to secondary master species, e-.\n"
+			"ERROR: Non-master species in secondary reaction, e-.\n"
+			"ERROR: No master species for element e.\n"
+			"ERROR: Could not find primary master species for e.\n"
+			"ERROR: No master species for element e.\n"
+			"ERROR: Could not reduce equation to secondary master species, Hausmannite.\n"
+			"ERROR: Could not reduce equation to secondary master species, Manganite.\n"
+			"ERROR: Could not reduce equation to secondary master species, Pyrite.\n"
+			"ERROR: Could not reduce equation to secondary master species, Pyrolusite.\n"
+			"ERROR: Could not reduce equation to secondary master species, Sulfur.\n"
+			"ERROR: e-, primary master species for E-, not defined.\n"
+			"ERROR: Calculations terminating due to input errors.\n"
+			"Stopping.\n";
 
-	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
+		const char* err = ::GetLastErrorString();
+
+		CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 	}
 }
-
 
 void TestInterface::TestRun()
 {
@@ -1191,8 +1182,7 @@ void TestInterface::TestLogOnOff()
 	TestOnOff("phreeqc.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void
-TestInterface::TestDumpOn()
+void TestInterface::TestDumpOn()
 {
 	int onoff[5];
 	onoff[0] = 0;  // output_on
@@ -1293,42 +1283,6 @@ DUMP(void)
 	oss << "-solution 1" << "\n";
 	return ::AccumulateLine(oss.str().c_str());
 }
-
-
-#if defined(_WIN32) || defined(__CYGWIN32__)
-bool FileExists(const char *szPathName)
-{
-	SECURITY_ATTRIBUTES sa;
-	sa.nLength = sizeof(SECURITY_ATTRIBUTES);
-	sa.lpSecurityDescriptor = NULL;
-	sa.bInheritHandle = TRUE;
-	HANDLE fileHandle = ::CreateFile(szPathName, GENERIC_READ, 0, &sa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-	bool retValue;
-	if (fileHandle == INVALID_HANDLE_VALUE)
-	{
-		retValue = false;
-	}
-	else
-	{
-		retValue = true;
-		::CloseHandle(fileHandle);
-	}
-	return retValue;
-}
-#else
-bool FileExists(const char *szPathName)
-{
-  FILE* fp;
-  fp = fopen(szPathName, "r");
-  if (fp == NULL) {
-    return false;
-  } else {
-    fclose(fp);
-    return true;
-  }
-}
-#endif
 
 void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on)
 {
