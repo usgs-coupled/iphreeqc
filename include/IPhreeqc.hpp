@@ -75,8 +75,6 @@ public:
 
 	// Singleton for library
 	static IPhreeqc* LibraryInstance(void);
-	static int Create(void);
-	static void Destroy(int n);
 
 	// Callbacks
 	//
@@ -101,7 +99,6 @@ public:
 	void do_run(const char* sz_routine, std::istream* pis, FILE* fp, PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie);
 
 protected:
-	void init(void);
 	void update_errors(void);
 
 protected:

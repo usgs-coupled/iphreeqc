@@ -25,6 +25,11 @@ Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_getline", "test_getlin
 		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testcpp", "testcpp\testcpp.vcproj", "{046110C9-CD5B-404D-B197-E295656CBF7F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -68,6 +73,12 @@ Global
 		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.MemDebug|Win32.Build.0 = Debug|Win32
 		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.Release|Win32.ActiveCfg = Release|Win32
 		{D95AB257-163E-4ABD-8577-94FB8D1EF62C}.Release|Win32.Build.0 = Release|Win32
+		{046110C9-CD5B-404D-B197-E295656CBF7F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{046110C9-CD5B-404D-B197-E295656CBF7F}.Debug|Win32.Build.0 = Debug|Win32
+		{046110C9-CD5B-404D-B197-E295656CBF7F}.MemDebug|Win32.ActiveCfg = Debug|Win32
+		{046110C9-CD5B-404D-B197-E295656CBF7F}.MemDebug|Win32.Build.0 = Debug|Win32
+		{046110C9-CD5B-404D-B197-E295656CBF7F}.Release|Win32.ActiveCfg = Release|Win32
+		{046110C9-CD5B-404D-B197-E295656CBF7F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

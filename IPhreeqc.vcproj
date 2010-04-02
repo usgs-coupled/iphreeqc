@@ -117,7 +117,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(DEV_GMP_INC);include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -315,6 +315,14 @@
 			</File>
 			<File
 				RelativePath=".\src\IPhreeqc.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\IPhreeqc2.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\IPhreeqcLib.cpp"
 				>
 			</File>
 			<File
@@ -800,6 +808,7 @@
 						>
 						<FileConfiguration
 							Name="Release|Win32"
+							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -810,6 +819,7 @@
 						</FileConfiguration>
 						<FileConfiguration
 							Name="Debug|Win32"
+							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -820,6 +830,7 @@
 						</FileConfiguration>
 						<FileConfiguration
 							Name="MemDebug|Win32"
+							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -1313,26 +1324,26 @@
 						>
 						<FileConfiguration
 							Name="Release|Win32"
-							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
+								CompileAs="2"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
 							Name="Debug|Win32"
-							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
+								CompileAs="2"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
 							Name="MemDebug|Win32"
-							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
+								CompileAs="2"
 							/>
 						</FileConfiguration>
 					</File>
@@ -1443,7 +1454,6 @@
 						>
 						<FileConfiguration
 							Name="Release|Win32"
-							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -1454,7 +1464,6 @@
 						</FileConfiguration>
 						<FileConfiguration
 							Name="Debug|Win32"
-							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -1465,7 +1474,6 @@
 						</FileConfiguration>
 						<FileConfiguration
 							Name="MemDebug|Win32"
-							ExcludedFromBuild="true"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2038,6 +2046,14 @@
 			</File>
 			<File
 				RelativePath=".\src\IPhreeqc.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IPhreeqc2.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\IPhreeqcLib.h"
 				>
 			</File>
 			<File
