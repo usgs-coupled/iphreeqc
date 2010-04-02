@@ -4,9 +4,9 @@
 #include <exception>
 #include <list>
 #include <vector>
+#include <cstdarg>
 #include "IPhreeqcCallbacks.h"      /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
 #include "Var.h"                    /* VRESULT */
-// COMMENT: {3/31/2010 4:21:28 PM}#include "SelectedOutput.hxx"
 
 class Phreeqc;
 class IErrorReporter;
@@ -30,7 +30,7 @@ public:
 
 	int LoadDatabase(const char* filename);
 	int LoadDatabaseString(const char* input);
-	
+
 	void UnLoadDatabase(void);
 
 	size_t AddError(const char* error_msg);
