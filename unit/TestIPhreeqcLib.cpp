@@ -9,6 +9,12 @@
 #include <cmath>
 #include <cfloat>
 
+#if defined(_WIN32) || defined(__CYGWIN32__)
+// DeleteFile defined in <windows.h>
+#else
+int DeleteFile(const char* szPathName);
+#endif
+
 bool FileExists(const char *szPathName);
 
 IPL_RESULT SOLUTION(int n, double C, double Ca, double Na);

@@ -9,6 +9,12 @@
 #undef false
 #include "CVar.hxx"
 
+#if defined(_WIN32) || defined(__CYGWIN32__)
+// DeleteFile defined in <windows.h>
+#else
+int DeleteFile(const char* szPathName);
+#endif
+
 bool FileExists(const char *szPathName);
 
 VRESULT SOLUTION(IPhreeqc2& obj, double C, double Ca, double Na);
