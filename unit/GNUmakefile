@@ -4,8 +4,6 @@ DEFINES             = -DNDEBUG -DSWIG_SHARED_OBJ -DPHREEQC_CPP -DPHREEQC_CLASS -
 CFLAGS              = -Wall -O3
 CPPFLAGS            = $(DEFINES) -I$(CPPUNIT)/include -I../include -I../src -I../src/phreeqcpp -I../src/phreeqcpp/phreeqc
 TARGET_ARCH         =
-FC                  = f95
-FFLAGS              = -fno-second-underscore
 CXX                 = g++
 CXXFLAGS            = -Wall -DNDEBUG
 RANLIB              = ranlib
@@ -36,6 +34,8 @@ VPATH=.:../src:../src/phreeqcpp:../src/phreeqcpp/phreeqc
 TOBJS =	\
 		TestCVar.o \
 		TestInterface.o \
+		TestIPhreeqc.o \
+		TestIPhreeqcLib.o \
 		TestSelectedOutput.o \
 		TestVar.o \
 		unit.o
@@ -43,6 +43,8 @@ TOBJS =	\
 
 SOBJS =	\
 		IPhreeqc.o \
+		IPhreeqc2.o \
+		IPhreeqcLib.o \
 		SelectedOutput.o \
 		Var.o \
 		fwrap.o \
@@ -100,9 +102,11 @@ POBJS =	\
 		model.o \
 		nvector.o \
 		nvector_serial.o \
+		output.o \
 		p2clib.o \
 		parse.o \
 		phqalloc.o \
+		phreeqc_files.o \
 		pitzer.o \
 		pitzer_structures.o \
 		prep.o \
@@ -303,7 +307,7 @@ utilities.o: ../src/phreeqcpp/phreeqc/utilities.c \
 
 # SOBJS
 IPhreeqc.o: ../src/IPhreeqc.cpp ../include/IPhreeqc.h \
- ../include/IPhreeqcCallbacks.h ../include/Var.h ../src/IPhreeqc.hpp \
+ ../include/IPhreeqcCallbacks.h ../include/Var.h ../include/IPhreeqc.hpp \
  ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
  ../src/phreeqcpp/phreeqc/sundialstypes.h \
  ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
