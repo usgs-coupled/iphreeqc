@@ -26,14 +26,16 @@ VPATH=src:src/phreeqcpp:src/phreeqcpp/phreeqc
 
 %.o: %.cxx
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<
-
+	
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<
+	
 
 OBJS = \
 		advection.o \
 		basic.o \
 		basicsubs.o \
 		cl1.o \
-		cl1mp.o \
 		cvdense.o \
 		cvode.o \
 		cxxKinetics.o \
@@ -51,6 +53,7 @@ OBJS = \
 		integrate.o \
 		inverse.o \
 		IPhreeqc.o \
+		IPhreeqc2.o \
 		IPhreeqcF.o \
 		ISolution.o \
 		ISolutionComp.o \
@@ -1214,7 +1217,7 @@ dumper.o: src/phreeqcpp/dumper.cpp src/phreeqcpp/dumper.h \
  src/phreeqcpp/Phreeqc_class.h
 IPhreeqc.o: src/IPhreeqc.cpp include/IPhreeqc.h \
  include/IPhreeqcCallbacks.h src/CVar.hxx src/Debug.h include/Var.h \
- src/IPhreeqc.hpp src/phreeqcpp/Phreeqc.h \
+ include/IPhreeqc.hpp src/phreeqcpp/Phreeqc.h \
  src/phreeqcpp/phreeqc/phrqtype.h src/phreeqcpp/phreeqc/sundialstypes.h \
  src/phreeqcpp/phreeqc/phrqtype.h src/phreeqcpp/phreeqc/nvector.h \
  src/phreeqcpp/phreeqc/sundialstypes.h src/phreeqcpp/phreeqc/cvdense.h \
@@ -1231,7 +1234,7 @@ IPhreeqc.o: src/IPhreeqc.cpp include/IPhreeqc.h \
  src/ErrorReporter.hxx
 fwrap2.o: src/fwrap2.cpp include/Var.h src/fwrap.h
 fwrap3.o: src/fwrap3.cpp include/Var.h src/fwrap.h
-module_output.o: src/module_output.cpp src/module_files.h src/IPhreeqc.hpp \
+module_output.o: src/module_output.cpp src/module_files.h include/IPhreeqc.hpp \
  src/phreeqcpp/Phreeqc.h src/phreeqcpp/phreeqc/phrqtype.h \
  src/phreeqcpp/phreeqc/sundialstypes.h src/phreeqcpp/phreeqc/phrqtype.h \
  src/phreeqcpp/phreeqc/nvector.h src/phreeqcpp/phreeqc/sundialstypes.h \
@@ -1265,7 +1268,7 @@ module_files.o: src/module_files.cpp src/module_files.h \
  src/phreeqcpp/phreeqc/global.h src/phreeqcpp/phreeqc/global_structures.h \
  src/phreeqcpp/phreeqc/phqalloc.h src/phreeqcpp/phreeqc/output.h \
  src/phreeqcpp/phreeqc/phrqproto.h src/phreeqcpp/phreeqc/input.h \
- src/IPhreeqc.hpp include/IPhreeqcCallbacks.h include/Var.h \
+ include/IPhreeqc.hpp include/IPhreeqcCallbacks.h include/Var.h \
  src/SelectedOutput.hxx src/CVar.hxx src/Debug.h
 SelectedOutput.o: src/SelectedOutput.cpp src/phreeqcpp/phreeqc/phrqtype.h \
  src/phreeqcpp/phreeqc/p2c.h src/phreeqcpp/phreeqc/global_structures.h \
