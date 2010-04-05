@@ -16,6 +16,7 @@ class TestInterface :
 	CPPUNIT_TEST( TestRun );
 	CPPUNIT_TEST( TestRunWithErrors );
 	CPPUNIT_TEST( TestRunFile );
+	CPPUNIT_TEST( TestRunString );
 	CPPUNIT_TEST( TestGetSelectedOutputRowCount );
 	CPPUNIT_TEST( TestGetSelectedOutputValue );
 	CPPUNIT_TEST( TestGetSelectedOutputColumnCount );
@@ -55,6 +56,7 @@ public:
 	void TestRun(void);
 	void TestRunWithErrors(void);
 	void TestRunFile(void);
+	void TestRunString(void);
 	void TestGetSelectedOutputRowCount(void);
 	void TestGetSelectedOutputValue(void);
 	void TestGetSelectedOutputColumnCount(void);

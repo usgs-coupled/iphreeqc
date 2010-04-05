@@ -257,6 +257,101 @@ void TestInterface::TestRunFile()
 	CPPUNIT_ASSERT(::DeleteFile(dump_file));
 }
 
+void TestInterface::TestRunString(void)
+{
+	const char input[] =
+		"TITLE Example 1.--Add uranium and speciate seawater.\n"
+		"SOLUTION 1  SEAWATER FROM NORDSTROM ET AL. (1979)\n"
+		"        units   ppm\n"
+		"        pH      8.22\n"
+		"        pe      8.451\n"
+		"        density 1.023\n"
+		"        temp    25.0\n"
+		"        redox   O(0)/O(-2)\n"
+		"        Ca              412.3\n"
+		"        Mg              1291.8\n"
+		"        Na              10768.0\n"
+		"        K               399.1\n"
+		"        Fe              0.002\n"
+		"        Mn              0.0002  pe\n"
+		"        Si              4.28\n"
+		"        Cl              19353.0\n"
+		"        Alkalinity      141.682 as HCO3\n"
+		"        S(6)            2712.0\n"
+		"        N(5)            0.29    gfw   62.0\n"
+		"        N(-3)           0.03    as    NH4\n"
+		"        U               3.3     ppb   N(5)/N(-3)\n"
+		"        O(0)            1.0     O2(g) -0.7\n"
+		"SOLUTION_MASTER_SPECIES\n"
+		"        U       U+4     0.0     238.0290     238.0290\n"
+		"        U(4)    U+4     0.0     238.0290\n"
+		"        U(5)    UO2+    0.0     238.0290\n"
+		"        U(6)    UO2+2   0.0     238.0290\n"
+		"SOLUTION_SPECIES\n"
+		"        #primary master species for U\n"
+		"        #is also secondary master species for U(4)\n"
+		"        U+4 = U+4\n"
+		"                log_k          0.0\n"
+		"        U+4 + 4 H2O = U(OH)4 + 4 H+\n"
+		"                log_k          -8.538\n"
+		"                delta_h        24.760 kcal\n"
+		"        U+4 + 5 H2O = U(OH)5- + 5 H+\n"
+		"                log_k          -13.147\n"
+		"                delta_h        27.580 kcal\n"
+		"        #secondary master species for U(5)\n"
+		"        U+4 + 2 H2O = UO2+ + 4 H+ + e-\n"
+		"                log_k          -6.432\n"
+		"                delta_h        31.130 kcal\n"
+		"        #secondary master species for U(6)\n"
+		"        U+4 + 2 H2O = UO2+2 + 4 H+ + 2 e-\n"
+		"                log_k          -9.217\n"
+		"                delta_h        34.430 kcal\n"
+		"        UO2+2 + H2O = UO2OH+ + H+\n"
+		"                log_k          -5.782\n"
+		"                delta_h        11.015 kcal\n"
+		"        2UO2+2 + 2H2O = (UO2)2(OH)2+2 + 2H+\n"
+		"                log_k          -5.626\n"
+		"                delta_h        -36.04 kcal\n"
+		"        3UO2+2 + 5H2O = (UO2)3(OH)5+ + 5H+\n"
+		"                log_k          -15.641\n"
+		"                delta_h        -44.27 kcal\n"
+		"        UO2+2 + CO3-2 = UO2CO3\n"
+		"                log_k          10.064\n"
+		"                delta_h        0.84 kcal\n"
+		"        UO2+2 + 2CO3-2 = UO2(CO3)2-2\n"
+		"                log_k          16.977\n"
+		"                delta_h        3.48 kcal\n"
+		"        UO2+2 + 3CO3-2 = UO2(CO3)3-4\n"
+		"                log_k          21.397\n"
+		"                delta_h        -8.78 kcal\n"
+		"PHASES\n"
+		"        Uraninite\n"
+		"        UO2 + 4 H+ = U+4 + 2 H2O\n"
+		"        log_k          -3.490\n"
+		"        delta_h        -18.630 kcal\n"
+		"END\n"
+		"\n";
+
+	if (::FileExists("phreeqc.out"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("phreeqc.out"));
+	}
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists("phreeqc.out"));
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("phreeqc.dat"));
+	::SetOutputOn(1);
+	::SetErrorOn(0);
+	::SetLogOn(0);
+	::SetSelectedOutputOn(0);
+	::SetDumpOn(0);
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists("phreeqc.out"));
+	CPPUNIT_ASSERT_EQUAL(0,     ::RunString(input));
+	CPPUNIT_ASSERT_EQUAL(true,  ::FileExists("phreeqc.out"));
+	if (::FileExists("phreeqc.out"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("phreeqc.out"));
+	}
+}
+
 void TestInterface::TestGetSelectedOutputRowCount()
 {
 	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase("llnl.dat"));

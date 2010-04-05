@@ -2045,11 +2045,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\IPhreeqc.hpp"
+				RelativePath=".\include\IPhreeqc.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\IPhreeqc2.h"
+				RelativePath=".\include\IPhreeqc2.h"
 				>
 			</File>
 			<File
