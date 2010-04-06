@@ -8,14 +8,14 @@
 /*! \brief Enumeration used to return error codes.
 */
 typedef enum {
-	IPL_OK            =  0,
-	IPL_OUTOFMEMORY   = -1,
-	IPL_BADINSTANCE   = -2,
-	IPL_BADVARTYPE    = -3,
-	IPL_INVALIDARG    = -4,
-	IPL_INVALIDROW    = -5,
-	IPL_INVALIDCOL    = -6,
-} IPL_RESULT;
+	IPQ_OK            =  0,
+	IPQ_OUTOFMEMORY   = -1,
+	IPQ_BADINSTANCE   = -2,
+	IPQ_BADVARTYPE    = -3,
+	IPQ_INVALIDARG    = -4,
+	IPQ_INVALIDROW    = -5,
+	IPQ_INVALIDCOL    = -6,
+} IPQ_RESULT;
 
 
 class IPhreeqc2;
@@ -40,7 +40,7 @@ extern "C" {
 
 	int CreateIPhreeqc(void);
 
-	IPL_RESULT DestroyIPhreeqc(int id);
+	IPQ_RESULT DestroyIPhreeqc(int id);
 
 /**
  *  Load the specified database file into phreeqc.
@@ -133,7 +133,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	IPL_RESULT AccumulateLineM(int id, const char *line);
+	IPQ_RESULT AccumulateLineM(int id, const char *line);
 
 /**
  *  Sets the selected_output flag on or off
@@ -150,7 +150,7 @@ extern "C" {
  *  @endhtmlonly
  */
 	int GetSelectedOutputOnM(int id);
-	IPL_RESULT SetSelectedOutputOnM(int id, int value);
+	IPQ_RESULT SetSelectedOutputOnM(int id, int value);
 
 /**
  *  Sets the output flag on or off
@@ -167,7 +167,7 @@ extern "C" {
  *  @endhtmlonly
  */
 	int GetOutputOnM(int id);
-	IPL_RESULT SetOutputOnM(int id, int value);
+	IPQ_RESULT SetOutputOnM(int id, int value);
 
 /**
  *  Sets the error flag on or off
@@ -184,7 +184,7 @@ extern "C" {
  *  @endhtmlonly
  */
 	int GetErrorOnM(int id);
-	IPL_RESULT SetErrorOnM(int id, int value);
+	IPQ_RESULT SetErrorOnM(int id, int value);
 
 /**
  *  Sets the log flag on or off
@@ -201,7 +201,7 @@ extern "C" {
  *  @endhtmlonly
  */
 	int GetLogOnM(int id);
-	IPL_RESULT SetLogOnM(int id, int value);
+	IPQ_RESULT SetLogOnM(int id, int value);
 
 /**
  *  Sets the dump flag on or off
@@ -218,7 +218,7 @@ extern "C" {
  *  @endhtmlonly
  */
 	int GetDumpOnM(int id);
-	IPL_RESULT SetDumpOnM(int id, int value);
+	IPQ_RESULT SetDumpOnM(int id, int value);
 
 /**
  *  Sets the dump string flag on or off
@@ -235,7 +235,7 @@ extern "C" {
  *  @endhtmlonly
  */
 	int GetDumpStringOnM(int id);
-	IPL_RESULT SetDumpStringOnM(int id, int value);
+	IPQ_RESULT SetDumpStringOnM(int id, int value);
 
 /**
  *  Runs the accumulated input sent to AccumulateLine.
@@ -489,7 +489,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	IPL_RESULT GetSelectedOutputValueM(int id, int row, int col, VAR* pVAR);
+	IPQ_RESULT GetSelectedOutputValueM(int id, int row, int col, VAR* pVAR);
 
 /**
  *  TODO
@@ -583,7 +583,7 @@ class IPhreeqcLib
 {
 public:
 	static int CreateIPhreeqc(void);
-	static IPL_RESULT DestroyIPhreeqc(int n);
+	static IPQ_RESULT DestroyIPhreeqc(int n);
 	static IPhreeqc2* GetInstance(int n);
 
 private:

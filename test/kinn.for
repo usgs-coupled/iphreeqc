@@ -67,7 +67,7 @@
         DO 30 j=1,cols
           iresult = GetSelectedOutputValue(id, i, j, vtype, 
      &                                     dvalue, svalue)
-          IF (iresult.EQ.IPL_OK) THEN
+          IF (iresult.EQ.IPQ_OK) THEN
             IF (vtype.eq.TT_EMPTY) THEN
               PRINT 50, ' ', ACHAR(9)
             ELSEIF(vtype.eq.TT_DOUBLE) THEN
@@ -77,9 +77,9 @@
               PRINT 50, svalue(1:len-1), ACHAR(9)
             ENDIF
           ELSE
-            IF (iresult.eq.IPL_INVALIDROW) THEN
+            IF (iresult.eq.IPQ_INVALIDROW) THEN
               PRINT 50, 'INVROW', ACHAR(9)
-            ELSEIF (iresult.eq.IPL_INVALIDCOL) THEN
+            ELSEIF (iresult.eq.IPQ_INVALIDCOL) THEN
               PRINT 50, 'INVCOL', ACHAR(9)
             ELSE
               PRINT 50, 'ERROR', ACHAR(9)
