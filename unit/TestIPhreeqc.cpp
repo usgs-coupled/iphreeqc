@@ -23,7 +23,7 @@ VRESULT USER_PUNCH(IPhreeqc2& obj, const char* element, int max);
 VRESULT SELECTED_OUTPUT(IPhreeqc2& obj);
 VRESULT DUMP(IPhreeqc2& obj);
 
-void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on);
+void TestOnOff(const char* FILENAME, bool output_on, bool error_on, bool log_on, bool selected_output_on, bool dump_on);
 
 TestIPhreeqc::TestIPhreeqc(void)
 {
@@ -1206,12 +1206,6 @@ void TestIPhreeqc::TestCase2(void)
 
 void TestIPhreeqc::TestPrintSelectedOutputFalse(void)
 {
-// COMMENT: {3/30/2010 5:03:24 PM}#if defined(_WIN32)
-// COMMENT: {3/30/2010 5:03:24 PM}	int n0 = ::_fcloseall();
-// COMMENT: {3/30/2010 5:03:24 PM}	CPPUNIT_ASSERT_EQUAL(0, n0);
-// COMMENT: {3/30/2010 5:03:24 PM}	{
-// COMMENT: {3/30/2010 5:03:24 PM}#endif
-
 	IPhreeqc2 obj;
 
 	// remove punch files if they exists
@@ -1264,22 +1258,14 @@ void TestIPhreeqc::TestPrintSelectedOutputFalse(void)
 
 	CPPUNIT_ASSERT_EQUAL( 11, obj.GetSelectedOutputColumnCount() );
 	CPPUNIT_ASSERT_EQUAL( 2, obj.GetSelectedOutputRowCount() );
-
-// COMMENT: {3/30/2010 5:03:31 PM}#if defined(_WIN32)
-// COMMENT: {3/30/2010 5:03:31 PM}	}
-// COMMENT: {3/30/2010 5:03:31 PM}	int n1 = ::_fcloseall();
-// COMMENT: {3/30/2010 5:03:31 PM}	CPPUNIT_ASSERT_EQUAL(0, n1);
-// COMMENT: {3/30/2010 5:03:31 PM}#endif
 }
 
 void TestIPhreeqc::TestOutputOnOff()
 {
-	//{{
 #if defined(_WIN32)
 	int n = ::_fcloseall();
 	CPPUNIT_ASSERT_EQUAL(0, n);
 #endif
-	//}}
 
 	bool onoff[5];
 	onoff[0] = true;   // output_on
@@ -1287,7 +1273,7 @@ void TestIPhreeqc::TestOutputOnOff()
 	onoff[2] = false;  // log_on
 	onoff[3] = false;  // selected_output_on
 	onoff[4] = false;  // dump_on
-	TestOnOff("phreeqc.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	::TestOnOff("phreeqc.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 void TestIPhreeqc::TestErrorOnOff()
@@ -1298,7 +1284,7 @@ void TestIPhreeqc::TestErrorOnOff()
 	onoff[2] = false;  // log_on
 	onoff[3] = false;  // selected_output_on
 	onoff[4] = false;  // dump_on
-	TestOnOff("phreeqc.err", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	::TestOnOff("phreeqc.err", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 void TestIPhreeqc::TestLogOnOff()
@@ -1309,7 +1295,7 @@ void TestIPhreeqc::TestLogOnOff()
 	onoff[2] = true;   // log_on
 	onoff[3] = false;  // selected_output_on
 	onoff[4] = false;  // dump_on
-	TestOnOff("phreeqc.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	::TestOnOff("phreeqc.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 void TestIPhreeqc::TestDumpOn()
@@ -1320,7 +1306,7 @@ void TestIPhreeqc::TestDumpOn()
 	onoff[2] = false;  // log_on
 	onoff[3] = false;  // selected_output_on
 	onoff[4] = true;   // dump_on
-	TestOnOff("dump.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	::TestOnOff("dump.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 void TestIPhreeqc::TestSelOutOnOff()
@@ -1331,13 +1317,12 @@ void TestIPhreeqc::TestSelOutOnOff()
 	onoff[2] = false;  // log_on
 	onoff[3] = true;   // selected_output_on
 	onoff[4] = false;  // dump_on
-	TestOnOff("selected.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	::TestOnOff("selected.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
 void TestOnOff(const char* FILENAME, bool output_on, bool error_on, bool log_on, bool selected_output_on, bool dump_on)
 {
 	IPhreeqc2 obj;
-	//const char *FILENAME = "phreeqc.out";
 
 	// remove FILENAME if it exists
 	//

@@ -103,7 +103,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	// TODO void    OutputLastError(void);
+	void    OutputLastErrorM(int id);
 
 	const char* GetLastErrorStringM(int id);
 
@@ -497,9 +497,9 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetErrorLineCount
- *    INTEGER :: GetErrorLineCount
- *  END FUNCTION GetErrorLineCount
+ *  FUNCTION GetComponentCount
+ *    INTEGER :: GetComponentCount
+ *  END FUNCTION GetComponentCount
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -512,9 +512,9 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetErrorLineCount
- *    INTEGER :: GetErrorLineCount
- *  END FUNCTION GetErrorLineCount
+ *  FUNCTION GetComponent
+ *    INTEGER :: GetComponent
+ *  END FUNCTION GetComponent
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -534,11 +534,43 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-// TODO void    OutputLines(void);
+	void    OutputLinesM(int id);
 
 // TODO int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);
 
 // TODO int CatchErrors(PFN_CATCH_CALLBACK pfn, void *cookie);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorLineCount
+ *    INTEGER :: GetErrorLineCount
+ *  END FUNCTION GetErrorLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+int GetErrorLineCountM(int id);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetErrorLine
+ *    INTEGER,          INTENT(IN)  :: N
+ *    CHARACTER(LEN=*), INTENT(OUT) :: LINE
+ *  END SUBROUTINE GetErrorLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+const char* GetErrorLineM(int id, int n);
+
 
 
 

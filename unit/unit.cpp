@@ -11,7 +11,6 @@
 #include "TestVar.h"
 #include "TestCVar.h"
 #include "TestSelectedOutput.h"
-#include "TestInterface.h"
 #include "TestIPhreeqc.h"
 #include "TestIPhreeqcLib.h"
 
@@ -22,7 +21,6 @@ int main(int argc, char **argv)
 	runner.addTest(TestVar::suite());
 	runner.addTest(TestCVar::suite());
 	runner.addTest(TestSelectedOutput::suite());
-	runner.addTest(TestInterface::suite());
 	runner.addTest(TestIPhreeqc::suite());
 	runner.addTest(TestIPhreeqcLib::suite());
 

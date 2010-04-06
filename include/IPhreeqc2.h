@@ -44,6 +44,8 @@ public:
 	int GetSelectedOutputColumnCount(void)const;
 	VRESULT GetSelectedOutputValue(int row, int col, VAR* pVAR);
 
+	void OutputLastError(void);
+
 	void OutputLines(void);
 	const std::string& GetAccumulatedLines(void);
 	void ClearAccumulatedLines(void);
@@ -90,7 +92,7 @@ public:
 	// module_output.c
 	int output_isopen2(const int type);
 
-	virtual int EndRow(void);
+	int EndRow(void);
 	void AddSelectedOutput(const char* name, const char* format, va_list argptr);
 
 	void check_database(const char* sz_routine);
@@ -124,10 +126,13 @@ protected:
 	std::string                DumpString;
 	std::vector< std::string > DumpLines;
 
-	std::list < std::string >  Components;
+	std::list< std::string >   Components;
 
 private:
+#if defined(CPPUNIT)
 	friend class TestIPhreeqc;
+	friend class TestSelectedOutput;
+#endif
 	Phreeqc* PhreeqcPtr;
 };
 

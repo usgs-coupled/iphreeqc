@@ -314,78 +314,12 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\IPhreeqc.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\IPhreeqc2.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\IPhreeqcLib.cpp"
 				>
-			</File>
-			<File
-				RelativePath=".\src\module_files.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MemDebug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\src\module_output.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MemDebug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\pp_sys.cpp"
@@ -2038,14 +1972,6 @@
 			</File>
 			<File
 				RelativePath="include\IPhreeqc.f90.inc"
-				>
-			</File>
-			<File
-				RelativePath=".\include\IPhreeqc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\IPhreeqc.hpp"
 				>
 			</File>
 			<File
