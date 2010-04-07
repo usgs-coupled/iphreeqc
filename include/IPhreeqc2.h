@@ -79,18 +79,16 @@ public:
 	bool GetSelectedOutputOn(void)const;
 	void SetSelectedOutputOn(bool bValue);
 
-	// IPhreeqc.cpp
-	static int handler2(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
-	int output_handler2(const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
-	int open_handler2(const int type, const char *file_name);
+protected:
+	static int handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
+	int output_handler(const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
+	int open_handler(const int type, const char *file_name);
 
-	// module_files.c
-	static int module_handler2(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
-	int module_isopen_handler2(const int type);
-	int module_open_handler2(const int type, const char *file_name);
+	static int module_handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
+	int module_isopen_handler(const int type);
+	int module_open_handler(const int type, const char *file_name);
 
-	// module_output.c
-	int output_isopen2(const int type);
+	int output_isopen(const int type);
 
 	int EndRow(void);
 	void AddSelectedOutput(const char* name, const char* format, va_list argptr);
@@ -98,9 +96,7 @@ public:
 	void check_database(const char* sz_routine);
 	void do_run(const char* sz_routine, std::istream* pis, FILE* fp, PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie);
 
-protected:
 	void update_errors(void);
-
 
 protected:
 	bool                       DatabaseLoaded;
