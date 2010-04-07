@@ -17,11 +17,11 @@ int DeleteFile(const char* szPathName);
 
 bool FileExists(const char *szPathName);
 
-VRESULT SOLUTION(IPhreeqc2& obj, double C, double Ca, double Na);
-VRESULT EQUILIBRIUM_PHASES(IPhreeqc2& obj, const char* phase, double si, double amount);
-VRESULT USER_PUNCH(IPhreeqc2& obj, const char* element, int max);
-VRESULT SELECTED_OUTPUT(IPhreeqc2& obj);
-VRESULT DUMP(IPhreeqc2& obj);
+VRESULT SOLUTION(IPhreeqc& obj, double C, double Ca, double Na);
+VRESULT EQUILIBRIUM_PHASES(IPhreeqc& obj, const char* phase, double si, double amount);
+VRESULT USER_PUNCH(IPhreeqc& obj, const char* element, int max);
+VRESULT SELECTED_OUTPUT(IPhreeqc& obj);
+VRESULT DUMP(IPhreeqc& obj);
 
 void TestOnOff(const char* FILENAME, bool output_on, bool error_on, bool log_on, bool selected_output_on, bool dump_on);
 
@@ -35,7 +35,7 @@ TestIPhreeqc::~TestIPhreeqc(void)
 
 void TestIPhreeqc::TestLoadDatabase(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 	for (int i = 0; i < 10; ++i)
 	{
 		CPPUNIT_ASSERT_EQUAL(true, ::FileExists("phreeqc.dat"));
@@ -111,7 +111,7 @@ void TestIPhreeqc::TestLoadDatabaseString(void)
 		"        log_k   -14.0;  -gamma  1e7   0.0\n"
 		"END\n";
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabaseString(ex15_dat));
 }
 
@@ -119,7 +119,7 @@ void TestIPhreeqc::TestLoadDatabaseMissingFile(void)
 {
 	CPPUNIT_ASSERT_EQUAL(false, ::FileExists("missing.file"));
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(1,     obj.LoadDatabase("missing.file"));
 	CPPUNIT_ASSERT_EQUAL(1,     obj.LoadDatabase("missing.file"));
@@ -140,7 +140,7 @@ void TestIPhreeqc::TestLoadDatabaseWithErrors(void)
 	assert(n0 == 0);
 #endif
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	for (int i = 0; i < 10; ++i)
 	{
@@ -189,7 +189,7 @@ void TestIPhreeqc::TestRun(void)
 #endif
 
 	bool files_on = false;
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 	CPPUNIT_ASSERT_EQUAL(0,     obj.LoadDatabase("phreeqc.dat"));
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("solution 12"));
 	obj.SetOutputOn(files_on);
@@ -203,7 +203,7 @@ void TestIPhreeqc::TestRun(void)
 void TestIPhreeqc::TestRunWithErrors(void)
 {
 	const char dump_file[] = "error.inp";
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	// remove dump file if it exists
 	//
@@ -254,7 +254,7 @@ void TestIPhreeqc::TestRunFile(void)
 		CPPUNIT_ASSERT(::DeleteFile(dump_file));
 	}
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
 	obj.SetOutputOn(false);
@@ -350,7 +350,7 @@ void TestIPhreeqc::TestRunString(void)
 		"END\n"
 		"\n";
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	if (::FileExists("phreeqc.out"))
 	{
@@ -374,7 +374,7 @@ void TestIPhreeqc::TestRunString(void)
 
 void TestIPhreeqc::TestGetSelectedOutputRowCount(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0,     obj.LoadDatabase("llnl.dat"));
 
@@ -398,7 +398,7 @@ void TestIPhreeqc::TestGetSelectedOutputValue(void)
 {
 	int col;
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("llnl.dat"));
 
@@ -997,7 +997,7 @@ EXPECTED selected.out:
 
 void TestIPhreeqc::TestGetSelectedOutputColumnCount(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("llnl.dat"));
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetSelectedOutputColumnCount() );
 	CPPUNIT_ASSERT_EQUAL( VR_OK, SOLUTION(obj, 1.0, 1.0, 1.0) );
@@ -1009,7 +1009,7 @@ void TestIPhreeqc::TestGetSelectedOutputColumnCount(void)
 
 void TestIPhreeqc::TestAddError(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
 
@@ -1066,7 +1066,7 @@ void TestIPhreeqc::TestRunWithCallback(void)
 
 void TestIPhreeqc::TestRunNoDatabaseLoaded(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	obj.UnLoadDatabase();
 	obj.SetOutputOn(false);
@@ -1092,7 +1092,7 @@ void TestIPhreeqc::TestCase1(void)
 	// output_isopen(OUTPUT_PUNCH) == FALSE
 	// selected_output_on == TRUE
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	// remove punch file if it exists
 	if (::FileExists("selected.out"))
@@ -1138,7 +1138,7 @@ void TestIPhreeqc::TestCase2(void)
 	// output_isopen(OUTPUT_PUNCH) == FALSE
 	// selected_output_on == TRUE
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	// remove punch files if they exists
 	//
@@ -1206,7 +1206,7 @@ void TestIPhreeqc::TestCase2(void)
 
 void TestIPhreeqc::TestPrintSelectedOutputFalse(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	// remove punch files if they exists
 	//
@@ -1322,7 +1322,7 @@ void TestIPhreeqc::TestSelOutOnOff()
 
 void TestOnOff(const char* FILENAME, bool output_on, bool error_on, bool log_on, bool selected_output_on, bool dump_on)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	// remove FILENAME if it exists
 	//
@@ -1419,7 +1419,7 @@ void TestOnOff(const char* FILENAME, bool output_on, bool error_on, bool log_on,
 }
 
 VRESULT
-SOLUTION(IPhreeqc2& obj, double C, double Ca, double Na)
+SOLUTION(IPhreeqc& obj, double C, double Ca, double Na)
 {
 	std::ostringstream oss;
 
@@ -1432,7 +1432,7 @@ SOLUTION(IPhreeqc2& obj, double C, double Ca, double Na)
 }
 
 VRESULT
-EQUILIBRIUM_PHASES(IPhreeqc2& obj, const char* phase, double si, double amount)
+EQUILIBRIUM_PHASES(IPhreeqc& obj, const char* phase, double si, double amount)
 {
 	std::ostringstream oss;
 
@@ -1442,7 +1442,7 @@ EQUILIBRIUM_PHASES(IPhreeqc2& obj, const char* phase, double si, double amount)
 }
 
 VRESULT
-USER_PUNCH(IPhreeqc2& obj, const char* element, int max)
+USER_PUNCH(IPhreeqc& obj, const char* element, int max)
 {
 	std::ostringstream oss;
 
@@ -1477,7 +1477,7 @@ USER_PUNCH(IPhreeqc2& obj, const char* element, int max)
 }
 
 VRESULT
-SELECTED_OUTPUT(IPhreeqc2& obj)
+SELECTED_OUTPUT(IPhreeqc& obj)
 {
 	std::ostringstream oss;
 
@@ -1489,7 +1489,7 @@ SELECTED_OUTPUT(IPhreeqc2& obj)
 }
 
 VRESULT
-DUMP(IPhreeqc2& obj)
+DUMP(IPhreeqc& obj)
 {
 	std::ostringstream oss;
 	oss << "DUMP" << "\n";
@@ -1502,7 +1502,7 @@ void TestIPhreeqc::TestLongHeadings()
 	char long_header[] = "this_is_a_long_header_0123456789012345678901234567890123456789";
 	char long_value[]  = "this_is_a_long_value_01234567890123456789012345678901234567890";
 
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
 
@@ -1545,7 +1545,7 @@ void TestIPhreeqc::TestLongHeadings()
 
 void TestIPhreeqc::TestDatabaseKeyword()
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
 	obj.SetOutputOn(false);
@@ -1566,7 +1566,7 @@ void TestIPhreeqc::TestDatabaseKeyword()
 
 void TestIPhreeqc::TestDumpString()
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
 
@@ -1649,7 +1649,7 @@ void TestIPhreeqc::TestDumpString()
 
 void TestIPhreeqc::TestGetDumpLineCount(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0,          obj.LoadDatabase("phreeqc.dat"));
 
@@ -1674,7 +1674,7 @@ void TestIPhreeqc::TestGetDumpLineCount(void)
 
 void TestIPhreeqc::TestGetDumpLine(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0,          obj.LoadDatabase("phreeqc.dat"));
 
@@ -1771,7 +1771,7 @@ void TestIPhreeqc::TestGetDumpLine(void)
 
 void TestIPhreeqc::TestGetComponentCount(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.LoadDatabase("phreeqc.dat") );
 
@@ -1791,7 +1791,7 @@ void TestIPhreeqc::TestGetComponentCount(void)
 
 void TestIPhreeqc::TestGetComponent(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.LoadDatabase("phreeqc.dat") );
 
@@ -1822,7 +1822,7 @@ void TestIPhreeqc::TestGetComponent(void)
 
 void TestIPhreeqc::TestListComponents(void)
 {
-	IPhreeqc2 obj;
+	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat") );
 

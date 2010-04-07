@@ -1,5 +1,5 @@
-#ifndef __IPHREEQC_LIB_H
-#define __IPHREEQC_LIB_H
+#ifndef INC_IPHREEQC_H
+#define INC_IPHREEQC_H
 
 #include <map>
 
@@ -18,7 +18,7 @@ typedef enum {
 } IPQ_RESULT;
 
 
-class IPhreeqc2;
+class IPhreeqc;
 
 #if defined(__cplusplus)
 extern "C" {
@@ -576,4 +576,4 @@ const char* GetErrorLine(int id, int n);
 }
 #endif
 
-#endif // __IPHREEQC_LIB_H
+#endif // INC_IPHREEQC_H

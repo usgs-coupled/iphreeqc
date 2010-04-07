@@ -1983,10 +1983,6 @@
 				>
 			</File>
 			<File
-				RelativePath="src\module_files.h"
-				>
-			</File>
-			<File
 				RelativePath="src\SelectedOutput.hxx"
 				>
 			</File>

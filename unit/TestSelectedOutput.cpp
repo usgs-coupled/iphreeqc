@@ -408,7 +408,7 @@ TestSelectedOutput::TestEndRow2()
 void
 TestSelectedOutput::TestTooManyHeadings()
 {
-	IPhreeqc2 p;
+	IPhreeqc p;
 
 	CPPUNIT_ASSERT_EQUAL(0u, p.SelectedOutput->GetColCount());
 	CPPUNIT_ASSERT_EQUAL(0u, p.SelectedOutput->GetRowCount());

@@ -1,8 +1,6 @@
 #include <iostream>
 #include <IPhreeqc.hpp>
 
-#define IPhreeqc IPhreeqc2
-
 int main(int argc, char* argv[])
 {
 	IPhreeqc obj;

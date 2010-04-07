@@ -1,5 +1,5 @@
-#ifndef _INC_IPHREEQC2_HPP
-#define _INC_IPHREEQC2_HPP
+#ifndef INC_IPHREEQC_HPP
+#define INC_IPHREEQC_HPP
 
 #include <exception>
 #include <list>
@@ -16,11 +16,11 @@ class IPhreeqcStop : std::exception
 {
 };
 
-class IPhreeqc2
+class IPhreeqc
 {
 public:
-	IPhreeqc2(void);
-	~IPhreeqc2(void);
+	IPhreeqc(void);
+	~IPhreeqc(void);
 
 public:
 
@@ -132,4 +132,4 @@ private:
 	Phreeqc* PhreeqcPtr;
 };
 
-#endif // _INC_IPHREEQC2_HPP
+#endif // INC_IPHREEQC_HPP
