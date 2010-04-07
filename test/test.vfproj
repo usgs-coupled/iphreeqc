@@ -36,5 +36,5 @@
 		<File RelativePath="..\include\IPhreeqc.f90.inc"/></Filter>
 		<Filter Name="Resource Files" Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<Filter Name="Source Files" Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;f90;for;f;fpp">
-		<File RelativePath="kinn.for"/></Filter></Files>
+		<File RelativePath=".\kinn.f"/></Filter></Files>
 	<Globals/></VisualStudioProject>
