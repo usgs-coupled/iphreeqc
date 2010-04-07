@@ -428,7 +428,7 @@
 				Name="src"
 				>
 				<File
-					RelativePath="..\src\IPhreeqc2.cpp"
+					RelativePath="..\src\IPhreeqc.cpp"
 					>
 				</File>
 				<File

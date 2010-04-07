@@ -1,5 +1,5 @@
 #include <iostream>
-#include <IPhreeqc2.h>
+#include <IPhreeqc.hpp>
 
 #define IPhreeqc IPhreeqc2
 

@@ -1,6 +1,6 @@
 #include "TestSelectedOutput.h"
 
-#include "IPhreeqc2.h"
+#include "IPhreeqc.hpp"
 #include "Phreeqc.h"
 
 #if defined(_WIN32)

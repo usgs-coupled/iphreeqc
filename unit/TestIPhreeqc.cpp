@@ -3,7 +3,7 @@
 #include <cmath>
 #include <cfloat>
 #include <cassert>
-#include "IPhreeqc2.h"
+#include "IPhreeqc.hpp"
 #include "Phreeqc.h"
 #undef true
 #undef false

@@ -314,7 +314,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\IPhreeqc2.cpp"
+				RelativePath=".\src\IPhreeqc.cpp"
 				>
 			</File>
 			<File
@@ -1979,7 +1979,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\IPhreeqc2.h"
+				RelativePath=".\include\IPhreeqc.hpp"
 				>
 			</File>
 			<File
