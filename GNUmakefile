@@ -52,9 +52,9 @@ OBJS = \
 		input.o \
 		integrate.o \
 		inverse.o \
-		IPhreeqc.o \
 		IPhreeqc2.o \
 		IPhreeqcF.o \
+		IPhreeqcLib.o \
 		ISolution.o \
 		ISolutionComp.o \
 		isotopes.o \
@@ -62,8 +62,6 @@ OBJS = \
 		KineticsComp.o \
 		mainsubs.o \
 		model.o \
-		module_files.o \
-		module_output.o \
 		NameDouble.o \
 		NumKeyword.o \
 		nvector.o \
@@ -1215,7 +1213,7 @@ Phreeqc.o: src/phreeqcpp/Phreeqc.cpp src/phreeqcpp/Phreeqc.h \
 dumper.o: src/phreeqcpp/dumper.cpp src/phreeqcpp/dumper.h \
  src/phreeqcpp/StorageBinList.h src/phreeqcpp/Parser.h \
  src/phreeqcpp/Phreeqc_class.h
-IPhreeqc.o: src/IPhreeqc.cpp include/IPhreeqc.h \
+IPhreeqc.o: src/IPhreeqc.cpp \
  include/IPhreeqcCallbacks.h src/CVar.hxx src/Debug.h include/Var.h \
  include/IPhreeqc.hpp src/phreeqcpp/Phreeqc.h \
  src/phreeqcpp/phreeqc/phrqtype.h src/phreeqcpp/phreeqc/sundialstypes.h \
@@ -1286,7 +1284,7 @@ SelectedOutput.o: src/SelectedOutput.cpp src/phreeqcpp/phreeqc/phrqtype.h \
  src/phreeqcpp/phreeqc/global_structures.h src/SelectedOutput.hxx \
  src/CVar.hxx src/Debug.h include/Var.h
 pp_sys.o: src/pp_sys.cpp
-fwrap.o: src/fwrap.cpp src/phreeqcpp/phreeqc/phrqtype.h include/IPhreeqc.h \
+fwrap.o: src/fwrap.cpp src/phreeqcpp/phreeqc/phrqtype.h \
  include/IPhreeqcCallbacks.h src/CVar.hxx src/Debug.h include/Var.h \
  src/fwrap.h
 Var.o: src/Var.c include/Var.h

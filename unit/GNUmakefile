@@ -1,6 +1,6 @@
 CPPUNIT             = /z/parkplace/home/charlton
 CC                  = g++
-DEFINES             = -DNDEBUG -DSWIG_SHARED_OBJ -DPHREEQC_CPP -DPHREEQC_CLASS -DUSE_PHRQ_ALLOC
+DEFINES             = -DNDEBUG -DSWIG_SHARED_OBJ -DPHREEQC_CPP -DPHREEQC_CLASS -DUSE_PHRQ_ALLOC -DCPPUNIT
 CFLAGS              = -Wall -O3
 CPPFLAGS            = $(DEFINES) -I$(CPPUNIT)/include -I../include -I../src -I../src/phreeqcpp -I../src/phreeqcpp/phreeqc
 TARGET_ARCH         =
@@ -33,7 +33,6 @@ VPATH=.:../src:../src/phreeqcpp:../src/phreeqcpp/phreeqc
 
 TOBJS =	\
 		TestCVar.o \
-		TestInterface.o \
 		TestIPhreeqc.o \
 		TestIPhreeqcLib.o \
 		TestSelectedOutput.o \
@@ -42,14 +41,10 @@ TOBJS =	\
 
 
 SOBJS =	\
-		IPhreeqc.o \
 		IPhreeqc2.o \
 		IPhreeqcLib.o \
 		SelectedOutput.o \
-		Var.o \
-		fwrap.o \
-		module_files.o \
-		module_output.o
+		Var.o
 
 PPOBJS = \
 		cxxKinetics.o \
@@ -136,11 +131,6 @@ clean:
 # TOBJS
 TestCVar.o: TestCVar.cpp TestCVar.h ../src/CVar.hxx ../src/Debug.h \
   ../src/../include/Var.h
-TestInterface.o: TestInterface.cpp TestInterface.h ../include/IPhreeqc.h \
-  ../include/Var.h ../src/CVar.hxx ../src/Debug.h ../src/../include/Var.h \
-  ../src/phreeqcpp/phreeqc/global.h ../src/phreeqcpp/phreeqc/phrqtype.h \
-  ../src/phreeqcpp/phreeqc/phqalloc.h ../src/phreeqcpp/phreeqc/input.h \
-  ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/phrqproto.h
 TestSelectedOutput.o: TestSelectedOutput.cpp TestSelectedOutput.h \
   ../src/SelectedOutput.hxx ../src/CVar.hxx ../src/Debug.h \
   ../src/../include/Var.h ../src/phreeqcpp/phreeqc/global.h \
@@ -150,7 +140,7 @@ TestSelectedOutput.o: TestSelectedOutput.cpp TestSelectedOutput.h \
 TestVar.o: TestVar.cpp TestVar.h ../include/Var.h
 unit.o: unit.cpp TestVar.h ../include/Var.h TestCVar.h ../src/CVar.hxx \
   ../src/Debug.h ../src/../include/Var.h TestSelectedOutput.h \
-  ../src/SelectedOutput.hxx ../src/CVar.hxx TestInterface.h
+  ../src/SelectedOutput.hxx ../src/CVar.hxx
 
 # POBJS
 advection.o: ../src/phreeqcpp/phreeqc/advection.c \
@@ -306,33 +296,11 @@ utilities.o: ../src/phreeqcpp/phreeqc/utilities.c \
   ../src/phreeqcpp/phreeqc/phrqproto.h
 
 # SOBJS
-IPhreeqc.o: ../src/IPhreeqc.cpp ../include/IPhreeqc.h \
- ../include/IPhreeqcCallbacks.h ../include/Var.h ../include/IPhreeqc.hpp \
- ../src/phreeqcpp/Phreeqc.h ../src/phreeqcpp/phreeqc/phrqtype.h \
- ../src/phreeqcpp/phreeqc/sundialstypes.h \
- ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/nvector.h \
- ../src/phreeqcpp/phreeqc/sundialstypes.h \
- ../src/phreeqcpp/phreeqc/cvdense.h ../src/phreeqcpp/phreeqc/cvode.h \
- ../src/phreeqcpp/phreeqc/nvector.h ../src/phreeqcpp/phreeqc/dense.h \
- ../src/phreeqcpp/phreeqc/smalldense.h \
- ../src/phreeqcpp/phreeqc/nvector_serial.h \
- ../src/phreeqcpp/phreeqc/dense.h ../src/phreeqcpp/runner.h \
- ../src/phreeqcpp/StorageBinList.h ../src/phreeqcpp/dumper.h \
- ../src/phreeqcpp/phreeqc/p2c.h \
- ../src/phreeqcpp/phreeqc/global_structures.h \
- ../src/phreeqcpp/phreeqc/basic.h \
- ../src/phreeqcpp/phreeqc/pitzer_structures.h \
- ../src/phreeqcpp/phreeqc/pitzer.h ../src/phreeqcpp/phreeqc/input.h \
- ../src/phreeqcpp/phreeqc/output.h ../src/phreeqcpp/phreeqc/global.h \
- ../src/phreeqcpp/phreeqc/global_structures.h \
- ../include/IPhreeqcCallbacks.h ../include/Var.h \
- ../src/SelectedOutput.hxx ../src/CVar.hxx ../src/Debug.h \
- ../src/ErrorReporter.hxx
 SelectedOutput.o: ../src/SelectedOutput.cpp ../src/SelectedOutput.hxx \
  ../src/CVar.hxx ../src/Debug.h ../include/Var.h
 Var.o: ../src/Var.c ../src/../include/Var.h
 fwrap.o: ../src/fwrap.cpp ../src/phreeqcpp/phreeqc/global.h \
-  ../src/phreeqcpp/phreeqc/phrqtype.h ../src/../include/IPhreeqc.h \
+  ../src/phreeqcpp/phreeqc/phrqtype.h \
   ../src/../include/Var.h
 global.o: ../src/global.c ../src/phreeqcpp/phreeqc/global.h \
   ../src/phreeqcpp/phreeqc/phrqtype.h ../src/phreeqcpp/phreeqc/phqalloc.h

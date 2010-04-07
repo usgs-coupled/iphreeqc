@@ -15,7 +15,7 @@
 
 
        INTERFACE
-        FUNCTION CreateIPhreeqc
+        FUNCTION CreateIPhreeqc()
          INTEGER(KIND=4) :: CreateIPhreeqc
         END FUNCTION CreateIPhreeqc
        END INTERFACE
