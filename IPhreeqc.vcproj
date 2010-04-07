@@ -1975,11 +1975,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\IPhreeqc2.h"
+				RelativePath=".\include\IPhreeqc.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\IPhreeqcLib.h"
+				RelativePath=".\include\IPhreeqc2.h"
 				>
 			</File>
 			<File

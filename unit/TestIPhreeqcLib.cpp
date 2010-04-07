@@ -1,5 +1,5 @@
 #include "TestIPhreeqcLib.h"
-#include "IPhreeqcLib.h"
+#include "IPhreeqc.h"
 #include "CVar.hxx"
 
 #if defined(_WIN32)
