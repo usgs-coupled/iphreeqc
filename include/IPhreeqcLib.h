@@ -10,11 +10,11 @@
 typedef enum {
 	IPQ_OK            =  0,
 	IPQ_OUTOFMEMORY   = -1,
-	IPQ_BADINSTANCE   = -2,
-	IPQ_BADVARTYPE    = -3,
-	IPQ_INVALIDARG    = -4,
-	IPQ_INVALIDROW    = -5,
-	IPQ_INVALIDCOL    = -6,
+	IPQ_BADVARTYPE    = -2,
+	IPQ_INVALIDARG    = -3,
+	IPQ_INVALIDROW    = -4,
+	IPQ_INVALIDCOL    = -5,
+	IPQ_BADINSTANCE   = -6,
 } IPQ_RESULT;
 
 
