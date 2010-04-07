@@ -29,7 +29,7 @@ extern "C" {
  *  Internally used to create an error condition.
  *  @internal
  */
-	int AddErrorM(int id, const char* error_msg);
+	int AddError(int id, const char* error_msg);
 
 /**
  *  TODO
@@ -62,7 +62,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int LoadDatabaseM(int id, const char* filename);
+	int LoadDatabase(int id, const char* filename);
 
 /**
  *  Load the specified string as a database into phreeqc.
@@ -82,14 +82,14 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int LoadDatabaseStringM(int id, const char* input);
+	int LoadDatabaseString(int id, const char* input);
 
 /**
  *  Unload any database currently loaded into phreeqc.
  *  @remarks
  *  Any previous database definitions are cleared.
  */
-	int UnLoadDatabaseM(int id);
+	int UnLoadDatabase(int id);
 
 /**
  *  Output the error messages normally stored in the phreeqc.err file to stdout.
@@ -103,18 +103,18 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	void    OutputLastErrorM(int id);
+	void    OutputLastError(int id);
 
-	const char* GetLastErrorStringM(int id);
+	const char* GetLastErrorString(int id);
 
 // TODO const char* GetLastWarningString(void);
 
 
-	const char* GetDumpStringM(int id);
+	const char* GetDumpString(int id);
 
-	int GetDumpLineCountM(int id);
+	int GetDumpLineCount(int id);
 
-	const char* GetDumpLineM(int id, int n);
+	const char* GetDumpLine(int id, int n);
 
 /**
  *  Accumlulate lines for input to phreeqc.
@@ -133,7 +133,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	IPQ_RESULT AccumulateLineM(int id, const char *line);
+	IPQ_RESULT AccumulateLine(int id, const char *line);
 
 /**
  *  Sets the selected_output flag on or off
@@ -149,8 +149,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetSelectedOutputOnM(int id);
-	IPQ_RESULT SetSelectedOutputOnM(int id, int value);
+	int GetSelectedOutputOn(int id);
+	IPQ_RESULT SetSelectedOutputOn(int id, int value);
 
 /**
  *  Sets the output flag on or off
@@ -166,8 +166,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetOutputOnM(int id);
-	IPQ_RESULT SetOutputOnM(int id, int value);
+	int GetOutputOn(int id);
+	IPQ_RESULT SetOutputOn(int id, int value);
 
 /**
  *  Sets the error flag on or off
@@ -183,8 +183,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetErrorOnM(int id);
-	IPQ_RESULT SetErrorOnM(int id, int value);
+	int GetErrorOn(int id);
+	IPQ_RESULT SetErrorOn(int id, int value);
 
 /**
  *  Sets the log flag on or off
@@ -200,8 +200,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetLogOnM(int id);
-	IPQ_RESULT SetLogOnM(int id, int value);
+	int GetLogOn(int id);
+	IPQ_RESULT SetLogOn(int id, int value);
 
 /**
  *  Sets the dump flag on or off
@@ -217,8 +217,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetDumpOnM(int id);
-	IPQ_RESULT SetDumpOnM(int id, int value);
+	int GetDumpOn(int id);
+	IPQ_RESULT SetDumpOn(int id, int value);
 
 /**
  *  Sets the dump string flag on or off
@@ -234,8 +234,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetDumpStringOnM(int id);
-	IPQ_RESULT SetDumpStringOnM(int id, int value);
+	int GetDumpStringOn(int id);
+	IPQ_RESULT SetDumpStringOn(int id, int value);
 
 /**
  *  Runs the accumulated input sent to AccumulateLine.
@@ -254,7 +254,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int RunAccumulatedM(int id);
+	int RunAccumulated(int id);
 
 /**
  *  Runs the specified phreeqc input file.
@@ -273,7 +273,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int RunFileM(int id, const char* filename);
+	int RunFile(int id, const char* filename);
 
 /**
  *  Runs the specified string as input to phreeqc.
@@ -292,7 +292,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int RunStringM(int id, const char* input);
+	int RunString(int id, const char* input);
 
 /**
  *  Returns the number of rows currently contained within selected_output.
@@ -307,7 +307,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetSelectedOutputRowCountM(int id);
+	int GetSelectedOutputRowCount(int id);
 
 /**
  *  Returns the number of columns currently contained within selected_output.
@@ -322,7 +322,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetSelectedOutputColumnCountM(int id);
+	int GetSelectedOutputColumnCount(int id);
 
 /**
  *  Returns the \c VAR associated with the specified row and column.
@@ -489,7 +489,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	IPQ_RESULT GetSelectedOutputValueM(int id, int row, int col, VAR* pVAR);
+	IPQ_RESULT GetSelectedOutputValue(int id, int row, int col, VAR* pVAR);
 
 /**
  *  TODO
@@ -504,7 +504,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetComponentCountM(int id);
+	int GetComponentCount(int id);
 
 /**
  *  TODO
@@ -519,7 +519,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	const char* GetComponentM(int id, int n);
+	const char* GetComponent(int id, int n);
 
 /**
  *  Send the accumulated input to stdout. 
@@ -534,7 +534,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	void    OutputLinesM(int id);
+	void    OutputLines(int id);
 
 // TODO int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);
 
@@ -553,7 +553,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-int GetErrorLineCountM(int id);
+int GetErrorLineCount(int id);
 
 /**
  *  TODO
@@ -569,26 +569,11 @@ int GetErrorLineCountM(int id);
  *  </CODE>
  *  @endhtmlonly
  */
-const char* GetErrorLineM(int id, int n);
-
-
-
+const char* GetErrorLine(int id, int n);
 
 
 #if defined(__cplusplus)
 }
 #endif
-
-class IPhreeqcLib
-{
-public:
-	static int CreateIPhreeqc(void);
-	static IPQ_RESULT DestroyIPhreeqc(int n);
-	static IPhreeqc2* GetInstance(int n);
-
-private:
-	static std::map<size_t, IPhreeqc2*> Instances;
-	static size_t InstancesIndex;
-};
 
 #endif // __IPHREEQC_LIB_H
