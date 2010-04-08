@@ -45,6 +45,7 @@ public:
 	VRESULT GetSelectedOutputValue(int row, int col, VAR* pVAR);
 
 	void OutputLastError(void);
+	void OutputLastWarning(void);
 
 	void OutputLines(void);
 	const std::string& GetAccumulatedLines(void);
@@ -56,6 +57,9 @@ public:
 
 	int GetErrorLineCount(void)const;
 	const char* GetErrorLine(int n);
+
+	int GetWarningLineCount(void)const;
+	const char* GetWarningLine(int n);
 
 	std::list< std::string > ListComponents(void);
 	size_t GetComponentCount(void);

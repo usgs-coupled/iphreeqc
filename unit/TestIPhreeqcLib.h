@@ -41,6 +41,8 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetDumpLine );
 	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
+	CPPUNIT_TEST( TestGetErrorLine );
+	CPPUNIT_TEST( TestGetWarningLine );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -81,6 +83,8 @@ public:
 	void TestGetDumpLine(void);
 	void TestGetComponentCount(void);
 	void TestGetComponent(void);
+	void TestGetErrorLine(void);
+	void TestGetWarningLine(void);
 
 protected:
 	void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on);

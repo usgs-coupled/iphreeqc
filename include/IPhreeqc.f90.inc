@@ -199,6 +199,23 @@
 
 
        INTERFACE
+        FUNCTION GetWarningLineCount(ID)
+         INTEGER(KIND=4)  :: ID
+         INTEGER(KIND=4)  :: GetWarningLineCount
+        END FUNCTION GetWarningLineCount
+       END INTERFACE
+
+
+       INTERFACE
+        SUBROUTINE GetWarningLine(ID,N,LINE)
+         INTEGER(KIND=4)  :: ID
+         INTEGER(KIND=4)  :: N
+         CHARACTER(LEN=*) :: LINE
+        END SUBROUTINE
+       END INTERFACE
+
+
+       INTERFACE
         FUNCTION GetComponentCount(ID)
          INTEGER(KIND=4)  :: ID
          INTEGER(KIND=4)  :: GetComponentCount

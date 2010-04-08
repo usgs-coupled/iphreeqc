@@ -31,13 +31,6 @@ extern "C" {
  */
 	int AddError(int id, const char* error_msg);
 
-/**
- *  TODO
- *  @internal
- */
-// TODO void ClearErrors(void);
-
-
 	int CreateIPhreeqc(void);
 
 	IPQ_RESULT DestroyIPhreeqc(int id);
@@ -105,10 +98,11 @@ extern "C" {
  */
 	void    OutputLastError(int id);
 
+	void    OutputLastWarning(int id);
+
 	const char* GetLastErrorString(int id);
 
-// TODO const char* GetLastWarningString(void);
-
+	const char* GetLastWarningString(int id);
 
 	const char* GetDumpString(int id);
 
@@ -570,6 +564,38 @@ int GetErrorLineCount(int id);
  *  @endhtmlonly
  */
 const char* GetErrorLine(int id, int n);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorLineCount
+ *    INTEGER :: GetErrorLineCount
+ *  END FUNCTION GetErrorLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+int GetWarningLineCount(int id);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetErrorLine
+ *    INTEGER,          INTENT(IN)  :: N
+ *    CHARACTER(LEN=*), INTENT(OUT) :: LINE
+ *  END SUBROUTINE GetErrorLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+const char* GetWarningLine(int id, int n);
+
 
 
 #if defined(__cplusplus)

@@ -1650,13 +1650,23 @@ void TestIPhreeqcLib::TestDatabaseKeyword()
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump"));
 
-	const char *expected =
+	const char *exp_errs =
 		"ERROR: Gas not found in PHASES data base, Amm(g).\n"
 		"ERROR: Calculations terminating due to input errors.\n"
 		"Stopping.\n";
 
 	const char* err = ::GetLastErrorString(n);
-	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
+	CPPUNIT_ASSERT_EQUAL(std::string(exp_errs), std::string(err));
+
+	const char *exp_warn =
+		"WARNING: DATABASE keyword is ignored by IPhreeqc.\n"
+		"WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100.\n"
+		"WARNING: No dispersivities were read; disp = 0 assumed.\n"
+		"WARNING: Could not find element in database, Amm.\n"
+		"	Concentration is set to zero.\n";
+
+	const char* warn = ::GetLastWarningString(n);
+	CPPUNIT_ASSERT_EQUAL(std::string(exp_warn), std::string(warn));
 
 	if (n >= 0)
 	{
@@ -1938,6 +1948,55 @@ void TestIPhreeqcLib::TestGetComponent(void)
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 3)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 4)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 5)) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+void TestIPhreeqcLib::TestGetErrorLine(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump") );
+
+	CPPUNIT_ASSERT_EQUAL( 3,      ::GetErrorLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),    std::string(::GetErrorLine(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."), std::string(::GetErrorLine(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                            std::string(::GetErrorLine(n, 2)) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestGetWarningLine(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump") );
+
+	CPPUNIT_ASSERT_EQUAL( 5,      ::GetWarningLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: DATABASE keyword is ignored by IPhreeqc."),                              std::string(::GetWarningLine(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."), std::string(::GetWarningLine(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                        std::string(::GetWarningLine(n, 2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                              std::string(::GetWarningLine(n, 3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("	Concentration is set to zero."),                                                 std::string(::GetWarningLine(n, 4)) );
 
 	if (n >= 0)
 	{
