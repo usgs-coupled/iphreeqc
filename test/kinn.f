@@ -25,6 +25,8 @@
         CALL OutputLastError(id)
         STOP
       ENDIF
+      
+      iresult = GetWarningLineCount(id)      
 
 !!!!	DO 45 k=1,10
 
