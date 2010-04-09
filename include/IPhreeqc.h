@@ -5,6 +5,12 @@
 
 #include "Var.h"
 
+#if defined(_WINDLL)
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#define DLL_EXPORT
+#endif
+
 /*! \brief Enumeration used to return error codes.
 */
 typedef enum {
@@ -29,11 +35,11 @@ extern "C" {
  *  Internally used to create an error condition.
  *  @internal
  */
-	int AddError(int id, const char* error_msg);
+	DLL_EXPORT int AddError(int id, const char* error_msg);
 
-	int CreateIPhreeqc(void);
+	DLL_EXPORT int CreateIPhreeqc(void);
 
-	IPQ_RESULT DestroyIPhreeqc(int id);
+	DLL_EXPORT IPQ_RESULT DestroyIPhreeqc(int id);
 
 /**
  *  Load the specified database file into phreeqc.
@@ -55,7 +61,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int LoadDatabase(int id, const char* filename);
+	DLL_EXPORT int LoadDatabase(int id, const char* filename);
 
 /**
  *  Load the specified string as a database into phreeqc.
@@ -75,14 +81,14 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int LoadDatabaseString(int id, const char* input);
+	DLL_EXPORT int LoadDatabaseString(int id, const char* input);
 
 /**
  *  Unload any database currently loaded into phreeqc.
  *  @remarks
  *  Any previous database definitions are cleared.
  */
-	int UnLoadDatabase(int id);
+	DLL_EXPORT int UnLoadDatabase(int id);
 
 /**
  *  Output the error messages normally stored in the phreeqc.err file to stdout.
@@ -96,19 +102,19 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	void    OutputLastError(int id);
+	DLL_EXPORT void OutputLastError(int id);
 
-	void    OutputLastWarning(int id);
+	DLL_EXPORT void OutputLastWarning(int id);
 
-	const char* GetLastErrorString(int id);
+	DLL_EXPORT const char* GetLastErrorString(int id);
 
-	const char* GetLastWarningString(int id);
+	DLL_EXPORT const char* GetLastWarningString(int id);
 
-	const char* GetDumpString(int id);
+	DLL_EXPORT const char* GetDumpString(int id);
 
-	int GetDumpLineCount(int id);
+	DLL_EXPORT int GetDumpLineCount(int id);
 
-	const char* GetDumpLine(int id, int n);
+	DLL_EXPORT const char* GetDumpLine(int id, int n);
 
 /**
  *  Accumlulate lines for input to phreeqc.
@@ -127,7 +133,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	IPQ_RESULT AccumulateLine(int id, const char *line);
+	DLL_EXPORT IPQ_RESULT AccumulateLine(int id, const char *line);
 
 /**
  *  Sets the selected_output flag on or off
@@ -143,8 +149,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetSelectedOutputOn(int id);
-	IPQ_RESULT SetSelectedOutputOn(int id, int value);
+	DLL_EXPORT int GetSelectedOutputOn(int id);
+	DLL_EXPORT IPQ_RESULT SetSelectedOutputOn(int id, int value);
 
 /**
  *  Sets the output flag on or off
@@ -160,8 +166,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetOutputOn(int id);
-	IPQ_RESULT SetOutputOn(int id, int value);
+	DLL_EXPORT int GetOutputOn(int id);
+	DLL_EXPORT IPQ_RESULT SetOutputOn(int id, int value);
 
 /**
  *  Sets the error flag on or off
@@ -177,8 +183,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetErrorOn(int id);
-	IPQ_RESULT SetErrorOn(int id, int value);
+	DLL_EXPORT int GetErrorOn(int id);
+	DLL_EXPORT IPQ_RESULT SetErrorOn(int id, int value);
 
 /**
  *  Sets the log flag on or off
@@ -194,8 +200,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetLogOn(int id);
-	IPQ_RESULT SetLogOn(int id, int value);
+	DLL_EXPORT int GetLogOn(int id);
+	DLL_EXPORT IPQ_RESULT SetLogOn(int id, int value);
 
 /**
  *  Sets the dump flag on or off
@@ -211,8 +217,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetDumpOn(int id);
-	IPQ_RESULT SetDumpOn(int id, int value);
+	DLL_EXPORT int GetDumpOn(int id);
+	DLL_EXPORT IPQ_RESULT SetDumpOn(int id, int value);
 
 /**
  *  Sets the dump string flag on or off
@@ -228,8 +234,8 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetDumpStringOn(int id);
-	IPQ_RESULT SetDumpStringOn(int id, int value);
+	DLL_EXPORT int GetDumpStringOn(int id);
+	DLL_EXPORT IPQ_RESULT SetDumpStringOn(int id, int value);
 
 /**
  *  Runs the accumulated input sent to AccumulateLine.
@@ -248,7 +254,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int RunAccumulated(int id);
+	DLL_EXPORT int RunAccumulated(int id);
 
 /**
  *  Runs the specified phreeqc input file.
@@ -267,7 +273,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int RunFile(int id, const char* filename);
+	DLL_EXPORT int RunFile(int id, const char* filename);
 
 /**
  *  Runs the specified string as input to phreeqc.
@@ -286,7 +292,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int RunString(int id, const char* input);
+	DLL_EXPORT int RunString(int id, const char* input);
 
 /**
  *  Returns the number of rows currently contained within selected_output.
@@ -301,7 +307,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetSelectedOutputRowCount(int id);
+	DLL_EXPORT int GetSelectedOutputRowCount(int id);
 
 /**
  *  Returns the number of columns currently contained within selected_output.
@@ -316,7 +322,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetSelectedOutputColumnCount(int id);
+	DLL_EXPORT int GetSelectedOutputColumnCount(int id);
 
 /**
  *  Returns the \c VAR associated with the specified row and column.
@@ -483,7 +489,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	IPQ_RESULT GetSelectedOutputValue(int id, int row, int col, VAR* pVAR);
+	DLL_EXPORT IPQ_RESULT GetSelectedOutputValue(int id, int row, int col, VAR* pVAR);
 
 /**
  *  TODO
@@ -498,7 +504,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	int GetComponentCount(int id);
+	DLL_EXPORT int GetComponentCount(int id);
 
 /**
  *  TODO
@@ -513,7 +519,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	const char* GetComponent(int id, int n);
+	DLL_EXPORT const char* GetComponent(int id, int n);
 
 /**
  *  Send the accumulated input to stdout. 
@@ -528,7 +534,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	void    OutputLines(int id);
+	DLL_EXPORT void OutputLines(int id);
 
 // TODO int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);
 
@@ -547,7 +553,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-int GetErrorLineCount(int id);
+	DLL_EXPORT int GetErrorLineCount(int id);
 
 /**
  *  TODO
@@ -563,7 +569,7 @@ int GetErrorLineCount(int id);
  *  </CODE>
  *  @endhtmlonly
  */
-const char* GetErrorLine(int id, int n);
+	DLL_EXPORT const char* GetErrorLine(int id, int n);
 
 /**
  *  TODO
@@ -578,7 +584,7 @@ const char* GetErrorLine(int id, int n);
  *  </CODE>
  *  @endhtmlonly
  */
-int GetWarningLineCount(int id);
+	DLL_EXPORT int GetWarningLineCount(int id);
 
 /**
  *  TODO
@@ -594,7 +600,7 @@ int GetWarningLineCount(int id);
  *  </CODE>
  *  @endhtmlonly
  */
-const char* GetWarningLine(int id, int n);
+	DLL_EXPORT const char* GetWarningLine(int id, int n);
 
 
 

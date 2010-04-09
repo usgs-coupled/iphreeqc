@@ -8,15 +8,21 @@
 #include "IPhreeqcCallbacks.h"      /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
 #include "Var.h"                    /* VRESULT */
 
+#if defined(_WINDLL)
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#define DLL_EXPORT
+#endif
+
 class Phreeqc;
 class IErrorReporter;
 class CSelectedOutput;
 
-class IPhreeqcStop : std::exception
+class DLL_EXPORT IPhreeqcStop : std::exception
 {
 };
 
-class IPhreeqc
+class DLL_EXPORT IPhreeqc
 {
 public:
 	IPhreeqc(void);
@@ -134,6 +140,13 @@ private:
 	friend class TestSelectedOutput;
 #endif
 	Phreeqc* PhreeqcPtr;
+
+private:
+	// copy ctor not supported
+	IPhreeqc(const IPhreeqc&);
+
+	// operator= not supported
+	IPhreeqc& operator=(const IPhreeqc&);
 };
 
 #endif // INC_IPHREEQC_HPP
