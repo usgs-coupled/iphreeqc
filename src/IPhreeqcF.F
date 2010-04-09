@@ -123,6 +123,24 @@
         GetErrorLine = GetErrorLineF(ID,N,LINE)
       END FUNCTION GetErrorLine
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      FUNCTION GetWarningLineCount(ID)
+        IMPLICIT NONE
+        INTEGER :: ID
+        INTEGER :: GetWarningLineCount
+        INTEGER :: GetWarningLineCountF
+        GetWarningLineCount = GetWarningLineCountF(ID)
+      END FUNCTION GetWarningLineCount
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      FUNCTION GetWarningLine(ID,N,LINE)
+        IMPLICIT NONE
+        INTEGER          :: ID
+        INTEGER          :: N
+        CHARACTER(LEN=*) :: LINE        
+        INTEGER          :: GetWarningLine
+        INTEGER          :: GetWarningLineF
+        GetWarningLine = GetWarningLineF(ID,N,LINE)
+      END FUNCTION GetWarningLine
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       FUNCTION GetComponentCount(ID)
         IMPLICIT NONE
         INTEGER :: ID
