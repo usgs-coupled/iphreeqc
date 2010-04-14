@@ -1,11 +1,46 @@
-#ifndef __IPHREEQC_H
-#define __IPHREEQC_H
+#ifndef INC_IPHREEQC_H
+#define INC_IPHREEQC_H
+
+#include <map>
 
 #include "Var.h"
+
+#if defined(_WINDLL)
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#define DLL_EXPORT
+#endif
+
+/*! \brief Enumeration used to return error codes.
+*/
+typedef enum {
+	IPQ_OK            =  0,
+	IPQ_OUTOFMEMORY   = -1,
+	IPQ_BADVARTYPE    = -2,
+	IPQ_INVALIDARG    = -3,
+	IPQ_INVALIDROW    = -4,
+	IPQ_INVALIDCOL    = -5,
+	IPQ_BADINSTANCE   = -6,
+} IPQ_RESULT;
+
+
+class IPhreeqc;
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
+
+/**
+ *  Appends the given error message and increments the error count.
+ *  Internally used to create an error condition.
+ *  @internal
+ */
+	DLL_EXPORT int AddError(int id, const char* error_msg);
+
+	DLL_EXPORT int CreateIPhreeqc(void);
+
+	DLL_EXPORT IPQ_RESULT DestroyIPhreeqc(int id);
+
 /**
  *  Load the specified database file into phreeqc.
  *  @param filename The name of the phreeqc database to load.
@@ -26,7 +61,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-int     LoadDatabase(const char *filename);
+	DLL_EXPORT int LoadDatabase(int id, const char* filename);
 
 /**
  *  Load the specified string as a database into phreeqc.
@@ -34,17 +69,28 @@ int     LoadDatabase(const char *filename);
  *  @return The number of errors encountered.
  *  @remarks
  *  Any previous database definitions are cleared.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION LoadDatabaseString(INPUT)
+ *    CHARACTER(LEN=*), INTENT(IN) :: INPUT
+ *    INTEGER :: LoadDatabaseString
+ *  END FUNCTION LoadDatabaseString
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
  */
-int     LoadDatabaseString(const char *input);
+	DLL_EXPORT int LoadDatabaseString(int id, const char* input);
 
 /**
  *  Unload any database currently loaded into phreeqc.
  *  @remarks
  *  Any previous database definitions are cleared.
  */
-void    UnLoadDatabase(void);
+	DLL_EXPORT int UnLoadDatabase(int id);
 
-/** 
+/**
  *  Output the error messages normally stored in the phreeqc.err file to stdout.
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -56,7 +102,19 @@ void    UnLoadDatabase(void);
  *  </CODE>
  *  @endhtmlonly
  */
-void    OutputLastError(void);
+	DLL_EXPORT void OutputLastError(int id);
+
+	DLL_EXPORT void OutputLastWarning(int id);
+
+	DLL_EXPORT const char* GetLastErrorString(int id);
+
+	DLL_EXPORT const char* GetLastWarningString(int id);
+
+	DLL_EXPORT const char* GetDumpString(int id);
+
+	DLL_EXPORT int GetDumpLineCount(int id);
+
+	DLL_EXPORT const char* GetDumpLine(int id, int n);
 
 /**
  *  Accumlulate lines for input to phreeqc.
@@ -75,14 +133,112 @@ void    OutputLastError(void);
  *  </CODE>
  *  @endhtmlonly
  */
-VRESULT AccumulateLine(const char *line);
+	DLL_EXPORT IPQ_RESULT AccumulateLine(int id, const char *line);
+
+/**
+ *  Sets the selected_output flag on or off
+ *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetSelectedOutputOn(SELECTED_ON)
+ *    LOGICAL, INTENT(IN) :: SELECTED_ON
+ *  END SUBROUTINE SetSelectedOutputOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetSelectedOutputOn(int id);
+	DLL_EXPORT IPQ_RESULT SetSelectedOutputOn(int id, int value);
+
+/**
+ *  Sets the output flag on or off
+ *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetOutputOn(OUTPUT_ON)
+ *    LOGICAL, INTENT(IN) :: OUTPUT_ON
+ *  END SUBROUTINE SetOutputOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetOutputOn(int id);
+	DLL_EXPORT IPQ_RESULT SetOutputOn(int id, int value);
+
+/**
+ *  Sets the error flag on or off
+ *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetErrorOn(ERROR_ON)
+ *    LOGICAL, INTENT(IN) :: ERROR_ON
+ *  END SUBROUTINE SetOutputOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetErrorOn(int id);
+	DLL_EXPORT IPQ_RESULT SetErrorOn(int id, int value);
+
+/**
+ *  Sets the log flag on or off
+ *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetLogOn(LOG_ON)
+ *    LOGICAL, INTENT(IN) :: LOG_ON
+ *  END SUBROUTINE SetLogOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetLogOn(int id);
+	DLL_EXPORT IPQ_RESULT SetLogOn(int id, int value);
+
+/**
+ *  Sets the dump flag on or off
+ *  @param dump_on             If non-zero turns on output to the <B>DUMP</B> (<B>dump.out</B> if unspecified) file.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetDumpOn(DUMP_ON)
+ *    LOGICAL, INTENT(IN) :: DUMP_ON
+ *  END SUBROUTINE SetDumpOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetDumpOn(int id);
+	DLL_EXPORT IPQ_RESULT SetDumpOn(int id, int value);
+
+/**
+ *  Sets the dump string flag on or off
+ *  @param dump_string_on      If non-zero captures as a string the output defined by the <B>DUMP</B> keyword.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE SetDumpStringOn(DUMP_STRING_ON)
+ *    LOGICAL, INTENT(IN) :: DUMP_STRING_ON
+ *  END SUBROUTINE SetDumpStringOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetDumpStringOn(int id);
+	DLL_EXPORT IPQ_RESULT SetDumpStringOn(int id, int value);
 
 /**
  *  Runs the accumulated input sent to AccumulateLine.
- *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
- *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
- *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
- *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
  *  @return The number of errors encountered.
  *  @remarks
  *  The accumulated input is cleared upon completion.
@@ -91,58 +247,52 @@ VRESULT AccumulateLine(const char *line);
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION Run(OUTPUT_ON, ERROR_ON, LOG_ON, SELECTED_ON)
- *    LOGICAL, INTENT(IN) :: OUTPUT_ON
- *    LOGICAL, INTENT(IN) :: ERROR_ON
- *    LOGICAL, INTENT(IN) :: LOG_ON
- *    LOGICAL, INTENT(IN) :: SELECTED_ON
- *    INTEGER :: Run
- *  END FUNCTION Run
+ *  FUNCTION RunAccumulated()
+ *    INTEGER :: RunAccumulated
+ *  END FUNCTION RunAccumulated
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-int     Run(int output_on, int error_on, int log_on, int selected_output_on);
+	DLL_EXPORT int RunAccumulated(int id);
 
 /**
  *  Runs the specified phreeqc input file.
  *  @param filename           The name of the phreeqc input file to run.
- *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
- *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
- *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
- *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
  *  @return The number of errors encountered during the run.
  *  @pre LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION RunFile(FILENAME,OUTPUT_ON,ERROR_ON,LOG_ON,SELECTED_ON)
+ *  FUNCTION RunFile(FILENAME)
  *    CHARACTER(LEN=*)    :: FILENAME
- *    LOGICAL, INTENT(IN) :: OUTPUT_ON
- *    LOGICAL, INTENT(IN) :: ERROR_ON
- *    LOGICAL, INTENT(IN) :: LOG_ON
- *    LOGICAL, INTENT(IN) :: SELECTED_ON
  *    INTEGER :: RunFile
  *  END FUNCTION RunFile
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-int     RunFile(const char *filename, int output_on, int error_on, int log_on, int selected_output_on);
+	DLL_EXPORT int RunFile(int id, const char* filename);
 
 /**
- *  Runs the specified phreeqc input file.
+ *  Runs the specified string as input to phreeqc.
  *  @param input              String containing phreeqc input.
- *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
- *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
- *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
- *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
  *  @return The number of errors encountered during the run.
  *  @pre LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION RunString(INPUT)
+ *    CHARACTER(LEN=*)    :: INPUT
+ *    INTEGER :: RunString
+ *  END FUNCTION RunString
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
  */
-int     RunString(const char *input, int output_on, int error_on, int log_on, int selected_output_on);
-
+	DLL_EXPORT int RunString(int id, const char* input);
 
 /**
  *  Returns the number of rows currently contained within selected_output.
@@ -157,7 +307,7 @@ int     RunString(const char *input, int output_on, int error_on, int log_on, in
  *  </CODE>
  *  @endhtmlonly
  */
-int     GetSelectedOutputRowCount(void);
+	DLL_EXPORT int GetSelectedOutputRowCount(int id);
 
 /**
  *  Returns the number of columns currently contained within selected_output.
@@ -172,7 +322,7 @@ int     GetSelectedOutputRowCount(void);
  *  </CODE>
  *  @endhtmlonly
  */
-int     GetSelectedOutputColumnCount(void);
+	DLL_EXPORT int GetSelectedOutputColumnCount(int id);
 
 /**
  *  Returns the \c VAR associated with the specified row and column.
@@ -339,27 +489,41 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-VRESULT GetSelectedOutputValue(int row, int col, VAR* pVAR);
-
-/**
- *  Appends the given error message and increments the error count.
- *  Internally used to create an error condition.
- *  @internal
- */
-size_t  AddError(const char* error_msg);
+	DLL_EXPORT IPQ_RESULT GetSelectedOutputValue(int id, int row, int col, VAR* pVAR);
 
 /**
  *  TODO
- *  @internal
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetComponentCount
+ *    INTEGER :: GetComponentCount
+ *  END FUNCTION GetComponentCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
  */
-/*
-void ClearErrors(void);
-*/
+	DLL_EXPORT int GetComponentCount(int id);
 
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetComponent
+ *    INTEGER :: GetComponent
+ *  END FUNCTION GetComponent
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT const char* GetComponent(int id, int n);
 
-/** 
+/**
  *  Send the accumulated input to stdout. 
- *  This is the input that will be used for the next call to Run.
+ *  This is the input that will be used for the next call to RunAccumulated.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -370,25 +534,78 @@ void ClearErrors(void);
  *  </CODE>
  *  @endhtmlonly
  */
-void    OutputLines(void);
+	DLL_EXPORT void OutputLines(int id);
+
+// TODO int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);
+
+// TODO int CatchErrors(PFN_CATCH_CALLBACK pfn, void *cookie);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorLineCount
+ *    INTEGER :: GetErrorLineCount
+ *  END FUNCTION GetErrorLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetErrorLineCount(int id);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetErrorLine
+ *    INTEGER,          INTENT(IN)  :: N
+ *    CHARACTER(LEN=*), INTENT(OUT) :: LINE
+ *  END SUBROUTINE GetErrorLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT const char* GetErrorLine(int id, int n);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorLineCount
+ *    INTEGER :: GetErrorLineCount
+ *  END FUNCTION GetErrorLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT int GetWarningLineCount(int id);
+
+/**
+ *  TODO
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetErrorLine
+ *    INTEGER,          INTENT(IN)  :: N
+ *    CHARACTER(LEN=*), INTENT(OUT) :: LINE
+ *  END SUBROUTINE GetErrorLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT const char* GetWarningLine(int id, int n);
 
 
-typedef int (*PFN_PRERUN_CALLBACK)(void *cookie);
-typedef int (*PFN_POSTRUN_CALLBACK)(void *cookie);
-typedef int (*PFN_CATCH_CALLBACK)(void *cookie);
-
-int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);
-
-int CatchErrors(PFN_CATCH_CALLBACK pfn, void *cookie);
-
-const char* GetLastErrorString(void);
-
-#if defined(WIN32)
-void DebugOutputLines(void);
-#endif
 
 #if defined(__cplusplus)
 }
 #endif
 
-#endif  /* __IPHREEQC_H */
+#endif // INC_IPHREEQC_H

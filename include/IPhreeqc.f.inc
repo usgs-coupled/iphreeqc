@@ -39,7 +39,7 @@
           INTEGER GetSelectedOutputRowCount
           INTEGER GetSelectedOutputValue
           INTEGER LoadDatabase
-          INTEGER Run
+          INTEGER RunAccumulated
           INTEGER RunFile                      !! (FILENAME,OUTPUT_ON,ERROR_ON,LOG_ON,SELECTED_ON)
 
 

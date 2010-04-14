@@ -16,12 +16,12 @@ typedef enum {
 /*! \brief Enumeration used to return error codes.
 */
 typedef enum {
-	VR_OK            = 0,
-	VR_OUTOFMEMORY   = 1,
-	VR_BADVARTYPE    = 2,
-	VR_INVALIDARG    = 3,
-	VR_INVALIDROW    = 4,
-	VR_INVALIDCOL    = 5
+	VR_OK            =  0,
+	VR_OUTOFMEMORY   = -1,
+	VR_BADVARTYPE    = -2,
+	VR_INVALIDARG    = -3,
+	VR_INVALIDROW    = -4,
+	VR_INVALIDCOL    = -5
 } VRESULT;
 
 /*! \brief Datatype used to store SELECTED_OUTPUT values.

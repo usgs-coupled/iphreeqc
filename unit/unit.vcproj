@@ -16,7 +16,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
+			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="SWIG_SHARED_OBJ;WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="CPPUNIT;SWIG_SHARED_OBJ;WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -106,7 +106,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
+			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
@@ -136,7 +136,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="SWIG_SHARED_OBJ;WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="CPPUNIT;SWIG_SHARED_OBJ;WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -195,7 +195,7 @@
 		</Configuration>
 		<Configuration
 			Name="MemDebug|Win32"
-			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
+			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
@@ -224,7 +224,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="WIN32_MEMORY_DEBUG;SWIG_SHARED_OBJ;WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="CPPUNIT;WIN32_MEMORY_DEBUG;SWIG_SHARED_OBJ;WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -324,35 +324,12 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="TestInterface.cpp"
+				RelativePath=".\TestIPhreeqc.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MemDebug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\TestIPhreeqcLib.cpp"
+				>
 			</File>
 			<File
 				RelativePath="TestSelectedOutput.cpp"
@@ -451,114 +428,12 @@
 				Name="src"
 				>
 				<File
-					RelativePath="..\src\fwrap.c"
-					>
-				</File>
-				<File
-					RelativePath="..\src\global.c"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="MemDebug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath="..\src\IPhreeqc.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\src\module_files.c"
+					RelativePath="..\src\IPhreeqcLib.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="MemDebug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\src\module_output.c"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="MemDebug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							CompileAs="2"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\src\SelectedOutput.cpp"
@@ -601,6 +476,214 @@
 				<Filter
 					Name="phreeqcpp"
 					>
+					<File
+						RelativePath="..\src\phreeqcpp\class_main.cpp"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="MemDebug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\cxxKinetics.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\cxxMix.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Dictionary.cxx"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="MemDebug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\dumper.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Exchange.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\ExchComp.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\GasPhase.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\ISolution.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\ISolutionComp.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\KineticsComp.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\NameDouble.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\NumKeyword.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Parser.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Phreeqc.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\PPassemblage.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\PPassemblageComp.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Reaction.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\ReadClass.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\runner.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\SAXPhreeqc.cxx"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="MemDebug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Solution.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\SolutionIsotope.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\SolutionIsotopeList.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\SSassemblage.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\SSassemblageSS.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\StorageBin.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\StorageBinList.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Surface.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\SurfaceCharge.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\SurfaceComp.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\System.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Temperature.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Utils.cxx"
+						>
+					</File>
 					<Filter
 						Name="phreeqc"
 						>
@@ -1261,7 +1344,6 @@
 							>
 							<FileConfiguration
 								Name="Debug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1272,7 +1354,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="Release|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1283,7 +1364,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="MemDebug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1400,7 +1480,6 @@
 							>
 							<FileConfiguration
 								Name="Debug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1411,7 +1490,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="Release|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1422,7 +1500,6 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="MemDebug|Win32"
-								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1979,39 +2056,15 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
-				RelativePath="..\src\CVar.hxx"
-				>
-			</File>
-			<File
-				RelativePath="..\src\ErrorReporter.hxx"
-				>
-			</File>
-			<File
-				RelativePath="..\include\IPhreeqc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\OutputFiles.hxx"
-				>
-			</File>
-			<File
-				RelativePath="..\src\Phreeqc.hxx"
-				>
-			</File>
-			<File
-				RelativePath="..\src\PhreeqcParser.hxx"
-				>
-			</File>
-			<File
-				RelativePath="..\src\SelectedOutput.hxx"
-				>
-			</File>
-			<File
 				RelativePath="TestCVar.h"
 				>
 			</File>
 			<File
-				RelativePath="TestInterface.h"
+				RelativePath=".\TestIPhreeqc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestIPhreeqcLib.h"
 				>
 			</File>
 			<File
@@ -2020,10 +2073,6 @@
 			</File>
 			<File
 				RelativePath="TestVar.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\Var.h"
 				>
 			</File>
 		</Filter>
