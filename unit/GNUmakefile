@@ -41,7 +41,7 @@ TOBJS =	\
 
 
 SOBJS =	\
-		IPhreeqc2.o \
+		IPhreeqc.o \
 		IPhreeqcLib.o \
 		SelectedOutput.o \
 		Var.o
