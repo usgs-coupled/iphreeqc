@@ -52,7 +52,7 @@ OBJS = \
 		input.o \
 		integrate.o \
 		inverse.o \
-		IPhreeqc2.o \
+		IPhreeqc.o \
 		IPhreeqcF.o \
 		IPhreeqcLib.o \
 		ISolution.o \
