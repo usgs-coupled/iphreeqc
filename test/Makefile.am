@@ -1,6 +1,5 @@
-EXTRA_DIST = phreeqc.dat llnl.dat ex1
-AM_FFLAGS = -I../include
-bin_PROGRAMS = kinn
+EXTRA_DIST = phreeqc.dat llnl.dat
+AM_FFLAGS = -I$(top_srcdir)/include
+noinst_PROGRAMS = kinn
 kinn_SOURCES = kinn.f dummy.cxx
-##kinn_LDADD = ../src/libiphreeqc.la $(FLIBS)
 kinn_LDADD = ../src/libiphreeqc.la $(FLIBS)
