@@ -2,7 +2,7 @@
       PROGRAM DRIVER
 
       IMPLICIT NONE
-      INCLUDE 'IPhreeqc.f90.inc'
+      INCLUDE 'IPhreeqc.f.inc'
       INTEGER iresult
       INTEGER i, j, k, rows, cols
       INTEGER vtype
@@ -34,11 +34,11 @@
       CALL EQUILIBRIUM_PHASES(id, 'calcite', 0.0, 0.010)
       CALL USER_PUNCH(id, 'Ca', 10)
 !!!!      CALL OutputLines
-      CALL SetOutputOn(id, .FALSE.)
-      CALL SetErrorOn(id, .FALSE.)
-      CALL SetLogOn(id, .FALSE.)
-      CALL SetSelectedOutputOn(id, .TRUE.)
-      CALL SetDumpOn(id, .FALSE.)
+      iresult = SetOutputOn(id, .FALSE.)
+      iresult = SetErrorOn(id, .FALSE.)
+      iresult = SetLogOn(id, .FALSE.)
+      iresult = SetSelectedOutputOn(id, .TRUE.)
+      iresult = SetDumpOn(id, .FALSE.)
       iresult = RunAccumulated(id)
       IF (iresult.NE.0) THEN
         CALL OutputLastError(id)
@@ -95,10 +95,11 @@
       !! test ListComponents
       n = GetComponentCount(id)
       DO i = 1, n
-        CALL GetComponent(id, i, comp)
+        iresult = GetComponent(id, i, comp)
         WRITE (*, *) trim(comp)
       END DO
-
+      
+      n = DestroyIPhreeqc(id)
 
 50    FORMAT(A15,A,$)
 60    FORMAT(1PG15.7E2,A,$)

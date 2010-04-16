@@ -1,108 +1,73 @@
-          ! GetSelectedOutputValue TYPES
-          INTEGER :: TT_EMPTY
-          PARAMETER (TT_EMPTY=0)
+      !
+      ! GetSelectedOutputValue TYPES
+      !
+      INTEGER :: TT_EMPTY
+      PARAMETER (TT_EMPTY=0)
           
-          INTEGER :: TT_ERROR
-          PARAMETER (TT_ERROR=1)
+      INTEGER :: TT_ERROR
+      PARAMETER (TT_ERROR=1)
           
-          INTEGER :: TT_DOUBLE
-          PARAMETER (TT_DOUBLE=3)
+      INTEGER :: TT_DOUBLE
+      PARAMETER (TT_DOUBLE=3)
           
-          INTEGER :: TT_STRING
-          PARAMETER (TT_STRING=4)
+      INTEGER :: TT_STRING
+      PARAMETER (TT_STRING=4)
           
+      !
+      ! IPQ_RESULT TYPES
+      !
           
-          ! ERROR (TT_ERROR) TYPES
-          INTEGER :: VR_OK
-          PARAMETER (VR_OK=0)
+      INTEGER :: IPQ_OK
+      PARAMETER (IPQ_OK=0)
           
-          INTEGER :: VR_OUTOFMEMORY
-          PARAMETER (VR_OUTOFMEMORY=1)
+      INTEGER :: IPQ_OUTOFMEMORY
+      PARAMETER (IPQ_OUTOFMEMORY=-1)
+         
+      INTEGER :: IPQ_BADVARTYPE
+      PARAMETER (IPQ_BADVARTYPE=-2)
           
-          INTEGER :: VR_BADVARTYPE
-          PARAMETER (VR_BADVARTYPE=2)
+      INTEGER :: IPQ_INVALIDARG
+      PARAMETER (IPQ_INVALIDARG=-3)
           
-          INTEGER :: VR_INVALIDARG
-          PARAMETER (VR_INVALIDARG=3)
+      INTEGER :: IPQ_INVALIDROW
+      PARAMETER (IPQ_INVALIDROW=-4)
           
-          INTEGER :: VR_INVALIDROW
-          PARAMETER (VR_INVALIDROW=4)
+      INTEGER :: IPQ_INVALIDCOL
+      PARAMETER (IPQ_INVALIDCOL=-5)
           
-          INTEGER :: VR_INVALIDCOL
-          PARAMETER (VR_INVALIDCOL=5)
+      INTEGER :: IPQ_BADINSTANCE
+      PARAMETER (IPQ_BADINSTANCE=-6)
           
+      !
+      ! function prototypes
+      !
           
-          ! function prototypes
-          
-          INTEGER AccumulateLine
-          INTEGER GetSelectedOutputColumnCount
-          INTEGER GetSelectedOutputRowCount
-          INTEGER GetSelectedOutputValue
-          INTEGER LoadDatabase
-          INTEGER RunAccumulated
-          INTEGER RunFile                      !! (FILENAME,OUTPUT_ON,ERROR_ON,LOG_ON,SELECTED_ON)
-
-
-!!REM          INTERFACE
-!!REM            FUNCTION LoadDatabase(FILENAME)
-!!REM              CHARACTER(LEN=*) :: FILENAME
-!!REM              INTEGER(KIND=4)  :: LoadDatabase
-!!REM            END FUNCTION LoadDatabase
-!!REM          END INTERFACE
-!!REM
-!!REM
-!!REM          INTERFACE 
-!!REM            SUBROUTINE OutputLastError
-!!REM            END SUBROUTINE OutputLastError
-!!REM          END INTERFACE 
-!!REM
-!!REM
-!!REM          INTERFACE
-!!REM            FUNCTION AccumulateLine(LINE)
-!!REM              CHARACTER(LEN=*) :: LINE
-!!REM              INTEGER(KIND=4)  :: AccumulateLine
-!!REM            END FUNCTION AccumulateLine
-!!REM          END INTERFACE
-!!REM
-!!REM
-!!REM          INTERFACE
-!!REM            FUNCTION Run(OUTPUT_ON, ERROR_ON, LOG_ON, SELECTED_ON)
-!!REM              LOGICAL(KIND=4) :: OUTPUT_ON
-!!REM              LOGICAL(KIND=4) :: ERROR_ON
-!!REM              LOGICAL(KIND=4) :: LOG_ON
-!!REM              LOGICAL(KIND=4) :: SELECTED_ON
-!!REM              INTEGER(KIND=4) :: Run
-!!REM            END FUNCTION Run
-!!REM          END INTERFACE
-!!REM
-!!REM
-!!REM          INTERFACE 
-!!REM            SUBROUTINE OutputLines
-!!REM            END SUBROUTINE OutputLines
-!!REM          END INTERFACE 
-!!REM
-!!REM
-!!REM          INTERFACE
-!!REM            FUNCTION GetSelectedOutputRowCount
-!!REM              INTEGER(KIND=4) :: GetSelectedOutputRowCount
-!!REM            END FUNCTION GetSelectedOutputRowCount
-!!REM          END INTERFACE
-!!REM
-!!REM
-!!REM          INTERFACE
-!!REM            FUNCTION GetSelectedOutputColumnCount
-!!REM              INTEGER(KIND=4) :: GetSelectedOutputColumnCount
-!!REM            END FUNCTION GetSelectedOutputColumnCount
-!!REM          END INTERFACE
-!!REM
-!!REM
-!!REM          INTERFACE
-!!REM            FUNCTION GetSelectedOutputValue(ROW,COL,VTYPE,DVALUE,SVALUE)
-!!REM              INTEGER(KIND=4)  :: ROW
-!!REM              INTEGER(KIND=4)  :: COL
-!!REM              INTEGER(KIND=4)  :: VTYPE
-!!REM              REAL(KIND=8)     :: DVALUE
-!!REM              CHARACTER(LEN=*) :: SVALUE
-!!REM              INTEGER(KIND=4)  :: GetSelectedOutputValue
-!!REM            END FUNCTION GetSelectedOutputValue
-!!REM          END INTERFACE
+      INTEGER AccumulateLine
+      INTEGER CreateIPhreeqc
+      INTEGER DestroyIPhreeqc
+      INTEGER GetComponent
+      INTEGER GetComponentCount
+      INTEGER GetDumpLine
+      INTEGER GetDumpLineCount
+      INTEGER GetErrorLine
+      INTEGER GetErrorLineCount
+      INTEGER GetSelectedOutputColumnCount
+      INTEGER GetSelectedOutputRowCount
+      INTEGER GetSelectedOutputValue
+      INTEGER GetWarningLine
+      INTEGER GetWarningLineCount
+      INTEGER LoadDatabase
+      INTEGER LoadDatabaseString
+!!      INTEGER OutputLastError
+      INTEGER OutputLastWarning
+      INTEGER OutputLines
+      INTEGER RunAccumulated
+      INTEGER RunFile
+      INTEGER RunString
+      INTEGER SetDumpOn
+      INTEGER SetDumpStringOn
+      INTEGER SetErrorOn
+      INTEGER SetLogOn
+      INTEGER SetOutputOn
+      INTEGER SetSelectedOutputOn
+      INTEGER UnLoadDatabase

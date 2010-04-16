@@ -2,7 +2,6 @@
 #define INC_IPHREEQC_H
 
 #include <map>
-
 #include "Var.h"
 
 #if defined(_WINDLL)
@@ -14,13 +13,13 @@
 /*! \brief Enumeration used to return error codes.
 */
 typedef enum {
-	IPQ_OK            =  0,
-	IPQ_OUTOFMEMORY   = -1,
-	IPQ_BADVARTYPE    = -2,
-	IPQ_INVALIDARG    = -3,
-	IPQ_INVALIDROW    = -4,
-	IPQ_INVALIDCOL    = -5,
-	IPQ_BADINSTANCE   = -6,
+	IPQ_OK            =  0,  /*!< Success */
+	IPQ_OUTOFMEMORY   = -1,  /*!< Failure, Out of memory */
+	IPQ_BADVARTYPE    = -2,  /*!< Failure, Invalid VAR type */
+	IPQ_INVALIDARG    = -3,  /*!< Failure, Invalid argument */
+	IPQ_INVALIDROW    = -4,  /*!< Failure, Invalid row */
+	IPQ_INVALIDCOL    = -5,  /*!< Failure, Invalid column */
+	IPQ_BADINSTANCE   = -6,  /*!< Failure, Invalid instance id */
 } IPQ_RESULT;
 
 
@@ -37,12 +36,42 @@ extern "C" {
  */
 	DLL_EXPORT int AddError(int id, const char* error_msg);
 
+/**
+ *  Create a new IPhreeqc instance.
+ *  @return A IPhreeqc instance id.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION CreateIPhreeqc()
+ *    INTEGER(KIND=4) :: CreateIPhreeqc
+ *  END FUNCTION CreateIPhreeqc
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
 	DLL_EXPORT int CreateIPhreeqc(void);
 
+/**
+ *  Release an IPhreeqc instance from memory.
+ *  @param id Id returned from CreateIPhreeqc
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION DestroyIPhreeqc(ID)
+ *    INTEGER(KIND=4) :: ID
+ *    INTEGER(KIND=4) :: DestroyIPhreeqc
+ *  END FUNCTION DestroyIPhreeqc
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
 	DLL_EXPORT IPQ_RESULT DestroyIPhreeqc(int id);
 
 /**
  *  Load the specified database file into phreeqc.
+ *  @param id Id returned from CreateIPhreeqc
  *  @param filename The name of the phreeqc database to load.
  *         The full path will be required if the file is not
  *         in the current working directory.
@@ -336,7 +365,7 @@ extern "C" {
  *  @remarks
  *  Row 0 contains the column headings to the selected_ouput.
  *  @par Examples:
- *  The headings will include a suffix and/or prefix in order to differentiate the 
+ *  The headings will include a suffix and/or prefix in order to differentiate the
  *  columns.
  *  @htmlonly
 <p>
@@ -522,7 +551,7 @@ Headings
 	DLL_EXPORT const char* GetComponent(int id, int n);
 
 /**
- *  Send the accumulated input to stdout. 
+ *  Send the accumulated input to stdout.
  *  This is the input that will be used for the next call to RunAccumulated.
  *  @par Fortran90 Interface:
  *  @htmlonly

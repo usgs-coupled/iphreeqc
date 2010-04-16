@@ -12,6 +12,7 @@
        INTEGER,PARAMETER :: IPQ_INVALIDARG   = -3
        INTEGER,PARAMETER :: IPQ_INVALIDROW   = -4
        INTEGER,PARAMETER :: IPQ_INVALIDCOL   = -5
+       INTEGER,PARAMETER :: IPQ_BADINSTANCE  = -6
 
 
        INTERFACE
@@ -22,10 +23,18 @@
 
 
        INTERFACE
+        FUNCTION DestroyIPhreeqc(ID)
+         INTEGER(KIND=4), INTENT(IN)  :: ID
+         INTEGER(KIND=4)              :: DestroyIPhreeqc
+        END FUNCTION DestroyIPhreeqc
+       END INTERFACE
+
+
+       INTERFACE
         FUNCTION LoadDatabase(ID,FILENAME)
-         INTEGER(KIND=4)  :: ID
-         CHARACTER(LEN=*) :: FILENAME
-         INTEGER(KIND=4)  :: LoadDatabase
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         CHARACTER(LEN=*), INTENT(IN) :: FILENAME
+         INTEGER(KIND=4)              :: LoadDatabase
         END FUNCTION LoadDatabase
        END INTERFACE
 
