@@ -19,6 +19,7 @@ if test "X$IPQ_FORTRAN" = "Xyes"; then
  echo "yes"
  AC_PROG_F77
  AC_F77_LIBRARY_LDFLAGS
+ AC_F77_WRAPPERS
 else
  echo "no"
 fi
