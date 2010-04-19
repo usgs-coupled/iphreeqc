@@ -1,6 +1,6 @@
-      !
-      ! GetSelectedOutputValue TYPES
-      !
+C
+C     GetSelectedOutputValue TYPES
+C      
       INTEGER :: TT_EMPTY
       PARAMETER (TT_EMPTY=0)
           
@@ -13,9 +13,9 @@
       INTEGER :: TT_STRING
       PARAMETER (TT_STRING=4)
           
-      !
-      ! IPQ_RESULT TYPES
-      !
+C
+C     IPQ_RESULT TYPES
+C      
           
       INTEGER :: IPQ_OK
       PARAMETER (IPQ_OK=0)
@@ -38,9 +38,9 @@
       INTEGER :: IPQ_BADINSTANCE
       PARAMETER (IPQ_BADINSTANCE=-6)
           
-      !
-      ! function prototypes
-      !
+C
+C     function prototypes
+C      
           
       INTEGER AccumulateLine
       INTEGER CreateIPhreeqc
@@ -58,7 +58,7 @@
       INTEGER GetWarningLineCount
       INTEGER LoadDatabase
       INTEGER LoadDatabaseString
-!!      INTEGER OutputLastError
+C      INTEGER OutputLastError
       INTEGER OutputLastWarning
       INTEGER OutputLines
       INTEGER RunAccumulated
