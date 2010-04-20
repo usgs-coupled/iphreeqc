@@ -91,50 +91,56 @@
 
 
        INTERFACE
-        SUBROUTINE SetSelectedOutputOn(ID,SEL_ON)
+        FUNCTION SetSelectedOutputOn(ID,SEL_ON)
          INTEGER(KIND=4)  :: ID
          LOGICAL(KIND=4)  :: SEL_ON
-        END SUBROUTINE SetSelectedOutputOn
+         INTEGER(KIND=4)  :: SetSelectedOutputOn
+        END FUNCTION SetSelectedOutputOn
        END INTERFACE
 
 
        INTERFACE
-        SUBROUTINE SetOutputOn(ID,OUT_ON)
+        FUNCTION SetOutputOn(ID,OUT_ON)
          INTEGER(KIND=4)  :: ID
          LOGICAL(KIND=4)  :: OUT_ON
-        END SUBROUTINE SetOutputOn
+         INTEGER(KIND=4)  :: SetOutputOn
+        END FUNCTION SetOutputOn
        END INTERFACE
 
 
        INTERFACE
-        SUBROUTINE SetErrorOn(ID,ERR_ON)
+        FUNCTION SetErrorOn(ID,ERR_ON)
          INTEGER(KIND=4)  :: ID
          LOGICAL(KIND=4)  :: ERR_ON
-        END SUBROUTINE SetErrorOn
+         INTEGER(KIND=4)  :: SetErrorOn
+        END FUNCTION SetErrorOn
        END INTERFACE
 
 
        INTERFACE
-        SUBROUTINE SetLogOn(ID,LOG_ON)
+        FUNCTION SetLogOn(ID,LOG_ON)
          INTEGER(KIND=4)  :: ID
          LOGICAL(KIND=4)  :: LOG_ON
-        END SUBROUTINE SetLogOn
+         INTEGER(KIND=4)  :: SetLogOn
+        END FUNCTION SetLogOn
        END INTERFACE
 
 
        INTERFACE
-        SUBROUTINE SetDumpOn(ID,DUMP_ON)
+        FUNCTION SetDumpOn(ID,DUMP_ON)
          INTEGER(KIND=4)  :: ID
          LOGICAL(KIND=4)  :: DUMP_ON
-        END SUBROUTINE SetDumpOn
+         INTEGER(KIND=4)  :: SetDumpOn
+        END FUNCTION SetDumpOn
        END INTERFACE
 
 
        INTERFACE
-        SUBROUTINE SetDumpStringOn(ID,DUMP_STRING_ON)
+        FUNCTION SetDumpStringOn(ID,DUMP_STRING_ON)
          INTEGER(KIND=4)  :: ID
          LOGICAL(KIND=4)  :: DUMP_STRING_ON
-        END SUBROUTINE SetDumpStringOn
+         INTEGER(KIND=4)  :: SetDumpStringOn
+        END FUNCTION SetDumpStringOn
        END INTERFACE
 
 
@@ -234,9 +240,10 @@
 
 
        INTERFACE
-        SUBROUTINE GetComponent(ID,N,COMP)
+        FUNCTION GetComponent(ID,N,COMP)
          INTEGER(KIND=4)  :: ID
          INTEGER(KIND=4)  :: N
          CHARACTER(LEN=*) :: COMP
-        END SUBROUTINE
+         INTEGER(KIND=4)  :: GetComponent
+        END FUNCTION GetComponent
        END INTERFACE

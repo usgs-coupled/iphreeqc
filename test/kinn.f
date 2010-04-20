@@ -1,5 +1,6 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      PROGRAM DRIVER
+C      PROGRAM DRIVER
+      SUBROUTINE F_MAIN
 
       IMPLICIT NONE
       INCLUDE 'IPhreeqc.f.inc'
@@ -10,18 +11,22 @@
       CHARACTER(30) comp
       INTEGER n
       INTEGER len
-      INTEGER id
+      INTEGER(KIND=4) id
       REAL*8 dvalue
       
       id = CreateIPhreeqc()
+      write (*,*) "id = ", id
       IF (id.LT.0) THEN
         CALL OutputLastError(id)
         STOP
       ENDIF
 
+      write (*,*) "id = ", id
       iresult = LoadDatabase(id, 'llnl.dat')
+      write (*,*) "id = ", id
 
       IF (iresult.NE.0) THEN
+        write (*,*) "id = ", id
         CALL OutputLastError(id)
         STOP
       ENDIF
@@ -103,7 +108,8 @@
 
 50    FORMAT(A15,A,$)
 60    FORMAT(1PG15.7E2,A,$)
-      END PROGRAM DRIVER
+C      END PROGRAM DRIVER
+      END SUBROUTINE F_MAIN
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       SUBROUTINE SOLUTION(id, C, Ca, Na)
       INCLUDE 'IPhreeqc.f90.inc'
@@ -111,13 +117,13 @@
       INTEGER err
       REAL C, Ca, Na
       CHARACTER(80) line
-        WRITE (line,100),'SOLUTION 1'
+        WRITE (line,100) 'SOLUTION 1'
         err = AccumulateLine(id, line)
-        WRITE (line,110),'C  ', C
+        WRITE (line,110) 'C  ', C
         err = AccumulateLine(id, line)
-        WRITE (line,110),'Ca  ', Ca
+        WRITE (line,110) 'Ca  ', Ca
         err = AccumulateLine(id, line)
-        WRITE (line,110),'Na  ', Na
+        WRITE (line,110) 'Na  ', Na
         err = AccumulateLine(id, line)
 100     FORMAT(A)
 110     FORMAT(TR4,A,F8.4)
@@ -130,9 +136,9 @@
       REAL si, amount
       CHARACTER*(*) phase
       CHARACTER(80) line
-        WRITE (line,'(A)'),'EQUILIBRIUM_PHASES'
+        WRITE (line,'(A)') 'EQUILIBRIUM_PHASES'
         err = AccumulateLine(id, line)
-        WRITE (line,'(TR4, A, F8.4, F8.4)'), phase, si, amount
+        WRITE (line,'(TR4, A, F8.4, F8.4)') phase, si, amount
         err = AccumulateLine(id, line)		
       END SUBROUTINE EQUILIBRIUM_PHASES
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -146,37 +152,37 @@
       CHARACTER(800) line
       CHARACTER(80) form
       CHARACTER(30) heading(20)
-        WRITE (line,200),'USER_PUNCH'
+        WRITE (line,200) 'USER_PUNCH'
         err = AccumulateLine(id, line)
         DO i = 1,max
-          WRITE (heading(i), 210),
+          WRITE (heading(i), 210)
      &                            i, '.name ',
      &                            i, '.type ',
      &                            i, '.moles '
         END DO
-        WRITE (line, *), '-head ', (heading(i), i=1,max)
+        WRITE (line, *) '-head ', (heading(i), i=1,max)
         err = AccumulateLine(id, line)
-        WRITE (line, 200), '-start'
+        WRITE (line, 200) '-start'
         err = AccumulateLine(id, line)
-        WRITE (line, 220), '10 n = sys("'
+        WRITE (line, 220) '10 n = sys("'
      &                     , element, '", count, names$, types$, moles)'
         err = AccumulateLine(id, line)
-        WRITE (line, 230), '20 n = ', max
+        WRITE (line, 230) '20 n = ', max
         err = AccumulateLine(id, line)
-        WRITE (line, 240), '30 if count < ', max
+        WRITE (line, 240) '30 if count < ', max
      &                            , ' then n = count'
         err = AccumulateLine(id, line)
-        WRITE (line, 200), '40 for i = 1 to count'
+        WRITE (line, 200) '40 for i = 1 to count'
         err = AccumulateLine(id, line)
-        WRITE (line, 200), '50 PUNCH names$(i), types$(i), moles(i)'
+        WRITE (line, 200) '50 PUNCH names$(i), types$(i), moles(i)'
         err = AccumulateLine(id, line)
-        WRITE (line, 200), '60 next i'
+        WRITE (line, 200) '60 next i'
         err = AccumulateLine(id, line)
-        WRITE (line, 200), '70 list'
+        WRITE (line, 200) '70 list'
         err = AccumulateLine(id, line)
-        WRITE (line, 200), '-end'
+        WRITE (line, 200) '-end'
         err = AccumulateLine(id, line)
-        WRITE (line, 200), 'SELECTED_OUTPUT'
+        WRITE (line, 200) 'SELECTED_OUTPUT'
         err = AccumulateLine(id, line)
 !!!        WRITE (line, 200), '-file srctest.txt'
 !!!        CALL AccumulateLine(line)
@@ -193,13 +199,13 @@
       INTEGER err
       CHARACTER(80) line
       INTEGER i
-        WRITE (line,500),'PHASES'
+        WRITE (line,500) 'PHASES'
         err = AccumulateLine(id, line)
-        WRITE (line,510),'Fix_H+'
+        WRITE (line,510) 'Fix_H+'
         err = AccumulateLine(id, line)
-        WRITE (line,510),'H+ = H+'
+        WRITE (line,510) 'H+ = H+'
         err = AccumulateLine(id, line)
-        WRITE (line,510),'log_k 0.0'
+        WRITE (line,510) 'log_k 0.0'
         err = AccumulateLine(id, line)
 500     FORMAT(A)
 510     FORMAT(TR4,A)

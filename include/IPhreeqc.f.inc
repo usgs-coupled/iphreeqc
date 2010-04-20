@@ -59,7 +59,7 @@ C
       INTEGER LoadDatabase
       INTEGER LoadDatabaseString
 C      INTEGER OutputLastError
-      INTEGER OutputLastWarning
+C      INTEGER OutputLastWarning
       INTEGER OutputLines
       INTEGER RunAccumulated
       INTEGER RunFile

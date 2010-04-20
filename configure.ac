@@ -1,8 +1,12 @@
-# Prelude.
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.64])
 AC_INIT([IPhreeqc], [1.0], [charlton@usgs.gov])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AC_CONFIG_SRCDIR([src/IPhreeqc.cpp])
 
 # Checks for programs.
 AC_PROG_CXX
@@ -17,9 +21,12 @@ AC_ARG_ENABLE([fortran],
 
 if test "X$IPQ_FORTRAN" = "Xyes"; then
  echo "yes"
- AC_PROG_F77
- AC_F77_LIBRARY_LDFLAGS
- AC_F77_WRAPPERS
+ AC_PROG_FC
+ AC_FC_LIBRARY_LDFLAGS
+ AC_FC_WRAPPERS
+ AC_FC_MAIN
+ AC_SUBST(F77, $FC)
+ AC_SUBST(FFLAGS, $FCFLAGS) 
 else
  echo "no"
 fi
@@ -29,7 +36,14 @@ AM_CONDITIONAL([BUILD_FORTRAN], [test "X$IPQ_FORTRAN" = "Xyes"])
 AC_DISABLE_SHARED
 AC_PROG_LIBTOOL
 
-# Output files.
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
 AC_CONFIG_FILES([Makefile src/Makefile test/Makefile testcpp/Makefile])
 AC_OUTPUT
 
