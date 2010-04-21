@@ -44,6 +44,6 @@ AC_PROG_LIBTOOL
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile src/Makefile test/Makefile testcpp/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile tests/phreeqc.dat tests/ex1 test/Makefile])
 AC_OUTPUT
 

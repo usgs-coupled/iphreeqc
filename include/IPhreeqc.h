@@ -1,7 +1,6 @@
 #ifndef INC_IPHREEQC_H
 #define INC_IPHREEQC_H
 
-#include <map>
 #include "Var.h"
 
 #if defined(_WINDLL)
@@ -22,8 +21,6 @@ typedef enum {
 	IPQ_BADINSTANCE   = -6,  /*!< Failure, Invalid instance id */
 } IPQ_RESULT;
 
-
-class IPhreeqc;
 
 #if defined(__cplusplus)
 extern "C" {
