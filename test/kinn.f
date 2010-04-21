@@ -11,7 +11,7 @@ C      PROGRAM DRIVER
       CHARACTER(30) comp
       INTEGER n
       INTEGER len
-      INTEGER(KIND=4) id
+      INTEGER id
       REAL*8 dvalue
       
       id = CreateIPhreeqc()
