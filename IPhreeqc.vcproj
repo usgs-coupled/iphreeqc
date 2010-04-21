@@ -3056,6 +3056,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\IPhreeqc.f.inc"
+				>
+			</File>
+			<File
 				RelativePath="include\IPhreeqc.f90.inc"
 				>
 			</File>
