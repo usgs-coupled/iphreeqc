@@ -24,10 +24,10 @@
 
 !!      iresult= Runfile('CO2test',
 !!     & .true.,.true.,.true.,.true.)
-      CALL SetOutputOn(id, .TRUE.)
-      CALL SetErrorOn(id, .TRUE.)
-      CALL SetLogOn(id, .TRUE.)
-      CALL SetSelectedOutputOn(id, .TRUE.)
+      iresult = SetOutputOn(id, .TRUE.)
+      iresult = SetErrorOn(id, .TRUE.)
+      iresult = SetLogOn(id, .TRUE.)
+      iresult = SetSelectedOutputOn(id, .TRUE.)
       iresult= Runfile(id, 'tester')
 
       IF (iresult.NE.0) THEN

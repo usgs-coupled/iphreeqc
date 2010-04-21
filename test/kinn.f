@@ -1,6 +1,5 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-C      PROGRAM DRIVER
-      SUBROUTINE F_MAIN
+      PROGRAM DRIVER
 
       IMPLICIT NONE
       INCLUDE 'IPhreeqc.f.inc'
@@ -15,18 +14,14 @@ C      PROGRAM DRIVER
       REAL*8 dvalue
       
       id = CreateIPhreeqc()
-      write (*,*) "id = ", id
       IF (id.LT.0) THEN
         CALL OutputLastError(id)
         STOP
       ENDIF
 
-      write (*,*) "id = ", id
       iresult = LoadDatabase(id, 'llnl.dat')
-      write (*,*) "id = ", id
 
       IF (iresult.NE.0) THEN
-        write (*,*) "id = ", id
         CALL OutputLastError(id)
         STOP
       ENDIF
@@ -100,7 +95,7 @@ C      PROGRAM DRIVER
       !! test ListComponents
       n = GetComponentCount(id)
       DO i = 1, n
-        iresult = GetComponent(id, i, comp)
+        CALL GetComponent(id, i, comp)
         WRITE (*, *) trim(comp)
       END DO
       
@@ -108,8 +103,7 @@ C      PROGRAM DRIVER
 
 50    FORMAT(A15,A,$)
 60    FORMAT(1PG15.7E2,A,$)
-C      END PROGRAM DRIVER
-      END SUBROUTINE F_MAIN
+      END PROGRAM DRIVER
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       SUBROUTINE SOLUTION(id, C, Ca, Na)
       INCLUDE 'IPhreeqc.f90.inc'

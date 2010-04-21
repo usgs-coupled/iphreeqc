@@ -171,8 +171,7 @@ void TestIPhreeqcLib::TestLoadDatabaseMissingFile(void)
 	}
 
 	const char expected[] =
-		"ERROR: LoadDatabase: Unable to open:\"missing.file\".\n"
-		"Stopping.\n";
+		"ERROR: LoadDatabase: Unable to open:\"missing.file\".\n";
 
 	const char* err = ::GetLastErrorString(n);
 
@@ -218,8 +217,7 @@ void TestIPhreeqcLib::TestLoadDatabaseWithErrors(void)
 			"ERROR: Could not reduce equation to secondary master species, Pyrolusite.\n"
 			"ERROR: Could not reduce equation to secondary master species, Sulfur.\n"
 			"ERROR: e-, primary master species for E-, not defined.\n"
-			"ERROR: Calculations terminating due to input errors.\n"
-			"Stopping.\n";
+			"ERROR: Calculations terminating due to input errors.\n";
 
 		const char* err = ::GetLastErrorString(n);
 
@@ -287,8 +285,7 @@ void TestIPhreeqcLib::TestRunWithErrors()
 	CPPUNIT_ASSERT_EQUAL(1,      ::RunAccumulated(n));
 
 	const char expected[] =
-		"ERROR: Numerical method failed on all combinations of convergence parameters\n"
-		"Stopping.\n";
+		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
 	const char* err = ::GetLastErrorString(n);
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
@@ -328,8 +325,7 @@ void TestIPhreeqcLib::TestRunFile(void)
 	CPPUNIT_ASSERT_EQUAL(1,    ::RunFile(n, "conv_fail.in"));
 
 	static const char expected[] =
-		"ERROR: Numerical method failed on all combinations of convergence parameters\n"
-		"Stopping.\n";
+		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
 	const char* err = ::GetLastErrorString(n);
 
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
@@ -1256,8 +1252,7 @@ void TestIPhreeqcLib::TestRunNoDatabaseLoaded(void)
 	CPPUNIT_ASSERT_EQUAL( 1, ::RunAccumulated(n) );
 
 	const char expected[] =
-		"ERROR: RunAccumulated: No database is loaded\n"
-		"Stopping.\n";
+		"ERROR: RunAccumulated: No database is loaded\n";
 	const char* err = ::GetLastErrorString(n);
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
@@ -1652,8 +1647,7 @@ void TestIPhreeqcLib::TestDatabaseKeyword()
 
 	const char *exp_errs =
 		"ERROR: Gas not found in PHASES data base, Amm(g).\n"
-		"ERROR: Calculations terminating due to input errors.\n"
-		"Stopping.\n";
+		"ERROR: Calculations terminating due to input errors.\n";
 
 	const char* err = ::GetLastErrorString(n);
 	CPPUNIT_ASSERT_EQUAL(std::string(exp_errs), std::string(err));
@@ -1967,10 +1961,9 @@ void TestIPhreeqcLib::TestGetErrorLine(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump") );
 
-	CPPUNIT_ASSERT_EQUAL( 3,      ::GetErrorLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 2,      ::GetErrorLineCount(n) );
 	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),    std::string(::GetErrorLine(n, 0)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."), std::string(::GetErrorLine(n, 1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                            std::string(::GetErrorLine(n, 2)) );
 
 	if (n >= 0)
 	{

@@ -45,7 +45,7 @@ C
       INTEGER AccumulateLine
       INTEGER CreateIPhreeqc
       INTEGER DestroyIPhreeqc
-      INTEGER GetComponent
+C      INTEGER GetComponent
       INTEGER GetComponentCount
       INTEGER GetDumpLine
       INTEGER GetDumpLineCount

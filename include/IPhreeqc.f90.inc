@@ -240,10 +240,9 @@
 
 
        INTERFACE
-        FUNCTION GetComponent(ID,N,COMP)
+        SUBROUTINE GetComponent(ID,N,COMP)
          INTEGER(KIND=4)  :: ID
          INTEGER(KIND=4)  :: N
          CHARACTER(LEN=*) :: COMP
-         INTEGER(KIND=4)  :: GetComponent
-        END FUNCTION GetComponent
+        END SUBROUTINE GetComponent
        END INTERFACE
