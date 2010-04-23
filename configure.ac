@@ -8,7 +8,13 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CONFIG_SRCDIR([src/IPhreeqc.cpp])
 
+AC_DEFINE(SWIG_SHARED_OBJ)
+AC_DEFINE(PHREEQC_CPP)
+AC_DEFINE(PHREEQC_CLASS)
+AC_DEFINE(USE_PHRQ_ALLOC)
+
 # Checks for programs.
+AC_PROG_CC
 AC_PROG_CXX
 
 # Check if the fortran interface should be included
@@ -27,6 +33,10 @@ if test "X$IPQ_FORTRAN" = "Xyes"; then
  AC_FC_MAIN
  AC_SUBST(F77, $FC)
  AC_SUBST(FFLAGS, $FCFLAGS) 
+#{{
+## AC_SUBST(COMPILE, $CXXCOMPILE)
+## AC_SUBST(LTCOMPILE, $LTCXXCOMPILE)
+#}}
 else
  echo "no"
 fi
@@ -44,6 +54,6 @@ AC_PROG_LIBTOOL
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile tests/phreeqc.dat tests/ex1])
+AC_CONFIG_FILES([Makefile src/Makefile src/phreeqcpp/Makefile src/phreeqcpp/phreeqc/Makefile tests/Makefile tests/phreeqc.dat tests/ex1])
 AC_OUTPUT
 
