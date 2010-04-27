@@ -1,10 +1,5 @@
-# Subdirectories to descend into.
 ACLOCAL_AMFLAGS = -I m4
-
-if BUILD_FORTRAN
-   FORTRAN_DIRS = test
-else
-   FORTRAN_DIRS = 
-endif
-
+EXTRA_DIST = INSTALL README
 SUBDIRS = src tests
+
+
