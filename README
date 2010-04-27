@@ -1,0 +1,27 @@
+Building Static Libraries
+=========================
+     ./configure
+     make LDFLAGS=-all-static check
+     
+   This will attemp to link ALL libraries statically. To be successful all libraries must have .a files.
+     
+
+Building Static iphreeqc Library
+================================
+     ./configure
+     make LDFLAGS=-static check
+     
+   This will link the iphreeqc library statically.  All required additional libraries may be linked to
+shared libraries.
+
+
+Building shared and static iphreeqc Library (linking tests statically)
+======================================================================
+     ./configure
+     make
+     make LDFLAGS=-static check       # static to iphreeqc
+   or
+     make LDFLAGS=-all-static check   # completely static (if possible)
+     
+   This configuration will create both static and shared (if supported) iphreeqc libraries. But 
+test programs (created during make check) will be statically linked to iphreeqc library
