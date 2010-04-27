@@ -5,7 +5,7 @@ AC_PREREQ([2.64])
 AC_INIT([IPhreeqc], [2.17.0], [charlton@usgs.gov])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/IPhreeqc.cpp])
 
 AC_DEFINE(SWIG_SHARED_OBJ)
@@ -51,6 +51,6 @@ AC_PROG_LIBTOOL
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile src/Makefile src/phreeqcpp/Makefile src/phreeqcpp/phreeqc/Makefile tests/Makefile tests/phreeqc.dat tests/ex1])
+AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile tests/phreeqc.dat tests/ex1])
 AC_OUTPUT
 
