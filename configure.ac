@@ -52,8 +52,6 @@ AC_PROG_LIBTOOL
 AC_CONFIG_FILES([
   Makefile
   src/Makefile
-  src/phreeqcpp/Makefile
-  src/phreeqcpp/phreeqc/Makefile
   tests/Makefile
   tests/phreeqc.dat
   tests/ex1
