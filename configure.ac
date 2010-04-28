@@ -39,8 +39,6 @@ else
 fi
 AM_CONDITIONAL([BUILD_FORTRAN], [test "X$IPQ_FORTRAN" = "Xyes"])
 
-# Disable shared library building by default (use --enable-shared to enable)
-##AC_DISABLE_SHARED
 AC_PROG_LIBTOOL
 
 # Checks for libraries.
@@ -51,6 +49,21 @@ AC_PROG_LIBTOOL
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile tests/phreeqc.dat tests/ex1])
+AC_CONFIG_FILES([
+  Makefile
+  src/Makefile
+  src/phreeqcpp/Makefile
+  src/phreeqcpp/phreeqc/Makefile
+  tests/Makefile
+  tests/phreeqc.dat
+  tests/ex1
+  examples/ex1
+  examples/main_fortran.cxx
+  examples/Makefile
+  examples/phreeqc.dat
+  examples/test_c.c
+  examples/test_cxx.cxx
+  examples/test_f.f
+  examples/test_f90.f90
+])
 AC_OUTPUT
-

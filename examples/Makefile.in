@@ -1,0 +1,50 @@
+CC = @CC@
+CPPFLAGS = -I@top_srcdir@/include @CPPFLAGS@
+CXX = @CXX@
+DEFS = @DEFS@
+F77 = @F77@
+FC = @FC@
+CFLAGS = @CFLAGS@
+FFLAGS = -I@top_srcdir@/include @FFLAGS@
+FCLIBS = @FCLIBS@
+LIBTOOL = @SHELL@ @top_builddir@/libtool
+LDFLAGS = @LDFLAGS@
+IPHREEQC_LA = @top_builddir@/src/libiphreeqc.la
+
+all: test_c test_cxx test_f test_f90
+
+
+test_c: test_c.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o test_c test_c.lo $(IPHREEQC_LA)
+
+test_cxx: test_cxx.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o test_cxx test_cxx.lo $(IPHREEQC_LA)
+
+test_f: test_f.lo main_fortran.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o test_f test_f.lo main_fortran.lo $(IPHREEQC_LA) $(FCLIBS)
+	
+test_f90: test_f90.lo main_fortran.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o test_f90 test_f90.lo main_fortran.lo $(IPHREEQC_LA) $(FCLIBS)
+
+
+.SUFFIXES: .c .cxx .f .f90 .lo
+
+
+.c.lo:
+	$(LIBTOOL) --mode=compile $(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+.cxx.lo:
+	$(LIBTOOL) --mode=compile $(CXX) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+.f.lo:
+	$(LIBTOOL) --mode=compile $(F77) $(FFLAGS) -c -o $@ $<
+
+.f90.lo:
+	$(LIBTOOL) --mode=compile $(FC) $(FFLAGS) -c -o $@ $<
+
+
+main_fortran.lo: main_fortran.cxx
+	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+clean:
+	$(LIBTOOL) --mode=clean rm -f test_c test_cxx test_f test_c.lo test_cxx.lo test_f.lo main_fortran.lo
