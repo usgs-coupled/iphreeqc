@@ -16,8 +16,13 @@ AC_DEFINE(USE_PHRQ_ALLOC)
 AC_DEFINE(NDEBUG)
 
 # Checks for programs.
-AC_PROG_CC
 AC_PROG_CXX
+AC_PROG_AWK
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
 
 # Check if the fortran interface should be included
 AC_MSG_CHECKING([if Fortran interface included])
@@ -45,10 +50,16 @@ AC_PROG_LIBTOOL
 # Checks for libraries.
 
 # Checks for header files.
+AC_CHECK_HEADERS([float.h limits.h memory.h stddef.h stdlib.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_TYPE_SIZE_T
 
 # Checks for library functions.
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+AC_FUNC_STRTOD
+AC_CHECK_FUNCS([floor memchr memmove memset pow sqrt strchr strcspn strrchr strstr strtol])
 
 
 AC_CONFIG_FILES([
