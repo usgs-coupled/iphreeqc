@@ -63,7 +63,8 @@ extern "C" {
 
 /**
  *  Create a new IPhreeqc instance.
- *  @return      A non-negative value if successful; otherwise returns a negative value.
+ *  @return      A non-negative value if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
+ *  @see         DestroyIPhreeqc
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -81,6 +82,7 @@ extern "C" {
 /**
  *  Release an IPhreeqc instance from memory.
  *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @see                 CreateIPhreeqc
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -100,6 +102,7 @@ extern "C" {
  *  Retrieves the given component.
  *  @param id            The instance id returned from CreateIPhreeqc.
  *  @param n             The zero-based index of the component to retrieve.
+ *  @see                 GetComponentCount
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -119,6 +122,7 @@ extern "C" {
 /**
  *  Retrieves the number of components in the current simulation.
  *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @see                 GetComponent
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -138,14 +142,15 @@ extern "C" {
  *  Retrieves the given dump line.
  *  @param id            The instance id returned from CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
+ *  @see                 GetDumpLineCount, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE GetComponent(ID,N,COMP)
+ *  SUBROUTINE GetDumpLine(ID,N,LINE)
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
  *    INTEGER(KIND=4),   INTENT(IN)   :: N     ! one-based index
- *    CHARACTER(LEN=*),  INTENT(OUT)  :: COMP
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
  *  END SUBROUTINE GetComponent
  *  </PRE>
  *  </CODE>
@@ -157,6 +162,7 @@ extern "C" {
 /**
  *  Retrieves the number of lines in the current dump string buffer.
  *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @see                 GetDumpLineCount, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -175,6 +181,7 @@ extern "C" {
 /**
  *  Retrieves the current value of the dump flag.
  *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @see                 SetDumpOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -191,8 +198,11 @@ extern "C" {
 
 
 /**
- *  TODO
+ *  Retrieves the string buffer containing <b>DUMP</b> output.
  *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @remarks
+ *  The dump string flag must be set to true in order to recieve <b>DUMP</b> output.
+ *  @see                 SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  Not implemented.
@@ -204,7 +214,6 @@ extern "C" {
 /**
  *  Retrieves the current value of the dump string flag.
  *  @param id                  The instance id returned from CreateIPhreeqc.
- *  @param dump_string_on      If non-zero captures as a string the output defined by the <B>DUMP</B> keyword.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -221,9 +230,10 @@ extern "C" {
 
 
 /**
- *  TODO
+ *  Retrieves the given error line.
  *  @param id            The instance id returned from CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
+ *  @see                 GetErrorLineCount
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -259,9 +269,9 @@ extern "C" {
 
 
 /**
- *  Sets the error flag on or off.
+ *  Retrieves the current value of the error flag.
  *  @param id            The instance id returned from CreateIPhreeqc.
- *  @param error_on           If non-zero turns on output to the <B>phreeqc.err</B> file.
+ *  @see                 SetErrorOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -286,7 +296,7 @@ extern "C" {
  *  Not implemented.
  *  @endhtmlonly
  */
-	DLL_EXPORT const char* GetLastErrorString(int id);
+	DLL_EXPORT const char* GetErrorString(int id);
 
 
 /**
@@ -298,7 +308,7 @@ extern "C" {
  *  Not implemented.
  *  @endhtmlonly
  */
-	DLL_EXPORT const char* GetLastWarningString(int id);
+	DLL_EXPORT const char* GetWarningString(int id);
 
 
 /**
@@ -629,8 +639,8 @@ Headings
 /**
  *  Load the specified string as a database into phreeqc.
  *  @param id            The instance id returned from CreateIPhreeqc.
- *  @param input String containing data to be used as the phreeqc database.
- *  @return The number of errors encountered.
+ *  @param input         String containing data to be used as the phreeqc database.
+ *  @return              The number of errors encountered.
  *  @remarks
  *  Any previous database definitions are cleared.
  *  @par Fortran90 Interface:
@@ -656,14 +666,14 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputLastError
+ *  SUBROUTINE OutputError
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END SUBROUTINE OutputLastError
+ *  END SUBROUTINE OutputError
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT void OutputLastError(int id);
+	DLL_EXPORT void OutputError(int id);
 
 
 /**
@@ -673,14 +683,14 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputLastError
+ *  SUBROUTINE OutputWarning
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END SUBROUTINE OutputLastError
+ *  END SUBROUTINE OutputWarning
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT void OutputLastWarning(int id);
+	DLL_EXPORT void OutputWarning(int id);
 
 
 /**
@@ -704,7 +714,7 @@ Headings
 /**
  *  Runs the accumulated input sent to AccumulateLine.
  *  @param id            The instance id returned from CreateIPhreeqc.
- *  @return The number of errors encountered.
+ *  @return              The number of errors encountered.
  *  @remarks
  *  The accumulated input is cleared upon completion.
  *  @pre LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
@@ -750,7 +760,7 @@ Headings
  *  @param id            The instance id returned from CreateIPhreeqc.
  *  @param input         String containing phreeqc input.
  *  @return              The number of errors encountered during the run.
- *  @pre LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
+ *  @pre                 LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -775,10 +785,10 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetDumpStringOn(ID,DUMP_ON)
+ *  FUNCTION SetDumpOn(ID,DUMP_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: DUMP_ON
- *  END FUNCTION SetDumpStringOn
+ *  END FUNCTION SetDumpOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -828,6 +838,8 @@ Headings
  *  Sets the log flag on or off
  *  @param id            The instance id returned from CreateIPhreeqc.
  *  @param log_on        If non-zero turns on output to the <B>phreeqc.log</B> file.
+ *  @see                 GetLogOn
+ *  @return              IPQ_OK on success
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>

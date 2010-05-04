@@ -6,22 +6,22 @@
 /*! \brief Enumeration used to determine the type of data stored in a VAR.
 */
 typedef enum {
-	TT_EMPTY  = 0,
-	TT_ERROR  = 1,
-	TT_LONG   = 2,
-	TT_DOUBLE = 3,
-	TT_STRING = 4
+	TT_EMPTY  = 0,  /*!< VAR contains no data */
+	TT_ERROR  = 1,  /*!< vresult is valid */
+	TT_LONG   = 2,  /*!< lVal is valid */
+	TT_DOUBLE = 3,  /*!< dVal is valid */
+	TT_STRING = 4   /*!< sVal is valid */
 } VAR_TYPE;
 
 /*! \brief Enumeration used to return error codes.
 */
 typedef enum {
-	VR_OK            =  0,
-	VR_OUTOFMEMORY   = -1,
-	VR_BADVARTYPE    = -2,
-	VR_INVALIDARG    = -3,
-	VR_INVALIDROW    = -4,
-	VR_INVALIDCOL    = -5
+	VR_OK            =  0,  /*!< Success */
+	VR_OUTOFMEMORY   = -1,  /*!< Failure, Out of memory */
+	VR_BADVARTYPE    = -2,  /*!< Failure, Invalid VAR type */
+	VR_INVALIDARG    = -3,  /*!< Failure, Invalid argument */
+	VR_INVALIDROW    = -4,  /*!< Failure, Invalid row */
+	VR_INVALIDCOL    = -5   /*!< Failure, Invalid column */
 } VRESULT;
 
 /*! \brief Datatype used to store SELECTED_OUTPUT values.
@@ -42,12 +42,12 @@ extern "C" {
 #endif
 
 /** Initializes a VAR.
- *  @param pvar Pointer to the VAR that will be initialized. 
+ *  @param pvar Pointer to the VAR that will be initialized.
  */
 void VarInit(VAR* pvar);
 
 /** Clears a VAR.
- *  @param pvar Pointer to the VAR that will be freed and initialized. 
+ *  @param pvar Pointer to the VAR that will be freed and initialized.
  *  @retval VR_OK Success.
  *  @retval VR_BADVARTYPE The \c VAR was invalid (probably uninitialized).
  */
@@ -65,13 +65,13 @@ VRESULT VarCopy(VAR* pvarDest, const VAR* pvarSrc);
 
 
 /** Allocates a new string for use in a VAR and copies the passed string into it.
- *  @param pSrc Pointer to the VAR that will be initialized. 
+ *  @param pSrc Pointer to the VAR that will be initialized.
  *  @return A pointer to the string on success NULL otherwise.
  */
 char* VarAllocString(const char* pSrc);
 
 /** Frees a string allocated using VarAllocString.
- *  @param pSrc Pointer to the string to be freed. 
+ *  @param pSrc Pointer to the string to be freed.
  */
 void VarFreeString(char* pSrc);
 

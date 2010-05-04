@@ -18,10 +18,23 @@ class Phreeqc;
 class IErrorReporter;
 class CSelectedOutput;
 
+/**
+ * @class IPhreeqcStop
+ *
+ * @brief This class is derived from std::exception and is thrown
+ * when an unrecoverable error has occured.
+ */
 class DLL_EXPORT IPhreeqcStop : std::exception
 {
 };
 
+/**
+ * @class IPhreeqc
+ *
+ * @brief Provides an interface to PHREEQC (Version 2)--A Computer
+ * Program for Speciation, Batch-Reaction, One-Dimensional Transport,
+ * and Inverse Geochemical Calculations
+ */
 class DLL_EXPORT IPhreeqc
 {
 public:
@@ -30,8 +43,8 @@ public:
 
 public:
 
-	const char* GetLastErrorString(void);
-	const char* GetLastWarningString(void);
+	const char* GetErrorString(void);
+	const char* GetWarningString(void);
 	const char* GetDumpString(void);
 
 	int LoadDatabase(const char* filename);
@@ -50,8 +63,8 @@ public:
 	int GetSelectedOutputColumnCount(void)const;
 	VRESULT GetSelectedOutputValue(int row, int col, VAR* pVAR);
 
-	void OutputLastError(void);
-	void OutputLastWarning(void);
+	void OutputError(void);
+	void OutputWarning(void);
 
 	void OutputLines(void);
 	const std::string& GetAccumulatedLines(void);
@@ -118,11 +131,11 @@ protected:
 	bool                       DumpStringOn;
 
 	IErrorReporter            *ErrorReporter;
-	std::string                LastErrorString;
+	std::string                ErrorString;
 	std::vector< std::string > ErrorLines;
 
 	IErrorReporter            *WarningReporter;
-	std::string                LastWarningString;
+	std::string                WarningString;
 	std::vector< std::string > WarningLines;
 
 	CSelectedOutput           *SelectedOutput;

@@ -23,7 +23,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestAddError );
 	CPPUNIT_TEST( TestAccumulateLine );
 	CPPUNIT_TEST( TestAddError );
-	CPPUNIT_TEST( TestOutputLastError );
+	CPPUNIT_TEST( TestOutputError );
 	CPPUNIT_TEST( TestRunWithCallback );
 	CPPUNIT_TEST( TestRunNoDatabaseLoaded );
 	CPPUNIT_TEST( TestCase1 );
@@ -65,7 +65,7 @@ public:
 	void TestGetSelectedOutputColumnCount(void);
 	void TestAddError(void);
 	void TestAccumulateLine(void);
-	void TestOutputLastError(void);
+	void TestOutputError(void);
 	void TestRunWithCallback(void);
 	void TestRunNoDatabaseLoaded(void);
 	void TestCase1(void);

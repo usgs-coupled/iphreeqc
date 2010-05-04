@@ -58,9 +58,9 @@
 
        INTERFACE
         SUBROUTINE GetDumpLine(ID,N,LINE)
-         INTEGER(KIND=4),   INTENT(IN)  :: ID
-         INTEGER(KIND=4),   INTENT(IN)  :: N
-         CHARACTER(LEN=*),  INTENT(OUT) :: LINE
+         INTEGER(KIND=4),   INTENT(IN)   :: ID
+         INTEGER(KIND=4),   INTENT(IN)   :: N
+         CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
         END SUBROUTINE
        END INTERFACE
 
@@ -100,10 +100,10 @@
        !!! TODO GetErrorOn
 
 
-       !!! GetLastErrorString not implemented
+       !!! GetErrorString not implemented
 
 
-       !!! GetLastWarningString not implemented
+       !!! GetWarningString not implemented
 
 
        !!! TODO GetLogOn
@@ -180,13 +180,13 @@
 
 
        INTERFACE 
-        SUBROUTINE OutputLastError(ID)
+        SUBROUTINE OutputError(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
-        END SUBROUTINE OutputLastError
+        END SUBROUTINE OutputError
        END INTERFACE
 
 
-       !!! TODO OutputLastWarning
+       !!! TODO OutputWarning
 
 
        INTERFACE

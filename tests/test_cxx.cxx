@@ -8,13 +8,13 @@ main(int argc, const char* argv[])
 
   if (iphreeqc.LoadDatabase("phreeqc.dat") != 0)
   {
-    std::cout << iphreeqc.GetLastErrorString();
+    std::cout << iphreeqc.GetErrorString();
     return 1;
   }
-  
+
   if (iphreeqc.RunFile("ex1") != 0)
   {
-    std::cout << iphreeqc.GetLastErrorString();
+    std::cout << iphreeqc.GetErrorString();
     return 2;
   }
 

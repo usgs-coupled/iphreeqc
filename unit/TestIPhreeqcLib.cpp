@@ -67,7 +67,7 @@ void TestIPhreeqcLib::TestLoadDatabase(void)
 	for (int i = 0; i < 10; ++i)
 	{
 		CPPUNIT_ASSERT_EQUAL(true,   ::FileExists("phreeqc.dat"));
-		CPPUNIT_ASSERT_EQUAL(0,      ::LoadDatabase(n, "phreeqc.dat"));	
+		CPPUNIT_ASSERT_EQUAL(0,      ::LoadDatabase(n, "phreeqc.dat"));
 	}
 
 	if (n >= 0)
@@ -173,7 +173,7 @@ void TestIPhreeqcLib::TestLoadDatabaseMissingFile(void)
 	const char expected[] =
 		"ERROR: LoadDatabase: Unable to open:\"missing.file\".\n";
 
-	const char* err = ::GetLastErrorString(n);
+	const char* err = ::GetErrorString(n);
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
@@ -219,7 +219,7 @@ void TestIPhreeqcLib::TestLoadDatabaseWithErrors(void)
 			"ERROR: e-, primary master species for E-, not defined.\n"
 			"ERROR: Calculations terminating due to input errors.\n";
 
-		const char* err = ::GetLastErrorString(n);
+		const char* err = ::GetErrorString(n);
 
 		CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 	}
@@ -286,7 +286,7 @@ void TestIPhreeqcLib::TestRunWithErrors()
 
 	const char expected[] =
 		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
-	const char* err = ::GetLastErrorString(n);
+	const char* err = ::GetErrorString(n);
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
@@ -326,7 +326,7 @@ void TestIPhreeqcLib::TestRunFile(void)
 
 	static const char expected[] =
 		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
-	const char* err = ::GetLastErrorString(n);
+	const char* err = ::GetErrorString(n);
 
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
 
@@ -1077,7 +1077,7 @@ void TestIPhreeqcLib::TestGetSelectedOutputValue(void)
 	{
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
-	
+
 #if defined(USE_VAR)
 	::VarClear(&v);
 #endif
@@ -1189,7 +1189,7 @@ void TestIPhreeqcLib::TestAddError(void)
 
 	// make sure initialized to empty
 	//
-	const char* err = ::GetLastErrorString(n);
+	const char* err = ::GetErrorString(n);
 	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(err) );
 
 	// make sure initialized to empty
@@ -1199,7 +1199,7 @@ void TestIPhreeqcLib::TestAddError(void)
 
 	// check 1
 	//
-	err = ::GetLastErrorString(n);
+	err = ::GetErrorString(n);
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
 	// check increment
@@ -1209,7 +1209,7 @@ void TestIPhreeqcLib::TestAddError(void)
 
 	// check concatenation
 	//
-	err = ::GetLastErrorString(n);
+	err = ::GetErrorString(n);
 	CPPUNIT_ASSERT_EQUAL( std::string(expected) + std::string(expected2), std::string(err) );
 
 
@@ -1219,7 +1219,7 @@ void TestIPhreeqcLib::TestAddError(void)
 
 	// make sure back to empty
 	//
-	err = ::GetLastErrorString(n);
+	err = ::GetErrorString(n);
 	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(err) );
 
 	if (n >= 0)
@@ -1233,7 +1233,7 @@ void TestIPhreeqcLib::TestAccumulateLine(void)
 	// TODO
 }
 
-void TestIPhreeqcLib::TestOutputLastError(void)
+void TestIPhreeqcLib::TestOutputError(void)
 {
 	// TODO
 }
@@ -1253,7 +1253,7 @@ void TestIPhreeqcLib::TestRunNoDatabaseLoaded(void)
 
 	const char expected[] =
 		"ERROR: RunAccumulated: No database is loaded\n";
-	const char* err = ::GetLastErrorString(n);
+	const char* err = ::GetErrorString(n);
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
@@ -1649,7 +1649,7 @@ void TestIPhreeqcLib::TestDatabaseKeyword()
 		"ERROR: Gas not found in PHASES data base, Amm(g).\n"
 		"ERROR: Calculations terminating due to input errors.\n";
 
-	const char* err = ::GetLastErrorString(n);
+	const char* err = ::GetErrorString(n);
 	CPPUNIT_ASSERT_EQUAL(std::string(exp_errs), std::string(err));
 
 	const char *exp_warn =
@@ -1659,7 +1659,7 @@ void TestIPhreeqcLib::TestDatabaseKeyword()
 		"WARNING: Could not find element in database, Amm.\n"
 		"	Concentration is set to zero.\n";
 
-	const char* warn = ::GetLastWarningString(n);
+	const char* warn = ::GetWarningString(n);
 	CPPUNIT_ASSERT_EQUAL(std::string(exp_warn), std::string(warn));
 
 	if (n >= 0)
