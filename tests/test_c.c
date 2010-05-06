@@ -1,7 +1,7 @@
 #include <IPhreeqc.h>
 
 typedef int (*getFunc)(int);
-typedef int (*setFunc)(int, int);
+typedef IPQ_RESULT (*setFunc)(int, int);
 int TestGetSet(int, getFunc, setFunc);
 
 int
