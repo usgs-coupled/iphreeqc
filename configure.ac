@@ -59,8 +59,18 @@ AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_FUNC_STRTOD
-AC_CHECK_FUNCS([floor memchr memmove memset pow sqrt strchr strcspn strrchr strstr strtol])
 
+# libc functions
+AC_CHECK_FUNCS([memmove], , AC_ERROR([memmove not found in libc]))
+AC_CHECK_FUNCS([memset],  , AC_ERROR([memset not found in libc]))
+AC_CHECK_FUNCS([strchr],  , AC_ERROR([strchr not found in libc]))
+AC_CHECK_FUNCS([strcspn], , AC_ERROR([strcspn not found in libc]))
+AC_CHECK_FUNCS([strtol],  , AC_ERROR([strtol not found in libc]))
+
+# libm functions
+AC_CHECK_FUNCS([floor],   , AC_CHECK_LIB(m, floor, , AC_ERROR([cannot find floor])) )
+AC_CHECK_FUNCS([pow],     , AC_CHECK_LIB(m, pow,   , AC_ERROR([cannot find pow])) )
+AC_CHECK_FUNCS([sqrt],    , AC_CHECK_LIB(m, sqrt,  , AC_ERROR([cannot find sqrt])) )
 
 AC_CONFIG_FILES([
   Makefile
