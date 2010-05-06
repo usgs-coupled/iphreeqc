@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <IPhreeqc.h>
 
 typedef int (*getFunc)(int);
@@ -12,65 +13,64 @@ main(int argc, const char* argv[])
   id = CreateIPhreeqc();
   if (id < 0)
   {
-    return 1;
+    return EXIT_FAILURE;
   }
 
   /* Dump */
   if (TestGetSet(id, GetDumpOn, SetDumpOn))
   {
-    return 2;
+    return EXIT_FAILURE;
   }
 
   /* Dump string */
   if (TestGetSet(id, GetDumpStringOn, SetDumpStringOn))
   {
-    return 2;
+    return EXIT_FAILURE;
   }
-
 
   /* Error */
   if (TestGetSet(id, GetErrorOn, SetErrorOn))
   {
-    return 2;
+    return EXIT_FAILURE;
   }
 
   /* Log */
   if (TestGetSet(id, GetLogOn, SetLogOn))
   {
-    return 2;
+    return EXIT_FAILURE;
   }
 
   /* Output */
   if (TestGetSet(id, GetOutputOn, SetOutputOn))
   {
-    return 2;
+    return EXIT_FAILURE;
   }
 
   /* Selected output */
   if (TestGetSet(id, GetSelectedOutputOn, SetSelectedOutputOn))
   {
-    return 2;
+    return EXIT_FAILURE;
   }
 
   if (LoadDatabase(id, "phreeqc.dat") != 0)
   {
     OutputError(id);
-    return 2;
+    return EXIT_FAILURE;
   }
 
   if (RunFile(id, "ex1") != 0)
   {
     OutputError(id);
-    return 3;
+    return EXIT_FAILURE;
   }
 
   if (DestroyIPhreeqc(id) != IPQ_OK)
   {
     OutputError(id);
-    return 4;
+    return EXIT_FAILURE;
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 int 
@@ -78,23 +78,23 @@ TestGetSet(int id, getFunc gf, setFunc sf)
 {
   if (gf(id))
   {  
-    return 2;
+    return EXIT_FAILURE;
   }
   
   if (sf(id, 1) != IPQ_OK)
   {
-    return 2;
+    return EXIT_FAILURE;
   }
   
   if (!gf(id))
   {
-    return 2;
+    return EXIT_FAILURE;
   }
   
   if (sf(id,0) != IPQ_OK)
   {
-    return 2;
+    return EXIT_FAILURE;
   }
   
-  return 0;
+  return EXIT_SUCCESS;
 }
