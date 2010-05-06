@@ -19,23 +19,23 @@ public:
     {
       if ((*_p.*_get)())
       {
-	return EXIT_FAILURE;
+        return EXIT_FAILURE;
       }
 
       (*_p.*_set)(true);
-
+      
       if (!(*_p.*_get)())
       {
-	return EXIT_FAILURE;
+        return EXIT_FAILURE;
       }
-
+      
       (*_p.*_set)(false);
-
+      
       if ((*_p.*_get)())
       {
-	return EXIT_FAILURE;
+        return EXIT_FAILURE;
       }
-
+      
       return 0;
     }
 };
