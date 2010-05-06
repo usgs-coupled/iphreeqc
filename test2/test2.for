@@ -11,14 +11,14 @@
       
       id = CreateIPhreeqc()
       IF (id.LT.0) THEN
-        CALL OutputLastError(id)
+        CALL OutputError(id)
         STOP
       ENDIF
 
       iresult = LoadDatabase
      &(id, 'wateq4f.dat')
       IF (iresult.NE.0) THEN
-        CALL OutputLastError(id)
+        CALL OutputError(id)
         STOP 'Failed to load database'
       ENDIF
 
@@ -31,7 +31,7 @@
       iresult= Runfile(id, 'tester')
 
       IF (iresult.NE.0) THEN
-        CALL OutputLastError(id)
+        CALL OutputError(id)
         STOP 'Failed to run'
       ENDIF
 

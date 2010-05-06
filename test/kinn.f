@@ -15,14 +15,14 @@
       
       id = CreateIPhreeqc()
       IF (id.LT.0) THEN
-        CALL OutputLastError(id)
+        CALL OutputError(id)
         STOP
       ENDIF
 
       iresult = LoadDatabase(id, 'llnl.dat')
 
       IF (iresult.NE.0) THEN
-        CALL OutputLastError(id)
+        CALL OutputError(id)
         STOP
       ENDIF
       
@@ -41,7 +41,7 @@
       iresult = SetDumpOn(id, .FALSE.)
       iresult = RunAccumulated(id)
       IF (iresult.NE.0) THEN
-        CALL OutputLastError(id)
+        CALL OutputError(id)
         STOP
       ENDIF
 

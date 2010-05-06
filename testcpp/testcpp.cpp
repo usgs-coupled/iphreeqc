@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	std::cout << "Ok\n";
 	return 0;
 error:
-	std::cout << obj.GetLastErrorString();
+	std::cout << obj.GetErrorString();
 	return 1;
 }
 
