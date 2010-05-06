@@ -73,11 +73,20 @@
        END INTERFACE
        
        
-       !!! TODO GetDumpOn
+       INTERFACE
+        FUNCTION GetDumpOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetDumpOn
+        END FUNCTION GetDumpOn
+       END INTERFACE
        
-       !!! GetDumpString not implemented
        
-       !!! TODO GetDumpStringOn 
+       INTERFACE
+        FUNCTION GetDumpStringOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetDumpOn
+        END FUNCTION GetDumpStringOn
+       END INTERFACE
 
 
        INTERFACE
@@ -97,19 +106,28 @@
        END INTERFACE
 
 
-       !!! TODO GetErrorOn
+       INTERFACE
+        FUNCTION GetErrorOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetErrorOn
+        END FUNCTION GetErrorOn
+       END INTERFACE
 
 
-       !!! GetErrorString not implemented
+       INTERFACE
+        FUNCTION GetLogOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetLogOn
+        END FUNCTION GetLogOn
+       END INTERFACE
 
 
-       !!! GetWarningString not implemented
-
-
-       !!! TODO GetLogOn
-
-
-       !!! TODO GetOutputOn
+       INTERFACE
+        FUNCTION GetOutputOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetOutputOn
+        END FUNCTION GetOutputOn
+       END INTERFACE
 
 
        INTERFACE
@@ -120,7 +138,12 @@
        END INTERFACE
 
 
-       !!! TODO GetSelectedOutputOn
+       INTERFACE
+        FUNCTION GetSelectedOutputOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetSelectedOutputOn
+        END FUNCTION GetSelectedOutputOn
+       END INTERFACE
 
 
        INTERFACE

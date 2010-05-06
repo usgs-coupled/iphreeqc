@@ -309,15 +309,6 @@ extern "C" {
 
 
 /**
- *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref LoadDatabase, or \ref LoadDatabaseString.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @par Fortran90 Interface:
- *  Not implemented. (see \ref GetWarningLineCount, \ref GetWarningLine, \ref OutputWarning)
- */
-	DLL_EXPORT const char* GetWarningString(int id);
-
-
-/**
  *  Retrieves the current value of the log flag.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @see SetLogOn
@@ -624,6 +615,15 @@ Headings
 
 
 /**
+ *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref LoadDatabase, or \ref LoadDatabaseString.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @par Fortran90 Interface:
+ *  Not implemented. (see \ref GetWarningLineCount, \ref GetWarningLine, \ref OutputWarning)
+ */
+	DLL_EXPORT const char* GetWarningString(int id);
+
+
+/**
  *  Load the specified database file into phreeqc.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param filename The name of the phreeqc database to load.
@@ -689,23 +689,6 @@ Headings
 
 
 /**
- *  Output the warning messages to stdout.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @par Fortran90 Interface:
- *  @htmlonly
- *  <CODE>
- *  <PRE>
- *  SUBROUTINE OutputWarning
- *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END SUBROUTINE OutputWarning
- *  </PRE>
- *  </CODE>
- *  @endhtmlonly
- */
-	DLL_EXPORT void OutputWarning(int id);
-
-
-/**
  *  Output the accumulated input to stdout.  This is the input that will be
  *  used for the next call to RunAccumulated.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
@@ -721,6 +704,23 @@ Headings
  *  @endhtmlonly
  */
 	DLL_EXPORT void OutputLines(int id);
+
+
+/**
+ *  Output the warning messages to stdout.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE OutputWarning
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *  END SUBROUTINE OutputWarning
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	DLL_EXPORT void OutputWarning(int id);
 
 
 /**
