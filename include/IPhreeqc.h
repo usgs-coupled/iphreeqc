@@ -28,10 +28,10 @@ extern "C" {
 
 /**
  *  Accumlulate line(s) for input to phreeqc.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param line          The line(s) to add for input to phreeqc.
- *  @retval VR_OK Success
- *  @retval VR_OUTOFMEMORY Out of memory
+ *  @retval IPQ_OK Success
+ *  @retval IPQ_OUTOFMEMORY Out of memory
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -51,8 +51,9 @@ extern "C" {
 /**
  *  Appends the given error message and increments the error count.
  *  Internally used to create an error condition.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param error_msg     The error message to display.
+ *  @returns             The current error count if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  Not implemented.
@@ -81,7 +82,9 @@ extern "C" {
 
 /**
  *  Release an IPhreeqc instance from memory.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @retval IPQ_OK Success
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @see                 CreateIPhreeqc
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -100,16 +103,19 @@ extern "C" {
 
 /**
  *  Retrieves the given component.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the component to retrieve.
+ *  @return              A null terminated string containing the given component.
+ *                       Returns an empty string if n is out of range.
  *  @see                 GetComponentCount
  *  @par Fortran90 Interface:
+ *  (Note: N is one-based for the fortran interface)
  *  @htmlonly
  *  <CODE>
  *  <PRE>
  *  SUBROUTINE GetComponent(ID,N,COMP)
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
- *    INTEGER(KIND=4),   INTENT(IN)   :: N     ! one-based index
+ *    INTEGER(KIND=4),   INTENT(IN)   :: N
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: COMP
  *  END SUBROUTINE GetComponent
  *  </PRE>
@@ -121,7 +127,9 @@ extern "C" {
 
 /**
  *  Retrieves the number of components in the current simulation.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              The current count of components.
+ *                       A negative value indicates an error occured (see \ref IPQ_RESULT).
  *  @see                 GetComponent
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -140,16 +148,19 @@ extern "C" {
 
 /**
  *  Retrieves the given dump line.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
+ *  @return              A null terminated string containing the given line.
+ *                       Returns an empty string if n is out of range.
  *  @see                 GetDumpLineCount, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
+ *  (Note: N is one-based for the fortran interface.)
  *  <CODE>
  *  <PRE>
  *  SUBROUTINE GetDumpLine(ID,N,LINE)
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
- *    INTEGER(KIND=4),   INTENT(IN)   :: N     ! one-based index
+ *    INTEGER(KIND=4),   INTENT(IN)   :: N
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
  *  END SUBROUTINE GetComponent
  *  </PRE>
@@ -161,7 +172,8 @@ extern "C" {
 
 /**
  *  Retrieves the number of lines in the current dump string buffer.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              The number of lines.
  *  @see                 GetDumpLineCount, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -180,7 +192,7 @@ extern "C" {
 
 /**
  *  Retrieves the current value of the dump flag.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @see                 SetDumpOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -199,21 +211,19 @@ extern "C" {
 
 /**
  *  Retrieves the string buffer containing <b>DUMP</b> output.
- *  @param id            The instance id returned from CreateIPhreeqc.
- *  @remarks
- *  The dump string flag must be set to true in order to recieve <b>DUMP</b> output.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @pre                 \ref SetDumpStringOn must have been set to true (non-zero) in order to recieve <b>DUMP</b> output.
  *  @see                 SetDumpStringOn
  *  @par Fortran90 Interface:
- *  @htmlonly
- *  Not implemented.
- *  @endhtmlonly
+ *  Not implemented. (see \ref GetDumpLineCount, \ref GetDumpLine)
  */
 	DLL_EXPORT const char* GetDumpString(int id);
 
 
 /**
  *  Retrieves the current value of the dump string flag.
- *  @param id                  The instance id returned from CreateIPhreeqc.
+ *  @param id                  The instance id returned from \ref CreateIPhreeqc.
+ *  @see SetDumpStringOn, GetDumpString
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -231,16 +241,17 @@ extern "C" {
 
 /**
  *  Retrieves the given error line.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
  *  @see                 GetErrorLineCount
  *  @par Fortran90 Interface:
+ *  (Note: N is one-based for the fortran interface.)
  *  @htmlonly
  *  <CODE>
  *  <PRE>
  *  SUBROUTINE GetErrorLine
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
- *    INTEGER(KIND=4),   INTENT(IN)   :: N     ! one-based index
+ *    INTEGER(KIND=4),   INTENT(IN)   :: N
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
  *  END SUBROUTINE GetErrorLine
  *  </PRE>
@@ -252,7 +263,8 @@ extern "C" {
 
 /**
  *  Retrieves the number of lines in the current error string buffer.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @see                 GetErrorLine
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -270,16 +282,16 @@ extern "C" {
 
 /**
  *  Retrieves the current value of the error flag.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @see                 SetErrorOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE SetErrorOn(ERROR_ON)
+ *  FUNCTION GetErrorOn(ERROR_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4),  INTENT(IN)  :: ERROR_ON
- *  END SUBROUTINE SetOutputOn
+ *    LOGICAL(KIND=4)               :: GetErrorOn
+ *  END FUNCTION GetErrorOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -288,41 +300,35 @@ extern "C" {
 
 
 /**
- *  Retrieves the current value of the dump flag.
- *  @param id            The instance id returned from CreateIPhreeqc.
- *  @param dump_on       If non-zero turns on output to the <B>DUMP</B> (<B>dump.out</B> if unspecified) file.
+ *  Retrieves the error messages from the last call to \ref RunAccumulated, \ref RunFile, \ref LoadDatabase, or \ref LoadDatabaseString.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @par Fortran90 Interface:
- *  @htmlonly
- *  Not implemented.
- *  @endhtmlonly
+ *  Not implemented. (see \ref GetErrorLineCount, \ref GetErrorLine, \ref OutputError)
  */
 	DLL_EXPORT const char* GetErrorString(int id);
 
 
 /**
- *  Retrieves the current value of the dump flag.
- *  @param id            The instance id returned from CreateIPhreeqc.
- *  @param dump_on       If non-zero turns on output to the <B>DUMP</B> (<B>dump.out</B> if unspecified) file.
+ *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref LoadDatabase, or \ref LoadDatabaseString.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @par Fortran90 Interface:
- *  @htmlonly
- *  Not implemented.
- *  @endhtmlonly
+ *  Not implemented. (see \ref GetWarningLineCount, \ref GetWarningLine, \ref OutputWarning)
  */
 	DLL_EXPORT const char* GetWarningString(int id);
 
 
 /**
- *  Sets the log flag on or off
- *  @param id            The instance id returned from CreateIPhreeqc.
- *  @param log_on             If non-zero turns on output to the <B>phreeqc.log</B> file.
+ *  Retrieves the current value of the log flag.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @see SetLogOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE SetLogOn(LOG_ON)
+ *  FUNCTION GetLogOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4),  INTENT(IN)  :: LOG_ON
- *  END SUBROUTINE SetLogOn
+ *    LOGICAL(KIND=4)               :: GetLogOn
+ *  END FUNCTION GetLogOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -331,17 +337,16 @@ extern "C" {
 
 
 /**
- *  Sets the output flag on or off
- *  @param id                 The instance id returned from CreateIPhreeqc.
- *  @param output_on          If non-zero turns on output to the <B>phreeqc.out</B> file.
+ *  Retrieves the current value of the output flag.
+ *  @param id                 The instance id returned from \ref CreateIPhreeqc.
+ *  @see SetOutputOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE SetOutputOn(OUTPUT_ON)
+ *  FUNCTION GetOutputOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4),  INTENT(IN)  :: OUTPUT_ON
- *  END SUBROUTINE SetOutputOn
+ *  END FUNCTION GetOutputOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -351,7 +356,8 @@ extern "C" {
 
 /**
  *  Returns the number of columns currently contained within selected_output.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @see                 GetSelectedOutputRowCount, GetSelectedOutputValue
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -368,17 +374,17 @@ extern "C" {
 
 
 /**
- *  Sets the selected_output flag on or off
- *  @param id The instance id returned from CreateIPhreeqc.
- *  @param selected_output_on If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
+ *  Retrieves the selected_output flag.
+ *  @param id                    The instance id returned from \ref CreateIPhreeqc.
+ *  @see                         SetSelectedOutputOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE SetSelectedOutputOn(SELECTED_ON)
+ *  FUNCTION GetSelectedOutputOn(SELECTED_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4),  INTENT(IN)  :: SELECTED_ON
- *  END SUBROUTINE SetSelectedOutputOn
+ *    LOGICAL(KIND=4)               :: GetSelectedOutputOn
+ *  END FUNCTION GetSelectedOutputOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -388,7 +394,8 @@ extern "C" {
 
 /**
  *  Returns the number of rows currently contained within selected_output.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @see GetSelectedOutputColumnCount, GetSelectedOutputValue
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -406,14 +413,15 @@ extern "C" {
 
 /**
  *  Returns the \c VAR associated with the specified row and column.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param row  The row index.
  *  @param col  The column index.
  *  @param pVAR Pointer to the \c VAR to recieve the requested data.
- *  @retval VR_OK Success
- *  @retval VR_INVALIDROW The given row is out of range.
- *  @retval VR_INVALIDCOL The given column is out of range.
- *  @retval VR_OUTOFMEMORY Memory could not be allocated.
+ *  @retval IPQ_OK Success
+ *  @retval IPQ_INVALIDROW The given row is out of range.
+ *  @retval IPQ_INVALIDCOL The given column is out of range.
+ *  @retval IPQ_OUTOFMEMORY Memory could not be allocated.
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @remarks
  *  Row 0 contains the column headings to the selected_ouput.
  *  @par Examples:
@@ -555,6 +563,8 @@ Headings
 </table>
  *  @endhtmlonly
  *  @par Fortran90 Interface:
+ *  ROW is 1-based for the fortran interface except that the column headings are stored in ROW=0.
+ *  COL is 1-based for the fortran interface.
  *  @htmlonly
  *  <CODE>
  *  <PRE>
@@ -576,16 +586,18 @@ Headings
 
 /**
  *  Retrieves the current value of the dump flag.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
+ *  @see                 GetWarningLineCount, OutputWarning
  *  @par Fortran90 Interface:
+ *  (Note: N is one-based for the fortran interface.)
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE GetDumpOn(DUMP_ON)
+ *  SUBROUTINE GetWarningLine(ID,N,LINE)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: DUMP_ON
- *  END SUBROUTINE SetDumpOn
+ *  END SUBROUTINE GetWarningLine
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -595,7 +607,7 @@ Headings
 
 /**
  *  Retrieves the number of lines in the current warning string buffer.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -613,7 +625,7 @@ Headings
 
 /**
  *  Load the specified database file into phreeqc.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param filename The name of the phreeqc database to load.
  *         The full path will be required if the file is not
  *         in the current working directory.
@@ -638,7 +650,7 @@ Headings
 
 /**
  *  Load the specified string as a database into phreeqc.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param input         String containing data to be used as the phreeqc database.
  *  @return              The number of errors encountered.
  *  @remarks
@@ -661,7 +673,7 @@ Headings
 
 /**
  *  Output the error messages normally stored in the phreeqc.err file to stdout.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -677,8 +689,8 @@ Headings
 
 
 /**
- *  Output the error messages normally stored in the phreeqc.err file to stdout.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  Output the warning messages to stdout.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -694,9 +706,9 @@ Headings
 
 
 /**
- *  Send the accumulated input to stdout.
- *  @param id            The instance id returned from CreateIPhreeqc.
- *  This is the input that will be used for the next call to RunAccumulated.
+ *  Output the accumulated input to stdout.  This is the input that will be
+ *  used for the next call to RunAccumulated.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -713,11 +725,11 @@ Headings
 
 /**
  *  Runs the accumulated input sent to AccumulateLine.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              The number of errors encountered.
  *  @remarks
- *  The accumulated input is cleared upon completion.
- *  @pre LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
+ *  The accumulated input is cleared upon a successful run (no errors).
+ *  @pre \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -735,10 +747,10 @@ Headings
 
 /**
  *  Runs the specified phreeqc input file.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param filename      The name of the phreeqc input file to run.
  *  @return              The number of errors encountered during the run.
- *  @pre                 LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
+ *  @pre                 \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -757,10 +769,10 @@ Headings
 
 /**
  *  Runs the specified string as input to phreeqc.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param input         String containing phreeqc input.
  *  @return              The number of errors encountered during the run.
- *  @pre                 LoadDatabase/LoadDatabaseString must have been called and returned 0 (zero) errors.
+ *  @pre                 \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -778,9 +790,13 @@ Headings
 
 
 /**
- *  Sets the dump flag on or off
- *  @param id            The instance id returned from CreateIPhreeqc.
- *  @param dump_on       If non-zero turns on output to the <B>DUMP</B> (<B>dump.out</B> if unspecified) file.
+ *  Sets the dump flag on or off.  This flag controls whether or not phreeqc writes to the dump file.
+ *  The default after calling \ref CreateIPhreeqc is off.
+ *  @param id                   The instance id returned from \ref CreateIPhreeqc.
+ *  @param dump_on              If non-zero turns on output to the <B>DUMP</B> (<B>dump.out</B> if unspecified) file.
+ *  @retval IPQ_OK              Success
+ *  @retval IPQ_BADINSTANCE     The given id is invalid.
+ *  @see
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -797,9 +813,13 @@ Headings
 
 
 /**
- *  Sets the dump string flag on or off
- *  @param id                The instance id returned from CreateIPhreeqc.
+ *  Sets the dump string flag on or off.  This flag controls whether or not the data normally sent
+ *  to the dump file is stored in a buffer for later retrieval.  The default after calling
+ *  \ref CreateIPhreeqc is off.
+ *  @param id                The instance id returned from \ref CreateIPhreeqc.
  *  @param dump_string_on    If non-zero captures the output defined by the <B>DUMP</B> keyword into a string buffer.
+ *  @retval IPQ_OK Success
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -816,9 +836,13 @@ Headings
 
 
 /**
- *  Sets the error flag on or off.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  Sets the error flag on or off.  This flag controls whether or not
+ *  error messages are written to the phreeqc.err file.  The default after calling
+ *  \ref CreateIPhreeqc is off.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param error_on      If non-zero turns on output to the <B>phreeqc.err</B> file.
+ *  @retval IPQ_OK Success
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -835,11 +859,14 @@ Headings
 
 
 /**
- *  Sets the log flag on or off
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  Sets the log flag on or off.  This flag controls whether or not phreeqc
+ *  writes log messages to the phreeqc.log file.  The default after calling
+ *  \ref CreateIPhreeqc is off.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param log_on        If non-zero turns on output to the <B>phreeqc.log</B> file.
+ *  @retval              IPQ_OK Success
+ *  @retval              IPQ_BADINSTANCE The given id is invalid.
  *  @see                 GetLogOn
- *  @return              IPQ_OK on success
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -857,9 +884,13 @@ Headings
 
 
 /**
- *  Sets the output flag on or off
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  Sets the output flag on or off.  This flag controls whether or not phreeqc
+ *  writes output to phreeqc.out.  This output is the output normally generated
+ *  when phreeqc is run.  The default after calling \ref CreateIPhreeqc is off.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param output_on     If non-zero turns on output to the <B>phreeqc.out</B> file.
+ *  @retval IPQ_OK Success
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -877,9 +908,12 @@ Headings
 
 
 /**
- *  Sets the selected_output flag on or off
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  Sets the selected output flag on or off.  This flag controls whether or not phreeqc writes output to
+ *  the selected output file. The default after calling \ref CreateIPhreeqc is off.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param sel_on        If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B>selected.out</B> if unspecified) file.
+ *  @retval IPQ_OK Success
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -898,12 +932,14 @@ Headings
 
 
 /**
- *  Unload any database currently loaded into phreeqc.
- *  @param id            The instance id returned from CreateIPhreeqc.
+ *  Unloads any database currently loaded into phreeqc.  In addition, all
+ *  previous phreeqc definitions (ie SOLUTIONS, EXCHANGERS, etc) are cleared from memory.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @remarks
- *  Any previous database definitions are cleared.
+ *  Use of the method is not normally necessary.  It is called automatically
+ *  before each call to \ref LoadDatabase or \ref LoadDatabaseString.
  */
-	DLL_EXPORT int UnLoadDatabase(int id);
+	DLL_EXPORT IPQ_RESULT UnLoadDatabase(int id);
 
 
 // TODO int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);
