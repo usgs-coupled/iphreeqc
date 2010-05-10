@@ -45,7 +45,6 @@ C
       INTEGER(KIND=4) AccumulateLine
       INTEGER(KIND=4) CreateIPhreeqc
       INTEGER(KIND=4) DestroyIPhreeqc
-      INTEGER(KIND=4) GetComponent
       INTEGER(KIND=4) GetComponentCount
       INTEGER(KIND=4) GetDumpLine
       INTEGER(KIND=4) GetDumpLineCount

@@ -10,6 +10,9 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
@@ -194,9 +197,9 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="MemDebug|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			Name="Debug|x64"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -217,6 +220,7 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
+				TargetEnvironment="3"
 				TypeLibraryName=".\Debug/unit.tlb"
 				HeaderFileName=""
 			/>
@@ -224,7 +228,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="CPPUNIT;WIN32_MEMORY_DEBUG;SWIG_SHARED_OBJ;WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS"
+				PreprocessorDefinitions="CPPUNIT;SWIG_SHARED_OBJ;WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -232,7 +236,7 @@
 				BrowseInformation="1"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -248,14 +252,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="cppunitd.lib odbc32.lib odbccp32.lib Shlwapi.lib"
-				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/unit.pdb"
 				SubSystem="1"
-				TargetMachine="1"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -270,6 +273,96 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile=".\Debug/unit.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+				TypeLibraryName=".\Release/unit.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="CPPUNIT;SWIG_SHARED_OBJ;WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
+				PrecompiledHeaderFile=".\Release/unit.pch"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="cppunit.lib odbc32.lib odbccp32.lib"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/lib"
+				ProgramDatabaseFile=".\Release/unit.pdb"
+				SubSystem="1"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\Release/unit.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -314,7 +407,16 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MemDebug|Win32"
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -353,7 +455,16 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MemDebug|Win32"
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -384,7 +495,16 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MemDebug|Win32"
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -415,7 +535,16 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MemDebug|Win32"
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -463,7 +592,17 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="MemDebug|Win32"
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							PreprocessorDefinitions=""
+							CompileAs="2"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -496,7 +635,15 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="MemDebug|Win32"
+							Name="Debug|x64"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -532,7 +679,15 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="MemDebug|Win32"
+							Name="Debug|x64"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -624,7 +779,15 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="MemDebug|Win32"
+							Name="Debug|x64"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -711,7 +874,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -745,7 +918,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -779,7 +962,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -813,7 +1006,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -849,7 +1052,18 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								ExcludedFromBuild="true"
 								>
 								<Tool
@@ -884,7 +1098,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -918,7 +1142,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -952,7 +1186,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -986,7 +1230,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1020,7 +1274,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1054,7 +1318,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1088,7 +1362,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1122,7 +1406,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1156,7 +1450,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1192,7 +1496,18 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								ExcludedFromBuild="true"
 								>
 								<Tool
@@ -1227,7 +1542,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1261,7 +1586,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1295,7 +1630,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1329,7 +1674,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1363,7 +1718,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1397,7 +1762,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1431,7 +1806,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1465,7 +1850,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1499,7 +1894,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1533,7 +1938,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1567,7 +1982,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1601,7 +2026,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1635,7 +2070,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1669,7 +2114,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1703,7 +2158,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1733,7 +2198,15 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1765,7 +2238,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1799,7 +2282,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1833,7 +2326,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1867,7 +2370,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1901,7 +2414,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1935,7 +2458,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1969,7 +2502,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -2003,7 +2546,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -2037,7 +2590,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="MemDebug|Win32"
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"

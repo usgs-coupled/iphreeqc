@@ -84,7 +84,7 @@
        INTERFACE
         FUNCTION GetDumpStringOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetDumpOn
+         LOGICAL(KIND=4)               :: GetDumpStringOn
         END FUNCTION GetDumpStringOn
        END INTERFACE
 
