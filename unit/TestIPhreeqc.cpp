@@ -1017,7 +1017,7 @@ void TestIPhreeqc::TestAddError(void)
 	// make sure initialized to empty
 	//
 	const char *expected = "TESTING AddError\n";
-	CPPUNIT_ASSERT_EQUAL(1u, obj.AddError(expected));
+	CPPUNIT_ASSERT_EQUAL((size_t)1, obj.AddError(expected));
 
 	// check 1
 	//
@@ -1027,7 +1027,7 @@ void TestIPhreeqc::TestAddError(void)
 	// check increment
 	//
 	const char *expected2 = "XXXXXX\n";
-	CPPUNIT_ASSERT_EQUAL(2u, obj.AddError(expected2));
+	CPPUNIT_ASSERT_EQUAL((size_t)2, obj.AddError(expected2));
 
 	// check concatenation
 	//

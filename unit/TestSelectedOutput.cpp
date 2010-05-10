@@ -20,33 +20,33 @@ void
 TestSelectedOutput::TestEmpty()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 }
 
 void
 TestSelectedOutput::TestSinglePushBack()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CVar v(7.0);
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBack("pH", v));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
 	// row count doesn't change until EndRow is called
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount());
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 #if defined(_DEBUG)
 	co.Dump("TestSinglePushBack");
 #endif
@@ -56,31 +56,31 @@ void
 TestSelectedOutput::TestMultiplePushBack()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CVar v1(7.0);
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBack("pH", v1));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v2(8.0);
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBack("pH", v2));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(3u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, co.GetRowCount());
 #if defined(_DEBUG)
 	co.Dump("TestMultiplePushBack");
 #endif
@@ -90,39 +90,39 @@ void
 TestSelectedOutput::TestNewHeadingsPushBack()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CVar v1(7.0);
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBack("pH", v1));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v2(8.0);
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBack("pH", v2));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v3(9.0);
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBack("user_pH", v3));
 
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(3u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, co.GetRowCount());
 #if defined(_DEBUG)
 	co.Dump("TestNewHeadingsPushBack");
 #endif
@@ -132,25 +132,25 @@ void
 TestSelectedOutput::TestPushBackDouble()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 7.0));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount()); // heading
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount()); // heading
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, v.type);
@@ -169,21 +169,21 @@ void
 TestSelectedOutput::TestPushBackLong()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackLong("Sim", 2));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount()); // heading plus first row
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount()); // heading plus first row
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, v.type);
@@ -202,21 +202,21 @@ void
 TestSelectedOutput::TestPushBackString()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackString("state", "i_soln"));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount()); // heading
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount()); // heading
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, v.type);
@@ -235,21 +235,21 @@ void
 TestSelectedOutput::TestPushBackEmpty()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackEmpty("Empty"));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount()); // heading
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount()); // heading
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, v.type);
@@ -267,28 +267,28 @@ void
 TestSelectedOutput::TestDuplicateHeadings()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 7.0));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount()); // heading
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount()); // heading
 
 	// overwrite pH with 8.0
 	//
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 8.0));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount()); // heading
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount()); // heading
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, v.type);
@@ -308,21 +308,21 @@ void
 TestSelectedOutput::TestEndRow()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 7.0));
 
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetRowCount()); // heading
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetRowCount()); // heading
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, v.type);
@@ -338,8 +338,8 @@ TestSelectedOutput::TestEndRow()
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 8.0));
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(3u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, co.GetRowCount());
 
 	CVar vval3;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, vval3.type);
@@ -358,12 +358,12 @@ void
 TestSelectedOutput::TestEndRow2()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 6.0));
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 7.0));
@@ -371,8 +371,8 @@ TestSelectedOutput::TestEndRow2()
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 9.0));
 
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, v.type);
@@ -388,8 +388,8 @@ TestSelectedOutput::TestEndRow2()
 
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackDouble("pH", 8.0));
 	CPPUNIT_ASSERT_EQUAL(0, co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(3u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, co.GetRowCount());
 
 	CVar vval3;
 	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, vval3.type);
@@ -410,12 +410,12 @@ TestSelectedOutput::TestTooManyHeadings()
 {
 	IPhreeqc p;
 
-	CPPUNIT_ASSERT_EQUAL(0u, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, p.SelectedOutput->GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetRowCount());
 
 	p.SelectedOutput->Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, p.SelectedOutput->GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetRowCount());
 
 	// USER_PUNCH
 	// -headings 1.name 1.type 1.moles
@@ -437,8 +437,8 @@ TestSelectedOutput::TestTooManyHeadings()
 	p.PhreeqcPtr->user_punch_count_headings++;
 
 	CPPUNIT_ASSERT_EQUAL(0,   p.EndRow());
-	CPPUNIT_ASSERT_EQUAL(3u, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, p.SelectedOutput->GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, p.SelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, p.SelectedOutput->GetRowCount());
 
 
 #if defined(_DEBUG)
@@ -484,8 +484,8 @@ TestSelectedOutput::TestTooManyHeadings()
 	CPPUNIT_ASSERT_EQUAL(0, p.SelectedOutput->PushBackLong("soln", 22));
 
 	CPPUNIT_ASSERT_EQUAL(0,  p.SelectedOutput->EndRow());
-	CPPUNIT_ASSERT_EQUAL(6u, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL(3u, p.SelectedOutput->GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)6, p.SelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, p.SelectedOutput->GetRowCount());
 #if defined(_DEBUG)
 	p.SelectedOutput->Dump("TestTooManyHeadings");
 #endif
@@ -495,12 +495,12 @@ void
 TestSelectedOutput::TestNotEnoughHeadings()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	// USER_PUNCH
 	// -headings 1.name 1.type 1.moles
@@ -510,8 +510,8 @@ TestSelectedOutput::TestNotEnoughHeadings()
 	CPPUNIT_ASSERT_EQUAL(0, co.PushBackLong("soln", 22));
 
 	CPPUNIT_ASSERT_EQUAL(0,  co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(3u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 #if defined(_DEBUG)
 	co.Dump("TestNotEnoughHeadings");
 #endif
@@ -529,8 +529,8 @@ TestSelectedOutput::TestNotEnoughHeadings()
 #endif
 
 	CPPUNIT_ASSERT_EQUAL(0,  co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(6u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(3u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)6, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, co.GetRowCount());
 
 	CVar head0, head1, head2, head3, head4, head5;
 	CVar val0, val1, val2, val3, val4, val5;
@@ -579,12 +579,12 @@ void
 TestSelectedOutput::TestInvalidRow()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, co.Get(0, 0, &v));
@@ -598,8 +598,8 @@ TestSelectedOutput::TestInvalidRow()
 
 	CPPUNIT_ASSERT_EQUAL(0,  co.PushBackEmpty("heading"));
 	CPPUNIT_ASSERT_EQUAL(0,  co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(VR_OK, co.Get(0, 0, &v) );
 	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
@@ -618,12 +618,12 @@ void
 TestSelectedOutput::TestInvalidCol()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CVar v;
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, co.Get(0, 0, &v));
@@ -637,8 +637,8 @@ TestSelectedOutput::TestInvalidCol()
 
 	CPPUNIT_ASSERT_EQUAL(0,  co.PushBackEmpty("heading"));
 	CPPUNIT_ASSERT_EQUAL(0,  co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(VR_OK, co.Get(0, 0, &v) );
 	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
@@ -661,17 +661,17 @@ void
 TestSelectedOutput::TestGet()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0,  co.PushBackEmpty("heading"));
 	CPPUNIT_ASSERT_EQUAL(0,  co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 
 	CVar v0 = co.Get(0, 0);
@@ -686,17 +686,17 @@ void
 TestSelectedOutput::TestLongHeadings()
 {
 	CSelectedOutput co;
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	co.Clear();
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(0u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, co.GetRowCount());
 
 	CPPUNIT_ASSERT_EQUAL(0,  co.PushBackEmpty("heading890123456789012345678901234567890123456789"));
 	CPPUNIT_ASSERT_EQUAL(0,  co.EndRow());
-	CPPUNIT_ASSERT_EQUAL(1u, co.GetColCount());
-	CPPUNIT_ASSERT_EQUAL(2u, co.GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)1, co.GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, co.GetRowCount());
 
 	CVar v0 = co.Get(0, 0);
 	CPPUNIT_ASSERT_EQUAL(TT_STRING, v0.type);
