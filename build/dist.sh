@@ -144,7 +144,7 @@ rm -rf "$DIST_SANDBOX"
 mkdir "$DIST_SANDBOX"
 echo "Removed and recreated $DIST_SANDBOX"
 
-echo "Exporting revision $REVISION of IPhreeqcCOM into sandbox..."
+echo "Exporting revision $REVISION of IPhreeqc into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/$REPOS_PATH" \
@@ -153,12 +153,12 @@ echo "Exporting revision $REVISION of IPhreeqcCOM into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqcpp/$REPOS_PATH/src" \
-	     "$DISTNAME/phreeqcpp")
+	     "$DISTNAME/src/phreeqcpp")
 	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/$REPOS_PATH/src" \
-	     "$DISTNAME/phreeqcpp/phreeqc")
+	     "$DISTNAME/src/phreeqcpp/phreeqc")
 
 ver_major=`echo $VERSION | cut -d '.' -f 1`
 ver_minor=`echo $VERSION | cut -d '.' -f 2`
@@ -168,9 +168,7 @@ if [ -z "$ver_patch" ]; then
   ver_patch="0"
 fi
 
-exit 0
-
-SED_FILES="$DISTPATH/build/version.h"
+SED_FILES=""
 
 for vsn_file in $SED_FILES
 do
