@@ -1,3 +1,6 @@
+/*! @file IPhreeqc.h
+	@brief C/Fortran Documentation
+*/
 #ifndef INC_IPHREEQC_H
 #define INC_IPHREEQC_H
 

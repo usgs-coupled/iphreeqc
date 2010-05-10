@@ -1,3 +1,6 @@
+/*! @file Var.h
+	@brief %IPhreeqc VARIANT Documentation
+*/
 // Var.h
 
 #ifndef __VAR_H_INC

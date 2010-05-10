@@ -1,3 +1,7 @@
+/*! @file IPhreeqc.hpp
+	@brief C++ Documentation
+*/
+
 #ifndef INC_IPHREEQC_HPP
 #define INC_IPHREEQC_HPP
 
