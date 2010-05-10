@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# IPhreeqcCOM package build script
+# IPhreeqc package build script
 #
 # $Id: build.sh 4133 2010-02-24 05:50:31Z charlton $
 #
@@ -151,26 +151,28 @@ reconf() {
 }
 build() {
   (
-# build IPhreeqcCOM.chm
+# build IPhreeqc.chm
 # hhc can't handle directory names that begin with a period
-  cd "${topdir}" && \
-  mv "${srcdir}/.build" "${srcdir}/_build" && \
-  cd "${srcdir}/_build/help" && \
-  make && \
-  cd "${topdir}" && \
-  mv "${srcdir}/_build" "${srcdir}/.build" && \
-# build IPhreeqcCOM.dll
-  cd "${topdir}" && \
-  cd "${objdir}" && \
-  MsBuild.exe IPhreeqcCOM.sln /t:IPhreeqcCOM /p:Configuration=Release /p:Platform=Win32 && \
-# build IPhreeqcCOM.dll
+###  cd "${topdir}" && \
+###  mv "${srcdir}/.build" "${srcdir}/_build" && \
+###  cd "${srcdir}/_build/help" && \
+###  make && \
+###  cd "${topdir}" && \
+###  mv "${srcdir}/_build" "${srcdir}/.build" && \
+# build Win32 libs
   cd "${topdir}" && \
   cd "${objdir}" && \
-  MsBuild.exe IPhreeqcCOM.sln /t:IPhreeqcCOM /p:Configuration=Release /p:Platform=x64 && \
-# build IPhreeqcCOM.msi
-  MsBuild.exe IPhreeqcCOM.sln /t:msi /p:Configuration=Release /p:Platform=Win32 /p:TargetName=${FULLPKG} /p:Major=${MAJOR} /p:Minor=${MINOR} /p:Build=${REL} && \
-# build IPhreeqcCOMx64.msi
-  MsBuild.exe IPhreeqcCOM.sln /t:msi /p:Configuration=Release /p:Platform=x64 /p:TargetName=${FULLPKG}-x64 /p:Major=${MAJOR} /p:Minor=${MINOR} /p:Build=${REL} )
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=Win32 && \
+# build x64 libs
+  cd "${topdir}" && \
+  cd "${objdir}" && \
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=x64 )
 }
 check() {
   (cd ${objdir} && \
@@ -182,18 +184,14 @@ clean() {
 }
 install() {
   (rm -fr ${instdir}/* && \
-# MSI file
-  /usr/bin/install -m 755 "${objdir}/msi/bin/Release/${FULLPKG}.msi" "${instdir}/${FULLPKG}.msi" && \
-# x64 MSI file
-  /usr/bin/install -m 755 "${objdir}/msi/bin/x64/Release/${FULLPKG}-x64.msi" "${instdir}/${FULLPKG}-x64.msi" && \
-# Build log  
-  if [ -f "${topdir}/all-${REL}.log" ] ; then \
-    /usr/bin/install -m 755 "${topdir}/all-${REL}.log" "${instdir}/all-${REL}.log" ;\
-  fi && \
-  if [ -x /usr/bin/md5sum ]; then \
-    cd "${instdir}" && \
-    find . -type f ! -name md5sum | sed 's/^/\"/' | sed 's/$/\"/' | xargs md5sum > md5sum ; \
-  fi )
+  mkdir "${instdir}/lib && \
+  /usr/bin/install -m 755 "${objdir}/lib/*" "${instdir}/lib/." && \
+  mkdir "${instdir}/dll && \
+  /usr/bin/install -m 755 "${objdir}/dll/*" "${instdir}/dll/." && \
+  mkdir "${instdir}/include && \
+  /usr/bin/install -m 755 "${objdir}/include/*" "${instdir}/include/." && \
+  mkdir "${instdir}/database && \
+  /usr/bin/install -m 755 "${objdir}/database/*.dat" "${instdir}/database/." )
 }
 strip() {
   (cd "${instdir}" && \
