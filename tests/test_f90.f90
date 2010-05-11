@@ -70,7 +70,7 @@ FUNCTION F_MAIN()
      RETURN
   ENDIF
   
-  DO r=1,GetSelectedOutputRowCount(id)
+  DO r=0,GetSelectedOutputRowCount(id)
      DO c=1,GetSelectedOutputColumnCount(id)
         IF (GetSelectedOutputValue(id,r,c,t,d,s).NE.IPQ_OK) THEN
            CALL OutputError(id)
