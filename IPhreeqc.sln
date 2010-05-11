@@ -20,6 +20,8 @@ Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_f90", "tests\test_f90.
 		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
 	EndProjectSection
 EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_f", "tests\test_f.vfproj", "{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -96,6 +98,18 @@ Global
 		{003309EE-36BE-493B-87D4-FE68918DA9AF}.ReleaseDll|Win32.ActiveCfg = ReleaseDll|Win32
 		{003309EE-36BE-493B-87D4-FE68918DA9AF}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
 		{003309EE-36BE-493B-87D4-FE68918DA9AF}.ReleaseDll|x64.ActiveCfg = Release|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.Debug|Win32.ActiveCfg = Debug|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.Debug|Win32.Build.0 = Debug|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.Debug|x64.ActiveCfg = Debug|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.DebugDll|Win32.ActiveCfg = Debug|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.DebugDll|Win32.Build.0 = Debug|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.DebugDll|x64.ActiveCfg = Debug|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.Release|Win32.ActiveCfg = Release|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.Release|Win32.Build.0 = Release|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.Release|x64.ActiveCfg = Release|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.ReleaseDll|Win32.ActiveCfg = Release|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.ReleaseDll|Win32.Build.0 = Release|Win32
+		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.ReleaseDll|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
