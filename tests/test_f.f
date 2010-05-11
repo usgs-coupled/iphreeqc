@@ -4,31 +4,72 @@
       INCLUDE 'IPhreeqc.f.inc'
       INTEGER(KIND=4) id
 
+      INTEGER(KIND=4) F_MAIN
+      INTEGER(KIND=4) TestGetSet
+
       INTEGER(KIND=4) EXIT_SUCCESS
       PARAMETER (EXIT_SUCCESS=0)
 
       INTEGER(KIND=4) EXIT_FAILURE
       PARAMETER (EXIT_FAILURE=1)
 
-      INTEGER(KIND=4) F_MAIN
-      
+      EXTERNAL GetDumpOn
+      EXTERNAL SetDumpOn
+
+      EXTERNAL GetDumpStringOn
+      EXTERNAL SetDumpStringOn
+
+      EXTERNAL GetErrorOn
+      EXTERNAL SetErrorOn
+
+      EXTERNAL GetLogOn
+      EXTERNAL SetLogOn
+
+      EXTERNAL GetOutputOn
+      EXTERNAL SetOutputOn
+
+      EXTERNAL GetSelectedOutputOn
+      EXTERNAL SetSelectedOutputOn
+
       id = CreateIPhreeqc()
       IF (id.LT.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
-      
-      IF (GetOutputOn(id)) THEN
+
+C     Dump
+      IF (TestGetSet(id,GetDumpOn,SetDumpOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
       
-      IF (SetOutputOn(id,.TRUE.).NE.IPQ_OK) THEN
+C     Dump string
+      IF (TestGetSet(id,GetDumpStringOn,SetDumpStringOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
       
-      IF (.NOT.GetOutputOn(id)) THEN
+C     Error
+      IF (TestGetSet(id,GetErrorOn,SetErrorOn).NE.0) THEN
+         F_MAIN = EXIT_FAILURE
+         RETURN
+      ENDIF
+      
+C     Log
+      IF (TestGetSet(id,GetLogOn,SetLogOn).NE.0) THEN
+         F_MAIN = EXIT_FAILURE
+         RETURN
+      ENDIF
+      
+C     Output
+      IF (TestGetSet(id,GetOutputOn,SetOutputOn).NE.0) THEN
+         F_MAIN = EXIT_FAILURE
+         RETURN
+      ENDIF
+      
+C     Selected output
+      IF (TestGetSet(id,GetSelectedOutputOn,SetSelectedOutputOn)
+     &     .NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
@@ -60,9 +101,9 @@
       FUNCTION TestGetSet(id,getFunc,setFunc)
       
       IMPLICIT NONE
-      INCLUDE 'IPhreeqc.f90.inc'
+      INCLUDE 'IPhreeqc.f.inc'
       INTEGER(KIND=4) id
-      INTEGER(KIND=4) TESTGETSET
+      INTEGER(KIND=4) TestGetSet
       
       LOGICAL(KIND=4) getFunc
       INTEGER(KIND=4) setFunc
@@ -72,7 +113,6 @@
       
       INTEGER(KIND=4) EXIT_FAILURE
       PARAMETER (EXIT_FAILURE=1)
-      
       
       IF (getFunc(id)) THEN
          TestGetSet = EXIT_FAILURE
