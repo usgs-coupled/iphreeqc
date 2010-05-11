@@ -93,12 +93,13 @@ C     Selected output
       ENDIF
       
       DO 20 r=1,GetSelectedOutputRowCount(id)
-        DO 10 c=1,GetSelectedOutputColumnCount(id)
+         DO 10 c=1,GetSelectedOutputColumnCount(id)
             IF (GetSelectedOutputValue(id,r,c,t,d,s).EQ.IPQ_OK) THEN
-                F_MAIN = EXIT_FAILURE
-                RETURN
+               CALL OutputError(id)
+               F_MAIN = EXIT_FAILURE
+               RETURN
             ENDIF
- 10     CONTINUE
+ 10      CONTINUE
  20   CONTINUE
       
       IF (DestroyIPhreeqc(id).NE.0) THEN
@@ -113,6 +114,10 @@ C     Selected output
       END FUNCTION F_MAIN
       
       
+
+
+
+
       FUNCTION TestGetSet(id,getFunc,setFunc)
       
       IMPLICIT NONE

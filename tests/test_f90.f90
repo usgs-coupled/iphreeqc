@@ -71,10 +71,10 @@ FUNCTION F_MAIN()
   ENDIF
   
   DO r=1,GetSelectedOutputRowCount(id)
-    DO c=1,GetSelectedOutputColumnCount(id)
+     DO c=1,GetSelectedOutputColumnCount(id)
         IF (GetSelectedOutputValue(id,r,c,t,d,s).EQ.IPQ_OK) THEN
-            F_MAIN = EXIT_FAILURE
-            RETURN
+           F_MAIN = EXIT_FAILURE
+           RETURN
         ENDIF
      ENDDO
   ENDDO

@@ -68,16 +68,16 @@ main(int argc, const char* argv[])
 
   for (r = 0; r < GetSelectedOutputRowCount(id); ++r)
   {
-	  for (c = 0; c < GetSelectedOutputColumnCount(id); ++c)
-	  {
-		  if (GetSelectedOutputValue(id, r, c, &v) != IPQ_OK)
-		  {
-			return EXIT_FAILURE;
-		  }
-		  VarClear(&v);
-	  }
+    for (c = 0; c < GetSelectedOutputColumnCount(id); ++c)
+    {
+      if (GetSelectedOutputValue(id, r, c, &v) != IPQ_OK)
+      {
+        return EXIT_FAILURE;
+      }
+      VarClear(&v);
+    }
   }
-
+  
   if (DestroyIPhreeqc(id) != IPQ_OK)
   {
     OutputError(id);
