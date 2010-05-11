@@ -77,7 +77,7 @@ AC_CONFIG_FILES([
   src/Makefile
   tests/Makefile
   tests/phreeqc.dat
-  tests/ex1
+  tests/ex2
   examples/ex1
   examples/main_fortran.cxx
   examples/Makefile
