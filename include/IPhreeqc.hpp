@@ -515,6 +515,10 @@ protected:
 	bool                       DumpOn;
 	bool                       DumpStringOn;
 
+#if defined(_MSC_VER)
+#pragma warning(disable:4251) /* disable warning C4251: 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2' */
+#endif
+
 	IErrorReporter            *ErrorReporter;
 	std::string                ErrorString;
 	std::vector< std::string > ErrorLines;
@@ -531,6 +535,10 @@ protected:
 	std::vector< std::string > DumpLines;
 
 	std::list< std::string >   Components;
+
+#if defined(_MSC_VER)
+#pragma warning(default:4251) /* reset warning C4251 */
+#endif
 
 private:
 	Phreeqc* PhreeqcPtr;

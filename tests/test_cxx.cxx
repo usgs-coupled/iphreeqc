@@ -93,11 +93,28 @@ main(int argc, const char* argv[])
     return EXIT_FAILURE;
   }
 
-  if (iphreeqc.RunFile("ex1") != 0)
+  if (iphreeqc.RunFile("ex2") != 0)
   {
     std::cout << iphreeqc.GetErrorString();
     return EXIT_FAILURE;
   }
+
+  for (int r = 0; r < iphreeqc.GetSelectedOutputRowCount(); ++r)
+  {
+	  for (int c = 0; c < iphreeqc.GetSelectedOutputColumnCount(); ++c)
+	  {
+		  VAR v;
+		  if (iphreeqc.GetSelectedOutputValue(r, c, &v) != VR_OK)
+		  {
+			return EXIT_FAILURE;
+		  }
+		  if (VarClear(&v) != VR_OK)
+		  {
+			return EXIT_FAILURE;
+		  }
+	  }
+  }
+
 
   return EXIT_SUCCESS;
 }

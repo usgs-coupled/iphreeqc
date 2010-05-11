@@ -3,6 +3,13 @@ FUNCTION F_MAIN()
   IMPLICIT NONE
   INCLUDE 'IPhreeqc.f90.inc'
   INTEGER(KIND=4) id
+  
+  INTEGER(KIND=4)   r
+  INTEGER(KIND=4)   c
+  INTEGER(KIND=4)   t
+  REAL(KIND=8)      d
+  CHARACTER(LEN=80) s
+  
   INTEGER(KIND=4) F_MAIN
   INTEGER(KIND=4) TestGetSet
   
@@ -57,11 +64,21 @@ FUNCTION F_MAIN()
      RETURN
   ENDIF
   
-  IF (RunFile(id, "ex1").NE.0) THEN
+  IF (RunFile(id, "ex2").NE.0) THEN
      CALL OutputError(id)
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
+  
+  DO r=1,GetSelectedOutputRowCount(id)
+    DO c=1,GetSelectedOutputColumnCount(id)
+        IF (GetSelectedOutputValue(id,r,c,t,d,s).EQ.IPQ_OK) THEN
+            F_MAIN = EXIT_FAILURE
+            RETURN
+        ENDIF
+     ENDDO
+  ENDDO
+  
   
   IF (DestroyIPhreeqc(id).NE.0) THEN
      CALL OutputError(id)

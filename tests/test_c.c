@@ -9,6 +9,8 @@ int
 main(int argc, const char* argv[])
 {
   int id;
+  int r, c;
+  VAR v;
 
   id = CreateIPhreeqc();
   if (id < 0)
@@ -58,10 +60,22 @@ main(int argc, const char* argv[])
     return EXIT_FAILURE;
   }
 
-  if (RunFile(id, "ex1") != 0)
+  if (RunFile(id, "ex2") != 0)
   {
     OutputError(id);
     return EXIT_FAILURE;
+  }
+
+  for (r = 0; r < GetSelectedOutputRowCount(id); ++r)
+  {
+	  for (c = 0; c < GetSelectedOutputColumnCount(id); ++c)
+	  {
+		  if (GetSelectedOutputValue(id, r, c, &v) != IPQ_OK)
+		  {
+			return EXIT_FAILURE;
+		  }
+		  VarClear(&v);
+	  }
   }
 
   if (DestroyIPhreeqc(id) != IPQ_OK)
