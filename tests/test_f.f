@@ -94,7 +94,7 @@ C     Selected output
       
       DO 20 r=1,GetSelectedOutputRowCount(id)
          DO 10 c=1,GetSelectedOutputColumnCount(id)
-            IF (GetSelectedOutputValue(id,r,c,t,d,s).EQ.IPQ_OK) THEN
+            IF (GetSelectedOutputValue(id,r,c,t,d,s).NE.IPQ_OK) THEN
                CALL OutputError(id)
                F_MAIN = EXIT_FAILURE
                RETURN
