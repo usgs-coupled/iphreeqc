@@ -24,12 +24,12 @@ scriptdir=`cd $tdir; pwd`
 topdir1=`echo ${scriptdir} | sed 's%/SPECS$%%'`
 topdir2=`echo ${scriptdir} | sed 's%/CYGWIN-PATCHES$%%'`
 if [ "x$topdir1" != "x$scriptdir" ] ; then # SPECS
-  topdir=`cd ${scriptdir}/..; pwd`
+  topdir=`cd "${scriptdir}/.."; pwd`
 else
   if [ "x$topdir2" != "x$scriptdir" ] ; then # CYGWIN-PATCHES
-    topdir=`cd ${scriptdir}/../..; pwd`
+    topdir=`cd "${scriptdir}/../.."; pwd`
   else
-    topdir=`cd ${scriptdir}; pwd`
+    topdir=`cd "${scriptdir}"; pwd`
   fi
 fi
 
@@ -183,15 +183,32 @@ clean() {
   make clean )
 }
 install() {
-  (rm -fr ${instdir}/* && \
-  mkdir "${instdir}/lib && \
-  /usr/bin/install -m 755 "${objdir}/lib/*" "${instdir}/lib/." && \
-  mkdir "${instdir}/dll && \
-  /usr/bin/install -m 755 "${objdir}/dll/*" "${instdir}/dll/." && \
-  mkdir "${instdir}/include && \
-  /usr/bin/install -m 755 "${objdir}/include/*" "${instdir}/include/." && \
-  mkdir "${instdir}/database && \
-  /usr/bin/install -m 755 "${objdir}/database/*.dat" "${instdir}/database/." )
+  (rm -fr "${instdir}/"* && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-win32" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-win32/lib" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-win32/dll" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-win32/include" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-win32/database" && \
+  /usr/bin/install -m 755 "${objdir}/lib/"* "${instdir}/${FULLPKG}-vs2005-win32/lib/." && \
+  /usr/bin/install -m 755 "${objdir}/dll/"* "${instdir}/${FULLPKG}-vs2005-win32/dll/." && \
+  /usr/bin/install -m 755 "${objdir}/include/"* "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/database/"*.dat "${instdir}/${FULLPKG}-vs2005-win32/database/." && \
+  cd "${instdir}" && \
+  zip -r ${FULLPKG}-vs2005-win32.zip ${FULLPKG}-vs2005-win32 && \
+  rm -fr ${FULLPKG}-vs2005-win32 && \
+  cd "${topdir}" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/lib" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/dll" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/include" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/database" && \
+  /usr/bin/install -m 755 "${objdir}/libx64/"* "${instdir}/${FULLPKG}-vs2005-x64/lib/." && \
+  /usr/bin/install -m 755 "${objdir}/dllx64/"* "${instdir}/${FULLPKG}-vs2005-x64/dll/." && \
+  /usr/bin/install -m 755 "${objdir}/include/"* "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/database/"*.dat "${instdir}/${FULLPKG}-vs2005-x64/database/." && \
+  cd "${instdir}" && \
+  zip -r ${FULLPKG}-vs2005-x64.zip ${FULLPKG}-vs2005-x64 && \
+  rm -fr ${FULLPKG}-vs2005-x64 )
 }
 strip() {
   (cd "${instdir}" && \
