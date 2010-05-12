@@ -1,9 +1,15 @@
-TARGET = html/index.html
+TARGET = IPhreeqc.chm
 
-all:$(TARGET)
+all: $(TARGET)
 
-$(TARGET): Doxyfile ../include/IPhreeqc.h ../include/Var.h ../include/IPhreeqc.hpp
+IPhreeqc.chm: IPhreeqc.hhp TOC.hhc html/index.html
+	@hhc IPhreeqc.hhp || exit 0
+
+view: $(TARGET)
+	cygstart $(TARGET)
+
+html/index.html : Doxyfile ../include/IPhreeqc.h ../include/Var.h ../include/IPhreeqc.hpp
 	doxygen
 
 clean:
-	rm -rf html
+	rm -rf html $(TARGET)
