@@ -153,12 +153,12 @@ build() {
   (
 # build IPhreeqc.chm
 # hhc can't handle directory names that begin with a period
-###  cd "${topdir}" && \
-###  mv "${srcdir}/.build" "${srcdir}/_build" && \
-###  cd "${srcdir}/_build/help" && \
-###  make && \
-###  cd "${topdir}" && \
-###  mv "${srcdir}/_build" "${srcdir}/.build" && \
+  cd "${topdir}" && \
+  mv "${srcdir}/.build" "${srcdir}/_build" && \
+  cd "${srcdir}/_build/doc" && \
+  make && \
+  cd "${topdir}" && \
+  mv "${srcdir}/_build" "${srcdir}/.build" && \
 # build Win32 libs
   cd "${topdir}" && \
   cd "${objdir}" && \
@@ -185,29 +185,33 @@ clean() {
 install() {
   (rm -fr "${instdir}/"* && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-win32/doc" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/lib" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/dll" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/include" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/database" && \
-  /usr/bin/install -m 755 "${objdir}/lib/"* "${instdir}/${FULLPKG}-vs2005-win32/lib/." && \
-  /usr/bin/install -m 755 "${objdir}/dll/"* "${instdir}/${FULLPKG}-vs2005-win32/dll/." && \
-  /usr/bin/install -m 755 "${objdir}/include/"* "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
-  /usr/bin/install -m 755 "${objdir}/database/"*.dat "${instdir}/${FULLPKG}-vs2005-win32/database/." && \
-  cd "${instdir}" && \
-  zip -r ${FULLPKG}-vs2005-win32.zip ${FULLPKG}-vs2005-win32 && \
-  rm -fr ${FULLPKG}-vs2005-win32 && \
-  cd "${topdir}" && \
+  /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm" "${instdir}/${FULLPKG}-vs2005-win32/doc/IPhreeqc.chm" && \
+  /usr/bin/install -m 755 "${objdir}/lib/"*            "${instdir}/${FULLPKG}-vs2005-win32/lib/." && \
+  /usr/bin/install -m 755 "${objdir}/dll/"*            "${instdir}/${FULLPKG}-vs2005-win32/dll/." && \
+  /usr/bin/install -m 755 "${objdir}/include/"*        "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/database/"*.dat   "${instdir}/${FULLPKG}-vs2005-win32/database/." && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/doc" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/lib" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/dll" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/include" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/database" && \
-  /usr/bin/install -m 755 "${objdir}/libx64/"* "${instdir}/${FULLPKG}-vs2005-x64/lib/." && \
-  /usr/bin/install -m 755 "${objdir}/dllx64/"* "${instdir}/${FULLPKG}-vs2005-x64/dll/." && \
-  /usr/bin/install -m 755 "${objdir}/include/"* "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
-  /usr/bin/install -m 755 "${objdir}/database/"*.dat "${instdir}/${FULLPKG}-vs2005-x64/database/." && \
+  /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm" "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.chm" && \
+  /usr/bin/install -m 755 "${objdir}/libx64/"*         "${instdir}/${FULLPKG}-vs2005-x64/lib/." && \
+  /usr/bin/install -m 755 "${objdir}/dllx64/"*         "${instdir}/${FULLPKG}-vs2005-x64/dll/." && \
+  /usr/bin/install -m 755 "${objdir}/include/"*        "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/database/"*.dat   "${instdir}/${FULLPKG}-vs2005-x64/database/." && \
   cd "${instdir}" && \
+  zip -r ${FULLPKG}-vs2005-win32.zip ${FULLPKG}-vs2005-win32 && \
   zip -r ${FULLPKG}-vs2005-x64.zip ${FULLPKG}-vs2005-x64 && \
+  7z a -r ${FULLPKG}-vs2005-win32.7z ${FULLPKG}-vs2005-win32 && \
+  7z a -r ${FULLPKG}-vs2005-x64.7z ${FULLPKG}-vs2005-x64 && \
+  rm -fr ${FULLPKG}-vs2005-win32 && \
   rm -fr ${FULLPKG}-vs2005-x64 )
 }
 strip() {
