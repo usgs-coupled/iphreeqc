@@ -10,17 +10,17 @@ SUBROUTINE F_MAIN
   ENDIF
   
   IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
-     CALL OutputLastError(id)
+     CALL OutputError(id)
      STOP
   ENDIF
   
   IF (RunFile(id, "ex1").NE.0) THEN
-     CALL OutputLastError(id)
+     CALL OutputError(id)
      STOP
   ENDIF
   
   IF (DestroyIPhreeqc(id).NE.0) THEN
-     CALL OutputLastError(id)
+     CALL OutputError(id)
      STOP
   ENDIF
   
