@@ -47,6 +47,12 @@ extern "C" {
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
+ *
+ *  @par C Example:
+ *  \include AccumulateLine.c
+ *
+ *  @par Fortran90 Example:
+ *  \include F90AccumulateLine.f90
  */
 	DLL_EXPORT IPQ_RESULT AccumulateLine(int id, const char *line);
 
@@ -79,6 +85,12 @@ extern "C" {
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
+ *
+ *  @par C Example:
+ *  \include CreateIPhreeqc.c
+ *
+ *  @par Fortran90 Example:
+ *  \include F90CreateIPhreeqc.f90
  */
 	DLL_EXPORT int CreateIPhreeqc(void);
 
