@@ -1996,3 +1996,38 @@ void TestIPhreeqcLib::TestGetWarningLine(void)
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
 }
+
+void TestIPhreeqcLib::TestPitzer(void)
+{
+	CPPUNIT_ASSERT_EQUAL(true, ::FileExists("../database/pitzer.dat"));
+
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(::LoadDatabase(id, "../database/pitzer.dat"), 0);
+
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "SOLUTION 1"),            IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "units mol/kgw"),         IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "pH    7"),               IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "temp  25"),              IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Mg    0.1    charge"),   IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Cl    0"),               IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "S(6)  1.0612244897959"), IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "EQUILIBRIUM_PHASES 1"),  IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Halite       0 10"),     IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Sylvite      0 10"),     IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Bischofite   0 0"),      IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Carnallite   0 0"),      IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Epsomite     0 0"),      IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "Kieserite    0 0"),      IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "END"),                   IPQ_OK);
+
+	// this fails -r4375
+	// fixed in -r4380
+	CPPUNIT_ASSERT_EQUAL(::RunAccumulated(id), 0);
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
+}
