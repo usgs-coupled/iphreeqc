@@ -8,7 +8,7 @@ IPhreeqc.chm: IPhreeqc.hhp TOC.hhc html/index.html
 view: $(TARGET)
 	cygstart $(TARGET)
 
-html/index.html : Doxyfile ../include/IPhreeqc.h ../include/Var.h ../include/IPhreeqc.hpp
+html/index.html: Doxyfile ../include/IPhreeqc.h ../include/Var.h ../include/IPhreeqc.hpp
 	doxygen
 
 clean:
