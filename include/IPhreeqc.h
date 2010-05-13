@@ -112,6 +112,12 @@ extern "C" {
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
+ *
+ *  @par C Example:
+ *  \include DestroyIPhreeqc.c
+ *
+ *  @par Fortran90 Example:
+ *  \include F90DestroyIPhreeqc.f90
  */
 	DLL_EXPORT IPQ_RESULT DestroyIPhreeqc(int id);
 

@@ -11,7 +11,16 @@ LIBTOOL = /bin/sh ../../_build/libtool
 LDFLAGS = 
 IPHREEQC_LA = ../../_build/src/libiphreeqc.la
 
-all: AccumulateLine F90AccumulateLine CreateIPhreeqc F90CreateIPhreeqc
+TARGETS = \
+	AccumulateLine \
+	F90AccumulateLine \
+	CreateIPhreeqc \
+	F90CreateIPhreeqc \
+	DestroyIPhreeqc \
+	F90DestroyIPhreeqc
+
+
+all: $(TARGETS)
 
 AccumulateLine: AccumulateLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
@@ -24,6 +33,13 @@ CreateIPhreeqc: CreateIPhreeqc.lo $(IPHREEQC_LA)
 
 F90CreateIPhreeqc: F90CreateIPhreeqc.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
+DestroyIPhreeqc: DestroyIPhreeqc.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+F90DestroyIPhreeqc: F90DestroyIPhreeqc.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
 
 .SUFFIXES: .c .cxx .f .f90 .lo
 
@@ -40,6 +56,13 @@ F90CreateIPhreeqc: F90CreateIPhreeqc.lo $(IPHREEQC_LA)
 .f90.lo:
 	$(LIBTOOL) --mode=compile $(FC) $(FFLAGS) -c -o $@ $<
 
+LO_FILES = \
+	AccumulateLine.lo \
+	F90AccumulateLine.lo \
+	CreateIPhreeqc.lo \
+	F90CreateIPhreeqc.lo \
+	DestroyIPhreeqc.lo \
+	F90DestroyIPhreeqc.lo
 
 clean:
-	$(LIBTOOL) --mode=clean rm -f AccumulateLine AccumulateLine.lo F90AccumulateLine F90AccumulateLine.lo
+	$(LIBTOOL) --mode=clean rm -f *~ $(TARGETS) $(LO_FILES)
