@@ -1,6 +1,8 @@
 PROGRAM example
   INCLUDE "IPhreeqc.f90.inc"
   INTEGER(KIND=4) :: id
+  INTEGER(KIND=4) :: i
+  CHARACTER(LEN=40) :: comp
   
   id = CreateIPhreeqc()
   IF (id.LT.0) THEN
@@ -12,24 +14,18 @@ PROGRAM example
      STOP
   ENDIF
   
-  IF (AccumulateLine(id, "SOLUTION 1").NE.IPQ_OK) THEN
+  IF (RunFile(id, "ex2").NE.0) THEN
      CALL OutputError(id)
      STOP
   ENDIF
   
-  IF (AccumulateLine(id, "END").NE.IPQ_OK) THEN
-     CALL OutputError(id)
-     STOP
-  ENDIF
+  DO i=1,GetComponentCount(id)
+     CALL GetComponent(id, i, comp)
+     WRITE(*,*) "comp ", i, "= ", comp
+  ENDDO
   
-  IF (RunAccumulated(id).NE.0) THEN
-     CALL OutputError(id)
-     STOP
-  ENDIF
-
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
      CALL OutputError(id)
      STOP
   ENDIF
-  
 END PROGRAM example

@@ -13,31 +13,42 @@ IPHREEQC_LA = ../../_build/src/libiphreeqc.la
 
 TARGETS = \
 	AccumulateLine \
-	F90AccumulateLine \
 	CreateIPhreeqc \
+	GetComponent \
+	GetDumpString
+	
+	
+F90_TARGETS = \
 	F90CreateIPhreeqc \
-	DestroyIPhreeqc \
-	F90DestroyIPhreeqc
+	F90GetComponent \
+	F90GetDumpLine
 
 
-all: $(TARGETS)
+all: $(TARGETS) $(F90_TARGETS)
 
 AccumulateLine: AccumulateLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
-F90AccumulateLine: F90AccumulateLine.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
-
 CreateIPhreeqc: CreateIPhreeqc.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetComponent: GetComponent.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetDumpString: GetDumpString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+
+F90AccumulateLine: F90AccumulateLine.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90CreateIPhreeqc: F90CreateIPhreeqc.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
-DestroyIPhreeqc: DestroyIPhreeqc.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
-
-F90DestroyIPhreeqc: F90DestroyIPhreeqc.lo $(IPHREEQC_LA)
+F90GetComponent: F90GetComponent.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	
+F90GetDumpLine: F90GetDumpLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 
@@ -58,11 +69,19 @@ F90DestroyIPhreeqc: F90DestroyIPhreeqc.lo $(IPHREEQC_LA)
 
 LO_FILES = \
 	AccumulateLine.lo \
-	F90AccumulateLine.lo \
 	CreateIPhreeqc.lo \
-	F90CreateIPhreeqc.lo \
 	DestroyIPhreeqc.lo \
-	F90DestroyIPhreeqc.lo
+	GetComponent.lo \
+	GetDumpString.lo
+
+
+F90_LO_FILES = \
+	F90AccumulateLine.lo \
+	F90CreateIPhreeqc.lo \
+	F90DestroyIPhreeqc.lo \
+	F90GetComponent.lo \
+	F90GetDumpLine.lo
+	
 
 clean:
-	$(LIBTOOL) --mode=clean rm -f *~ $(TARGETS) $(LO_FILES)
+	$(LIBTOOL) --mode=clean rm -f *~ $(TARGETS) $(F90_TARGETS) $(LO_FILES) $(F90_LO_FILES)
