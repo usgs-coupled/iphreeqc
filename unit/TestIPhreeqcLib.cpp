@@ -2031,3 +2031,48 @@ void TestIPhreeqcLib::TestPitzer(void)
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
 	}
 }
+
+void TestIPhreeqcLib::TestClearAccumulatedLines(void)
+{
+	CPPUNIT_ASSERT_EQUAL(true, ::FileExists("../database/wateq4f.dat"));
+
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(::LoadDatabase(id, "../database/wateq4f.dat"), 0);
+
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "SOLUTION 1"), IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "pH -2"),      IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "END"),        IPQ_OK);
+
+	CPPUNIT_ASSERT_EQUAL(::RunAccumulated(id), 1);
+
+	CPPUNIT_ASSERT_EQUAL( 3, ::GetErrorLineCount(id) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+000"),    std::string(::GetErrorLine(id, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                                std::string(::GetErrorLine(id, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Model failed to converge for initial solution."),                                           std::string(::GetErrorLine(id, 2)) );
+
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "SOLUTION 1"), IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "pH 2"),       IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "END"),        IPQ_OK);
+
+	CPPUNIT_ASSERT_EQUAL(::RunAccumulated(id), 1);
+
+	CPPUNIT_ASSERT_EQUAL( 3, ::GetErrorLineCount(id) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+000"),    std::string(::GetErrorLine(id, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                                std::string(::GetErrorLine(id, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Model failed to converge for initial solution."),                                           std::string(::GetErrorLine(id, 2)) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::ClearAccumulatedLines(id) );
+
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "SOLUTION 1"), IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "pH 2"),       IPQ_OK);
+	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "END"),        IPQ_OK);
+
+	CPPUNIT_ASSERT_EQUAL(::RunAccumulated(id), 0);
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
+}

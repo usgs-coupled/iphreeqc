@@ -44,6 +44,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetErrorLine );
 	CPPUNIT_TEST( TestGetWarningLine );
 	CPPUNIT_TEST( TestPitzer );
+	CPPUNIT_TEST( TestClearAccumulatedLines );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -87,6 +88,7 @@ public:
 	void TestGetErrorLine(void);
 	void TestGetWarningLine(void);
 	void TestPitzer(void);
+	void TestClearAccumulatedLines(void);
 
 
 protected:

@@ -73,6 +73,15 @@ extern "C" {
 
 
 /**
+ *  Clears the accumulated input buffer.  Input buffer is accumulated from calls to \ref AccumulateLine.
+ *  @retval IPQ_OK           Success.
+ *  @retval IPQ_BADINSTANCE  The given id is invalid.
+ *  @see                     AccumulateLine, OutputLines, RunAccumulated
+ */
+	DLL_EXPORT IPQ_RESULT ClearAccumulatedLines(int id);
+
+
+/**
  *  Create a new IPhreeqc instance.
  *  @return      A non-negative value if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
  *  @see         DestroyIPhreeqc, UnLoadDatabase

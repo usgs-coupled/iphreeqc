@@ -80,7 +80,7 @@ public:
 
 	/**
 	 *  Clears the accumulated input buffer.  Input buffer is accumulated from calls to \ref AccumulateLine.
-	 *  @see                    AccumulateLine, GetAccumulatedLines, RunAccumulated
+	 *  @see                    AccumulateLine, GetAccumulatedLines, OutputLines, RunAccumulated
 	 */
 	void ClearAccumulatedLines(void);
 
