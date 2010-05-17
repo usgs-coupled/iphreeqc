@@ -240,6 +240,7 @@ extern "C" {
 /**
  *  Retrieves the current value of the dump file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              Non-zero if output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file, 0 (zero) otherwise.
  *  @see                 SetDumpOn, GetDumpLineCount, GetDumpLine, GetDumpString
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -753,7 +754,7 @@ Headings
 
 
 /**
- *  Output the error messages normally stored in the phreeqc.err file to stdout.
+ *  Output the error messages normally stored in the <B><I>phreeqc.err</I></B> file to stdout.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @see                 GetErrorLine, GetErrorLineCount
  *  @par Fortran90 Interface:
@@ -777,9 +778,9 @@ Headings
 
 
 /**
- *  Output the accumulated input buffer to stdout.  This input can be run with a call to \ref RunAccumulated.
+ *  Output the accumulated input buffer to stdout.  This input buffer can be run with a call to \ref RunAccumulated.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @see                 AccumulateLine, RunAccumulated
+ *  @see                 AccumulateLine, ClearAccumulatedLines, RunAccumulated
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -816,7 +817,7 @@ Headings
 
 
 /**
- *  Runs the input buffer defined by calls to \ref AccumulateLine.
+ *  Runs the input buffer as defined by calls to \ref AccumulateLine.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              The number of errors encountered.
  *  @see                 AccumulateLine, OutputLines, RunFile, RunString
@@ -895,7 +896,7 @@ Headings
  *  The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id                   The instance id returned from \ref CreateIPhreeqc.
  *  @param dump_on              If non-zero turns on output to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
- *  @retval IPQ_OK              Success
+ *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
  *  @see                        GetDumpOn, GetDumpString, GetDumpLine, GetDumpLineCount, SetDumpStringOn
  *  @par Fortran90 Interface:
@@ -994,7 +995,7 @@ Headings
 
 /**
  *  Sets the output file switch on or off.  This switch controls whether or not phreeqc
- *  writes to the output file.  This output is the output normally generated
+ *  writes to the output file.  This is the output normally generated
  *  when phreeqc is run.  The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id               The instance id returned from \ref CreateIPhreeqc.
  *  @param output_on        If non-zero turns on output to the <B><I>phreeqc.out</I></B> file.
@@ -1044,7 +1045,7 @@ Headings
 
 /**
  *  Unloads the database currently loaded into phreeqc.  In addition, all
- *  previous phreeqc definitions (i.e. SOLUTION, EXCHANGER, etc) are cleared from memory.
+ *  previous phreeqc definitions (i.e. SOLUTION, EXCHANGE, etc) are cleared from memory.
  *  @param id               The instance id returned from \ref CreateIPhreeqc.
  *  @retval IPQ_OK          Success.
  *  @retval IPQ_BADINSTANCE The given id is invalid.
