@@ -21,7 +21,8 @@ TARGETS = \
 F90_TARGETS = \
 	F90CreateIPhreeqc \
 	F90GetComponent \
-	F90GetDumpLine
+	F90GetDumpLine \
+	F90ClearAccumulatedLines
 
 
 all: $(TARGETS) $(F90_TARGETS)
@@ -51,6 +52,8 @@ F90GetComponent: F90GetComponent.lo $(IPHREEQC_LA)
 F90GetDumpLine: F90GetDumpLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
+F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 .SUFFIXES: .c .cxx .f .f90 .lo
 
