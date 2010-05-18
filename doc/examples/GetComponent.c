@@ -12,12 +12,12 @@ int main(void)
   }
   
   if (LoadDatabase(id, "phreeqc.dat") != 0) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
   
   if (RunFile(id, "ex2") != 0) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
   
@@ -26,7 +26,7 @@ int main(void)
   }
   
   if (DestroyIPhreeqc(id) != IPQ_OK) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
   

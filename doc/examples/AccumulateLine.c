@@ -11,27 +11,27 @@ int main(void)
   }
   
   if (LoadDatabase(id, "phreeqc.dat") != 0) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
   if (AccumulateLine(id, "SOLUTION 1") != IPQ_OK) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
   if (AccumulateLine(id, "END") != IPQ_OK) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
   
   if (RunAccumulated(id) != 0) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
   
   if (DestroyIPhreeqc(id) != IPQ_OK) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
   

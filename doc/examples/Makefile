@@ -21,7 +21,7 @@ TARGETS = \
 F90_TARGETS = \
 	F90CreateIPhreeqc \
 	F90GetComponent \
-	F90GetDumpLine \
+	F90GetDumpStringLine \
 	F90ClearAccumulatedLines
 
 
@@ -49,7 +49,7 @@ F90CreateIPhreeqc: F90CreateIPhreeqc.lo $(IPHREEQC_LA)
 F90GetComponent: F90GetComponent.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 	
-F90GetDumpLine: F90GetDumpLine.lo $(IPHREEQC_LA)
+F90GetDumpStringLine: F90GetDumpStringLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
@@ -83,7 +83,7 @@ F90_LO_FILES = \
 	F90CreateIPhreeqc.lo \
 	F90DestroyIPhreeqc.lo \
 	F90GetComponent.lo \
-	F90GetDumpLine.lo
+	F90GetDumpStringLine.lo
 	
 
 clean:

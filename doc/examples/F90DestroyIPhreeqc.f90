@@ -8,7 +8,7 @@ PROGRAM example
   ENDIF
   
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   

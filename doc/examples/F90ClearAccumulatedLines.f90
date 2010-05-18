@@ -9,40 +9,40 @@ PROGRAM example
   ENDIF
   
   IF (LoadDatabase(id, "../../database/wateq4f.dat").NE.0) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   
   IF (AccumulateLine(id, "SOLUTION 1").NE.IPQ_OK) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   
   IF (AccumulateLine(id, "pH -2").NE.IPQ_OK) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   
   IF (AccumulateLine(id, "END").NE.IPQ_OK) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   
   IF (RunAccumulated(id).NE.0) THEN
-     CALL OutputLines(id)
-     CALL OutputError(id)
+     CALL OutputAccumulatedLines(id)
+     CALL OutputErrorString(id)
      IF (AccumulateLine(id, "SOLUTION 1").NE.IPQ_OK) THEN
-        CALL OutputError(id)
+        CALL OutputErrorString(id)
         STOP
      ENDIF
      
      IF (AccumulateLine(id, "pH 2").NE.IPQ_OK) THEN
-        CALL OutputError(id)
+        CALL OutputErrorString(id)
         STOP
      ENDIF
      
      IF (AccumulateLine(id, "END").NE.IPQ_OK) THEN
-        CALL OutputError(id)
+        CALL OutputErrorString(id)
         STOP
      ENDIF
      
@@ -52,7 +52,7 @@ PROGRAM example
   ENDIF
   
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   WRITE(*,*) "Ok"

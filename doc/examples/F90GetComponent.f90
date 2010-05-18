@@ -10,12 +10,12 @@ PROGRAM example
   ENDIF
   
   IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   
   IF (RunFile(id, "ex2").NE.0) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
   
@@ -25,7 +25,7 @@ PROGRAM example
   ENDDO
   
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      STOP
   ENDIF
 END PROGRAM example

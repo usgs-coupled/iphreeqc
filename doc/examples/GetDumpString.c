@@ -24,17 +24,17 @@ int main(void)
   }
 
   if (LoadDatabase(id, "phreeqc.dat") != 0) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
   if (SetDumpStringOn(id, TRUE) != IPQ_OK) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
   if (RunString(id, input) != 0) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
@@ -42,7 +42,7 @@ int main(void)
   printf("%s\n", GetDumpString(id));
 
   if (DestroyIPhreeqc(id) != IPQ_OK) {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
