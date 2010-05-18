@@ -6,12 +6,6 @@
 
 #include "Var.h"
 
-#if defined(_WINDLL)
-#define DLL_EXPORT __declspec(dllexport)
-#else
-#define DLL_EXPORT
-#endif
-
 /*! \brief Enumeration used to return error codes.
 */
 typedef enum {
@@ -35,7 +29,7 @@ extern "C" {
  *  @param line          The line(s) to add for input to phreeqc.
  *  @retval IPQ_OK Success
  *  @retval IPQ_OUTOFMEMORY Out of memory
- *  @see                 OutputLines, RunAccumulated
+ *  @see                 OutputAccumulatedLines, RunAccumulated
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -53,9 +47,9 @@ extern "C" {
  *  \include AccumulateLine.c
  *
  *  @par Fortran90 Example:
- *  see \ref GetDumpLine_f90 "GetDumpLine"
+ *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
  */
-	DLL_EXPORT IPQ_RESULT AccumulateLine(int id, const char *line);
+	IPQ_DLL_EXPORT IPQ_RESULT  AccumulateLine(int id, const char *line);
 
 
 /**
@@ -69,16 +63,16 @@ extern "C" {
  *  Not implemented.
  *  @endhtmlonly
  */
-	DLL_EXPORT int AddError(int id, const char* error_msg);
+	IPQ_DLL_EXPORT int         AddError(int id, const char* error_msg);
 
 
 /**
  *  Clears the accumulated input buffer.  Input buffer is accumulated from calls to \ref AccumulateLine.
  *  @retval IPQ_OK           Success.
  *  @retval IPQ_BADINSTANCE  The given id is invalid.
- *  @see                     AccumulateLine, OutputLines, RunAccumulated
+ *  @see                     AccumulateLine, OutputAccumulatedLines, RunAccumulated
  */
-	DLL_EXPORT IPQ_RESULT ClearAccumulatedLines(int id);
+	IPQ_DLL_EXPORT IPQ_RESULT  ClearAccumulatedLines(int id);
 
 
 /**
@@ -104,7 +98,7 @@ extern "C" {
  *  @par Fortran90 Example:
  *  \include F90CreateIPhreeqc.f90
  */
-	DLL_EXPORT int CreateIPhreeqc(void);
+	IPQ_DLL_EXPORT int         CreateIPhreeqc(void);
 
 
 /**
@@ -131,7 +125,7 @@ extern "C" {
  *  @par Fortran90 Example:
  *  see \ref CreateIPhreeqc_f90 "CreateIPhreeqc"
  */
-	DLL_EXPORT IPQ_RESULT DestroyIPhreeqc(int id);
+	IPQ_DLL_EXPORT IPQ_RESULT  DestroyIPhreeqc(int id);
 
 
 /**
@@ -163,7 +157,7 @@ extern "C" {
  *  @par  Fortran90 Example:
  *  \include F90GetComponent.f90
  */
-	DLL_EXPORT const char* GetComponent(int id, int n);
+	IPQ_DLL_EXPORT const char* GetComponent(int id, int n);
 
 
 /**
@@ -190,7 +184,7 @@ extern "C" {
  *  @par Fortran90 Example:
  *  see \ref GetComponent_f90 "GetComponent"
  */
-	DLL_EXPORT int GetComponentCount(int id);
+	IPQ_DLL_EXPORT int         GetComponentCount(int id);
 
 
 /**
@@ -200,13 +194,13 @@ extern "C" {
  *  @return              A null terminated string containing the given line.
  *                       Returns an empty string if n is out of range.
  *  @pre                 \ref SetDumpStringOn must have been set to true (non-zero).
- *  @see                 GetDumpLineCount, SetDumpStringOn
+ *  @see                 GetDumpStringLineCount, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  (Note: N is one-based for the Fortran interface.)
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE GetDumpLine(ID,N,LINE)
+ *  SUBROUTINE GetDumpStringLine(ID,N,LINE)
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
  *    INTEGER(KIND=4),   INTENT(IN)   :: N
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
@@ -215,11 +209,11 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  *
- *  \anchor GetDumpLine_f90
+ *  \anchor GetDumpStringLine_f90
  *  @par  Fortran90 Example:
- *  \include F90GetDumpLine.f90
+ *  \include F90GetDumpStringLine.f90
  */
-	DLL_EXPORT const char* GetDumpLine(int id, int n);
+	IPQ_DLL_EXPORT const char* GetDumpStringLine(int id, int n);
 
 
 /**
@@ -227,43 +221,43 @@ extern "C" {
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              The number of lines.
  *  @pre                 \ref SetDumpStringOn must have been set to true (non-zero).
- *  @see                 GetDumpLine, SetDumpStringOn
+ *  @see                 GetDumpStringLine, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetDumpLineCount(ID)
+ *  FUNCTION GetDumpStringLineCount(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    INTEGER(KIND=4)               :: GetDumpLineCount
- *  END FUNCTION GetDumpLineCount
+ *    INTEGER(KIND=4)               :: GetDumpStringLineCount
+ *  END FUNCTION GetDumpStringLineCount
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  *
  *  @par Fortran90 Example:
- *  see \ref GetDumpLine_f90 "GetDumpLine"
+ *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
  */
-	DLL_EXPORT int GetDumpLineCount(int id);
+	IPQ_DLL_EXPORT int         GetDumpStringLineCount(int id);
 
 
 /**
  *  Retrieves the current value of the dump file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              Non-zero if output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file, 0 (zero) otherwise.
- *  @see                 SetDumpOn, GetDumpLineCount, GetDumpLine, GetDumpString
+ *  @see                 SetDumpFileOn, GetDumpStringLineCount, GetDumpStringLine, GetDumpString
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetDumpOn(DUMP_ON)
+ *  FUNCTION GetDumpFileOn(DUMP_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4)               :: GetDumpOn
- *  END FUNCTION SetDumpOn
+ *    LOGICAL(KIND=4)               :: GetDumpFileOn
+ *  END FUNCTION SetDumpFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetDumpOn(int id);
+	IPQ_DLL_EXPORT int         GetDumpFileOn(int id);
 
 
 /**
@@ -273,13 +267,13 @@ extern "C" {
  *  @pre                 \ref SetDumpStringOn must have been set to true (non-zero) in order to recieve <b>DUMP</b> output.
  *  @see                 SetDumpStringOn
  *  @par Fortran90 Interface:
- *  Not implemented. (see \ref GetDumpLineCount, \ref GetDumpLine)
+ *  Not implemented. (see \ref GetDumpStringLineCount, \ref GetDumpStringLine)
  *
  *  \anchor GetDumpString_c
  *  @par  C Example:
  *  \include GetDumpString.c
  */
-	DLL_EXPORT const char* GetDumpString(int id);
+	IPQ_DLL_EXPORT const char* GetDumpString(int id);
 
 
 /**
@@ -299,7 +293,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetDumpStringOn(int id);
+	IPQ_DLL_EXPORT int         GetDumpStringOn(int id);
 
 
 /**
@@ -307,62 +301,62 @@ extern "C" {
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
  *  @return              A null terminated string containing the given error line message.
- *  @see                 GetErrorLineCount, OutputError
+ *  @see                 GetErrorStringLineCount, OutputErrorString
  *  @par Fortran90 Interface:
  *  (Note: N is one-based for the Fortran interface.)
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE GetErrorLine
+ *  SUBROUTINE GetErrorStringLine
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
  *    INTEGER(KIND=4),   INTENT(IN)   :: N
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
- *  END SUBROUTINE GetErrorLine
+ *  END SUBROUTINE GetErrorStringLine
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT const char* GetErrorLine(int id, int n);
+	IPQ_DLL_EXPORT const char* GetErrorStringLine(int id, int n);
 
 
 /**
  *  Retrieves the number of lines in the current error string buffer.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              The number of lines.
- *  @see                 GetErrorLine, OutputError
+ *  @see                 GetErrorStringLine, OutputErrorString
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetErrorLineCount
+ *  FUNCTION GetErrorStringLineCount
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    INTEGER(KIND=4)               :: GetErrorLineCount
- *  END FUNCTION GetErrorLineCount
+ *    INTEGER(KIND=4)               :: GetErrorStringLineCount
+ *  END FUNCTION GetErrorStringLineCount
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetErrorLineCount(int id);
+	IPQ_DLL_EXPORT int         GetErrorStringLineCount(int id);
 
 
 /**
  *  Retrieves the current value of the error file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              Non-zero if errors are written to the <B><I>phreeqc.err</I></B> file, 0 (zero) otherwise.
- *  @see                 SetErrorOn
+ *  @see                 SetErrorFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetErrorOn(ERROR_ON)
+ *  FUNCTION GetErrorFileOn(ERROR_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4)               :: GetErrorOn
- *  END FUNCTION GetErrorOn
+ *    LOGICAL(KIND=4)               :: GetErrorFileOn
+ *  END FUNCTION GetErrorFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetErrorOn(int id);
+	IPQ_DLL_EXPORT int         GetErrorFileOn(int id);
 
 
 /**
@@ -370,48 +364,48 @@ extern "C" {
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              A null terminated string containing error messages.
  *  @par Fortran90 Interface:
- *  Not implemented. (see \ref GetErrorLineCount, \ref GetErrorLine, \ref OutputError)
+ *  Not implemented. (see \ref GetErrorStringLineCount, \ref GetErrorStringLine, \ref OutputErrorString)
  */
-	DLL_EXPORT const char* GetErrorString(int id);
+	IPQ_DLL_EXPORT const char* GetErrorString(int id);
 
 
 /**
  *  Retrieves the current value of the log file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              Non-zero if output is written to the <B><I>phreeqc.log</I></B> file, 0 (zero) otherwise.
- *  @see                 SetLogOn
+ *  @see                 SetLogFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetLogOn(ID)
+ *  FUNCTION GetLogFileOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4)               :: GetLogOn
- *  END FUNCTION GetLogOn
+ *    LOGICAL(KIND=4)               :: GetLogFileOn
+ *  END FUNCTION GetLogFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetLogOn(int id);
+	IPQ_DLL_EXPORT int         GetLogFileOn(int id);
 
 
 /**
  *  Retrieves the current value of the output file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              Non-zero if output is written to the <B><I>phreeqc.out</I></B> file, 0 (zero) otherwise.
- *  @see                 SetOutputOn
+ *  @see                 SetOutputFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetOutputOn(ID)
+ *  FUNCTION GetOutputFileOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END FUNCTION GetOutputOn
+ *  END FUNCTION GetOutputFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetOutputOn(int id);
+	IPQ_DLL_EXPORT int         GetOutputFileOn(int id);
 
 
 /**
@@ -431,27 +425,27 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetSelectedOutputColumnCount(int id);
+	IPQ_DLL_EXPORT int         GetSelectedOutputColumnCount(int id);
 
 
 /**
  *  Retrieves the selected-output file switch.
  *  @param id                    The instance id returned from \ref CreateIPhreeqc.
  *  @return                      Non-zero if output is written to the selected-output (<B><I>selected.out</I></B> if unspecified) file, 0 (zero) otherwise.
- *  @see                         SetSelectedOutputOn
+ *  @see                         SetSelectedOutputFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetSelectedOutputOn(SELECTED_ON)
+ *  FUNCTION GetSelectedOutputFileOn(SELECTED_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4)               :: GetSelectedOutputOn
- *  END FUNCTION GetSelectedOutputOn
+ *    LOGICAL(KIND=4)               :: GetSelectedOutputFileOn
+ *  END FUNCTION GetSelectedOutputFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetSelectedOutputOn(int id);
+	IPQ_DLL_EXPORT int         GetSelectedOutputFileOn(int id);
 
 
 /**
@@ -471,7 +465,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetSelectedOutputRowCount(int id);
+	IPQ_DLL_EXPORT int         GetSelectedOutputRowCount(int id);
 
 
 /**
@@ -650,7 +644,7 @@ Headings
  *  @param DVALUE            Returns the numeric value when (VTYPE=\ref TT_DOUBLE) or (VTYPE=\ref TT_LONG).
  *  @param SVALUE            Returns the string variable when (VTYPE=\ref TT_STRING).  When (VTYPE=\ref TT_DOUBLE) or (VTYPE=\ref TT_LONG) this variable is filled with a string equivalent of DVALUE.
  */
-	DLL_EXPORT IPQ_RESULT GetSelectedOutputValue(int id, int row, int col, VAR* pVAR);
+	IPQ_DLL_EXPORT IPQ_RESULT  GetSelectedOutputValue(int id, int row, int col, VAR* pVAR);
 
 
 /**
@@ -658,52 +652,52 @@ Headings
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
  *  @return              A null terminated string containing the given warning line message.
- *  @see                 GetWarningLineCount, OutputWarning
+ *  @see                 GetWarningStringLineCount, OutputWarningString
  *  @par Fortran90 Interface:
  *  (Note: N is one-based for the Fortran interface.)
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE GetWarningLine(ID,N,LINE)
+ *  SUBROUTINE GetWarningStringLine(ID,N,LINE)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: DUMP_ON
- *  END SUBROUTINE GetWarningLine
+ *  END SUBROUTINE GetWarningStringLine
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT const char* GetWarningLine(int id, int n);
+	IPQ_DLL_EXPORT const char* GetWarningStringLine(int id, int n);
 
 
 /**
  *  Retrieves the number of lines in the current warning string buffer.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              The number of lines.
- *  @see                 GetWarningLine, OutputWarning
+ *  @see                 GetWarningStringLine, OutputWarningString
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetWarningLineCount(ID)
+ *  FUNCTION GetWarningStringLineCount(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    INTEGER(KIND=4)               :: GetWarningLineCount
- *  END FUNCTION GetWarningLineCount
+ *    INTEGER(KIND=4)               :: GetWarningStringLineCount
+ *  END FUNCTION GetWarningStringLineCount
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int GetWarningLineCount(int id);
+	IPQ_DLL_EXPORT int         GetWarningStringLineCount(int id);
 
 
 /**
  *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              A null terminated string containing warning messages.
- *  @see                 GetWarningLine, GetWarningLineCount, OutputWarning
+ *  @see                 GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
  *  @par Fortran90 Interface:
- *  Not implemented. (see \ref GetWarningLineCount, \ref GetWarningLine, \ref OutputWarning)
+ *  Not implemented. (see \ref GetWarningStringLineCount, \ref GetWarningStringLine, \ref OutputWarningString)
  */
-	DLL_EXPORT const char* GetWarningString(int id);
+	IPQ_DLL_EXPORT const char* GetWarningString(int id);
 
 
 /**
@@ -735,7 +729,7 @@ Headings
  *  @par Fortran90 Example:
  *  see \ref CreateIPhreeqc_f90 "CreateIPhreeqc"
  */
-	DLL_EXPORT int LoadDatabase(int id, const char* filename);
+	IPQ_DLL_EXPORT int         LoadDatabase(int id, const char* filename);
 
 
 /**
@@ -759,20 +753,20 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int LoadDatabaseString(int id, const char* input);
+	IPQ_DLL_EXPORT int         LoadDatabaseString(int id, const char* input);
 
 
 /**
  *  Output the error messages normally stored in the <B><I>phreeqc.err</I></B> file to stdout.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @see                 GetErrorLine, GetErrorLineCount
+ *  @see                 GetErrorStringLine, GetErrorStringLineCount
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputError
+ *  SUBROUTINE OutputErrorString
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END SUBROUTINE OutputError
+ *  END SUBROUTINE OutputErrorString
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -781,9 +775,9 @@ Headings
  *  see \ref GetComponent_c "GetComponent"
  *
  *  @par Fortran90 Example:
- *  see \ref GetDumpLine_f90 "GetDumpLine"
+ *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
  */
-	DLL_EXPORT void OutputError(int id);
+	IPQ_DLL_EXPORT void        OutputErrorString(int id);
 
 
 /**
@@ -794,42 +788,42 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputLines
+ *  SUBROUTINE OutputAccumulatedLines
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END SUBROUTINE OutputLines
+ *  END SUBROUTINE OutputAccumulatedLines
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  *
  *  @par Fortran90 Example:
- *  see \ref GetDumpLine_f90 "GetDumpLine"
+ *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
  */
-	DLL_EXPORT void OutputLines(int id);
+	IPQ_DLL_EXPORT void        OutputAccumulatedLines(int id);
 
 
 /**
  *  Output the warning messages to stdout.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @see                 GetWarningLine, GetWarningLineCount
+ *  @see                 GetWarningStringLine, GetWarningStringLineCount
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputWarning
+ *  SUBROUTINE OutputWarningString
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END SUBROUTINE OutputWarning
+ *  END SUBROUTINE OutputWarningString
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT void OutputWarning(int id);
+	IPQ_DLL_EXPORT void        OutputWarningString(int id);
 
 
 /**
  *  Runs the input buffer as defined by calls to \ref AccumulateLine.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              The number of errors encountered.
- *  @see                 AccumulateLine, OutputLines, RunFile, RunString
+ *  @see                 AccumulateLine, OutputAccumulatedLines, RunFile, RunString
  *  @remarks
  *  The accumulated input is cleared upon a successful run (no errors).
  *  @pre \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
@@ -845,7 +839,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int RunAccumulated(int id);
+	IPQ_DLL_EXPORT int         RunAccumulated(int id);
 
 
 /**
@@ -874,7 +868,7 @@ Headings
  *  @par Fortran90 Example:
  *  see \ref CreateIPhreeqc_f90 "CreateIPhreeqc"
  */
-	DLL_EXPORT int RunFile(int id, const char* filename);
+	IPQ_DLL_EXPORT int         RunFile(int id, const char* filename);
 
 
 /**
@@ -897,7 +891,7 @@ Headings
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT int RunString(int id, const char* input);
+	IPQ_DLL_EXPORT int         RunString(int id, const char* input);
 
 
 /**
@@ -907,20 +901,20 @@ Headings
  *  @param dump_on              If non-zero turns on output to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
- *  @see                        GetDumpOn, GetDumpString, GetDumpLine, GetDumpLineCount, SetDumpStringOn
+ *  @see                        GetDumpFileOn, GetDumpString, GetDumpStringLine, GetDumpStringLineCount, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetDumpOn(ID,DUMP_ON)
+ *  FUNCTION SetDumpFileOn(ID,DUMP_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: DUMP_ON
- *  END FUNCTION SetDumpOn
+ *  END FUNCTION SetDumpFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT IPQ_RESULT SetDumpOn(int id, int dump_on);
+	IPQ_DLL_EXPORT IPQ_RESULT  SetDumpFileOn(int id, int dump_on);
 
 
 /**
@@ -931,7 +925,7 @@ Headings
  *  @param dump_string_on       If non-zero captures the output defined by the <B>DUMP</B> keyword into a string buffer.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
- *  @see                        GetDumpStringOn, GetDumpString, GetDumpLine, GetDumpLineCount
+ *  @see                        GetDumpStringOn, GetDumpString, GetDumpStringLine, GetDumpStringLineCount
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -948,9 +942,9 @@ Headings
  *  see \ref GetDumpString_c "GetDumpString"
  *
  *  @par Fortran90 Example:
- *  see \ref GetDumpLine_f90 "GetDumpLine"
+ *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
  */
-	DLL_EXPORT IPQ_RESULT SetDumpStringOn(int id, int dump_string_on);
+	IPQ_DLL_EXPORT IPQ_RESULT  SetDumpStringOn(int id, int dump_string_on);
 
 
 /**
@@ -961,20 +955,20 @@ Headings
  *  @param error_on             If non-zero turns on output to the <B><I>phreeqc.err</I></B> file.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
- *  @see                        OutputError, GetErrorLine, GetErrorLineCount
+ *  @see                        OutputErrorString, GetErrorStringLine, GetErrorStringLineCount
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetErrorOn(ERROR_ON)
+ *  FUNCTION SetErrorFileOn(ERROR_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: ERROR_ON
- *  END FUNCTION SetErrorOn
+ *  END FUNCTION SetErrorFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT IPQ_RESULT SetErrorOn(int id, int error_on);
+	IPQ_DLL_EXPORT IPQ_RESULT  SetErrorFileOn(int id, int error_on);
 
 
 /**
@@ -985,21 +979,21 @@ Headings
  *  @param log_on        If non-zero turns on output to the <B><I>phreeqc.log</I></B> file.
  *  @retval IPQ_OK       Success.
  *  @retval              IPQ_BADINSTANCE The given id is invalid.
- *  @see                 GetLogOn
+ *  @see                 GetLogFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetLogOn(ID,LOG_ON)
+ *  FUNCTION SetLogFileOn(ID,LOG_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: LOG_ON
- *    INTEGER(KIND=4)               :: SetLogOn
- *  END FUNCTION SetLogOn
+ *    INTEGER(KIND=4)               :: SetLogFileOn
+ *  END FUNCTION SetLogFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT IPQ_RESULT SetLogOn(int id, int log_on);
+	IPQ_DLL_EXPORT IPQ_RESULT  SetLogFileOn(int id, int log_on);
 
 
 /**
@@ -1010,21 +1004,21 @@ Headings
  *  @param output_on        If non-zero turns on output to the <B><I>phreeqc.out</I></B> file.
  *  @retval IPQ_OK          Success.
  *  @retval IPQ_BADINSTANCE The given id is invalid.
- *  @see                    GetOutputOn
+ *  @see                    GetOutputFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetOutputOn(ID,OUTPUT_ON)
+ *  FUNCTION SetOutputFileOn(ID,OUTPUT_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: OUTPUT_ON
- *    INTEGER(KIND=4)               :: SetOutputOn
- *  END FUNCTION SetOutputOn
+ *    INTEGER(KIND=4)               :: SetOutputFileOn
+ *  END FUNCTION SetOutputFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT IPQ_RESULT SetOutputOn(int id, int output_on);
+	IPQ_DLL_EXPORT IPQ_RESULT  SetOutputFileOn(int id, int output_on);
 
 
 /**
@@ -1034,21 +1028,21 @@ Headings
  *  @param sel_on           If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file.
  *  @retval IPQ_OK          Success.
  *  @retval IPQ_BADINSTANCE The given id is invalid.
- *  @see                    GetSelectedOutputOn
+ *  @see                    GetSelectedOutputFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetSelectedOutputOn(ID,SEL_ON)
+ *  FUNCTION SetSelectedOutputFileOn(ID,SEL_ON)
  *    INTEGER(KIND=4),  INTENT(IN) :: ID
  *    LOGICAL(KIND=4),  INTENT(IN) :: SEL_ON
- *    INTEGER(KIND=4)              :: SetSelectedOutputOn
- *  END FUNCTION SetSelectedOutputOn
+ *    INTEGER(KIND=4)              :: SetSelectedOutputFileOn
+ *  END FUNCTION SetSelectedOutputFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
  */
-	DLL_EXPORT IPQ_RESULT SetSelectedOutputOn(int id, int sel_on);
+	IPQ_DLL_EXPORT IPQ_RESULT  SetSelectedOutputFileOn(int id, int sel_on);
 
 
 
@@ -1063,7 +1057,7 @@ Headings
  *  Use of the method is not normally necessary.  It is called automatically
  *  before each call to \ref LoadDatabase or \ref LoadDatabaseString.
  */
-	DLL_EXPORT IPQ_RESULT UnLoadDatabase(int id);
+	IPQ_DLL_EXPORT IPQ_RESULT  UnLoadDatabase(int id);
 
 
 // TODO int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);

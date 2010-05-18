@@ -19,7 +19,7 @@ main(int argc, const char* argv[])
   }
 
   /* Dump */
-  if (TestGetSet(id, GetDumpOn, SetDumpOn))
+  if (TestGetSet(id, GetDumpFileOn, SetDumpFileOn))
   {
     return EXIT_FAILURE;
   }
@@ -31,38 +31,38 @@ main(int argc, const char* argv[])
   }
 
   /* Error */
-  if (TestGetSet(id, GetErrorOn, SetErrorOn))
+  if (TestGetSet(id, GetErrorFileOn, SetErrorFileOn))
   {
     return EXIT_FAILURE;
   }
 
   /* Log */
-  if (TestGetSet(id, GetLogOn, SetLogOn))
+  if (TestGetSet(id, GetLogFileOn, SetLogFileOn))
   {
     return EXIT_FAILURE;
   }
 
   /* Output */
-  if (TestGetSet(id, GetOutputOn, SetOutputOn))
+  if (TestGetSet(id, GetOutputFileOn, SetOutputFileOn))
   {
     return EXIT_FAILURE;
   }
 
   /* Selected output */
-  if (TestGetSet(id, GetSelectedOutputOn, SetSelectedOutputOn))
+  if (TestGetSet(id, GetSelectedOutputFileOn, SetSelectedOutputFileOn))
   {
     return EXIT_FAILURE;
   }
 
   if (LoadDatabase(id, "phreeqc.dat") != 0)
   {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
   if (RunFile(id, "ex2") != 0)
   {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 
@@ -80,7 +80,7 @@ main(int argc, const char* argv[])
   
   if (DestroyIPhreeqc(id) != IPQ_OK)
   {
-    OutputError(id);
+    OutputErrorString(id);
     return EXIT_FAILURE;
   }
 

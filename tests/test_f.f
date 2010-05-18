@@ -19,23 +19,23 @@
       INTEGER(KIND=4) EXIT_FAILURE
       PARAMETER (EXIT_FAILURE=1)
 
-      EXTERNAL GetDumpOn
-      EXTERNAL SetDumpOn
+      EXTERNAL GetDumpFileOn
+      EXTERNAL SetDumpFileOn
 
       EXTERNAL GetDumpStringOn
       EXTERNAL SetDumpStringOn
 
-      EXTERNAL GetErrorOn
-      EXTERNAL SetErrorOn
+      EXTERNAL GetErrorFileOn
+      EXTERNAL SetErrorFileOn
 
-      EXTERNAL GetLogOn
-      EXTERNAL SetLogOn
+      EXTERNAL GetLogFileOn
+      EXTERNAL SetLogFileOn
 
-      EXTERNAL GetOutputOn
-      EXTERNAL SetOutputOn
+      EXTERNAL GetOutputFileOn
+      EXTERNAL SetOutputFileOn
 
-      EXTERNAL GetSelectedOutputOn
-      EXTERNAL SetSelectedOutputOn
+      EXTERNAL GetSelectedOutputFileOn
+      EXTERNAL SetSelectedOutputFileOn
 
       id = CreateIPhreeqc()
       IF (id.LT.0) THEN
@@ -44,7 +44,7 @@
       ENDIF
 
 C     Dump
-      IF (TestGetSet(id,GetDumpOn,SetDumpOn).NE.0) THEN
+      IF (TestGetSet(id,GetDumpFileOn,SetDumpFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
@@ -56,38 +56,38 @@ C     Dump string
       ENDIF
       
 C     Error
-      IF (TestGetSet(id,GetErrorOn,SetErrorOn).NE.0) THEN
+      IF (TestGetSet(id,GetErrorFileOn,SetErrorFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
       
 C     Log
-      IF (TestGetSet(id,GetLogOn,SetLogOn).NE.0) THEN
+      IF (TestGetSet(id,GetLogFileOn,SetLogFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
       
 C     Output
-      IF (TestGetSet(id,GetOutputOn,SetOutputOn).NE.0) THEN
+      IF (TestGetSet(id,GetOutputFileOn,SetOutputFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
       
 C     Selected output
-      IF (TestGetSet(id,GetSelectedOutputOn,SetSelectedOutputOn)
+      IF (TestGetSet(id,GetSelectedOutputFileOn,SetSelectedOutputFileOn)
      &     .NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
       
       IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
-         CALL OutputError(id)
+         CALL OutputErrorString(id)
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
       
       IF (RunFile(id, "ex2").NE.0) THEN
-         CALL OutputError(id)
+         CALL OutputErrorString(id)
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF
@@ -95,7 +95,7 @@ C     Selected output
       DO 20 r=0,GetSelectedOutputRowCount(id)
          DO 10 c=1,GetSelectedOutputColumnCount(id)
             IF (GetSelectedOutputValue(id,r,c,t,d,s).NE.IPQ_OK) THEN
-               CALL OutputError(id)
+               CALL OutputErrorString(id)
                F_MAIN = EXIT_FAILURE
                RETURN
             ENDIF
@@ -103,7 +103,7 @@ C     Selected output
  20   CONTINUE
       
       IF (DestroyIPhreeqc(id).NE.0) THEN
-         CALL OutputError(id)
+         CALL OutputErrorString(id)
          F_MAIN = EXIT_FAILURE
          RETURN
       ENDIF

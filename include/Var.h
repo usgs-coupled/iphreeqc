@@ -7,9 +7,9 @@
 #define __VAR_H_INC
 
 #if defined(_WINDLL)
-#define DLL_EXPORT __declspec(dllexport)
+#define IPQ_DLL_EXPORT __declspec(dllexport)
 #else
-#define DLL_EXPORT
+#define IPQ_DLL_EXPORT
 #endif
 
 /*! \brief Enumeration used to determine the type of data stored in a VAR.
@@ -53,14 +53,14 @@ extern "C" {
 /** Initializes a VAR.
  *  @param pvar Pointer to the VAR that will be initialized.
  */
-DLL_EXPORT void VarInit(VAR* pvar);
+IPQ_DLL_EXPORT void VarInit(VAR* pvar);
 
 /** Clears a VAR.
  *  @param pvar Pointer to the VAR that will be freed and initialized.
  *  @retval VR_OK Success.
  *  @retval VR_BADVARTYPE The \c VAR was invalid (probably uninitialized).
  */
-DLL_EXPORT VRESULT VarClear(VAR* pvar);
+IPQ_DLL_EXPORT VRESULT VarClear(VAR* pvar);
 
 /** Frees the destination VAR and makes a copy of the source VAR.
  *  @param pvarDest Pointer to the VAR to receive the copy.
@@ -70,19 +70,19 @@ DLL_EXPORT VRESULT VarClear(VAR* pvar);
  *  @retval VR_OUTOFMEMORY Memory could not be allocated for the copy.
  *  @return The return value is one of the following.
  */
-DLL_EXPORT VRESULT VarCopy(VAR* pvarDest, const VAR* pvarSrc);
+IPQ_DLL_EXPORT VRESULT VarCopy(VAR* pvarDest, const VAR* pvarSrc);
 
 
 /** Allocates a new string for use in a VAR and copies the passed string into it.
  *  @param pSrc Pointer to the VAR that will be initialized.
  *  @return A pointer to the string on success NULL otherwise.
  */
-DLL_EXPORT char* VarAllocString(const char* pSrc);
+IPQ_DLL_EXPORT char* VarAllocString(const char* pSrc);
 
 /** Frees a string allocated using VarAllocString.
  *  @param pSrc Pointer to the string to be freed.
  */
-DLL_EXPORT void VarFreeString(char* pSrc);
+IPQ_DLL_EXPORT void VarFreeString(char* pSrc);
 
 #if defined(__cplusplus)
 }

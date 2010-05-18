@@ -57,7 +57,7 @@
 
 
        INTERFACE
-        SUBROUTINE GetDumpLine(ID,N,LINE)
+        SUBROUTINE GetDumpStringLine(ID,N,LINE)
          INTEGER(KIND=4),   INTENT(IN)   :: ID
          INTEGER(KIND=4),   INTENT(IN)   :: N
          CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
@@ -66,18 +66,18 @@
 
 
        INTERFACE
-        FUNCTION GetDumpLineCount(ID)
+        FUNCTION GetDumpStringLineCount(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
-         INTEGER(KIND=4)               :: GetDumpLineCount
-        END FUNCTION GetDumpLineCount
+         INTEGER(KIND=4)               :: GetDumpStringLineCount
+        END FUNCTION GetDumpStringLineCount
        END INTERFACE
        
        
        INTERFACE
-        FUNCTION GetDumpOn(ID)
+        FUNCTION GetDumpFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetDumpOn
-        END FUNCTION GetDumpOn
+         LOGICAL(KIND=4)               :: GetDumpFileOn
+        END FUNCTION GetDumpFileOn
        END INTERFACE
        
        
@@ -90,7 +90,7 @@
 
 
        INTERFACE
-        SUBROUTINE GetErrorLine(ID,N,LINE)
+        SUBROUTINE GetErrorStringLine(ID,N,LINE)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
          INTEGER(KIND=4),  INTENT(IN)  :: N
          CHARACTER(LEN=*), INTENT(OUT) :: LINE
@@ -99,34 +99,34 @@
 
 
        INTERFACE
-        FUNCTION GetErrorLineCount(ID)
+        FUNCTION GetErrorStringLineCount(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
-         INTEGER(KIND=4)              :: GetErrorLineCount
-        END FUNCTION GetErrorLineCount
+         INTEGER(KIND=4)              :: GetErrorStringLineCount
+        END FUNCTION GetErrorStringLineCount
        END INTERFACE
 
 
        INTERFACE
-        FUNCTION GetErrorOn(ID)
+        FUNCTION GetErrorFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetErrorOn
-        END FUNCTION GetErrorOn
+         LOGICAL(KIND=4)               :: GetErrorFileOn
+        END FUNCTION GetErrorFileOn
        END INTERFACE
 
 
        INTERFACE
-        FUNCTION GetLogOn(ID)
+        FUNCTION GetLogFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetLogOn
-        END FUNCTION GetLogOn
+         LOGICAL(KIND=4)               :: GetLogFileOn
+        END FUNCTION GetLogFileOn
        END INTERFACE
 
 
        INTERFACE
-        FUNCTION GetOutputOn(ID)
+        FUNCTION GetOutputFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetOutputOn
-        END FUNCTION GetOutputOn
+         LOGICAL(KIND=4)               :: GetOutputFileOn
+        END FUNCTION GetOutputFileOn
        END INTERFACE
 
 
@@ -139,10 +139,10 @@
 
 
        INTERFACE
-        FUNCTION GetSelectedOutputOn(ID)
+        FUNCTION GetSelectedOutputFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetSelectedOutputOn
-        END FUNCTION GetSelectedOutputOn
+         LOGICAL(KIND=4)               :: GetSelectedOutputFileOn
+        END FUNCTION GetSelectedOutputFileOn
        END INTERFACE
 
 
@@ -168,7 +168,7 @@
 
 
        INTERFACE
-        SUBROUTINE GetWarningLine(ID,N,LINE)
+        SUBROUTINE GetWarningStringLine(ID,N,LINE)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
          INTEGER(KIND=4),  INTENT(IN)  :: N
          CHARACTER(LEN=*), INTENT(OUT) :: LINE
@@ -177,10 +177,10 @@
 
 
        INTERFACE
-        FUNCTION GetWarningLineCount(ID)
+        FUNCTION GetWarningStringLineCount(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
-         INTEGER(KIND=4)              :: GetWarningLineCount
-        END FUNCTION GetWarningLineCount
+         INTEGER(KIND=4)              :: GetWarningStringLineCount
+        END FUNCTION GetWarningStringLineCount
        END INTERFACE
 
 
@@ -203,19 +203,19 @@
 
 
        INTERFACE 
-        SUBROUTINE OutputError(ID)
+        SUBROUTINE OutputErrorString(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
-        END SUBROUTINE OutputError
+        END SUBROUTINE OutputErrorString
        END INTERFACE
 
 
-       !!! TODO OutputWarning
+       !!! TODO OutputWarningString
 
 
        INTERFACE
-        SUBROUTINE OutputLines(ID)
+        SUBROUTINE OutputAccumulatedLines(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
-        END SUBROUTINE OutputLines
+        END SUBROUTINE OutputAccumulatedLines
        END INTERFACE 
 
 
@@ -246,11 +246,11 @@
 
 
        INTERFACE
-        FUNCTION SetDumpOn(ID,DUMP_ON)
+        FUNCTION SetDumpFileOn(ID,DUMP_ON)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          LOGICAL(KIND=4),  INTENT(IN) :: DUMP_ON
-         INTEGER(KIND=4)              :: SetDumpOn
-        END FUNCTION SetDumpOn
+         INTEGER(KIND=4)              :: SetDumpFileOn
+        END FUNCTION SetDumpFileOn
        END INTERFACE
 
 
@@ -264,38 +264,38 @@
 
 
        INTERFACE
-        FUNCTION SetErrorOn(ID,ERR_ON)
+        FUNCTION SetErrorFileOn(ID,ERR_ON)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          LOGICAL(KIND=4),  INTENT(IN) :: ERR_ON
-         INTEGER(KIND=4)              :: SetErrorOn
-        END FUNCTION SetErrorOn
+         INTEGER(KIND=4)              :: SetErrorFileOn
+        END FUNCTION SetErrorFileOn
        END INTERFACE
 
 
        INTERFACE
-        FUNCTION SetLogOn(ID,LOG_ON)
+        FUNCTION SetLogFileOn(ID,LOG_ON)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          LOGICAL(KIND=4),  INTENT(IN) :: LOG_ON
-         INTEGER(KIND=4)              :: SetLogOn
-        END FUNCTION SetLogOn
+         INTEGER(KIND=4)              :: SetLogFileOn
+        END FUNCTION SetLogFileOn
        END INTERFACE
 
 
        INTERFACE
-        FUNCTION SetOutputOn(ID,OUT_ON)
+        FUNCTION SetOutputFileOn(ID,OUT_ON)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          LOGICAL(KIND=4),  INTENT(IN) :: OUT_ON
-         INTEGER(KIND=4)              :: SetOutputOn
-        END FUNCTION SetOutputOn
+         INTEGER(KIND=4)              :: SetOutputFileOn
+        END FUNCTION SetOutputFileOn
        END INTERFACE
 
 
        INTERFACE
-        FUNCTION SetSelectedOutputOn(ID,SEL_ON)
+        FUNCTION SetSelectedOutputFileOn(ID,SEL_ON)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          LOGICAL(KIND=4),  INTENT(IN) :: SEL_ON
-         INTEGER(KIND=4)              :: SetSelectedOutputOn
-        END FUNCTION SetSelectedOutputOn
+         INTEGER(KIND=4)              :: SetSelectedOutputFileOn
+        END FUNCTION SetSelectedOutputFileOn
        END INTERFACE
        
        

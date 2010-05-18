@@ -13,19 +13,19 @@ main(int argc, const char* argv[])
   
   if (LoadDatabase(id, "phreeqc.dat") != 0)
   {
-    OutputError(id);
+    OutputErrorString(id);
     return 2;
   }
   
   if (RunFile(id, "ex1") != 0)
   {
-    OutputError(id);
+    OutputErrorString(id);
     return 3;
   }
   
   if (DestroyIPhreeqc(id) != IPQ_OK)
   {
-    OutputError(id);
+    OutputErrorString(id);
     return 4;
   }
   

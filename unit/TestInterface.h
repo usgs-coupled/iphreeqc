@@ -37,8 +37,8 @@ class TestInterface :
 	CPPUNIT_TEST( TestDatabaseKeyword );
 	CPPUNIT_TEST( TestDumpOn );
 	CPPUNIT_TEST( TestDumpString );
-	CPPUNIT_TEST( TestGetDumpLineCount );
-	CPPUNIT_TEST( TestGetDumpLine );
+	CPPUNIT_TEST( TestGetDumpStringLineCount );
+	CPPUNIT_TEST( TestGetDumpStringLine );
 	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
 
@@ -77,8 +77,8 @@ public:
 	void TestDatabaseKeyword(void);
 	void TestDumpOn(void);
 	void TestDumpString(void);
-	void TestGetDumpLineCount(void);
-	void TestGetDumpLine(void);
+	void TestGetDumpStringLineCount(void);
+	void TestGetDumpStringLine(void);
 	void TestGetComponentCount(void);
 	void TestGetComponent(void);
 

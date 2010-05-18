@@ -237,11 +237,11 @@ void TestIPhreeqcLib::TestRunAccumulated(void)
 
 	CPPUNIT_ASSERT_EQUAL(0,      ::LoadDatabase(n, "phreeqc.dat"));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(n, "solution 12"));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpFileOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpStringOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,      ::RunAccumulated(n));
 
@@ -276,11 +276,11 @@ void TestIPhreeqcLib::TestRunWithErrors()
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(n, "EQUILIBRIUM_PHASES"));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(n, "	Fix_H+ -10 HCl	10"));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(n, "END"));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpFileOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpStringOn(n));
 	CPPUNIT_ASSERT_EQUAL(1,      ::RunAccumulated(n));
 
@@ -315,11 +315,11 @@ void TestIPhreeqcLib::TestRunFile(void)
 
 	CPPUNIT_ASSERT_EQUAL(true, ::FileExists("phreeqc.dat"));
 	CPPUNIT_ASSERT_EQUAL(0,    ::LoadDatabase(n, "phreeqc.dat"));
-	CPPUNIT_ASSERT_EQUAL(0,    ::GetOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,    ::GetErrorOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,    ::GetLogOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,    ::GetSelectedOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,    ::GetDumpOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,    ::GetOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,    ::GetErrorFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,    ::GetLogFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,    ::GetSelectedOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,    ::GetDumpFileOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,    ::GetDumpStringOn(n));
 	CPPUNIT_ASSERT_EQUAL(true, ::FileExists("conv_fail.in"));
 	CPPUNIT_ASSERT_EQUAL(1,    ::RunFile(n, "conv_fail.in"));
@@ -335,7 +335,7 @@ void TestIPhreeqcLib::TestRunFile(void)
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
 
-	// Note: should this file exist since GetDumpOn is false?
+	// Note: should this file exist since GetDumpFileOn is false?
 	CPPUNIT_ASSERT_EQUAL(true, ::FileExists(dump_file));
 	CPPUNIT_ASSERT(::DeleteFile(dump_file));
 }
@@ -423,11 +423,11 @@ void TestIPhreeqcLib::TestRunString(void)
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(n, "phreeqc.dat"));
-	::SetOutputOn(n, 1);
-	::SetErrorOn(n, 0);
-	::SetLogOn(n, 0);
-	::SetSelectedOutputOn(n, 0);
-	::SetDumpOn(n, 0);
+	::SetOutputFileOn(n, 1);
+	::SetErrorFileOn(n, 0);
+	::SetLogFileOn(n, 0);
+	::SetSelectedOutputFileOn(n, 0);
+	::SetDumpFileOn(n, 0);
 	CPPUNIT_ASSERT_EQUAL(false, ::FileExists("phreeqc.out"));
 	CPPUNIT_ASSERT_EQUAL(0,     ::RunString(n, input));
 	CPPUNIT_ASSERT_EQUAL(true,  ::FileExists("phreeqc.out"));
@@ -454,11 +454,11 @@ void TestIPhreeqcLib::TestGetSelectedOutputRowCount()
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::USER_PUNCH(n, "Ca", max));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpFileOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpStringOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,      ::RunAccumulated(n));
 	CPPUNIT_ASSERT_EQUAL(3,      ::GetSelectedOutputRowCount(n)); // rows + header
@@ -481,11 +481,11 @@ void TestIPhreeqcLib::TestGetSelectedOutputValue(void)
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::USER_PUNCH(n, "Ca", max));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputOn(n));
-	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpFileOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpStringOn(n));
 	CPPUNIT_ASSERT_EQUAL(0,      ::RunAccumulated(n));
 
@@ -1233,7 +1233,7 @@ void TestIPhreeqcLib::TestAccumulateLine(void)
 	// TODO
 }
 
-void TestIPhreeqcLib::TestOutputError(void)
+void TestIPhreeqcLib::TestOutputErrorString(void)
 {
 	// TODO
 }
@@ -1284,12 +1284,12 @@ void TestIPhreeqcLib::TestCase1(void)
 	CPPUNIT_ASSERT_EQUAL( 0,          ::LoadDatabase(n, "phreeqc.dat") );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,     ::SOLUTION(n, 1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,     ::USER_PUNCH(n, "Ca", 10) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK,     ::SetSelectedOutputOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,     ::SetSelectedOutputFileOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,          ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( 62,         ::GetSelectedOutputColumnCount(n) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,     ::SOLUTION(n, 1.0, 1.0, 1.0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK,     ::SetSelectedOutputOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,     ::SetSelectedOutputFileOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,          ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( 62,         ::GetSelectedOutputColumnCount(n) );
@@ -1327,7 +1327,7 @@ void TestIPhreeqcLib::TestCase2(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,  ::SOLUTION(n, 1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,  ::USER_PUNCH(n, "Ca", 10) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,  ::AccumulateLine(n, "-file case2.punch") ); // force have_punch_name to TRUE (see read_selected_ouput)
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK,  ::SetSelectedOutputOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,  ::SetSelectedOutputFileOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,       ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( true,    ::FileExists("case2.punch") );
@@ -1348,7 +1348,7 @@ void TestIPhreeqcLib::TestCase2(void)
 	CPPUNIT_ASSERT_EQUAL( false,  ::FileExists("case2.punch") );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::USER_PUNCH(n, "Ca", 10) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( false,  ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists("case2.punch") );
@@ -1391,7 +1391,7 @@ void TestIPhreeqcLib::TestPrintSelectedOutputFalse(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "PRINT; -selected_output false \n") );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputColumnCount(n) );
@@ -1408,7 +1408,7 @@ void TestIPhreeqcLib::TestPrintSelectedOutputFalse(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SELECTED_OUTPUT(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 
 	CPPUNIT_ASSERT_EQUAL( 11,     ::GetSelectedOutputColumnCount(n) );
@@ -1502,11 +1502,11 @@ void TestIPhreeqcLib::TestOnOff(const char* FILENAME, int output_on, int error_o
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run all off
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( false,  ::FileExists(FILENAME) );
@@ -1522,11 +1522,11 @@ void TestIPhreeqcLib::TestOnOff(const char* FILENAME, int output_on, int error_o
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, dump_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, error_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, log_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, output_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, selected_output_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, dump_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, error_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, log_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, output_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, selected_output_on) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, dump_string_on) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(FILENAME) );
@@ -1543,11 +1543,11 @@ void TestIPhreeqcLib::TestOnOff(const char* FILENAME, int output_on, int error_o
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( false,  ::FileExists(FILENAME) );
@@ -1563,11 +1563,11 @@ void TestIPhreeqcLib::TestOnOff(const char* FILENAME, int output_on, int error_o
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, dump_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, error_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, log_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, output_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, selected_output_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, dump_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, error_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, log_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, output_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, selected_output_on) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, dump_string_on) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(FILENAME) );
@@ -1603,11 +1603,11 @@ void TestIPhreeqcLib::TestLongHeadings(void)
 	oss << "-end" << "\n";
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, oss.str().c_str()) );
 
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 
 	CPPUNIT_ASSERT_EQUAL( 2,      ::GetSelectedOutputRowCount(n));
@@ -1638,11 +1638,11 @@ void TestIPhreeqcLib::TestDatabaseKeyword()
 	CPPUNIT_ASSERT(n >= 0);
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump"));
 
 	const char *exp_errs =
@@ -1682,11 +1682,11 @@ void TestIPhreeqcLib::TestDumpString()
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 
@@ -1757,7 +1757,7 @@ void TestIPhreeqcLib::TestDumpString()
 	}
 }
 
-void TestIPhreeqcLib::TestGetDumpLineCount(void)
+void TestIPhreeqcLib::TestGetDumpStringLineCount(void)
 {
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
@@ -1771,14 +1771,14 @@ void TestIPhreeqcLib::TestGetDumpLineCount(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 26,     ::GetDumpLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 26,     ::GetDumpStringLineCount(n) );
 
 	if (n >= 0)
 	{
@@ -1786,7 +1786,7 @@ void TestIPhreeqcLib::TestGetDumpLineCount(void)
 	}
 }
 
-void TestIPhreeqcLib::TestGetDumpLine(void)
+void TestIPhreeqcLib::TestGetDumpStringLine(void)
 {
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
@@ -1800,85 +1800,85 @@ void TestIPhreeqcLib::TestGetDumpLine(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 26,     ::GetDumpLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 26,     ::GetDumpStringLineCount(n) );
 
 	int line = 0;
 #if defined(_MSC_VER)
-	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003929"),  std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-025"),          std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826911"), std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003929"),  std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-025"),          std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826911"), std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpStringLine(n, line++)) );
 #endif
 
 #if defined(__GNUC__)
-	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003928"),  std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-25"),           std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826912"), std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003928"),  std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-25"),           std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826912"), std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpStringLine(n, line++)) );
 #endif
 
 	// remaining lines should be empty
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, line++)) );
 
 	// negative lines should be empty
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, -1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, -2)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, -3)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpLine(n, -4)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, -3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, -4)) );
 
 	if (n >= 0)
 	{
@@ -1897,11 +1897,11 @@ void TestIPhreeqcLib::TestGetComponentCount(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( 3,      ::GetComponentCount(n) );
@@ -1923,11 +1923,11 @@ void TestIPhreeqcLib::TestGetComponent(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( 3,      ::GetComponentCount(n) );
@@ -1948,22 +1948,22 @@ void TestIPhreeqcLib::TestGetComponent(void)
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
 }
-void TestIPhreeqcLib::TestGetErrorLine(void)
+void TestIPhreeqcLib::TestGetErrorStringLine(void)
 {
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump") );
 
-	CPPUNIT_ASSERT_EQUAL( 2,      ::GetErrorLineCount(n) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),    std::string(::GetErrorLine(n, 0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."), std::string(::GetErrorLine(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( 2,      ::GetErrorStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),    std::string(::GetErrorStringLine(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."), std::string(::GetErrorStringLine(n, 1)) );
 
 	if (n >= 0)
 	{
@@ -1971,25 +1971,25 @@ void TestIPhreeqcLib::TestGetErrorLine(void)
 	}
 }
 
-void TestIPhreeqcLib::TestGetWarningLine(void)
+void TestIPhreeqcLib::TestGetWarningStringLine(void)
 {
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump") );
 
-	CPPUNIT_ASSERT_EQUAL( 5,      ::GetWarningLineCount(n) );
-	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: DATABASE keyword is ignored by IPhreeqc."),                              std::string(::GetWarningLine(n, 0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."), std::string(::GetWarningLine(n, 1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                        std::string(::GetWarningLine(n, 2)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                              std::string(::GetWarningLine(n, 3)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Concentration is set to zero."),                                                 std::string(::GetWarningLine(n, 4)) );
+	CPPUNIT_ASSERT_EQUAL( 5,      ::GetWarningStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: DATABASE keyword is ignored by IPhreeqc."),                              std::string(::GetWarningStringLine(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."), std::string(::GetWarningStringLine(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                        std::string(::GetWarningStringLine(n, 2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                              std::string(::GetWarningStringLine(n, 3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("	Concentration is set to zero."),                                                 std::string(::GetWarningStringLine(n, 4)) );
 
 	if (n >= 0)
 	{
@@ -2047,24 +2047,28 @@ void TestIPhreeqcLib::TestClearAccumulatedLines(void)
 
 	CPPUNIT_ASSERT_EQUAL(::RunAccumulated(id), 1);
 
-	CPPUNIT_ASSERT_EQUAL( 3, ::GetErrorLineCount(id) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+000"),    std::string(::GetErrorLine(id, 0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                                std::string(::GetErrorLine(id, 1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Model failed to converge for initial solution."),                                           std::string(::GetErrorLine(id, 2)) );
+	CPPUNIT_ASSERT_EQUAL( 3, ::GetErrorStringLineCount(id) );
+
+#if defined(_MSC_VER)
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+000"),    std::string(::GetErrorStringLine(id, 0)) );
+#endif
+#if defined(__GNUC__)
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+00"),     std::string(::GetErrorStringLine(id, 0)) );
+#endif
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                                std::string(::GetErrorStringLine(id, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Model failed to converge for initial solution."),                                           std::string(::GetErrorStringLine(id, 2)) );
 
 	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "SOLUTION 1"), IPQ_OK);
 	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "pH 2"),       IPQ_OK);
 	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "END"),        IPQ_OK);
 
-	CPPUNIT_ASSERT_EQUAL(::RunAccumulated(id), 1);
-
-	CPPUNIT_ASSERT_EQUAL( 3, ::GetErrorLineCount(id) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+000"),    std::string(::GetErrorLine(id, 0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                                std::string(::GetErrorLine(id, 1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Model failed to converge for initial solution."),                                           std::string(::GetErrorLine(id, 2)) );
+	// RunAccumulated clears accumulated lines on next call to AccumulateLine
+	//
+	CPPUNIT_ASSERT_EQUAL(::RunAccumulated(id), 0);
+	CPPUNIT_ASSERT_EQUAL( 0, ::GetErrorStringLineCount(id) );
 
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::ClearAccumulatedLines(id) );
-
 	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "SOLUTION 1"), IPQ_OK);
 	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "pH 2"),       IPQ_OK);
 	CPPUNIT_ASSERT_EQUAL(::AccumulateLine(id, "END"),        IPQ_OK);

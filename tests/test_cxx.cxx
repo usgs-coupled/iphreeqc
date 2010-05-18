@@ -46,7 +46,7 @@ main(int argc, const char* argv[])
   IPhreeqc iphreeqc;
 
   // Dump
-  TTestGetSet<IPhreeqc> testDump(&iphreeqc, &IPhreeqc::GetDumpOn, &IPhreeqc::SetDumpOn);
+  TTestGetSet<IPhreeqc> testDump(&iphreeqc, &IPhreeqc::GetDumpFileOn, &IPhreeqc::SetDumpFileOn);
   if (testDump.Test() != EXIT_SUCCESS)
   {
     return EXIT_FAILURE;
@@ -60,28 +60,28 @@ main(int argc, const char* argv[])
   }
 
   // Error
-  TTestGetSet<IPhreeqc> testError(&iphreeqc, &IPhreeqc::GetErrorOn, &IPhreeqc::SetErrorOn);
+  TTestGetSet<IPhreeqc> testError(&iphreeqc, &IPhreeqc::GetErrorFileOn, &IPhreeqc::SetErrorFileOn);
   if (testError.Test() != EXIT_SUCCESS)
   {
     return EXIT_FAILURE;
   }
 
   // Log
-  TTestGetSet<IPhreeqc> testLog(&iphreeqc, &IPhreeqc::GetLogOn, &IPhreeqc::SetLogOn);
+  TTestGetSet<IPhreeqc> testLog(&iphreeqc, &IPhreeqc::GetLogFileOn, &IPhreeqc::SetLogFileOn);
   if (testLog.Test() != EXIT_SUCCESS)
   {
     return EXIT_FAILURE;
   }
 
   // Output
-  TTestGetSet<IPhreeqc> testOutput(&iphreeqc, &IPhreeqc::GetOutputOn, &IPhreeqc::SetOutputOn);
+  TTestGetSet<IPhreeqc> testOutput(&iphreeqc, &IPhreeqc::GetOutputFileOn, &IPhreeqc::SetOutputFileOn);
   if (testOutput.Test() != EXIT_SUCCESS)
   {
     return EXIT_FAILURE;
   }
 
   // Selected output
-  TTestGetSet<IPhreeqc> testSelectedOutput(&iphreeqc, &IPhreeqc::GetSelectedOutputOn, &IPhreeqc::SetSelectedOutputOn);
+  TTestGetSet<IPhreeqc> testSelectedOutput(&iphreeqc, &IPhreeqc::GetSelectedOutputFileOn, &IPhreeqc::SetSelectedOutputFileOn);
   if (testSelectedOutput.Test() != EXIT_SUCCESS)
   {
     return EXIT_FAILURE;

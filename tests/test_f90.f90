@@ -23,7 +23,7 @@ FUNCTION F_MAIN()
   ENDIF
   
   ! Dump
-  IF (TestGetSet(id,GetDumpOn,SetDumpOn).NE.0) THEN
+  IF (TestGetSet(id,GetDumpFileOn,SetDumpFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
@@ -35,37 +35,37 @@ FUNCTION F_MAIN()
   ENDIF
   
   ! Error
-  IF (TestGetSet(id,GetErrorOn,SetErrorOn).NE.0) THEN
+  IF (TestGetSet(id,GetErrorFileOn,SetErrorFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
   
   ! Log
-  IF (TestGetSet(id,GetLogOn,SetLogOn).NE.0) THEN
+  IF (TestGetSet(id,GetLogFileOn,SetLogFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
   
   ! Output
-  IF (TestGetSet(id,GetOutputOn,SetOutputOn).NE.0) THEN
+  IF (TestGetSet(id,GetOutputFileOn,SetOutputFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
   
   ! Selected output
-  IF (TestGetSet(id,GetSelectedOutputOn,SetSelectedOutputOn).NE.0) THEN
+  IF (TestGetSet(id,GetSelectedOutputFileOn,SetSelectedOutputFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
   
   IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
   
   IF (RunFile(id, "ex2").NE.0) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF
@@ -73,7 +73,7 @@ FUNCTION F_MAIN()
   DO r=0,GetSelectedOutputRowCount(id)
      DO c=1,GetSelectedOutputColumnCount(id)
         IF (GetSelectedOutputValue(id,r,c,t,d,s).NE.IPQ_OK) THEN
-           CALL OutputError(id)
+           CALL OutputErrorString(id)
            F_MAIN = EXIT_FAILURE
            RETURN
         ENDIF
@@ -82,7 +82,7 @@ FUNCTION F_MAIN()
   
   
   IF (DestroyIPhreeqc(id).NE.0) THEN
-     CALL OutputError(id)
+     CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
      RETURN
   ENDIF

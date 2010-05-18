@@ -23,7 +23,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestAddError );
 	CPPUNIT_TEST( TestAccumulateLine );
 	CPPUNIT_TEST( TestAddError );
-	CPPUNIT_TEST( TestOutputError );
+	CPPUNIT_TEST( TestOutputErrorString );
 	CPPUNIT_TEST( TestRunWithCallback );
 	CPPUNIT_TEST( TestRunNoDatabaseLoaded );
 	CPPUNIT_TEST( TestCase1 );
@@ -37,12 +37,12 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLongHeadings );
 	CPPUNIT_TEST( TestDatabaseKeyword );
 	CPPUNIT_TEST( TestDumpString );
-	CPPUNIT_TEST( TestGetDumpLineCount );
-	CPPUNIT_TEST( TestGetDumpLine );
+	CPPUNIT_TEST( TestGetDumpStringLineCount );
+	CPPUNIT_TEST( TestGetDumpStringLine );
 	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
-	CPPUNIT_TEST( TestGetErrorLine );
-	CPPUNIT_TEST( TestGetWarningLine );
+	CPPUNIT_TEST( TestGetErrorStringLine );
+	CPPUNIT_TEST( TestGetWarningStringLine );
 	CPPUNIT_TEST( TestPitzer );
 	CPPUNIT_TEST( TestClearAccumulatedLines );
 	CPPUNIT_TEST_SUITE_END();
@@ -67,7 +67,7 @@ public:
 	void TestGetSelectedOutputColumnCount(void);
 	void TestAddError(void);
 	void TestAccumulateLine(void);
-	void TestOutputError(void);
+	void TestOutputErrorString(void);
 	void TestRunWithCallback(void);
 	void TestRunNoDatabaseLoaded(void);
 	void TestCase1(void);
@@ -81,12 +81,12 @@ public:
 	void TestLongHeadings(void);
 	void TestDatabaseKeyword();
 	void TestDumpString();
-	void TestGetDumpLineCount(void);
-	void TestGetDumpLine(void);
+	void TestGetDumpStringLineCount(void);
+	void TestGetDumpStringLine(void);
 	void TestGetComponentCount(void);
 	void TestGetComponent(void);
-	void TestGetErrorLine(void);
-	void TestGetWarningLine(void);
+	void TestGetErrorStringLine(void);
+	void TestGetWarningStringLine(void);
 	void TestPitzer(void);
 	void TestClearAccumulatedLines(void);
 
