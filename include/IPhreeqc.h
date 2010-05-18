@@ -188,6 +188,42 @@ extern "C" {
 
 
 /**
+ *  Retrieves the current value of the dump file switch.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              Non-zero if output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file, 0 (zero) otherwise.
+ *  @see                 SetDumpFileOn, GetDumpStringLineCount, GetDumpStringLine, GetDumpString
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetDumpFileOn(DUMP_ON)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    LOGICAL(KIND=4)               :: GetDumpFileOn
+ *  END FUNCTION SetDumpFileOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT int         GetDumpFileOn(int id);
+
+
+/**
+ *  Retrieves the string buffer containing <b>DUMP</b> output.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              A null terminated string containing <b>DUMP</b> output.
+ *  @pre                 \ref SetDumpStringOn must have been set to true (non-zero) in order to recieve <b>DUMP</b> output.
+ *  @see                 SetDumpStringOn
+ *  @par Fortran90 Interface:
+ *  Not implemented. (see \ref GetDumpStringLineCount, \ref GetDumpStringLine)
+ *
+ *  \anchor GetDumpString_c
+ *  @par  C Example:
+ *  \include GetDumpString.c
+ */
+	IPQ_DLL_EXPORT const char* GetDumpString(int id);
+
+
+/**
  *  Retrieves the given dump line.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
@@ -241,42 +277,6 @@ extern "C" {
 
 
 /**
- *  Retrieves the current value of the dump file switch.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              Non-zero if output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file, 0 (zero) otherwise.
- *  @see                 SetDumpFileOn, GetDumpStringLineCount, GetDumpStringLine, GetDumpString
- *  @par Fortran90 Interface:
- *  @htmlonly
- *  <CODE>
- *  <PRE>
- *  FUNCTION GetDumpFileOn(DUMP_ON)
- *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4)               :: GetDumpFileOn
- *  END FUNCTION SetDumpFileOn
- *  </PRE>
- *  </CODE>
- *  @endhtmlonly
- */
-	IPQ_DLL_EXPORT int         GetDumpFileOn(int id);
-
-
-/**
- *  Retrieves the string buffer containing <b>DUMP</b> output.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              A null terminated string containing <b>DUMP</b> output.
- *  @pre                 \ref SetDumpStringOn must have been set to true (non-zero) in order to recieve <b>DUMP</b> output.
- *  @see                 SetDumpStringOn
- *  @par Fortran90 Interface:
- *  Not implemented. (see \ref GetDumpStringLineCount, \ref GetDumpStringLine)
- *
- *  \anchor GetDumpString_c
- *  @par  C Example:
- *  \include GetDumpString.c
- */
-	IPQ_DLL_EXPORT const char* GetDumpString(int id);
-
-
-/**
  *  Retrieves the current value of the dump string flag.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              Non-zero if output defined by the <B>DUMP</B> keyword is stored, 0 (zero) otherwise.
@@ -294,6 +294,36 @@ extern "C" {
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT int         GetDumpStringOn(int id);
+
+
+/**
+ *  Retrieves the current value of the error file switch.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              Non-zero if errors are written to the <B><I>phreeqc.err</I></B> file, 0 (zero) otherwise.
+ *  @see                 SetErrorFileOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetErrorFileOn(ERROR_ON)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    LOGICAL(KIND=4)               :: GetErrorFileOn
+ *  END FUNCTION GetErrorFileOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT int         GetErrorFileOn(int id);
+
+
+/**
+ *  Retrieves the error messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              A null terminated string containing error messages.
+ *  @par Fortran90 Interface:
+ *  Not implemented. (see \ref GetErrorStringLineCount, \ref GetErrorStringLine, \ref OutputErrorString)
+ */
+	IPQ_DLL_EXPORT const char* GetErrorString(int id);
 
 
 /**
@@ -337,36 +367,6 @@ extern "C" {
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT int         GetErrorStringLineCount(int id);
-
-
-/**
- *  Retrieves the current value of the error file switch.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              Non-zero if errors are written to the <B><I>phreeqc.err</I></B> file, 0 (zero) otherwise.
- *  @see                 SetErrorFileOn
- *  @par Fortran90 Interface:
- *  @htmlonly
- *  <CODE>
- *  <PRE>
- *  FUNCTION GetErrorFileOn(ERROR_ON)
- *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4)               :: GetErrorFileOn
- *  END FUNCTION GetErrorFileOn
- *  </PRE>
- *  </CODE>
- *  @endhtmlonly
- */
-	IPQ_DLL_EXPORT int         GetErrorFileOn(int id);
-
-
-/**
- *  Retrieves the error messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              A null terminated string containing error messages.
- *  @par Fortran90 Interface:
- *  Not implemented. (see \ref GetErrorStringLineCount, \ref GetErrorStringLine, \ref OutputErrorString)
- */
-	IPQ_DLL_EXPORT const char* GetErrorString(int id);
 
 
 /**
@@ -648,6 +648,17 @@ Headings
 
 
 /**
+ *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              A null terminated string containing warning messages.
+ *  @see                 GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
+ *  @par Fortran90 Interface:
+ *  Not implemented. (see \ref GetWarningStringLineCount, \ref GetWarningStringLine, \ref OutputWarningString)
+ */
+	IPQ_DLL_EXPORT const char* GetWarningString(int id);
+
+
+/**
  *  Retrieves the given warning line.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param n             The zero-based index of the line to retrieve.
@@ -687,17 +698,6 @@ Headings
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT int         GetWarningStringLineCount(int id);
-
-
-/**
- *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              A null terminated string containing warning messages.
- *  @see                 GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
- *  @par Fortran90 Interface:
- *  Not implemented. (see \ref GetWarningStringLineCount, \ref GetWarningStringLine, \ref OutputWarningString)
- */
-	IPQ_DLL_EXPORT const char* GetWarningString(int id);
 
 
 /**
@@ -757,6 +757,27 @@ Headings
 
 
 /**
+ *  Output the accumulated input buffer to stdout.  This input buffer can be run with a call to \ref RunAccumulated.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @see                 AccumulateLine, ClearAccumulatedLines, RunAccumulated
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE OutputAccumulatedLines
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *  END SUBROUTINE OutputAccumulatedLines
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ *
+ *  @par Fortran90 Example:
+ *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
+ */
+	IPQ_DLL_EXPORT void        OutputAccumulatedLines(int id);
+
+
+/**
  *  Output the error messages normally stored in the <B><I>phreeqc.err</I></B> file to stdout.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @see                 GetErrorStringLine, GetErrorStringLineCount
@@ -778,27 +799,6 @@ Headings
  *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
  */
 	IPQ_DLL_EXPORT void        OutputErrorString(int id);
-
-
-/**
- *  Output the accumulated input buffer to stdout.  This input buffer can be run with a call to \ref RunAccumulated.
- *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @see                 AccumulateLine, ClearAccumulatedLines, RunAccumulated
- *  @par Fortran90 Interface:
- *  @htmlonly
- *  <CODE>
- *  <PRE>
- *  SUBROUTINE OutputAccumulatedLines
- *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *  END SUBROUTINE OutputAccumulatedLines
- *  </PRE>
- *  </CODE>
- *  @endhtmlonly
- *
- *  @par Fortran90 Example:
- *  see \ref GetDumpStringLine_f90 "GetDumpStringLine"
- */
-	IPQ_DLL_EXPORT void        OutputAccumulatedLines(int id);
 
 
 /**

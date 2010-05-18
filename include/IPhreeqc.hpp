@@ -60,7 +60,7 @@ public:
 	 *  @retval VR_OK           Success
 	 *  @retval VR_OUTOFMEMORY  Out of memory
 	 */
-	VRESULT AccumulateLine(const char *line);
+	VRESULT                  AccumulateLine(const char *line);
 
 	/**
 	 *  Appends the given error message and increments the error count.
@@ -68,7 +68,7 @@ public:
 	 *  @param error_msg        The error message to display.
 	 *  @returns                The current error count.
 	 */
-	size_t AddError(const char* error_msg);
+	size_t                   AddError(const char* error_msg);
 
 	/**
 	 *  Appends the given warning message and increments the warning count.
@@ -76,13 +76,13 @@ public:
 	 *  @param warning_msg      The warning message to display.
 	 *  @returns                The current warning count.
 	 */
-	size_t AddWarning(const char* warning_msg);
+	size_t                   AddWarning(const char* warning_msg);
 
 	/**
 	 *  Clears the accumulated input buffer.  Input buffer is accumulated from calls to \ref AccumulateLine.
 	 *  @see                    AccumulateLine, GetAccumulatedLines, OutputAccumulatedLines, RunAccumulated
 	 */
-	void ClearAccumulatedLines(void);
+	void                     ClearAccumulatedLines(void);
 
 	/**
 	 *  Retrieve the accumulated input string.  The accumulated input string can be run
@@ -90,7 +90,7 @@ public:
 	 *  @returns                The accumulated input string.
 	 *  @see                    AccumulateLine, ClearAccumulatedLines, RunAccumulated
 	 */
-	const std::string& GetAccumulatedLines(void);
+	const std::string&       GetAccumulatedLines(void);
 
 	/**
 	 *  Retrieves the given component.
@@ -99,14 +99,31 @@ public:
 	 *                          Returns an empty string if n is out of range.
 	 *  @see                    GetComponentCount, ListComponents
 	 */
-	const char* GetComponent(int n);
+	const char*              GetComponent(int n);
 
 	/**
 	 *  Retrieves the number of components in the current list of components.
 	 *  @return                 The current count of components.
 	 *  @see                    GetComponent, ListComponents
 	 */
-	size_t GetComponentCount(void);
+	size_t                   GetComponentCount(void);
+
+	/**
+	 *  Retrieves the current value of the dump file switch.
+     *  @retval true            Output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
+     *  @retval false           No output is written.
+	 *  @see                    GetDumpStringLine, GetDumpStringLineCount, GetDumpStringOn, GetDumpString, SetDumpFileOn, SetDumpStringOn
+	 */
+	bool                     GetDumpFileOn(void)const;
+
+	/**
+	 *  Retrieves the string buffer containing <b>DUMP</b> output.
+     *  @return                 A null terminated string containing <b>DUMP</b> output.
+	 *  @pre
+	 *      \ref SetDumpStringOn must have been set to true in order to recieve <b>DUMP</b> output.
+	 *  @see                    GetDumpStringLine, GetDumpFileOn, GetDumpStringLineCount, GetDumpStringOn, SetDumpFileOn, SetDumpStringOn
+	 */
+	const char*              GetDumpString(void);
 
 	/**
 	 *  Retrieves the given dump line.
@@ -116,7 +133,7 @@ public:
      *  @pre                    \ref SetDumpStringOn must have been set to true.
 	 *  @see                    GetDumpStringLineCount, GetDumpStringOn, GetDumpFileOn, GetDumpString, SetDumpFileOn, SetDumpStringOn
 	 */
-	const char* GetDumpStringLine(int n);
+	const char*              GetDumpStringLine(int n);
 
 	/**
 	 *  Retrieves the number of lines in the current dump string buffer.
@@ -124,24 +141,7 @@ public:
      *  @pre                    \ref SetDumpStringOn must have been set to true.
 	 *  @see                    GetDumpStringLine, GetDumpStringOn, GetDumpFileOn, GetDumpString, SetDumpFileOn, SetDumpStringOn
 	 */
-	int GetDumpStringLineCount(void)const;
-
-	/**
-	 *  Retrieves the current value of the dump file switch.
-     *  @retval true            Output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
-     *  @retval false           No output is written.
-	 *  @see                    GetDumpStringLine, GetDumpStringLineCount, GetDumpStringOn, GetDumpString, SetDumpFileOn, SetDumpStringOn
-	 */
-	bool GetDumpFileOn(void)const;
-
-	/**
-	 *  Retrieves the string buffer containing <b>DUMP</b> output.
-     *  @return                 A null terminated string containing <b>DUMP</b> output.
-	 *  @pre
-	 *      \ref SetDumpStringOn must have been set to true in order to recieve <b>DUMP</b> output.
-	 *  @see                    GetDumpStringLine, GetDumpFileOn, GetDumpStringLineCount, GetDumpStringOn, SetDumpFileOn, SetDumpStringOn
-	 */
-	const char* GetDumpString(void);
+	int                      GetDumpStringLineCount(void)const;
 
 	/**
 	 *  Retrieves the current value of the dump string switch.
@@ -149,22 +149,7 @@ public:
      *  @retval false           No output is stored.
 	 *  @see                    GetDumpStringLine, GetDumpFileOn, GetDumpString, GetDumpStringLineCount, SetDumpFileOn, SetDumpStringOn
 	 */
-	bool GetDumpStringOn(void)const;
-
-	/**
-	 *  Retrieves the given error line.
-     *  @return                 A null terminated string containing the given error line message.
-	 *  @param n                The zero-based index of the line to retrieve.
-	 *  @see                    GetErrorStringLineCount, OutputErrorString
-	 */
-	const char* GetErrorStringLine(int n);
-
-	/**
-	 *  Retrieves the number of lines in the current error string buffer.
-     *  @return                 The number of lines.
-	 *  @see                    GetErrorStringLine, OutputErrorString
-	 */
-	int GetErrorStringLineCount(void)const;
+	bool                     GetDumpStringOn(void)const;
 
 	/**
 	 *  Retrieves the current value of the error file switch.
@@ -172,14 +157,29 @@ public:
      *  @retval false           No output is written.
 	 *  @see                    SetErrorFileOn
 	 */
-	bool GetErrorFileOn(void)const;
+	bool                     GetErrorFileOn(void)const;
 
 	/**
 	 *  Retrieves the error messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
      *  @return                 A null terminated string containing error messages.
 	 *  @see                    GetErrorStringLine, GetErrorStringLineCount, GetErrorFileOn, OutputErrorString, SetErrorFileOn
 	 */
-	const char* GetErrorString(void);
+	const char*              GetErrorString(void);
+
+	/**
+	 *  Retrieves the given error line.
+     *  @return                 A null terminated string containing the given error line message.
+	 *  @param n                The zero-based index of the line to retrieve.
+	 *  @see                    GetErrorStringLineCount, OutputErrorString
+	 */
+	const char*              GetErrorStringLine(int n);
+
+	/**
+	 *  Retrieves the number of lines in the current error string buffer.
+     *  @return                 The number of lines.
+	 *  @see                    GetErrorStringLine, OutputErrorString
+	 */
+	int                      GetErrorStringLineCount(void)const;
 
 	/**
 	 *  Retrieves the current value of the log file switch.
@@ -187,7 +187,7 @@ public:
      *  @retval false           No output is written.
 	 *  @see                    SetLogFileOn
 	 */
-	bool GetLogFileOn(void)const;
+	bool                     GetLogFileOn(void)const;
 
 	/**
 	 *  Retrieves the current value of the output file switch.
@@ -195,14 +195,14 @@ public:
      *  @retval false           No output is written.
 	 *  @see                    SetOutputFileOn
 	 */
-	bool GetOutputFileOn(void)const;
+	bool                     GetOutputFileOn(void)const;
 
 	/**
 	 *  Returns the number of columns currently contained within selected-output buffer.
      *  @return                 The number of columns.
 	 *  @see                    GetSelectedOutputRowCount, GetSelectedOutputValue
 	 */
-	int GetSelectedOutputColumnCount(void)const;
+	int                      GetSelectedOutputColumnCount(void)const;
 
 	/**
 	 *  Retrieves the selected-output file switch.
@@ -210,14 +210,14 @@ public:
      *  @retval false           No output is written.
 	 *  @see                    GetSelectedOutputValue, GetSelectedOutputColumnCount, GetSelectedOutputRowCount, SetSelectedOutputFileOn
 	 */
-	bool GetSelectedOutputFileOn(void)const;
+	bool                     GetSelectedOutputFileOn(void)const;
 
 	/**
 	 *  Returns the number of rows currently contained within the selected-output buffer.
      *  @return                 The number of rows.
 	 *  @see                    GetSelectedOutputColumnCount, GetSelectedOutputFileOn, GetSelectedOutputValue, SetSelectedOutputFileOn
 	 */
-	int GetSelectedOutputRowCount(void)const;
+	int                      GetSelectedOutputRowCount(void)const;
 
 	/**
 	 *  Returns the \c VAR associated with the specified row and column.
@@ -371,7 +371,14 @@ public:
 	</table>
 	 *  @endhtmlonly
 	 */
-	VRESULT GetSelectedOutputValue(int row, int col, VAR* pVAR);
+	VRESULT                  GetSelectedOutputValue(int row, int col, VAR* pVAR);
+
+	/**
+	 *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
+     *  @return                 A null terminated string containing warning messages.
+	 *  @see                    GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
+	 */
+	const char*              GetWarningString(void);
 
 	/**
      *  Retrieves the given warning line.
@@ -379,21 +386,14 @@ public:
      *  @return                 A null terminated string containing the given warning line message.
 	 *  @see                    GetWarningStringLineCount, OutputWarningString
 	 */
-	const char* GetWarningStringLine(int n);
+	const char*              GetWarningStringLine(int n);
 
 	/**
 	 *  Retrieves the number of lines in the current warning string buffer.
      *  @return                 The number of lines.
 	 *  @see                    GetWarningStringLine, GetWarningString, OutputWarningString
 	 */
-	int GetWarningStringLineCount(void)const;
-
-	/**
-	 *  Retrieves the warning messages from the last call to \ref RunAccumulated, \ref RunFile, \ref RunString, \ref LoadDatabase, or \ref LoadDatabaseString.
-     *  @return                 A null terminated string containing warning messages.
-	 *  @see                    GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
-	 */
-	const char* GetWarningString(void);
+	int                      GetWarningStringLineCount(void)const;
 
 	/**
 	 *  Retrieves a list containing the current list of components.
@@ -412,7 +412,7 @@ public:
 	 *  @remarks
      *      All previous definitions are cleared.
 	 */
-	int LoadDatabase(const char* filename);
+	int                      LoadDatabase(const char* filename);
 
 	/**
 	 *  Load the specified string as a database into phreeqc.
@@ -422,25 +422,25 @@ public:
 	 *  @remarks
      *      All previous definitions are cleared.
 	 */
-	int LoadDatabaseString(const char* input);
-
-	/**
-	 *  Output the error messages normally stored in the <B><I>phreeqc.err</I></B> file to stdout.
-	 *  @see                    GetErrorStringLine, GetErrorStringLineCount, GetErrorFileOn, SetErrorFileOn
-	 */
-	void OutputErrorString(void);
+	int                      LoadDatabaseString(const char* input);
 
 	/**
      *  Output the accumulated input buffer to stdout.  The input buffer can be run with a call to \ref RunAccumulated.
 	 *  @see                    AccumulateLine, ClearAccumulatedLines, RunAccumulated
 	 */
-	void OutputAccumulatedLines(void);
+	void                     OutputAccumulatedLines(void);
+
+	/**
+	 *  Output the error messages normally stored in the <B><I>phreeqc.err</I></B> file to stdout.
+	 *  @see                    GetErrorStringLine, GetErrorStringLineCount, GetErrorFileOn, SetErrorFileOn
+	 */
+	void                     OutputErrorString(void);
 
 	/**
 	 *  Output the warning messages to stdout.
 	 *  @see                    GetWarningStringLine, GetWarningStringLineCount, GetWarningString
 	 */
-	void OutputWarningString(void);
+	void                     OutputWarningString(void);
 
 	/**
 	 *  Runs the input buffer as defined by calls to \ref AccumulateLine.
@@ -451,7 +451,7 @@ public:
 	 *  @pre
 	 *      \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
 	 */
-	int RunAccumulated(void);
+	int                      RunAccumulated(void);
 
 	/**
 	 *  Runs the specified phreeqc input file.
@@ -461,7 +461,7 @@ public:
 	 *  @pre
 	 *      \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
 	 */
-	int RunFile(const char* filename);
+	int                      RunFile(const char* filename);
 
 	/**
 	 *  Runs the specified string as input to phreeqc.
@@ -471,7 +471,7 @@ public:
 	 *  @pre
 	 *      \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
 	 */
-	int RunString(const char* input);
+	int                      RunString(const char* input);
 
 	/**
 	 *  Sets the dump file switch on or off.  This switch controls whether or not phreeqc writes to the dump file.
@@ -479,7 +479,7 @@ public:
 	 *  @param bValue           If true, turns on output to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
 	 *  @see                    GetDumpStringLine, GetDumpStringLineCount, GetDumpFileOn, GetDumpString, GetDumpStringOn, SetDumpStringOn
 	 */
-	void SetDumpFileOn(bool bValue);
+	void                     SetDumpFileOn(bool bValue);
 
 	/**
 	 *  Sets the dump string switch on or off.  This switch controls whether or not the data normally sent
@@ -487,7 +487,7 @@ public:
 	 *  @param bValue           If true, captures the output defined by the <B>DUMP</B> keyword into a string buffer.
 	 *  @see                    GetDumpStringLine, GetDumpStringLineCount, GetDumpString, GetDumpStringOn
 	 */
-	void SetDumpStringOn(bool bValue);
+	void                     SetDumpStringOn(bool bValue);
 
 	/**
 	 *  Sets the error file switch on or off.  This switch controls whether or not
@@ -495,7 +495,7 @@ public:
 	 *  @param bValue           If true, turns on output to the <B><I>phreeqc.err</I></B> file.
 	 *  @see                    GetErrorStringLine, GetErrorStringLineCount, GetErrorFileOn, OutputErrorString
 	 */
-	void SetErrorFileOn(bool bValue);
+	void                     SetErrorFileOn(bool bValue);
 
 	/**
 	 *  Sets the log file switch on or off.  This switch controls whether or not phreeqc
@@ -503,7 +503,7 @@ public:
 	 *  @param bValue           If true, turns on output to the <B><I>phreeqc.log</I></B> file.
 	 *  @see                    GetLogFileOn
 	 */
-	void SetLogFileOn(bool bValue);
+	void                     SetLogFileOn(bool bValue);
 
 	/**
 	 *  Sets the output file switch on or off.  This switch controls whether or not phreeqc
@@ -512,7 +512,7 @@ public:
 	 *  @param bValue           If true, turns on output to the <B><I>phreeqc.out</I></B> file.
 	 *  @see                    GetOutputFileOn
 	 */
-	void SetOutputFileOn(bool bValue);
+	void                     SetOutputFileOn(bool bValue);
 
 	/**
 	 *  Sets the selected-output file switch on or off.  This switch controls whether or not phreeqc writes output to
@@ -520,7 +520,7 @@ public:
 	 *  @param bValue           If true, turns on output to the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file.
 	 *  @see                    GetSelectedOutputColumnCount, GetSelectedOutputFileOn, GetSelectedOutputRowCount, GetSelectedOutputValue
 	 */
-	void SetSelectedOutputFileOn(bool bValue);
+	void                     SetSelectedOutputFileOn(bool bValue);
 
 	/**
 	 *  Unloads the database currently loaded into phreeqc.  In addition, all
@@ -530,7 +530,7 @@ public:
 	 *      Use of the method is not normally necessary.  It is called automatically
 	 *      before each call to \ref LoadDatabase or \ref LoadDatabaseString.
 	 */
-	void UnLoadDatabase(void);
+	void                     UnLoadDatabase(void);
 
 protected:
 	static int handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
