@@ -13,9 +13,9 @@
 #include "Var.h"                    /* VRESULT */
 
 #if defined(_WINDLL)
-#define DLL_EXPORT __declspec(dllexport)
+#define IPQ_DLL_EXPORT __declspec(dllexport)
 #else
-#define DLL_EXPORT
+#define IPQ_DLL_EXPORT
 #endif
 
 class Phreeqc;
@@ -28,7 +28,7 @@ class CSelectedOutput;
  * @brief This class is derived from std::exception and is thrown
  * when an unrecoverable error has occured.
  */
-class DLL_EXPORT IPhreeqcStop : std::exception
+class IPQ_DLL_EXPORT IPhreeqcStop : std::exception
 {
 };
 
@@ -39,7 +39,7 @@ class DLL_EXPORT IPhreeqcStop : std::exception
  * Program for Speciation, Batch-Reaction, One-Dimensional Transport,
  * and Inverse Geochemical Calculations
  */
-class DLL_EXPORT IPhreeqc
+class IPQ_DLL_EXPORT IPhreeqc
 {
 public:
 	/**
