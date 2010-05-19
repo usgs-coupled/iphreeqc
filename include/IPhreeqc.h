@@ -898,7 +898,7 @@ Headings
  *  Sets the dump file switch on or off.  This switch controls whether or not phreeqc writes to the dump file.
  *  The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id                   The instance id returned from \ref CreateIPhreeqc.
- *  @param dump_on              If non-zero turns on output to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
+ *  @param dump_on              If non-zero, turns on output to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
  *  @see                        GetDumpFileOn, GetDumpString, GetDumpStringLine, GetDumpStringLineCount, SetDumpStringOn
@@ -922,7 +922,7 @@ Headings
  *  to the dump file are stored in a buffer for retrieval.  The initial setting after calling
  *  \ref CreateIPhreeqc is off.
  *  @param id                   The instance id returned from \ref CreateIPhreeqc.
- *  @param dump_string_on       If non-zero captures the output defined by the <B>DUMP</B> keyword into a string buffer.
+ *  @param dump_string_on       If non-zero, captures the output defined by the <B>DUMP</B> keyword into a string buffer.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
  *  @see                        GetDumpStringOn, GetDumpString, GetDumpStringLine, GetDumpStringLineCount
@@ -952,7 +952,7 @@ Headings
  *  error messages are written to the <B><I>phreeqc.err</I></B> file.  The initial setting after calling
  *  \ref CreateIPhreeqc is off.
  *  @param id                   The instance id returned from \ref CreateIPhreeqc.
- *  @param error_on             If non-zero turns on output to the <B><I>phreeqc.err</I></B> file.
+ *  @param error_on             If non-zero, turns on output to the <B><I>phreeqc.err</I></B> file.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
  *  @see                        OutputErrorString, GetErrorStringLine, GetErrorStringLineCount
@@ -976,7 +976,7 @@ Headings
  *  writes log messages to the <B><I>phreeqc.log</I></B> file.  The initial setting after calling
  *  \ref CreateIPhreeqc is off.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @param log_on        If non-zero turns on output to the <B><I>phreeqc.log</I></B> file.
+ *  @param log_on        If non-zero, turns on output to the <B><I>phreeqc.log</I></B> file.
  *  @retval IPQ_OK       Success.
  *  @retval              IPQ_BADINSTANCE The given id is invalid.
  *  @see                 GetLogFileOn
@@ -1001,7 +1001,7 @@ Headings
  *  writes to the output file.  This is the output normally generated
  *  when phreeqc is run.  The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id               The instance id returned from \ref CreateIPhreeqc.
- *  @param output_on        If non-zero turns on output to the <B><I>phreeqc.out</I></B> file.
+ *  @param output_on        If non-zero, turns on output to the <B><I>phreeqc.out</I></B> file.
  *  @retval IPQ_OK          Success.
  *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @see                    GetOutputFileOn
@@ -1025,7 +1025,7 @@ Headings
  *  Sets the selected-output file switch on or off.  This switch controls whether or not phreeqc writes output to
  *  the selected-output file. The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id               The instance id returned from \ref CreateIPhreeqc.
- *  @param sel_on           If non-zero turns on output to the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file.
+ *  @param sel_on           If non-zero, turns on output to the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file.
  *  @retval IPQ_OK          Success.
  *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @see                    GetSelectedOutputFileOn
