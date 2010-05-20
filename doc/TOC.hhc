@@ -17,14 +17,6 @@
 			<param name="Name" value="IPhreeqc Class Reference">
 			<param name="Local" value="html\classIPhreeqc.html">
 			</OBJECT>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="IPhreeqcStop Class Reference">
-			<param name="Local" value="html\classIPhreeqcStop.html">
-			</OBJECT>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="VAR Struct Reference">
-			<param name="Local" value="html\structVAR.html">
-			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="C/Fortran Reference">
