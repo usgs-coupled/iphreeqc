@@ -44,6 +44,9 @@ class IPQ_DLL_EXPORT IPhreeqc
 public:
 	/**
 	 * Constructor.
+     *  \anchor IPhreeqc_cpp
+     *  @par Example:
+     *  \include IPhreeqc.cpp
 	 */
 	IPhreeqc(void);
 
@@ -72,7 +75,7 @@ public:
 
 	/**
 	 *  Appends the given warning message and increments the warning count.
-	 *  Internally used to create an error condition.
+	 *  Internally used to create a warning condition.
 	 *  @param warning_msg      The warning message to display.
 	 *  @returns                The current warning count.
 	 */
@@ -88,7 +91,7 @@ public:
 	 *  Retrieve the accumulated input string.  The accumulated input string can be run
 	 *  with \ref RunAccumulated.
 	 *  @returns                The accumulated input string.
-	 *  @see                    AccumulateLine, ClearAccumulatedLines, RunAccumulated
+	 *  @see                    AccumulateLine, ClearAccumulatedLines, OutputAccumulatedLines, RunAccumulated
 	 */
 	const std::string&       GetAccumulatedLines(void);
 
@@ -131,7 +134,7 @@ public:
 	 *  @return                 A null terminated string containing the given line.
 	 *                          Returns an empty string if n is out of range.
      *  @pre                    \ref SetDumpStringOn must have been set to true.
-	 *  @see                    GetDumpStringLineCount, GetDumpStringOn, GetDumpFileOn, GetDumpString, SetDumpFileOn, SetDumpStringOn
+	 *  @see                    GetDumpFileOn, GetDumpString, GetDumpStringLineCount, GetDumpStringOn, SetDumpFileOn, SetDumpStringOn
 	 */
 	const char*              GetDumpStringLine(int n);
 
@@ -139,7 +142,7 @@ public:
 	 *  Retrieves the number of lines in the current dump string buffer.
 	 *  @return                 The number of lines.
      *  @pre                    \ref SetDumpStringOn must have been set to true.
-	 *  @see                    GetDumpStringLine, GetDumpStringOn, GetDumpFileOn, GetDumpString, SetDumpFileOn, SetDumpStringOn
+	 *  @see                    GetDumpFileOn, GetDumpString, GetDumpStringLine, GetDumpStringOn, SetDumpFileOn, SetDumpStringOn
 	 */
 	int                      GetDumpStringLineCount(void)const;
 
@@ -147,14 +150,14 @@ public:
 	 *  Retrieves the current value of the dump string switch.
      *  @retval true            Output defined by the <B>DUMP</B> keyword is stored.
      *  @retval false           No output is stored.
-	 *  @see                    GetDumpStringLine, GetDumpFileOn, GetDumpString, GetDumpStringLineCount, SetDumpFileOn, SetDumpStringOn
+	 *  @see                    GetDumpFileOn, GetDumpString, GetDumpStringLine, GetDumpStringLineCount, SetDumpFileOn, SetDumpStringOn
 	 */
 	bool                     GetDumpStringOn(void)const;
 
 	/**
 	 *  Retrieves the current value of the error file switch.
      *  @retval true            Errors are written to the <B><I>phreeqc.err</I></B> file.
-     *  @retval false           No output is written.
+     *  @retval false           No errors are written.
 	 *  @see                    SetErrorFileOn
 	 */
 	bool                     GetErrorFileOn(void)const;
@@ -168,7 +171,7 @@ public:
 
 	/**
 	 *  Retrieves the given error line.
-     *  @return                 A null terminated string containing the given error line message.
+     *  @return                 A null terminated string containing the given line of the error string buffer.
 	 *  @param n                The zero-based index of the line to retrieve.
 	 *  @see                    GetErrorStringLineCount, OutputErrorString
 	 */
@@ -183,8 +186,10 @@ public:
 
 	/**
 	 *  Retrieves the current value of the log file switch.
-     *  @retval true            Output is written to the <B><I>phreeqc.log</I></B> file.
-     *  @retval false           No output is written.
+     *  @retval true            Log messages are written to the <B><I>phreeqc.log</I></B> file.
+     *  @retval false           No log messages are written.
+     *  @remarks
+     *      Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
 	 *  @see                    SetLogFileOn
 	 */
 	bool                     GetLogFileOn(void)const;
@@ -198,7 +203,7 @@ public:
 	bool                     GetOutputFileOn(void)const;
 
 	/**
-	 *  Returns the number of columns currently contained within selected-output buffer.
+	 *  Retrieves the number of columns in the selected-output buffer.
      *  @return                 The number of columns.
 	 *  @see                    GetSelectedOutputRowCount, GetSelectedOutputValue
 	 */
@@ -213,7 +218,7 @@ public:
 	bool                     GetSelectedOutputFileOn(void)const;
 
 	/**
-	 *  Returns the number of rows currently contained within the selected-output buffer.
+	 *  Retrieves the number of rows in the selected-output buffer.
      *  @return                 The number of rows.
 	 *  @see                    GetSelectedOutputColumnCount, GetSelectedOutputFileOn, GetSelectedOutputValue, SetSelectedOutputFileOn
 	 */
@@ -396,7 +401,7 @@ public:
 	int                      GetWarningStringLineCount(void)const;
 
 	/**
-	 *  Retrieves a list containing the current list of components.
+	 *  Retrieves the current list of components.
 	 *  @return                 The current list of components.
 	 *  @see                    GetComponent, GetComponentCount
 	 */
@@ -405,10 +410,10 @@ public:
 	/**
 	 *  Load the specified database file into phreeqc.
 	 *  @param filename         The name of the phreeqc database to load.
-	 *                          The full path will be required if the file is not
+	 *                          The full path (or relative path with respect to the working directory) will be required if the file is not
 	 *                          in the current working directory.
 	 *  @return                 The number of errors encountered.
-	 *  @see                    LoadDatabaseString
+	 *  @see                    LoadDatabaseString, UnLoadDatabase
 	 *  @remarks
      *      All previous definitions are cleared.
 	 */
@@ -418,7 +423,7 @@ public:
 	 *  Load the specified string as a database into phreeqc.
 	 *  @param input            String containing data to be used as the phreeqc database.
 	 *  @return                 The number of errors encountered.
-	 *  @see                    LoadDatabase
+	 *  @see                    LoadDatabaseString, UnLoadDatabase
 	 *  @remarks
      *      All previous definitions are cleared.
 	 */
@@ -447,7 +452,7 @@ public:
 	 *  @return                 The number of errors encountered.
 	 *  @see                    AccumulateLine, ClearAccumulatedLines, OutputAccumulatedLines, RunFile, RunString
 	 *  @remarks
-	 *      The accumulated input is cleared upon a successful run (no errors).
+	 *      The accumulated input is cleared at the next call to \ref AccumulateLine.
 	 *  @pre
 	 *      \ref LoadDatabase/\ref LoadDatabaseString must have been called and returned 0 (zero) errors.
 	 */
@@ -474,50 +479,54 @@ public:
 	int                      RunString(const char* input);
 
 	/**
-	 *  Sets the dump file switch on or off.  This switch controls whether or not phreeqc writes to the dump file.
+	 *  Sets the dump file switch on or off.  This switch controls whether or not phreeqc writes to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
 	 *  The initial setting is false.
-	 *  @param bValue           If true, turns on output to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
-	 *  @see                    GetDumpStringLine, GetDumpStringLineCount, GetDumpFileOn, GetDumpString, GetDumpStringOn, SetDumpStringOn
+	 *  @param bValue           If true, turns on output to the <B>DUMP</B> file;
+	 *                          if false, turns off output to the <B>DUMP</B> file.
+	 *  @see                    GetDumpFileOn, GetDumpString, GetDumpStringOn, GetDumpStringLine, GetDumpStringLineCount, SetDumpStringOn
 	 */
 	void                     SetDumpFileOn(bool bValue);
 
 	/**
 	 *  Sets the dump string switch on or off.  This switch controls whether or not the data normally sent
 	 *  to the dump file are stored in a buffer for retrieval.  The initial setting is false.
-	 *  @param bValue           If true, captures the output defined by the <B>DUMP</B> keyword into a string buffer.
-	 *  @see                    GetDumpStringLine, GetDumpStringLineCount, GetDumpString, GetDumpStringOn
+	 *  @param bValue           If true, captures the output defined by the <B>DUMP</B> keyword into a string buffer;
+	 *                          if false, output defined by the <B>DUMP</B> keyword is not captured to a string buffer.
+	 *  @see                    GetDumpFileOn, GetDumpString, GetDumpStringOn, GetDumpStringLine, GetDumpStringLineCount, SetDumpFileOn
 	 */
 	void                     SetDumpStringOn(bool bValue);
 
 	/**
 	 *  Sets the error file switch on or off.  This switch controls whether or not
-	 *  error messages are written to the error file.  The initial setting is false.
-	 *  @param bValue           If true, turns on output to the <B><I>phreeqc.err</I></B> file.
+	 *  error messages are written to the <B><I>phreeqc.err</I></B> file.  The initial setting is false.
+	 *  @param bValue           If true, writes errors to the error file; if false, no errors are written to the error file.
 	 *  @see                    GetErrorStringLine, GetErrorStringLineCount, GetErrorFileOn, OutputErrorString
 	 */
 	void                     SetErrorFileOn(bool bValue);
 
 	/**
 	 *  Sets the log file switch on or off.  This switch controls whether or not phreeqc
-	 *  writes log messages to the log file.  The initial setting is false.
-	 *  @param bValue           If true, turns on output to the <B><I>phreeqc.log</I></B> file.
+	 *  writes log messages to the <B><I>phreeqc.log</I></B> file.  The initial setting is false.
+	 *  @param bValue           If true, turns on output to the log file; if false, no log messages are written to the log file.
+     *  @remarks
+     *      Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
 	 *  @see                    GetLogFileOn
 	 */
 	void                     SetLogFileOn(bool bValue);
 
 	/**
 	 *  Sets the output file switch on or off.  This switch controls whether or not phreeqc
-	 *  writes to the output file.  This is the output that is normally generated
+	 *  writes to the <B><I>phreeqc.out</I></B> file.  This is the output that is normally generated
 	 *  when phreeqc is run.  The initial setting is false.
-	 *  @param bValue           If true, turns on output to the <B><I>phreeqc.out</I></B> file.
+	 *  @param bValue           If true, writes output to the output file; if false, no output is written to the output file.
 	 *  @see                    GetOutputFileOn
 	 */
 	void                     SetOutputFileOn(bool bValue);
 
 	/**
 	 *  Sets the selected-output file switch on or off.  This switch controls whether or not phreeqc writes output to
-	 *  the selected-output file. The initial setting is false.
-	 *  @param bValue           If true, turns on output to the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file.
+	 *  the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file. The initial setting is false.
+	 *  @param bValue           If true, writes output to the selected-output file; if false, no output is written to the selected-output file.
 	 *  @see                    GetSelectedOutputColumnCount, GetSelectedOutputFileOn, GetSelectedOutputRowCount, GetSelectedOutputValue
 	 */
 	void                     SetSelectedOutputFileOn(bool bValue);

@@ -15,7 +15,8 @@ TARGETS = \
 	AccumulateLine \
 	CreateIPhreeqc \
 	GetComponent \
-	GetDumpString
+	GetDumpString \
+	IPhreeqc
 	
 	
 F90_TARGETS = \
@@ -37,6 +38,9 @@ GetComponent: GetComponent.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetDumpString: GetDumpString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+IPhreeqc: IPhreeqc.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 
@@ -63,6 +67,9 @@ F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
 
 .cxx.lo:
 	$(LIBTOOL) --mode=compile $(CXX) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+	
+.cpp.lo:
+	$(LIBTOOL) --mode=compile $(CXX) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
 .f.lo:
 	$(LIBTOOL) --mode=compile $(F77) $(FFLAGS) -c -o $@ $<
@@ -75,7 +82,8 @@ LO_FILES = \
 	CreateIPhreeqc.lo \
 	DestroyIPhreeqc.lo \
 	GetComponent.lo \
-	GetDumpString.lo
+	GetDumpString.lo\
+	IPhreeqc.lo
 
 
 F90_LO_FILES = \
@@ -83,7 +91,8 @@ F90_LO_FILES = \
 	F90CreateIPhreeqc.lo \
 	F90DestroyIPhreeqc.lo \
 	F90GetComponent.lo \
-	F90GetDumpStringLine.lo
+	F90GetDumpStringLine.lo \
+	F90ClearAccumulatedLines.lo
 	
 
 clean:

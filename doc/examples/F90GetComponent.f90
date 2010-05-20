@@ -21,7 +21,7 @@ PROGRAM example
   
   DO i=1,GetComponentCount(id)
      CALL GetComponent(id, i, comp)
-     WRITE(*,*) "comp ", i, "= ", comp
+     WRITE(*,*) "comp #", i, "= ", comp
   ENDDO
   
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
