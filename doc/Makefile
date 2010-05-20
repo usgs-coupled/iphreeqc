@@ -15,7 +15,7 @@ EXAMPLES = \
 	examples/F90DestroyIPhreeqc.f90 \
 	examples/F90GetComponent.f90 \
 	examples/F90GetDumpLine.f90 \
-	examples/F90GetDumpStringLine.f90 \
+	examples/F90GetDumpStringLine.f90
 	
 
 all: $(TARGET)
