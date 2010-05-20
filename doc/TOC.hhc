@@ -196,5 +196,31 @@
 			<param name="Local" value="html\IPhreeqc_8h.html#ab972eca345175f5703918c05737e725a">
 			</OBJECT>
 	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="C/C++ VAR Reference">
+		<param name="Local" value="html\Var_8h.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarAllocString">
+			<param name="Local" value="html\Var_8h.html#a4bc9504b10b2cce50efd0312703ac1f9">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarClear">
+			<param name="Local" value="html\Var_8h.html#a697bc568210799b851797b8232d6ddea">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarCopy">
+			<param name="Local" value="html\Var_8h.html#a87ebbf36638bfb913ab9ab9acf87bb45">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarFreeString">
+			<param name="Local" value="html\Var_8h.html#a323d0b3678b4187a3dbba35a5ded0f1f">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarInit">
+			<param name="Local" value="html\Var_8h.html#a54f8cc0deea8289bec3aceceb71c9ef3">
+			</OBJECT>
+	</UL>
 </UL>
 </BODY></HTML>

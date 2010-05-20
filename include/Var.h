@@ -50,10 +50,11 @@ typedef struct {
 extern "C" {
 #endif
 
-/** Initializes a VAR.
- *  @param pvar Pointer to the VAR that will be initialized.
+/** Allocates a new string for use in a VAR and copies the passed string into it.
+ *  @param pSrc Pointer to the VAR that will be initialized.
+ *  @return A pointer to the string on success NULL otherwise.
  */
-IPQ_DLL_EXPORT void VarInit(VAR* pvar);
+IPQ_DLL_EXPORT char*   VarAllocString(const char* pSrc);
 
 /** Clears a VAR.
  *  @param pvar Pointer to the VAR that will be freed and initialized.
@@ -72,17 +73,15 @@ IPQ_DLL_EXPORT VRESULT VarClear(VAR* pvar);
  */
 IPQ_DLL_EXPORT VRESULT VarCopy(VAR* pvarDest, const VAR* pvarSrc);
 
-
-/** Allocates a new string for use in a VAR and copies the passed string into it.
- *  @param pSrc Pointer to the VAR that will be initialized.
- *  @return A pointer to the string on success NULL otherwise.
- */
-IPQ_DLL_EXPORT char* VarAllocString(const char* pSrc);
-
 /** Frees a string allocated using VarAllocString.
  *  @param pSrc Pointer to the string to be freed.
  */
-IPQ_DLL_EXPORT void VarFreeString(char* pSrc);
+IPQ_DLL_EXPORT void    VarFreeString(char* pSrc);
+
+/** Initializes a VAR.
+ *  @param pvar Pointer to the VAR that will be initialized.
+ */
+IPQ_DLL_EXPORT void    VarInit(VAR* pvar);
 
 #if defined(__cplusplus)
 }
