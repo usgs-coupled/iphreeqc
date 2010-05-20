@@ -60,10 +60,41 @@ extern "C" {
  *  @returns             The current error count if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
  *  @par Fortran90 Interface:
  *  @htmlonly
- *  Not implemented.
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION AddError(ID,ERROR_MSG)
+ *    INTEGER(KIND=4),  INTENT(IN) :: ID
+ *    CHARACTER(LEN=*), INTENT(IN) :: ERROR_MSG
+ *    INTEGER(KIND=4)              :: AddError
+ *  END FUNCTION AddError
+ *  </PRE>
+ *  </CODE>
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT int         AddError(int id, const char* error_msg);
+
+
+/**
+ *  Appends the given warning message and increments the warning count.
+ *  Internally used to create a warning condition.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @param error_msg     The warning message to display.
+ *  @returns             The current warning count if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION AddWarning(ID,WARN_MSG)
+ *    INTEGER(KIND=4),  INTENT(IN) :: ID
+ *    CHARACTER(LEN=*), INTENT(IN) :: WARN_MSG
+ *    INTEGER(KIND=4)              :: AddWarning
+ *  END FUNCTION AddWarning
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT int         AddWarning(int id, const char* warn_msg);
+
 
 
 /**

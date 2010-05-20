@@ -40,6 +40,10 @@
 			<param name="Local" value="html\IPhreeqc_8h.html#af3f2f3e5a3da135b37bd43e943b3dc38">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AddWarning">
+			<param name="Local" value="html\IPhreeqc_8h.html#ae8393fd0ef3939bed93943dcac17a0a1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="ClearAccumulatedLines">
 			<param name="Local" value="html\IPhreeqc_8h.html#a9b0cbb3bbc80c9e8b4e43d99e831cb69">
 			</OBJECT>

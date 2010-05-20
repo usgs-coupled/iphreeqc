@@ -25,6 +25,24 @@
 
 
        INTERFACE
+        FUNCTION AddError(ID,ERROR_MSG)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         CHARACTER(LEN=*), INTENT(IN) :: ERROR_MSG
+         INTEGER(KIND=4)              :: AddError
+        END FUNCTION AddError
+       END INTERFACE       
+
+
+       INTERFACE
+        FUNCTION AddWarning(ID,WARN_MSG)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         CHARACTER(LEN=*), INTENT(IN) :: WARN_MSG
+         INTEGER(KIND=4)              :: AddWarning
+        END FUNCTION AddWarning
+       END INTERFACE       
+
+
+       INTERFACE
         FUNCTION CreateIPhreeqc()
          INTEGER(KIND=4) :: CreateIPhreeqc
         END FUNCTION CreateIPhreeqc
@@ -209,7 +227,11 @@
        END INTERFACE
 
 
-       !!! TODO OutputWarningString
+       INTERFACE 
+        SUBROUTINE OutputWarningString(ID)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+        END SUBROUTINE OutputWarningString
+       END INTERFACE
 
 
        INTERFACE

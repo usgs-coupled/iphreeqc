@@ -43,6 +43,8 @@ C     function prototypes
 C      
           
       INTEGER(KIND=4) AccumulateLine
+      INTEGER(KIND=4) AddError
+      INTEGER(KIND=4) AddWarning
       INTEGER(KIND=4) CreateIPhreeqc
       INTEGER(KIND=4) DestroyIPhreeqc
       INTEGER(KIND=4) GetComponentCount
@@ -63,8 +65,8 @@ C
       INTEGER(KIND=4) GetWarningStringLineCount
       INTEGER(KIND=4) LoadDatabase
       INTEGER(KIND=4) LoadDatabaseString
-      INTEGER(KIND=4) OutputLastError
-      INTEGER(KIND=4) OutputLastWarning
+      INTEGER(KIND=4) OutputErrorString
+      INTEGER(KIND=4) OutputWarningString
       INTEGER(KIND=4) OutputAccumulatedLines
       INTEGER(KIND=4) RunAccumulated
       INTEGER(KIND=4) RunFile
