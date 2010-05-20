@@ -547,6 +547,7 @@ protected:
 	void AddSelectedOutput(const char* name, const char* format, va_list argptr);
 
 	void check_database(const char* sz_routine);
+	void open_output_files(const char* sz_routine);
 	void do_run(const char* sz_routine, std::istream* pis, FILE* fp, PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie);
 
 	void update_errors(void);
