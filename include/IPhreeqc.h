@@ -680,6 +680,13 @@ Headings
  *  @param VTYPE             Returns the variable type.  See \ref VAR_TYPE.
  *  @param DVALUE            Returns the numeric value when (VTYPE=\ref TT_DOUBLE) or (VTYPE=\ref TT_LONG).
  *  @param SVALUE            Returns the string variable when (VTYPE=\ref TT_STRING).  When (VTYPE=\ref TT_DOUBLE) or (VTYPE=\ref TT_LONG) this variable is filled with a string equivalent of DVALUE.
+ *  \anchor GetSelectedOutputValue_c
+ *  @par  C Example:
+ *  \include GetSelectedOutputValue.c
+ *
+ *  \anchor F90GetSelectedOutputValue_f90
+ *  @par  Fortran90 Example:
+ *  \include F90GetSelectedOutputValue.f90
  */
 	IPQ_DLL_EXPORT IPQ_RESULT  GetSelectedOutputValue(int id, int row, int col, VAR* pVAR);
 
