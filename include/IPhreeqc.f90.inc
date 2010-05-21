@@ -319,6 +319,3 @@
          INTEGER(KIND=4)              :: SetSelectedOutputFileOn
         END FUNCTION SetSelectedOutputFileOn
        END INTERFACE
-       
-       
-       !!! TODO UnLoadDatabase

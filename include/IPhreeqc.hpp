@@ -416,7 +416,7 @@ public:
 	 *                          The full path (or relative path with respect to the working directory) will be required if the file is not
 	 *                          in the current working directory.
 	 *  @return                 The number of errors encountered.
-	 *  @see                    LoadDatabaseString, UnLoadDatabase
+	 *  @see                    LoadDatabaseString
 	 *  @remarks
      *      All previous definitions are cleared.
 	 */
@@ -426,7 +426,7 @@ public:
 	 *  Load the specified string as a database into phreeqc.
 	 *  @param input            String containing data to be used as the phreeqc database.
 	 *  @return                 The number of errors encountered.
-	 *  @see                    LoadDatabaseString, UnLoadDatabase
+	 *  @see                    LoadDatabaseString
 	 *  @remarks
      *      All previous definitions are cleared.
 	 */
@@ -534,16 +534,6 @@ public:
 	 */
 	void                     SetSelectedOutputFileOn(bool bValue);
 
-	/**
-	 *  Unloads the database currently loaded into phreeqc.  In addition, all
-	 *  previous phreeqc definitions (i.e. SOLUTION, EXCHANGE, etc) are cleared from memory.
-	 *  @see                    LoadDatabase, LoadDatabaseString
-	 *  @remarks
-	 *      Use of the method is not normally necessary.  It is called automatically
-	 *      before each call to \ref LoadDatabase or \ref LoadDatabaseString.
-	 */
-	void                     UnLoadDatabase(void);
-
 protected:
 	static int handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
 	int output_handler(const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
@@ -557,6 +547,7 @@ protected:
 
 	int EndRow(void);
 	void AddSelectedOutput(const char* name, const char* format, va_list argptr);
+	void UnLoadDatabase(void);
 
 	void check_database(const char* sz_routine);
 	void open_output_files(const char* sz_routine);

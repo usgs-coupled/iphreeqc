@@ -77,4 +77,3 @@ C
       INTEGER(KIND=4) SetLogFileOn
       INTEGER(KIND=4) SetOutputFileOn
       INTEGER(KIND=4) SetSelectedOutputFileOn
-      INTEGER(KIND=4) UnLoadDatabase

@@ -1248,7 +1248,6 @@ void TestIPhreeqcLib::TestRunNoDatabaseLoaded(void)
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 
-	::UnLoadDatabase(n);
 	CPPUNIT_ASSERT_EQUAL( 1, ::RunAccumulated(n) );
 
 	const char expected[] =

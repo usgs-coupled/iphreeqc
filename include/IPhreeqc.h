@@ -111,7 +111,7 @@ extern "C" {
 /**
  *  Create a new IPhreeqc instance.
  *  @return      A non-negative value if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
- *  @see         DestroyIPhreeqc, UnLoadDatabase
+ *  @see         DestroyIPhreeqc
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -139,7 +139,7 @@ extern "C" {
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @retval IPQ_OK Success
  *  @retval IPQ_BADINSTANCE The given id is invalid.
- *  @see                 CreateIPhreeqc, UnLoadDatabase
+ *  @see                 CreateIPhreeqc
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -744,7 +744,7 @@ Headings
  *                       The full path (or relative path with respect to the working directory)
  *                       must be given if the file is not in the current working directory.
  *  @return              The number of errors encountered.
- *  @see                 LoadDatabaseString, UnLoadDatabase
+ *  @see                 LoadDatabaseString
  *  @remarks
  *  All previous definitions are cleared.
  *  @par Fortran90 Interface:
@@ -774,7 +774,7 @@ Headings
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param input         String containing data to be used as the phreeqc database.
  *  @return              The number of errors encountered.
- *  @see                 LoadDatabase, UnLoadDatabase
+ *  @see                 LoadDatabase
  *  @remarks
  *  All previous definitions are cleared.
  *  @par Fortran90 Interface:
@@ -1091,21 +1091,6 @@ Headings
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT IPQ_RESULT  SetSelectedOutputFileOn(int id, int sel_on);
-
-
-
-/**
- *  Unloads the database currently loaded into phreeqc.  In addition, all
- *  previous phreeqc definitions (i.e. SOLUTION, EXCHANGE, etc) are cleared from memory.
- *  @param id               The instance id returned from \ref CreateIPhreeqc.
- *  @retval IPQ_OK          Success.
- *  @retval IPQ_BADINSTANCE The given id is invalid.
- *  @see                    DestroyIPhreeqc, LoadDatabase, LoadDatabaseString
- *  @remarks
- *  Use of the method is not normally necessary.  It is called automatically
- *  before each call to \ref LoadDatabase or \ref LoadDatabaseString.
- */
-	IPQ_DLL_EXPORT IPQ_RESULT  UnLoadDatabase(int id);
 
 
 // TODO int RunWithCallback(PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie, int output_on, int error_on, int log_on, int selected_output_on);

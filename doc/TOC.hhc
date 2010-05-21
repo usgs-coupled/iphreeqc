@@ -183,10 +183,6 @@
 			<param name="Name" value="SetSelectedOutputFileOn">
 			<param name="Local" value="html\IPhreeqc_8h.html#aab495f8b0729402876405d1be19ecded">
 			</OBJECT>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="UnLoadDatabase">
-			<param name="Local" value="html\IPhreeqc_8h.html#ab972eca345175f5703918c05737e725a">
-			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="C/C++ VAR Reference">
