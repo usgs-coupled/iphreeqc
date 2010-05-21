@@ -62,6 +62,7 @@ public:
 	 *  @param line             The line(s) to add for input to phreeqc.
 	 *  @retval VR_OK           Success
 	 *  @retval VR_OUTOFMEMORY  Out of memory
+     *  @see                    ClearAccumulatedLines, OutputAccumulatedLines, RunAccumulated
 	 */
 	VRESULT                  AccumulateLine(const char *line);
 
@@ -70,6 +71,7 @@ public:
 	 *  Internally used to create an error condition.
 	 *  @param error_msg        The error message to display.
 	 *  @returns                The current error count.
+     *  @see                    GetErrorString, GetErrorStringLine, GetErrorStringLineCount, OutputErrorString
 	 */
 	size_t                   AddError(const char* error_msg);
 
@@ -78,6 +80,7 @@ public:
 	 *  Internally used to create a warning condition.
 	 *  @param warning_msg      The warning message to display.
 	 *  @returns                The current warning count.
+     *  @see                    GetWarningString, GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
 	 */
 	size_t                   AddWarning(const char* warning_msg);
 

@@ -58,6 +58,7 @@ extern "C" {
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param error_msg     The error message to display.
  *  @returns             The current error count if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
+ *  @see                 GetErrorString, GetErrorStringLine, GetErrorStringLineCount, OutputErrorString
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
@@ -80,6 +81,7 @@ extern "C" {
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param error_msg     The warning message to display.
  *  @returns             The current warning count if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
+ *  @see                 GetWarningString, GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
  *  @par Fortran90 Interface:
  *  @htmlonly
  *  <CODE>
