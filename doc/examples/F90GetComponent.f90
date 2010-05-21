@@ -7,25 +7,25 @@ PROGRAM example
   id = CreateIPhreeqc()
   IF (id.LT.0) THEN
      STOP
-  ENDIF
+  END IF
   
   IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
   
   IF (RunFile(id, "ex2").NE.0) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
   
   DO i=1,GetComponentCount(id)
      CALL GetComponent(id, i, comp)
      WRITE(*,*) "comp ", i, " = ", comp
-  ENDDO
+  END DO
   
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
 END PROGRAM example

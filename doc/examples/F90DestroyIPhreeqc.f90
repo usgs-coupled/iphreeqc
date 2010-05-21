@@ -5,11 +5,10 @@ PROGRAM example
   id = CreateIPhreeqc()
   IF (id.LT.0) THEN
      STOP
-  ENDIF
+  END IF
   
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
-  
+  END IF
 END PROGRAM example

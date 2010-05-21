@@ -20,55 +20,55 @@ FUNCTION F_MAIN()
   IF (id.LT.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   ! Dump
   IF (TestGetSet(id,GetDumpFileOn,SetDumpFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   ! Dump string
   IF (TestGetSet(id,GetDumpStringOn,SetDumpStringOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   ! Error
   IF (TestGetSet(id,GetErrorFileOn,SetErrorFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   ! Log
   IF (TestGetSet(id,GetLogFileOn,SetLogFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   ! Output
   IF (TestGetSet(id,GetOutputFileOn,SetOutputFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   ! Selected output
   IF (TestGetSet(id,GetSelectedOutputFileOn,SetSelectedOutputFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
      CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   IF (RunFile(id, "ex2").NE.0) THEN
      CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   DO r=0,GetSelectedOutputRowCount(id)
      DO c=1,GetSelectedOutputColumnCount(id)
@@ -76,16 +76,16 @@ FUNCTION F_MAIN()
            CALL OutputErrorString(id)
            F_MAIN = EXIT_FAILURE
            RETURN
-        ENDIF
-     ENDDO
-  ENDDO
+        END IF
+     END DO
+  END DO
   
   
   IF (DestroyIPhreeqc(id).NE.0) THEN
      CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   F_MAIN = EXIT_SUCCESS
   RETURN
@@ -118,22 +118,22 @@ FUNCTION TestGetSet(id,getFunc,setFunc)
   IF (getFunc(id)) THEN
      TestGetSet = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   IF (setFunc(id,.TRUE.).NE.IPQ_OK) THEN
      TestGetSet = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   IF (.NOT.getFunc(id)) THEN
      TestGetSet = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   IF (setFunc(id,.FALSE.).NE.IPQ_OK) THEN
      TestGetSet = EXIT_FAILURE
      RETURN
-  ENDIF
+  END IF
   
   TestGetSet = EXIT_SUCCESS
   RETURN

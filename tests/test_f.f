@@ -41,56 +41,56 @@
       IF (id.LT.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
 
 C     Dump
       IF (TestGetSet(id,GetDumpFileOn,SetDumpFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
 C     Dump string
       IF (TestGetSet(id,GetDumpStringOn,SetDumpStringOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
 C     Error
       IF (TestGetSet(id,GetErrorFileOn,SetErrorFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
 C     Log
       IF (TestGetSet(id,GetLogFileOn,SetLogFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
 C     Output
       IF (TestGetSet(id,GetOutputFileOn,SetOutputFileOn).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
 C     Selected output
       IF (TestGetSet(id,GetSelectedOutputFileOn,SetSelectedOutputFileOn)
      &     .NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
          CALL OutputErrorString(id)
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       IF (RunFile(id, "ex2").NE.0) THEN
          CALL OutputErrorString(id)
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       DO 20 r=0,GetSelectedOutputRowCount(id)
          DO 10 c=1,GetSelectedOutputColumnCount(id)
@@ -98,7 +98,7 @@ C     Selected output
                CALL OutputErrorString(id)
                F_MAIN = EXIT_FAILURE
                RETURN
-            ENDIF
+            END IF
  10      CONTINUE
  20   CONTINUE
       
@@ -106,7 +106,7 @@ C     Selected output
          CALL OutputErrorString(id)
          F_MAIN = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       F_MAIN = EXIT_SUCCESS
       RETURN
@@ -114,9 +114,6 @@ C     Selected output
       END FUNCTION F_MAIN
       
       
-
-
-
 
       FUNCTION TestGetSet(id,getFunc,setFunc)
       
@@ -137,22 +134,22 @@ C     Selected output
       IF (getFunc(id)) THEN
          TestGetSet = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       IF (setFunc(id,.TRUE.).NE.IPQ_OK) THEN
          TestGetSet = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       IF (.NOT.getFunc(id)) THEN
          TestGetSet = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       IF (setFunc(id,.FALSE.).NE.IPQ_OK) THEN
          TestGetSet = EXIT_FAILURE
          RETURN
-      ENDIF
+      END IF
       
       TestGetSet = EXIT_SUCCESS
       RETURN

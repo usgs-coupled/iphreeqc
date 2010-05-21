@@ -7,21 +7,21 @@
       id = CreateIPhreeqc()
       IF (id.LT.0) THEN
         STOP
-      ENDIF
+      END IF
       
       IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
         CALL OutputErrorString(id)
         STOP
-      ENDIF
+      END IF
       
       IF (RunFile(id, "ex1").NE.0) THEN
         CALL OutputErrorString(id)
         STOP
-      ENDIF
+      END IF
       
       IF (DestroyIPhreeqc(id).NE.0) THEN
         CALL OutputErrorString(id)
         STOP
-      ENDIF
+      END IF
       
       END SUBROUTINE F_MAIN

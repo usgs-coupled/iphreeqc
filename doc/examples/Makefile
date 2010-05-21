@@ -16,14 +16,16 @@ TARGETS = \
 	CreateIPhreeqc \
 	GetComponent \
 	GetDumpString \
+	GetSelectedOutputValue \
 	IPhreeqc
-	
-	
+
+
 F90_TARGETS = \
 	F90CreateIPhreeqc \
 	F90GetComponent \
 	F90GetDumpStringLine \
-	F90ClearAccumulatedLines
+	F90ClearAccumulatedLines \
+	F90GetSelectedOutputValue
 
 
 all: $(TARGETS) $(F90_TARGETS)
@@ -40,6 +42,9 @@ GetComponent: GetComponent.lo $(IPHREEQC_LA)
 GetDumpString: GetDumpString.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
+GetSelectedOutputValue: GetSelectedOutputValue.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
 IPhreeqc: IPhreeqc.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
@@ -52,11 +57,14 @@ F90CreateIPhreeqc: F90CreateIPhreeqc.lo $(IPHREEQC_LA)
 
 F90GetComponent: F90GetComponent.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
-	
+
 F90GetDumpStringLine: F90GetDumpStringLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
+F90GetSelectedOutputValue: F90GetSelectedOutputValue.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 .SUFFIXES: .c .cxx .f .f90 .lo
@@ -67,7 +75,7 @@ F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
 
 .cxx.lo:
 	$(LIBTOOL) --mode=compile $(CXX) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
-	
+
 .cpp.lo:
 	$(LIBTOOL) --mode=compile $(CXX) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
@@ -83,7 +91,8 @@ LO_FILES = \
 	DestroyIPhreeqc.lo \
 	GetComponent.lo \
 	GetDumpString.lo\
-	IPhreeqc.lo
+	IPhreeqc.lo \
+	GetSelectedOutputValue.lo
 
 
 F90_LO_FILES = \
@@ -92,8 +101,9 @@ F90_LO_FILES = \
 	F90DestroyIPhreeqc.lo \
 	F90GetComponent.lo \
 	F90GetDumpStringLine.lo \
-	F90ClearAccumulatedLines.lo
-	
+	F90ClearAccumulatedLines.lo \
+	F90GetSelectedOutputValue.lo
+
 
 clean:
 	$(LIBTOOL) --mode=clean rm -f *~ $(TARGETS) $(F90_TARGETS) $(LO_FILES) $(F90_LO_FILES)

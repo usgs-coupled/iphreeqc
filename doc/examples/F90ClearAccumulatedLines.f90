@@ -6,27 +6,27 @@ PROGRAM example
   id = CreateIPhreeqc()
   IF (id.LT.0) THEN
      STOP
-  ENDIF
+  END IF
   
   IF (LoadDatabase(id, "../../database/wateq4f.dat").NE.0) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
   
   IF (AccumulateLine(id, "SOLUTION 1").NE.IPQ_OK) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
   
   IF (AccumulateLine(id, "pH -2").NE.IPQ_OK) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
   
   IF (AccumulateLine(id, "END").NE.IPQ_OK) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
   
   IF (RunAccumulated(id).NE.0) THEN
      CALL OutputAccumulatedLines(id)
@@ -34,26 +34,26 @@ PROGRAM example
      IF (AccumulateLine(id, "SOLUTION 1").NE.IPQ_OK) THEN
         CALL OutputErrorString(id)
         STOP
-     ENDIF
+     END IF
      
      IF (AccumulateLine(id, "pH 2").NE.IPQ_OK) THEN
         CALL OutputErrorString(id)
         STOP
-     ENDIF
+     END IF
      
      IF (AccumulateLine(id, "END").NE.IPQ_OK) THEN
         CALL OutputErrorString(id)
         STOP
-     ENDIF
+     END IF
      
      IF (RunAccumulated(id).NE.0) THEN
         STOP
-     ENDIF
-  ENDIF
+     END IF
+  END IF
   
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
      CALL OutputErrorString(id)
      STOP
-  ENDIF
+  END IF
   WRITE(*,*) "Ok"
 END PROGRAM example
