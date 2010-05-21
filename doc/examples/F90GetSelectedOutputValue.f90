@@ -35,4 +35,8 @@ PROGRAM example
      END DO
      WRITE(*,*)
   END DO
+
+  IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
+     STOP
+  END IF
 END PROGRAM example

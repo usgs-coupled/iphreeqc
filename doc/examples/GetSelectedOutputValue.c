@@ -30,7 +30,7 @@ int main(void)
       if (GetSelectedOutputValue(id, i, j, &v) == VR_OK) {
         switch (v.type) {
         case TT_LONG:
-          printf("%d ", v.lVal);
+          printf("%ld ", v.lVal);
           break;
         case TT_DOUBLE:
           printf("%g ", v.dVal);
@@ -44,5 +44,10 @@ int main(void)
     }
     printf("\n");
   }
+
+  if (DestroyIPhreeqc(id)) {
+    return EXIT_FAILURE;
+  }
+
   return EXIT_SUCCESS;
 }

@@ -1,7 +1,6 @@
 PROGRAM example
   INCLUDE "IPhreeqc.f90.inc"
   INTEGER(KIND=4) :: id
-  INTEGER(KIND=4) :: i
   
   id = CreateIPhreeqc()
   IF (id.LT.0) THEN
