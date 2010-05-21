@@ -22,7 +22,7 @@ int main(void)
   }
   
   for (i=0; i < GetComponentCount(id); ++i) {
-    printf("comp #%d = %s\n", i, GetComponent(id, i));
+    printf("comp %d = %s\n", i, GetComponent(id, i));
   }
   
   if (DestroyIPhreeqc(id) != IPQ_OK) {
