@@ -667,7 +667,7 @@ Headings
  *    INTEGER(KIND=4),   INTENT(IN)   :: ROW
  *    INTEGER(KIND=4),   INTENT(IN)   :: COL
  *    INTEGER(KIND=4),   INTENT(OUT)  :: VTYPE
- *    REAL*8,            INTENT(OUT)  :: DVALUE
+ *    REAL(KIND=8),      INTENT(OUT)  :: DVALUE
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: SVALUE
  *    INTEGER(KIND=4)                 :: GetSelectedOutputValue
  *  END FUNCTION GetSelectedOutputValue
