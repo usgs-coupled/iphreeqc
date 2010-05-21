@@ -220,6 +220,13 @@
        END INTERFACE
 
 
+       INTERFACE
+        SUBROUTINE OutputAccumulatedLines(ID)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+        END SUBROUTINE OutputAccumulatedLines
+       END INTERFACE 
+
+
        INTERFACE 
         SUBROUTINE OutputErrorString(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
@@ -232,13 +239,6 @@
          INTEGER(KIND=4),  INTENT(IN) :: ID
         END SUBROUTINE OutputWarningString
        END INTERFACE
-
-
-       INTERFACE
-        SUBROUTINE OutputAccumulatedLines(ID)
-         INTEGER(KIND=4),  INTENT(IN) :: ID
-        END SUBROUTINE OutputAccumulatedLines
-       END INTERFACE 
 
 
        INTERFACE

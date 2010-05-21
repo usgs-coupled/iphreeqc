@@ -65,9 +65,6 @@ C
       INTEGER(KIND=4) GetWarningStringLineCount
       INTEGER(KIND=4) LoadDatabase
       INTEGER(KIND=4) LoadDatabaseString
-      INTEGER(KIND=4) OutputErrorString
-      INTEGER(KIND=4) OutputWarningString
-      INTEGER(KIND=4) OutputAccumulatedLines
       INTEGER(KIND=4) RunAccumulated
       INTEGER(KIND=4) RunFile
       INTEGER(KIND=4) RunString
