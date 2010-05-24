@@ -27,9 +27,9 @@ PROGRAM example
      DO j=1,GetSelectedOutputColumnCount(id)
         IF (GetSelectedOutputValue(id, i, j, vt, dv, sv).EQ.IPQ_OK) THEN
            IF (vt.EQ.TT_DOUBLE) THEN
-              WRITE(*,"(g12.6,A1)",ADVANCE='NO') dv, ' '
+              WRITE(*,"(g12.6,A1)",ADVANCE="NO") dv, " "
            ELSE IF (vt.EQ.TT_STRING) THEN
-              WRITE(*,"(A12,A1)",ADVANCE='NO') sv, ' '
+              WRITE(*,"(A12,A1)",ADVANCE="NO") sv, " "
            END IF
         END IF
      END DO
