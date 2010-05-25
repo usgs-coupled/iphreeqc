@@ -557,7 +557,8 @@ protected:
 
 protected:
 	bool                       DatabaseLoaded;
-	bool                       ClearAccumulatedLinesOnNextAccumulate;
+	bool                       ClearAccumulated;
+	bool                       UpdateComponents;
 	bool                       SelectedOutputOn;
 	bool                       OutputOn;
 	bool                       LogOn;

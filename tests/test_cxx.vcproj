@@ -253,7 +253,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy phreeqc.dat.in phreeqc.dat&#x0D;&#x0A;copy ex1.in ex1&#x0D;&#x0A;"
+				CommandLine="copy phreeqc.dat.in phreeqc.dat&#x0D;&#x0A;copy ex2.in ex2&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration

@@ -23,6 +23,73 @@ IPQ_RESULT USER_PUNCH(int n, const char* element, int max);
 IPQ_RESULT SELECTED_OUTPUT(int n);
 IPQ_RESULT DUMP(int n);
 
+const char ex15_dat[] =
+	"SOLUTION_MASTER_SPECIES\n"
+	"C        CO2            2.0     61.0173         12.0111\n"
+	"Cl       Cl-            0.0     Cl              35.453\n"
+	"Co       Co+2           0.0     58.93           58.93   \n"
+	"E        e-             0.0     0.0             0.0\n"
+	"H        H+             -1.     1.008           1.008\n"
+	"H(0)     H2             0.0     1.008\n"
+	"H(1)     H+             -1.     1.008\n"
+	"N        NH4+           0.0     14.0067         14.0067\n"
+	"Na       Na+            0.0     Na              22.9898\n"
+	"Nta      Nta-3          3.0     1.              1.\n"
+	"O        H2O            0.0     16.00           16.00\n"
+	"O(-2)    H2O            0.0     18.016\n"
+	"O(0)     O2             0.0     16.00\n"
+	"SOLUTION_SPECIES\n"
+	"2H2O = O2 + 4H+ + 4e- \n"
+	"        log_k   -86.08; -gamma  1e7   0.0\n"
+	"2 H+ + 2 e- = H2\n"
+	"        log_k   -3.15;  -gamma  1e7   0.0\n"
+	"H+ = H+\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"e- = e-\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"H2O = H2O\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"CO2 = CO2\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"Na+ = Na+\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"Cl- = Cl-\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"Co+2 = Co+2\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"NH4+ = NH4+\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"Nta-3 = Nta-3\n"
+	"        log_k   0.0;    -gamma  1e7   0.0\n"
+	"Nta-3 + 3H+ = H3Nta\n"
+	"        log_k   14.9;   -gamma  1e7   0.0\n"
+	"Nta-3 + 2H+ = H2Nta-\n"
+	"        log_k   13.3;   -gamma  1e7   0.0\n"
+	"Nta-3 + H+ = HNta-2\n"
+	"        log_k   10.3;   -gamma  1e7   0.0\n"
+	"Nta-3 + Co+2 = CoNta-\n"
+	"        log_k   11.7;   -gamma  1e7   0.0\n"
+	"2 Nta-3 + Co+2 = CoNta2-4\n"
+	"        log_k   14.5;   -gamma  1e7   0.0\n"
+	"Nta-3 + Co+2 + H2O = CoOHNta-2 + H+\n"
+	"        log_k   0.5;    -gamma  1e7   0.0\n"
+	"Co+2 + H2O = CoOH+ + H+\n"
+	"        log_k   -9.7;   -gamma  1e7   0.0\n"
+	"Co+2 + 2H2O = Co(OH)2 + 2H+\n"
+	"        log_k   -22.9;  -gamma  1e7   0.0\n"
+	"Co+2 + 3H2O = Co(OH)3- + 3H+\n"
+	"        log_k   -31.5;  -gamma  1e7   0.0\n"
+	"CO2 + H2O = HCO3- + H+\n"
+	"        log_k   -6.35;  -gamma  1e7   0.0\n"
+	"CO2 + H2O = CO3-2 + 2H+\n"
+	"        log_k   -16.68; -gamma  1e7   0.0\n"
+	"NH4+ = NH3 + H+\n"
+	"        log_k   -9.3;   -gamma  1e7   0.0\n"
+	"H2O = OH- +  H+\n"
+	"        log_k   -14.0;  -gamma  1e7   0.0\n"
+	"END\n";
+
+
 
 TestIPhreeqcLib::TestIPhreeqcLib(void)
 {
@@ -78,72 +145,6 @@ void TestIPhreeqcLib::TestLoadDatabase(void)
 
 void TestIPhreeqcLib::TestLoadDatabaseString(void)
 {
-	const char ex15_dat[] =
-		"SOLUTION_MASTER_SPECIES\n"
-		"C        CO2            2.0     61.0173         12.0111\n"
-		"Cl       Cl-            0.0     Cl              35.453\n"
-		"Co       Co+2           0.0     58.93           58.93   \n"
-		"E        e-             0.0     0.0             0.0\n"
-		"H        H+             -1.     1.008           1.008\n"
-		"H(0)     H2             0.0     1.008\n"
-		"H(1)     H+             -1.     1.008\n"
-		"N        NH4+           0.0     14.0067         14.0067\n"
-		"Na       Na+            0.0     Na              22.9898\n"
-		"Nta      Nta-3          3.0     1.              1.\n"
-		"O        H2O            0.0     16.00           16.00\n"
-		"O(-2)    H2O            0.0     18.016\n"
-		"O(0)     O2             0.0     16.00\n"
-		"SOLUTION_SPECIES\n"
-		"2H2O = O2 + 4H+ + 4e- \n"
-		"        log_k   -86.08; -gamma  1e7   0.0\n"
-		"2 H+ + 2 e- = H2\n"
-		"        log_k   -3.15;  -gamma  1e7   0.0\n"
-		"H+ = H+\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"e- = e-\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"H2O = H2O\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"CO2 = CO2\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"Na+ = Na+\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"Cl- = Cl-\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"Co+2 = Co+2\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"NH4+ = NH4+\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"Nta-3 = Nta-3\n"
-		"        log_k   0.0;    -gamma  1e7   0.0\n"
-		"Nta-3 + 3H+ = H3Nta\n"
-		"        log_k   14.9;   -gamma  1e7   0.0\n"
-		"Nta-3 + 2H+ = H2Nta-\n"
-		"        log_k   13.3;   -gamma  1e7   0.0\n"
-		"Nta-3 + H+ = HNta-2\n"
-		"        log_k   10.3;   -gamma  1e7   0.0\n"
-		"Nta-3 + Co+2 = CoNta-\n"
-		"        log_k   11.7;   -gamma  1e7   0.0\n"
-		"2 Nta-3 + Co+2 = CoNta2-4\n"
-		"        log_k   14.5;   -gamma  1e7   0.0\n"
-		"Nta-3 + Co+2 + H2O = CoOHNta-2 + H+\n"
-		"        log_k   0.5;    -gamma  1e7   0.0\n"
-		"Co+2 + H2O = CoOH+ + H+\n"
-		"        log_k   -9.7;   -gamma  1e7   0.0\n"
-		"Co+2 + 2H2O = Co(OH)2 + 2H+\n"
-		"        log_k   -22.9;  -gamma  1e7   0.0\n"
-		"Co+2 + 3H2O = Co(OH)3- + 3H+\n"
-		"        log_k   -31.5;  -gamma  1e7   0.0\n"
-		"CO2 + H2O = HCO3- + H+\n"
-		"        log_k   -6.35;  -gamma  1e7   0.0\n"
-		"CO2 + H2O = CO3-2 + 2H+\n"
-		"        log_k   -16.68; -gamma  1e7   0.0\n"
-		"NH4+ = NH3 + H+\n"
-		"        log_k   -9.3;   -gamma  1e7   0.0\n"
-		"H2O = OH- +  H+\n"
-		"        log_k   -14.0;  -gamma  1e7   0.0\n"
-		"END\n";
-
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 
@@ -1941,6 +1942,81 @@ void TestIPhreeqcLib::TestGetComponent(void)
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 3)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 4)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 5)) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 3,      ::GetComponentCount(n) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -1)) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string("C"),  std::string(::GetComponent(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Ca"), std::string(::GetComponent(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Na"), std::string(::GetComponent(n, 2)) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 4)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 5)) );
+
+	// clear using LoadDatabase
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetComponentCount(n) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -1)) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 1)) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 3,      ::GetComponentCount(n) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -1)) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string("C"),  std::string(::GetComponent(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Ca"), std::string(::GetComponent(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Na"), std::string(::GetComponent(n, 2)) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 4)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 5)) );
+
+
+	// clear using LoadDatabaseString
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabaseString(n, ex15_dat) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetComponentCount(n) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	// ex15.dat doesn't have Ca
+	CPPUNIT_ASSERT_EQUAL( 2, ::GetWarningStringLineCount(n));
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Ca."), std::string(::GetWarningStringLine(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("\tConcentration is set to zero."), std::string(::GetWarningStringLine(n, 1)) );
+
+	CPPUNIT_ASSERT_EQUAL( 2,      ::GetComponentCount(n) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, -1)) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string("C"),  std::string(::GetComponent(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Na"), std::string(::GetComponent(n, 1)) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),   std::string(::GetComponent(n, 3)) );
 
 	if (n >= 0)
 	{
