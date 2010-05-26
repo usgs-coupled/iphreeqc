@@ -229,7 +229,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;lib\vc80.pdb&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -302,7 +302,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;libx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;libx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;libx64\vc80.pdb&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -547,7 +547,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dll\vc80.pdb&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -631,7 +631,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dllx64\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dllx64\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dllx64\vc80.pdb&quot;"
 			/>
 		</Configuration>
 	</Configurations>
