@@ -16,12 +16,12 @@
 
 
        INTERFACE
-        FUNCTION AccumulateLine(ID, LINE)
+        FUNCTION AccumulateLine(ID,LINE)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          CHARACTER(LEN=*), INTENT(IN) :: LINE
          INTEGER(KIND=4)              :: AccumulateLine
         END FUNCTION AccumulateLine
-       END INTERFACE       
+       END INTERFACE
 
 
        INTERFACE
@@ -30,7 +30,7 @@
          CHARACTER(LEN=*), INTENT(IN) :: ERROR_MSG
          INTEGER(KIND=4)              :: AddError
         END FUNCTION AddError
-       END INTERFACE       
+       END INTERFACE
 
 
        INTERFACE
@@ -39,7 +39,15 @@
          CHARACTER(LEN=*), INTENT(IN) :: WARN_MSG
          INTEGER(KIND=4)              :: AddWarning
         END FUNCTION AddWarning
-       END INTERFACE       
+       END INTERFACE
+       
+       
+       INTERFACE
+        FUNCTION ClearAccumulatedLines(ID)
+         INTEGER(KIND=4), INTENT(IN) :: ID
+         INTEGER(KIND=4)             :: ClearAccumulatedLines
+        END FUNCTION ClearAccumulatedLines
+       END INTERFACE
 
 
        INTERFACE
@@ -75,6 +83,14 @@
 
 
        INTERFACE
+        FUNCTION GetDumpFileOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetDumpFileOn
+        END FUNCTION GetDumpFileOn
+       END INTERFACE
+
+
+       INTERFACE
         SUBROUTINE GetDumpStringLine(ID,N,LINE)
          INTEGER(KIND=4),   INTENT(IN)   :: ID
          INTEGER(KIND=4),   INTENT(IN)   :: N
@@ -89,21 +105,21 @@
          INTEGER(KIND=4)               :: GetDumpStringLineCount
         END FUNCTION GetDumpStringLineCount
        END INTERFACE
-       
-       
-       INTERFACE
-        FUNCTION GetDumpFileOn(ID)
-         INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetDumpFileOn
-        END FUNCTION GetDumpFileOn
-       END INTERFACE
-       
-       
+
+
        INTERFACE
         FUNCTION GetDumpStringOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
          LOGICAL(KIND=4)               :: GetDumpStringOn
         END FUNCTION GetDumpStringOn
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION GetErrorFileOn(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         LOGICAL(KIND=4)               :: GetErrorFileOn
+        END FUNCTION GetErrorFileOn
        END INTERFACE
 
 
@@ -121,14 +137,6 @@
          INTEGER(KIND=4),  INTENT(IN) :: ID
          INTEGER(KIND=4)              :: GetErrorStringLineCount
         END FUNCTION GetErrorStringLineCount
-       END INTERFACE
-
-
-       INTERFACE
-        FUNCTION GetErrorFileOn(ID)
-         INTEGER(KIND=4),  INTENT(IN)  :: ID
-         LOGICAL(KIND=4)               :: GetErrorFileOn
-        END FUNCTION GetErrorFileOn
        END INTERFACE
 
 
@@ -224,7 +232,7 @@
         SUBROUTINE OutputAccumulatedLines(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
         END SUBROUTINE OutputAccumulatedLines
-       END INTERFACE 
+       END INTERFACE
 
 
        INTERFACE 

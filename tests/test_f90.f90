@@ -22,6 +22,18 @@ FUNCTION F_MAIN()
      RETURN
   END IF
   
+  IF (AccumulateLine(id, "SOLUTION 1").NE.IPQ_OK) THEN
+     CALL OutputErrorString(id)
+     F_MAIN = EXIT_FAILURE
+     RETURN
+  END IF 
+  
+  IF (ClearAccumulatedLines(id).NE.IPQ_OK) THEN
+     CALL OutputErrorString(id)
+     F_MAIN = EXIT_FAILURE
+     RETURN
+  END IF
+  
   ! Dump
   IF (TestGetSet(id,GetDumpFileOn,SetDumpFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE

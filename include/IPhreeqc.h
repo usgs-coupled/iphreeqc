@@ -34,7 +34,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION AccumulateLine(LINE)
+ *  FUNCTION AccumulateLine(ID,LINE)
  *    INTEGER(KIND=4),   INTENT(IN)  :: ID
  *    CHARACTER(LEN=*),  INTENT(IN)  :: LINE
  *    INTEGER(KIND=4)                :: AccumulateLine
@@ -104,6 +104,17 @@ extern "C" {
  *  @retval IPQ_OK           Success.
  *  @retval IPQ_BADINSTANCE  The given id is invalid.
  *  @see                     AccumulateLine, OutputAccumulatedLines, RunAccumulated
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION ClearAccumulatedLines(ID)
+ *    INTEGER(KIND=4), INTENT(IN) :: ID
+ *    INTEGER(KIND=4)             :: ClearAccumulatedLines
+ *  END FUNCTION ClearAccumulatedLines
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT IPQ_RESULT  ClearAccumulatedLines(int id);
 
@@ -229,10 +240,10 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetDumpFileOn(DUMP_ON)
+ *  FUNCTION GetDumpFileOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4)               :: GetDumpFileOn
- *  END FUNCTION SetDumpFileOn
+ *  END FUNCTION GetDumpFileOn
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -273,7 +284,7 @@ extern "C" {
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
  *    INTEGER(KIND=4),   INTENT(IN)   :: N
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
- *  END SUBROUTINE GetComponent
+ *  END SUBROUTINE GetDumpStringLine
  *  </PRE>
  *  </CODE>
  *  @endhtmlonly
@@ -318,7 +329,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetDumpStringOn(DUMP_STRING_ON)
+ *  FUNCTION GetDumpStringOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4)               :: GetDumpStringOn
  *  END FUNCTION GetDumpStringOn
@@ -338,7 +349,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetErrorFileOn(ERROR_ON)
+ *  FUNCTION GetErrorFileOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4)               :: GetErrorFileOn
  *  END FUNCTION GetErrorFileOn
@@ -371,7 +382,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE GetErrorStringLine
+ *  SUBROUTINE GetErrorStringLine(ID,N,LINE)
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
  *    INTEGER(KIND=4),   INTENT(IN)   :: N
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
@@ -392,7 +403,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetErrorStringLineCount
+ *  FUNCTION GetErrorStringLineCount(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    INTEGER(KIND=4)               :: GetErrorStringLineCount
  *  END FUNCTION GetErrorStringLineCount
@@ -436,6 +447,7 @@ extern "C" {
  *  <PRE>
  *  FUNCTION GetOutputFileOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    LOGICAL(KIND=4)               :: GetOutputFileOn
  *  END FUNCTION GetOutputFileOn
  *  </PRE>
  *  </CODE>
@@ -453,7 +465,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetSelectedOutputColumnCount
+ *  FUNCTION GetSelectedOutputColumnCount(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    INTEGER(KIND=4)               :: GetSelectedOutputColumnCount
  *  END FUNCTION GetSelectedOutputColumnCount
@@ -473,7 +485,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetSelectedOutputFileOn(SELECTED_ON)
+ *  FUNCTION GetSelectedOutputFileOn(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4)               :: GetSelectedOutputFileOn
  *  END FUNCTION GetSelectedOutputFileOn
@@ -493,7 +505,7 @@ extern "C" {
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION GetSelectedOutputRowCount
+ *  FUNCTION GetSelectedOutputRowCount(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    INTEGER(KIND=4)               :: GetSelectedOutputRowCount
  *  END FUNCTION GetSelectedOutputRowCount
@@ -715,7 +727,8 @@ Headings
  *  <PRE>
  *  SUBROUTINE GetWarningStringLine(ID,N,LINE)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4),  INTENT(IN)  :: DUMP_ON
+ *    LOGICAL(KIND=4),  INTENT(IN)  :: N
+ *    CHARACTER(LEN=*), INTENT(OUT) :: LINE
  *  END SUBROUTINE GetWarningStringLine
  *  </PRE>
  *  </CODE>
@@ -758,7 +771,7 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION LoadDatabase(FILENAME)
+ *  FUNCTION LoadDatabase(ID,FILENAME)
  *    INTEGER(KIND=4),   INTENT(IN)  :: ID
  *    CHARACTER(LEN=*),  INTENT(IN)  :: FILENAME
  *    INTEGER(KIND=4)                :: LoadDatabase
@@ -788,7 +801,7 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION LoadDatabaseString(INPUT)
+ *  FUNCTION LoadDatabaseString(ID,INPUT)
  *    INTEGER(KIND=4),   INTENT(IN)  :: ID
  *    CHARACTER(LEN=*),  INTENT(IN)  :: INPUT
  *    INTEGER(KIND=4)                :: LoadDatabaseString
@@ -808,7 +821,7 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputAccumulatedLines
+ *  SUBROUTINE OutputAccumulatedLines(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *  END SUBROUTINE OutputAccumulatedLines
  *  </PRE>
@@ -829,7 +842,7 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputErrorString
+ *  SUBROUTINE OutputErrorString(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *  END SUBROUTINE OutputErrorString
  *  </PRE>
@@ -853,7 +866,7 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  SUBROUTINE OutputWarningString
+ *  SUBROUTINE OutputWarningString(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *  END SUBROUTINE OutputWarningString
  *  </PRE>
@@ -875,7 +888,7 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION RunAccumulated()
+ *  FUNCTION RunAccumulated(ID)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    INTEGER(KIND=4)               :: RunAccumulated
  *  END FUNCTION RunAccumulated
@@ -900,9 +913,9 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION RunFile(FILENAME)
+ *  FUNCTION RunFile(ID,FNAME)
  *    INTEGER(KIND=4),   INTENT(IN)  :: ID
- *    CHARACTER(LEN=*),  INTENT(IN)  :: FILENAME
+ *    CHARACTER(LEN=*),  INTENT(IN)  :: FNAME
  *    INTEGER(KIND=4)                :: RunFile
  *  END FUNCTION RunFile
  *  </PRE>
@@ -929,7 +942,7 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION RunString(INPUT)
+ *  FUNCTION RunString(ID,INPUT)
  *    INTEGER(KIND=4),  INTENT(IN)   :: ID
  *    CHARACTER(LEN=*),  INTENT(IN)  :: INPUT
  *    INTEGER(KIND=4)                :: RunString
@@ -961,6 +974,7 @@ Headings
  *  FUNCTION SetDumpFileOn(ID,DUMP_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: DUMP_ON
+ *    INTEGER(KIND=4)               :: SetDumpFileOn
  *  END FUNCTION SetDumpFileOn
  *  </PRE>
  *  </CODE>
@@ -986,6 +1000,7 @@ Headings
  *  FUNCTION SetDumpStringOn(ID,DUMP_STRING_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
  *    LOGICAL(KIND=4),  INTENT(IN)  :: DUMP_STRING_ON
+ *    INTEGER(KIND=4)               :: SetDumpStringOn
  *  END FUNCTION SetDumpStringOn
  *  </PRE>
  *  </CODE>
@@ -1013,9 +1028,10 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetErrorFileOn(ERROR_ON)
+ *  FUNCTION SetErrorFileOn(ID,ERR_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4),  INTENT(IN)  :: ERROR_ON
+ *    LOGICAL(KIND=4),  INTENT(IN)  :: ERR_ON
+ *    INTEGER(KIND=4)               :: SetErrorFileOn
  *  END FUNCTION SetErrorFileOn
  *  </PRE>
  *  </CODE>
@@ -1064,9 +1080,9 @@ Headings
  *  @htmlonly
  *  <CODE>
  *  <PRE>
- *  FUNCTION SetOutputFileOn(ID,OUTPUT_ON)
+ *  FUNCTION SetOutputFileOn(ID,OUT_ON)
  *    INTEGER(KIND=4),  INTENT(IN)  :: ID
- *    LOGICAL(KIND=4),  INTENT(IN)  :: OUTPUT_ON
+ *    LOGICAL(KIND=4),  INTENT(IN)  :: OUT_ON
  *    INTEGER(KIND=4)               :: SetOutputFileOn
  *  END FUNCTION SetOutputFileOn
  *  </PRE>
