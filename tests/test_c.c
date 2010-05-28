@@ -66,6 +66,7 @@ main(int argc, const char* argv[])
     return EXIT_FAILURE;
   }
 
+  VarInit(&v);
   for (r = 0; r < GetSelectedOutputRowCount(id); ++r)
   {
     for (c = 0; c < GetSelectedOutputColumnCount(id); ++c)

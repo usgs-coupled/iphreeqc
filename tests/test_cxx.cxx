@@ -99,22 +99,22 @@ main(int argc, const char* argv[])
     return EXIT_FAILURE;
   }
 
+  VAR v;
+  ::VarInit(&v);
   for (int r = 0; r < iphreeqc.GetSelectedOutputRowCount(); ++r)
   {
     for (int c = 0; c < iphreeqc.GetSelectedOutputColumnCount(); ++c)
     {
-      VAR v;
       if (iphreeqc.GetSelectedOutputValue(r, c, &v) != VR_OK)
       {
         return EXIT_FAILURE;
       }
-      if (VarClear(&v) != VR_OK)
+	  if (::VarClear(&v) != VR_OK)
       {
         return EXIT_FAILURE;
       }
     }
   }
-  
 
   return EXIT_SUCCESS;
 }
