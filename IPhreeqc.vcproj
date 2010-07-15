@@ -4684,7 +4684,39 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
+				RelativePath=".\src\phreeqcpp\char_star.h"
+				>
+			</File>
+			<File
 				RelativePath="src\CVar.hxx"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\cvdense.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\cvode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\cxxKinetics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\cxxMix.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\dense.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Dictionary.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\dumper.h"
 				>
 			</File>
 			<File
@@ -4692,7 +4724,35 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\Exchange.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\ExchComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\Form1.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\fwrap.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\GasPhase.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\global.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\global_structures.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\input.h"
 				>
 			</File>
 			<File
@@ -4712,7 +4772,163 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\ISolution.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\ISolutionComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\kinetics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\KineticsComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\NameDouble.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\NumKeyword.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\nvector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\nvector_serial.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\output.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\p2c.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Parser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\phqalloc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Phreeqc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Phreeqc_class.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\phrqtype.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\pitzer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\pitzer_structures.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PPassemblage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PPassemblageComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Reaction.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\runner.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SAXPhreeqc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SaxPhreeqcHandlers.h"
+				>
+			</File>
+			<File
 				RelativePath="src\SelectedOutput.hxx"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\smalldense.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Solution.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SolutionIsotope.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SolutionIsotopeList.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SSassemblage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SSassemblageSS.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\StorageBin.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\StorageBinList.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\sundialsmath.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\sundialstypes.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Surface.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SurfaceCharge.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SurfaceComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\System.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Temperature.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Utils.h"
 				>
 			</File>
 			<File

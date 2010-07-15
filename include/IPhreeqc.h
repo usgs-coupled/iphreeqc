@@ -15,7 +15,7 @@ typedef enum {
 	IPQ_INVALIDARG    = -3,  /*!< Failure, Invalid argument */
 	IPQ_INVALIDROW    = -4,  /*!< Failure, Invalid row */
 	IPQ_INVALIDCOL    = -5,  /*!< Failure, Invalid column */
-	IPQ_BADINSTANCE   = -6,  /*!< Failure, Invalid instance id */
+	IPQ_BADINSTANCE   = -6   /*!< Failure, Invalid instance id */
 } IPQ_RESULT;
 
 
