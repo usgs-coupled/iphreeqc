@@ -72,6 +72,36 @@ AC_CHECK_FUNCS([floor],   , AC_CHECK_LIB(m, floor, , AC_ERROR([cannot find floor
 AC_CHECK_FUNCS([pow],     , AC_CHECK_LIB(m, pow,   , AC_ERROR([cannot find pow])) )
 AC_CHECK_FUNCS([sqrt],    , AC_CHECK_LIB(m, sqrt,  , AC_ERROR([cannot find sqrt])) )
 
+# isfinite
+AC_LANG_PUSH(C++)
+AC_CACHE_CHECK([for isfinite], ac_cv_isfinite,
+ [AC_TRY_LINK([#include <math.h>],
+ [double x; int y; y = isfinite(x);],
+ ac_cv_isfinite=yes,
+ ac_cv_isfinite=no
+)])
+if test x"$ac_cv_isfinite" = x"yes"; then
+  AC_DEFINE(HAVE_ISFINITE, [], [Has isfinite])
+fi
+AC_LANG_POP(C++)
+
+# finite
+AC_LANG_PUSH(C++)
+AC_CACHE_CHECK([for finite], ac_cv_finite,
+ [AC_TRY_LINK([#include <math.h>],
+ [double x; int y; y = finite(x);],
+ ac_cv_finite=yes,
+ ac_cv_finite=no
+)])
+if test x"$ac_cv_finite" = x"yes"; then
+  AC_DEFINE(HAVE_FINITE, [], [Has finite])
+fi
+AC_LANG_POP(C++)
+
+# isnan
+AC_CHECK_FUNCS([isnan],    , AC_CHECK_LIB(m, isnan))
+
+
 AC_CONFIG_FILES([
   Makefile
   src/Makefile
