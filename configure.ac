@@ -1,8 +1,8 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.64])
-AC_INIT([IPhreeqc], [2.17.1-4466], [charlton@usgs.gov])
+AC_PREREQ([2.61])
+AC_INIT([IPhreeqc], [2.17.2-4652], [charlton@usgs.gov])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
 
