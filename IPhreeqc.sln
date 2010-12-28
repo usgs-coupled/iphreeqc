@@ -25,6 +25,8 @@ Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_f", "tests\test_f.vfpr
 		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
 	EndProjectSection
 EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "memory_leak_f", "memory_leak_f\memory_leak_f.vfproj", "{941BC4D5-7D05-4786-BC65-38914514EA9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -127,6 +129,18 @@ Global
 		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
 		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.ReleaseDll|x64.ActiveCfg = ReleaseDll|x64
 		{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}.ReleaseDll|x64.Build.0 = ReleaseDll|x64
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.Debug|Win32.Build.0 = Debug|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.Debug|x64.ActiveCfg = Debug|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.DebugDll|Win32.ActiveCfg = Debug|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.DebugDll|Win32.Build.0 = Debug|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.DebugDll|x64.ActiveCfg = Debug|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.Release|Win32.ActiveCfg = Release|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.Release|Win32.Build.0 = Release|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.Release|x64.ActiveCfg = Release|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.ReleaseDll|Win32.ActiveCfg = Release|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.ReleaseDll|Win32.Build.0 = Release|Win32
+		{941BC4D5-7D05-4786-BC65-38914514EA9B}.ReleaseDll|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
