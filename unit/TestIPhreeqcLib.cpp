@@ -1717,7 +1717,11 @@ void TestIPhreeqcLib::TestDumpString()
 		"    H(0)   -25.15\n"
 		"    Na   -3.0255625287599\n"
 		"    O(0)   -42.080044167952\n"
-		"  -gammas\n";
+		"  -gammas\n"
+		"USE mix none\n"
+		"USE reaction none\n"
+		"USE reaction_temperature none\n"
+		;
 #endif
 #if defined(__GNUC__)
 		"SOLUTION_RAW       1 \n"
@@ -1745,7 +1749,11 @@ void TestIPhreeqcLib::TestDumpString()
 		"    H(0)   -25.15\n"
 		"    Na   -3.0255625287599\n"
 		"    O(0)   -42.080044167952\n"
-		"  -gammas\n";
+		"  -gammas\n"
+		"USE mix none\n"
+		"USE reaction none\n"
+		"USE reaction_temperature none\n"
+		;
 #endif
 
 	const char* dump_str = ::GetDumpString(n);
@@ -1778,7 +1786,7 @@ void TestIPhreeqcLib::TestGetDumpStringLineCount(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 26,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 29,     ::GetDumpStringLineCount(n) );
 
 	if (n >= 0)
 	{
@@ -1807,7 +1815,7 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 26,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 29,     ::GetDumpStringLineCount(n) );
 
 	int line = 0;
 #if defined(_MSC_VER)
@@ -1837,6 +1845,9 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpStringLine(n, line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpStringLine(n, line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                             std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            std::string(::GetDumpStringLine(n, line++)) );
 #endif
 
 #if defined(__GNUC__)
@@ -1866,6 +1877,9 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpStringLine(n, line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpStringLine(n, line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                             std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        std::string(::GetDumpStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            std::string(::GetDumpStringLine(n, line++)) );
 #endif
 
 	// remaining lines should be empty
