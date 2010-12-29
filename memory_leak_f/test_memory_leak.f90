@@ -21,6 +21,8 @@ OPEN(UNIT=13, file='test_memory_leak.log', STATUS='UNKNOWN', IOSTAT = ios)
 IF (ios.NE.0) STOP 'Could not open log file'
 
 id1 = new_phreeqc_id()
+!!nerr = DestroyIPhreeqc(id1)
+!!STOP
 
 nerr = SetSelectedOutputFileOn(id1,.TRUE.)
 nerr = SetOutputFileOn(id1,.TRUE.)
