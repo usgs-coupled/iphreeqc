@@ -26,6 +26,9 @@ Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_f", "tests\test_f.vfpr
 	EndProjectSection
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "memory_leak_f", "memory_leak_f\memory_leak_f.vfproj", "{941BC4D5-7D05-4786-BC65-38914514EA9B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
