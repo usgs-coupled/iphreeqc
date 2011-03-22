@@ -1,4 +1,4 @@
-EXTRA_DIST = test_c.vcproj test_cxx.vcproj test_f90.vfproj test_f.vfproj
+EXTRA_DIST = test_c.vcproj test_cxx.vcproj test_f90.vfproj test_f.vfproj main77.f main.f90
 
 AM_CPPFLAGS = -I$(top_srcdir)/include
 AM_FCFLAGS = -I$(top_srcdir)/include
