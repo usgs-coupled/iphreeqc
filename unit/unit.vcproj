@@ -108,6 +108,69 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="cppunitd.lib"
+				AdditionalLibraryDirectories="C:\Documents and Settings\charlton\My Documents\cppunit-1.10.2\libx64"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
@@ -182,6 +245,73 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile=".\Release/unit.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="..\IPhreeqc.vsprops"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="cppunit.lib"
+				AdditionalLibraryDirectories="C:\Documents and Settings\charlton\My Documents\cppunit-1.10.2\libx64"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -361,6 +491,14 @@
 								Name="VCCLCompilerTool"
 							/>
 						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\src\phreeqcpp\cxxKinetics.cxx"
@@ -383,6 +521,14 @@
 						</FileConfiguration>
 						<FileConfiguration
 							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -473,6 +619,14 @@
 								Name="VCCLCompilerTool"
 							/>
 						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\src\phreeqcpp\Solution.cxx"
@@ -543,12 +697,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -567,12 +737,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -591,12 +777,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -615,12 +817,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -640,6 +858,15 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								ExcludedFromBuild="true"
 								>
@@ -647,6 +874,15 @@
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -665,12 +901,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -689,12 +941,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -713,12 +981,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -737,12 +1021,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -761,12 +1061,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -785,12 +1101,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -809,12 +1141,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -833,12 +1181,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -857,12 +1221,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -882,6 +1262,14 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								ExcludedFromBuild="true"
 								>
@@ -889,6 +1277,15 @@
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -907,12 +1304,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -931,12 +1344,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -955,12 +1384,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -979,12 +1424,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1003,12 +1464,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1027,12 +1504,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1051,12 +1544,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1075,12 +1584,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1099,12 +1624,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1123,12 +1664,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1147,12 +1704,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1171,12 +1744,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1195,12 +1784,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1219,12 +1824,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1243,12 +1864,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1265,7 +1902,23 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -1287,12 +1940,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1311,12 +1980,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1335,12 +2020,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1359,12 +2060,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1383,12 +2100,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1407,12 +2140,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1431,12 +2180,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1455,12 +2220,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
@@ -1479,12 +2260,28 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
+								Name="Debug|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
 								Name="Release|Win32"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
 									AdditionalIncludeDirectories=""
 									PreprocessorDefinitions=""
+									CompileAs="2"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|x64"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
 									CompileAs="2"
 								/>
 							</FileConfiguration>
