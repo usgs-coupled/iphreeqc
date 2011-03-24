@@ -76,7 +76,6 @@
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/lib"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile=".\Debug/unit.pdb"
 				SubSystem="1"
 				TargetMachine="1"
 			/>
@@ -112,6 +111,7 @@
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
+			InheritedPropertySheets="..\IPhreeqc.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -130,6 +130,13 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				WarningLevel="3"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -143,7 +150,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="cppunitd.lib"
-				AdditionalLibraryDirectories="C:\Documents and Settings\charlton\My Documents\cppunit-1.10.2\libx64"
+				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/libx64"
+				GenerateDebugInformation="true"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -299,7 +307,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="cppunit.lib"
-				AdditionalLibraryDirectories="C:\Documents and Settings\charlton\My Documents\cppunit-1.10.2\libx64"
+				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/libx64"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -484,6 +492,14 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							ExcludedFromBuild="true"
 							>
@@ -513,6 +529,14 @@
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|x64"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -605,6 +629,14 @@
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|x64"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -1263,6 +1295,7 @@
 							</FileConfiguration>
 							<FileConfiguration
 								Name="Debug|x64"
+								ExcludedFromBuild="true"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
