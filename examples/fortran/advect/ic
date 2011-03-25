@@ -1,0 +1,14 @@
+SOLUTION 1-2
+END
+EQUILIBRIUM_PHASES 1
+   CO2(g) -1.5 10  
+EQUILIBRIUM_PHASES 2
+   Calcite 0   10  
+SELECTED_OUTPUT
+   -reset false  
+USER_PUNCH
+   -Heading  charge    H   O   C   Ca  pH  SR(calcite)
+   10 w = TOT("water")   
+   20 PUNCH charge_balance, TOT("H")*w, TOT("O")*w, TOT("C")*w, TOT("Ca")*w
+   30 PUNCH -LA("H+"), SR("calcite")
+END
