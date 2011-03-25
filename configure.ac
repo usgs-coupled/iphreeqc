@@ -104,17 +104,10 @@ AC_CHECK_FUNCS([isnan],    , AC_CHECK_LIB(m, isnan))
 
 AC_CONFIG_FILES([
   Makefile
+  examples/Makefile
   src/Makefile
   tests/Makefile
   tests/phreeqc.dat
   tests/ex2
-  examples/ex1
-  examples/main_fortran.cxx
-  examples/Makefile
-  examples/phreeqc.dat
-  examples/test_c.c
-  examples/test_cxx.cxx
-  examples/test_f.f
-  examples/test_f90.f90
 ])
 AC_OUTPUT
