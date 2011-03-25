@@ -30,7 +30,7 @@ def show_results(input_string):
     plt.ylabel('GYPSUM SOLUBILITY, MOLES PER KILOGRAM WATER')
     plt.xlabel('NaCl, MOLES PER KILOGRAM WATER')
     plt.savefig("Figure2.png")
-    #plt.show()
+    plt.show()
     
 if __name__ == '__main__':
     # This will only run when called as script from the command line
