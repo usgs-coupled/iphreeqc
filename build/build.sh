@@ -197,13 +197,13 @@ install() {
   /usr/bin/install -m 755 "${objdir}/database/"*.dat   "${instdir}/${FULLPKG}-vs2005-win32/database/." && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/doc" && \
-  mkdir "${instdir}/${FULLPKG}-vs2005-x64/lib" && \
-  mkdir "${instdir}/${FULLPKG}-vs2005-x64/dll" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/libx64" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/dllx64" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/include" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/database" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm" "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.chm" && \
-  /usr/bin/install -m 755 "${objdir}/libx64/"*         "${instdir}/${FULLPKG}-vs2005-x64/lib/." && \
-  /usr/bin/install -m 755 "${objdir}/dllx64/"*         "${instdir}/${FULLPKG}-vs2005-x64/dll/." && \
+  /usr/bin/install -m 755 "${objdir}/libx64/"*         "${instdir}/${FULLPKG}-vs2005-x64/libx64/." && \
+  /usr/bin/install -m 755 "${objdir}/dllx64/"*         "${instdir}/${FULLPKG}-vs2005-x64/dllx64/." && \
   /usr/bin/install -m 755 "${objdir}/include/"*        "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
   /usr/bin/install -m 755 "${objdir}/database/"*.dat   "${instdir}/${FULLPKG}-vs2005-x64/database/." && \
   cd "${instdir}" && \
