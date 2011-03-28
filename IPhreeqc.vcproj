@@ -4240,10 +4240,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\phreeqc\Form1.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\fwrap.h"
 				>
 			</File>
@@ -4361,14 +4357,6 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\runner.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\SAXPhreeqc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\SaxPhreeqcHandlers.h"
 				>
 			</File>
 			<File
