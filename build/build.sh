@@ -200,6 +200,7 @@ install() {
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/examples/fortran/advect" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm"          "${instdir}/${FULLPKG}-vs2005-win32/doc/IPhreeqc.chm" && \
   /usr/bin/install -m 755 "${objdir}/doc/CharltonParkhurst.pdf" "${instdir}/${FULLPKG}-vs2005-win32/doc/CharltonParkhurst.pdf" && \
+  /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/revisions"   "${instdir}/${FULLPKG}-vs2005-win32/doc/REVISIONS.txt" && \
   /usr/bin/install -m 755 "${objdir}/lib/"*                     "${instdir}/${FULLPKG}-vs2005-win32/lib/." && \
   /usr/bin/install -m 755 "${objdir}/dll/"*                     "${instdir}/${FULLPKG}-vs2005-win32/dll/." && \
   /usr/bin/install -m 755 "${objdir}/include/"*                 "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
@@ -224,6 +225,7 @@ install() {
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/examples/fortran/advect" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm"          "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.chm" && \
   /usr/bin/install -m 755 "${objdir}/doc/CharltonParkhurst.pdf" "${instdir}/${FULLPKG}-vs2005-x64/doc/CharltonParkhurst.pdf" && \
+  /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/revisions"   "${instdir}/${FULLPKG}-vs2005-x64/doc/REVISIONS.txt" && \
   /usr/bin/install -m 755 "${objdir}/libx64/"*                  "${instdir}/${FULLPKG}-vs2005-x64/libx64/." && \
   /usr/bin/install -m 755 "${objdir}/dllx64/"*                  "${instdir}/${FULLPKG}-vs2005-x64/dllx64/." && \
   /usr/bin/install -m 755 "${objdir}/include/"*                 "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
