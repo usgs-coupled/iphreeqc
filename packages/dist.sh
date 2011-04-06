@@ -202,7 +202,7 @@ do
   cp "$vsn_file" "$vsn_file.dist"
 done
 
-(cd "$DISTPATH/doc" && doxygen)
+(cd "$DISTPATH/doc" && "$DOXYGEN")
 
 echo "Rolling $DISTNAME.tar ..."
 (cd "$DIST_SANDBOX" > /dev/null && tar c "$DISTNAME") > \

@@ -1,5 +1,7 @@
 TARGET = IPhreeqc.chm
 
+DOXYGEN = doxygen
+
 HEADERS = \
 	../include/IPhreeqc.h \
 	../include/Var.h \
@@ -18,7 +20,7 @@ EXAMPLES = \
 	examples/F90GetSelectedOutputValue.f90 \
 	examples/F90GetDumpLine.f90 \
 	examples/F90GetDumpStringLine.f90
-	
+
 
 all: $(TARGET)
 
@@ -29,7 +31,7 @@ view: $(TARGET)
 	cygstart $(TARGET)
 
 html/index.html: Doxyfile $(HEADERS) $(EXAMPLES)
-	doxygen
+	$(DOXYGEN)
 
 clean:
 	rm -rf html $(TARGET)
