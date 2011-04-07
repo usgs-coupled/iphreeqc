@@ -6,6 +6,18 @@
 
 #include "Var.h"
 
+/**
+ * @mainpage IPhreeqc Library Documentation
+ *
+ *  @htmlonly
+ *  <table>
+ *   <tr><td class="indexkey"><a class="el" href="IPhreeqc_8h.html">IPhreeqc.h</a> </td><td class="indexvalue">C/Fortran Documentation </td></tr>
+ *   <tr><td class="indexkey"><a class="el" href="IPhreeqc_8hpp.html">IPhreeqc.hpp</a> </td><td class="indexvalue">C++ Documentation </td></tr>
+ *   <tr><td class="indexkey"><a class="el" href="Var_8h.html">Var.h</a></td><td class="indexvalue">IPhreeqc VARIANT Documentation </td></tr>
+ *  </table>
+ *  @endhtmlonly
+ */
+
 /*! \brief Enumeration used to return error codes.
 */
 typedef enum {
