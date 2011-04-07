@@ -188,7 +188,9 @@ if [ -z "$ver_patch" ]; then
   ver_patch="0"
 fi
 
-SED_FILES=""
+SED_FILES="$DISTPATH/src/phreeqcpp/PHREEQCPP-RELEASE.txt \
+           $DISTPATH/src/phreeqcpp/phreeqc/revisions"
+
 
 for vsn_file in $SED_FILES
 do
