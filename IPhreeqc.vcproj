@@ -4192,10 +4192,6 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
-				RelativePath=".\src\phreeqcpp\char_star.h"
-				>
-			</File>
-			<File
 				RelativePath="src\CVar.hxx"
 				>
 			</File>
