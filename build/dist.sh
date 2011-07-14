@@ -200,6 +200,8 @@ do
    -e "/#define *VER_PATCH/s/[0-9]\+/$ver_patch/" \
    -e "/#define *VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
    -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
+   -e "s/@PHREEQC_VER@/$VER/g" \
+   -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
     < "$vsn_file" > "$vsn_file.tmp"
   unix2dos "$vsn_file.tmp" 2> /dev/null
   mv -f "$vsn_file.tmp" "$vsn_file"
