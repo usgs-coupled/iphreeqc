@@ -190,8 +190,9 @@ fi
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
 SED_FILES="$DISTPATH/configure.ac \
-           $DISTPATH/src/phreeqcpp/PHREEQCPP-RLEASE.txt \
-           $DISTPATH/src/phreeqcpp/phreec/revisions"
+           $DISTPATH/src/phreeqcpp/PHREEQCPP-RELEASE.txt \
+           $DISTPATH/src/phreeqcpp/phreeqc/revisions"
+
 for vsn_file in $SED_FILES
 do
   sed \
