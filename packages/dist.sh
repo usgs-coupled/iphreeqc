@@ -189,11 +189,15 @@ fi
 
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
-SED_FILES="$DISTPATH/configure.ac"
+SED_FILES="$DISTPATH/configure.ac \
+           $DISTPATH/src/phreeqcpp/PHREEQCPP-RLEASE.txt \
+           $DISTPATH/src/phreeqcpp/phreec/revisions"
 for vsn_file in $SED_FILES
 do
   sed \
    -e "s/AC_INIT(.*)/AC_INIT([IPhreeqc], [$VERSION-$REVISION], [charlton@usgs.gov])/g" \
+   -e "s/@PHREEQC_VER@/$VER/g" \
+   -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
     < "$vsn_file" > "$vsn_file.tmp"
   mv -f "$vsn_file.tmp" "$vsn_file"
   if [ -n "$WIN" ]; then
