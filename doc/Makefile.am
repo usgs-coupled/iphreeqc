@@ -5,6 +5,8 @@ docdir = $(datadir)/doc/$(PACKAGE_TARNAME)-$(VERSION)/html
 dist_doc_DATA = $(DOCS)
 
 DOCS= \
+    RELEASE \
+    PHREEQCPP-RELEASE \
     html/globals_eval.html \
     html/tabs.css \
     html/globals.html \
