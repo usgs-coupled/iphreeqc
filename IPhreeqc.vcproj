@@ -946,6 +946,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\PBasic.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Phreeqc.cpp"
 					>
 				</File>
