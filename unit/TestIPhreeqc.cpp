@@ -1167,7 +1167,7 @@ void TestIPhreeqc::TestCase2(void)
 	CPPUNIT_ASSERT_EQUAL( 62,      obj.GetSelectedOutputColumnCount() );
 
 
-	// remove punch files if they exists
+	// remove punch files if they exist
 	//
 	if (::FileExists("selected.out"))
 	{

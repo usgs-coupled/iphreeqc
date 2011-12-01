@@ -11,6 +11,7 @@
 #include <cstdarg>
 #include "IPhreeqcCallbacks.h"      /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
 #include "Var.h"                    /* VRESULT */
+#include "phreeqcpp/PHRQ_io.h"
 
 #if defined(_WINDLL)
 #define IPQ_DLL_EXPORT __declspec(dllexport)
@@ -39,7 +40,7 @@ class IPQ_DLL_EXPORT IPhreeqcStop : std::exception
  * Program for Speciation, Batch-Reaction, One-Dimensional Transport,
  * and Inverse Geochemical Calculations
  */
-class IPQ_DLL_EXPORT IPhreeqc
+class IPQ_DLL_EXPORT IPhreeqc : public PHRQ_io
 {
 public:
 	/**
@@ -53,7 +54,7 @@ public:
 	/**
 	 * Destructor
 	 */
-	~IPhreeqc(void);
+	virtual ~IPhreeqc(void);
 
 public:
 
@@ -534,6 +535,20 @@ public:
 	 */
 	void                     SetSelectedOutputFileOn(bool bValue);
 
+public:
+	// overrides
+	virtual void error_msg(const char * str, bool stop=false);
+	virtual void output_msg(const char * str);
+	virtual void screen_msg(const char *str);
+	virtual void punch_msg(const char *str);
+
+	virtual void fpunchf(const char *name, const char *format, double d);
+	virtual void fpunchf(const char *name, const char *format, char * d);
+	virtual void fpunchf(const char *name, const char *format, int d);
+	virtual void fpunchf_end_row(const char *format);
+
+	virtual bool punch_open(const char *file_name);
+
 protected:
 	static int handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
 	int output_handler(const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
@@ -550,8 +565,11 @@ protected:
 	void UnLoadDatabase(void);
 
 	void check_database(const char* sz_routine);
+	int close_input_files(void);
+	int close_output_files(void);
 	void open_output_files(const char* sz_routine);
-	void do_run(const char* sz_routine, std::istream* pis, FILE* fp, PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie);
+
+	void do_run(const char* sz_routine, std::istream* pis, PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie);
 
 	void update_errors(void);
 
@@ -593,7 +611,7 @@ protected:
 #pragma warning(default:4251)
 #endif
 
-private:
+protected:
 	Phreeqc* PhreeqcPtr;
 
 #if defined(CPPUNIT)

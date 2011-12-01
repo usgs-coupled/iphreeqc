@@ -807,6 +807,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\IPHRQ_io.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\SelectedOutput.cpp"
 				>
 			</File>
@@ -1041,10 +1045,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\src\phreeqcpp\phreeqc\basic.cpp"
-						>
-					</File>
-					<File
 						RelativePath=".\src\phreeqcpp\phreeqc\basicsubs.cpp"
 						>
 					</File>
@@ -1105,23 +1105,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\src\phreeqcpp\phreeqc\output.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\phreeqc\p2clib.cpp"
-						>
-					</File>
-					<File
 						RelativePath=".\src\phreeqcpp\phreeqc\parse.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\src\phreeqcpp\phreeqc\phqalloc.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\phreeqc\phreeqc_files.cpp"
 						>
 					</File>
 					<File
@@ -1277,6 +1265,10 @@
 			</File>
 			<File
 				RelativePath=".\include\IPhreeqc.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\IPHRQ_io.h"
 				>
 			</File>
 			<File

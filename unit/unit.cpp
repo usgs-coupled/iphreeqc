@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	runner.addTest(TestCVar::suite());
 	runner.addTest(TestSelectedOutput::suite());
 	runner.addTest(TestIPhreeqc::suite());
-	runner.addTest(TestIPhreeqcLib::suite());
+// COMMENT: {11/16/2011 11:12:52 PM}	runner.addTest(TestIPhreeqcLib::suite());
 
 	runner.setOutputter(CppUnit::CompilerOutputter::defaultOutputter(&runner.result(), std::cout));
 

@@ -13,7 +13,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
 	CPPUNIT_TEST( TestRun );
 	CPPUNIT_TEST( TestRunWithErrors );
-	CPPUNIT_TEST( TestRunFile );
+	CPPUNIT_TEST( TestRunFile ); 
 	CPPUNIT_TEST( TestRunString );
 	CPPUNIT_TEST( TestGetSelectedOutputRowCount );
 	CPPUNIT_TEST( TestGetSelectedOutputValue );
