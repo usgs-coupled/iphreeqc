@@ -1610,6 +1610,7 @@ void TestIPhreeqc::TestDumpString()
 		"USE mix none\n"
 		"USE reaction none\n"
 		"USE reaction_temperature none\n"
+		"USE reaction_pressure none\n"
 		;
 
 #endif
@@ -1643,6 +1644,7 @@ void TestIPhreeqc::TestDumpString()
 		"USE mix none\n"
 		"USE reaction none\n"
 		"USE reaction_temperature none\n"
+		"USE reaction_pressure none\n"
 		;
 #endif
 
@@ -1672,7 +1674,7 @@ void TestIPhreeqc::TestGetDumpStringLineCount(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 29,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 30,        obj.GetDumpStringLineCount() );
 }
 
 void TestIPhreeqc::TestGetDumpStringLine(void)
@@ -1698,7 +1700,7 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 29,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 30,        obj.GetDumpStringLineCount() );
 
 	int line = 0;
 #if defined(_MSC_VER)
@@ -1731,6 +1733,7 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                             std::string(obj.GetDumpStringLine(line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        std::string(obj.GetDumpStringLine(line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            std::string(obj.GetDumpStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),               std::string(obj.GetDumpStringLine(line++)) );
 #endif
 
 #if defined(__GNUC__)
@@ -1763,6 +1766,7 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                             std::string(obj.GetDumpStringLine(line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        std::string(obj.GetDumpStringLine(line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            std::string(obj.GetDumpStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),               std::string(obj.GetDumpStringLine(line++)) );
 #endif
 
 	// remaining lines should be empty
