@@ -61,13 +61,18 @@ PPOBJS = \
 	GasPhase.o \
 	ISolutionComp.o \
 	ISolution.o \
+	Keywords.o \
 	KineticsComp.o \
 	NameDouble.o \
 	NumKeyword.o \
 	Parser.o \
+	PBasic.o \
 	Phreeqc.o \
+	PHRQ_base.o \
+	PHRQ_io.o \
 	PPassemblageComp.o \
 	PPassemblage.o \
+	Pressure.o \
 	Reaction.o \
 	ReadClass.o \
 	runner.o \
@@ -88,7 +93,6 @@ PPOBJS = \
 # phreeqc objs
 POBJS =	\
 	advection.o \
-	basic.o \
 	basicsubs.o \
 	cl1.o \
 	cvdense.o \
@@ -104,11 +108,9 @@ POBJS =	\
 	model.o \
 	nvector.o \
 	nvector_serial.o \
-	output.o \
-	p2clib.o \
 	parse.o \
 	phqalloc.o \
-	phreeqc_files.o \
+	PHRQ_io_output.o \
 	pitzer.o \
 	pitzer_structures.o \
 	prep.o \
@@ -135,7 +137,6 @@ clean:
 	$(RM) $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS) unit unit.exe *~
 
 -include ./$(DEPDIR)/advection.Po
--include ./$(DEPDIR)/basic.Po
 -include ./$(DEPDIR)/basicsubs.Po
 -include ./$(DEPDIR)/cl1.Po
 -include ./$(DEPDIR)/cvdense.Po
@@ -156,6 +157,7 @@ clean:
 -include ./$(DEPDIR)/ISolution.Po
 -include ./$(DEPDIR)/ISolutionComp.Po
 -include ./$(DEPDIR)/isotopes.Po
+-include ./$(DEPDIR)/Keywords.Po
 -include ./$(DEPDIR)/kinetics.Po
 -include ./$(DEPDIR)/KineticsComp.Po
 -include ./$(DEPDIR)/mainsubs.Po
@@ -164,18 +166,20 @@ clean:
 -include ./$(DEPDIR)/NumKeyword.Po
 -include ./$(DEPDIR)/nvector.Po
 -include ./$(DEPDIR)/nvector_serial.Po
--include ./$(DEPDIR)/output.Po
--include ./$(DEPDIR)/p2clib.Po
 -include ./$(DEPDIR)/parse.Po
 -include ./$(DEPDIR)/Parser.Po
+-include ./$(DEPDIR)/PBasic.Po
 -include ./$(DEPDIR)/phqalloc.Po
 -include ./$(DEPDIR)/Phreeqc.Po
--include ./$(DEPDIR)/phreeqc_files.Po
+-include ./$(DEPDIR)/PHRQ_base.Po
+-include ./$(DEPDIR)/PHRQ_io.Po
+-include ./$(DEPDIR)/PHRQ_io_output.Po
 -include ./$(DEPDIR)/pitzer.Po
 -include ./$(DEPDIR)/pitzer_structures.Po
 -include ./$(DEPDIR)/PPassemblage.Po
 -include ./$(DEPDIR)/PPassemblageComp.Po
 -include ./$(DEPDIR)/prep.Po
+-include ./$(DEPDIR)/Pressure.Po
 -include ./$(DEPDIR)/print.Po
 -include ./$(DEPDIR)/Reaction.Po
 -include ./$(DEPDIR)/read.Po
