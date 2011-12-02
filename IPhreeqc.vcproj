@@ -807,10 +807,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\IPHRQ_io.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\SelectedOutput.cpp"
 				>
 			</File>
@@ -934,6 +930,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\Keywords.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\KineticsComp.cxx"
 					>
 				</File>
@@ -971,6 +971,10 @@
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\PPassemblageComp.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\Pressure.cxx"
 					>
 				</File>
 				<File
@@ -1280,6 +1284,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\Keywords.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\phreeqcpp\phreeqc\kinetics.h"
 				>
 			</File>
@@ -1313,6 +1321,10 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\Parser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PBasic.h"
 				>
 			</File>
 			<File
@@ -1353,6 +1365,10 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\PPassemblageComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Pressure.h"
 				>
 			</File>
 			<File
