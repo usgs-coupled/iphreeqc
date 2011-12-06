@@ -550,16 +550,6 @@ public:
 	virtual bool punch_open(const char *file_name);
 
 protected:
-	static int handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
-	int output_handler(const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
-	int open_handler(const int type, const char *file_name);
-
-	static int module_handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
-	int module_isopen_handler(const int type);
-	int module_open_handler(const int type, const char *file_name);
-
-	int output_isopen(const int type);
-
 	int EndRow(void);
 	void AddSelectedOutput(const char* name, const char* format, va_list argptr);
 	void UnLoadDatabase(void);
@@ -572,6 +562,8 @@ protected:
 	void do_run(const char* sz_routine, std::istream* pis, PFN_PRERUN_CALLBACK pfn_pre, PFN_POSTRUN_CALLBACK pfn_post, void *cookie);
 
 	void update_errors(void);
+
+	int get_error_count(void)const;
 
 protected:
 	bool                       DatabaseLoaded;
