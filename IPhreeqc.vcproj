@@ -85,7 +85,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(ProjectDir)src\phreeqcpp\PHRQ_io.h&quot; &quot;$(ProjectDir)include\PHRQ_io.h&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -229,7 +229,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;lib\vc80.pdb&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;lib\vc80.pdb&quot;&#x0D;&#x0A;copy &quot;$(ProjectDir)src\phreeqcpp\PHRQ_io.h&quot; &quot;$(ProjectDir)include\PHRQ_io.h&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -383,7 +383,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dll\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dll\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(ProjectDir)src\phreeqcpp\PHRQ_io.h&quot; &quot;$(ProjectDir)include\PHRQ_io.h&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -547,7 +547,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dll\vc80.pdb&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dll\vc80.pdb&quot;&#x0D;&#x0A;copy &quot;$(ProjectDir)src\phreeqcpp\PHRQ_io.h&quot; &quot;$(ProjectDir)include\PHRQ_io.h&quot;"
 			/>
 		</Configuration>
 		<Configuration

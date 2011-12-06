@@ -11,7 +11,7 @@
 #include <cstdarg>
 #include "IPhreeqcCallbacks.h"      /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
 #include "Var.h"                    /* VRESULT */
-#include "phreeqcpp/PHRQ_io.h"
+#include "PHRQ_io.h"
 
 #if defined(_WINDLL)
 #define IPQ_DLL_EXPORT __declspec(dllexport)
