@@ -537,17 +537,19 @@ public:
 
 public:
 	// overrides
-	virtual void error_msg(const char * str, bool stop=false);
-	virtual void output_msg(const char * str);
+	virtual void error_msg(const char *str, bool stop=false);
+	virtual void output_msg(const char *str);
 	virtual void screen_msg(const char *str);
 	virtual void punch_msg(const char *str);
+	virtual void warning_msg(const char *str);
 
 	virtual void fpunchf(const char *name, const char *format, double d);
 	virtual void fpunchf(const char *name, const char *format, char * d);
 	virtual void fpunchf(const char *name, const char *format, int d);
 	virtual void fpunchf_end_row(const char *format);
 
-	virtual bool punch_open(const char *file_name);
+	virtual bool output_open(const char *file_name, std::ios_base::openmode mode = std::ios_base::out);
+	virtual bool punch_open(const char *file_name, std::ios_base::openmode mode = std::ios_base::out);
 
 protected:
 	int EndRow(void);
@@ -563,7 +565,6 @@ protected:
 
 	void update_errors(void);
 
-	int get_error_count(void)const;
 
 protected:
 	bool                       DatabaseLoaded;
@@ -605,6 +606,8 @@ protected:
 
 protected:
 	Phreeqc* PhreeqcPtr;
+	FILE *input_file;
+	FILE *database_file;
 
 #if defined(CPPUNIT)
 	friend class TestIPhreeqc;

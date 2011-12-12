@@ -24,7 +24,8 @@ GAS_PHASE 1-100
     N2(g)     0.9
 
 #---------------- OUTPUT and TRANSPORT ----------------#
-
+KNOBS
+    -logfile true
 
 transport
 -cells 100

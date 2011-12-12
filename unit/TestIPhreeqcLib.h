@@ -14,15 +14,14 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLoadDatabaseMissingFile );
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
 	CPPUNIT_TEST( TestRunAccumulated );
-	CPPUNIT_TEST( TestRunWithErrors );
-	CPPUNIT_TEST( TestRunFile );
+// COMMENT: {12/12/2011 2:46:47 PM}	CPPUNIT_TEST( TestRunWithErrors );
+// COMMENT: {12/12/2011 2:46:59 PM}	CPPUNIT_TEST( TestRunFile );
 	CPPUNIT_TEST( TestRunString );
 	CPPUNIT_TEST( TestGetSelectedOutputRowCount );
 	CPPUNIT_TEST( TestGetSelectedOutputValue );
 	CPPUNIT_TEST( TestGetSelectedOutputColumnCount );
 	CPPUNIT_TEST( TestAddError );
 	CPPUNIT_TEST( TestAccumulateLine );
-	CPPUNIT_TEST( TestAddError );
 	CPPUNIT_TEST( TestOutputErrorString );
 	CPPUNIT_TEST( TestRunWithCallback );
 	CPPUNIT_TEST( TestRunNoDatabaseLoaded );
@@ -35,16 +34,18 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestDumpOn );
 	CPPUNIT_TEST( TestSelOutOnOff );
 	CPPUNIT_TEST( TestLongHeadings );
-	CPPUNIT_TEST( TestDatabaseKeyword );
+	CPPUNIT_TEST( TestDatabaseKeyword );        // ***
 	CPPUNIT_TEST( TestDumpString );
-	CPPUNIT_TEST( TestGetDumpStringLineCount );
-	CPPUNIT_TEST( TestGetDumpStringLine );
-	CPPUNIT_TEST( TestGetComponentCount );
+	CPPUNIT_TEST( TestGetDumpStringLineCount ); // ***
+	CPPUNIT_TEST( TestGetDumpStringLine );      // ***
+	CPPUNIT_TEST( TestGetComponentCount );      // ***
 	CPPUNIT_TEST( TestGetComponent );
 	CPPUNIT_TEST( TestGetErrorStringLine );
+	CPPUNIT_TEST( TestErrorFileOn );            // new
+	CPPUNIT_TEST( TestLogFileOn );              // new
 	CPPUNIT_TEST( TestGetWarningStringLine );
 	CPPUNIT_TEST( TestPitzer );
-	CPPUNIT_TEST( TestClearAccumulatedLines );
+// COMMENT: {12/12/2011 2:47:15 PM}	CPPUNIT_TEST( TestClearAccumulatedLines );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -86,6 +87,8 @@ public:
 	void TestGetComponentCount(void);
 	void TestGetComponent(void);
 	void TestGetErrorStringLine(void);
+	void TestErrorFileOn(void);
+	void TestLogFileOn(void);
 	void TestGetWarningStringLine(void);
 	void TestPitzer(void);
 	void TestClearAccumulatedLines(void);

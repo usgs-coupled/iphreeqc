@@ -16,6 +16,7 @@ int DeleteFile(const char* szPathName);
 #endif
 
 bool FileExists(const char *szPathName);
+size_t FileSize(const char *szPathName);
 
 VRESULT SOLUTION(IPhreeqc& obj, double C, double Ca, double Na);
 VRESULT EQUILIBRIUM_PHASES(IPhreeqc& obj, const char* phase, double si, double amount);
@@ -39,6 +40,7 @@ void TestIPhreeqc::TestLoadDatabase(void)
 	for (int i = 0; i < 10; ++i)
 	{
 		CPPUNIT_ASSERT_EQUAL(true, ::FileExists("phreeqc.dat"));
+		CPPUNIT_ASSERT(::FileSize("phreeqc.dat") > 0);
 		CPPUNIT_ASSERT_EQUAL(0,    obj.LoadDatabase("phreeqc.dat"));
 	}
 }
@@ -144,6 +146,7 @@ void TestIPhreeqc::TestLoadDatabaseWithErrors(void)
 	for (int i = 0; i < 10; ++i)
 	{
 		CPPUNIT_ASSERT_EQUAL(true, ::FileExists("missing_e.dat"));
+		CPPUNIT_ASSERT(::FileSize("missing_e.dat") > 0);
 		CPPUNIT_ASSERT_EQUAL(6,    obj.LoadDatabase("missing_e.dat"));
 
 		const char *expected =
@@ -179,7 +182,7 @@ void TestIPhreeqc::TestLoadDatabaseWithErrors(void)
 #endif
 }
 
-void TestIPhreeqc::TestRun(void)
+void TestIPhreeqc::TestRunAccumulated(void)
 {
 #if defined(_WIN32)
 	int n = ::_fcloseall();
@@ -237,6 +240,7 @@ void TestIPhreeqc::TestRunWithErrors(void)
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
 	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(dump_file) );
+	CPPUNIT_ASSERT( ::FileSize(dump_file) > 0 );
 	CPPUNIT_ASSERT( ::DeleteFile(dump_file) );
 }
 
@@ -267,8 +271,10 @@ void TestIPhreeqc::TestRunFile(void)
 
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
 
-	CPPUNIT_ASSERT_EQUAL(true, ::FileExists(dump_file));
-	CPPUNIT_ASSERT(::DeleteFile(dump_file));
+	// Note: should this file exist since GetDumpFileOn is false?
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(dump_file) );
+	CPPUNIT_ASSERT( ::FileSize(dump_file) > 0 );
+	CPPUNIT_ASSERT( ::DeleteFile(dump_file) );
 }
 
 void TestIPhreeqc::TestRunString(void)
@@ -362,6 +368,7 @@ void TestIPhreeqc::TestRunString(void)
 	CPPUNIT_ASSERT_EQUAL(false, ::FileExists("phreeqc.out"));
 	CPPUNIT_ASSERT_EQUAL(0,     obj.RunString(input));
 	CPPUNIT_ASSERT_EQUAL(true,  ::FileExists("phreeqc.out"));
+	CPPUNIT_ASSERT(::FileSize("phreeqc.out") > 0);
 	if (::FileExists("phreeqc.out"))
 	{
 		CPPUNIT_ASSERT(::DeleteFile("phreeqc.out"));
@@ -1112,6 +1119,7 @@ void TestIPhreeqc::TestCase1(void)
 	obj.SetDumpFileOn(false);
 	CPPUNIT_ASSERT_EQUAL( 0,          obj.RunAccumulated() );
 	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists("selected.out") );
+	CPPUNIT_ASSERT( ::FileSize("selected.out") > 0 );
 	CPPUNIT_ASSERT_EQUAL( 62,         obj.GetSelectedOutputColumnCount() );
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      SOLUTION(obj, 1.0, 1.0, 1.0) );
@@ -1122,6 +1130,7 @@ void TestIPhreeqc::TestCase1(void)
 	obj.SetDumpFileOn(false);
 	CPPUNIT_ASSERT_EQUAL( 0,          obj.RunAccumulated() );
 	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists("selected.out") );
+	CPPUNIT_ASSERT( ::FileSize("selected.out") > 0 );
 	CPPUNIT_ASSERT_EQUAL( 62,         obj.GetSelectedOutputColumnCount() );
 }
 
@@ -1164,6 +1173,7 @@ void TestIPhreeqc::TestCase2(void)
 	CPPUNIT_ASSERT_EQUAL( 0,       obj.RunAccumulated() );
 	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( true,    ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT( ::FileSize("case2.punch") > 0 );
 	CPPUNIT_ASSERT_EQUAL( 62,      obj.GetSelectedOutputColumnCount() );
 
 
@@ -1190,6 +1200,7 @@ void TestIPhreeqc::TestCase2(void)
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
 	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("selected.out") );
 	CPPUNIT_ASSERT_EQUAL( true,  ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT( ::FileSize("case2.punch") > 0 );
 	CPPUNIT_ASSERT_EQUAL( 62,    obj.GetSelectedOutputColumnCount() );
 
 	if (::FileExists("case2.punch"))
@@ -1369,8 +1380,6 @@ void TestOnOff(const char* FILENAME, bool output_on, bool error_on, bool log_on,
 	CPPUNIT_ASSERT_EQUAL( 0,    obj.RunAccumulated() );
 	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(FILENAME) );
 	CPPUNIT_ASSERT( ::DeleteFile(FILENAME) );
-
-
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat") );
 
 	// add solution block
@@ -1556,6 +1565,16 @@ void TestIPhreeqc::TestDatabaseKeyword()
 
 	const char* err = obj.GetErrorString();
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
+
+	const char *exp_warn =
+		"WARNING: DATABASE keyword is ignored by IPhreeqc.\n"
+		"WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100.\n"
+		"WARNING: No dispersivities were read; disp = 0 assumed.\n"
+		"WARNING: Could not find element in database, Amm.\n"
+		"	Concentration is set to zero.\n";
+
+	const char* warn = obj.GetWarningString();
+	CPPUNIT_ASSERT_EQUAL(std::string(exp_warn), std::string(warn));
 }
 
 void TestIPhreeqc::TestDumpString()

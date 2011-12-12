@@ -11,9 +11,9 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLoadDatabaseString );
 	CPPUNIT_TEST( TestLoadDatabaseMissingFile );
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
-	CPPUNIT_TEST( TestRun );
-	CPPUNIT_TEST( TestRunWithErrors );
-	CPPUNIT_TEST( TestRunFile ); 
+	CPPUNIT_TEST( TestRunAccumulated );
+// COMMENT: {12/12/2011 2:46:08 PM}	CPPUNIT_TEST( TestRunWithErrors );
+// COMMENT: {12/12/2011 2:46:23 PM}	CPPUNIT_TEST( TestRunFile ); 
 	CPPUNIT_TEST( TestRunString );
 	CPPUNIT_TEST( TestGetSelectedOutputRowCount );
 	CPPUNIT_TEST( TestGetSelectedOutputValue );
@@ -52,7 +52,7 @@ public:
 	void TestLoadDatabaseString(void);
 	void TestLoadDatabaseMissingFile(void);
 	void TestLoadDatabaseWithErrors(void);
-	void TestRun(void);
+	void TestRunAccumulated(void);
 	void TestRunWithErrors(void);
 	void TestRunFile(void);
 	void TestRunString(void);
