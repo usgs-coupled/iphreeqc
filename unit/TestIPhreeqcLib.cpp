@@ -2105,13 +2105,13 @@ void TestIPhreeqcLib::TestErrorFileOn(void)
 	std::string lines[10];
 	std::ifstream ifs(FILENAME);
 
-	int i = 0;
+	size_t i = 0;
 	while (std::getline(ifs, lines[i]) && i < sizeof(lines)/sizeof(lines[0]))
 	{
 		++i;
 	}
 	
-	CPPUNIT_ASSERT_EQUAL(8, i);
+	CPPUNIT_ASSERT_EQUAL(8u, i);
 
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: DATABASE keyword is ignored by IPhreeqc."),                                 lines[0] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."),    lines[1] );
@@ -2152,13 +2152,13 @@ void TestIPhreeqcLib::TestLogFileOn(void)
 	std::string lines[10];
 	std::ifstream ifs(FILENAME);
 
-	int i = 0;
+	size_t i = 0;
 	while (std::getline(ifs, lines[i]) && i < sizeof(lines)/sizeof(lines[0]))
 	{
 		++i;
 	}
 	
-	CPPUNIT_ASSERT_EQUAL(6, i);
+	CPPUNIT_ASSERT_EQUAL(6u, i);
 
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."),    lines[0] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                           lines[1] );
