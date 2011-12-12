@@ -12,8 +12,8 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLoadDatabaseMissingFile );
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
 	CPPUNIT_TEST( TestRunAccumulated );
-// COMMENT: {12/12/2011 2:46:08 PM}	CPPUNIT_TEST( TestRunWithErrors );
-// COMMENT: {12/12/2011 2:46:23 PM}	CPPUNIT_TEST( TestRunFile ); 
+	CPPUNIT_TEST( TestRunWithErrors );
+	CPPUNIT_TEST( TestRunFile );
 	CPPUNIT_TEST( TestRunString );
 	CPPUNIT_TEST( TestGetSelectedOutputRowCount );
 	CPPUNIT_TEST( TestGetSelectedOutputValue );
@@ -44,8 +44,6 @@ class TestIPhreeqc : public CppUnit::TestFixture
 public:
 	TestIPhreeqc(void);
 	~TestIPhreeqc(void);
-
-// COMMENT: {3/30/2010 3:27:03 PM}	static bool FileExists(const char *szPathName);
 
 public:
 	void TestLoadDatabase(void);

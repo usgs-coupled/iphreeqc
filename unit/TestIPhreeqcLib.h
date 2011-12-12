@@ -14,8 +14,8 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLoadDatabaseMissingFile );
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
 	CPPUNIT_TEST( TestRunAccumulated );
-// COMMENT: {12/12/2011 2:46:47 PM}	CPPUNIT_TEST( TestRunWithErrors );
-// COMMENT: {12/12/2011 2:46:59 PM}	CPPUNIT_TEST( TestRunFile );
+	CPPUNIT_TEST( TestRunWithErrors );
+	CPPUNIT_TEST( TestRunFile );
 	CPPUNIT_TEST( TestRunString );
 	CPPUNIT_TEST( TestGetSelectedOutputRowCount );
 	CPPUNIT_TEST( TestGetSelectedOutputValue );
@@ -45,7 +45,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLogFileOn );              // new
 	CPPUNIT_TEST( TestGetWarningStringLine );
 	CPPUNIT_TEST( TestPitzer );
-// COMMENT: {12/12/2011 2:47:15 PM}	CPPUNIT_TEST( TestClearAccumulatedLines );
+	CPPUNIT_TEST( TestClearAccumulatedLines );
 	CPPUNIT_TEST_SUITE_END();
 
 public:

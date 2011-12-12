@@ -2245,23 +2245,27 @@ void TestIPhreeqcLib::TestClearAccumulatedLines(void)
 
 	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(id, "../database/wateq4f.dat"));
 
+	// phreeqc can now handle pH of -2 (-r5885)
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "SOLUTION 1"));
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "pH -2")     );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "END")       );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "	pH	7"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "	Na	1"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "PHASES"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "	Fix_H+"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "	H+ = H+"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "	log_k	0"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "EQUILIBRIUM_PHASES"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "	Fix_H+ -10 HCl	10"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "END"));
 
 	CPPUNIT_ASSERT_EQUAL(1, ::RunAccumulated(id));
 
-	CPPUNIT_ASSERT_EQUAL( 3, ::GetErrorStringLineCount(id) );
+	CPPUNIT_ASSERT_EQUAL(1, ::GetErrorStringLineCount(id));
 
-#if defined(_MSC_VER)
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+000"),    std::string(::GetErrorStringLine(id, 0)) );
-#endif
-#if defined(__GNUC__)
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR:               A(H2O) Activity of water has not converged. 	Residual: 1.590343e+00"),     std::string(::GetErrorStringLine(id, 0)) );
-#endif
+	const char expected[] =
+		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
+	const char* err = ::GetErrorString(id);
 
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                                std::string(::GetErrorStringLine(id, 1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Model failed to converge for initial solution."),                                           std::string(::GetErrorStringLine(id, 2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "SOLUTION 1"));
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::AccumulateLine(id, "pH 2")      );
