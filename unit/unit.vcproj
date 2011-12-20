@@ -800,6 +800,10 @@
 							>
 						</File>
 						<File
+							RelativePath="..\src\phreeqcpp\phreeqc\gases.cpp"
+							>
+						</File>
+						<File
 							RelativePath="..\src\phreeqcpp\phreeqc\input.cpp"
 							>
 						</File>

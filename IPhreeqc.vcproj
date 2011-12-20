@@ -383,7 +383,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dll\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;"
+				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dll\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -1070,6 +1070,10 @@
 					</File>
 					<File
 						RelativePath=".\src\phreeqcpp\phreeqc\dw.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\src\phreeqcpp\phreeqc\gases.cpp"
 						>
 					</File>
 					<File
