@@ -12,7 +12,8 @@
 
       INTEGER(KIND=4) F_MAIN
       INTEGER(KIND=4) TestGetSet
-
+      INTEGER(KIND=4) TestGetSetName
+      
       INTEGER(KIND=4) EXIT_SUCCESS
       PARAMETER (EXIT_SUCCESS=0)
 
@@ -36,6 +37,9 @@
 
       EXTERNAL GetSelectedOutputFileOn
       EXTERNAL SetSelectedOutputFileOn
+      
+      EXTERNAL GetDumpFileName
+      EXTERNAL SetDumpFileName
 
       id = CreateIPhreeqc()
       IF (id.LT.0) THEN
@@ -51,6 +55,12 @@ C     Dump
       
 C     Dump string
       IF (TestGetSet(id,GetDumpStringOn,SetDumpStringOn).NE.0) THEN
+         F_MAIN = EXIT_FAILURE
+         RETURN
+      END IF
+      
+C     Dump filename
+      IF (TestGetSetName(id,GetDumpFileName,SetDumpFileName).NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       END IF
@@ -155,3 +165,56 @@ C     Selected output
       RETURN
       
       END FUNCTION TestGetSet
+
+
+
+      FUNCTION TestGetSetName(id,getFuncName,setFuncName)
+      
+      IMPLICIT NONE
+      INCLUDE 'IPhreeqc.f.inc'
+      INTEGER(KIND=4) id
+      INTEGER(KIND=4) TestGetSetName
+      
+      EXTERNAL getFuncName
+      INTEGER(KIND=4) setFuncName
+      
+      INTEGER(KIND=4) EXIT_SUCCESS
+      PARAMETER (EXIT_SUCCESS=0)
+      
+      INTEGER(KIND=4) EXIT_FAILURE
+      PARAMETER (EXIT_FAILURE=1)
+      
+      CHARACTER(LEN=80) FILEN
+      
+      CALL getFuncName(id,FILEN)
+      
+      IF (setFuncName(id,'ABCDEFG').NE.IPQ_OK) THEN
+         TestGetSetName = EXIT_FAILURE
+         WRITE(*,*) "FAILURE" 
+         RETURN
+      END IF
+      
+      CALL getFuncName(id,FILEN)
+      IF (.NOT.LLE('ABCDEFG', FILEN)) THEN
+         TestGetSetName = EXIT_FAILURE
+         WRITE(*,*) "FAILURE" 
+         RETURN
+      END IF  
+      
+      IF (setFuncName(id,'XYZ').NE.IPQ_OK) THEN
+         TestGetSetName = EXIT_FAILURE
+         WRITE(*,*) "FAILURE" 
+         RETURN
+      END IF
+  
+      CALL getFuncName(id,FILEN)
+      IF (.NOT.LLE('XYZ', FILEN)) THEN
+         TestGetSetName = EXIT_FAILURE
+         WRITE(*,*) "FAILURE" 
+         RETURN
+      END IF  
+          
+      TestGetSetName = EXIT_SUCCESS
+      RETURN
+      
+      END FUNCTION TestGetSetName

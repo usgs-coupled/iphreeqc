@@ -29,7 +29,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestOutputOnOff );
 	CPPUNIT_TEST( TestErrorOnOff );
 	CPPUNIT_TEST( TestLogOnOff );
-	CPPUNIT_TEST( TestDumpOn );
+	CPPUNIT_TEST( TestDumpOnOff );
 	CPPUNIT_TEST( TestSelOutOnOff );
 	CPPUNIT_TEST( TestLongHeadings );
 	CPPUNIT_TEST( TestDatabaseKeyword );
@@ -39,6 +39,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
 	CPPUNIT_TEST( TestListComponents );
+	CPPUNIT_TEST( TestSetDumpFileName );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -68,7 +69,7 @@ public:
 	void TestOutputOnOff(void);
 	void TestErrorOnOff(void);
 	void TestLogOnOff(void);
-	void TestDumpOn(void);
+	void TestDumpOnOff(void);
 	void TestSelOutOnOff(void);
 	void TestLongHeadings(void);
 	void TestDatabaseKeyword(void);
@@ -78,6 +79,7 @@ public:
 	void TestGetComponentCount(void);
 	void TestGetComponent(void);
 	void TestListComponents(void);
+	void TestSetDumpFileName(void);
 
 };
 

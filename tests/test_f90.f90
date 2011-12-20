@@ -12,6 +12,7 @@ FUNCTION F_MAIN()
   
   INTEGER(KIND=4) F_MAIN
   INTEGER(KIND=4) TestGetSet
+  INTEGER(KIND=4) TestGetSetName
   
   INTEGER(KIND=4),PARAMETER :: EXIT_SUCCESS = 0
   INTEGER(KIND=4),PARAMETER :: EXIT_FAILURE = 1
@@ -42,6 +43,12 @@ FUNCTION F_MAIN()
   
   ! Dump string
   IF (TestGetSet(id,GetDumpStringOn,SetDumpStringOn).NE.0) THEN
+     F_MAIN = EXIT_FAILURE
+     RETURN
+  END IF
+  
+  ! Dump filename
+  IF (TestGetSetName(id,GetDumpFileName,SetDumpFileName).NE.0) THEN
      F_MAIN = EXIT_FAILURE
      RETURN
   END IF
@@ -110,7 +117,7 @@ FUNCTION TestGetSet(id,getFunc,setFunc)
   IMPLICIT NONE
   INCLUDE 'IPhreeqc.f90.inc'
   INTEGER(KIND=4) id
-  INTEGER(KIND=4) TESTGETSET
+  INTEGER(KIND=4) TestGetSet
   INTERFACE
      FUNCTION getFunc(id)
        INTEGER(KIND=4) id
@@ -129,21 +136,25 @@ FUNCTION TestGetSet(id,getFunc,setFunc)
   
   IF (getFunc(id)) THEN
      TestGetSet = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
      RETURN
   END IF
   
   IF (setFunc(id,.TRUE.).NE.IPQ_OK) THEN
      TestGetSet = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
      RETURN
   END IF
   
   IF (.NOT.getFunc(id)) THEN
      TestGetSet = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
      RETURN
   END IF
   
   IF (setFunc(id,.FALSE.).NE.IPQ_OK) THEN
      TestGetSet = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
      RETURN
   END IF
   
@@ -151,3 +162,62 @@ FUNCTION TestGetSet(id,getFunc,setFunc)
   RETURN
   
 END FUNCTION TestGetSet
+
+
+FUNCTION TestGetSetName(id,getFuncName,setFuncName)
+  
+  IMPLICIT NONE
+  INCLUDE 'IPhreeqc.f90.inc'
+  INTEGER(KIND=4) id
+  INTEGER(KIND=4) TestGetSetName
+  INTERFACE
+     SUBROUTINE getFuncName(id,fname)
+       INTEGER(KIND=4) id
+       CHARACTER(LEN=*) fname
+     END SUBROUTINE getFuncName
+  END INTERFACE
+  INTERFACE
+     FUNCTION setFuncName(id,fname)
+       INTEGER(KIND=4) id
+       CHARACTER(LEN=*) fname
+       INTEGER(KIND=4) setFuncName
+     END FUNCTION setFuncName
+  END INTERFACE
+  INTEGER(KIND=4),PARAMETER :: EXIT_SUCCESS = 0
+  INTEGER(KIND=4),PARAMETER :: EXIT_FAILURE = 1
+  CHARACTER(LEN=80) FILEN
+  
+  CALL getFuncName(id,FILEN)
+  
+  FILEN = 'ABCDEFG'
+  
+  IF (setFuncName(id,FILEN).NE.IPQ_OK) THEN
+     TestGetSetName = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
+     RETURN
+  END IF
+  
+  CALL getFuncName(id,FILEN)
+  IF (.NOT.LLE('ABCDEFG', FILEN)) THEN
+     TestGetSetName = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
+     RETURN
+  END IF
+  
+  IF (setFuncName(id,'XYZ').NE.IPQ_OK) THEN
+     TestGetSetName = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
+     RETURN
+  END IF
+  
+  CALL getFuncName(id,FILEN)
+  IF (.NOT.LLE('XYZ', FILEN)) THEN
+     TestGetSetName = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
+     RETURN
+  END IF  
+  
+  TestGetSetName = EXIT_SUCCESS
+  RETURN
+  
+END FUNCTION TestGetSetName

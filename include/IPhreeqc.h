@@ -217,7 +217,7 @@ extern "C" {
 
 
 /**
- *  Retrieves the number of components in the current component list .
+ *  Retrieves the number of components in the current component list.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              The current count of components.
  *                       A negative value indicates an error occured (see \ref IPQ_RESULT).
@@ -240,7 +240,28 @@ extern "C" {
  *  @par Fortran90 Example:
  *  see \ref GetComponent_f90 "GetComponent"
  */
-	IPQ_DLL_EXPORT int         GetComponentCount(int id);
+	IPQ_DLL_EXPORT int            GetComponentCount(int id);
+
+
+/**
+ *  Retrieves the name of the dump file.  This file name is used if not specified within <B>DUMP</B> input.
+ *  The default value is <B><I>dump.id.out</I></B>.
+ *  @param id               The instance id returned from \ref CreateIPhreeqc.
+ *  @return filename        The name of the file to write <B>DUMP</B> output to.
+ *  @see                    GetDumpFileOn, GetDumpString, GetDumpStringOn, GetDumpStringLine, GetDumpStringLineCount, SetDumpFileName, SetDumpFileOn, SetDumpStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetDumpFileName(ID,FILENAME)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: FILENAME
+ *  END SUBROUTINE GetDumpFileName
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT const char*    GetDumpFileName(int id);
 
 
 /**
@@ -260,7 +281,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	IPQ_DLL_EXPORT int         GetDumpFileOn(int id);
+	IPQ_DLL_EXPORT int            GetDumpFileOn(int id);
 
 
 /**
@@ -968,6 +989,28 @@ Headings
  *
  */
 	IPQ_DLL_EXPORT int         RunString(int id, const char* input);
+
+
+/**
+ *  Sets the name of the dump file.  This file name is used if not specified within <B>DUMP</B> input.
+ *  The default value is <B><I>dump.id.out</I></B>.
+ *  @param id               The instance id returned from \ref CreateIPhreeqc.
+ *  @return filename        The name of the file to write <B>DUMP</B> output to.
+ *  @see                    GetDumpFileName, GetDumpFileOn, GetDumpString, GetDumpStringOn, GetDumpStringLine, GetDumpStringLineCount, SetDumpFileOn, SetDumpStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION SetDumpFileName(ID,FILENAME)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: FILENAME
+ *    INTEGER(KIND=4)                 :: SetDumpFileOn
+ *  END FUNCTION SetDumpFileName
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT IPQ_RESULT  SetDumpFileName(int id, const char* filename);
 
 
 /**

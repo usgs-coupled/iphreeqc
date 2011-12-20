@@ -8,6 +8,7 @@
 #include <exception>
 #include <list>
 #include <vector>
+#include <map>
 #include <cstdarg>
 #include "IPhreeqcCallbacks.h"      /* PFN_PRERUN_CALLBACK, PFN_POSTRUN_CALLBACK, PFN_CATCH_CALLBACK */
 #include "Var.h"                    /* VRESULT */
@@ -115,9 +116,18 @@ public:
 	 */
 	size_t                   GetComponentCount(void);
 
+
+	/**
+	 *  Retrieves the name of the dump file.  This file name is used if not specified within <B>DUMP</B> input.
+	 *  The default value is <B><I>dump.id.out</I></B>, where id is obtained from \ref GetId.
+	 *  @return filename        The name of the file to write <B>DUMP</B> output to.
+	 *  @see                    GetDumpFileOn, GetDumpString, GetDumpStringOn, GetDumpStringLine, GetDumpStringLineCount, SetDumpFileName, SetDumpFileOn, SetDumpStringOn
+	 */
+	const char*              GetDumpFileName(void)const;
+
 	/**
 	 *  Retrieves the current value of the dump file switch.
-     *  @retval true            Output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
+     *  @retval true            Output is written to the <B>DUMP</B> (<B><I>dump.id.out</I></B> if unspecified, where id is obtained from \ref GetId) file.
      *  @retval false           No output is written.
 	 *  @see                    GetDumpStringLine, GetDumpStringLineCount, GetDumpStringOn, GetDumpString, SetDumpFileOn, SetDumpStringOn
 	 */
@@ -160,7 +170,7 @@ public:
 
 	/**
 	 *  Retrieves the current value of the error file switch.
-     *  @retval true            Errors are written to the <B><I>phreeqc.err</I></B> file.
+     *  @retval true            Errors are written to the <B><I>phreeqc.id.err</I></B> (where id is obtained from \ref GetId) file.
      *  @retval false           No errors are written.
 	 *  @see                    SetErrorFileOn
 	 */
@@ -189,8 +199,15 @@ public:
 	int                      GetErrorStringLineCount(void)const;
 
 	/**
+	 *  Retrieves the id of this object.  Each instance receives an id which is incremented for each instance
+	 *  starting with the value zero.
+     *  @return                 The id.
+	 */
+	int                      GetId(void)const;
+
+	/**
 	 *  Retrieves the current value of the log file switch.
-     *  @retval true            Log messages are written to the <B><I>phreeqc.log</I></B> file.
+     *  @retval true            Log messages are written to the <B><I>phreeqc.id.log</I></B> (where id is obtained from \ref GetId) file.
      *  @retval false           No log messages are written.
      *  @remarks
      *      Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
@@ -200,7 +217,7 @@ public:
 
 	/**
 	 *  Retrieves the current value of the output file switch.
-     *  @retval true            Output is written to the <B><I>phreeqc.out</I></B> file.
+     *  @retval true            Output is written to the <B><I>phreeqc.id.out</I></B> (where id is obtained from \ref GetId) file.
      *  @retval false           No output is written.
 	 *  @see                    SetOutputFileOn
 	 */
@@ -215,7 +232,7 @@ public:
 
 	/**
 	 *  Retrieves the selected-output file switch.
-     *  @retval true            Output is written to the selected-output (<B><I>selected.out</I></B> if unspecified) file.
+     *  @retval true            Output is written to the selected-output (<B><I>selected.id.out</I></B> if unspecified, where id is obtained from \ref GetId) file.
      *  @retval false           No output is written.
 	 *  @see                    GetSelectedOutputValue, GetSelectedOutputColumnCount, GetSelectedOutputRowCount, SetSelectedOutputFileOn
 	 */
@@ -440,7 +457,8 @@ public:
 	void                     OutputAccumulatedLines(void);
 
 	/**
-	 *  Output the error messages normally stored in the <B><I>phreeqc.err</I></B> file to stdout.
+	 *  Output the error messages normally stored in the <B><I>phreeqc.id.err</I></B> (where id is obtained from \ref GetId)
+	 *  file to stdout.
 	 *  @see                    GetErrorStringLine, GetErrorStringLineCount, GetErrorFileOn, SetErrorFileOn
 	 */
 	void                     OutputErrorString(void);
@@ -483,7 +501,16 @@ public:
 	int                      RunString(const char* input);
 
 	/**
-	 *  Sets the dump file switch on or off.  This switch controls whether or not phreeqc writes to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file.
+	 *  Sets the name of the dump file.  This file name is used if not specified within <B>DUMP</B> input.
+	 *  The default value is <B><I>dump.id.out</I></B>, where id is obtained from \ref GetId.
+	 *  @param filename         The name of the file to write <B>DUMP</B> output to.
+	 *  @see                    GetDumpFileName, GetDumpFileOn, GetDumpString, GetDumpStringOn, GetDumpStringLine, GetDumpStringLineCount, SetDumpStringOn
+	 */
+	void                     SetDumpFileName(const char *filename);
+
+	/**
+	 *  Sets the dump file switch on or off.  This switch controls whether or not phreeqc writes to the <B>DUMP</B> (<B><I>dump.id.out</I></B>
+	 *  if unspecified, where id is obtained from \ref GetId) file.
 	 *  The initial setting is false.
 	 *  @param bValue           If true, turns on output to the <B>DUMP</B> file;
 	 *                          if false, turns off output to the <B>DUMP</B> file.
@@ -502,7 +529,8 @@ public:
 
 	/**
 	 *  Sets the error file switch on or off.  This switch controls whether or not
-	 *  error messages are written to the <B><I>phreeqc.err</I></B> file.  The initial setting is false.
+	 *  error messages are written to the <B><I>phreeqc.id.err</I></B> (where id is obtained from \ref GetId) file.
+	 *  The initial setting is false.
 	 *  @param bValue           If true, writes errors to the error file; if false, no errors are written to the error file.
 	 *  @see                    GetErrorStringLine, GetErrorStringLineCount, GetErrorFileOn, OutputErrorString
 	 */
@@ -510,7 +538,7 @@ public:
 
 	/**
 	 *  Sets the log file switch on or off.  This switch controls whether or not phreeqc
-	 *  writes log messages to the <B><I>phreeqc.log</I></B> file.  The initial setting is false.
+	 *  writes log messages to the <B><I>phreeqc.id.log</I></B> (where id is obtained from \ref GetId) file.  The initial setting is false.
 	 *  @param bValue           If true, turns on output to the log file; if false, no log messages are written to the log file.
      *  @remarks
      *      Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
@@ -520,7 +548,7 @@ public:
 
 	/**
 	 *  Sets the output file switch on or off.  This switch controls whether or not phreeqc
-	 *  writes to the <B><I>phreeqc.out</I></B> file.  This is the output that is normally generated
+	 *  writes to the <B><I>phreeqc.id.out</I></B> file (where id is obtained from \ref GetId).  This is the output that is normally generated
 	 *  when phreeqc is run.  The initial setting is false.
 	 *  @param bValue           If true, writes output to the output file; if false, no output is written to the output file.
 	 *  @see                    GetOutputFileOn
@@ -529,7 +557,8 @@ public:
 
 	/**
 	 *  Sets the selected-output file switch on or off.  This switch controls whether or not phreeqc writes output to
-	 *  the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file. The initial setting is false.
+	 *  the <B>SELECTED_OUTPUT</B> (<B><I>selected.id.out</I></B> if unspecified, where id is obtained from \ref GetId) file.
+	 *  The initial setting is false.
 	 *  @param bValue           If true, writes output to the selected-output file; if false, no output is written to the selected-output file.
 	 *  @see                    GetSelectedOutputColumnCount, GetSelectedOutputFileOn, GetSelectedOutputRowCount, GetSelectedOutputValue
 	 */
@@ -591,13 +620,18 @@ protected:
 	std::vector< std::string > WarningLines;
 
 	CSelectedOutput           *SelectedOutput;
-	std::string                PunchFileName;
 	std::string                StringInput;
 
 	std::string                DumpString;
 	std::vector< std::string > DumpLines;
 
 	std::list< std::string >   Components;
+
+	std::string                PunchFileName;
+	std::string                OutputFileName;
+	std::string                ErrorFileName;
+	std::string                LogFileName;
+	std::string                DumpFileName;
 
 #if defined(_MSC_VER)
 /* reset warning C4251 */
@@ -608,6 +642,11 @@ protected:
 	Phreeqc* PhreeqcPtr;
 	FILE *input_file;
 	FILE *database_file;
+
+	friend class IPhreeqcLib;
+	static std::map<size_t, IPhreeqc*> Instances;
+	static size_t InstancesIndex;
+	const size_t Index;
 
 #if defined(CPPUNIT)
 	friend class TestIPhreeqc;

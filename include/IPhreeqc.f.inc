@@ -69,6 +69,7 @@ C
       INTEGER(KIND=4) RunAccumulated
       INTEGER(KIND=4) RunFile
       INTEGER(KIND=4) RunString
+      INTEGER(KIND=4) SetDumpFileName
       INTEGER(KIND=4) SetDumpFileOn
       INTEGER(KIND=4) SetDumpStringOn
       INTEGER(KIND=4) SetErrorFileOn

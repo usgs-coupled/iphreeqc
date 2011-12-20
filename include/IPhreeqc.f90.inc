@@ -83,6 +83,14 @@
 
 
        INTERFACE
+        SUBROUTINE GetDumpFileName(ID,FNAME)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         CHARACTER(LEN=*), INTENT(OUT) :: FNAME
+        END SUBROUTINE GetDumpFileName
+       END INTERFACE
+
+
+       INTERFACE
         FUNCTION GetDumpFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
          LOGICAL(KIND=4)               :: GetDumpFileOn
@@ -272,6 +280,15 @@
          CHARACTER(LEN=*),  INTENT(IN) :: INPUT
          INTEGER(KIND=4)               :: RunString
         END FUNCTION RunString
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION SetDumpFileName(ID,FNAME)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         CHARACTER(LEN=*), INTENT(IN) :: FNAME
+         INTEGER(KIND=4)              :: SetDumpFileName
+        END FUNCTION SetDumpFileName
        END INTERFACE
 
 

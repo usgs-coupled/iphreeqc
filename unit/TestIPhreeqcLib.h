@@ -31,7 +31,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestOutputOnOff );
 	CPPUNIT_TEST( TestErrorOnOff );
 	CPPUNIT_TEST( TestLogOnOff );
-	CPPUNIT_TEST( TestDumpOn );
+	CPPUNIT_TEST( TestDumpOnOff );
 	CPPUNIT_TEST( TestSelOutOnOff );
 	CPPUNIT_TEST( TestLongHeadings );
 	CPPUNIT_TEST( TestDatabaseKeyword );        // ***
@@ -46,6 +46,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetWarningStringLine );
 	CPPUNIT_TEST( TestPitzer );
 	CPPUNIT_TEST( TestClearAccumulatedLines );
+	CPPUNIT_TEST( TestSetDumpFileName );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -77,7 +78,7 @@ public:
 	void TestOutputOnOff(void);
 	void TestErrorOnOff(void);
 	void TestLogOnOff(void);
-	void TestDumpOn(void);
+	void TestDumpOnOff(void);
 	void TestSelOutOnOff(void);
 	void TestLongHeadings(void);
 	void TestDatabaseKeyword();
@@ -92,7 +93,7 @@ public:
 	void TestGetWarningStringLine(void);
 	void TestPitzer(void);
 	void TestClearAccumulatedLines(void);
-
+	void TestSetDumpFileName(void);
 
 protected:
 	void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on);
