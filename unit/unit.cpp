@@ -18,11 +18,11 @@ int main(int argc, char **argv)
 {
 	CppUnit::TextUi::TestRunner runner;
 
-// COMMENT: {12/19/2011 11:06:54 PM}	runner.addTest(TestVar::suite());
-// COMMENT: {12/19/2011 11:06:54 PM}	runner.addTest(TestCVar::suite());
-// COMMENT: {12/19/2011 11:06:54 PM}	runner.addTest(TestSelectedOutput::suite());
+	runner.addTest(TestVar::suite());
+	runner.addTest(TestCVar::suite());
+	runner.addTest(TestSelectedOutput::suite());
 	runner.addTest(TestIPhreeqc::suite());
-// COMMENT: {12/19/2011 11:06:57 PM}	runner.addTest(TestIPhreeqcLib::suite());
+	runner.addTest(TestIPhreeqcLib::suite());
 
 	runner.setOutputter(CppUnit::CompilerOutputter::defaultOutputter(&runner.result(), std::cout));
 
