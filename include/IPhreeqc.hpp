@@ -216,10 +216,17 @@ public:
 	bool                     GetLogFileOn(void)const;
 
 	/**
+	 *  Retrieves the name of the output file. The default value is <B><I>phreeqc.id.out</I></B>, where id is obtained from \ref GetId.
+	 *  @return filename        The name of the file to write phreeqc output to.
+	 *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileName, SetOutputFileOn, SetOutputStringOn
+	 */
+	const char*              GetOutputFileName(void)const;
+
+	/**
 	 *  Retrieves the current value of the output file switch.
      *  @retval true            Output is written to the <B><I>phreeqc.id.out</I></B> (where id is obtained from \ref GetId) file.
      *  @retval false           No output is written.
-	 *  @see                    SetOutputFileOn
+	 *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileName, SetOutputFileOn, SetOutputStringOn
 	 */
 	bool                     GetOutputFileOn(void)const;
 
@@ -545,6 +552,13 @@ public:
 	 *  @see                    GetLogFileOn
 	 */
 	void                     SetLogFileOn(bool bValue);
+
+	/**
+	 *  Sets the name of the output file. The default value is <B><I>phreeqc.id.out</I></B>, where id is obtained from \ref GetId.
+	 *  @param filename         The name of the file to write phreeqc output to.
+	 *  @see                    GetOutputFileName, GetOutputFileOn, GetOutputString, GetOutputStringOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileOn, SetOutputStringOn
+	 */
+	void                     SetOutputFileName(const char *filename);
 
 	/**
 	 *  Sets the output file switch on or off.  This switch controls whether or not phreeqc
