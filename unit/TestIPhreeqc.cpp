@@ -2037,7 +2037,7 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(OUTPUT_FILENAME) );
 
-	std::string lines[100];
+	std::string lines[101];
 	std::ifstream ifs(OUTPUT_FILENAME);
 
 	size_t i = 0;
@@ -2045,6 +2045,8 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 	{
 		++i;
 	}
+
+	CPPUNIT_ASSERT_EQUAL( 98u, i );
 
 	int line = 0;
 #if defined(_MSC_VER)
@@ -2166,7 +2168,7 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("Beginning of initial solution calculations."),                                          lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"),                                          lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Initial solution 1.	"),                                                                 lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Initial solution 1.	"),                                                                lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("-----------------------------Solution composition------------------------------"),      lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
