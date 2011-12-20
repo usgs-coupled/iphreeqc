@@ -1919,11 +1919,11 @@ void TestIPhreeqc::TestSetDumpFileName(void)
 
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(DUMP_FILENAME) );
 
-	std::string lines[30];
+	std::string lines[32];
 	std::ifstream ifs(DUMP_FILENAME);
 
 	size_t i = 0;
-	while (std::getline(ifs, lines[i]) && i < sizeof(lines)/sizeof(lines[0]))
+	while (i < sizeof(lines)/sizeof(lines[0]) && std::getline(ifs, lines[i]))
 	{
 		++i;
 	}
@@ -1960,6 +1960,8 @@ void TestIPhreeqc::TestSetDumpFileName(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),               lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
 #endif
 
 #if defined(__GNUC__)
@@ -1993,6 +1995,8 @@ void TestIPhreeqc::TestSetDumpFileName(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),               lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
 #endif
 
 	if (::FileExists(DUMP_FILENAME))

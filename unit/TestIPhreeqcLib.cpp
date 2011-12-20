@@ -2120,7 +2120,7 @@ void TestIPhreeqcLib::TestErrorFileOn(void)
 	std::ifstream ifs(FILENAME);
 
 	size_t i = 0;
-	while (std::getline(ifs, lines[i]) && i < sizeof(lines)/sizeof(lines[0]))
+	while (i < sizeof(lines)/sizeof(lines[0]) && std::getline(ifs, lines[i]))
 	{
 		++i;
 	}
@@ -2135,6 +2135,8 @@ void TestIPhreeqcLib::TestErrorFileOn(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("\tConcentration is set to zero."),                                                   lines[5] );
 	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."),                              lines[6] );
 	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                         lines[7] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                  lines[8] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                  lines[9] );
 
 	if (n >= 0)
 	{
@@ -2169,7 +2171,7 @@ void TestIPhreeqcLib::TestLogFileOn(void)
 	std::ifstream ifs(FILENAME);
 
 	size_t i = 0;
-	while (std::getline(ifs, lines[i]) && i < sizeof(lines)/sizeof(lines[0]))
+	while (i < sizeof(lines)/sizeof(lines[0]) && std::getline(ifs, lines[i]))
 	{
 		++i;
 	}
@@ -2182,6 +2184,8 @@ void TestIPhreeqcLib::TestLogFileOn(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                                 lines[3] );
 	CPPUNIT_ASSERT_EQUAL( std::string("\tConcentration is set to zero."),                                                   lines[4] );
 	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."),                              lines[5] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                  lines[8] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                  lines[9] );
 
 	if (n >= 0)
 	{
