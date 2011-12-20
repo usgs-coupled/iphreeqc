@@ -10,6 +10,7 @@
 #include <string>
 #include <cmath>
 #include <cfloat>
+#include <stdlib.h>
 
 #if defined(_WIN32) || defined(__CYGWIN32__)
 // DeleteFile defined in <windows.h>
