@@ -2259,6 +2259,6 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 
 	if (::FileExists(OUTPUT_FILENAME))
 	{
-		///::DeleteFile(OUTPUT_FILENAME);
+		::DeleteFile(OUTPUT_FILENAME);
 	}
 }
