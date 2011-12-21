@@ -99,6 +99,7 @@ POBJS =	\
 	cvode.o \
 	dense.o \
 	dw.o \
+	gases.o \
 	input.o \
 	integrate.o \
 	inverse.o \
