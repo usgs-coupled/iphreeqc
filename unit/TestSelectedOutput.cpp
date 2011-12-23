@@ -424,15 +424,15 @@ TestSelectedOutput::TestTooManyHeadings()
 	p.PhreeqcPtr->user_punch_headings       = 0;
 	p.PhreeqcPtr->user_punch_count_headings = 0;
 
-	p.PhreeqcPtr->user_punch_headings = (char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
+	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
 	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.name");
 	p.PhreeqcPtr->user_punch_count_headings++;
 
-	p.PhreeqcPtr->user_punch_headings = (char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
+	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
 	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.type");
 	p.PhreeqcPtr->user_punch_count_headings++;
 
-	p.PhreeqcPtr->user_punch_headings = (char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
+	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
 	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.moles");
 	p.PhreeqcPtr->user_punch_count_headings++;
 
@@ -449,7 +449,7 @@ TestSelectedOutput::TestTooManyHeadings()
 	//
 	for (int i = 0; i < p.PhreeqcPtr->user_punch_count_headings; ++i)
 	{
-		::free(p.PhreeqcPtr->user_punch_headings[i]);
+		::free((void*)p.PhreeqcPtr->user_punch_headings[i]);
 	}
 	::free(p.PhreeqcPtr->user_punch_headings);
 	p.PhreeqcPtr->user_punch_headings = NULL;
