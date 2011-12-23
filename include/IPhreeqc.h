@@ -240,7 +240,7 @@ extern "C" {
  *  @par Fortran90 Example:
  *  see \ref GetComponent_f90 "GetComponent"
  */
-	IPQ_DLL_EXPORT int            GetComponentCount(int id);
+	IPQ_DLL_EXPORT int         GetComponentCount(int id);
 
 
 /**
@@ -261,7 +261,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	IPQ_DLL_EXPORT const char*    GetDumpFileName(int id);
+	IPQ_DLL_EXPORT const char* GetDumpFileName(int id);
 
 
 /**
@@ -281,7 +281,7 @@ extern "C" {
  *  </CODE>
  *  @endhtmlonly
  */
-	IPQ_DLL_EXPORT int            GetDumpFileOn(int id);
+	IPQ_DLL_EXPORT int         GetDumpFileOn(int id);
 
 
 /**
@@ -467,6 +467,25 @@ extern "C" {
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT int         GetLogFileOn(int id);
+
+/**
+ *  Retrieves the name of the output file.  The default name is <B><I>phreeqc.id.out</I></B>.
+ *  @param id               The instance id returned from \ref CreateIPhreeqc.
+ *  @return filename        The name of the output file.
+ *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileName, SetOutputFileOn, SetOutputStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetOutputFileName(ID,FILENAME)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: FILENAME
+ *  END SUBROUTINE GetOutputFileName
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT const char* GetOutputFileName(int id);
 
 
 /**
@@ -995,7 +1014,9 @@ Headings
  *  Sets the name of the dump file.  This file name is used if not specified within <B>DUMP</B> input.
  *  The default value is <B><I>dump.id.out</I></B>.
  *  @param id               The instance id returned from \ref CreateIPhreeqc.
- *  @return filename        The name of the file to write <B>DUMP</B> output to.
+ *  @param filename         The name of the file to write <B>DUMP</B> output to.
+ *  @retval IPQ_OK          Success.
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
  *  @see                    GetDumpFileName, GetDumpFileOn, GetDumpString, GetDumpStringOn, GetDumpStringLine, GetDumpStringLineCount, SetDumpFileOn, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -1004,7 +1025,7 @@ Headings
  *  FUNCTION SetDumpFileName(ID,FILENAME)
  *    INTEGER(KIND=4),   INTENT(IN)   :: ID
  *    CHARACTER(LEN=*),  INTENT(OUT)  :: FILENAME
- *    INTEGER(KIND=4)                 :: SetDumpFileOn
+ *    INTEGER(KIND=4)                 :: SetDumpFileName
  *  END FUNCTION SetDumpFileName
  *  </PRE>
  *  </CODE>
@@ -1121,6 +1142,28 @@ Headings
  */
 	IPQ_DLL_EXPORT IPQ_RESULT  SetLogFileOn(int id, int log_on);
 
+/**
+ *  Sets the name of the output file.  This file name is used if not specified within <B>DUMP</B> input.
+ *  The default value is <B><I>phreeqc.id.out</I></B>.
+ *  @param id               The instance id returned from \ref CreateIPhreeqc.
+ *  @param filename         The name of the phreeqc output file.
+ *  @retval IPQ_OK          Success.
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
+ *  @see                    GetOutputFileName, GetOutputFileOn, GetOutputString, GetOutputStringOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileOn, SetOutputStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION SetOutputFileName(ID,FILENAME)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: FILENAME
+ *    INTEGER(KIND=4)                 :: SetOutputFileName
+ *  END FUNCTION SetOutputFileName
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT IPQ_RESULT  SetOutputFileName(int id, const char* filename);
 
 /**
  *  Sets the output file switch on or off.  This switch controls whether or not phreeqc

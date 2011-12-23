@@ -157,6 +157,14 @@
 
 
        INTERFACE
+        SUBROUTINE GetOutputFileName(ID,FNAME)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         CHARACTER(LEN=*), INTENT(OUT) :: FNAME
+        END SUBROUTINE GetOutputFileName
+       END INTERFACE
+
+
+       INTERFACE
         FUNCTION GetOutputFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
          LOGICAL(KIND=4)               :: GetOutputFileOn
@@ -325,6 +333,15 @@
          LOGICAL(KIND=4),  INTENT(IN) :: LOG_ON
          INTEGER(KIND=4)              :: SetLogFileOn
         END FUNCTION SetLogFileOn
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION SetOutputFileName(ID,FNAME)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         CHARACTER(LEN=*), INTENT(IN) :: FNAME
+         INTEGER(KIND=4)              :: SetOutputFileName
+        END FUNCTION SetOutputFileName
        END INTERFACE
 
 

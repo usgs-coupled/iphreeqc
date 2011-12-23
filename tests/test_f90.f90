@@ -71,6 +71,12 @@ FUNCTION F_MAIN()
      RETURN
   END IF
   
+  ! Output filename
+  IF (TestGetSetName(id,GetOutputFileName,SetOutputFileName).NE.0) THEN
+     F_MAIN = EXIT_FAILURE
+     RETURN
+  END IF  
+  
   ! Selected output
   IF (TestGetSet(id,GetSelectedOutputFileOn,SetSelectedOutputFileOn).NE.0) THEN
      F_MAIN = EXIT_FAILURE

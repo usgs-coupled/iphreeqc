@@ -47,6 +47,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestPitzer );
 	CPPUNIT_TEST( TestClearAccumulatedLines );
 	CPPUNIT_TEST( TestSetDumpFileName );
+	CPPUNIT_TEST( TestSetOutputFileName );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -94,6 +95,7 @@ public:
 	void TestPitzer(void);
 	void TestClearAccumulatedLines(void);
 	void TestSetDumpFileName(void);
+	void TestSetOutputFileName(void);
 
 protected:
 	void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on);

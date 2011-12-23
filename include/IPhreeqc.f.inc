@@ -74,5 +74,6 @@ C
       INTEGER(KIND=4) SetDumpStringOn
       INTEGER(KIND=4) SetErrorFileOn
       INTEGER(KIND=4) SetLogFileOn
+      INTEGER(KIND=4) SetOutputFileName
       INTEGER(KIND=4) SetOutputFileOn
       INTEGER(KIND=4) SetSelectedOutputFileOn

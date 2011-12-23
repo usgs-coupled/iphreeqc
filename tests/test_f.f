@@ -40,6 +40,9 @@
       
       EXTERNAL GetDumpFileName
       EXTERNAL SetDumpFileName
+      
+      EXTERNAL GetOutputFileName
+      EXTERNAL SetOutputFileName      
 
       id = CreateIPhreeqc()
       IF (id.LT.0) THEN
@@ -79,6 +82,13 @@ C     Log
       
 C     Output
       IF (TestGetSet(id,GetOutputFileOn,SetOutputFileOn).NE.0) THEN
+         F_MAIN = EXIT_FAILURE
+         RETURN
+      END IF
+      
+C     Output filename
+      IF (TestGetSetName(id,GetOutputFileName,SetOutputFileName)
+     &     .NE.0) THEN
          F_MAIN = EXIT_FAILURE
          RETURN
       END IF
