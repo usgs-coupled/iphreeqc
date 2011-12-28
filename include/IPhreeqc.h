@@ -491,7 +491,7 @@ extern "C" {
 /**
  *  Retrieves the current value of the output file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              Non-zero if output is written to the <B><I>phreeqc.out</I></B> file, 0 (zero) otherwise.
+ *  @return              Non-zero if output is written to the <B><I>phreeqc.id.out</I></B> file, 0 (zero) otherwise.
  *  @see                 SetOutputFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -506,6 +506,91 @@ extern "C" {
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT int         GetOutputFileOn(int id);
+
+/**
+ *  Retrieves the string buffer containing phreeqc output.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              A null terminated string containing phreeqc output.
+ *  @pre                 \ref SetOutputStringOn must have been set to true (non-zero) in order to recieve phreeqc output.
+ *  @see                 GetOutputFileOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileOn, GetOutputStringOn, SetOutputStringOn
+ *  @par Fortran90 Interface:
+ *  Not implemented. (see \ref GetOutputStringLineCount, \ref GetOutputStringLine)
+ *
+ *  \anchor GetOutputString_c
+ *  @par  C Example:
+ *  \include GetOutputString.c
+ */
+	IPQ_DLL_EXPORT const char* GetOutputString(int id);
+
+/**
+ *  Retrieves the given output line.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @param n             The zero-based index of the line to retrieve.
+ *  @return              A null terminated string containing the given line.
+ *                       Returns an empty string if n is out of range.
+ *  @pre                 \ref SetOutputStringOn must have been set to true (non-zero).
+ *  @see                 GetOutputFileOn, GetOutputString, GetOutputStringLineCount, GetOutputStringOn, SetOutputFileOn, SetOutputStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  (Note: N is one-based for the Fortran interface.)
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetOutputStringLine(ID,N,LINE)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    INTEGER(KIND=4),   INTENT(IN)   :: N
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
+ *  END SUBROUTINE GetOutputStringLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ *
+ *  \anchor GetOutputStringLine_f90
+ *  @par  Fortran90 Example:
+ *  \include F90GetOutputStringLine.f90
+ */
+	IPQ_DLL_EXPORT const char* GetOutputStringLine(int id, int n);
+
+/**
+ *  Retrieves the number of lines in the current output string buffer.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              The number of lines.
+ *  @pre                 \ref SetOutputStringOn must have been set to true (non-zero).
+ *  @see                 GetOutputFileOn, GetOutputString, GetOutputStringLine, GetOutputStringOn, SetOutputFileOn, SetOutputStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetOutputStringLineCount(ID)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    INTEGER(KIND=4)               :: GetOutputStringLineCount
+ *  END FUNCTION GetOutputStringLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ *
+ *  @par Fortran90 Example:
+ *  see \ref GetOutputStringLine_f90 "GetOutputStringLine"
+ */
+	IPQ_DLL_EXPORT int         GetOutputStringLineCount(int id);
+
+/**
+ *  Retrieves the current value of the output string switch.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              Non-zero if output is stored, 0 (zero) otherwise.
+ *  @see                 GetOutputFileOn, GetOutputString, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileOn, SetOutputStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetOutputStringOn(ID)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    LOGICAL(KIND=4)               :: GetOutputStringOn
+ *  END FUNCTION GetOutputStringOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT int         GetOutputStringOn(int id);
 
 
 /**
@@ -1188,6 +1273,37 @@ Headings
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT IPQ_RESULT  SetOutputFileOn(int id, int output_on);
+
+/**
+ *  Sets the output string switch on or off.  This switch controls whether or not the data normally sent
+ *  to the output file are stored in a buffer for retrieval.  The initial setting after calling
+ *  \ref CreateIPhreeqc is off.
+ *  @param id                   The instance id returned from \ref CreateIPhreeqc.
+ *  @param dump_string_on       If non-zero, captures the phreeqc output into a string buffer;
+ *                              if zero, phreeqc output is not captured to a string buffer.
+ *  @retval IPQ_OK              Success.
+ *  @retval IPQ_BADINSTANCE     The given id is invalid.
+ *  @see                        GetOutputFileOn, GetOutputStringOn, GetOutputString, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION SetOutputStringOn(ID,OUTPUT_STRING_ON)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    LOGICAL(KIND=4),  INTENT(IN)  :: OUTPUT_STRING_ON
+ *    INTEGER(KIND=4)               :: SetOutputStringOn
+ *  END FUNCTION SetOutputStringOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ *
+ *  @par C Example:
+ *  see \ref GetOutputString_c "GetOutputString"
+ *
+ *  @par Fortran90 Example:
+ *  see \ref GetOutputStringLine_f90 "GetOutputStringLine"
+ */
+	IPQ_DLL_EXPORT IPQ_RESULT  SetOutputStringOn(int id, int value);
 
 
 /**

@@ -34,20 +34,25 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestDumpOnOff );
 	CPPUNIT_TEST( TestSelOutOnOff );
 	CPPUNIT_TEST( TestLongHeadings );
-	CPPUNIT_TEST( TestDatabaseKeyword );        // ***
+	CPPUNIT_TEST( TestDatabaseKeyword );
 	CPPUNIT_TEST( TestDumpString );
-	CPPUNIT_TEST( TestGetDumpStringLineCount ); // ***
-	CPPUNIT_TEST( TestGetDumpStringLine );      // ***
-	CPPUNIT_TEST( TestGetComponentCount );      // ***
+	CPPUNIT_TEST( TestGetDumpStringLineCount );
+	CPPUNIT_TEST( TestGetDumpStringLine );
+	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
 	CPPUNIT_TEST( TestGetErrorStringLine );
-	CPPUNIT_TEST( TestErrorFileOn );            // new
-	CPPUNIT_TEST( TestLogFileOn );              // new
+	CPPUNIT_TEST( TestErrorFileOn );
+	CPPUNIT_TEST( TestLogFileOn );
 	CPPUNIT_TEST( TestGetWarningStringLine );
 	CPPUNIT_TEST( TestPitzer );
 	CPPUNIT_TEST( TestClearAccumulatedLines );
 	CPPUNIT_TEST( TestSetDumpFileName );
 	CPPUNIT_TEST( TestSetOutputFileName );
+	CPPUNIT_TEST( TestOutputStringOnOff );
+	CPPUNIT_TEST( TestGetOutputString );
+	CPPUNIT_TEST( TestGetOutputStringLineCount );
+	CPPUNIT_TEST( TestGetOutputStringLine );
+
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -96,6 +101,10 @@ public:
 	void TestClearAccumulatedLines(void);
 	void TestSetDumpFileName(void);
 	void TestSetOutputFileName(void);
+	void TestOutputStringOnOff(void);
+	void TestGetOutputString(void);
+	void TestGetOutputStringLineCount(void);
+	void TestGetOutputStringLine(void);	
 
 protected:
 	void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on);

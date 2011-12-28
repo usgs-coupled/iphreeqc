@@ -2699,3 +2699,223 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 		::DeleteFile(OUTPUT_FILENAME);
 	}
 }
+
+void TestIPhreeqcLib::TestOutputStringOnOff(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( false,    ::GetOutputStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetOutputStringOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( true,     ::GetOutputStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( false,    ::GetOutputStringOn(n) != 0 );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestGetOutputString(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	char OUTPUT_FILENAME[80];
+	sprintf(OUTPUT_FILENAME, "output.%06d.out", ::rand());
+	if (::FileExists(OUTPUT_FILENAME))
+	{
+		::DeleteFile(OUTPUT_FILENAME);
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(OUTPUT_FILENAME) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,     ::LoadDatabase(n, "phreeqc.dat"));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileName(n, OUTPUT_FILENAME) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(OUTPUT_FILENAME) );
+
+	{
+		std::ifstream ifs(OUTPUT_FILENAME);
+		std::string fline((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+		std::string sline(::GetOutputString(n));
+		CPPUNIT_ASSERT( sline.size() > 0 );
+
+		CPPUNIT_ASSERT_EQUAL( fline, sline );
+	}
+
+	if (::FileExists(OUTPUT_FILENAME))
+	{
+		::DeleteFile(OUTPUT_FILENAME);
+	}
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestGetOutputStringLineCount(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 98,     ::GetOutputStringLineCount(n) );
+
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestGetOutputStringLine(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+
+	int line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -4)) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 98,     ::GetOutputStringLineCount(n) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                std::string(::GetOutputStringLine(n, 0))  );
+	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 1."),                                                std::string(::GetOutputStringLine(n, 1))  );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                std::string(::GetOutputStringLine(n, 2))  );
+	CPPUNIT_ASSERT_EQUAL( std::string("-----------------------------Solution composition------------------------------"),     std::string(::GetOutputStringLine(n, 16)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Description of solution----------------------------"),     std::string(::GetOutputStringLine(n, 24)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Distribution of species----------------------------"),     std::string(::GetOutputStringLine(n, 40)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------Saturation indices-------------------------------"),     std::string(::GetOutputStringLine(n, 73)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("End of run.")                                                                    ,     std::string(::GetOutputStringLine(n, 95)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                    std::string(::GetOutputStringLine(n, 98)) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
+
+	line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetOutputStringLine(n, -4)) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
