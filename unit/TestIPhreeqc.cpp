@@ -2262,3 +2262,201 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 		::DeleteFile(OUTPUT_FILENAME);
 	}
 }
+
+void TestIPhreeqc::TestOutputStringOnOff(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL( false,    obj.GetOutputStringOn() );
+
+	obj.SetOutputStringOn(true);
+	CPPUNIT_ASSERT_EQUAL( true,     obj.GetOutputStringOn() );
+
+	obj.SetOutputStringOn(false);
+	CPPUNIT_ASSERT_EQUAL( false,    obj.GetOutputStringOn() );
+}
+
+void TestIPhreeqc::TestGetOutputString(void)
+{
+	char OUTPUT_FILENAME[80];
+	sprintf(OUTPUT_FILENAME, "output.%06d.out", ::rand());
+	if (::FileExists(OUTPUT_FILENAME))
+	{
+		::DeleteFile(OUTPUT_FILENAME);
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(OUTPUT_FILENAME) );
+
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::DUMP(obj) );
+
+	// run
+	obj.SetOutputFileOn(true);
+	obj.SetOutputStringOn(true);
+
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpStringOn(false);
+	obj.SetDumpFileOn(false);
+	obj.SetOutputFileName(OUTPUT_FILENAME);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      obj.RunAccumulated() );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(OUTPUT_FILENAME) );
+
+	{
+		std::ifstream ifs(OUTPUT_FILENAME);
+		std::string fline((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+		std::string sline(obj.GetOutputString());
+		CPPUNIT_ASSERT( sline.size() > 0 );
+
+		CPPUNIT_ASSERT_EQUAL( fline, sline );
+	}
+
+	if (::FileExists(OUTPUT_FILENAME))
+	{
+		::DeleteFile(OUTPUT_FILENAME);
+	}
+}
+
+void TestIPhreeqc::TestGetOutputStringLineCount(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::DUMP(obj) );
+
+	// run
+	obj.SetOutputStringOn(false);
+	obj.SetOutputFileOn(false);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpStringOn(false);
+	obj.SetDumpFileOn(false);
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::DUMP(obj) );
+
+	obj.SetOutputStringOn(true);
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL( 98,    obj.GetOutputStringLineCount() );
+
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::DUMP(obj) );
+
+	obj.SetOutputStringOn(false);
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+}
+
+void TestIPhreeqc::TestGetOutputStringLine(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::DUMP(obj) );
+
+	// run
+	obj.SetOutputStringOn(false);
+	obj.SetOutputFileOn(false);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpStringOn(false);
+	obj.SetDumpFileOn(false);
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+
+	int line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-4)) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::DUMP(obj) );
+
+	obj.SetOutputStringOn(true);
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL( 98,    obj.GetOutputStringLineCount() );
+
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                std::string(obj.GetOutputStringLine(0))  );
+	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 1."),                                                std::string(obj.GetOutputStringLine(1))  );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                std::string(obj.GetOutputStringLine(2))  );
+	CPPUNIT_ASSERT_EQUAL( std::string("-----------------------------Solution composition------------------------------"),     std::string(obj.GetOutputStringLine(16)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Description of solution----------------------------"),     std::string(obj.GetOutputStringLine(24)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Distribution of species----------------------------"),     std::string(obj.GetOutputStringLine(40)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------Saturation indices-------------------------------"),     std::string(obj.GetOutputStringLine(73)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("End of run.")                                                                    ,     std::string(obj.GetOutputStringLine(95)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                    std::string(obj.GetOutputStringLine(98)) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::DUMP(obj) );
+
+	obj.SetOutputStringOn(false);
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
+
+	line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetOutputStringLine(-4)) );
+}

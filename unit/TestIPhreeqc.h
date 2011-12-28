@@ -41,6 +41,11 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestListComponents );
 	CPPUNIT_TEST( TestSetDumpFileName );
 	CPPUNIT_TEST( TestSetOutputFileName );
+	CPPUNIT_TEST( TestOutputStringOnOff );
+	CPPUNIT_TEST( TestGetOutputString );
+	CPPUNIT_TEST( TestGetOutputStringLineCount );
+	CPPUNIT_TEST( TestGetOutputStringLine );
+
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -82,6 +87,10 @@ public:
 	void TestListComponents(void);
 	void TestSetDumpFileName(void);
 	void TestSetOutputFileName(void);
+	void TestOutputStringOnOff(void);
+	void TestGetOutputString(void);
+	void TestGetOutputStringLineCount(void);
+	void TestGetOutputStringLine(void);	
 };
 
 #endif // TESTIPHREEQC_H_INCLUDED

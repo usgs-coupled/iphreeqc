@@ -1167,7 +1167,7 @@ Headings
 
 /**
  *  Sets the output file switch on or off.  This switch controls whether or not phreeqc
- *  writes to the <B><I>phreeqc.out</I></B> file.  This is the output normally generated
+ *  writes to the <B><I>phreeqc.id.out</I></B> file.  This is the output normally generated
  *  when phreeqc is run.  The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id               The instance id returned from \ref CreateIPhreeqc.
  *  @param output_on        If non-zero, writes output to the output file; if zero, no output is written to the output file.

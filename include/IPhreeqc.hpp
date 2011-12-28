@@ -140,7 +140,7 @@ public:
 	 *      \ref SetDumpStringOn must have been set to true in order to recieve <b>DUMP</b> output.
 	 *  @see                    GetDumpStringLine, GetDumpFileOn, GetDumpStringLineCount, GetDumpStringOn, SetDumpFileOn, SetDumpStringOn
 	 */
-	const char*              GetDumpString(void);
+	const char*              GetDumpString(void)const;
 
 	/**
 	 *  Retrieves the given dump line.
@@ -229,6 +229,41 @@ public:
 	 *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileName, SetOutputFileOn, SetOutputStringOn
 	 */
 	bool                     GetOutputFileOn(void)const;
+
+	/**
+	 *  Retrieves the string buffer containing phreeqc output.
+     *  @return                 A null terminated string containing phreeqc output.
+	 *  @pre
+	 *      \ref SetOutputStringOn must have been set to true in order to recieve output.
+	 *  @see                    GetOutputStringLine, GetOutputFileOn, GetOutputStringLineCount, GetOutputStringOn, SetOutputFileOn, SetOutputStringOn
+	 */
+	const char*              GetOutputString(void)const;
+
+	/**
+	 *  Retrieves the given output line.
+	 *  @param n                The zero-based index of the line to retrieve.
+	 *  @return                 A null terminated string containing the given line.
+	 *                          Returns an empty string if n is out of range.
+     *  @pre                    \ref SetOutputStringOn must have been set to true.
+	 *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringLineCount, GetOutputStringOn, SetOutputFileOn, SetOutputStringOn
+	 */
+	const char*              GetOutputStringLine(int n)const;
+
+	/**
+	 *  Retrieves the number of lines in the current output string buffer.
+	 *  @return                 The number of lines.
+     *  @pre                    \ref SetOutputStringOn must have been set to true.
+	 *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringLine, GetOutputStringOn, SetOutputFileOn, SetOutputStringOn
+	 */
+	int                      GetOutputStringLineCount(void)const;
+
+	/**
+	 *  Retrieves the current value of the output string switch.
+     *  @retval true            Phreeqc output is stored.
+     *  @retval false           No phreeqc output is stored.
+	 *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileOn, SetOutputStringOn
+	 */
+	bool                     GetOutputStringOn(void)const;
 
 	/**
 	 *  Retrieves the number of columns in the selected-output buffer.
@@ -570,6 +605,14 @@ public:
 	void                     SetOutputFileOn(bool bValue);
 
 	/**
+	 *  Sets the output string switch on or off.  This switch controls whether or not the data normally sent
+	 *  to the output file are stored in a buffer for retrieval.  The initial setting is false.
+	 *  @param bValue           If true, captures output into a string buffer; if false, output is not captured to a string buffer.
+	 *  @see                    GetOutputFileOn, GetOutputString, GetOutputStringOn, GetOutputStringLine, GetOutputStringLineCount, SetOutputFileOn
+	 */
+	void                     SetOutputStringOn(bool bValue);
+
+	/**
 	 *  Sets the selected-output file switch on or off.  This switch controls whether or not phreeqc writes output to
 	 *  the <B>SELECTED_OUTPUT</B> (<B><I>selected.id.out</I></B> if unspecified, where id is obtained from \ref GetId) file.
 	 *  The initial setting is false.
@@ -614,11 +657,16 @@ protected:
 	bool                       ClearAccumulated;
 	bool                       UpdateComponents;
 	bool                       SelectedOutputOn;
-	bool                       OutputOn;
+	bool                       OutputFileOn;
 	bool                       LogOn;
 	bool                       ErrorOn;
 	bool                       DumpOn;
+
 	bool                       DumpStringOn;
+
+	bool                       OutputStringOn;
+	std::string                OutputString;
+	std::vector< std::string > OutputLines;
 
 #if defined(_MSC_VER)
 /* disable warning C4251: 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2' */
