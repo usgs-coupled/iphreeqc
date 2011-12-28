@@ -28,7 +28,7 @@ int main(void)
     return EXIT_FAILURE;
   }
 
-  if (SetDumpStringOn(id, TRUE) != IPQ_OK) {
+  if (SetOutputStringOn(id, TRUE) != IPQ_OK) {
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
