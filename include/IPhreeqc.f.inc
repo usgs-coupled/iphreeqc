@@ -50,7 +50,6 @@ C
       INTEGER(KIND=4) DestroyIPhreeqc
       INTEGER(KIND=4) GetComponentCount
       LOGICAL(KIND=4) GetDumpFileOn
-      INTEGER(KIND=4) GetDumpStringLine
       INTEGER(KIND=4) GetDumpStringLineCount
       LOGICAL(KIND=4) GetDumpStringOn
       LOGICAL(KIND=4) GetErrorFileOn
@@ -58,6 +57,8 @@ C
       INTEGER(KIND=4) GetErrorStringLineCount
       LOGICAL(KIND=4) GetLogFileOn
       LOGICAL(KIND=4) GetOutputFileOn
+      INTEGER(KIND=4) GetOutputStringLineCount
+      LOGICAL(KIND=4) GetOutputStringOn
       INTEGER(KIND=4) GetSelectedOutputColumnCount
       LOGICAL(KIND=4) GetSelectedOutputFileOn
       INTEGER(KIND=4) GetSelectedOutputRowCount
@@ -76,4 +77,5 @@ C
       INTEGER(KIND=4) SetLogFileOn
       INTEGER(KIND=4) SetOutputFileName
       INTEGER(KIND=4) SetOutputFileOn
+      INTEGER(KIND=4) SetOutputStringOn
       INTEGER(KIND=4) SetSelectedOutputFileOn

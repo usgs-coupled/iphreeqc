@@ -173,6 +173,23 @@
 
 
        INTERFACE
+        SUBROUTINE GetOutputStringLine(ID,N,LINE)
+         INTEGER(KIND=4),   INTENT(IN)   :: ID
+         INTEGER(KIND=4),   INTENT(IN)   :: N
+         CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
+        END SUBROUTINE
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION GetOutputStringLineCount(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         INTEGER(KIND=4)               :: GetOutputStringLineCount
+        END FUNCTION GetOutputStringLineCount
+       END INTERFACE
+
+
+       INTERFACE
         FUNCTION GetSelectedOutputColumnCount(ID)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          INTEGER(KIND=4)              :: GetSelectedOutputColumnCount
@@ -351,6 +368,15 @@
          LOGICAL(KIND=4),  INTENT(IN) :: OUT_ON
          INTEGER(KIND=4)              :: SetOutputFileOn
         END FUNCTION SetOutputFileOn
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION SetOutputStringOn(ID,OUT_STRING_ON)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         LOGICAL(KIND=4),  INTENT(IN) :: OUT_STRING_ON
+         INTEGER(KIND=4)              :: SetOutputStringOn
+        END FUNCTION SetOutputStringOn
        END INTERFACE
 
 
