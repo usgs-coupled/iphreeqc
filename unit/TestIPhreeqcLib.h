@@ -28,11 +28,11 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestCase1 );
 	CPPUNIT_TEST( TestCase2 );
 	CPPUNIT_TEST( TestPrintSelectedOutputFalse );
-	CPPUNIT_TEST( TestOutputOnOff );
-	CPPUNIT_TEST( TestErrorOnOff );
-	CPPUNIT_TEST( TestLogOnOff );
-	CPPUNIT_TEST( TestDumpOnOff );
-	CPPUNIT_TEST( TestSelOutOnOff );
+	CPPUNIT_TEST( TestOutputFileOnOff );
+	CPPUNIT_TEST( TestErrorFileOnOff );
+	CPPUNIT_TEST( TestLogFileOnOff );
+	CPPUNIT_TEST( TestDumpFileOnOff );
+	CPPUNIT_TEST( TestSelOutFileOnOff );
 	CPPUNIT_TEST( TestLongHeadings );
 	CPPUNIT_TEST( TestDatabaseKeyword );
 	CPPUNIT_TEST( TestDumpString );
@@ -81,11 +81,11 @@ public:
 	void TestCase1(void);
 	void TestCase2(void);
 	void TestPrintSelectedOutputFalse(void);
-	void TestOutputOnOff(void);
-	void TestErrorOnOff(void);
-	void TestLogOnOff(void);
-	void TestDumpOnOff(void);
-	void TestSelOutOnOff(void);
+	void TestOutputFileOnOff(void);
+	void TestErrorFileOnOff(void);
+	void TestLogFileOnOff(void);
+	void TestDumpFileOnOff(void);
+	void TestSelOutFileOnOff(void);
 	void TestLongHeadings(void);
 	void TestDatabaseKeyword();
 	void TestDumpString();
@@ -107,7 +107,7 @@ public:
 	void TestGetOutputStringLine(void);	
 
 protected:
-	void TestOnOff(const char* FILENAME, int output_on, int error_on, int log_on, int selected_output_on, int dump_on);
+	void TestFileOnOff(const char* FILENAME, int output_file_on, int error_file_on, int log_file_on, int selected_output_file_on, int dump_file_on);
 };
 
 

@@ -1447,62 +1447,62 @@ void TestIPhreeqcLib::TestPrintSelectedOutputFalse(void)
 	}
 }
 
-void TestIPhreeqcLib::TestOutputOnOff()
+void TestIPhreeqcLib::TestOutputFileOnOff()
 {
 	int onoff[5];
-	onoff[0] = 1;  // output_on
-	onoff[1] = 0;  // error_on
-	onoff[2] = 0;  // log_on
-	onoff[3] = 0;  // selected_output_on
-	onoff[4] = 0;  // dump_on
-	TestOnOff("phreeqc.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = 1;  // output_file_on
+	onoff[1] = 0;  // error_file_on
+	onoff[2] = 0;  // log_file_on
+	onoff[3] = 0;  // selected_output_file_on
+	onoff[4] = 0;  // dump_file_on
+	TestFileOnOff("phreeqc.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqcLib::TestErrorOnOff()
+void TestIPhreeqcLib::TestErrorFileOnOff()
 {
 	int onoff[5];
-	onoff[0] = 0;  // output_on
-	onoff[1] = 1;  // error_on
-	onoff[2] = 0;  // log_on
-	onoff[3] = 0;  // selected_output_on
-	onoff[4] = 0;  // dump_on
-	TestOnOff("phreeqc.%d.err", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = 0;  // output_file_on
+	onoff[1] = 1;  // error_file_on
+	onoff[2] = 0;  // log_file_on
+	onoff[3] = 0;  // selected_output_file_on
+	onoff[4] = 0;  // dump_file_on
+	TestFileOnOff("phreeqc.%d.err", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqcLib::TestLogOnOff()
+void TestIPhreeqcLib::TestLogFileOnOff()
 {
 	int onoff[5];
-	onoff[0] = 0;  // output_on
-	onoff[1] = 0;  // error_on
-	onoff[2] = 1;  // log_on
-	onoff[3] = 0;  // selected_output_on
-	onoff[4] = 0;  // dump_on
-	TestOnOff("phreeqc.%d.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = 0;  // output_file_on
+	onoff[1] = 0;  // error_file_on
+	onoff[2] = 1;  // log_file_on
+	onoff[3] = 0;  // selected_output_file_on
+	onoff[4] = 0;  // dump_file_on
+	TestFileOnOff("phreeqc.%d.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqcLib::TestDumpOnOff()
+void TestIPhreeqcLib::TestDumpFileOnOff()
 {
 	int onoff[5];
-	onoff[0] = 0;  // output_on
-	onoff[1] = 0;  // error_on
-	onoff[2] = 0;  // log_on
-	onoff[3] = 0;  // selected_output_on
-	onoff[4] = 1;  // dump_on
-	TestOnOff("dump.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = 0;  // output_file_on
+	onoff[1] = 0;  // error_file_on
+	onoff[2] = 0;  // log_file_on
+	onoff[3] = 0;  // selected_output_file_on
+	onoff[4] = 1;  // dump_file_on
+	TestFileOnOff("dump.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqcLib::TestSelOutOnOff()
+void TestIPhreeqcLib::TestSelOutFileOnOff()
 {
 	int onoff[5];
-	onoff[0] = 0;  // output_on
-	onoff[1] = 0;  // error_on
-	onoff[2] = 0;  // log_on
-	onoff[3] = 1;  // selected_output_on
-	onoff[4] = 0;  // dump_on
-	TestOnOff("selected.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = 0;  // output_file_on
+	onoff[1] = 0;  // error_file_on
+	onoff[2] = 0;  // log_file_on
+	onoff[3] = 1;  // selected_output_file_on
+	onoff[4] = 0;  // dump_file_on
+	TestFileOnOff("selected.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqcLib::TestOnOff(const char* FILENAME_FORMAT, int output_on, int error_on, int log_on, int selected_output_on, int dump_on)
+void TestIPhreeqcLib::TestFileOnOff(const char* FILENAME_FORMAT, int output_file_on, int error_file_on, int log_file_on, int selected_output_file_on, int dump_file_on)
 {
 	int dump_string_on = 0;
 
@@ -1552,11 +1552,11 @@ void TestIPhreeqcLib::TestOnOff(const char* FILENAME_FORMAT, int output_on, int 
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, dump_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, error_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, log_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, output_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, selected_output_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, dump_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, error_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, log_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, output_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, selected_output_file_on) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, dump_string_on) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(FILENAME) );
@@ -1593,11 +1593,11 @@ void TestIPhreeqcLib::TestOnOff(const char* FILENAME_FORMAT, int output_on, int 
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
 
 	// run
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, dump_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, error_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, log_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, output_on) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, selected_output_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, dump_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, error_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, log_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, output_file_on) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, selected_output_file_on) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, dump_string_on) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(FILENAME) );

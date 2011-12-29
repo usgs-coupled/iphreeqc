@@ -24,8 +24,6 @@ VRESULT USER_PUNCH(IPhreeqc& obj, const char* element, int max);
 VRESULT SELECTED_OUTPUT(IPhreeqc& obj);
 VRESULT DUMP(IPhreeqc& obj);
 
-void TestOnOff(const char* FILENAME, bool output_on, bool error_on, bool log_on, bool selected_output_on, bool dump_on);
-
 TestIPhreeqc::TestIPhreeqc(void)
 {
 }
@@ -1272,7 +1270,7 @@ void TestIPhreeqc::TestPrintSelectedOutputFalse(void)
 	CPPUNIT_ASSERT_EQUAL( 2, obj.GetSelectedOutputRowCount() );
 }
 
-void TestIPhreeqc::TestOutputOnOff()
+void TestIPhreeqc::TestOutputFileOnOff()
 {
 #if defined(_WIN32)
 	int n = ::_fcloseall();
@@ -1280,59 +1278,59 @@ void TestIPhreeqc::TestOutputOnOff()
 #endif
 
 	bool onoff[5];
-	onoff[0] = true;   // output_on
-	onoff[1] = false;  // error_on
-	onoff[2] = false;  // log_on
-	onoff[3] = false;  // selected_output_on
-	onoff[4] = false;  // dump_on
-	::TestOnOff("phreeqc.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = true;   // output_file_on
+	onoff[1] = false;  // error_file_on
+	onoff[2] = false;  // log_file_on
+	onoff[3] = false;  // selected_output_file_on
+	onoff[4] = false;  // dump_file_on
+	TestFileOnOff("phreeqc.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqc::TestErrorOnOff()
+void TestIPhreeqc::TestErrorFileOnOff()
 {
 	bool onoff[5];
-	onoff[0] = false;  // output_on
-	onoff[1] = true;   // error_on
-	onoff[2] = false;  // log_on
-	onoff[3] = false;  // selected_output_on
-	onoff[4] = false;  // dump_on
-	::TestOnOff("phreeqc.%d.err", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = false;  // output_file_on
+	onoff[1] = true;   // error_file_on
+	onoff[2] = false;  // log_file_on
+	onoff[3] = false;  // selected_output_file_on
+	onoff[4] = false;  // dump_file_on
+	TestFileOnOff("phreeqc.%d.err", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqc::TestLogOnOff()
+void TestIPhreeqc::TestLogFileOnOff()
 {
 	bool onoff[5];
-	onoff[0] = false;  // output_on
-	onoff[1] = false;  // error_on
-	onoff[2] = true;   // log_on
-	onoff[3] = false;  // selected_output_on
-	onoff[4] = false;  // dump_on
-	::TestOnOff("phreeqc.%d.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = false;  // output_file_on
+	onoff[1] = false;  // error_file_on
+	onoff[2] = true;   // log_file_on
+	onoff[3] = false;  // selected_output_file_on
+	onoff[4] = false;  // dump_file_on
+	TestFileOnOff("phreeqc.%d.log", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqc::TestDumpOnOff()
+void TestIPhreeqc::TestDumpFileOnOff()
 {
 	bool onoff[5];
-	onoff[0] = false;  // output_on
-	onoff[1] = false;  // error_on
-	onoff[2] = false;  // log_on
-	onoff[3] = false;  // selected_output_on
-	onoff[4] = true;   // dump_on
-	::TestOnOff("dump.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = false;  // output_file_on
+	onoff[1] = false;  // error_file_on
+	onoff[2] = false;  // log_file_on
+	onoff[3] = false;  // selected_output_file_on
+	onoff[4] = true;   // dump_file_on
+	TestFileOnOff("dump.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestIPhreeqc::TestSelOutOnOff()
+void TestIPhreeqc::TestSelOutFileOnOff()
 {
 	bool onoff[5];
-	onoff[0] = false;  // output_on
-	onoff[1] = false;  // error_on
-	onoff[2] = false;  // log_on
-	onoff[3] = true;   // selected_output_on
-	onoff[4] = false;  // dump_on
-	::TestOnOff("selected.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
+	onoff[0] = false;  // output_file_on
+	onoff[1] = false;  // error_file_on
+	onoff[2] = false;  // log_file_on
+	onoff[3] = true;   // selected_output_file_on
+	onoff[4] = false;  // dump_file_on
+	TestFileOnOff("selected.%d.out", onoff[0], onoff[1], onoff[2], onoff[3], onoff[4]);
 }
 
-void TestOnOff(const char* FILENAME_FORMAT, bool output_on, bool error_on, bool log_on, bool selected_output_on, bool dump_on)
+void TestIPhreeqc::TestFileOnOff(const char* FILENAME_FORMAT, bool output_file_on, bool error_file_on, bool log_file_on, bool selected_output_file_on, bool dump_file_on)
 {
 	IPhreeqc obj;
 
@@ -1381,11 +1379,11 @@ void TestOnOff(const char* FILENAME_FORMAT, bool output_on, bool error_on, bool 
 	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP(obj) );
 
 	// run
-	obj.SetDumpFileOn(dump_on);
-	obj.SetErrorFileOn(error_on);
-	obj.SetLogFileOn(log_on);
-	obj.SetOutputFileOn(output_on);
-	obj.SetSelectedOutputFileOn(selected_output_on);
+	obj.SetDumpFileOn(dump_file_on);
+	obj.SetErrorFileOn(error_file_on);
+	obj.SetLogFileOn(log_file_on);
+	obj.SetOutputFileOn(output_file_on);
+	obj.SetSelectedOutputFileOn(selected_output_file_on);
 	CPPUNIT_ASSERT_EQUAL( 0,    obj.RunAccumulated() );
 	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(FILENAME) );
 	CPPUNIT_ASSERT( ::DeleteFile(FILENAME) );
@@ -1421,11 +1419,11 @@ void TestOnOff(const char* FILENAME_FORMAT, bool output_on, bool error_on, bool 
 	CPPUNIT_ASSERT_EQUAL( VR_OK, DUMP(obj) );
 
 	// run
-	obj.SetDumpFileOn(dump_on);
-	obj.SetErrorFileOn(error_on);
-	obj.SetLogFileOn(log_on);
-	obj.SetOutputFileOn(output_on);
-	obj.SetSelectedOutputFileOn(selected_output_on);
+	obj.SetDumpFileOn(dump_file_on);
+	obj.SetErrorFileOn(error_file_on);
+	obj.SetLogFileOn(log_file_on);
+	obj.SetOutputFileOn(output_file_on);
+	obj.SetSelectedOutputFileOn(selected_output_file_on);
 	CPPUNIT_ASSERT_EQUAL( 0,    obj.RunAccumulated() );
 	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(FILENAME) );
 	CPPUNIT_ASSERT( ::DeleteFile(FILENAME) );
