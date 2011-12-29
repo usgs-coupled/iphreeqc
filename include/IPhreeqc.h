@@ -267,7 +267,7 @@ extern "C" {
 /**
  *  Retrieves the current value of the dump file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              Non-zero if output is written to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file, 0 (zero) otherwise.
+ *  @return              Non-zero if output is written to the <B>DUMP</B> (<B><I>dump.id.out</I></B> if unspecified) file, 0 (zero) otherwise.
  *  @see                 GetDumpString, GetDumpStringLine, GetDumpStringLineCount, GetDumpStringOn, SetDumpFileOn, SetDumpStringOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -376,7 +376,7 @@ extern "C" {
 /**
  *  Retrieves the current value of the error file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              Non-zero if errors are written to the <B><I>phreeqc.err</I></B> file, 0 (zero) otherwise.
+ *  @return              Non-zero if errors are written to the <B><I>phreeqc.id.err</I></B> file, 0 (zero) otherwise.
  *  @see                 SetErrorFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -450,7 +450,7 @@ extern "C" {
 /**
  *  Retrieves the current value of the log file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @return              Non-zero if log messages are written to the <B><I>phreeqc.log</I></B> file, 0 (zero) otherwise.
+ *  @return              Non-zero if log messages are written to the <B><I>phreeqc.id.log</I></B> file, 0 (zero) otherwise.
  *  @remarks
  *      Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
  *  @see                 SetLogFileOn
@@ -616,7 +616,7 @@ extern "C" {
 /**
  *  Retrieves the selected-output file switch.
  *  @param id                    The instance id returned from \ref CreateIPhreeqc.
- *  @return                      Non-zero if output is written to the selected-output (<B><I>selected.out</I></B> if unspecified) file, 0 (zero) otherwise.
+ *  @return                      Non-zero if output is written to the selected-output (<B><I>selected.id.out</I></B> if unspecified) file, 0 (zero) otherwise.
  *  @see                         GetSelectedOutputColumnCount, GetSelectedOutputRowCount, GetSelectedOutputValue, SetSelectedOutputFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -972,7 +972,7 @@ Headings
 
 
 /**
- *  Output the error messages normally stored in the <B><I>phreeqc.err</I></B> file to stdout.
+ *  Output the error messages normally stored in the <B><I>phreeqc.id.err</I></B> file to stdout.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @see                 GetErrorFileOn, GetErrorStringLine, GetErrorStringLineCount, SetErrorFileOn
  *  @par Fortran90 Interface:
@@ -1123,7 +1123,7 @@ Headings
  *  Sets the dump file switch on or off.  This switch controls whether or not phreeqc writes to the dump file.
  *  The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id                   The instance id returned from \ref CreateIPhreeqc.
- *  @param dump_on              If non-zero, turns on output to the <B>DUMP</B> (<B><I>dump.out</I></B> if unspecified) file;
+ *  @param dump_on              If non-zero, turns on output to the <B>DUMP</B> (<B><I>dump.id.out</I></B> if unspecified) file;
  *                              if zero, turns off output to the <B>DUMP</B> file.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
@@ -1178,7 +1178,7 @@ Headings
 
 /**
  *  Sets the error file switch on or off.  This switch controls whether or not
- *  error messages are written to the <B><I>phreeqc.err</I></B> file.  The initial setting after calling
+ *  error messages are written to the <B><I>phreeqc.id.err</I></B> file.  The initial setting after calling
  *  \ref CreateIPhreeqc is off.
  *  @param id                   The instance id returned from \ref CreateIPhreeqc.
  *  @param error_on             If non-zero, writes errors to the error file; if zero, no errors are written to the error file.
@@ -1203,7 +1203,7 @@ Headings
 
 /**
  *  Sets the log file switch on or off.  This switch controls whether or not phreeqc
- *  writes log messages to the <B><I>phreeqc.log</I></B> file.  The initial setting after calling
+ *  writes log messages to the <B><I>phreeqc.id.log</I></B> file.  The initial setting after calling
  *  \ref CreateIPhreeqc is off.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @param log_on        If non-zero, log messages are written to the log file; if zero, no log messages are written to the log file.
@@ -1308,7 +1308,7 @@ Headings
 
 /**
  *  Sets the selected-output file switch on or off.  This switch controls whether or not phreeqc writes output to
- *  the <B>SELECTED_OUTPUT</B> (<B><I>selected.out</I></B> if unspecified) file. The initial setting after calling \ref CreateIPhreeqc is off.
+ *  the <B>SELECTED_OUTPUT</B> (<B><I>selected.id.out</I></B> if unspecified) file. The initial setting after calling \ref CreateIPhreeqc is off.
  *  @param id               The instance id returned from \ref CreateIPhreeqc.
  *  @param sel_on           If non-zero, writes output to the selected-output file; if zero, no output is written to the selected-output file.
  *  @retval IPQ_OK          Success.
