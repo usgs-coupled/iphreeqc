@@ -91,7 +91,7 @@ extern "C" {
  *  Appends the given warning message and increments the warning count.
  *  Internally used to create a warning condition.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
- *  @param error_msg     The warning message to display.
+ *  @param warn_msg      The warning message to display.
  *  @returns             The current warning count if successful; otherwise a negative value indicates an error occured (see \ref IPQ_RESULT).
  *  @see                 GetWarningString, GetWarningStringLine, GetWarningStringLineCount, OutputWarningString
  *  @par Fortran90 Interface:
@@ -1279,7 +1279,7 @@ Headings
  *  to the output file are stored in a buffer for retrieval.  The initial setting after calling
  *  \ref CreateIPhreeqc is off.
  *  @param id                   The instance id returned from \ref CreateIPhreeqc.
- *  @param dump_string_on       If non-zero, captures the phreeqc output into a string buffer;
+ *  @param output_string_on     If non-zero, captures the phreeqc output into a string buffer;
  *                              if zero, phreeqc output is not captured to a string buffer.
  *  @retval IPQ_OK              Success.
  *  @retval IPQ_BADINSTANCE     The given id is invalid.
@@ -1303,7 +1303,7 @@ Headings
  *  @par Fortran90 Example:
  *  see \ref GetOutputStringLine_f90 "GetOutputStringLine"
  */
-	IPQ_DLL_EXPORT IPQ_RESULT  SetOutputStringOn(int id, int value);
+	IPQ_DLL_EXPORT IPQ_RESULT  SetOutputStringOn(int id, int output_string_on);
 
 
 /**
