@@ -89,6 +89,12 @@ FUNCTION F_MAIN()
      RETURN
   END IF
   
+  IF (SetOutputStringOn(id, .TRUE.).NE.IPQ_OK) THEN
+     CALL OutputErrorString(id)
+     F_MAIN = EXIT_FAILURE
+     RETURN
+  END IF  
+  
   IF (RunFile(id, "ex2").NE.0) THEN
      CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
@@ -105,7 +111,10 @@ FUNCTION F_MAIN()
      END DO
   END DO
   
-  
+  DO r=1,GetOutputStringLineCount(id)
+     CALL GetOutputStringLine(id, r, s)
+  END DO 
+    
   IF (DestroyIPhreeqc(id).NE.0) THEN
      CALL OutputErrorString(id)
      F_MAIN = EXIT_FAILURE
