@@ -206,6 +206,13 @@ public:
 	int                      GetId(void)const;
 
 	/**
+	 *  Retrieves the name of the log file. The default value is <B><I>phreeqc.id.log</I></B>, where id is obtained from \ref GetId.
+	 *  @return filename        The name of the file to write to.
+	 *  @see                    GetLogFileOn, GetLogString, GetLogStringOn, GetLogStringLine, GetLogStringLineCount, SetLogFileName, SetLogFileOn, SetLogStringOn
+	 */
+	const char*              GetLogFileName(void)const;
+
+	/**
 	 *  Retrieves the current value of the log file switch.
      *  @retval true            Log messages are written to the <B><I>phreeqc.id.log</I></B> (where id is obtained from \ref GetId) file.
      *  @retval false           No log messages are written.
@@ -214,6 +221,41 @@ public:
 	 *  @see                    SetLogFileOn
 	 */
 	bool                     GetLogFileOn(void)const;
+
+	/**
+	 *  Retrieves the string buffer containing phreeqc log output.
+     *  @return                 A null terminated string containing log output.
+	 *  @pre
+	 *      \ref SetLogStringOn must have been set to true and enabled through the use of the KNOBS -logfile option in order to receive any log messages.
+	 *  @see                    GetLogStringLine, GetLogFileOn, GetLogStringLineCount, GetLogStringOn, SetLogFileOn, SetLogStringOn
+	 */
+	const char*              GetLogString(void)const;
+
+	/**
+	 *  Retrieves the given log line.
+	 *  @param n                The zero-based index of the line to retrieve.
+	 *  @return                 A null terminated string containing the given line.
+	 *                          Returns an empty string if n is out of range.
+     *  @pre                    \ref SetLogStringOn must have been set to true and enabled through the use of the KNOBS -logfile option in order to receive any log messages.
+	 *  @see                    GetLogFileOn, GetLogString, GetLogStringLineCount, GetLogStringOn, SetLogFileOn, SetLogStringOn
+	 */
+	const char*              GetLogStringLine(int n)const;
+
+	/**
+	 *  Retrieves the number of lines in the current log string buffer.
+	 *  @return                 The number of lines.
+     *  @pre                    \ref SetLogStringOn must have been set to true and enabled through the use of the KNOBS -logfile option in order to receive any log messages.
+	 *  @see                    GetLogFileOn, GetLogString, GetLogStringLine, GetLogStringOn, SetLogFileOn, SetLogStringOn
+	 */
+	int                      GetLogStringLineCount(void)const;
+
+	/**
+	 *  Retrieves the current value of the log string switch.
+     *  @retval true            Log output is stored.
+     *  @retval false           No log output is stored.
+	 *  @see                    GetLogFileOn, GetLogString, GetLogStringLine, GetLogStringLineCount, SetLogFileOn, SetLogStringOn
+	 */
+	bool                     GetLogStringOn(void)const;
 
 	/**
 	 *  Retrieves the name of the output file. The default value is <B><I>phreeqc.id.out</I></B>, where id is obtained from \ref GetId.
@@ -579,6 +621,13 @@ public:
 	void                     SetErrorFileOn(bool bValue);
 
 	/**
+	 *  Sets the name of the log file. The default value is <B><I>phreeqc.id.log</I></B>, where id is obtained from \ref GetId.
+	 *  @param filename         The name of the file to write log output to.
+	 *  @see                    GetLogFileName, GetLogFileOn, GetLogString, GetLogStringOn, GetLogStringLine, GetLogStringLineCount, SetLogFileOn, SetLogStringOn
+	 */
+	void                     SetLogFileName(const char *filename);
+
+	/**
 	 *  Sets the log file switch on or off.  This switch controls whether or not phreeqc
 	 *  writes log messages to the <B><I>phreeqc.id.log</I></B> (where id is obtained from \ref GetId) file.  The initial setting is false.
 	 *  @param bValue           If true, turns on output to the log file; if false, no log messages are written to the log file.
@@ -587,6 +636,14 @@ public:
 	 *  @see                    GetLogFileOn
 	 */
 	void                     SetLogFileOn(bool bValue);
+
+	/**
+	 *  Sets the log string switch on or off.  This switch controls whether or not the data normally sent
+	 *  to the log file are stored in a buffer for retrieval.  The initial setting is false.
+	 *  @param bValue           If true, captures log output into a string buffer; if false, log output is not captured to a string buffer.
+	 *  @see                    GetLogFileOn, GetLogString, GetLogStringOn, GetLogStringLine, GetLogStringLineCount, SetLogFileOn
+	 */
+	void                     SetLogStringOn(bool bValue);
 
 	/**
 	 *  Sets the name of the output file. The default value is <B><I>phreeqc.id.out</I></B>, where id is obtained from \ref GetId.
@@ -624,9 +681,10 @@ public:
 public:
 	// overrides
 	virtual void error_msg(const char *str, bool stop=false);
+	virtual void log_msg(const char * str);
 	virtual void output_msg(const char *str);
-	virtual void screen_msg(const char *str);
 	virtual void punch_msg(const char *str);
+	virtual void screen_msg(const char *str);
 	virtual void warning_msg(const char *str);
 
 	virtual void fpunchf(const char *name, const char *format, double d);
@@ -658,7 +716,8 @@ protected:
 	bool                       UpdateComponents;
 	bool                       SelectedOutputOn;
 	bool                       OutputFileOn;
-	bool                       LogOn;
+
+	bool                       LogFileOn;
 	bool                       ErrorOn;
 	bool                       DumpOn;
 
@@ -667,6 +726,11 @@ protected:
 	bool                       OutputStringOn;
 	std::string                OutputString;
 	std::vector< std::string > OutputLines;
+
+	bool                       LogStringOn;
+	std::string                LogString;
+	std::vector< std::string > LogLines;
+
 
 #if defined(_MSC_VER)
 /* disable warning C4251: 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2' */

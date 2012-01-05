@@ -12,13 +12,16 @@ EXAMPLES = \
 	examples/CreateIPhreeqc.c \
 	examples/GetComponent.c \
 	examples/GetDumpString.c \
+	examples/GetLogString.c \
+	examples/GetOutputString.c \
 	examples/GetSelectedOutputValue.c \
 	examples/F90ClearAccumulatedLines.f90 \
 	examples/F90CreateIPhreeqc.f90 \
 	examples/F90DestroyIPhreeqc.f90 \
 	examples/F90GetComponent.f90 \
+	examples/F90GetLogStringLine.f90 \
+	examples/F90GetOutputStringLine.f90 \
 	examples/F90GetSelectedOutputValue.f90 \
-	examples/F90GetDumpLine.f90 \
 	examples/F90GetDumpStringLine.f90
 
 

@@ -446,13 +446,31 @@ extern "C" {
  */
 	IPQ_DLL_EXPORT int         GetErrorStringLineCount(int id);
 
+/**
+ *  Retrieves the name of the log file.  The default name is <B><I>phreeqc.id.log</I></B>.
+ *  @param id               The instance id returned from \ref CreateIPhreeqc.
+ *  @return filename        The name of the log file.
+ *  @see                    GetLogFileOn, GetLogString, GetLogStringOn, GetLogStringLine, GetLogStringLineCount, SetLogFileName, SetLogFileOn, SetLogStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetLogFileName(ID,FILENAME)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: FILENAME
+ *  END SUBROUTINE GetLogFileName
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT const char* GetLogFileName(int id);
+
 
 /**
  *  Retrieves the current value of the log file switch.
  *  @param id            The instance id returned from \ref CreateIPhreeqc.
  *  @return              Non-zero if log messages are written to the <B><I>phreeqc.id.log</I></B> file, 0 (zero) otherwise.
- *  @remarks
- *      Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
+ *  @remarks             Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
  *  @see                 SetLogFileOn
  *  @par Fortran90 Interface:
  *  @htmlonly
@@ -467,6 +485,96 @@ extern "C" {
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT int         GetLogFileOn(int id);
+
+
+/**
+ *  Retrieves the string buffer containing log output.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              A null terminated string containing log output.
+ *  @remarks             Logging must be enabled through the use of the KNOBS -logfile option in order to receive any log messages.
+ *  @pre                 \ref SetLogStringOn must have been set to true (non-zero) in order to recieve log output.
+ *  @see                 GetLogFileOn, GetLogStringLine, GetLogStringLineCount, SetLogFileOn, GetLogStringOn, SetLogStringOn
+ *  @par Fortran90 Interface:
+ *  Not implemented. (see \ref GetLogStringLineCount, \ref GetLogStringLine)
+ *
+ *  \anchor GetOutputString_c
+ *  @par  C Example:
+ *  \include GetOutputString.c
+ */
+	IPQ_DLL_EXPORT const char* GetLogString(int id);
+
+
+/**
+ *  Retrieves the given log line.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @param n             The zero-based index of the line to retrieve.
+ *  @return              A null terminated string containing the given line.
+ *                       Returns an empty string if n is out of range.
+ *  @pre                 \ref SetLogStringOn must have been set to true (non-zero).
+ *  @see                 GetLogFileOn, GetLogString, GetLogStringLineCount, GetLogStringOn, SetLogFileOn, SetLogStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  (Note: N is one-based for the Fortran interface.)
+ *  <CODE>
+ *  <PRE>
+ *  SUBROUTINE GetLogStringLine(ID,N,LINE)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    INTEGER(KIND=4),   INTENT(IN)   :: N
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
+ *  END SUBROUTINE GetLogStringLine
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ *
+ *  \anchor GetLogStringLine_f90
+ *  @par  Fortran90 Example:
+ *  \include F90GetLogStringLine.f90
+ */
+	IPQ_DLL_EXPORT const char* GetLogStringLine(int id, int n);
+
+/**
+ *  Retrieves the number of lines in the current log string buffer.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              The number of lines.
+ *  @pre                 \ref SetLogStringOn must have been set to true (non-zero).
+ *  @see                 GetLogFileOn, GetLogString, GetLogStringLine, GetLogStringOn, SetLogFileOn, SetLogStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetLogStringLineCount(ID)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    INTEGER(KIND=4)               :: GetLogStringLineCount
+ *  END FUNCTION GetLogStringLineCount
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ *
+ *  @par Fortran90 Example:
+ *  see \ref GetLogStringLine_f90 "GetLogStringLine"
+ */
+	IPQ_DLL_EXPORT int         GetLogStringLineCount(int id);
+
+
+/**
+ *  Retrieves the current value of the log string switch.
+ *  @param id            The instance id returned from \ref CreateIPhreeqc.
+ *  @return              Non-zero if output is stored, 0 (zero) otherwise.
+ *  @see                 GetLogFileOn, GetLogString, GetLogStringLine, GetLogStringLineCount, SetLogFileOn, SetLogStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION GetLogStringOn(ID)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    LOGICAL(KIND=4)               :: GetLogStringOn
+ *  END FUNCTION GetLogStringOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT int         GetLogStringOn(int id);
+
 
 /**
  *  Retrieves the name of the output file.  The default name is <B><I>phreeqc.id.out</I></B>.
@@ -1200,6 +1308,27 @@ Headings
  */
 	IPQ_DLL_EXPORT IPQ_RESULT  SetErrorFileOn(int id, int error_on);
 
+/**
+ *  Sets the name of the log file.  The default value is <B><I>phreeqc.id.log</I></B>.
+ *  @param id               The instance id returned from \ref CreateIPhreeqc.
+ *  @param filename         The name of the log file.
+ *  @retval IPQ_OK          Success.
+ *  @retval IPQ_BADINSTANCE The given id is invalid.
+ *  @see                    GetLogFileName, GetLogFileOn, GetLogString, GetLogStringOn, GetLogStringLine, GetLogStringLineCount, SetLogFileOn, SetLogStringOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION SetLogFileName(ID,FILENAME)
+ *    INTEGER(KIND=4),   INTENT(IN)   :: ID
+ *    CHARACTER(LEN=*),  INTENT(OUT)  :: FILENAME
+ *    INTEGER(KIND=4)                 :: SetLogFileName
+ *  END FUNCTION SetLogFileName
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ */
+	IPQ_DLL_EXPORT IPQ_RESULT  SetLogFileName(int id, const char* filename);
 
 /**
  *  Sets the log file switch on or off.  This switch controls whether or not phreeqc
@@ -1226,6 +1355,38 @@ Headings
  *  @endhtmlonly
  */
 	IPQ_DLL_EXPORT IPQ_RESULT  SetLogFileOn(int id, int log_on);
+
+/**
+ *  Sets the log string switch on or off.  This switch controls whether or not the data normally sent
+ *  to the log file are stored in a buffer for retrieval.  The initial setting after calling
+ *  \ref CreateIPhreeqc is off.
+ *  @param id                   The instance id returned from \ref CreateIPhreeqc.
+ *  @param output_string_on     If non-zero, captures the log output into a string buffer;
+ *                              if zero, log output is not captured to a string buffer.
+ *  @retval IPQ_OK              Success.
+ *  @retval IPQ_BADINSTANCE     The given id is invalid.
+ *  @see                        GetLogFileOn, GetLogStringOn, GetLogString, GetLogStringLine, GetLogStringLineCount, SetLogFileOn
+ *  @par Fortran90 Interface:
+ *  @htmlonly
+ *  <CODE>
+ *  <PRE>
+ *  FUNCTION SetLogStringOn(ID,LOG_STRING_ON)
+ *    INTEGER(KIND=4),  INTENT(IN)  :: ID
+ *    LOGICAL(KIND=4),  INTENT(IN)  :: LOG_STRING_ON
+ *    INTEGER(KIND=4)               :: SetLogStringOn
+ *  END FUNCTION SetLogStringOn
+ *  </PRE>
+ *  </CODE>
+ *  @endhtmlonly
+ *
+ *  @par C Example:
+ *  see \ref GetLogString_c "GetLogString"
+ *
+ *  @par Fortran90 Example:
+ *  see \ref GetLogStringLine_f90 "GetLogStringLine"
+ */
+	IPQ_DLL_EXPORT IPQ_RESULT  SetLogStringOn(int id, int log_string_on);
+
 
 /**
  *  Sets the name of the output file.  This file name is used if not specified within <B>DUMP</B> input.

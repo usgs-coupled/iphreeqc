@@ -149,10 +149,43 @@
 
 
        INTERFACE
+        SUBROUTINE GetLogFileName(ID,FNAME)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         CHARACTER(LEN=*), INTENT(OUT) :: FNAME
+        END SUBROUTINE GetLogFileName
+       END INTERFACE
+
+
+       INTERFACE
         FUNCTION GetLogFileOn(ID)
          INTEGER(KIND=4),  INTENT(IN)  :: ID
          LOGICAL(KIND=4)               :: GetLogFileOn
         END FUNCTION GetLogFileOn
+       END INTERFACE
+
+
+       INTERFACE
+        SUBROUTINE GetLogStringLine(ID,N,LINE)
+         INTEGER(KIND=4),   INTENT(IN)   :: ID
+         INTEGER(KIND=4),   INTENT(IN)   :: N
+         CHARACTER(LEN=*),  INTENT(OUT)  :: LINE
+        END SUBROUTINE
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION GetLogStringLineCount(ID)
+         INTEGER(KIND=4),  INTENT(IN)  :: ID
+         INTEGER(KIND=4)               :: GetLogStringLineCount
+        END FUNCTION GetLogStringLineCount
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION GetLogStringOn(ID)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         LOGICAL(KIND=4)              :: GetLogStringOn
+        END FUNCTION GetLogStringOn
        END INTERFACE
 
 
@@ -186,6 +219,14 @@
          INTEGER(KIND=4),  INTENT(IN)  :: ID
          INTEGER(KIND=4)               :: GetOutputStringLineCount
         END FUNCTION GetOutputStringLineCount
+       END INTERFACE
+       
+       
+       INTERFACE
+        FUNCTION GetOutputStringOn(ID)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         LOGICAL(KIND=4)              :: GetOutputStringOn
+        END FUNCTION GetOutputStringOn
        END INTERFACE
 
 
@@ -345,11 +386,29 @@
 
 
        INTERFACE
+        FUNCTION SetLogFileName(ID,FNAME)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         CHARACTER(LEN=*), INTENT(IN) :: FNAME
+         INTEGER(KIND=4)              :: SetLogFileName
+        END FUNCTION SetLogFileName
+       END INTERFACE
+
+
+       INTERFACE
         FUNCTION SetLogFileOn(ID,LOG_ON)
          INTEGER(KIND=4),  INTENT(IN) :: ID
          LOGICAL(KIND=4),  INTENT(IN) :: LOG_ON
          INTEGER(KIND=4)              :: SetLogFileOn
         END FUNCTION SetLogFileOn
+       END INTERFACE
+
+
+       INTERFACE
+        FUNCTION SetLogStringOn(ID,LOG_STRING_ON)
+         INTEGER(KIND=4),  INTENT(IN) :: ID
+         LOGICAL(KIND=4),  INTENT(IN) :: LOG_STRING_ON
+         INTEGER(KIND=4)              :: SetLogStringOn
+        END FUNCTION SetLogStringOn
        END INTERFACE
 
 

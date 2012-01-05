@@ -2919,3 +2919,348 @@ void TestIPhreeqcLib::TestGetOutputStringLine(void)
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
 }
+
+void TestIPhreeqcLib::TestSetLogFileName(void)
+{
+	char LOG_FILENAME[80];
+	sprintf(LOG_FILENAME, "log.%06d.out", ::rand());
+	if (::FileExists(LOG_FILENAME))
+	{
+		::DeleteFile(LOG_FILENAME);
+	}
+
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileName(n, LOG_FILENAME) );
+
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(LOG_FILENAME) );
+
+	std::string lines[33];
+	std::ifstream ifs(LOG_FILENAME);
+
+	size_t i = 0;
+	while (i < sizeof(lines)/sizeof(lines[0]) && std::getline(ifs, lines[i]))
+	{
+		++i;
+	}
+
+	CPPUNIT_ASSERT_EQUAL( 25u, i );
+
+	int line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"), lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Beginning of initial solution calculations."), lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"), lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Initial solution 1.	"),                       lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Iterations in revise_guesses: 2"),             lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Number of infeasible solutions: 0"),           lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Number of basis changes: 0"),                  lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Number of iterations: 6"),                     lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                          lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("End of simulation."),                          lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                          lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),        lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 2."),        lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),        lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("-----------"),                                 lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("End of run."),                                 lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("-----------"),                                 lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            lines[line++] );
+
+	if (::FileExists(LOG_FILENAME))
+	{
+		::DeleteFile(LOG_FILENAME);
+	}
+}
+
+void TestIPhreeqcLib::TestLogStringOnOff(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( false,    ::GetLogStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetLogStringOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( true,     ::GetLogStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetLogStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( false,    ::GetLogStringOn(n) != 0 );
+
+}
+
+void TestIPhreeqcLib::TestGetLogString(void)
+{
+	char LOG_FILENAME[80];
+	sprintf(LOG_FILENAME, "log.%06d.out", ::rand());
+	if (::FileExists(LOG_FILENAME))
+	{
+		::DeleteFile(LOG_FILENAME);
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(LOG_FILENAME) );
+
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileName(n, LOG_FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( std::string(LOG_FILENAME), std::string(::GetLogFileName(n)) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(LOG_FILENAME), std::string(::GetLogFileName(n)) );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(LOG_FILENAME) );
+	
+	{
+		std::ifstream ifs(LOG_FILENAME);
+		std::string fline((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+		std::string sline(::GetLogString(n));
+		CPPUNIT_ASSERT( sline.size() > 0 );
+
+		CPPUNIT_ASSERT_EQUAL( fline, sline );
+	}
+
+	if (::FileExists(LOG_FILENAME))
+	{
+		::DeleteFile(LOG_FILENAME);
+	}
+}
+
+void TestIPhreeqcLib::TestGetLogStringLineCount(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetLogStringLineCount(n));
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetLogStringLineCount(n));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogStringLineCount(n) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(     29, ::GetLogStringLineCount(n) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogStringOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogStringLineCount(n) );
+}
+
+void TestIPhreeqcLib::TestGetLogStringLine(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogStringLineCount(n));
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::LoadDatabase(n, "phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogStringLineCount(n));
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogStringLineCount(n) );
+
+	int line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -4)) );
+
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(     29, ::GetLogStringLineCount(n) );
+
+	line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),        std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 1."),        std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),        std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"), std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Beginning of initial solution calculations."), std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"), std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Initial solution 1.	"),                       std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Iterations in revise_guesses: 2"),             std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Number of infeasible solutions: 0"),           std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Number of basis changes: 0"),                  std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Number of iterations: 6"),                     std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                          std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("End of simulation."),                          std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                          std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),        std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 2."),        std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),        std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("-----------"),                                 std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("End of run."),                                 std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("-----------"),                                 std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                            std::string(::GetLogStringLine(n, line++)) );
+
+	// add solution block
+	// add solution block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+
+	// add dump block
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::DUMP(n) );
+
+	// add knobs
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "KNOBS") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "\t-logfile TRUE") );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogStringOn(n, 0) );
+
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogStringLineCount(n) );
+
+	line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -3)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -4)) );
+}
+
