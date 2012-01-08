@@ -58,6 +58,7 @@ PPOBJS = \
 	dumper.o \
 	Exchange.o \
 	ExchComp.o \
+	GasComp.o \
 	GasPhase.o \
 	ISolutionComp.o \
 	ISolution.o \
