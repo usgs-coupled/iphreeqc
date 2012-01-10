@@ -2231,12 +2231,12 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("	Aragonite        -1.21     -9.55   -8.34  CaCO3"),                                     lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("	Calcite          -1.07     -9.55   -8.48  CaCO3"),                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	CH4(g)          -64.51*   -67.37   -2.86  CH4	 Delta_V -54.21 cm3/mol"),             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	CO2(g)           -2.29*    -3.76   -1.47  CO2	 Delta_V -18.07 cm3/mol"),             lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("	CH4(g)          -64.51    -67.37   -2.86  CH4"),                                       lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("	CO2(g)           -2.29     -3.76   -1.47  CO2"),                                       lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("	H2(g)           -22.00    -25.15   -3.15  H2"),                                        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	H2O(g)           -1.51*    -0.00    1.51  H2O	 Delta_V  18.07 cm3/mol"),             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	O2(g)           -39.12*   -42.08   -2.96  O2	 Delta_V  36.14 cm3/mol"),             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	                      *  with Delta_V * (P - 1) / 2.3RT."),                            lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("	H2O(g)           -1.51     -0.00    1.51  H2O"),                                       lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string("	O2(g)           -39.12    -42.08   -2.96  O2"),                                        lines[line++] );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                                                                   lines[line++] );
 	CPPUNIT_ASSERT_EQUAL( std::string("End of simulation."),                                                                   lines[line++] );
