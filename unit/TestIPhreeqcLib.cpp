@@ -2126,7 +2126,7 @@ void TestIPhreeqcLib::TestErrorFileOn(void)
 		++i;
 	}
 	
-	CPPUNIT_ASSERT_EQUAL(8u, i);
+	CPPUNIT_ASSERT_EQUAL((size_t)8, i);
 
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: DATABASE keyword is ignored by IPhreeqc."),                                 lines[0] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."),    lines[1] );
@@ -2177,7 +2177,7 @@ void TestIPhreeqcLib::TestLogFileOn(void)
 		++i;
 	}
 	
-	CPPUNIT_ASSERT_EQUAL(6u, i);
+	CPPUNIT_ASSERT_EQUAL((size_t)6, i);
 
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."),    lines[0] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                           lines[1] );
@@ -2483,7 +2483,7 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 		++i;
 	}
 
-	CPPUNIT_ASSERT_EQUAL( 98u, i );
+	CPPUNIT_ASSERT_EQUAL( (size_t)98, i );
 
 	int line = 0;
 #if defined(_MSC_VER)
@@ -2967,7 +2967,7 @@ void TestIPhreeqcLib::TestSetLogFileName(void)
 		++i;
 	}
 
-	CPPUNIT_ASSERT_EQUAL( 25u, i );
+	CPPUNIT_ASSERT_EQUAL( (size_t)25, i );
 
 	int line = 0;
 	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"), lines[line++] );

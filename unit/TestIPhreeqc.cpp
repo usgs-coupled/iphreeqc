@@ -2044,7 +2044,7 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 		++i;
 	}
 
-	CPPUNIT_ASSERT_EQUAL( 98u, i );
+	CPPUNIT_ASSERT_EQUAL( (size_t)98, i );
 
 	int line = 0;
 #if defined(_MSC_VER)
@@ -2504,7 +2504,7 @@ void TestIPhreeqc::TestSetLogFileName(void)
 		++i;
 	}
 
-	CPPUNIT_ASSERT_EQUAL( 25u, i );
+	CPPUNIT_ASSERT_EQUAL( (size_t)25, i );
 
 	int line = 0;
 	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"), lines[line++] );
