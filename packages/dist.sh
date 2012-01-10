@@ -209,6 +209,8 @@ done
 
 cp $DISTPATH/src/phreeqcpp/PHREEQCPP-RELEASE.txt $DISTPATH/doc/PHREEQCPP-RELEASE
 cp $DISTPATH/src/phreeqcpp/phreeqc/revisions     $DISTPATH/doc/RELEASE
+mv $DISTPATH/src/phreeqcpp/PHRQ_io.h             $DISTPATH/include/PHRQ_io.h
+mv $DISTPATH/src/phreeqcpp/Keywords.h            $DISTPATH/include/Keywords.h
 
 (cd "$DISTPATH/doc" && "doxygen")
 
