@@ -711,6 +711,11 @@ protected:
 
 
 protected:
+#if defined(_MSC_VER)
+/* disable warning C4251: 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2' */
+#pragma warning(disable:4251)
+#endif
+
 	bool                       DatabaseLoaded;
 	bool                       ClearAccumulated;
 	bool                       UpdateComponents;
@@ -730,12 +735,6 @@ protected:
 	bool                       LogStringOn;
 	std::string                LogString;
 	std::vector< std::string > LogLines;
-
-
-#if defined(_MSC_VER)
-/* disable warning C4251: 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2' */
-#pragma warning(disable:4251)
-#endif
 
 	IErrorReporter            *ErrorReporter;
 	std::string                ErrorString;
@@ -759,11 +758,6 @@ protected:
 	std::string                LogFileName;
 	std::string                DumpFileName;
 
-#if defined(_MSC_VER)
-/* reset warning C4251 */
-#pragma warning(default:4251)
-#endif
-
 protected:
 	Phreeqc* PhreeqcPtr;
 	FILE *input_file;
@@ -773,6 +767,11 @@ protected:
 	static std::map<size_t, IPhreeqc*> Instances;
 	static size_t InstancesIndex;
 	const size_t Index;
+
+#if defined(_MSC_VER)
+/* reset warning C4251 */
+#pragma warning(default:4251)
+#endif
 
 #if defined(CPPUNIT)
 	friend class TestIPhreeqc;
