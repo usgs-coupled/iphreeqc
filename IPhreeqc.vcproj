@@ -954,6 +954,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\GasComp.cxx"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\GasPhase.cxx"
 					>
 				</File>
