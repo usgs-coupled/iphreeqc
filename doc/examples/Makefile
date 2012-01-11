@@ -1,11 +1,11 @@
 CC = gcc
-CPPFLAGS = -I../../include 
+CPPFLAGS = -I../../src -I../../src/phreeqcpp
 CXX = g++
 DEFS = -DNDEBUG=1 -DFC_FUNC\(name,NAME\)=name\ \#\#\ _ -DFC_FUNC_\(name,NAME\)=name\ \#\#\ _ -DFC_MAIN=MAIN__ 
 F77 = gfortran
 FC = gfortran
 CFLAGS = -g -O2 -Wall
-FFLAGS = -I../../include -g -O2 -Wall
+FFLAGS = -I../../src -g -O2 -Wall
 FCLIBS =  -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1 -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/../../.. -lgfortranbegin -lgfortran -lm
 LIBTOOL = /bin/sh ../../_build/libtool
 LDFLAGS = 
