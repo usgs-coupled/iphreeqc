@@ -89,6 +89,7 @@ PPOBJS = \
 	Surface.o \
 	System.o \
 	Temperature.o \
+	Use.o \
 	Utils.o
 
 # phreeqc objs
