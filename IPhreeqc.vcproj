@@ -46,7 +46,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -188,7 +188,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -261,7 +261,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -334,7 +334,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -416,7 +416,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -496,7 +496,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -579,7 +579,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -645,154 +645,10 @@
 			<File
 				RelativePath=".\src\fwrap.cpp"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\fwrap2.cpp"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\fwrap3.cpp"
@@ -847,25 +703,13 @@
 				>
 			</File>
 			<File
-				RelativePath="src\Var.c"
+				RelativePath=".\src\Var.c"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -874,18 +718,6 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -894,18 +726,6 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -914,18 +734,6 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -1042,11 +850,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\SSassemblage.cxx"
+					RelativePath=".\src\phreeqcpp\SS.cxx"
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\SSassemblageSS.cxx"
+					RelativePath=".\src\phreeqcpp\SSassemblage.cxx"
 					>
 				</File>
 				<File
@@ -1075,6 +883,10 @@
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\Temperature.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\Use.cpp"
 					>
 				</File>
 				<File
@@ -1236,7 +1048,7 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
-				RelativePath="src\CVar.hxx"
+				RelativePath=".\src\CVar.hxx"
 				>
 			</File>
 			<File
@@ -1297,22 +1109,6 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\phreeqc\input.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\IPhreeqc.f.inc"
-				>
-			</File>
-			<File
-				RelativePath="include\IPhreeqc.f90.inc"
-				>
-			</File>
-			<File
-				RelativePath=".\include\IPhreeqc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\IPhreeqc.hpp"
 				>
 			</File>
 			<File
@@ -1444,11 +1240,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\SSassemblage.h"
+				RelativePath=".\src\phreeqcpp\SS.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\SSassemblageSS.h"
+				RelativePath=".\src\phreeqcpp\SSassemblage.h"
 				>
 			</File>
 			<File
@@ -1488,11 +1284,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\Utils.h"
+				RelativePath=".\src\phreeqcpp\Use.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\Var.h"
+				RelativePath=".\src\phreeqcpp\Utils.h"
 				>
 			</File>
 		</Filter>

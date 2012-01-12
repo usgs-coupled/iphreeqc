@@ -47,7 +47,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -131,7 +131,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -209,7 +209,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -291,7 +291,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 			/>
@@ -697,11 +697,11 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\SSassemblage.cxx"
+						RelativePath="..\src\phreeqcpp\SS.cxx"
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\SSassemblageSS.cxx"
+						RelativePath="..\src\phreeqcpp\SSassemblage.cxx"
 						>
 					</File>
 					<File
@@ -730,6 +730,10 @@
 					</File>
 					<File
 						RelativePath="..\src\phreeqcpp\Temperature.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Use.cpp"
 						>
 					</File>
 					<File
