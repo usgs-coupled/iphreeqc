@@ -1112,10 +1112,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\IPHRQ_io.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\phreeqcpp\ISolution.h"
 				>
 			</File>
