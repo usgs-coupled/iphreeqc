@@ -1160,6 +1160,32 @@ USER_PUNCH(int n, const char* element, int max)
 }
 
 IPQ_RESULT
+USER_PUNCH_NEH(int n)
+{
+	std::ostringstream oss;
+
+	oss << "USER_PUNCH\n";
+
+	oss << "-head head0 head1 head2\n";
+	oss << "-start" << "\n";
+	oss << "10 PUNCH \"have0\", \"have1\", \"have2\"" << "\n";
+	oss << "20 PUNCH \"missing0\", \"missing1\", \"missing2\"" << "\n";
+	oss << "-end" << "\n";
+	oss << "SELECTED_OUTPUT" << "\n";
+	oss << "-totals C Ca Na" << "\n";
+	oss << "-molalities CO3-2  CaOH+  NaCO3-" << "\n";
+	oss << "-activities CO3-2  CaOH+  NaCO3-" << "\n";
+	oss << "-equilibrium_phases Calcite" << "\n";
+	oss << "-saturation_indices CO2(g) Siderite" << "\n";
+	oss << "-gases CO2(g) N2(g)" << "\n";
+	oss << "-kinetic_reactants Albite Pyrite" << "\n";
+	oss << "-solid_solutions CaSO4 SrSO4" << "\n";
+
+	return ::AccumulateLine(n, oss.str().c_str());
+}
+
+
+IPQ_RESULT
 SELECTED_OUTPUT(int n)
 {
 	std::ostringstream oss;
@@ -3032,6 +3058,7 @@ void TestIPhreeqcLib::TestLogStringOnOff(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetLogStringOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( false,    ::GetLogStringOn(n) != 0 );
 
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::DestroyIPhreeqc(n) );
 }
 
 void TestIPhreeqcLib::TestGetLogString(void)
@@ -3359,6 +3386,8 @@ void TestIPhreeqcLib::TestErrorStringOnOff(void)
 
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetErrorStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( true,     ::GetErrorStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::DestroyIPhreeqc(n) );
 }
 
 void TestIPhreeqcLib::TestGetErrorString(void)
@@ -3483,4 +3512,270 @@ void TestIPhreeqcLib::TestGetErrorStringLineCount(void)
 
 	CPPUNIT_ASSERT_EQUAL(      1, ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL(      0, ::GetErrorStringLineCount(n) );
+}
+
+void TestIPhreeqcLib::TestSetSelectedOutputFileName(void)
+{
+	char SELOUT_FILENAME[80];
+	sprintf(SELOUT_FILENAME, "selected_output.%06d.out", ::rand());
+	if (::FileExists(SELOUT_FILENAME))
+	{
+		::DeleteFile(SELOUT_FILENAME);
+	}
+
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(n, "llnl.dat"));
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::USER_PUNCH(n, "Ca", max));
+
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpStringOn(n));
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileName(n, SELOUT_FILENAME) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(SELOUT_FILENAME) );
+
+	/*
+	EXPECTED selected.out:
+			 sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles
+			   1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009
+			   1	       react	           1	         -99	           0	           1	     7.86135	       10.18	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	     calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009
+	*/
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+
+	if (::FileExists(SELOUT_FILENAME))
+	{
+		::DeleteFile(SELOUT_FILENAME);
+	}
+}
+
+void TestIPhreeqcLib::TestSelectedOutputStringOnOff(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( false,    ::GetSelectedOutputFileOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetSelectedOutputFileOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( true,     ::GetSelectedOutputFileOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( false,    ::GetSelectedOutputFileOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::DestroyIPhreeqc(n) );
+}
+
+void TestIPhreeqcLib::TestGetSelectedOutputString(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(n, "llnl.dat"));
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::USER_PUNCH(n, "Ca", max));
+
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetErrorFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetLogFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetSelectedOutputFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpFileOn(n));
+	CPPUNIT_ASSERT_EQUAL(0,      ::GetDumpStringOn(n));
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	std::string fline(
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	\n"
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009	\n"
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4001	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	     Calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009	\n"
+		);
+
+	std::string sline( ::GetSelectedOutputString(n) );
+
+	CPPUNIT_ASSERT_EQUAL( fline, sline );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestGetSelectedOutputStringLineCount(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputFileOn(n) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "llnl.dat") );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputFileOn(n) );
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::USER_PUNCH(n, "Ca", max) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetErrorFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetLogFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetDumpFileOn(n ));
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetDumpStringOn(n) );
+
+	CPPUNIT_ASSERT_EQUAL(  false, ::GetSelectedOutputStringOn(n) != 0 );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL( 3,      ::GetSelectedOutputStringLineCount(n) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestGetSelectedOutputStringLine(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputFileOn(n) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "llnl.dat") );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputFileOn(n) );
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::USER_PUNCH(n, "Ca", max) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetOutputFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetErrorFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetSelectedOutputFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetDumpFileOn(n ));
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetDumpStringOn(n) );
+
+	CPPUNIT_ASSERT_EQUAL(  false, ::GetSelectedOutputStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetSelectedOutputStringLineCount(n) );
+
+	int line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -3)) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::USER_PUNCH(n, "Ca", max) );
+
+	CPPUNIT_ASSERT_EQUAL(  false, ::GetSelectedOutputStringOn(n) != 0 );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      3, ::GetSelectedOutputStringLineCount(n) );
+
+	const char * expected[] = {
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	",
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009	",
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4001	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	     Calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009	"
+	};
+
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[0]),  std::string(::GetSelectedOutputStringLine(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[1]),  std::string(::GetSelectedOutputStringLine(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[2]),  std::string(::GetSelectedOutputStringLine(n, 2)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -3)) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestGetSelectedOutputStringLineNotEnoughHeadings(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputFileOn(n) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "llnl.dat") );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::GetSelectedOutputFileOn(n) );
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::EQUILIBRIUM_PHASES(n, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::USER_PUNCH_NEH(n) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetOutputFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetErrorFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetSelectedOutputFileOn(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetDumpFileOn(n ));
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetDumpStringOn(n) );
+
+	CPPUNIT_ASSERT_EQUAL(  false, ::GetSelectedOutputStringOn(n) != 0 );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      3, ::GetSelectedOutputStringLineCount(n) );
+
+	const char * expected[] = {
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	       head0	       head1	       head2	",
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	       have0	       have1	       have2	    missing0	    missing1	    missing2	",
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4001	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	       have0	       have1	       have2	    missing0	    missing1	    missing2	"
+	};
+
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[0]),  std::string(::GetSelectedOutputStringLine(n, 0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[1]),  std::string(::GetSelectedOutputStringLine(n, 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[2]),  std::string(::GetSelectedOutputStringLine(n, 2)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -3)) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
 }

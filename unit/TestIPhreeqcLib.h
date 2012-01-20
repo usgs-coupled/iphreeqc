@@ -54,6 +54,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetOutputString );
 	CPPUNIT_TEST( TestGetOutputStringLineCount );
 	CPPUNIT_TEST( TestGetOutputStringLine );
+
 	CPPUNIT_TEST( TestSetLogFileName );
 	CPPUNIT_TEST( TestLogStringOnOff );
 	CPPUNIT_TEST( TestGetLogString );
@@ -64,6 +65,15 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestErrorStringOnOff );
 	CPPUNIT_TEST( TestGetErrorString );
 	CPPUNIT_TEST( TestGetErrorStringLineCount );
+
+	CPPUNIT_TEST( TestSetSelectedOutputFileName );
+	CPPUNIT_TEST( TestSelectedOutputStringOnOff );
+	CPPUNIT_TEST( TestGetSelectedOutputString );
+	CPPUNIT_TEST( TestGetSelectedOutputStringLineCount );
+	CPPUNIT_TEST( TestGetSelectedOutputStringLine );
+
+	CPPUNIT_TEST( TestGetSelectedOutputStringLineNotEnoughHeadings );
+
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -116,6 +126,7 @@ public:
 	void TestGetOutputString(void);
 	void TestGetOutputStringLineCount(void);
 	void TestGetOutputStringLine(void);
+
 	void TestSetLogFileName(void);
 	void TestLogStringOnOff(void);
 	void TestGetLogString(void);
@@ -126,6 +137,14 @@ public:
 	void TestErrorStringOnOff(void);
 	void TestGetErrorString(void);
 	void TestGetErrorStringLineCount(void);
+
+	void TestSetSelectedOutputFileName(void);
+	void TestSelectedOutputStringOnOff(void);
+	void TestGetSelectedOutputString(void);
+	void TestGetSelectedOutputStringLineCount(void);
+	void TestGetSelectedOutputStringLine(void);
+
+	void TestGetSelectedOutputStringLineNotEnoughHeadings(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, int output_file_on, int error_file_on, int log_file_on, int selected_output_file_on, int dump_file_on);
