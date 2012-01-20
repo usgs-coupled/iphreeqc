@@ -2084,10 +2084,27 @@ void TestIPhreeqcLib::TestGetErrorStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump") );
-
+#if 0
+	CPPUNIT_ASSERT_EQUAL( 8,      ::GetErrorStringLineCount(n) );
+#else
 	CPPUNIT_ASSERT_EQUAL( 2,      ::GetErrorStringLineCount(n) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),    std::string(::GetErrorStringLine(n, 0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."), std::string(::GetErrorStringLine(n, 1)) );
+#endif
+
+	int line = 0;
+#if 0
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: DATABASE keyword is ignored by IPhreeqc."),                              std::string(::GetErrorStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."), std::string(::GetErrorStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                        std::string(::GetErrorStringLine(n, line++)) );
+#endif
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),                              std::string(::GetErrorStringLine(n, line++)) );
+#if 0
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                              std::string(::GetErrorStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("\tConcentration is set to zero."),                                                std::string(::GetErrorStringLine(n, line++)) );
+#endif
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."),                           std::string(::GetErrorStringLine(n, line++)) );
+#if 0
+	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                      std::string(::GetErrorStringLine(n, line++)) );
+#endif
 
 	if (n >= 0)
 	{
@@ -3264,3 +3281,206 @@ void TestIPhreeqcLib::TestGetLogStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -4)) );
 }
 
+void TestIPhreeqcLib::TestSetErrorFileName(void)
+{
+	char ERR_FILENAME[80];
+	sprintf(ERR_FILENAME, "error.%06d.out", ::rand());
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "END") );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileName(n, ERR_FILENAME) );
+
+
+	CPPUNIT_ASSERT_EQUAL( 1,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(ERR_FILENAME) );
+
+	std::string lines[100];
+	{
+		std::ifstream ifs(ERR_FILENAME);
+
+		size_t i = 0;
+		while (i < sizeof(lines)/sizeof(lines[0]) && std::getline(ifs, lines[i]))
+		{
+			++i;
+		}
+
+		CPPUNIT_ASSERT_EQUAL( (size_t)84, i );
+	}
+
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Maximum iterations exceeded, 100"),                                    lines[0] );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Numerical method failed with this set of convergence parameters."),    lines[2] );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Numerical method failed on all combinations of convergence parameters"), lines[82] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                    lines[83] );
+
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+}
+
+void TestIPhreeqcLib::TestErrorStringOnOff(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( true,     ::GetErrorStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetErrorStringOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( true,     ::GetErrorStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetErrorStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( false,    ::GetErrorStringOn(n) != 0 );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetErrorStringOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( true,     ::GetErrorStringOn(n) != 0 );
+}
+
+void TestIPhreeqcLib::TestGetErrorString(void)
+{
+	char ERR_FILENAME[80];
+	sprintf(ERR_FILENAME, "error.%06d.out", ::rand());
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(ERR_FILENAME) );
+
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "END") );
+
+	// run
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorStringOn(n, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileName(n, ERR_FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( std::string(ERR_FILENAME), std::string(::GetErrorFileName(n)) );
+
+	CPPUNIT_ASSERT_EQUAL( 1,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(ERR_FILENAME), std::string(::GetErrorFileName(n)) );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(ERR_FILENAME) );
+	
+	{
+#if 0
+		std::ifstream ifs(ERR_FILENAME);
+		std::string fline((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+#else
+		std::string fline("ERROR: Numerical method failed on all combinations of convergence parameters\n");
+#endif
+
+		std::string sline(::GetErrorString(n));
+		CPPUNIT_ASSERT( sline.size() > 0 );
+
+		CPPUNIT_ASSERT_EQUAL( fline, sline );
+	}
+
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+}
+
+void TestIPhreeqcLib::TestGetErrorStringLineCount(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetErrorStringLineCount(n));
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::LoadDatabase(n, "phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetErrorStringLineCount(n));
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "END") );
+
+	CPPUNIT_ASSERT_EQUAL(   true, ::GetErrorStringOn(n) != 0 );
+	CPPUNIT_ASSERT_EQUAL(      1, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      1, ::GetErrorStringLineCount(n) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "END") );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorStringOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL(      1, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      1, ::GetErrorStringLineCount(n) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "END") );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorStringOn(n, 0) );
+
+	CPPUNIT_ASSERT_EQUAL(      1, ::RunAccumulated(n) );
+	CPPUNIT_ASSERT_EQUAL(      0, ::GetErrorStringLineCount(n) );
+}

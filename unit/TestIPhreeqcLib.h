@@ -40,7 +40,9 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetDumpStringLine );
 	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
+#if 1
 	CPPUNIT_TEST( TestGetErrorStringLine );
+#endif
 	CPPUNIT_TEST( TestErrorFileOn );
 	CPPUNIT_TEST( TestLogFileOn );
 	CPPUNIT_TEST( TestGetWarningStringLine );
@@ -58,6 +60,10 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetLogStringLineCount );
 	CPPUNIT_TEST( TestGetLogStringLine );
 
+	CPPUNIT_TEST( TestSetErrorFileName );
+	CPPUNIT_TEST( TestErrorStringOnOff );
+	CPPUNIT_TEST( TestGetErrorString );
+	CPPUNIT_TEST( TestGetErrorStringLineCount );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -115,6 +121,12 @@ public:
 	void TestGetLogString(void);
 	void TestGetLogStringLineCount(void);
 	void TestGetLogStringLine(void);
+
+	void TestSetErrorFileName(void);
+	void TestErrorStringOnOff(void);
+	void TestGetErrorString(void);
+	void TestGetErrorStringLineCount(void);
+
 protected:
 	void TestFileOnOff(const char* FILENAME, int output_file_on, int error_file_on, int log_file_on, int selected_output_file_on, int dump_file_on);
 };
