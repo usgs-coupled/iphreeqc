@@ -2786,3 +2786,197 @@ void TestIPhreeqc::TestGetLogStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetLogStringLine(-3)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetLogStringLine(-4)) );
 }
+
+void TestIPhreeqc::TestSetErrorFileName(void)
+{
+	char ERR_FILENAME[80];
+	sprintf(ERR_FILENAME, "error.%06d.out", ::rand());
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("END") );
+
+	// run
+	obj.SetErrorFileOn(true);
+	obj.SetLogFileOn(false);
+	obj.SetOutputFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpStringOn(false);
+	obj.SetDumpFileOn(false);
+	obj.SetErrorFileName(ERR_FILENAME);
+
+	CPPUNIT_ASSERT_EQUAL( 1,     obj.RunAccumulated() );
+
+	CPPUNIT_ASSERT_EQUAL( true,  ::FileExists(ERR_FILENAME) );
+
+	std::string lines[100];
+	{
+		std::ifstream ifs(ERR_FILENAME);
+
+		size_t i = 0;
+		while (i < sizeof(lines)/sizeof(lines[0]) && std::getline(ifs, lines[i]))
+		{
+			++i;
+		}
+
+		CPPUNIT_ASSERT_EQUAL( (size_t)84, i );
+	}
+
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Maximum iterations exceeded, 100"),                                    lines[0] );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Numerical method failed with this set of convergence parameters."),    lines[2] );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Numerical method failed on all combinations of convergence parameters"), lines[82] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                    lines[83] );
+
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+}
+
+void TestIPhreeqc::TestErrorStringOnOff(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL( true,     obj.GetErrorStringOn() );
+
+	obj.SetErrorStringOn(false);
+	CPPUNIT_ASSERT_EQUAL( false,    obj.GetErrorStringOn() );
+
+	obj.SetErrorStringOn(true);
+	CPPUNIT_ASSERT_EQUAL( true,     obj.GetErrorStringOn() );
+
+	obj.SetErrorStringOn(false);
+	CPPUNIT_ASSERT_EQUAL( false,    obj.GetErrorStringOn() );
+}
+
+void TestIPhreeqc::TestGetErrorString(void)
+{
+	char ERR_FILENAME[80];
+	sprintf(ERR_FILENAME, "error.%06d.out", ::rand());
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(ERR_FILENAME) );
+
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("END") );
+
+	// run
+	obj.SetErrorFileOn(true);
+	obj.SetErrorStringOn(true);
+
+	obj.SetDumpFileOn(false);
+	obj.SetDumpStringOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetOutputFileOn(false);
+	obj.SetOutputStringOn(false);
+	obj.SetSelectedOutputFileOn(false);
+
+	obj.SetErrorFileName(ERR_FILENAME);
+	CPPUNIT_ASSERT_EQUAL( std::string(ERR_FILENAME), std::string(obj.GetErrorFileName()) );
+
+	CPPUNIT_ASSERT_EQUAL( 1,      obj.RunAccumulated() );
+
+	CPPUNIT_ASSERT_EQUAL( std::string(ERR_FILENAME), std::string(obj.GetErrorFileName()) );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(ERR_FILENAME) );
+	
+	{
+		std::string fline("ERROR: Numerical method failed on all combinations of convergence parameters\n");
+
+		std::string sline(obj.GetErrorString());
+		CPPUNIT_ASSERT( sline.size() > 0 );
+
+		CPPUNIT_ASSERT_EQUAL( fline, sline );
+	}
+
+	if (::FileExists(ERR_FILENAME))
+	{
+		::DeleteFile(ERR_FILENAME);
+	}
+}
+
+void TestIPhreeqc::TestGetErrorStringLineCount(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(     0, obj.GetErrorStringLineCount() );
+
+	CPPUNIT_ASSERT_EQUAL(     0, obj.LoadDatabase("phreeqc.dat") );
+
+	CPPUNIT_ASSERT_EQUAL(     0, obj.GetErrorStringLineCount() );
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("END") );
+
+	CPPUNIT_ASSERT_EQUAL(  true, obj.GetErrorStringOn() );
+	CPPUNIT_ASSERT_EQUAL(     1, obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL(     1, obj.GetErrorStringLineCount() );
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("END") );
+
+	obj.SetErrorStringOn(true);
+	CPPUNIT_ASSERT_EQUAL(     1, obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL(     1, obj.GetErrorStringLineCount() );
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	pH	7") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Na	1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	H+ = H+") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	log_k	0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("EQUILIBRIUM_PHASES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("	Fix_H+ -10 HCl	10") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("END") );
+
+	obj.SetErrorStringOn(false);
+	CPPUNIT_ASSERT_EQUAL(     1, obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL(     0, obj.GetErrorStringLineCount() );
+}
+
+
