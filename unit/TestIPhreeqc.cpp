@@ -2902,11 +2902,11 @@ void TestIPhreeqc::TestGetErrorString(void)
 	obj.SetErrorFileName(ERR_FILENAME);
 	CPPUNIT_ASSERT_EQUAL( std::string(ERR_FILENAME), std::string(obj.GetErrorFileName()) );
 
-	CPPUNIT_ASSERT_EQUAL( 1,      obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL( 1,     obj.RunAccumulated() );
 
 	CPPUNIT_ASSERT_EQUAL( std::string(ERR_FILENAME), std::string(obj.GetErrorFileName()) );
 
-	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(ERR_FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( true,  ::FileExists(ERR_FILENAME) );
 	
 	{
 		std::string fline("ERROR: Numerical method failed on all combinations of convergence parameters\n");

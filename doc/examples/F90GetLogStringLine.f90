@@ -9,7 +9,7 @@ PROGRAM example
      STOP
   END IF
 
-  IF (SetOutputStringOn(id, .TRUE.).NE.IPQ_OK) THEN
+  IF (SetLogStringOn(id, .TRUE.).NE.IPQ_OK) THEN
      CALL OutputErrorString(id)
      STOP
   END IF
