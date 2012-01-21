@@ -40,9 +40,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetDumpStringLine );
 	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
-#if 1
 	CPPUNIT_TEST( TestGetErrorStringLine );
-#endif
 	CPPUNIT_TEST( TestErrorFileOn );
 	CPPUNIT_TEST( TestLogFileOn );
 	CPPUNIT_TEST( TestGetWarningStringLine );
@@ -54,26 +52,21 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetOutputString );
 	CPPUNIT_TEST( TestGetOutputStringLineCount );
 	CPPUNIT_TEST( TestGetOutputStringLine );
-
 	CPPUNIT_TEST( TestSetLogFileName );
 	CPPUNIT_TEST( TestLogStringOnOff );
 	CPPUNIT_TEST( TestGetLogString );
 	CPPUNIT_TEST( TestGetLogStringLineCount );
 	CPPUNIT_TEST( TestGetLogStringLine );
-
 	CPPUNIT_TEST( TestSetErrorFileName );
 	CPPUNIT_TEST( TestErrorStringOnOff );
 	CPPUNIT_TEST( TestGetErrorString );
 	CPPUNIT_TEST( TestGetErrorStringLineCount );
-
 	CPPUNIT_TEST( TestSetSelectedOutputFileName );
 	CPPUNIT_TEST( TestSelectedOutputStringOnOff );
 	CPPUNIT_TEST( TestGetSelectedOutputString );
 	CPPUNIT_TEST( TestGetSelectedOutputStringLineCount );
 	CPPUNIT_TEST( TestGetSelectedOutputStringLine );
-
 	CPPUNIT_TEST( TestGetSelectedOutputStringLineNotEnoughHeadings );
-
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -126,24 +119,20 @@ public:
 	void TestGetOutputString(void);
 	void TestGetOutputStringLineCount(void);
 	void TestGetOutputStringLine(void);
-
 	void TestSetLogFileName(void);
 	void TestLogStringOnOff(void);
 	void TestGetLogString(void);
 	void TestGetLogStringLineCount(void);
 	void TestGetLogStringLine(void);
-
 	void TestSetErrorFileName(void);
 	void TestErrorStringOnOff(void);
 	void TestGetErrorString(void);
 	void TestGetErrorStringLineCount(void);
-
 	void TestSetSelectedOutputFileName(void);
 	void TestSelectedOutputStringOnOff(void);
 	void TestGetSelectedOutputString(void);
 	void TestGetSelectedOutputStringLineCount(void);
 	void TestGetSelectedOutputStringLine(void);
-
 	void TestGetSelectedOutputStringLineNotEnoughHeadings(void);
 
 protected:

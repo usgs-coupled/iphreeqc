@@ -1488,6 +1488,31 @@ USER_PUNCH(IPhreeqc& obj, const char* element, int max)
 }
 
 VRESULT
+USER_PUNCH_NEH(IPhreeqc& obj)
+{
+	std::ostringstream oss;
+
+	oss << "USER_PUNCH\n";
+
+	oss << "-head head0 head1 head2\n";
+	oss << "-start" << "\n";
+	oss << "10 PUNCH \"have0\", \"have1\", \"have2\"" << "\n";
+	oss << "20 PUNCH \"missing0\", \"missing1\", \"missing2\"" << "\n";
+	oss << "-end" << "\n";
+	oss << "SELECTED_OUTPUT" << "\n";
+	oss << "-totals C Ca Na" << "\n";
+	oss << "-molalities CO3-2  CaOH+  NaCO3-" << "\n";
+	oss << "-activities CO3-2  CaOH+  NaCO3-" << "\n";
+	oss << "-equilibrium_phases Calcite" << "\n";
+	oss << "-saturation_indices CO2(g) Siderite" << "\n";
+	oss << "-gases CO2(g) N2(g)" << "\n";
+	oss << "-kinetic_reactants Albite Pyrite" << "\n";
+	oss << "-solid_solutions CaSO4 SrSO4" << "\n";
+
+	return obj.AccumulateLine(oss.str().c_str());
+}
+
+VRESULT
 SELECTED_OUTPUT(IPhreeqc& obj)
 {
 	std::ostringstream oss;
@@ -2979,4 +3004,263 @@ void TestIPhreeqc::TestGetErrorStringLineCount(void)
 	CPPUNIT_ASSERT_EQUAL(     0, obj.GetErrorStringLineCount() );
 }
 
+void TestIPhreeqc::TestSetSelectedOutputFileName(void)
+{
+	char SELOUT_FILENAME[80];
+	sprintf(SELOUT_FILENAME, "selected_output.%06d.out", ::rand());
+	if (::FileExists(SELOUT_FILENAME))
+	{
+		::DeleteFile(SELOUT_FILENAME);
+	}
+
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("llnl.dat"));
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, ::EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, ::USER_PUNCH(obj, "Ca", max));
+
+	CPPUNIT_ASSERT_EQUAL(false,  obj.GetOutputFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,  obj.GetErrorFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,  obj.GetLogFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,  obj.GetSelectedOutputFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,  obj.GetDumpFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,  obj.GetDumpStringOn());
+
+	obj.SetSelectedOutputFileOn(1);
+	obj.SetSelectedOutputFileName(SELOUT_FILENAME);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      obj.RunAccumulated() );
+
+	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(SELOUT_FILENAME) );
+
+	/*
+	EXPECTED selected.out:
+			 sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles
+			   1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009
+			   1	       react	           1	         -99	           0	           1	     7.86135	       10.18	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	     calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009
+	*/
+
+	if (::FileExists(SELOUT_FILENAME))
+	{
+		::DeleteFile(SELOUT_FILENAME);
+	}
+}
+
+void TestIPhreeqc::TestSelectedOutputStringOnOff(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL( false,    obj.GetSelectedOutputFileOn());
+
+	obj.SetSelectedOutputFileOn(true);
+	CPPUNIT_ASSERT_EQUAL( true,     obj.GetSelectedOutputFileOn());
+
+	obj.SetSelectedOutputFileOn(false);
+	CPPUNIT_ASSERT_EQUAL( false,    obj.GetSelectedOutputFileOn());
+}
+
+void TestIPhreeqc::TestGetSelectedOutputString(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0,          obj.LoadDatabase("llnl.dat"));
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK,      ::SOLUTION(obj, 1.0, 1.0, 1.0));
+	CPPUNIT_ASSERT_EQUAL(VR_OK,      ::EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010));
+	CPPUNIT_ASSERT_EQUAL(VR_OK,      ::USER_PUNCH(obj, "Ca", max));
+
+	CPPUNIT_ASSERT_EQUAL(false,      obj.GetOutputFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,      obj.GetErrorFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,      obj.GetLogFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,      obj.GetSelectedOutputFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,      obj.GetDumpFileOn());
+	CPPUNIT_ASSERT_EQUAL(false,      obj.GetDumpStringOn());
+
+	obj.SetSelectedOutputStringOn(true);
+
+	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
+
+#if defined(_MSC_VER)
+	std::string fline(
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	\n"
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009	\n"
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4001	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	     Calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009	\n"
+		);
+#endif
+
+#if defined(__GNUC__)
+	std::string fline(
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	\n"
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	  1.0000e-03	  1.0000e-03	  1.0000e-03	  4.2975e-07	  1.1819e-09	  1.1881e-09	 -6.4686e+00	 -8.9530e+00	 -8.9507e+00	  0.0000e+00	  0.0000e+00	     -2.2870	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	        Ca+2	          aq	  9.9178e-04	     CaHCO3+	          aq	  7.5980e-06	       CaCO3	          aq	  6.2155e-07	       CaOH+	          aq	  1.1819e-09	\n"
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4014	  1.1556e-03	  1.1556e-03	  1.0000e-03	  4.2718e-06	  9.7385e-09	  1.1620e-08	 -5.4781e+00	 -8.0388e+00	 -7.9621e+00	  9.8444e-03	 -1.5555e-04	     -3.0192	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	     Calcite	        equi	  9.8444e-03	        Ca+2	          aq	  1.1371e-03	     CaHCO3+	          aq	  1.1598e-05	       CaCO3	          aq	  6.8668e-06	       CaOH+	          aq	  9.7385e-09	\n"
+		);
+#endif
+
+	std::string sline( obj.GetSelectedOutputString() );
+
+	CPPUNIT_ASSERT_EQUAL( fline, sline );
+}
+
+void TestIPhreeqc::TestGetSelectedOutputStringLineCount(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetSelectedOutputFileOn() );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      obj.LoadDatabase("llnl.dat") );
+
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetSelectedOutputFileOn() );
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK,  ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,  ::EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK,  ::USER_PUNCH(obj, "Ca", max) );
+
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetOutputFileOn() );
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetErrorFileOn() );
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetLogFileOn() );
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetSelectedOutputFileOn() );
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetDumpFileOn());
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetDumpStringOn() );
+
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetSelectedOutputStringOn() != 0 );
+	obj.SetSelectedOutputStringOn(true);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      obj.RunAccumulated() );
+
+	CPPUNIT_ASSERT_EQUAL( 3,      obj.GetSelectedOutputStringLineCount() );
+}
+
+void TestIPhreeqc::TestGetSelectedOutputStringLine(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetSelectedOutputFileOn() );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      obj.LoadDatabase("llnl.dat") );
+
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetSelectedOutputFileOn() );
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL(  VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL(  VR_OK, ::EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL(  VR_OK, ::USER_PUNCH(obj, "Ca", max) );
+
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetOutputFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetErrorFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetLogFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetSelectedOutputFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetDumpFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetDumpStringOn() );
+
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetSelectedOutputStringOn() );
+
+	CPPUNIT_ASSERT_EQUAL(      0, obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL(      0, obj.GetSelectedOutputStringLineCount() );
+
+	int line = 0;
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(line++)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-3)) );
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, ::USER_PUNCH(obj, "Ca", max) );
+
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetSelectedOutputStringOn() != 0 );
+	obj.SetSelectedOutputStringOn(true);
+
+	CPPUNIT_ASSERT_EQUAL(      0, obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL(      3, obj.GetSelectedOutputStringLineCount() );
+
+#if defined(_MSC_VER)
+	const char * expected[] = {
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	",
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009	",
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4001	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	     Calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009	"
+	};
+#endif
+
+#if defined(__GNUC__)
+	const char * expected[] = {
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	",
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	  1.0000e-03	  1.0000e-03	  1.0000e-03	  4.2975e-07	  1.1819e-09	  1.1881e-09	 -6.4686e+00	 -8.9530e+00	 -8.9507e+00	  0.0000e+00	  0.0000e+00	     -2.2870	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	        Ca+2	          aq	  9.9178e-04	     CaHCO3+	          aq	  7.5980e-06	       CaCO3	          aq	  6.2155e-07	       CaOH+	          aq	  1.1819e-09	",
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4014	  1.1556e-03	  1.1556e-03	  1.0000e-03	  4.2718e-06	  9.7385e-09	  1.1620e-08	 -5.4781e+00	 -8.0388e+00	 -7.9621e+00	  9.8444e-03	 -1.5555e-04	     -3.0192	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	     Calcite	        equi	  9.8444e-03	        Ca+2	          aq	  1.1371e-03	     CaHCO3+	          aq	  1.1598e-05	       CaCO3	          aq	  6.8668e-06	       CaOH+	          aq	  9.7385e-09	"
+	};
+#endif
+
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[0]),  std::string(obj.GetSelectedOutputStringLine(0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[1]),  std::string(obj.GetSelectedOutputStringLine(1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[2]),  std::string(obj.GetSelectedOutputStringLine(2)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-3)) );
+}
+
+void TestIPhreeqc::TestGetSelectedOutputStringLineNotEnoughHeadings(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetSelectedOutputFileOn() );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      obj.LoadDatabase("llnl.dat") );
+
+	CPPUNIT_ASSERT_EQUAL( false,  obj.GetSelectedOutputFileOn() );
+
+	CPPUNIT_ASSERT_EQUAL(  VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
+	CPPUNIT_ASSERT_EQUAL(  VR_OK, ::EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010) );
+	CPPUNIT_ASSERT_EQUAL(  VR_OK, ::USER_PUNCH_NEH(obj) );
+
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetOutputFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetErrorFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetLogFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetSelectedOutputFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetDumpFileOn() );
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetDumpStringOn() );
+
+	CPPUNIT_ASSERT_EQUAL(  false, obj.GetSelectedOutputStringOn() != 0 );
+	obj.SetSelectedOutputStringOn(true);
+
+	CPPUNIT_ASSERT_EQUAL(      0, obj.RunAccumulated() );
+	CPPUNIT_ASSERT_EQUAL(      3, obj.GetSelectedOutputStringLineCount() );
+
+#if defined(_MSC_VER)
+	const char * expected[] = {
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	       head0	       head1	       head2	",
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	       have0	       have1	       have2	    missing0	    missing1	    missing2	",
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4001	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	       have0	       have1	       have2	    missing0	    missing1	    missing2	"
+	};
+#endif
+
+#if defined(__GNUC__)
+	const char * expected[] = {
+		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	       head0	       head1	       head2	",
+		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	  1.0000e-03	  1.0000e-03	  1.0000e-03	  4.2975e-07	  1.1819e-09	  1.1881e-09	 -6.4686e+00	 -8.9530e+00	 -8.9507e+00	  0.0000e+00	  0.0000e+00	     -2.2870	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	       have0	       have1	       have2	    missing0	    missing1	    missing2	",
+		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4014	  1.1556e-03	  1.1556e-03	  1.0000e-03	  4.2718e-06	  9.7385e-09	  1.1620e-08	 -5.4781e+00	 -8.0388e+00	 -7.9621e+00	  9.8444e-03	 -1.5555e-04	     -3.0192	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	       have0	       have1	       have2	    missing0	    missing1	    missing2	"
+	};
+#endif
+
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[0]),  std::string(obj.GetSelectedOutputStringLine(0)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[1]),  std::string(obj.GetSelectedOutputStringLine(1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(expected[2]),  std::string(obj.GetSelectedOutputStringLine(2)) );
+
+	// negative lines should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-2)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(obj.GetSelectedOutputStringLine(-3)) );
+}
 
