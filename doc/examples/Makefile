@@ -18,6 +18,7 @@ TARGETS = \
 	GetDumpString \
 	GetLogString \
 	GetOutputString \
+	GetSelectedOutputString \
 	GetSelectedOutputValue \
 	IPhreeqc
 
@@ -29,6 +30,7 @@ F90_TARGETS = \
 	F90GetLogStringLine \
 	F90GetOutputStringLine \
 	F90ClearAccumulatedLines \
+	F90GetSelectedOutputStringLine \
 	F90GetSelectedOutputValue
 
 
@@ -50,6 +52,9 @@ GetLogString: GetLogString.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetOutputString: GetOutputString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetSelectedOutputString: GetSelectedOutputString.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetSelectedOutputValue: GetSelectedOutputValue.lo $(IPHREEQC_LA)
@@ -78,6 +83,9 @@ F90GetOutputStringLine: F90GetOutputStringLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
+F90GetSelectedOutputStringLine: F90GetSelectedOutputStringLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetSelectedOutputValue: F90GetSelectedOutputValue.lo $(IPHREEQC_LA)

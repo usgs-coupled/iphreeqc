@@ -14,6 +14,7 @@ EXAMPLES = \
 	examples/GetDumpString.c \
 	examples/GetLogString.c \
 	examples/GetOutputString.c \
+	examples/GetSelectedOutputString.c \
 	examples/GetSelectedOutputValue.c \
 	examples/F90ClearAccumulatedLines.f90 \
 	examples/F90CreateIPhreeqc.f90 \
@@ -22,6 +23,7 @@ EXAMPLES = \
 	examples/F90GetDumpStringLine.f90 \
 	examples/F90GetLogStringLine.f90 \
 	examples/F90GetOutputStringLine.f90 \
+	examples/F90GetSelectedOutputStringLine.f90 \
 	examples/F90GetSelectedOutputValue.f90
 
 
