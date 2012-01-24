@@ -858,6 +858,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\SScomp.cxx"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\StorageBin.cxx"
 					>
 				</File>
@@ -1241,6 +1245,10 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\SSassemblage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SScomp.h"
 				>
 			</File>
 			<File

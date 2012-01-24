@@ -705,6 +705,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\src\phreeqcpp\SScomp.cxx"
+						>
+					</File>
+					<File
 						RelativePath="..\src\phreeqcpp\StorageBin.cxx"
 						>
 					</File>
