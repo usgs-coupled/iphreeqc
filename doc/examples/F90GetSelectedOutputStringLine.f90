@@ -9,6 +9,11 @@ PROGRAM example
      STOP
   END IF
   
+  IF (SetSelectedOutputStringOn(id, .TRUE.).NE.IPQ_OK) THEN
+     CALL OutputErrorString(id)
+     STOP
+  END IF
+  
   IF (LoadDatabase(id, "phreeqc.dat").NE.0) THEN
      CALL OutputErrorString(id)
      STOP
