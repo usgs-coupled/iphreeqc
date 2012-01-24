@@ -115,21 +115,25 @@ LO_FILES = \
 	DestroyIPhreeqc.lo \
 	GetComponent.lo \
 	GetDumpString.lo \
+	GetErrorString.lo
 	GetLogString.lo \
 	GetOutputString.lo \
-	IPhreeqc.lo \
-	GetSelectedOutputValue.lo
+	GetSelectedOutputString.lo \
+	GetSelectedOutputValue.lo \
+	IPhreeqc.lo
 
 
 F90_LO_FILES = \
 	F90AccumulateLine.lo \
+	F90ClearAccumulatedLines.lo \
 	F90CreateIPhreeqc.lo \
 	F90DestroyIPhreeqc.lo \
 	F90GetComponent.lo \
 	F90GetDumpStringLine.lo \
+	F90GetErrorStringLine.lo \
 	F90GetLogStringLine.lo \
 	F90GetOutputStringLine.lo \
-	F90ClearAccumulatedLines.lo \
+	F90GetSelectedOutputStringLine.lo \
 	F90GetSelectedOutputValue.lo
 
 
