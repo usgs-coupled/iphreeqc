@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <IPhreeqc.h>
 
+#define TRUE  1
+
 int main(void)
 {
   int id;
