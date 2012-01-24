@@ -34,6 +34,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "advect_c", "examples\c\adve
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "advect", "examples\fortran\advect\advect.vfproj", "{28459FF2-3C6C-469E-B0C3-2E4D483E7025}"
 EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "F90GetLogStringLine", "F90GetLogStringLine\F90GetLogStringLine.vfproj", "{DB7565AA-4A90-420A-B626-97BA56120A59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -181,6 +183,18 @@ Global
 		{28459FF2-3C6C-469E-B0C3-2E4D483E7025}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
 		{28459FF2-3C6C-469E-B0C3-2E4D483E7025}.ReleaseDll|x64.ActiveCfg = ReleaseDll|x64
 		{28459FF2-3C6C-469E-B0C3-2E4D483E7025}.ReleaseDll|x64.Build.0 = ReleaseDll|x64
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.Debug|Win32.Build.0 = Debug|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.Debug|x64.ActiveCfg = Debug|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.DebugDll|Win32.ActiveCfg = Debug|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.DebugDll|Win32.Build.0 = Debug|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.DebugDll|x64.ActiveCfg = Debug|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.Release|Win32.ActiveCfg = Release|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.Release|Win32.Build.0 = Release|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.Release|x64.ActiveCfg = Release|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.ReleaseDll|Win32.ActiveCfg = Release|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.ReleaseDll|Win32.Build.0 = Release|Win32
+		{DB7565AA-4A90-420A-B626-97BA56120A59}.ReleaseDll|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

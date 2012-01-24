@@ -11,6 +11,11 @@ int main(void)
     return EXIT_FAILURE;
   }
 
+  if (SetSelectedOutputStringOn(id, TRUE) != IPQ_OK) {
+    OutputErrorString(id);
+    return EXIT_FAILURE;
+  }
+
   if (LoadDatabase(id, "phreeqc.dat") != 0) {
     OutputErrorString(id);
     return EXIT_FAILURE;
