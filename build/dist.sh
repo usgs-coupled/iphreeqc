@@ -147,19 +147,14 @@ echo "Removed and recreated $DIST_SANDBOX"
 echo "Exporting revision $REVISION of IPhreeqc into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/$REPOS_PATH" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/branches/ErrorHandling" \
 	     "$DISTNAME")
 	     
 (cd "$DIST_SANDBOX" && \
- 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqcpp/$REPOS_PATH/src" \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "6109" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqcpp/branches/ErrorHandling/src" \
 	     "$DISTNAME/src/phreeqcpp")
-	     
-(cd "$DIST_SANDBOX" && \
- 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/$REPOS_PATH/src" \
-	     "$DISTNAME/src/phreeqcpp/phreeqc")
-	     
+	     	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/$REPOS_PATH/database" \
