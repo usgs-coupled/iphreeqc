@@ -162,17 +162,17 @@ build() {
 # build Win32 libs
   cd "${topdir}" && \
   cd "${objdir}" && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=Win32 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=Win32 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=Win32 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=Win32 && \
 # build x64 libs
   cd "${topdir}" && \
   cd "${objdir}" && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=x64 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=x64 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=x64 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=x64 )
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=x64 )
 }
 check() {
   (cd ${objdir} && \
