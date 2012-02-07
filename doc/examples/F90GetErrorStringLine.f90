@@ -43,15 +43,13 @@ PROGRAM example
   CALL OutputAccumulatedLines(id)
 
   IF (RunAccumulated(id).NE.0) THEN
-     CALL OutputErrorString(id)
+     WRITE(*,*) "Error:"
+     DO i=1,GetErrorStringLineCount(id)
+        CALL GetErrorStringLine(id, i, line)
+        WRITE(*,*) TRIM(line)
+     END DO
      STOP
   END IF
-
-  WRITE(*,*) "Error:"
-  DO i=1,GetErrorStringLineCount(id)
-     CALL GetErrorStringLine(id, i, line)
-     WRITE(*,*) TRIM(line)
-  END DO
 
   IF (DestroyIPhreeqc(id).NE.IPQ_OK) THEN
      CALL OutputErrorString(id)

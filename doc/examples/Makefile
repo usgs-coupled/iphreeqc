@@ -16,6 +16,7 @@ TARGETS = \
 	CreateIPhreeqc \
 	GetComponent \
 	GetDumpString \
+	GetErrorString \
 	GetLogString \
 	GetOutputString \
 	GetSelectedOutputString \
@@ -27,6 +28,7 @@ F90_TARGETS = \
 	F90CreateIPhreeqc \
 	F90GetComponent \
 	F90GetDumpStringLine \
+	F90GetErrorStringLine \
 	F90GetLogStringLine \
 	F90GetOutputStringLine \
 	F90ClearAccumulatedLines \
@@ -46,6 +48,9 @@ GetComponent: GetComponent.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetDumpString: GetDumpString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetErrorString: GetErrorString.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetLogString: GetLogString.lo $(IPHREEQC_LA)
@@ -74,6 +79,9 @@ F90GetComponent: F90GetComponent.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetDumpStringLine: F90GetDumpStringLine.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
+F90GetErrorStringLine: F90GetErrorStringLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetLogStringLine: F90GetLogStringLine.lo $(IPHREEQC_LA)
@@ -115,7 +123,7 @@ LO_FILES = \
 	DestroyIPhreeqc.lo \
 	GetComponent.lo \
 	GetDumpString.lo \
-	GetErrorString.lo
+	GetErrorString.lo \
 	GetLogString.lo \
 	GetOutputString.lo \
 	GetSelectedOutputString.lo \
