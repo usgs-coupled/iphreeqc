@@ -214,7 +214,7 @@ install() {
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/Keywords.h"               "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
   /usr/bin/install -m 755 "${objdir}/database/"*.dat                         "${instdir}/${FULLPKG}-vs2005-win32/database/." && \
   /usr/bin/install -m 755 "${objdir}/examples/c/advect/"*                    "${instdir}/${FULLPKG}-vs2005-win32/examples/c/advect/." && \
-  /usr/bin/install -m 755 "${objdir}/examples/com/"*                         "${instdir}/${FULLPKG}-vs2005-win32/examples/com/." && \
+  /usr/bin/install -m 755 "${objdir}/examples/com/README.txt"                "${instdir}/${FULLPKG}-vs2005-win32/examples/com/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/excel/"*                   "${instdir}/${FULLPKG}-vs2005-win32/examples/com/excel/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/python/"*                  "${instdir}/${FULLPKG}-vs2005-win32/examples/com/python/." && \
   /usr/bin/install -m 755 "${objdir}/examples/fortran/advect/"*              "${instdir}/${FULLPKG}-vs2005-win32/examples/fortran/advect/." && \
@@ -248,7 +248,7 @@ install() {
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/Keywords.h"               "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
   /usr/bin/install -m 755 "${objdir}/database/"*.dat                         "${instdir}/${FULLPKG}-vs2005-x64/database/." && \
   /usr/bin/install -m 755 "${objdir}/examples/c/advect/"*                    "${instdir}/${FULLPKG}-vs2005-x64/examples/c/advect/." && \
-  /usr/bin/install -m 755 "${objdir}/examples/com/"*                         "${instdir}/${FULLPKG}-vs2005-x64/examples/com/." && \
+  /usr/bin/install -m 755 "${objdir}/examples/com/README.txt"                "${instdir}/${FULLPKG}-vs2005-x64/examples/com/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/excel/"*                   "${instdir}/${FULLPKG}-vs2005-x64/examples/com/excel/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/python/"*                  "${instdir}/${FULLPKG}-vs2005-x64/examples/com/python/." && \
   /usr/bin/install -m 755 "${objdir}/examples/fortran/advect/"*              "${instdir}/${FULLPKG}-vs2005-x64/examples/fortran/advect/." && \
