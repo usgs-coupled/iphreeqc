@@ -44,6 +44,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
@@ -187,6 +188,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
@@ -332,6 +334,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
@@ -495,6 +498,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
