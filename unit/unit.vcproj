@@ -48,7 +48,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -75,7 +75,7 @@
 				AdditionalDependencies="cppunitd.lib odbc32.lib odbccp32.lib Shlwapi.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/lib"
+				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1_10)/lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -132,7 +132,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -151,7 +151,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="cppunitd.lib"
-				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/libx64"
+				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1_10)/libx64"
 				GenerateDebugInformation="true"
 			/>
 			<Tool
@@ -211,7 +211,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -237,7 +237,7 @@
 				AdditionalDependencies="cppunit.lib odbc32.lib odbccp32.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/lib"
+				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1_10)/lib"
 				ProgramDatabaseFile=".\Release/unit.pdb"
 				SubSystem="1"
 				TargetMachine="1"
@@ -293,7 +293,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1.10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 			/>
@@ -309,7 +309,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="cppunit.lib"
-				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1.10)/libx64"
+				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1_10)/libx64"
 			/>
 			<Tool
 				Name="VCALinkTool"
