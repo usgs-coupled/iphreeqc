@@ -117,6 +117,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
@@ -192,13 +193,13 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
-				MinimalRebuild="true"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=""
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -262,6 +263,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
@@ -417,6 +419,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
@@ -502,13 +505,13 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
-				MinimalRebuild="true"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -582,6 +585,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
