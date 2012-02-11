@@ -147,12 +147,12 @@ echo "Removed and recreated $DIST_SANDBOX"
 echo "Exporting revision $REVISION of IPhreeqc into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/branches/ErrorHandling" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/$REPOS_PATH" \
 	     "$DISTNAME")
 	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/src" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/src" \
 	     "$DISTNAME/src/phreeqcpp")
 	     	     
 (cd "$DIST_SANDBOX" && \
