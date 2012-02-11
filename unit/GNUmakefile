@@ -6,7 +6,7 @@ CXXFLAGS            = -g -O2 -Wall
 CXXLINK             = $(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@
 DEFS                = -DNDEBUG -DSWIG_SHARED_OBJ -DPHREEQC_CPP -DPHREEQC_CLASS -DUSE_PHRQ_ALLOC -DCPPUNIT
 DEPDIR              = .deps
-INCLUDES            = -I../include -I../src -I../src/phreeqcpp -I../src/phreeqcpp/phreeqc -I$(CPPUNIT)/include
+INCLUDES            = -I../src -I../src/phreeqcpp -I../src/phreeqcpp/phreeqc -I$(CPPUNIT)/include
 LDFLAGS             = -L$(CPPUNIT)/lib 
 LIBS                = -lcppunit -ldl -lm
 MKDIR_P             = /bin/mkdir -p
@@ -58,16 +58,22 @@ PPOBJS = \
 	dumper.o \
 	Exchange.o \
 	ExchComp.o \
+	GasComp.o \
 	GasPhase.o \
 	ISolutionComp.o \
 	ISolution.o \
+	Keywords.o \
 	KineticsComp.o \
 	NameDouble.o \
 	NumKeyword.o \
 	Parser.o \
+	PBasic.o \
 	Phreeqc.o \
+	PHRQ_base.o \
+	PHRQ_io.o \
 	PPassemblageComp.o \
 	PPassemblage.o \
+	Pressure.o \
 	Reaction.o \
 	ReadClass.o \
 	runner.o \
@@ -75,7 +81,7 @@ PPOBJS = \
 	SolutionIsotope.o \
 	SolutionIsotopeList.o \
 	SSassemblage.o \
-	SSassemblageSS.o \
+	SS.o \
 	StorageBin.o \
 	StorageBinList.o \
 	SurfaceCharge.o \
@@ -83,18 +89,19 @@ PPOBJS = \
 	Surface.o \
 	System.o \
 	Temperature.o \
+	Use.o \
 	Utils.o
 
 # phreeqc objs
 POBJS =	\
 	advection.o \
-	basic.o \
 	basicsubs.o \
 	cl1.o \
 	cvdense.o \
 	cvode.o \
 	dense.o \
 	dw.o \
+	gases.o \
 	input.o \
 	integrate.o \
 	inverse.o \
@@ -104,11 +111,9 @@ POBJS =	\
 	model.o \
 	nvector.o \
 	nvector_serial.o \
-	output.o \
-	p2clib.o \
 	parse.o \
 	phqalloc.o \
-	phreeqc_files.o \
+	PHRQ_io_output.o \
 	pitzer.o \
 	pitzer_structures.o \
 	prep.o \
@@ -135,7 +140,6 @@ clean:
 	$(RM) $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS) unit unit.exe *~
 
 -include ./$(DEPDIR)/advection.Po
--include ./$(DEPDIR)/basic.Po
 -include ./$(DEPDIR)/basicsubs.Po
 -include ./$(DEPDIR)/cl1.Po
 -include ./$(DEPDIR)/cvdense.Po
@@ -147,64 +151,70 @@ clean:
 -include ./$(DEPDIR)/dw.Po
 -include ./$(DEPDIR)/Exchange.Po
 -include ./$(DEPDIR)/ExchComp.Po
+-include ./$(DEPDIR)/files
+-include ./$(DEPDIR)/GasComp.Po
+-include ./$(DEPDIR)/gases.Po
 -include ./$(DEPDIR)/GasPhase.Po
 -include ./$(DEPDIR)/input.Po
 -include ./$(DEPDIR)/integrate.Po
 -include ./$(DEPDIR)/inverse.Po
--include ./$(DEPDIR)/IPhreeqc.Po
 -include ./$(DEPDIR)/IPhreeqcLib.Po
--include ./$(DEPDIR)/ISolution.Po
+-include ./$(DEPDIR)/IPhreeqc.Po
 -include ./$(DEPDIR)/ISolutionComp.Po
+-include ./$(DEPDIR)/ISolution.Po
 -include ./$(DEPDIR)/isotopes.Po
--include ./$(DEPDIR)/kinetics.Po
+-include ./$(DEPDIR)/Keywords.Po
 -include ./$(DEPDIR)/KineticsComp.Po
+-include ./$(DEPDIR)/kinetics.Po
 -include ./$(DEPDIR)/mainsubs.Po
 -include ./$(DEPDIR)/model.Po
 -include ./$(DEPDIR)/NameDouble.Po
 -include ./$(DEPDIR)/NumKeyword.Po
 -include ./$(DEPDIR)/nvector.Po
 -include ./$(DEPDIR)/nvector_serial.Po
--include ./$(DEPDIR)/output.Po
--include ./$(DEPDIR)/p2clib.Po
 -include ./$(DEPDIR)/parse.Po
 -include ./$(DEPDIR)/Parser.Po
+-include ./$(DEPDIR)/PBasic.Po
 -include ./$(DEPDIR)/phqalloc.Po
 -include ./$(DEPDIR)/Phreeqc.Po
--include ./$(DEPDIR)/phreeqc_files.Po
+-include ./$(DEPDIR)/PHRQ_base.Po
+-include ./$(DEPDIR)/PHRQ_io_output.Po
+-include ./$(DEPDIR)/PHRQ_io.Po
 -include ./$(DEPDIR)/pitzer.Po
 -include ./$(DEPDIR)/pitzer_structures.Po
--include ./$(DEPDIR)/PPassemblage.Po
 -include ./$(DEPDIR)/PPassemblageComp.Po
+-include ./$(DEPDIR)/PPassemblage.Po
 -include ./$(DEPDIR)/prep.Po
+-include ./$(DEPDIR)/Pressure.Po
 -include ./$(DEPDIR)/print.Po
 -include ./$(DEPDIR)/Reaction.Po
--include ./$(DEPDIR)/read.Po
 -include ./$(DEPDIR)/ReadClass.Po
+-include ./$(DEPDIR)/read.Po
 -include ./$(DEPDIR)/readtr.Po
 -include ./$(DEPDIR)/runner.Po
 -include ./$(DEPDIR)/SelectedOutput.Po
 -include ./$(DEPDIR)/sit.Po
 -include ./$(DEPDIR)/smalldense.Po
--include ./$(DEPDIR)/Solution.Po
--include ./$(DEPDIR)/SolutionIsotope.Po
 -include ./$(DEPDIR)/SolutionIsotopeList.Po
+-include ./$(DEPDIR)/SolutionIsotope.Po
+-include ./$(DEPDIR)/Solution.Po
 -include ./$(DEPDIR)/spread.Po
 -include ./$(DEPDIR)/SSassemblage.Po
--include ./$(DEPDIR)/SSassemblageSS.Po
+-include ./$(DEPDIR)/SS.Po
 -include ./$(DEPDIR)/step.Po
--include ./$(DEPDIR)/StorageBin.Po
 -include ./$(DEPDIR)/StorageBinList.Po
+-include ./$(DEPDIR)/StorageBin.Po
 -include ./$(DEPDIR)/structures.Po
 -include ./$(DEPDIR)/sundialsmath.Po
--include ./$(DEPDIR)/Surface.Po
 -include ./$(DEPDIR)/SurfaceCharge.Po
 -include ./$(DEPDIR)/SurfaceComp.Po
+-include ./$(DEPDIR)/Surface.Po
 -include ./$(DEPDIR)/System.Po
 -include ./$(DEPDIR)/tally.Po
 -include ./$(DEPDIR)/Temperature.Po
 -include ./$(DEPDIR)/TestCVar.Po
--include ./$(DEPDIR)/TestIPhreeqc.Po
 -include ./$(DEPDIR)/TestIPhreeqcLib.Po
+-include ./$(DEPDIR)/TestIPhreeqc.Po
 -include ./$(DEPDIR)/TestSelectedOutput.Po
 -include ./$(DEPDIR)/TestVar.Po
 -include ./$(DEPDIR)/tidy.Po

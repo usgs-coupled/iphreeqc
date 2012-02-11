@@ -84,3 +84,38 @@ int DeleteFile(const char* szPathName)
   return 0; // failure
 }
 #endif
+
+#if defined(_WIN32) || defined(__CYGWIN32__)
+size_t FileSize(const char *szPathName)
+{
+	HANDLE hFile = ::CreateFile(
+		szPathName,            // file to open
+		GENERIC_READ,          // open for reading
+		FILE_SHARE_READ,       // share for reading
+		NULL,                  // default security
+		OPEN_EXISTING,         // existing file only
+		FILE_ATTRIBUTE_NORMAL, // normal file
+		NULL);                 // no attr. template
+
+	if (hFile != INVALID_HANDLE_VALUE)
+	{
+		// read file size
+		LARGE_INTEGER liFileSize;
+		::GetFileSizeEx(hFile, &liFileSize);
+		::CloseHandle(hFile);
+		return (size_t) liFileSize.QuadPart;
+	}
+	return 0;
+}
+#else
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+size_t FileSize(const char *szPathName)
+{
+	struct stat s;
+	stat(szPathName, &s);
+	return (size_t) s.st_size;
+}
+#endif

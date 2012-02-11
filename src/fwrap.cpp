@@ -120,6 +120,12 @@ GetComponentF(int *id, int *n, char* comp, unsigned int line_length)
 	padfstring(comp, ::GetComponent(*id, (*n) - 1), line_length);
 }
 
+void
+GetDumpFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	padfstring(fname, ::GetDumpFileName(*id), fname_length);
+}
+
 int
 GetDumpFileOnF(int *id)
 {
@@ -148,6 +154,12 @@ GetDumpStringOnF(int *id)
 	return ::GetDumpStringOn(*id);
 }
 
+void
+GetErrorFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	padfstring(fname, ::GetErrorFileName(*id), fname_length);
+}
+
 int
 GetErrorFileOnF(int *id)
 {
@@ -171,9 +183,63 @@ GetErrorStringLineF(int *id, int* n, char* line, unsigned int line_length)
 }
 
 int
+GetErrorStringOnF(int *id)
+{
+	return ::GetErrorStringOn(*id);
+}
+
+void 
+GetLogFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	padfstring(fname, ::GetLogFileName(*id), fname_length);
+}
+
+int
 GetLogFileOnF(int *id)
 {
 	return ::GetLogFileOn(*id);
+}
+
+int
+GetLogStringOnF(int *id)
+{
+	return ::GetLogStringOn(*id);
+}
+
+int
+GetLogStringLineCountF(int *id)
+{
+	return ::GetLogStringLineCount(*id);
+}
+
+void
+GetLogStringLineF(int *id, int* n, char* line, unsigned int line_length)
+{
+	padfstring(line, ::GetLogStringLine(*id, (*n) - 1), line_length);
+}
+
+void
+GetOutputFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	padfstring(fname, ::GetOutputFileName(*id), fname_length);
+}
+
+int
+GetOutputStringLineCountF(int *id)
+{
+	return ::GetOutputStringLineCount(*id);
+}
+
+void
+GetOutputStringLineF(int *id, int* n, char* line, unsigned int line_length)
+{
+	padfstring(line, ::GetOutputStringLine(*id, (*n) - 1), line_length);
+}
+
+int
+GetOutputStringOnF(int *id)
+{
+	return ::GetOutputStringOn(*id);
 }
 
 int
@@ -188,10 +254,38 @@ GetSelectedOutputColumnCountF(int *id)
 	return ::GetSelectedOutputColumnCount(*id);
 }
 
+void
+GetSelectedOutputFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	padfstring(fname, ::GetSelectedOutputFileName(*id), fname_length);
+}
+
 int
 GetSelectedOutputFileOnF(int *id)
 {
 	return ::GetSelectedOutputFileOn(*id);
+}
+
+/*
+GetSelectedOutputStringF
+*/
+
+int
+GetSelectedOutputStringLineCountF(int *id)
+{
+	return ::GetSelectedOutputStringLineCount(*id);
+}
+
+void
+GetSelectedOutputStringLineF(int *id, int* n, char* line, unsigned int line_length)
+{
+	padfstring(line, ::GetSelectedOutputStringLine(*id, (*n) - 1), line_length);
+}
+
+int
+GetSelectedOutputStringOnF(int *id)
+{
+	return ::GetSelectedOutputStringOn(*id);
 }
 
 int
@@ -356,6 +450,23 @@ RunStringF(int *id, char* input, unsigned int input_length)
 }
 
 IPQ_RESULT
+SetDumpFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	char* cinput;
+
+	cinput = f2cstring(fname, fname_length);
+	if (!cinput)
+	{
+		::AddError(*id, "SetDumpFileName: Out of memory.\n");
+		return IPQ_OUTOFMEMORY;
+	}
+
+	IPQ_RESULT n = ::SetDumpFileName(*id, cinput);
+	free(cinput);
+	return n;
+}
+
+IPQ_RESULT
 SetDumpFileOnF(int *id, int* dump_on)
 {
 	return ::SetDumpFileOn(*id, *dump_on);
@@ -368,9 +479,49 @@ SetDumpStringOnF(int *id, int* dump_string_on)
 }
 
 IPQ_RESULT
-SetErrorFileOnF(int *id, int* error_on)
+SetErrorFileNameF(int *id, char* fname, unsigned int fname_length)
 {
-	return ::SetErrorFileOn(*id, *error_on);
+	char* cinput;
+
+	cinput = f2cstring(fname, fname_length);
+	if (!cinput)
+	{
+		::AddError(*id, "SetErrorFileName: Out of memory.\n");
+		return IPQ_OUTOFMEMORY;
+	}
+
+	IPQ_RESULT n = ::SetErrorFileName(*id, cinput);
+	free(cinput);
+	return n;
+}
+
+IPQ_RESULT
+SetErrorFileOnF(int *id, int* error_file_on)
+{
+	return ::SetErrorFileOn(*id, *error_file_on);
+}
+
+IPQ_RESULT
+SetErrorStringOnF(int *id, int* error_string_on)
+{
+	return ::SetErrorStringOn(*id, *error_string_on);
+}
+
+IPQ_RESULT
+SetLogFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	char* cinput;
+
+	cinput = f2cstring(fname, fname_length);
+	if (!cinput)
+	{
+		::AddError(*id, "SetLogFileName: Out of memory.\n");
+		return IPQ_OUTOFMEMORY;
+	}
+
+	IPQ_RESULT n = ::SetLogFileName(*id, cinput);
+	free(cinput);
+	return n;
 }
 
 IPQ_RESULT
@@ -380,15 +531,67 @@ SetLogFileOnF(int *id, int* log_on)
 }
 
 IPQ_RESULT
+SetLogStringOnF(int *id, int* log_string_on)
+{
+	return ::SetLogStringOn(*id, *log_string_on);
+}
+
+IPQ_RESULT
+SetOutputFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	char* cinput;
+
+	cinput = f2cstring(fname, fname_length);
+	if (!cinput)
+	{
+		::AddError(*id, "SetOutputFileName: Out of memory.\n");
+		return IPQ_OUTOFMEMORY;
+	}
+
+	IPQ_RESULT n = ::SetOutputFileName(*id, cinput);
+	free(cinput);
+	return n;
+}
+
+IPQ_RESULT
 SetOutputFileOnF(int *id, int* output_on)
 {
 	return ::SetOutputFileOn(*id, *output_on);
 }
 
 IPQ_RESULT
-SetSelOutFileOnF(int *id, int* sel_on)
+SetOutputStringOnF(int *id, int* output_string_on)
+{
+	return ::SetOutputStringOn(*id, *output_string_on);
+}
+
+IPQ_RESULT
+SetSelectedOutputFileNameF(int *id, char* fname, unsigned int fname_length)
+{
+	char* cinput;
+
+	cinput = f2cstring(fname, fname_length);
+	if (!cinput)
+	{
+		::AddError(*id, "SetSelectedOutputFileName: Out of memory.\n");
+		return IPQ_OUTOFMEMORY;
+	}
+
+	IPQ_RESULT n = ::SetSelectedOutputFileName(*id, cinput);
+	free(cinput);
+	return n;
+}
+
+IPQ_RESULT
+SetSelectedOutputFileOnF(int *id, int* sel_on)
 {
 	return ::SetSelectedOutputFileOn(*id, *sel_on);
+}
+
+IPQ_RESULT
+SetSelectedOutputStringOnF(int *id, int* selected_output_string_on)
+{
+	return ::SetSelectedOutputStringOn(*id, *selected_output_string_on);
 }
 
 #if defined(_WIN32) && !defined(_M_AMD64)
@@ -432,6 +635,10 @@ IPQ_DLL_EXPORT int  __stdcall GETCOMPONENTCOUNT(int *id)
 {
 	return GetComponentCountF(id);
 }
+IPQ_DLL_EXPORT void __stdcall GETDUMPFILENAME(int *id, char *filename, unsigned int len)
+{
+	GetDumpFileNameF(id, filename, len);
+}
 IPQ_DLL_EXPORT int  __stdcall GETDUMPFILEON(int *id)
 {
 	return GetDumpFileOnF(id);
@@ -449,6 +656,10 @@ IPQ_DLL_EXPORT int  __stdcall GETDUMPSTRINGON(int *id)
 {
 	return GetDumpStringOnF(id);
 }
+IPQ_DLL_EXPORT void __stdcall GETERRORFILENAME(int *id, char *filename, unsigned int len)
+{
+	GetErrorFileNameF(id, filename, len);
+}
 IPQ_DLL_EXPORT int  __stdcall GETERRORFILEON(int *id)
 {
 	return GetErrorFileOnF(id);
@@ -462,17 +673,59 @@ IPQ_DLL_EXPORT int  __stdcall GETERRORSTRINGLINECOUNT(int *id)
 {
 	return GetErrorStringLineCountF(id);
 }
+IPQ_DLL_EXPORT int  __stdcall GETERRORSTRINGON(int *id)
+{
+	return GetErrorStringOnF(id);
+}
+IPQ_DLL_EXPORT void __stdcall GETLOGFILENAME(int *id, char *filename, unsigned int len)
+{
+	GetLogFileNameF(id, filename, len);
+}
 IPQ_DLL_EXPORT int  __stdcall GETLOGFILEON(int *id)
 {
 	return GetLogFileOnF(id);
+}
+IPQ_DLL_EXPORT int  __stdcall GETLOGSTRINGON(int *id)
+{
+	return GetLogStringOnF(id);
+}
+// GetLogString
+IPQ_DLL_EXPORT void __stdcall GETLOGSTRINGLINE(int *id, int *n, char* line, unsigned int line_length)
+{
+	GetLogStringLineF(id, n, line, line_length);
+}
+IPQ_DLL_EXPORT int  __stdcall GETLOGSTRINGLINECOUNT(int *id)
+{
+	return GetLogStringLineCountF(id);
+}
+IPQ_DLL_EXPORT void __stdcall GETOUTPUTFILENAME(int *id, char *filename, unsigned int len)
+{
+	GetOutputFileNameF(id, filename, len);
 }
 IPQ_DLL_EXPORT int  __stdcall GETOUTPUTFILEON(int *id)
 {
 	return GetOutputFileOnF(id);
 }
+// GetOutputString
+IPQ_DLL_EXPORT void __stdcall GETOUTPUTSTRINGLINE(int *id, int *n, char* line, unsigned int line_length)
+{
+	GetOutputStringLineF(id, n, line, line_length);
+}
+IPQ_DLL_EXPORT int  __stdcall GETOUTPUTSTRINGLINECOUNT(int *id)
+{
+	return GetOutputStringLineCountF(id);
+}
+IPQ_DLL_EXPORT int  __stdcall GETOUTPUTSTRINGON(int *id)
+{
+	return GetOutputStringOnF(id);
+}
 IPQ_DLL_EXPORT int  __stdcall GETSELECTEDOUTPUTCOLUMNCOUNT(int *id)
 {
 	return GetSelectedOutputColumnCountF(id);
+}
+IPQ_DLL_EXPORT void __stdcall GETSELECTEDOUTPUTFILENAME(int *id, char *filename, unsigned int len)
+{
+	GetSelectedOutputFileNameF(id, filename, len);
 }
 IPQ_DLL_EXPORT int  __stdcall GETSELECTEDOUTPUTFILEON(int *id)
 {
@@ -481,6 +734,19 @@ IPQ_DLL_EXPORT int  __stdcall GETSELECTEDOUTPUTFILEON(int *id)
 IPQ_DLL_EXPORT int  __stdcall GETSELECTEDOUTPUTROWCOUNT(int *id)
 {
 	return GetSelectedOutputRowCountF(id);
+}
+// GetSelectedOutputString
+IPQ_DLL_EXPORT void __stdcall GETSELECTEDOUTPUTSTRINGLINE(int *id, int *n, char* line, unsigned int line_length)
+{
+	GetSelectedOutputStringLineF(id, n, line, line_length);
+}
+IPQ_DLL_EXPORT int  __stdcall GETSELECTEDOUTPUTSTRINGLINECOUNT(int *id)
+{
+	return GetSelectedOutputStringLineCountF(id);
+}
+IPQ_DLL_EXPORT int  __stdcall GETSELECTEDOUTPUTSTRINGON(int *id)
+{
+	return GetSelectedOutputStringOnF(id);
 }
 IPQ_DLL_EXPORT int  __stdcall GETSELECTEDOUTPUTVALUE(int *id, int *row, int *col, int *vtype, double* dvalue, char* svalue, unsigned int svalue_length)
 {
@@ -527,29 +793,65 @@ IPQ_DLL_EXPORT int  __stdcall RUNSTRING(int *id, char *input, unsigned int len)
 {
 	return RunStringF(id, input, len);
 }
-IPQ_DLL_EXPORT void __stdcall SETDUMPFILEON(int *id, int *dump_on)
+IPQ_DLL_EXPORT int  __stdcall SETDUMPFILENAME(int *id, char *filename, unsigned int len)
 {
-	SetDumpFileOnF(id, dump_on);
+	return SetDumpFileNameF(id, filename, len);
 }
-IPQ_DLL_EXPORT void __stdcall SETDUMPSTRINGON(int *id, int *dump_string_on)
+IPQ_DLL_EXPORT int  __stdcall SETDUMPFILEON(int *id, int *dump_on)
 {
-	SetDumpStringOnF(id, dump_string_on);
+	return SetDumpFileOnF(id, dump_on);
 }
-IPQ_DLL_EXPORT void __stdcall SETERRORFILEON(int *id, int *error_on)
+IPQ_DLL_EXPORT int  __stdcall SETDUMPSTRINGON(int *id, int *dump_string_on)
 {
-	SetErrorFileOnF(id, error_on);
+	return SetDumpStringOnF(id, dump_string_on);
 }
-IPQ_DLL_EXPORT void __stdcall SETLOGFILEON(int *id, int *log_on)
+IPQ_DLL_EXPORT int  __stdcall SETERRORFILENAME(int *id, char *filename, unsigned int len)
 {
-	SetLogFileOnF(id, log_on);
+	return SetErrorFileNameF(id, filename, len);
 }
-IPQ_DLL_EXPORT void __stdcall SETOUTPUTFILEON(int *id, int *output_on)
+IPQ_DLL_EXPORT int  __stdcall SETERRORFILEON(int *id, int *error_on)
 {
-	SetOutputFileOnF(id, output_on);
+	return SetErrorFileOnF(id, error_on);
 }
-IPQ_DLL_EXPORT void __stdcall SETSELECTEDOUTPUTFILEON(int *id, int *selected_on)
+IPQ_DLL_EXPORT int  __stdcall SETERRORSTRINGON(int *id, int *error_string_on)
 {
-	SetSelOutFileOnF(id, selected_on);
+	return SetErrorStringOnF(id, error_string_on);
+}
+IPQ_DLL_EXPORT int  __stdcall SETLOGFILENAME(int *id, char *filename, unsigned int len)
+{
+	return SetLogFileNameF(id, filename, len);
+}
+IPQ_DLL_EXPORT int  __stdcall SETLOGFILEON(int *id, int *log_on)
+{
+	return SetLogFileOnF(id, log_on);
+}
+IPQ_DLL_EXPORT int  __stdcall SETLOGSTRINGON(int *id, int *log_on)
+{
+	return SetLogStringOnF(id, log_on);
+}
+IPQ_DLL_EXPORT int  __stdcall SETOUTPUTFILENAME(int *id, char *filename, unsigned int len)
+{
+	return SetOutputFileNameF(id, filename, len);
+}
+IPQ_DLL_EXPORT int  __stdcall SETOUTPUTFILEON(int *id, int *output_on)
+{
+	return SetOutputFileOnF(id, output_on);
+}
+IPQ_DLL_EXPORT int  __stdcall SETOUTPUTSTRINGON(int *id, int *output_on)
+{
+	return SetOutputStringOnF(id, output_on);
+}
+IPQ_DLL_EXPORT int  __stdcall SETSELECTEDOUTPUTFILENAME(int *id, char *filename, unsigned int len)
+{
+	return SetSelectedOutputFileNameF(id, filename, len);
+}
+IPQ_DLL_EXPORT int  __stdcall SETSELECTEDOUTPUTFILEON(int *id, int *selout_file_on)
+{
+	return SetSelectedOutputFileOnF(id, selout_file_on);
+}
+IPQ_DLL_EXPORT int  __stdcall SETSELECTEDOUTPUTSTRINGON(int *id, int *selout_string_on)
+{
+	return SetSelectedOutputStringOnF(id, selout_string_on);
 }
 #if defined(__cplusplus)
 }

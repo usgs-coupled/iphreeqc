@@ -11,10 +11,6 @@ public:
 	static int CreateIPhreeqc(void);
 	static IPQ_RESULT DestroyIPhreeqc(int n);
 	static IPhreeqc* GetInstance(int n);
-
-private:
-	static std::map<size_t, IPhreeqc*> Instances;
-	static size_t InstancesIndex;
 };
 
 IPQ_RESULT
@@ -108,6 +104,18 @@ GetComponentCount(int id)
 	return IPQ_BADINSTANCE;
 }
 
+const char*
+GetDumpFileName(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetDumpFileName();
+	}
+	return empty;
+}
+
 int
 GetDumpFileOn(int id)
 {
@@ -179,6 +187,18 @@ GetDumpStringOn(int id)
 	return IPQ_BADINSTANCE;
 }
 
+const char*
+GetErrorFileName(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetErrorFileName();
+	}
+	return empty;
+}
+
 int
 GetErrorFileOn(int id)
 {
@@ -233,6 +253,36 @@ GetErrorStringLineCount(int id)
 }
 
 int
+GetErrorStringOn(int id)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		if (IPhreeqcPtr->GetErrorStringOn())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	return IPQ_BADINSTANCE;
+}
+
+const char*
+GetLogFileName(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetLogFileName();
+	}
+	return empty;
+}
+
+int
 GetLogFileOn(int id)
 {
 	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
@@ -248,6 +298,71 @@ GetLogFileOn(int id)
 		}
 	}
 	return IPQ_BADINSTANCE;
+}
+
+const char*
+GetLogString(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetLogString();
+	}
+	return empty;
+}
+
+const char*
+GetLogStringLine(int id, int n)
+{
+	static const char err_msg[] = "GetLogStringLine: Invalid instance id.\n";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetLogStringLine(n);
+	}
+	return err_msg;
+}
+
+int
+GetLogStringLineCount(int id)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetLogStringLineCount();
+	}
+	return 0;
+}
+
+int
+GetLogStringOn(int id)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		if (IPhreeqcPtr->GetLogStringOn())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	return IPQ_BADINSTANCE;
+}
+
+const char*
+GetOutputFileName(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetOutputFileName();
+	}
+	return empty;
 }
 
 int
@@ -268,6 +383,59 @@ GetOutputFileOn(int id)
 	return IPQ_BADINSTANCE;
 }
 
+const char*
+GetOutputString(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetOutputString();
+	}
+	return empty;
+}
+
+const char*
+GetOutputStringLine(int id, int n)
+{
+	static const char err_msg[] = "GetOutputStringLine: Invalid instance id.\n";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetOutputStringLine(n);
+	}
+	return err_msg;
+}
+
+int
+GetOutputStringLineCount(int id)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetOutputStringLineCount();
+	}
+	return 0;
+}
+
+int
+GetOutputStringOn(int id)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		if (IPhreeqcPtr->GetOutputStringOn())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	return IPQ_BADINSTANCE;
+}
+
 int
 GetSelectedOutputColumnCount(int id)
 {
@@ -277,6 +445,18 @@ GetSelectedOutputColumnCount(int id)
 		return IPhreeqcPtr->GetSelectedOutputColumnCount();
 	}
 	return IPQ_BADINSTANCE;
+}
+
+const char*
+GetSelectedOutputFileName(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetSelectedOutputFileName();
+	}
+	return empty;
 }
 
 int
@@ -304,6 +484,59 @@ GetSelectedOutputRowCount(int id)
 	if (IPhreeqcPtr)
 	{
 		return IPhreeqcPtr->GetSelectedOutputRowCount();
+	}
+	return IPQ_BADINSTANCE;
+}
+
+const char*
+GetSelectedOutputString(int id)
+{
+	static const char empty[] = "";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetSelectedOutputString();
+	}
+	return empty;
+}
+
+const char*
+GetSelectedOutputStringLine(int id, int n)
+{
+	static const char err_msg[] = "GetSelectedOutputStringLine: Invalid instance id.\n";
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetSelectedOutputStringLine(n);
+	}
+	return err_msg;
+}
+
+int
+GetSelectedOutputStringLineCount(int id)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		return IPhreeqcPtr->GetSelectedOutputStringLineCount();
+	}
+	return 0;
+}
+
+int
+GetSelectedOutputStringOn(int id)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		if (IPhreeqcPtr->GetSelectedOutputStringOn())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	return IPQ_BADINSTANCE;
 }
@@ -459,6 +692,18 @@ RunString(int id, const char* input)
 }
 
 IPQ_RESULT
+SetDumpFileName(int id, const char* filename)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetDumpFileName(filename);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
 SetDumpFileOn(int id, int value)
 {
 	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
@@ -483,12 +728,48 @@ SetDumpStringOn(int id, int value)
 }
 
 IPQ_RESULT
+SetErrorFileName(int id, const char* filename)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetErrorFileName(filename);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
 SetErrorFileOn(int id, int value)
 {
 	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
 	if (IPhreeqcPtr)
 	{
 		IPhreeqcPtr->SetErrorFileOn(value != 0);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
+SetErrorStringOn(int id, int value)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetErrorStringOn(value != 0);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
+SetLogFileName(int id, const char* filename)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetLogFileName(filename);
 		return IPQ_OK;
 	}
 	return IPQ_BADINSTANCE;
@@ -507,12 +788,60 @@ SetLogFileOn(int id, int value)
 }
 
 IPQ_RESULT
+SetLogStringOn(int id, int value)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetLogStringOn(value != 0);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
+SetOutputFileName(int id, const char* filename)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetOutputFileName(filename);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
 SetOutputFileOn(int id, int value)
 {
 	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
 	if (IPhreeqcPtr)
 	{
 		IPhreeqcPtr->SetOutputFileOn(value != 0);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
+SetOutputStringOn(int id, int value)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetOutputStringOn(value != 0);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
+IPQ_RESULT
+SetSelectedOutputFileName(int id, const char* filename)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetSelectedOutputFileName(filename);
 		return IPQ_OK;
 	}
 	return IPQ_BADINSTANCE;
@@ -530,11 +859,20 @@ SetSelectedOutputFileOn(int id, int value)
 	return IPQ_BADINSTANCE;
 }
 
+IPQ_RESULT
+SetSelectedOutputStringOn(int id, int value)
+{
+	IPhreeqc* IPhreeqcPtr = IPhreeqcLib::GetInstance(id);
+	if (IPhreeqcPtr)
+	{
+		IPhreeqcPtr->SetSelectedOutputStringOn(value != 0);
+		return IPQ_OK;
+	}
+	return IPQ_BADINSTANCE;
+}
+
 // helper functions
 //
-
-std::map<size_t, IPhreeqc*> IPhreeqcLib::Instances;
-size_t IPhreeqcLib::InstancesIndex = 0;
 
 int
 IPhreeqcLib::CreateIPhreeqc(void)
@@ -543,16 +881,7 @@ IPhreeqcLib::CreateIPhreeqc(void)
 	try
 	{
 		IPhreeqc* IPhreeqcPtr = new IPhreeqc;
-		if (IPhreeqcPtr)
-		{
-			std::map<size_t, IPhreeqc*>::value_type instance(IPhreeqcLib::InstancesIndex, IPhreeqcPtr);
-			std::pair<std::map<size_t, IPhreeqc*>::iterator, bool> pr = IPhreeqcLib::Instances.insert(instance);
-			if (pr.second)
-			{
-				n = (int) (*pr.first).first;
-				++IPhreeqcLib::InstancesIndex;
-			}
-		}
+		n = IPhreeqcPtr->Index;
 	}
 	catch(...)
 	{
@@ -567,11 +896,9 @@ IPhreeqcLib::DestroyIPhreeqc(int id)
 	IPQ_RESULT retval = IPQ_BADINSTANCE;
 	if (id >= 0)
 	{
-		std::map<size_t, IPhreeqc*>::iterator it = IPhreeqcLib::Instances.find(size_t(id));
-		if (it != IPhreeqcLib::Instances.end())
+		if (IPhreeqc *ptr = IPhreeqcLib::GetInstance(id))
 		{
-			delete (*it).second;
-			IPhreeqcLib::Instances.erase(it);
+			delete ptr;
 			retval = IPQ_OK;
 		}
 	}
@@ -581,8 +908,8 @@ IPhreeqcLib::DestroyIPhreeqc(int id)
 IPhreeqc*
 IPhreeqcLib::GetInstance(int id)
 {
-	std::map<size_t, IPhreeqc*>::iterator it = IPhreeqcLib::Instances.find(size_t(id));
-	if (it != IPhreeqcLib::Instances.end())
+	std::map<size_t, IPhreeqc*>::iterator it = IPhreeqc::Instances.find(size_t(id));
+	if (it != IPhreeqc::Instances.end())
 	{
 		return (*it).second;
 	}

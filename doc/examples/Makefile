@@ -1,11 +1,11 @@
 CC = gcc
-CPPFLAGS = -I../../include 
+CPPFLAGS = -I../../src -I../../src/phreeqcpp
 CXX = g++
 DEFS = -DNDEBUG=1 -DFC_FUNC\(name,NAME\)=name\ \#\#\ _ -DFC_FUNC_\(name,NAME\)=name\ \#\#\ _ -DFC_MAIN=MAIN__ 
 F77 = gfortran
 FC = gfortran
 CFLAGS = -g -O2 -Wall
-FFLAGS = -I../../include -g -O2 -Wall
+FFLAGS = -I../../src -g -O2 -Wall
 FCLIBS =  -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1 -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/../../.. -lgfortranbegin -lgfortran -lm
 LIBTOOL = /bin/sh ../../_build/libtool
 LDFLAGS = 
@@ -16,6 +16,10 @@ TARGETS = \
 	CreateIPhreeqc \
 	GetComponent \
 	GetDumpString \
+	GetErrorString \
+	GetLogString \
+	GetOutputString \
+	GetSelectedOutputString \
 	GetSelectedOutputValue \
 	IPhreeqc
 
@@ -24,7 +28,11 @@ F90_TARGETS = \
 	F90CreateIPhreeqc \
 	F90GetComponent \
 	F90GetDumpStringLine \
+	F90GetErrorStringLine \
+	F90GetLogStringLine \
+	F90GetOutputStringLine \
 	F90ClearAccumulatedLines \
+	F90GetSelectedOutputStringLine \
 	F90GetSelectedOutputValue
 
 
@@ -40,6 +48,18 @@ GetComponent: GetComponent.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetDumpString: GetDumpString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetErrorString: GetErrorString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetLogString: GetLogString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetOutputString: GetOutputString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetSelectedOutputString: GetSelectedOutputString.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetSelectedOutputValue: GetSelectedOutputValue.lo $(IPHREEQC_LA)
@@ -61,7 +81,19 @@ F90GetComponent: F90GetComponent.lo $(IPHREEQC_LA)
 F90GetDumpStringLine: F90GetDumpStringLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
+F90GetErrorStringLine: F90GetErrorStringLine.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
+F90GetLogStringLine: F90GetLogStringLine.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
+F90GetOutputStringLine: F90GetOutputStringLine.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
 F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
+F90GetSelectedOutputStringLine: F90GetSelectedOutputStringLine.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetSelectedOutputValue: F90GetSelectedOutputValue.lo $(IPHREEQC_LA)
@@ -90,18 +122,26 @@ LO_FILES = \
 	CreateIPhreeqc.lo \
 	DestroyIPhreeqc.lo \
 	GetComponent.lo \
-	GetDumpString.lo\
-	IPhreeqc.lo \
-	GetSelectedOutputValue.lo
+	GetDumpString.lo \
+	GetErrorString.lo \
+	GetLogString.lo \
+	GetOutputString.lo \
+	GetSelectedOutputString.lo \
+	GetSelectedOutputValue.lo \
+	IPhreeqc.lo
 
 
 F90_LO_FILES = \
 	F90AccumulateLine.lo \
+	F90ClearAccumulatedLines.lo \
 	F90CreateIPhreeqc.lo \
 	F90DestroyIPhreeqc.lo \
 	F90GetComponent.lo \
 	F90GetDumpStringLine.lo \
-	F90ClearAccumulatedLines.lo \
+	F90GetErrorStringLine.lo \
+	F90GetLogStringLine.lo \
+	F90GetOutputStringLine.lo \
+	F90GetSelectedOutputStringLine.lo \
 	F90GetSelectedOutputValue.lo
 
 

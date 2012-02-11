@@ -162,17 +162,17 @@ build() {
 # build Win32 libs
   cd "${topdir}" && \
   cd "${objdir}" && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=Win32 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=Win32 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=Win32 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=Win32 && \
 # build x64 libs
   cd "${topdir}" && \
   cd "${objdir}" && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=x64 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=x64 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=x64 && \
-  MsBuild.exe IPhreeqc.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=x64 )
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=x64 )
 }
 check() {
   (cd ${objdir} && \
@@ -204,9 +204,17 @@ install() {
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/phreeqc/revisions"        "${instdir}/${FULLPKG}-vs2005-win32/doc/RELEASE.txt" && \
   /usr/bin/install -m 755 "${objdir}/lib/"*                                  "${instdir}/${FULLPKG}-vs2005-win32/lib/." && \
   /usr/bin/install -m 755 "${objdir}/dll/"*                                  "${instdir}/${FULLPKG}-vs2005-win32/dll/." && \
-  /usr/bin/install -m 755 "${objdir}/include/"*                              "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.f.inc"                     "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.f90.inc"                   "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.h"                         "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.hpp"                       "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqcCallbacks.h"                "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/Var.h"                              "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/PHRQ_io.h"                "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/Keywords.h"               "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
   /usr/bin/install -m 755 "${objdir}/database/"*.dat                         "${instdir}/${FULLPKG}-vs2005-win32/database/." && \
   /usr/bin/install -m 755 "${objdir}/examples/c/advect/"*                    "${instdir}/${FULLPKG}-vs2005-win32/examples/c/advect/." && \
+  /usr/bin/install -m 755 "${objdir}/examples/com/README.txt"                "${instdir}/${FULLPKG}-vs2005-win32/examples/com/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/excel/"*                   "${instdir}/${FULLPKG}-vs2005-win32/examples/com/excel/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/python/"*                  "${instdir}/${FULLPKG}-vs2005-win32/examples/com/python/." && \
   /usr/bin/install -m 755 "${objdir}/examples/fortran/advect/"*              "${instdir}/${FULLPKG}-vs2005-win32/examples/fortran/advect/." && \
@@ -230,9 +238,17 @@ install() {
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/phreeqc/revisions"        "${instdir}/${FULLPKG}-vs2005-x64/doc/RELEASE.txt" && \
   /usr/bin/install -m 755 "${objdir}/libx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/libx64/." && \
   /usr/bin/install -m 755 "${objdir}/dllx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/dllx64/." && \
-  /usr/bin/install -m 755 "${objdir}/include/"*                              "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.f.inc"                     "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.f90.inc"                   "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.h"                         "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.hpp"                       "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/IPhreeqcCallbacks.h"                "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/Var.h"                              "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/PHRQ_io.h"                "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
+  /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/Keywords.h"               "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
   /usr/bin/install -m 755 "${objdir}/database/"*.dat                         "${instdir}/${FULLPKG}-vs2005-x64/database/." && \
   /usr/bin/install -m 755 "${objdir}/examples/c/advect/"*                    "${instdir}/${FULLPKG}-vs2005-x64/examples/c/advect/." && \
+  /usr/bin/install -m 755 "${objdir}/examples/com/README.txt"                "${instdir}/${FULLPKG}-vs2005-x64/examples/com/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/excel/"*                   "${instdir}/${FULLPKG}-vs2005-x64/examples/com/excel/." && \
   /usr/bin/install -m 755 "${objdir}/examples/com/python/"*                  "${instdir}/${FULLPKG}-vs2005-x64/examples/com/python/." && \
   /usr/bin/install -m 755 "${objdir}/examples/fortran/advect/"*              "${instdir}/${FULLPKG}-vs2005-x64/examples/fortran/advect/." && \
