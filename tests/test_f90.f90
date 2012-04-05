@@ -135,14 +135,14 @@ FUNCTION TestGetSet(id,getFunc,setFunc)
   INTEGER(KIND=4) TestGetSet
   INTERFACE
      FUNCTION getFunc(id)
-       INTEGER(KIND=4) id
+       INTEGER(KIND=4), INTENT(in) :: id
        LOGICAL(KIND=4) getFunc
      END FUNCTION getFunc
   END INTERFACE
   INTERFACE
      FUNCTION setFunc(id,flag)
-       INTEGER(KIND=4) id
-       LOGICAL(KIND=4) flag
+       INTEGER(KIND=4), INTENT(in) :: id
+       LOGICAL(KIND=4), INTENT(in) :: flag
        INTEGER(KIND=4) setFunc
      END FUNCTION setFunc
   END INTERFACE
