@@ -10,7 +10,6 @@ File contains:
 ------------------------------------------------------------
 Version @PHREEQC_VER@: @PHREEQC_DATE@
 ------------------------------------------------------------
-        
         --------
         svn 5556
         -------- 
@@ -1559,6 +1558,13 @@ End of Features not documented in WRIR 99-4259.
 ------------------------------------------------------------
 Version @PHREEQC_VER@: @PHREEQC_DATE@
 ------------------------------------------------------------
+        --------
+        svn 6047
+        -------- 
+        Fixes bug that occurred when selected output file
+        was enabled.  Bad results were written under certain
+        compilers (IPhreeqc only).
+        
         --------
         svn 5570
         -------- 
