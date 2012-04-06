@@ -18,6 +18,10 @@ static size_t count_output_callback = 0;
 static int forward_output_to_log = 0;
 #endif
 
+#if 4444444
+#include "IPhreeqc.hpp"
+#endif
+
 /* ---------------------------------------------------------------------- */
 int CLASS_QUALIFIER
 add_output_callback(PFN_OUTPUT_CALLBACK pfn, void *cookie)
@@ -148,6 +152,18 @@ output_msg(const int type, const char *format, ...)
 										output_callbacks[i].cookie, format,
 										args1);
 		va_end(args1);
+
+#if 4444444
+		if (type == Phreeqc::OUTPUT_PUNCH)
+		{
+			va_list args3;
+			va_start(args3, format);
+			IPhreeqc::module_handler (ACTION_OUTPUT, type, NULL, CONTINUE,
+				output_callbacks[i].cookie, format, 
+				args3);
+			va_end(args3);
+		}
+#endif
 
 		if (phast == TRUE)
 		{
@@ -350,6 +366,16 @@ fpunchf_user(int user_index, const char *format, ...)
 										output_callbacks[i].cookie, format,
 										args);
 		va_end(args);
+#if 4444444
+		{
+			va_list args2;
+			va_start(args2, format);
+			IPhreeqc::module_handler (ACTION_OUTPUT, OUTPUT_PUNCH, name, CONTINUE,
+				output_callbacks[i].cookie, format, 
+				args2);
+			va_end(args2);
+		}
+#endif
 	}
 	return OK;
 }

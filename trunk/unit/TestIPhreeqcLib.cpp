@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include <cfloat>
+#include <fstream>
 
 #if defined(_WIN32) || defined(__CYGWIN32__)
 // DeleteFile defined in <windows.h>
@@ -2168,4 +2169,105 @@ void TestIPhreeqcLib::TestClearAccumulatedLines(void)
 	{
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
 	}
+}
+
+static int _id;
+static int _vt[7];
+static double _dv[7];
+static char _sv[7][100];
+static char _buffer[100];
+
+static void _ExtractWrite(int cell)
+{
+	VAR v;
+	int j;
+	VarInit(&v);
+	for (j = 0; j < 7; ++j)
+	{
+		GetSelectedOutputValue(_id, 1, j, &v);
+		_vt[j] = v.type;
+		switch (_vt[j])
+		{
+		case TT_DOUBLE:
+			_dv[j] = v.dVal;
+			sprintf(_sv[j], "%23.15e", v.dVal);
+			break;
+		case TT_STRING:
+			strcpy(_sv[j], v.sVal);
+			break;
+		}
+		VarClear(&v);
+	}
+}
+
+static void _EHandler(void)
+{
+	OutputErrorString(_id);
+}
+
+static const char *_ConCat(const char *str1, const char *str2)
+{
+	strcpy(_buffer, str1);
+	return strcat(_buffer, str2);
+}
+
+void TestIPhreeqcLib::TestSetSelectedOutputFileOn(void)
+{
+	const char *line0 =
+		"      charge	           H	           O	           C	          Ca	          pH	 SR(calcite)	";
+
+#if defined(_MSC_VER)
+	const char *line1 = 
+		"-9.0924e-011	 1.1101e+002	 5.5511e+001	 2.1196e-003	 1.0210e-003	 7.6776e+000	 1.0000e+000	";
+#endif
+#if defined(__GNUC__)
+	const char *line1 = 
+		"-9.0924e-011	 1.1101e+002	 5.5511e+001	 2.1196e-003	 1.0210e-003	 7.6776e+000	 1.0000e+000	";
+#endif
+
+	_id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(_id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(_id, 1) );
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(_id, "phreeqc.dat") );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunFile(_id, "ic"));
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunString(_id, "RUN_CELLS; -cells; 1; END"));
+	_ExtractWrite(1);
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("SOLUTION_MODIFY 2",         ""   )));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("   -cb      ",              _sv[0])));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("   -total_h ",              _sv[1])));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("   -total_o ",              _sv[2])));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("   -totals  ",              ""   )));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("      C     ",              _sv[3])));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("      Ca    ",              _sv[4])));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::AccumulateLine(_id, _ConCat("RUN_CELLS; -cells; 2; END", ""   )));
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(_id));
+	_ExtractWrite(2);
+
+	if (_id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(_id));
+	}
+
+	CPPUNIT_ASSERT_EQUAL(true,   ::FileExists("selected.out"));
+
+	{
+		std::ifstream ifs;
+		ifs.open("selected.out");
+		CPPUNIT_ASSERT(ifs.is_open());
+
+		std::string line;
+
+		std::getline(ifs, line, '\n');
+		CPPUNIT_ASSERT_EQUAL(std::string(line0), line);
+
+		std::getline(ifs, line, '\n');
+		CPPUNIT_ASSERT_EQUAL(std::string(line1), line);
+	}
+
+	CPPUNIT_ASSERT(::DeleteFile("selected.out"));
+
 }

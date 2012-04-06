@@ -639,6 +639,9 @@ int IPhreeqc::output_handler(const int type, const char *err_str, const int stop
 
 	case Phreeqc::OUTPUT_PUNCH:
 		this->AddSelectedOutput(err_str, format, args);
+#if 4444444
+		return (OK);
+#endif
 		break;
 
 	case Phreeqc::OUTPUT_PUNCH_END_ROW:

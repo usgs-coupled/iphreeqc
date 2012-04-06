@@ -39,6 +39,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetComponentCount );
 	CPPUNIT_TEST( TestGetComponent );
 	CPPUNIT_TEST( TestListComponents );
+	CPPUNIT_TEST( TestSetSelectedOutputFileOn );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -80,6 +81,7 @@ public:
 	void TestGetComponentCount(void);
 	void TestGetComponent(void);
 	void TestListComponents(void);
+	void TestSetSelectedOutputFileOn(void);
 
 };
 

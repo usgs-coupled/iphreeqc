@@ -1855,3 +1855,92 @@ void TestIPhreeqc::TestListComponents(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("Ca"), std::string((*it++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("Na"), std::string((*it++)) );
 }
+
+static int _vt[7];
+static double _dv[7];
+static char _sv[7][100];
+static char _buffer[100];
+
+static void _ExtractWrite(IPhreeqc* obj, int cell)
+{
+	VAR v;
+	int j;
+	VarInit(&v);
+	for (j = 0; j < 7; ++j)
+	{
+		obj->GetSelectedOutputValue(1, j, &v);
+		_vt[j] = v.type;
+		switch (_vt[j])
+		{
+		case TT_DOUBLE:
+			_dv[j] = v.dVal;
+			sprintf(_sv[j], "%23.15e", v.dVal);
+			break;
+		case TT_STRING:
+			strcpy(_sv[j], v.sVal);
+			break;
+		}
+		VarClear(&v);
+	}
+}
+
+static const char *_ConCat(const char *str1, const char *str2)
+{
+	strcpy(_buffer, str1);
+	return strcat(_buffer, str2);
+}
+
+void TestIPhreeqc::TestSetSelectedOutputFileOn(void)
+{
+	const char *line0 =
+		"      charge	           H	           O	           C	          Ca	          pH	 SR(calcite)	";
+
+#if defined(_MSC_VER)
+	const char *line1 = 
+		"-9.0924e-011	 1.1101e+002	 5.5511e+001	 2.1196e-003	 1.0210e-003	 7.6776e+000	 1.0000e+000	";
+#endif
+#if defined(__GNUC__)
+	const char *line1 = 
+		"-9.0924e-011	 1.1101e+002	 5.5511e+001	 2.1196e-003	 1.0210e-003	 7.6776e+000	 1.0000e+000	";
+#endif
+
+	{
+		IPhreeqc obj;
+		obj.SetSelectedOutputFileOn(true);
+
+		CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat") );
+		CPPUNIT_ASSERT_EQUAL( 0,     obj.RunFile("ic"));
+		CPPUNIT_ASSERT_EQUAL( 0,     obj.RunString("RUN_CELLS; -cells; 1; END"));
+		_ExtractWrite(&obj, 1);
+
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("SOLUTION_MODIFY 2",         ""   )));
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("   -cb      ",              _sv[0])));
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("   -total_h ",              _sv[1])));
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("   -total_o ",              _sv[2])));
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("   -totals  ",              ""   )));
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("      C     ",              _sv[3])));
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("      Ca    ",              _sv[4])));
+		CPPUNIT_ASSERT_EQUAL(VR_OK,  obj.AccumulateLine(_ConCat("RUN_CELLS; -cells; 2; END", ""   )));
+
+		CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated());
+		_ExtractWrite(&obj, 2);
+	}
+
+	CPPUNIT_ASSERT_EQUAL(true,   ::FileExists("selected.out"));
+
+	{
+		std::ifstream ifs;
+		ifs.open("selected.out");
+		CPPUNIT_ASSERT(ifs.is_open());
+
+		std::string line;
+
+		std::getline(ifs, line, '\n');
+		CPPUNIT_ASSERT_EQUAL(std::string(line0), line);
+
+		std::getline(ifs, line, '\n');
+		CPPUNIT_ASSERT_EQUAL(std::string(line1), line);
+	}
+
+	CPPUNIT_ASSERT(::DeleteFile("selected.out"));
+}

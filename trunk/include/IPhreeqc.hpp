@@ -539,7 +539,14 @@ protected:
 	int output_handler(const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
 	int open_handler(const int type, const char *file_name);
 
+#if 4444444
+public:
+#endif
 	static int module_handler(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
+#if 4444444
+protected:
+#endif
+
 	int module_isopen_handler(const int type);
 	int module_open_handler(const int type, const char *file_name);
 
