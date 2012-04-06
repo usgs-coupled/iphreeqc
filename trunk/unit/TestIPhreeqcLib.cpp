@@ -9,6 +9,7 @@
 #include <cmath>
 #include <cfloat>
 #include <fstream>
+#include <string.h>
 
 #if defined(_WIN32) || defined(__CYGWIN32__)
 // DeleteFile defined in <windows.h>
@@ -2200,11 +2201,6 @@ static void _ExtractWrite(int cell)
 	}
 }
 
-static void _EHandler(void)
-{
-	OutputErrorString(_id);
-}
-
 static const char *_ConCat(const char *str1, const char *str2)
 {
 	strcpy(_buffer, str1);
@@ -2222,7 +2218,7 @@ void TestIPhreeqcLib::TestSetSelectedOutputFileOn(void)
 #endif
 #if defined(__GNUC__)
 	const char *line1 = 
-		"-9.0924e-011	 1.1101e+002	 5.5511e+001	 2.1196e-003	 1.0210e-003	 7.6776e+000	 1.0000e+000	";
+          " -9.0924e-11	  1.1101e+02	  5.5511e+01	  2.1196e-03	  1.0210e-03	  7.6776e+00	  1.0000e+00	";
 #endif
 
 	_id = ::CreateIPhreeqc();

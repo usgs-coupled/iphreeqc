@@ -1901,7 +1901,7 @@ void TestIPhreeqc::TestSetSelectedOutputFileOn(void)
 #endif
 #if defined(__GNUC__)
 	const char *line1 = 
-		"-9.0924e-011	 1.1101e+002	 5.5511e+001	 2.1196e-003	 1.0210e-003	 7.6776e+000	 1.0000e+000	";
+          " -9.0924e-11	  1.1101e+02	  5.5511e+01	  2.1196e-03	  1.0210e-03	  7.6776e+00	  1.0000e+00	";
 #endif
 
 	{
