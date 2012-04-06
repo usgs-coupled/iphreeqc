@@ -143,6 +143,30 @@ echo "Exporting revision $REVISION of IPhreeqc into sandbox..."
 	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/branches/2.18.3-4/trunk" \
 	     "$DISTNAME")
 
+echo "Exporting revision $REVISION of external database into sandbox..."
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/database" \
+	     "$DISTNAME/database")
+
+echo "Exporting revision $REVISION of external examples/c into sandbox..."
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/c" \
+	     "$DISTNAME/examples/c")
+
+echo "Exporting revision $REVISION of external examples/com into sandbox..."
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/com" \
+	     "$DISTNAME/examples/com")
+
+echo "Exporting revision $REVISION of external examples/fortran into sandbox..."
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/fortran" \
+	     "$DISTNAME/examples/fortran")
+
 ver_major=`echo $VERSION | cut -d '.' -f 1`
 ver_minor=`echo $VERSION | cut -d '.' -f 2`
 ver_patch=`echo $VERSION | cut -d '.' -f 3`
@@ -174,7 +198,7 @@ done
 cp $DISTPATH/src/phreeqcpp/PHREEQCPP-RELEASE.txt $DISTPATH/doc/PHREEQCPP-RELEASE
 cp $DISTPATH/src/phreeqcpp/phreeqc/revisions     $DISTPATH/doc/RELEASE
 
-(cd "$DISTPATH/doc" && "$DOXYGEN")
+(cd "$DISTPATH/doc" && doxygen)
 
 echo "Rolling $DISTNAME.tar ..."
 (cd "$DIST_SANDBOX" > /dev/null && tar c "$DISTNAME") > \
