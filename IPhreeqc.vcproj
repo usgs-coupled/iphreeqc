@@ -854,10 +854,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\SolutionIsotopeList.cxx"
-					>
-				</File>
-				<File
 					RelativePath=".\src\phreeqcpp\SS.cxx"
 					>
 				</File>
