@@ -663,6 +663,26 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\fwrap4.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap5.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap6.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap7.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap8.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\IPhreeqc.cpp"
 				>
 			</File>
