@@ -23,7 +23,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -45,10 +45,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="$(DEV_GMP_INC);include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -94,7 +95,7 @@
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -117,10 +118,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="$(DEV_GMP_INC);include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -166,7 +168,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -188,16 +190,17 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
-				MinimalRebuild="true"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=""
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -230,7 +233,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;lib\vc80.pdb&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -238,7 +241,7 @@
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -261,9 +264,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -303,7 +307,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;libx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;libx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;libx64\vc80.pdb&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -311,7 +315,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -333,10 +337,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="$(DEV_GMP_INC);include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -391,7 +396,7 @@
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -414,10 +419,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="$(DEV_GMP_INC);include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -472,7 +478,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -494,16 +500,17 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
-				MinimalRebuild="true"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -545,7 +552,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dll\vc80.pdb&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -553,7 +560,7 @@
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -576,9 +583,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;src;src/phreeqcpp;src/phreeqcpp/phreeqc"
-				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;SWIG_SHARED_OBJ;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -628,7 +636,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dllx64\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dllx64\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dllx64\vc80.pdb&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -642,157 +650,33 @@
 			<File
 				RelativePath=".\src\fwrap.cpp"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\fwrap2.cpp"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\fwrap3.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap4.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap5.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap6.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap7.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\fwrap8.cpp"
 				>
 			</File>
 			<File
@@ -800,26 +684,14 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\IPhreeqcLib.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\pp_sys.cpp"
+				RelativePath=".\src\IPhreeqcF.f"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="true"
 					>
 					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
+						Name="VCCustomBuildTool"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -827,15 +699,7 @@
 					ExcludedFromBuild="true"
 					>
 					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
+						Name="VCCustomBuildTool"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -843,15 +707,7 @@
 					ExcludedFromBuild="true"
 					>
 					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|x64"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
+						Name="VCCustomBuildTool"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -859,42 +715,26 @@
 					ExcludedFromBuild="true"
 					>
 					<Tool
-						Name="VCCLCompilerTool"
+						Name="VCCustomBuildTool"
 					/>
 				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|x64"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\src\IPhreeqcLib.cpp"
+				>
 			</File>
 			<File
 				RelativePath=".\src\SelectedOutput.cpp"
 				>
 			</File>
 			<File
-				RelativePath="src\Var.c"
+				RelativePath=".\src\Var.c"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -903,18 +743,6 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -923,18 +751,6 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="ReleaseDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -943,18 +759,6 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DebugDll|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
 						CompileAs="2"
 					/>
 				</FileConfiguration>
@@ -963,148 +767,12 @@
 				Name="phreeqcpp"
 				>
 				<File
-					RelativePath=".\src\phreeqcpp\class_main.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="ReleaseDll|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="ReleaseDll|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DebugDll|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DebugDll|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\src\phreeqcpp\cxxKinetics.cxx"
 					>
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\cxxMix.cxx"
 					>
-				</File>
-				<File
-					RelativePath=".\src\phreeqcpp\Dictionary.cxx"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="ReleaseDll|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="ReleaseDll|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DebugDll|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DebugDll|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\dumper.cpp"
@@ -1119,6 +787,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\GasComp.cxx"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\GasPhase.cxx"
 					>
 				</File>
@@ -1128,6 +800,10 @@
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\ISolutionComp.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\Keywords.cpp"
 					>
 				</File>
 				<File
@@ -1147,7 +823,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\PBasic.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Phreeqc.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\PHRQ_base.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\PHRQ_io.cpp"
 					>
 				</File>
 				<File
@@ -1156,6 +844,10 @@
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\PPassemblageComp.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\Pressure.cxx"
 					>
 				</File>
 				<File
@@ -1171,74 +863,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\SAXPhreeqc.cxx"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="ReleaseDll|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="ReleaseDll|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DebugDll|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DebugDll|x64"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\src\phreeqcpp\Solution.cxx"
 					>
 				</File>
@@ -1247,7 +871,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\SolutionIsotopeList.cxx"
+					RelativePath=".\src\phreeqcpp\SS.cxx"
 					>
 				</File>
 				<File
@@ -1255,7 +879,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\SSassemblageSS.cxx"
+					RelativePath=".\src\phreeqcpp\SScomp.cxx"
 					>
 				</File>
 				<File
@@ -1287,6 +911,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\Use.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Utils.cxx"
 					>
 				</File>
@@ -1294,3348 +922,148 @@
 					Name="phreeqc"
 					>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\advection.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\advection.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\basic.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\basicsubs.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\basicsubs.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\cl1.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\cl1.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\cvdense.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\cl1mp.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\cvode.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\cvdense.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\dense.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\cvode.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\dw.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\dense.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\gases.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\dw.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\input.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\input.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\integrate.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\integrate.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\inverse.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\inverse.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\isotopes.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\isotopes.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\kinetics.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\kinetics.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\mainsubs.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\main.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\model.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\mainsubs.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\nvector.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\model.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\nvector_serial.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\nvector.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\parse.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\nvector_serial.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\phqalloc.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\src\phreeqcpp\phreeqc\output.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\PHRQ_io_output.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\p2clib.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\pitzer.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\parse.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\pitzer_structures.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\phqalloc.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\prep.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\phreeqc_files.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\print.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\pitzer.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\read.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\pitzer_structures.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\readtr.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\prep.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\sit.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\print.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\smalldense.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\read.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\spread.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\readtr.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\step.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\src\phreeqcpp\phreeqc\sit.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\structures.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\smalldense.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\sundialsmath.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\spread.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\tally.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\step.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\tidy.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\structures.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\transport.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="src\phreeqcpp\phreeqc\sundialsmath.c"
+						RelativePath=".\src\phreeqcpp\phreeqc\utilities.cpp"
 						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-					</File>
-					<File
-						RelativePath="src\phreeqcpp\phreeqc\tally.c"
-						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-					</File>
-					<File
-						RelativePath="src\phreeqcpp\phreeqc\tidy.c"
-						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-					</File>
-					<File
-						RelativePath="src\phreeqcpp\phreeqc\transport.c"
-						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-					</File>
-					<File
-						RelativePath="src\phreeqcpp\phreeqc\utilities.c"
-						>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="ReleaseDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="DebugDll|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								PreprocessorDefinitions=""
-								CompileAs="2"
-							/>
-						</FileConfiguration>
 					</File>
 				</Filter>
 			</Filter>
@@ -4645,7 +1073,35 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
-				RelativePath="src\CVar.hxx"
+				RelativePath=".\src\CVar.hxx"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\cvdense.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\cvode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\cxxKinetics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\cxxMix.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\dense.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Dictionary.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\dumper.h"
 				>
 			</File>
 			<File
@@ -4653,23 +1109,135 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\Exchange.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\ExchComp.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\fwrap.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\IPhreeqc.f.inc"
+				RelativePath=".\src\phreeqcpp\GasPhase.h"
 				>
 			</File>
 			<File
-				RelativePath="include\IPhreeqc.f90.inc"
+				RelativePath=".\src\phreeqcpp\phreeqc\global.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\IPhreeqc.h"
+				RelativePath=".\src\phreeqcpp\phreeqc\global_structures.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\IPhreeqc.hpp"
+				RelativePath=".\src\phreeqcpp\phreeqc\input.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\ISolution.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\ISolutionComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Keywords.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\kinetics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\KineticsComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\NameDouble.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\NumKeyword.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\nvector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\nvector_serial.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\output.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\p2c.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Parser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PBasic.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\phqalloc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Phreeqc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Phreeqc_class.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PHRQ_base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PHRQ_io.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\phrqtype.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\pitzer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\pitzer_structures.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PPassemblage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\PPassemblageComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Pressure.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Reaction.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\runner.h"
 				>
 			</File>
 			<File
@@ -4677,7 +1245,75 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\Var.h"
+				RelativePath=".\src\phreeqcpp\phreeqc\smalldense.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Solution.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SolutionIsotope.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SolutionIsotopeList.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SS.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SSassemblage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SScomp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\StorageBin.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\StorageBinList.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\sundialsmath.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\sundialstypes.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Surface.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SurfaceCharge.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\SurfaceComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\System.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Temperature.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Use.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Utils.h"
 				>
 			</File>
 		</Filter>
