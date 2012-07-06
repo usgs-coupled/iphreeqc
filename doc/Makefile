@@ -16,7 +16,7 @@ EXAMPLES = \
 	examples/GetOutputString.c \
 	examples/GetSelectedOutputString.c \
 	examples/GetSelectedOutputValue.c \
-	examples/GetSelectedOutputValue2.c \	
+	examples/GetSelectedOutputValue2.c \
 	examples/IPhreeqc.cpp \
 	examples/F90ClearAccumulatedLines.f90 \
 	examples/F90CreateIPhreeqc.f90 \
