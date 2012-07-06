@@ -132,6 +132,7 @@ LO_FILES = \
 	GetOutputString.lo \
 	GetSelectedOutputString.lo \
 	GetSelectedOutputValue.lo \
+	GetSelectedOutputValue2.lo \
 	IPhreeqc.lo
 
 
