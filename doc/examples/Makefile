@@ -21,6 +21,7 @@ TARGETS = \
 	GetOutputString \
 	GetSelectedOutputString \
 	GetSelectedOutputValue \
+	GetSelectedOutputValue2 \
 	IPhreeqc
 
 
@@ -63,6 +64,9 @@ GetSelectedOutputString: GetSelectedOutputString.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetSelectedOutputValue: GetSelectedOutputValue.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetSelectedOutputValue2: GetSelectedOutputValue2.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 IPhreeqc: IPhreeqc.lo $(IPHREEQC_LA)
