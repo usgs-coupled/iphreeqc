@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="IPhreeqc"
-	ProjectGUID="{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}"
+	ProjectGUID="{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}"
 	RootNamespace="IPhreeqc"
 	>
 	<Platforms>

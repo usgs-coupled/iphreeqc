@@ -1,38 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IPhreeqc", "IPhreeqc.vcproj", "{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unit", "unit\unit.vcproj", "{270BB952-FCB2-4FA8-821E-BB750E83C902}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_c", "tests\test_c.vcproj", "{6F2B675D-2585-4AD6-866D-4DDA00279B00}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_cxx", "tests\test_cxx.vcproj", "{3102214A-D304-48FC-B2DF-94D838DC4B2A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
-	EndProjectSection
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_f90", "tests\test_f90.vfproj", "{003309EE-36BE-493B-87D4-FE68918DA9AF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
-	EndProjectSection
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "test_f", "tests\test_f.vfproj", "{66E68C3F-EFCE-47EE-80F1-4D8F6F8AB450}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
-	EndProjectSection
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "memory_leak_f", "memory_leak_f\memory_leak_f.vfproj", "{941BC4D5-7D05-4786-BC65-38914514EA9B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7} = {F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "advect_c", "examples\c\advect\advect_c.vcproj", "{BD883425-1DD0-466A-911B-32AD6D4CE262}"
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "advect", "examples\fortran\advect\advect.vfproj", "{28459FF2-3C6C-469E-B0C3-2E4D483E7025}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IPhreeqc", "IPhreeqc.2005.vcproj", "{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,22 +31,6 @@ Global
 		ReleaseDll|x64 = ReleaseDll|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Debug|Win32.Build.0 = Debug|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Debug|x64.ActiveCfg = Debug|x64
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Debug|x64.Build.0 = Debug|x64
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.DebugDll|Win32.ActiveCfg = DebugDll|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.DebugDll|Win32.Build.0 = DebugDll|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.DebugDll|x64.ActiveCfg = DebugDll|x64
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.DebugDll|x64.Build.0 = DebugDll|x64
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Release|Win32.ActiveCfg = Release|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Release|Win32.Build.0 = Release|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Release|x64.ActiveCfg = Release|x64
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.Release|x64.Build.0 = Release|x64
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.ReleaseDll|Win32.ActiveCfg = ReleaseDll|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.ReleaseDll|x64.ActiveCfg = ReleaseDll|x64
-		{F9C18E06-F73A-4EB0-92E0-AE1713EA7FD7}.ReleaseDll|x64.Build.0 = ReleaseDll|x64
 		{270BB952-FCB2-4FA8-821E-BB750E83C902}.Debug|Win32.ActiveCfg = Debug|Win32
 		{270BB952-FCB2-4FA8-821E-BB750E83C902}.Debug|Win32.Build.0 = Debug|Win32
 		{270BB952-FCB2-4FA8-821E-BB750E83C902}.Debug|x64.ActiveCfg = Debug|x64
@@ -181,6 +150,22 @@ Global
 		{28459FF2-3C6C-469E-B0C3-2E4D483E7025}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
 		{28459FF2-3C6C-469E-B0C3-2E4D483E7025}.ReleaseDll|x64.ActiveCfg = ReleaseDll|x64
 		{28459FF2-3C6C-469E-B0C3-2E4D483E7025}.ReleaseDll|x64.Build.0 = ReleaseDll|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Debug|Win32.Build.0 = Debug|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Debug|x64.ActiveCfg = Debug|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Debug|x64.Build.0 = Debug|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.DebugDll|Win32.ActiveCfg = DebugDll|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.DebugDll|Win32.Build.0 = DebugDll|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.DebugDll|x64.ActiveCfg = DebugDll|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.DebugDll|x64.Build.0 = DebugDll|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Release|Win32.ActiveCfg = Release|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Release|Win32.Build.0 = Release|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Release|x64.ActiveCfg = Release|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.Release|x64.Build.0 = Release|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.ReleaseDll|Win32.ActiveCfg = ReleaseDll|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.ReleaseDll|x64.ActiveCfg = ReleaseDll|x64
+		{B0A40DC6-D218-4028-9FF1-3E25EF0FF5FE}.ReleaseDll|x64.Build.0 = ReleaseDll|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
