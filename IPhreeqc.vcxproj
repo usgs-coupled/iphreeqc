@@ -450,7 +450,6 @@ copy "$(TargetDir)vc100.pdb" "dllx64\vc100.pdb"</Command>
     <ClCompile Include="src\phreeqcpp\runner.cpp" />
     <ClCompile Include="src\phreeqcpp\Solution.cxx" />
     <ClCompile Include="src\phreeqcpp\SolutionIsotope.cxx" />
-    <ClCompile Include="src\phreeqcpp\SolutionIsotopeList.cxx" />
     <ClCompile Include="src\phreeqcpp\SS.cxx" />
     <ClCompile Include="src\phreeqcpp\SSassemblage.cxx" />
     <ClCompile Include="src\phreeqcpp\SScomp.cxx" />
@@ -556,7 +555,6 @@ copy "$(TargetDir)vc100.pdb" "dllx64\vc100.pdb"</Command>
     <ClInclude Include="src\phreeqcpp\phreeqc\smalldense.h" />
     <ClInclude Include="src\phreeqcpp\Solution.h" />
     <ClInclude Include="src\phreeqcpp\SolutionIsotope.h" />
-    <ClInclude Include="src\phreeqcpp\SolutionIsotopeList.h" />
     <ClInclude Include="src\phreeqcpp\SS.h" />
     <ClInclude Include="src\phreeqcpp\SSassemblage.h" />
     <ClInclude Include="src\phreeqcpp\SScomp.h" />
