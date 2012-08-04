@@ -260,6 +260,21 @@
     <ClCompile Include="src\phreeqcpp\phreeqc\utilities.cpp">
       <Filter>Source Files\phreeqcpp\phreeqc</Filter>
     </ClCompile>
+    <ClCompile Include="src\fwrap4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fwrap5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fwrap6.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fwrap7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fwrap8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CVar.hxx">

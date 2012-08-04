@@ -133,6 +133,14 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">$(ProjectName)d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">$(ProjectName)d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectName)d</TargetName>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -162,7 +170,8 @@
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST lib mkdir lib
-copy "$(TargetDir)$(TargetName).lib" "lib\$(TargetName).lib"
+copy "$(OutDir)$(TargetName)$(TargetExt)" "lib\$(TargetName)$(TargetExt)"
+copy "$(OutDir)vc100.pdb" "lib\vc100.pdb"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -196,8 +205,7 @@ copy "$(TargetDir)$(TargetName).lib" "lib\$(TargetName).lib"
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST libx64 mkdir libx64
-copy "$(TargetDir)$(TargetName).lib" "libx64\$(TargetName).lib"
-</Command>
+copy "$(OutDir)$(TargetName)$(TargetExt)" "libx64\$(TargetName)$(TargetExt)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -220,7 +228,7 @@ copy "$(TargetDir)$(TargetName).lib" "libx64\$(TargetName).lib"
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Lib>
-      <OutputFile>$(OutDir)$(ProjectName)d.lib</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
     <Bscmake>
@@ -228,9 +236,8 @@ copy "$(TargetDir)$(TargetName).lib" "libx64\$(TargetName).lib"
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST lib mkdir lib
-copy "$(TargetDir)$(TargetName).lib" "lib\$(TargetName).lib"
-copy "$(TargetDir)vc100.pdb" "lib\vc100.pdb"
-</Command>
+copy "$(OutDir)$(TargetName)$(TargetExt)" "lib\$(TargetName)$(TargetExt)"
+copy "$(OutDir)vc100.pdb" "lib\vc100.pdb"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -257,15 +264,15 @@ copy "$(TargetDir)vc100.pdb" "lib\vc100.pdb"
     </ResourceCompile>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>$(OutDir)$(ProjectName)d.lib</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST  libx64 mkdir  libx64
-copy "$(TargetDir)$(TargetName).lib" "libx64\$(TargetName).lib"
-copy "$(TargetDir)vc100.pdb" "libx64\vc100.pdb"
+copy "$(OutDir)$(TargetName)$(TargetExt)" "libx64\$(TargetName)$(TargetExt)"
+copy "$(OutDir)vc100.pdb" "libx64\vc100.pdb"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -298,8 +305,9 @@ copy "$(TargetDir)vc100.pdb" "libx64\vc100.pdb"
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST dll mkdir dll
-copy "$(OutDir)$(ProjectName).dll" "dll\$(ProjectName).dll"
-copy "$(TargetDir)$(TargetName).lib" "dll\$(TargetName).lib"</Command>
+copy "$(OutDir)$(TargetName)$(TargetExt)" "dll\$(TargetName)$(TargetExt)"
+copy "$(OutDir)$(TargetName).lib" "dll\$(TargetName).lib"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|x64'">
@@ -333,8 +341,8 @@ copy "$(TargetDir)$(TargetName).lib" "dll\$(TargetName).lib"</Command>
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST dllx64 mkdir dllx64
-copy "$(OutDir)$(ProjectName).dll" "dllx64\$(ProjectName).dll"
-copy "$(TargetDir)$(TargetName).lib" "dllx64\$(TargetName).lib"
+copy "$(OutDir)$(TargetName)$(TargetExt)" "dllx64\$(TargetName)$(TargetExt)"
+copy "$(OutDir)$(TargetName).lib" "dllx64\$(TargetName).lib"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -358,7 +366,7 @@ copy "$(TargetDir)$(TargetName).lib" "dllx64\$(TargetName).lib"
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)$(ProjectName)d.dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
     </Link>
@@ -367,9 +375,9 @@ copy "$(TargetDir)$(TargetName).lib" "dllx64\$(TargetName).lib"
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST dll mkdir dll
-copy "$(OutDir)$(ProjectName)d.dll" "dll\$(ProjectName)d.dll"
-copy "$(TargetDir)$(TargetName).lib" "dll\$(TargetName).lib"
-copy "$(TargetDir)vc100.pdb" "dll\vc100.pdb"
+copy "$(OutDir)$(TargetName)$(TargetExt)" "dll\$(TargetName)$(TargetExt)"
+copy "$(OutDir)$(TargetName).lib" "dll\$(TargetName).lib"
+copy "$(OutDir)vc100.pdb" "dll\vc100.pdb"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -396,7 +404,7 @@ copy "$(TargetDir)vc100.pdb" "dll\vc100.pdb"
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)$(ProjectName)d.dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
@@ -406,15 +414,36 @@ copy "$(TargetDir)vc100.pdb" "dll\vc100.pdb"
     </Bscmake>
     <PostBuildEvent>
       <Command>IF NOT EXIST dllx64 mkdir dllx64
-copy "$(OutDir)$(ProjectName)d.dll" "dllx64\$(ProjectName)d.dll"
-copy "$(TargetDir)$(TargetName).lib" "dllx64\$(TargetName).lib"
-copy "$(TargetDir)vc100.pdb" "dllx64\vc100.pdb"</Command>
+copy "$(OutDir)$(TargetName)$(TargetExt)" "dllx64\$(TargetName)$(TargetExt)"
+copy "$(OutDir)$(TargetName).lib" "dllx64\$(TargetName).lib"
+copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\fwrap.cpp" />
     <ClCompile Include="src\fwrap2.cpp" />
     <ClCompile Include="src\fwrap3.cpp" />
+    <ClCompile Include="src\fwrap4.cpp" />
+    <ClCompile Include="src\fwrap5.cpp" />
+    <ClCompile Include="src\fwrap6.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\fwrap7.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\fwrap8.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\IPhreeqc.cpp" />
     <ClCompile Include="src\IPhreeqcLib.cpp" />
     <ClCompile Include="src\SelectedOutput.cpp" />
