@@ -149,31 +149,55 @@ echo "Exporting revision $REVISION of IPhreeqc into sandbox..."
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/$REPOS_PATH" \
 	     "$DISTNAME")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/src" \
 	     "$DISTNAME/src/phreeqcpp")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 	     	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/$REPOS_PATH/database" \
 	     "$DISTNAME/database")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/c" \
 	     "$DISTNAME/examples/c")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/com" \
 	     "$DISTNAME/examples/com")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/fortran" \
 	     "$DISTNAME/examples/fortran")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 
 ver_major=`echo $VERSION | cut -d '.' -f 1`
 ver_minor=`echo $VERSION | cut -d '.' -f 2`
