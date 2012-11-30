@@ -70,8 +70,11 @@ int main(int argc, char **argv)
 {
 	CppUnit::TextUi::TestRunner runner;
 
+#if defined(_MSC_VER)
 	CStopWatch s;
 	s.startTimer();
+#endif
+
 	runner.addTest(TestVar::suite());
 	runner.addTest(TestCVar::suite());
 	runner.addTest(TestSelectedOutput::suite());
@@ -86,8 +89,11 @@ int main(int argc, char **argv)
 #endif
 
 	bool wasSucessful = runner.run("", false);
+
+#if defined(_MSC_VER)
 	s.stopTimer();
 	std::cerr << s.getElapsedTime() << std::endl;
+#endif
 
 	return wasSucessful;
 }
