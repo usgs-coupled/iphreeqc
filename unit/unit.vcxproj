@@ -261,7 +261,6 @@
     </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\Solution.cxx" />
     <ClCompile Include="..\src\phreeqcpp\SolutionIsotope.cxx" />
-    <ClCompile Include="..\src\phreeqcpp\SolutionIsotopeList.cxx" />
     <ClCompile Include="..\src\phreeqcpp\SS.cxx" />
     <ClCompile Include="..\src\phreeqcpp\SSassemblage.cxx" />
     <ClCompile Include="..\src\phreeqcpp\SScomp.cxx" />

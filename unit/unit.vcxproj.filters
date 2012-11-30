@@ -141,9 +141,6 @@
     <ClCompile Include="..\src\phreeqcpp\SolutionIsotope.cxx">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\phreeqcpp\SolutionIsotopeList.cxx">
-      <Filter>Source Files\src\phreeqcpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\SS.cxx">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
