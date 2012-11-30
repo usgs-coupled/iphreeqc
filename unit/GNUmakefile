@@ -79,7 +79,6 @@ PPOBJS = \
 	runner.o \
 	Solution.o \
 	SolutionIsotope.o \
-	SolutionIsotopeList.o \
 	SSassemblage.o \
 	SS.o \
 	StorageBin.o \

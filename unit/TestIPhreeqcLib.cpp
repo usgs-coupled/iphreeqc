@@ -8,6 +8,7 @@
 
 #include <fstream>
 #include <string>
+#include <string.h> // strstr
 #include <cmath>
 #include <cfloat>
 #include <stdlib.h>
