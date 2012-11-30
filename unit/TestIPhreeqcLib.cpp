@@ -3637,25 +3637,68 @@ void TestIPhreeqcLib::TestGetSelectedOutputString(void)
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 
-#if defined(_MSC_VER)
-	std::string fline(
-		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	\n"
-		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009	\n"
-		"           1	       react	           1	         -99	           0	           1	     7.86135	     9.90852	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	     Calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009	\n"
-		);
-#endif
-
-#if defined(__GNUC__)
-	std::string fline(
-		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	\n"
-		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	  1.0000e-03	  1.0000e-03	  1.0000e-03	  4.2975e-07	  1.1819e-09	  1.1881e-09	 -6.4686e+00	 -8.9530e+00	 -8.9507e+00	  0.0000e+00	  0.0000e+00	     -2.2870	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	        Ca+2	          aq	  9.9178e-04	     CaHCO3+	          aq	  7.5980e-06	       CaCO3	          aq	  6.2155e-07	       CaOH+	          aq	  1.1819e-09	\n"
-		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4014	  1.1556e-03	  1.1556e-03	  1.0000e-03	  4.2718e-06	  9.7385e-09	  1.1620e-08	 -5.4781e+00	 -8.0388e+00	 -7.9621e+00	  9.8444e-03	 -1.5555e-04	     -3.0192	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	     Calcite	        equi	  9.8444e-03	        Ca+2	          aq	  1.1371e-03	     CaHCO3+	          aq	  1.1598e-05	       CaCO3	          aq	  6.8668e-06	       CaOH+	          aq	  9.7385e-09	\n"
-		);
-#endif
-
 	std::string sline( ::GetSelectedOutputString(n) );
 
-	CPPUNIT_ASSERT_EQUAL( fline, sline );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "sim\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "state\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "soln\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "dist_x\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "time\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "step\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "pH\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "pe\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "C\t")           != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "Ca\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "Na\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "m_CO3-2\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "m_CaOH+\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "m_NaCO3-\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "la_CO3-2\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "la_CaOH+\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "la_NaCO3-\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "Calcite\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "d_Calcite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "si_CO2(g)\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "si_Siderite\t") != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "pressure\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "total mol\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "volume\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "g_CO2(g)\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "g_N2(g)\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "k_Albite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "dk_Albite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "k_Pyrite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "dk_Pyrite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "s_CaSO4\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "s_SrSO4\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "1.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "1.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "1.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "2.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "2.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "2.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "3.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "3.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "3.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "4.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "4.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "4.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "5.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "5.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "5.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "6.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "6.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "6.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "\n")            != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "i_soln\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "react\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "Ca+2\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "aq\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "CaHCO3+\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "CaCO3\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "CaOH+\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "Calcite\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(sline.c_str(), "equi\t")        != NULL );
 
 	if (n >= 0)
 	{
@@ -3749,25 +3792,72 @@ void TestIPhreeqcLib::TestGetSelectedOutputStringLine(void)
 	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL(      3, ::GetSelectedOutputStringLineCount(n) );
 
-#if defined(_MSC_VER)
-	const char * expected[] = {
-		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	",
-		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	        Ca+2	          aq	 9.9178e-004	     CaHCO3+	          aq	 7.5980e-006	       CaCO3	          aq	 6.2155e-007	       CaOH+	          aq	 1.1819e-009	",
-		"           1	       react	           1	         -99	           0	           1	     7.86135	     9.90852	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	     Calcite	        equi	 9.8444e-003	        Ca+2	          aq	 1.1371e-003	     CaHCO3+	          aq	 1.1598e-005	       CaCO3	          aq	 6.8668e-006	       CaOH+	          aq	 9.7385e-009	"
-	};
-#endif
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "sim\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "state\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "soln\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "dist_x\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "time\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "step\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "pH\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "pe\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "C\t")           != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "Ca\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "Na\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "m_CO3-2\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "m_CaOH+\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "m_NaCO3-\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "la_CO3-2\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "la_CaOH+\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "la_NaCO3-\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "Calcite\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "d_Calcite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "si_CO2(g)\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "si_Siderite\t") != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "pressure\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "total mol\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "volume\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "g_CO2(g)\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "g_N2(g)\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "k_Albite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "dk_Albite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "k_Pyrite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "dk_Pyrite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "s_CaSO4\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "s_SrSO4\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "1.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "1.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "1.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "2.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "2.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "2.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "3.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "3.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "3.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "4.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "4.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "4.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "5.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "5.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "5.moles\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "6.name\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "6.type\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "6.moles\t")     != NULL );
 
-#if defined(__GNUC__)
-	const char * expected[] = {
-		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	      1.name	      1.type	     1.moles	      2.name	      2.type	     2.moles	      3.name	      3.type	     3.moles	      4.name	      4.type	     4.moles	      5.name	      5.type	     5.moles	      6.name	      6.type	     6.moles	",
-		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	  1.0000e-03	  1.0000e-03	  1.0000e-03	  4.2975e-07	  1.1819e-09	  1.1881e-09	 -6.4686e+00	 -8.9530e+00	 -8.9507e+00	  0.0000e+00	  0.0000e+00	     -2.2870	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	        Ca+2	          aq	  9.9178e-04	     CaHCO3+	          aq	  7.5980e-06	       CaCO3	          aq	  6.2155e-07	       CaOH+	          aq	  1.1819e-09	",
-		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4014	  1.1556e-03	  1.1556e-03	  1.0000e-03	  4.2718e-06	  9.7385e-09	  1.1620e-08	 -5.4781e+00	 -8.0388e+00	 -7.9621e+00	  9.8444e-03	 -1.5555e-04	     -3.0192	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	     Calcite	        equi	  9.8444e-03	        Ca+2	          aq	  1.1371e-03	     CaHCO3+	          aq	  1.1598e-05	       CaCO3	          aq	  6.8668e-06	       CaOH+	          aq	  9.7385e-09	"
-	};
-#endif
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "i_soln\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "Ca+2\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "aq\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "CaHCO3+\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "CaCO3\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "CaOH+\t")       != NULL );
 
-	CPPUNIT_ASSERT_EQUAL( std::string(expected[0]),  std::string(::GetSelectedOutputStringLine(n, 0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(expected[1]),  std::string(::GetSelectedOutputStringLine(n, 1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(expected[2]),  std::string(::GetSelectedOutputStringLine(n, 2)) );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "react\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "Calcite\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "equi\t")        != NULL );
+
+	// after obj.GetSelectedOutputStringLineCount() should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, ::GetSelectedOutputStringLineCount(n)))     );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, ::GetSelectedOutputStringLineCount(n) + 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, ::GetSelectedOutputStringLineCount(n) + 2)) );
 
 	// negative lines should be empty
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -1)) );
@@ -3808,30 +3898,92 @@ void TestIPhreeqcLib::TestGetSelectedOutputStringLineNotEnoughHeadings(void)
 	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL(      3, ::GetSelectedOutputStringLineCount(n) );
 
-#if defined(_MSC_VER)
-	const char * expected[] = {
-		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	       head0	       head1	       head2	",
-		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	 1.0000e-003	 1.0000e-003	 1.0000e-003	 4.2975e-007	 1.1819e-009	 1.1881e-009	-6.4686e+000	-8.9530e+000	-8.9507e+000	 0.0000e+000	 0.0000e+000	     -2.2870	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	       have0	       have1	       have2	    missing0	    missing1	    missing2	",
-		"           1	       react	           1	         -99	           0	           1	     7.86135	     9.90852	 1.1556e-003	 1.1556e-003	 1.0000e-003	 4.2718e-006	 9.7385e-009	 1.1620e-008	-5.4781e+000	-8.0388e+000	-7.9621e+000	 9.8444e-003	-1.5555e-004	     -3.0192	   -999.9990	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	-0.0000e+000	 0.0000e+000	 0.0000e+000	       have0	       have1	       have2	    missing0	    missing1	    missing2	"
-	};
-#endif
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "sim\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "state\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "soln\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "dist_x\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "time\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "step\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "pH\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "pe\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "C\t")           != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "Ca\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "Na\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "m_CO3-2\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "m_CaOH+\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "m_NaCO3-\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "la_CO3-2\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "la_CaOH+\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "la_NaCO3-\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "Calcite\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "d_Calcite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "si_CO2(g)\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "si_Siderite\t") != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "pressure\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "total mol\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "volume\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "g_CO2(g)\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "g_N2(g)\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "k_Albite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "dk_Albite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "k_Pyrite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "dk_Pyrite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "s_CaSO4\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "s_SrSO4\t")     != NULL );	
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "head0\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "head1\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 0), "head2\t")       != NULL );
 
-#if defined(__GNUC__)
-	const char * expected[] = {
-		"         sim	       state	        soln	      dist_x	        time	        step	          pH	          pe	           C	          Ca	          Na	     m_CO3-2	     m_CaOH+	    m_NaCO3-	    la_CO3-2	    la_CaOH+	   la_NaCO3-	     Calcite	   d_Calcite	   si_CO2(g)	 si_Siderite	    pressure	   total mol	      volume	    g_CO2(g)	     g_N2(g)	    k_Albite	   dk_Albite	    k_Pyrite	   dk_Pyrite	     s_CaSO4	     s_SrSO4	       head0	       head1	       head2	",
-		"           1	      i_soln	           1	         -99	         -99	         -99	           7	           4	  1.0000e-03	  1.0000e-03	  1.0000e-03	  4.2975e-07	  1.1819e-09	  1.1881e-09	 -6.4686e+00	 -8.9530e+00	 -8.9507e+00	  0.0000e+00	  0.0000e+00	     -2.2870	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	       have0	       have1	       have2	    missing0	    missing1	    missing2	",
-		"           1	       react	           1	         -99	           0	           1	     7.86135	     10.4014	  1.1556e-03	  1.1556e-03	  1.0000e-03	  4.2718e-06	  9.7385e-09	  1.1620e-08	 -5.4781e+00	 -8.0388e+00	 -7.9621e+00	  9.8444e-03	 -1.5555e-04	     -3.0192	   -999.9990	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	 -0.0000e+00	  0.0000e+00	  0.0000e+00	       have0	       have1	       have2	    missing0	    missing1	    missing2	"
-	};
-#endif
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "i_soln\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "have0\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "have1\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "have2\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "missing0\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "missing2\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 1), "missing2\t")    != NULL );
 
-	CPPUNIT_ASSERT_EQUAL( std::string(expected[0]),  std::string(::GetSelectedOutputStringLine(n, 0)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(expected[1]),  std::string(::GetSelectedOutputStringLine(n, 1)) );
-	CPPUNIT_ASSERT_EQUAL( std::string(expected[2]),  std::string(::GetSelectedOutputStringLine(n, 2)) );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "react\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "have0\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "have1\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "have2\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "missing0\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "missing2\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(::GetSelectedOutputStringLine(n, 2), "missing2\t")    != NULL );
+
+	// after obj.GetSelectedOutputStringLineCount() should be empty
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, ::GetSelectedOutputStringLineCount(n)))     );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, ::GetSelectedOutputStringLineCount(n) + 1)) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, ::GetSelectedOutputStringLineCount(n) + 2)) );
 
 	// negative lines should be empty
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -1)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -2)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetSelectedOutputStringLine(n, -3)) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestLongUser_Punch(void)
+{
+	const char input[] =
+		"PRINT\n"
+		" -selected_output t\n"
+		"SOLUTION\n"
+		"SELECTED_OUTPUT\n"
+		" -reset false\n"
+		"USER_PUNCH\n"
+		"1 REM 255 CHARACTER STRING\n"
+		"10 temp$ = \"XXXXX123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345\"\n"
+		"20 PUNCH temp$\n";
+
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputStringOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunString(n, input) );
 
 	if (n >= 0)
 	{

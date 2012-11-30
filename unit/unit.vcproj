@@ -131,6 +131,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
@@ -293,6 +294,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
