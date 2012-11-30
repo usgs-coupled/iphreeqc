@@ -3177,7 +3177,7 @@ void TestIPhreeqc::TestGetSelectedOutputStringLineNotEnoughHeadings(void)
 void TestIPhreeqc::TestLongUser_Punch(void)
 {
 	// stream tests
-	std::ostringstream oss(2051);
+	std::ostringstream oss;
 	PHRQ_io::fpunchf_helper(&oss, "%2046.2046s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2046, oss.str().size());
 	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(oss.str()));
