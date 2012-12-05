@@ -1714,7 +1714,6 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 
 	int line = 0;
 
-
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "SOLUTION_RAW")                  != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-temp")                         != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-total_h")                      != NULL);
@@ -2038,13 +2037,13 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Phase               SI   log IAP   log K(298 K,   1 atm)")                      != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Aragonite        -1.21     -9.55   -8.34  CaCO3")                               != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Calcite          -1.07     -9.55   -8.48  CaCO3")                               != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CH4(g)          -64.51    -67.37   -2.86  CH4")                                 != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CO2(g)           -2.29     -3.76   -1.47  CO2")                                 != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2(g)           -22.00    -25.15   -3.15  H2")                                  != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2O(g)           -1.51     -0.00    1.51  H2O")                                 != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	O2(g)           -39.12    -42.08   -2.96  O2")                                  != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Aragonite")                                                                     != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Calcite")                                                                       != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CH4(g)")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CO2(g)")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2(g)")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2O(g)")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	O2(g)")                                                                         != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------")                                                               != NULL );

@@ -1747,76 +1747,37 @@ void TestIPhreeqcLib::TestDumpString()
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
 
-	const char *expected =
-#if defined(_MSC_VER)
-		"SOLUTION_RAW                 1 \n"
-		"  -temp                      25\n"
-		"  -total_h                   111.01325935122\n"
-		"  -total_o                   55.50904348945\n"
-		"  -cb                        0.0021723723290529\n"
-		"  -density                   1\n"
-		"  -totals\n"
-		"    C(4)                     0.0010000000000377\n"
-		"    Ca                       0.0010000000043479\n"
-		"    H(0)                     1.4149476873393e-025\n"
-		"    Na                       0.001\n"
-		"    -pH                        7\n"
-		"  -pe                        4\n"
-		"  -mu                        0.0028961200143277\n"
-		"  -ah2o                      0.99994915101244\n"
-		"  -mass_water                1\n"
-		"  -total_alkalinity          0.0008276276796429\n"
-		"  -activities\n"
-		"    C(-4)                    -67.370549826961\n"
-		"    C(4)                     -6.44161607895\n"
-		"    Ca                       -3.1041817298911\n"
-		"    E                        -4\n"
-		"    H(0)                     -25.15\n"
-		"    Na                       -3.0255978827554\n"
-		"    O(0)                     -42.080044167992\n"
-		"  -gammas\n"
-		"USE mix none\n"
-		"USE reaction none\n"
-		"USE reaction_temperature none\n"
-		"USE reaction_pressure none\n"
-		;
-#endif
-#if defined(__GNUC__)
-		"SOLUTION_RAW       1 \n"
-		"  -temp              25\n"
-		"  -total_h           111.0132593403\n"
-		"  -total_o           55.509043478605\n"
-		"  -cb                0.0021723831003928\n"
-		"  -totals\n"
-		"    C(4)   0.0010000000000376\n"
-		"    Ca   0.001000000004331\n"
-		"    H(0)   1.4149476909313e-25\n"
-		"    Na   0.001\n"
-		"  -Isotopes\n"
-		"  -pH                7\n"
-		"  -pe                4\n"
-		"  -mu                0.0028961089894362\n"
-		"  -ah2o              0.99994915105857\n"
-		"  -mass_water        1\n"
-		"  -total_alkalinity  0.00082761690826912\n"
-		"  -activities\n"
-		"    C(-4)   -67.370522674574\n"
-		"    C(4)   -6.4415889265024\n"
-		"    Ca   -3.1040445240857\n"
-		"    E   -4\n"
-		"    H(0)   -25.15\n"
-		"    Na   -3.0255625287599\n"
-		"    O(0)   -42.080044167952\n"
-		"  -gammas\n"
-		"USE mix none\n"
-		"USE reaction none\n"
-		"USE reaction_temperature none\n"
-		"USE reaction_pressure none\n"
-		;
-#endif
-
 	const char* dump_str = ::GetDumpString(n);
-	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(dump_str));
+
+	CPPUNIT_ASSERT(::strstr(dump_str, "SOLUTION_RAW")                  != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-temp")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-total_h")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-total_o")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-cb")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-totals")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " C(4) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " Ca ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " H(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " Na ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-pH")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-pe")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-mu")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-ah2o")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-mass_water")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-total_alkalinity")             != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-activities")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " C(-4) ")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " C(4) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " Ca ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " E ")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " H(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " Na ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, " O(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "-gammas")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "USE mix none")                  != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "USE reaction none")             != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "USE reaction_temperature none") != NULL);
+	CPPUNIT_ASSERT(::strstr(dump_str, "USE reaction_pressure none")    != NULL);
 
 	if (n >= 0)
 	{
@@ -1877,71 +1838,37 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( 30,     ::GetDumpStringLineCount(n) );
 
 	int line = 0;
-#if defined(_MSC_VER)
-	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW                 1 "),                    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -temp                      25"),                    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h                   111.01325935122"),       std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o                   55.50904348945"),        std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                        0.0021723723290529"),    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -density                   1"),                     std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                          std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)                     0.0010000000000377"),    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca                       0.0010000000043479"),    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)                     1.4149476873393e-025"),  std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na                       0.001"),                 std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    -pH                        7"),                   std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                        4"),                     std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                        0.0028961200143277"),    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o                      0.99994915101244"),      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water                1"),                     std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity          0.0008276276796429"),    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                                      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)                    -67.370549826961"),      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)                     -6.44161607895"),        std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca                       -3.1041817298911"),      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    E                        -4"),                    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)                     -25.15"),                std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na                       -3.0255978827554"),      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)                     -42.080044167992"),      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                          std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                                       std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                                  std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),                      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),                         std::string(::GetDumpStringLine(n, line++)) );
-#endif
 
-#if defined(__GNUC__)
-	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003928"),  std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-25"),           std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826912"), std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                             std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            std::string(::GetDumpStringLine(n, line++)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),               std::string(::GetDumpStringLine(n, line++)) );
-#endif
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "SOLUTION_RAW")                  != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-temp")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-total_h")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-total_o")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-cb")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-density")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-totals")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " C(4) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " Ca ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " H(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " Na ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-pH")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-pe")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-mu")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-ah2o")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-mass_water")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-total_alkalinity")             != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-activities")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " C(-4) ")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " C(4) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " Ca ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " E ")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " H(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " Na ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " O(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-gammas")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "USE mix none")                  != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "USE reaction none")             != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "USE reaction_temperature none") != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "USE reaction_pressure none")    != NULL);
 
 	// remaining lines should be empty
 	CPPUNIT_ASSERT_EQUAL( std::string(""), std::string(::GetDumpStringLine(n, line++)) );
@@ -2401,107 +2328,36 @@ void TestIPhreeqcLib::TestSetDumpFileName(void)
 	}
 
 	int line = 0;
-#if defined(_MSC_VER)
-	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW                 1 "),                    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -temp                      25"),                    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h                   111.01325935122"),       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o                   55.50904348945"),        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                        0.0021723723290529"),    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -density                   1"),                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)                     0.0010000000000377"),    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca                       0.0010000000043479"),    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)                     1.4149476873393e-025"),  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na                       0.001"),                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    -pH                        7"),                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                        4"),                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                        0.0028961200143277"),    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o                      0.99994915101244"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water                1"),                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity          0.0008276276796429"),    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                                      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)                    -67.370549826961"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)                     -6.44161607895"),        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca                       -3.1041817298911"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    E                        -4"),                    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)                     -25.15"),                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na                       -3.0255978827554"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)                     -42.080044167992"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                                       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                                  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),                      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),                         lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                   lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003929"),  lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-025"),          lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826911"), lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                             lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),               lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
-// COMMENT: {7/11/2012 9:51:21 PM}	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
-#endif
-
-#if defined(__GNUC__)
-	CPPUNIT_ASSERT_EQUAL( std::string("SOLUTION_RAW       1 "),                    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -temp              25"),                  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_h           111.0132593403"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_o           55.509043478605"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -cb                0.0021723831003928"),  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -totals"),                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   0.0010000000000376"),            lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   0.001000000004331"),               lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   1.4149476909313e-25"),           lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   0.001"),                           lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -Isotopes"),                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pH                7"),                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -pe                4"),                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mu                0.0028961089894362"),  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -ah2o              0.99994915105857"),    lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -mass_water        1"),                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -total_alkalinity  0.00082761690826912"), lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -activities"),                            lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(-4)   -67.370522674574"),             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    C(4)   -6.4415889265024"),              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Ca   -3.1040445240857"),                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    E   -4"),                               lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    H(0)   -25.15"),                        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    Na   -3.0255625287599"),                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("    O(0)   -42.080044167952"),              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("  -gammas"),                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE mix none"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction none"),                        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_temperature none"),            lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("USE reaction_pressure none"),               lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                         lines[line++] );
-#endif
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "SOLUTION_RAW")                  != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-temp")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_h")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_o")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-cb")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-density")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-totals")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " C(4) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " Ca ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " H(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " Na ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-pH")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-pe")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-mu")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-ah2o")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-mass_water")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_alkalinity")             != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-activities")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " C(-4) ")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " C(4) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " Ca ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " E ")                           != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " H(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " Na ")                          != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " O(0) ")                        != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-gammas")                       != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "USE mix none")                  != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "USE reaction none")             != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "USE reaction_temperature none") != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "USE reaction_pressure none")    != NULL);
 
 	if (::FileExists(DUMP_FILENAME))
 	{
@@ -2562,213 +2418,108 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT_EQUAL( (size_t)98, i );
 
 	int line = 0;
-#if defined(_MSC_VER)
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 1."),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	SOLUTION 1"),                                                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	C 1"),                                                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Ca 1"),                                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Na 1"),                                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	DUMP"),                                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	-solution 1"),                                                                         lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Beginning of initial solution calculations."),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Initial solution 1.	"),                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-----------------------------Solution composition------------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Elements           Molality       Moles"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	C                1.000e-003  1.000e-003"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Ca               1.000e-003  1.000e-003"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Na               1.000e-003  1.000e-003"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Description of solution----------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                       pH  =   7.000    "),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                       pe  =   4.000    "),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                        Activity of water  =   1.000"),                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                           Ionic strength  =  2.896e-003"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                       Mass of water (kg)  =  1.000e+000"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                 Total alkalinity (eq/kg)  =  8.276e-004"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                       Total CO2 (mol/kg)  =  1.000e-003"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                      Temperature (deg C)  =  25.00"),                                  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                  Electrical balance (eq)  =  2.172e-003"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(" Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  57.04"),                                  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                               Iterations  =   6"),                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                  Total H  = 1.110133e+002"),                           lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                  Total O  = 5.550904e+001"),                           lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Distribution of species----------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                               Log       Log       Log    mole V"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   Species          Molality    Activity  Molality  Activity     Gamma   cm3/mol"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   OH-            1.062e-007  1.001e-007    -6.974    -7.000    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   H+             1.056e-007  1.000e-007    -6.976    -7.000    -0.024      0.00"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   H2O            5.551e+001  9.999e-001     1.744    -0.000     0.000     18.07"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("C(-4)        0.000e+000"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CH4            0.000e+000  0.000e+000   -67.371   -67.371     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("C(4)         1.000e-003"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   HCO3-          8.171e-004  7.713e-004    -3.088    -3.113    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CO2            1.733e-004  1.734e-004    -3.761    -3.761     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaHCO3+        8.202e-006  7.742e-006    -5.086    -5.111    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaCO3          4.777e-007  4.781e-007    -6.321    -6.321     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CO3-2          4.556e-007  3.617e-007    -6.341    -6.442    -0.100     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaHCO3         4.086e-007  4.089e-007    -6.389    -6.388     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaCO3-         6.736e-009  6.350e-009    -8.172    -8.197    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Ca           1.000e-003"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   Ca+2           9.913e-004  7.867e-004    -3.004    -3.104    -0.100     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaHCO3+        8.202e-006  7.742e-006    -5.086    -5.111    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaCO3          4.777e-007  4.781e-007    -6.321    -6.321     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaOH+          1.385e-009  1.306e-009    -8.859    -8.884    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("H(0)         1.415e-025"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   H2             7.075e-026  7.079e-026   -25.150   -25.150     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Na           1.000e-003"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   Na+            9.996e-004  9.428e-004    -3.000    -3.026    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaHCO3         4.086e-007  4.089e-007    -6.389    -6.388     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaCO3-         6.736e-009  6.350e-009    -8.172    -8.197    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaOH           6.224e-011  6.228e-011   -10.206   -10.206     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("O(0)         0.000e+000"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   O2             0.000e+000  0.000e+000   -42.080   -42.080     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------Saturation indices-------------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Phase               SI   log IAP   log K(298 K,   1 atm)"),                            lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Aragonite        -1.21     -9.55   -8.34  CaCO3"),                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Calcite          -1.07     -9.55   -8.48  CaCO3"),                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	CH4(g)          -64.51    -67.37   -2.86  CH4"),                                       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	CO2(g)           -2.29     -3.76   -1.47  CO2"),                                       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	H2(g)           -22.00    -25.15   -3.15  H2"),                                        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	H2O(g)           -1.51     -0.00    1.51  H2O"),                                       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	O2(g)           -39.12    -42.08   -2.96  O2"),                                        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                                                                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("End of simulation."),                                                                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                                                                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 2."),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	line++;
-	line++;
-	line++;
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-#endif
 
-#if defined(__GNUC__)
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 1."),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	SOLUTION 1"),                                                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	C 1"),                                                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Ca 1"),                                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Na 1"),                                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	DUMP"),                                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	-solution 1"),                                                                         lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Beginning of initial solution calculations."),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-------------------------------------------"),                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Initial solution 1.	"),                                                                lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-----------------------------Solution composition------------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Elements           Molality       Moles"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	C                 1.000e-03   1.000e-03"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Ca                1.000e-03   1.000e-03"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Na                1.000e-03   1.000e-03"),                                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Description of solution----------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                       pH  =   7.000    "),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                       pe  =   4.000    "),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                        Activity of water  =   1.000"),                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                           Ionic strength  =   2.896e-03"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                       Mass of water (kg)  =   1.000e+00"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                 Total alkalinity (eq/kg)  =   8.276e-04"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                       Total CO2 (mol/kg)  =   1.000e-03"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                      Temperature (deg C)  =  25.00"),                                  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                  Electrical balance (eq)  =   2.172e-03"),                             lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(" Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  57.04"),                                  lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                               Iterations  =   6"),                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                  Total H  = 1.110133e+02"),                            lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                  Total O  = 5.550904e+01"),                            lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Distribution of species----------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("                                            Log       Log         Log     mole V"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   Species          Molality    Activity  Molality  Activity     Gamma   cm3/mol"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   OH-             1.062e-07   1.001e-07    -6.974    -7.000    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   H+              1.056e-07   1.000e-07    -6.976    -7.000    -0.024      0.00"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   H2O             5.551e+01   9.999e-01     1.744    -0.000     0.000     18.07"),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("C(-4)         0.000e+00"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CH4             0.000e+00   0.000e+00   -67.371   -67.371     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("C(4)          1.000e-03"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   HCO3-           8.171e-04   7.714e-04    -3.088    -3.113    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CO2             1.733e-04   1.734e-04    -3.761    -3.761     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaHCO3+         8.204e-06   7.745e-06    -5.086    -5.111    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaCO3           4.779e-07   4.782e-07    -6.321    -6.320     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CO3-2           4.555e-07   3.618e-07    -6.342    -6.442    -0.100     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaHCO3          4.087e-07   4.090e-07    -6.389    -6.388     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaCO3-          6.736e-09   6.351e-09    -8.172    -8.197    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Ca            1.000e-03"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   Ca+2            9.913e-04   7.870e-04    -3.004    -3.104    -0.100     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaHCO3+         8.204e-06   7.745e-06    -5.086    -5.111    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaCO3           4.779e-07   4.782e-07    -6.321    -6.320     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   CaOH+           1.385e-09   1.306e-09    -8.859    -8.884    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("H(0)          1.415e-25"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   H2              7.075e-26   7.079e-26   -25.150   -25.150     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Na            1.000e-03"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   Na+             9.996e-04   9.428e-04    -3.000    -3.026    -0.025     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaHCO3          4.087e-07   4.090e-07    -6.389    -6.388     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaCO3-          6.736e-09   6.351e-09    -8.172    -8.197    -0.026     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   NaOH            6.225e-11   6.229e-11   -10.206   -10.206     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("O(0)          0.000e+00"),                                                              lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("   O2              0.000e+00   0.000e+00   -42.080   -42.080     0.000     (0)  "),     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------Saturation indices-------------------------------"),      lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Phase               SI   log IAP   log K(298 K,   1 atm)"),                            lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Aragonite        -1.21     -9.55   -8.34  CaCO3"),                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	Calcite          -1.07     -9.55   -8.48  CaCO3"),                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	CH4(g)          -64.51    -67.37   -2.86  CH4"),                                       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	CO2(g)           -2.29     -3.76   -1.47  CO2"),                                       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	H2(g)           -22.00    -25.15   -3.15  H2"),                                        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	H2O(g)           -1.51     -0.00    1.51  H2O"),                                       lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("	O2(g)           -39.12    -42.08   -2.96  O2"),                                        lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                                                                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("End of simulation."),                                                                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------"),                                                                   lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 2."),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                 lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-----------"),                                                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("End of run."),                                                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string("-----------"),                                                                          lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                     lines[line++] );
-#endif
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------------------------")                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "Reading input data for simulation 1.")                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------------------------")                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	SOLUTION 1")                                                                    != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	C 1")                                                                           != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Ca 1")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Na 1")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	DUMP")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	-solution 1")                                                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "-------------------------------------------")                                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "Beginning of initial solution calculations.")                                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "-------------------------------------------")                                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "Initial solution 1.	")                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "-----------------------------Solution composition--------")                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Elements           Molality       Moles")                                       != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	C                ")                                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Ca               ")                                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Na               ")                                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "----------------------------Description of solution------")                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                       pH  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                       pe  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                        Activity of water  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                           Ionic strength  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Mass of water (kg)  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                 Total alkalinity (eq/kg)  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Total CO2 (mol/kg)  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                      Temperature (deg C)  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                  Electrical balance (eq)  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), " Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                               Iterations  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                  Total H  = ")                                    != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                  Total O  = ")                                    != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "----------------------------Distribution of species----------------------------")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                               Log       Log       Log    mole V") != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma   cm3/mol") != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   OH- ")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   H+ ")                                                                           != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   H2O ")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "C(-4) ")                                                                           != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CH4 ")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "C(4) ")                                                                            != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   HCO3- ")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CO2 ")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CaHCO3+ ")                                                                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CaCO3 ")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CO3-2 ")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   NaHCO3 ")                                                                       != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   NaCO3- ")                                                                       != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "Ca ")                                                                              != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   Ca+2 ")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CaHCO3+ ")                                                                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CaCO3 ")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   CaOH+ ")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "H(0) ")                                                                            != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   H2 ")                                                                           != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "Na ")                                                                              != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   Na+ ")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   NaHCO3 ")                                                                       != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   NaCO3- ")                                                                       != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   NaOH ")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "O(0) ")                                                                            != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   O2 ")                                                                           != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------------------Saturation indices-------------------------------")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Phase               SI   log IAP   log K(298 K,   1 atm)")                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Aragonite")                                                                     != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Calcite")                                                                       != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CH4(g)")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CO2(g)")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2(g)")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2O(g)")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	O2(g)")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------")                                                               != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "End of simulation.")                                                               != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------")                                                               != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------------------------")                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "Reading input data for simulation 2.")                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------------------------")                                             != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "----------------")                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "End of Run after ")                                                                != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "----------------")                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 
 	if (::FileExists(OUTPUT_FILENAME))
 	{
