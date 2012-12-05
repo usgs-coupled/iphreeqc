@@ -80,6 +80,7 @@ PPOBJS = \
 	Solution.o \
 	SolutionIsotope.o \
 	SSassemblage.o \
+	SScomp.o \
 	SS.o \
 	StorageBin.o \
 	StorageBinList.o \
@@ -199,6 +200,7 @@ clean:
 -include ./$(DEPDIR)/Solution.Po
 -include ./$(DEPDIR)/spread.Po
 -include ./$(DEPDIR)/SSassemblage.Po
+-include ./$(DEPDIR)/SScomp.Po
 -include ./$(DEPDIR)/SS.Po
 -include ./$(DEPDIR)/step.Po
 -include ./$(DEPDIR)/StorageBinList.Po
