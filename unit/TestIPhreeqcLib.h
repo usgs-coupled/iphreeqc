@@ -68,6 +68,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetSelectedOutputStringLine );
 	CPPUNIT_TEST( TestGetSelectedOutputStringLineNotEnoughHeadings );
 	CPPUNIT_TEST( TestLongUser_Punch );
+	CPPUNIT_TEST( TestBasicSURF );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -136,6 +137,7 @@ public:
 	void TestGetSelectedOutputStringLine(void);
 	void TestGetSelectedOutputStringLineNotEnoughHeadings(void);
 	void TestLongUser_Punch(void);
+	void TestBasicSURF(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, int output_file_on, int error_file_on, int log_file_on, int selected_output_file_on, int dump_file_on);

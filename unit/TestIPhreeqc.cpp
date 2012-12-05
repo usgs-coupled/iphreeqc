@@ -3180,55 +3180,59 @@ void TestIPhreeqc::TestLongUser_Punch(void)
 	std::ostringstream oss;
 	PHRQ_io::fpunchf_helper(&oss, "%2046.2046s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2046, oss.str().size());
-	std::string s0(oss.str());        
+	std::string s0(oss.str());
 	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(s0));
 
 	oss.clear(); oss.seekp(0);
 	PHRQ_io::fpunchf_helper(&oss, "%2047.2047s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2047, oss.str().size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(oss.str()));
+	std::string s1(oss.str());
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(s1));
 
 	oss.clear(); oss.seekp(0);
 	PHRQ_io::fpunchf_helper(&oss, "%2048.2048s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2048, oss.str().size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(oss.str()));
+	std::string s2(oss.str());
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(s2));
 
 	oss.clear(); oss.seekp(0);
 	PHRQ_io::fpunchf_helper(&oss, "%2049.2049s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2049, oss.str().size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(oss.str()));
+	std::string s3(oss.str());
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(s3));
 
 	oss.clear(); oss.seekp(0);
 	PHRQ_io::fpunchf_helper(&oss, "%2050.2050s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2050, oss.str().size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(oss.str()));
+	std::string s4(oss.str());
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(s4));
 
 
 	// string tests
 	std::string str;
 	PHRQ_io::fpunchf_helper(&str, "%2046.2046s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2046, str.size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
 
 	str.clear();
 	PHRQ_io::fpunchf_helper(&str, "%2047.2047s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2047, str.size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
 
 	str.clear();
 	PHRQ_io::fpunchf_helper(&str, "%2048.2048s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2048, str.size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
 
 	str.clear();
 	PHRQ_io::fpunchf_helper(&str, "%2049.2049s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2049, str.size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
 
 	str.clear();
 	PHRQ_io::fpunchf_helper(&str, "%2050.2050s", "TEST");
 	CPPUNIT_ASSERT_EQUAL((size_t)2050, str.size());
-	//CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
+	CPPUNIT_ASSERT_EQUAL(std::string("TEST"), trim(str));
 
 	const char input[] =
 		"PRINT\n"
@@ -3245,4 +3249,133 @@ void TestIPhreeqc::TestLongUser_Punch(void)
 	obj.SetSelectedOutputFileOn(true);
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunString(input));
+}
+
+void TestIPhreeqc::TestBasicSURF(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SURFACE_MASTER_SPECIES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfa Surfa") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfb Surfb") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SURFACE_SPECIES") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfa = Surfa") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 log_k 0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfb = Surfb") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 log_k 0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfa + Zn+2 = SurfaZn+2") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 log_k  5.") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfb + Zn+2 = SurfbZn+2") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 log_k  6.") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfa + Cu+2 = SurfaCu+2") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 log_k  4.5") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 Surfb + Cu+2 = SurfbCu+2") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("		 log_k  6.5") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   pH        8") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   units     mol/kgw") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   Fe(3)     1e-2") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   Zn        1e-4") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   Cu        1e-5") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   Na        1e-1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   Cl        1e-1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("EQUILIBRIUM_PHASES 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("   Fe(OH)3(a) 0 0") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SELECTED_OUTPUT") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("USER_PUNCH") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("    -headings Hfo-Zn Surfa-Zn Surfb-Zn Surfa-Cu Surfb-Cu") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("-start") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("10 PUNCH SURF(\"Zn\",\"Hfo\")") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("20 PUNCH SURF(\"Zn\",\"Surfa\")") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("30 PUNCH SURF(\"Zn\",\"Surfb\")") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("40 PUNCH SURF(\"Cu\",\"Surfa\")") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("50 PUNCH SURF(\"Cu\",\"Surfb\")") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("-end") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("SURFACE 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("    Hfo_sOH Fe(OH)3(a)      equilibrium_phase 0.005  53300") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("    Hfo_wOH Fe(OH)3(a)      equilibrium_phase 0.2") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("    Surfa  0.2 100. 2") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("    Surfb  0.1 100. 1") );
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.AccumulateLine("END") );
+
+	obj.SetOutputStringOn(true);
+	obj.SetOutputFileOn(false);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpStringOn(false);
+	obj.SetDumpFileOn(false);
+
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
+
+	CPPUNIT_ASSERT_EQUAL(13, obj.GetSelectedOutputColumnCount());
+	CPPUNIT_ASSERT_EQUAL(3, obj.GetSelectedOutputRowCount());
+
+	CVar v;
+
+	const int offset = 8;
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, offset + 0, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Hfo-Zn"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, offset + 1, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfa-Zn"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, offset + 2, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfb-Zn"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, offset + 3, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfa-Cu"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, offset + 4, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfb-Cu"), std::string(v.sVal));
+
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, offset + 0, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, offset + 1, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, offset + 2, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, offset + 3, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, offset + 4, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, offset + 0, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.3861e-005, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, offset + 1, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 1.7868e-005, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, offset + 2, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 1.8248e-005, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, offset + 3, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.6216e-009, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, offset + 4, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.7201e-008, v.dVal, ::pow(10., -FLT_DIG) );
 }

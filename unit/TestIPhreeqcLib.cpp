@@ -302,7 +302,7 @@ void TestIPhreeqcLib::TestRunWithErrors()
 	{
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
-
+	//::Sleep(100);
 	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(dump_file) );
 	CPPUNIT_ASSERT( ::FileSize(dump_file) > 0 );
 	CPPUNIT_ASSERT(::DeleteFile(dump_file));
@@ -3985,6 +3985,143 @@ void TestIPhreeqcLib::TestLongUser_Punch(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunString(n, input) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
+
+void TestIPhreeqcLib::TestBasicSURF(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat") );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SURFACE_MASTER_SPECIES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfa Surfa") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfb Surfb") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SURFACE_SPECIES") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfa = Surfa") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 log_k 0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfb = Surfb") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 log_k 0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfa + Zn+2 = SurfaZn+2") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 log_k  5.") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfb + Zn+2 = SurfbZn+2") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 log_k  6.") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfa + Cu+2 = SurfaCu+2") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 log_k  4.5") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 Surfb + Cu+2 = SurfbCu+2") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "		 log_k  6.5") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SOLUTION 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   pH        8") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   units     mol/kgw") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   Fe(3)     1e-2") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   Zn        1e-4") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   Cu        1e-5") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   Na        1e-1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   Cl        1e-1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "EQUILIBRIUM_PHASES 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "   Fe(OH)3(a) 0 0") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SELECTED_OUTPUT") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "USER_PUNCH") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "    -headings Hfo-Zn Surfa-Zn Surfb-Zn Surfa-Cu Surfb-Cu") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "-start") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "10 PUNCH SURF(\"Zn\",\"Hfo\")") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "20 PUNCH SURF(\"Zn\",\"Surfa\")") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "30 PUNCH SURF(\"Zn\",\"Surfb\")") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "40 PUNCH SURF(\"Cu\",\"Surfa\")") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "50 PUNCH SURF(\"Cu\",\"Surfb\")") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "-end") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "SURFACE 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "    Hfo_sOH Fe(OH)3(a)      equilibrium_phase 0.005  53300") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "    Hfo_wOH Fe(OH)3(a)      equilibrium_phase 0.2") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "    Surfa  0.2 100. 2") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "    Surfb  0.1 100. 1") );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::AccumulateLine(n, "END") );
+
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
+
+	CPPUNIT_ASSERT_EQUAL(13,      ::GetSelectedOutputColumnCount(n));
+	CPPUNIT_ASSERT_EQUAL(3,       ::GetSelectedOutputRowCount(n));
+
+	CVar v;
+
+	const int offset = 8;
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 0, offset + 0, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Hfo-Zn"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 0, offset + 1, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfa-Zn"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 0, offset + 2, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfb-Zn"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 0, offset + 3, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfa-Cu"), std::string(v.sVal));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 0, offset + 4, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_STRING, v.type);
+	CPPUNIT_ASSERT_EQUAL(std::string("Surfb-Cu"), std::string(v.sVal));
+
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 1, offset + 0, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 1, offset + 1, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 1, offset + 2, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 1, offset + 3, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 1, offset + 4, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, v.dVal, ::pow(10., -FLT_DIG) );
+
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 2, offset + 0, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.3861e-005, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 2, offset + 1, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 1.7868e-005, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 2, offset + 2, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 1.8248e-005, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 2, offset + 3, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.6216e-009, v.dVal, ::pow(10., -FLT_DIG) );
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,  ::GetSelectedOutputValue(n, 2, offset + 4, &v));
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.7201e-008, v.dVal, ::pow(10., -FLT_DIG) );
 
 	if (n >= 0)
 	{
