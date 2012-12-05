@@ -353,7 +353,7 @@ void TestIPhreeqc::TestRunString(void)
 	IPhreeqc obj;
 
 	char OUTPUT_FILE[80];
-	sprintf(OUTPUT_FILE, "phreeqc.%d.out", obj.Index);
+	sprintf(OUTPUT_FILE, "phreeqc.%lu.out", (unsigned long)obj.Index);
 
 	if (::FileExists(OUTPUT_FILE))
 	{
@@ -1098,7 +1098,7 @@ void TestIPhreeqc::TestCase1(void)
 	IPhreeqc obj;
 
 	char SELECTED_OUT[80];
-	sprintf(SELECTED_OUT, "selected.%d.out", obj.Index);
+	sprintf(SELECTED_OUT, "selected.%lu.out", (unsigned long)obj.Index);
 
 	// remove punch file if it exists
 	if (::FileExists(SELECTED_OUT))
