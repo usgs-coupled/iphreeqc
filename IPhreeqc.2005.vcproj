@@ -642,8 +642,363 @@
 				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dllx64\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dllx64\vc80.pdb&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
+		<Configuration
+			Name="DebugCLR|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			ManagedExtensions="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
+				Optimization="0"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;MULTICHART"
+				MinimalRebuild="false"
+				BasicRuntimeChecks="0"
+				RuntimeLibrary="3"
+				PrecompiledHeaderFile=""
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				GenerateDebugInformation="true"
+				AssemblyDebug="1"
+				ImportLibrary="$(TargetDir)$(TargetName).lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clr&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;%DEST%\vc80.pdb&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="DebugCLR|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			ManagedExtensions="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
+				Optimization="0"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;MULTICHART"
+				MinimalRebuild="false"
+				BasicRuntimeChecks="0"
+				RuntimeLibrary="3"
+				PrecompiledHeaderFile=""
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				GenerateDebugInformation="true"
+				AssemblyDebug="1"
+				ImportLibrary="$(TargetDir)$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clrx64&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;%DEST%\vc80.pdb&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="ReleaseCLR|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			ManagedExtensions="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;MULTICHART"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				PrecompiledHeaderFile=""
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				SubSystem="0"
+				ImportLibrary="$(TargetDir)$(TargetName).lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clr&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="ReleaseCLR|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\IPhreeqc.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			ManagedExtensions="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;MULTICHART"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				PrecompiledHeaderFile=""
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				SubSystem="0"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clrx64&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
+		<AssemblyReference
+			RelativePath=".\src\phreeqcpp\phreeqc\ZedGraph.dll"
+			AssemblyName="ZedGraph, Version=5.1.5.28844, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="System.Windows.Forms.dll"
+			AssemblyName="System.Windows.Forms, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="System.Drawing.dll"
+			AssemblyName="System.Drawing, Version=2.0.0.0, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="System.dll"
+			AssemblyName="System, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -721,6 +1076,22 @@
 						Name="VCCustomBuildTool"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="DebugCLR|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="ReleaseCLR|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\IPhreeqcLib.cpp"
@@ -759,6 +1130,38 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="DebugDll|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						CompileAs="2"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DebugCLR|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						CompileAs="2"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DebugCLR|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						CompileAs="2"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="ReleaseCLR|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						CompileAs="2"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="ReleaseCLR|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -933,7 +1336,19 @@
 						>
 					</File>
 					<File
+						RelativePath=".\src\phreeqcpp\ChartHandler.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\src\phreeqcpp\ChartObject.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\src\phreeqcpp\phreeqc\cl1.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\src\phreeqcpp\CurveObject.cpp"
 						>
 					</File>
 					<File
@@ -1117,6 +1532,10 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\ExchComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\phreeqc\Form1.h"
 				>
 			</File>
 			<File
