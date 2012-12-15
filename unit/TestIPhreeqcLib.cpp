@@ -3879,3 +3879,32 @@ void TestIPhreeqcLib::TestBasicSURF(void)
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
 }
+
+void TestIPhreeqcLib::TestIEEE(void)
+{
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "wateq4f.dat") );
+	//CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "cdmusic_hiemstra.dat") );
+	//::LoadDatabase(n, "cdmusic_hiemstra.dat");
+	//const char* errdb = ::GetErrorString(n);
+	//fprintf(stderr, "%s\n", errdb);
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+
+	::RunFile(n, "IEEE");
+	const char* err = ::GetErrorString(n);
+	fprintf(stderr, "%s\n", err);
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+}
