@@ -166,13 +166,17 @@ build() {
   MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=Win32 && \
   MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=Win32 && \
   MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseCLR /p:Platform=Win32 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugCLR /p:Platform=Win32 && \
 # build x64 libs
   cd "${topdir}" && \
   cd "${objdir}" && \
   MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Release /p:Platform=x64 && \
   MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=Debug /p:Platform=x64 && \
   MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseDll /p:Platform=x64 && \
-  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=x64 )
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugDll /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=ReleaseCLR /p:Platform=x64 && \
+  MsBuild.exe IPhreeqc.2005.sln /t:IPhreeqc /p:Configuration=DebugCLR /p:Platform=x64 )
 }
 check() {
   (cd ${objdir} && \
@@ -185,6 +189,7 @@ clean() {
 install() {
   (rm -fr "${instdir}/"* && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-win32/clr" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/doc" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/lib" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/dll" && \
@@ -202,6 +207,7 @@ install() {
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.pdf"                       "${instdir}/${FULLPKG}-vs2005-win32/doc/IPhreeqc.pdf" && \
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/PHREEQCPP-RELEASE.txt"    "${instdir}/${FULLPKG}-vs2005-win32/doc/PHREEQCPP-RELEASE.txt" && \
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/phreeqc/revisions"        "${instdir}/${FULLPKG}-vs2005-win32/doc/RELEASE.txt" && \
+  /usr/bin/install -m 755 "${objdir}/clr/"*                                  "${instdir}/${FULLPKG}-vs2005-win32/clr/." && \
   /usr/bin/install -m 755 "${objdir}/lib/"*                                  "${instdir}/${FULLPKG}-vs2005-win32/lib/." && \
   /usr/bin/install -m 755 "${objdir}/dll/"*                                  "${instdir}/${FULLPKG}-vs2005-win32/dll/." && \
   /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.f.inc"                     "${instdir}/${FULLPKG}-vs2005-win32/include/." && \
@@ -220,6 +226,7 @@ install() {
   /usr/bin/install -m 755 "${objdir}/examples/fortran/advect/"*              "${instdir}/${FULLPKG}-vs2005-win32/examples/fortran/advect/." && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/doc" && \
+  mkdir "${instdir}/${FULLPKG}-vs2005-x64/clrx64" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/libx64" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/dllx64" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/include" && \
@@ -236,6 +243,7 @@ install() {
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.pdf"                       "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.pdf" && \
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/PHREEQCPP-RELEASE.txt"    "${instdir}/${FULLPKG}-vs2005-x64/doc/PHREEQCPP-RELEASE.txt" && \
   /usr/bin/install -m 755 "${objdir}/src/phreeqcpp/phreeqc/revisions"        "${instdir}/${FULLPKG}-vs2005-x64/doc/RELEASE.txt" && \
+  /usr/bin/install -m 755 "${objdir}/clrx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/libx64/." && \
   /usr/bin/install -m 755 "${objdir}/libx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/libx64/." && \
   /usr/bin/install -m 755 "${objdir}/dllx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/dllx64/." && \
   /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.f.inc"                     "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
