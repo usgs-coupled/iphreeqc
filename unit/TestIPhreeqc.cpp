@@ -1591,7 +1591,7 @@ void TestIPhreeqc::TestDatabaseKeyword()
 	CPPUNIT_ASSERT_EQUAL(1, obj.RunFile("dump"));
 
 	const char *expected =
-		"ERROR: Gas not found in PHASES data base, Amm(g).\n"
+		"ERROR: Gas not found in PHASES database, Amm(g).\n"
 		"ERROR: Calculations terminating due to input errors.\n";
 
 	const char* err = obj.GetErrorString();

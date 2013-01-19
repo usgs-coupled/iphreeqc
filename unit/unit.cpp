@@ -75,10 +75,10 @@ int main(int argc, char **argv)
 	s.startTimer();
 #endif
 
-	//runner.addTest(TestVar::suite());
-	//runner.addTest(TestCVar::suite());
-	//runner.addTest(TestSelectedOutput::suite());
-	//runner.addTest(TestIPhreeqc::suite());
+	runner.addTest(TestVar::suite());
+	runner.addTest(TestCVar::suite());
+	runner.addTest(TestSelectedOutput::suite());
+	runner.addTest(TestIPhreeqc::suite());
 	runner.addTest(TestIPhreeqcLib::suite());
 
 	runner.setOutputter(CppUnit::CompilerOutputter::defaultOutputter(&runner.result(), std::cout));

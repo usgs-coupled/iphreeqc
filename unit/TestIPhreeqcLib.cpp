@@ -1703,7 +1703,7 @@ void TestIPhreeqcLib::TestDatabaseKeyword()
 	CPPUNIT_ASSERT_EQUAL( 1,      ::RunFile(n, "dump"));
 
 	const char *exp_errs =
-		"ERROR: Gas not found in PHASES data base, Amm(g).\n"
+		"ERROR: Gas not found in PHASES database, Amm(g).\n"
 		"ERROR: Calculations terminating due to input errors.\n";
 
 	const char* err = ::GetErrorString(n);
@@ -2050,7 +2050,7 @@ void TestIPhreeqcLib::TestGetErrorStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."), std::string(::GetErrorStringLine(n, line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                        std::string(::GetErrorStringLine(n, line++)) );
 #endif
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),                              std::string(::GetErrorStringLine(n, line++)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES database, Amm(g)."),                              std::string(::GetErrorStringLine(n, line++)) );
 #if 0
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                              std::string(::GetErrorStringLine(n, line++)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("\tConcentration is set to zero."),                                                std::string(::GetErrorStringLine(n, line++)) );
@@ -2102,7 +2102,7 @@ void TestIPhreeqcLib::TestErrorFileOn(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: DATABASE keyword is ignored by IPhreeqc."),                                 lines[0] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."),    lines[1] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                           lines[2] );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),                                 lines[3] );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES database, Amm(g)."),                                 lines[3] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                                 lines[4] );
 	CPPUNIT_ASSERT_EQUAL( std::string("\tConcentration is set to zero."),                                                   lines[5] );
 	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."),                              lines[6] );
@@ -2152,7 +2152,7 @@ void TestIPhreeqcLib::TestLogFileOn(void)
 
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100."),    lines[0] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: No dispersivities were read; disp = 0 assumed."),                           lines[1] );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES data base, Amm(g)."),                                 lines[2] );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Gas not found in PHASES database, Amm(g)."),                                 lines[2] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Could not find element in database, Amm."),                                 lines[3] );
 	CPPUNIT_ASSERT_EQUAL( std::string("\tConcentration is set to zero."),                                                   lines[4] );
 	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Calculations terminating due to input errors."),                              lines[5] );
@@ -3882,29 +3882,29 @@ void TestIPhreeqcLib::TestBasicSURF(void)
 
 void TestIPhreeqcLib::TestIEEE(void)
 {
-	int n = ::CreateIPhreeqc();
-	CPPUNIT_ASSERT(n >= 0);
-
-	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "wateq4f.dat") );
-	//CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "cdmusic_hiemstra.dat") );
-	//::LoadDatabase(n, "cdmusic_hiemstra.dat");
-	//const char* errdb = ::GetErrorString(n);
-	//fprintf(stderr, "%s\n", errdb);
-
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
-
-	::RunFile(n, "IEEE");
-	const char* err = ::GetErrorString(n);
-	fprintf(stderr, "%s\n", err);
-
-	if (n >= 0)
-	{
-		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
-	}
+// COMMENT: {1/18/2013 6:34:57 PM}	int n = ::CreateIPhreeqc();
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT(n >= 0);
+// COMMENT: {1/18/2013 6:34:57 PM}
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "wateq4f.dat") );
+// COMMENT: {1/18/2013 6:34:57 PM}	//CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "cdmusic_hiemstra.dat") );
+// COMMENT: {1/18/2013 6:34:57 PM}	//::LoadDatabase(n, "cdmusic_hiemstra.dat");
+// COMMENT: {1/18/2013 6:34:57 PM}	//const char* errdb = ::GetErrorString(n);
+// COMMENT: {1/18/2013 6:34:57 PM}	//fprintf(stderr, "%s\n", errdb);
+// COMMENT: {1/18/2013 6:34:57 PM}
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputFileOn(n, 0) );
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetErrorFileOn(n, 0) );
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetLogFileOn(n, 0) );
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetSelectedOutputFileOn(n, 0) );
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 0) );
+// COMMENT: {1/18/2013 6:34:57 PM}	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
+// COMMENT: {1/18/2013 6:34:57 PM}
+// COMMENT: {1/18/2013 6:34:57 PM}	::RunFile(n, "IEEE");
+// COMMENT: {1/18/2013 6:34:57 PM}	const char* err = ::GetErrorString(n);
+// COMMENT: {1/18/2013 6:34:57 PM}	fprintf(stderr, "%s\n", err);
+// COMMENT: {1/18/2013 6:34:57 PM}
+// COMMENT: {1/18/2013 6:34:57 PM}	if (n >= 0)
+// COMMENT: {1/18/2013 6:34:57 PM}	{
+// COMMENT: {1/18/2013 6:34:57 PM}		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+// COMMENT: {1/18/2013 6:34:57 PM}	}
 }
