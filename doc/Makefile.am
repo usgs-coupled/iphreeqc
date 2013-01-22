@@ -5,8 +5,7 @@ docdir = $(datadir)/doc/$(PACKAGE_TARNAME)-$(VERSION)/html
 dist_doc_DATA = $(DOCS)
 
 DOCS= \
-    RELEASE \
-    PHREEQCPP-RELEASE \
+	RELEASE \
 	html/annotated.html \
 	html/classes.html \
 	html/classIPhreeqc.html \
