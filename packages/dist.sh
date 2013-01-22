@@ -173,6 +173,13 @@ echo "Exporting revision $REVISION of external examples/fortran into sandbox..."
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/fortran" \
 	     "$DISTNAME/examples/fortran")
 
+echo "Exporting revision $REVISION of external phreeqc3-doc into sandbox..."
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/doc" \
+	     "$DISTNAME/phreeqc3-doc")
+
+
 ver_major=`echo $VERSION | cut -d '.' -f 1`
 ver_minor=`echo $VERSION | cut -d '.' -f 2`
 ver_patch=`echo $VERSION | cut -d '.' -f 3`
