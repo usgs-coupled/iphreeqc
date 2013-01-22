@@ -184,8 +184,7 @@ fi
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
 SED_FILES="$DISTPATH/configure.ac \
-           $DISTPATH/src/phreeqcpp/PHREEQCPP-RELEASE.txt \
-           $DISTPATH/src/phreeqcpp/phreeqc/revisions"
+           $DISTPATH/phreeqc3-doc/RELEASE.TXT"
 
 for vsn_file in $SED_FILES
 do
@@ -201,8 +200,7 @@ do
   cp "$vsn_file" "$vsn_file.dist"
 done
 
-cp $DISTPATH/src/phreeqcpp/PHREEQCPP-RELEASE.txt $DISTPATH/doc/PHREEQCPP-RELEASE
-cp $DISTPATH/src/phreeqcpp/phreeqc/revisions     $DISTPATH/doc/RELEASE
+cp $DISTPATH/phreeqc3-doc/RELEASE.TXT     $DISTPATH/doc/RELEASE
 
 (cd "$DISTPATH/doc" && "doxygen")
 
