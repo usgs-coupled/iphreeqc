@@ -165,6 +165,15 @@ fi
 	     	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/doc" \
+	     "$DISTNAME/phreeqc3-doc")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
+	     	     
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/$REPOS_PATH/database" \
 	     "$DISTNAME/database")
 if [ $? != 0 ] ; then
@@ -207,8 +216,7 @@ if [ -z "$ver_patch" ]; then
   ver_patch="0"
 fi
 
-SED_FILES="$DISTPATH/src/phreeqcpp/PHREEQCPP-RELEASE.txt \
-           $DISTPATH/src/phreeqcpp/phreeqc/revisions"
+SED_FILES="$DISTNAME/phreeqc3-doc/RELEASE.TXT"
 
 
 for vsn_file in $SED_FILES
