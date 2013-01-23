@@ -216,8 +216,7 @@ if [ -z "$ver_patch" ]; then
   ver_patch="0"
 fi
 
-SED_FILES="$DISTNAME/phreeqc3-doc/RELEASE.TXT"
-
+SED_FILES="$DISTPATH/phreeqc3-doc/RELEASE.TXT"
 
 for vsn_file in $SED_FILES
 do
