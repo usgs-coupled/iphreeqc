@@ -984,7 +984,7 @@
 	</Configurations>
 	<References>
 		<AssemblyReference
-			RelativePath=".\src\phreeqcpp\ZedGraph.dll"
+			RelativePath="ZedGraph.dll"
 			AssemblyName="ZedGraph, Version=5.1.5.28844, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
 		/>
 		<AssemblyReference
@@ -1515,10 +1515,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\Dictionary.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\phreeqcpp\dumper.h"
 				>
 			</File>
@@ -1547,15 +1543,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\global.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\phreeqcpp\global_structures.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\input.h"
 				>
 			</File>
 			<File
@@ -1568,10 +1556,6 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\Keywords.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\kinetics.h"
 				>
 			</File>
 			<File
@@ -1595,14 +1579,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\output.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\p2c.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\phreeqcpp\Parser.h"
 				>
 			</File>
@@ -1619,10 +1595,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\Phreeqc_class.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\phreeqcpp\PHRQ_base.h"
 				>
 			</File>
@@ -1632,14 +1604,6 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\phrqtype.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\pitzer.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\pitzer_structures.h"
 				>
 			</File>
 			<File
@@ -1676,10 +1640,6 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\SolutionIsotope.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\phreeqcpp\SolutionIsotopeList.h"
 				>
 			</File>
 			<File
