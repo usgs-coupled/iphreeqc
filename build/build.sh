@@ -241,7 +241,7 @@ install() {
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm"                       "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.chm" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.pdf"                       "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.pdf" && \
   /usr/bin/install -m 755 "${objdir}/phreeqc3-doc/RELEASE.TXT"               "${instdir}/${FULLPKG}-vs2005-x64/doc/RELEASE.txt" && \
-  /usr/bin/install -m 755 "${objdir}/clrx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/libx64/." && \
+  /usr/bin/install -m 755 "${objdir}/clrx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/clrx64/." && \
   /usr/bin/install -m 755 "${objdir}/libx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/libx64/." && \
   /usr/bin/install -m 755 "${objdir}/dllx64/"*                               "${instdir}/${FULLPKG}-vs2005-x64/dllx64/." && \
   /usr/bin/install -m 755 "${objdir}/src/IPhreeqc.f.inc"                     "${instdir}/${FULLPKG}-vs2005-x64/include/." && \
