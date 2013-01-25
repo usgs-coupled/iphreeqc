@@ -216,7 +216,8 @@ if [ -z "$ver_patch" ]; then
   ver_patch="0"
 fi
 
-SED_FILES="$DISTPATH/phreeqc3-doc/RELEASE.TXT"
+SED_FILES="$DISTPATH/phreeqc3-doc/RELEASE.TXT \
+           $DISTPATH/doc/Doxyfile"
 
 for vsn_file in $SED_FILES
 do
@@ -227,6 +228,7 @@ do
    -e "/#define *VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
    -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
    -e "s/@PHREEQC_VER@/$VER/g" \
+   -e "s/^PHREEQC_VER^/$VER/g" \
    -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
     < "$vsn_file" > "$vsn_file.tmp"
   unix2dos "$vsn_file.tmp" 2> /dev/null
