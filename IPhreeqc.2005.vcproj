@@ -1042,6 +1042,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\IPhreeqc.rc"
+				>
+			</File>
+			<File
 				RelativePath=".\src\IPhreeqcF.f"
 				>
 				<FileConfiguration
@@ -1623,6 +1627,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\phreeqcpp\runner.h"
 				>
 			</File>
@@ -1696,6 +1704,15 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\Utils.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+			>
+			<File
+				RelativePath=".\src\phreeqcpp\Form1.resX"
 				>
 			</File>
 		</Filter>
