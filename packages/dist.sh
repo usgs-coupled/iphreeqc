@@ -208,6 +208,7 @@ do
 done
 
 cp $DISTPATH/phreeqc3-doc/RELEASE.TXT     $DISTPATH/doc/RELEASE
+cp $DISTPATH/phreeqc3-doc/NOTICE.TXT      $DISTPATH/doc/NOTICE
 
 (cd "$DISTPATH/doc" && "doxygen")
 

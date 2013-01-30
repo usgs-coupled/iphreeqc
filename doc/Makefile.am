@@ -5,6 +5,7 @@ docdir = $(datadir)/doc/$(PACKAGE_TARNAME)-$(VERSION)/html
 dist_doc_DATA = $(DOCS)
 
 DOCS= \
+	NOTICE \
 	RELEASE \
 	html/annotated.html \
 	html/classes.html \
