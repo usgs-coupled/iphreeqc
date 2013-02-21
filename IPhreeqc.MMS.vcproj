@@ -48,7 +48,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -87,7 +87,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -121,7 +121,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -160,12 +160,12 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;libx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\IPhreeqc.vsprops"
@@ -192,9 +192,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
-				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=""
@@ -215,7 +214,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName)d.lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -233,7 +231,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc90.pdb&quot; &quot;lib\vc90.pdb&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -266,9 +264,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
-				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=""
@@ -289,7 +286,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName)d.lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -307,7 +303,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;libx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;libx64\vc80.pdb&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -340,7 +336,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -388,7 +384,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dll\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -422,7 +418,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -470,7 +466,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dllx64\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -502,9 +498,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
-				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
@@ -525,7 +520,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				GenerateDebugInformation="true"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -552,7 +546,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dll\vc80.pdb&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -585,9 +579,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
-				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
@@ -608,7 +601,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				GenerateDebugInformation="true"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -636,7 +628,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dllx64\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;dllx64\vc80.pdb&quot;&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
