@@ -3378,3 +3378,43 @@ void TestIPhreeqc::TestBasicSURF(void)
 	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
 	CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.7201e-008, v.dVal, ::pow(10., -FLT_DIG) );
 }
+
+#include <time.h>
+void TestIPhreeqc::TestCErrorReporter(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("llnl.dat"));
+
+	int max = 6;
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, SOLUTION(obj, 1.0, 1.0, 1.0));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, USER_PUNCH(obj, "Ca", max));
+
+	obj.SetOutputFileOn(0);
+	obj.SetErrorFileOn(0);
+	obj.SetLogFileOn(0);
+	obj.SetSelectedOutputFileOn(0);
+	obj.SetDumpFileOn(0);
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunAccumulated());
+
+	clock_t t0 = clock();
+	int nrows = obj.GetSelectedOutputRowCount();
+	int ncols = obj.GetSelectedOutputColumnCount();
+	CVar var;
+	for (int c = 0; c < 4000; ++c)
+	{
+		for (int row = 0; row < nrows; ++row)
+		{
+			for (int col = 0; col < ncols; ++col)
+			{
+				CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(row, col, &var));
+			}
+		}
+	}
+	clock_t t = clock();
+	//printf("\ntime = %g\n", double(t - t0));
+}
+
+
