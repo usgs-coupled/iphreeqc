@@ -1,0 +1,37 @@
+# Simple predominance diagram
+PRINT
+   -reset false
+PHASES
+Fix_H+
+   H+ = H+
+   log_k 0.0
+SELECTED_OUTPUT
+   -high_precision true
+   -reset false
+
+USER_PUNCH
+-headings
+-start
+50 main$ = "<mainspecies>"
+60 IF STEP_NO = 0 THEN 100 ELSE 70
+70 totel = SYS(main$, n, n$, t$, c)
+80 h2o = TOT("water")
+90 PUNCH n$(1), c(1)/h2o
+100 END
+-end
+END
+
+SOLUTION 1
+   pH        1.8
+   units     mol/kgw
+   Fe(3)     1e-1
+   Na        1e-1
+   Cl        1e-1
+
+EQUILIBRIUM_PHASES 1
+   Fix_H+ -<x_axis> NaOH 10
+     -force_equality true
+   O2(g)  <y_axis>
+   Fe(OH)3(a) 0 0
+END
+

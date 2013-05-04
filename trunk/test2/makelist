@@ -1,0 +1,50 @@
+CC                  = gcc -fno-second-underscore
+FC                  = g77 -fno-second-underscore
+ARC                 = CYGWIN
+RM                  = rm -f
+MV                  = mv -f
+CP                  = cp
+RANLIB              = ls
+MAKE                = make
+LN                  = ln -s
+CD                  = cd
+AR                  = ar ruv
+
+COMPILE_FLAGS       = -DUSE_DIRENT
+LDFLAGS             =
+PRINTFLAGS          = -DUSE_LPR_PRINT_CMD
+
+XCFLAGS             =
+XLDFLAGS            =
+XINCPATH            = -I/usr/X11R6/include
+XBAEINCPATH         = -I/mms/src/include -I/usr/X11R6/include/Xbae
+XMINCPATH           = -I/usr/X11R6/include
+XLIBPATH            = -L/usr/X11R6/lib
+XTLIBPATH           = -L/usr/X11R6/lib
+XMLIBPATH           = -L/usr/X11R6/lib
+XLIB                = -lX11
+XTLIB               = -lXt
+XMLIB               = -lXm
+XEXTRALIBS          = -lcygipc -lSM -lICE -lnetcdf -lf2c
+MATHLIB             = -lm
+GISFLAG             = -D_GIS
+GISLIB              = -lgis
+
+
+###################################################################### 
+#                   local macros for model building
+###################################################################### 
+
+MMSDIR              = /mms
+MSRCDIR             = /mms/src/mms
+MINCDIR             = /mms/src/include
+MLIBDIR             = /mms/lib
+MOBJDIR             = /mms/obj
+OBJDIR              = /mms/obj
+MBINDIR             = /mms/bin
+CFLAGS              = -g -DUSE_DIRENT -I. -I/mms/src/include -I/usr/X11R6/include -DHAVE_NETCDF -I/usr/include -I/usr/local/include
+FFLAGS              = -g
+# CFLAGS              = -O3 -DNDEBUG -DUSE_DIRENT -I. -I/mms/src/include -I/usr/X11R6/include -DHAVE_NETCDF -I/usr/include -I/usr/local/include
+# FFLAGS              = -O3
+FLIBS               = -lm -lc
+GLIBS               = -L/usr/X11R6/lib -lXm -lXt -lX11 $(XEXTRALIBS)
