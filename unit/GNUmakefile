@@ -14,7 +14,7 @@ MV                  = mv -f
 RANLIB              = ranlib
 RM                  = rm -f
 TARGET              = unit
-VPATH               = .:../src:../src/phreeqcpp:../src/phreeqcpp/phreeqc
+VPATH               = .:../src:../src/phreeqcpp
 
 %.o: %.c
 	test -z "$(DEPDIR)" || $(MKDIR_P) "$(DEPDIR)"
