@@ -803,6 +803,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\Model_eqns.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\NameDouble.cxx"
 					>
 				</File>
