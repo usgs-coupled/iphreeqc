@@ -3908,3 +3908,60 @@ void TestIPhreeqcLib::TestIEEE(void)
 // COMMENT: {1/18/2013 6:34:57 PM}		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 // COMMENT: {1/18/2013 6:34:57 PM}	}
 }
+
+void TestIPhreeqcLib::TestDelete(void)
+{
+	const char input[] =
+		"SOLUTION 1 # definition of intial condition 1\n"
+		"COPY cell 1 7405 # copy cell 1 to placeholder cell with index larger than the number of cells in the model domain\n"
+		"END\n"
+		"DELETE # delete initial condition 1 to allow for a redefinition of all reactions\n"
+		"-cell 1\n"
+		"END\n"
+		"# define other initial conditions and copy to another placeholder cell\n"
+		"\n"
+		"COPY cell 7405    1 # copy back from placeholder cell to domain cell 1\n"
+		"END\n"
+		"MIX    1 # mix according to initial moisture content\n"
+		"   1 0.25\n"
+		"END\n"
+		"RUN_CELLS\n"
+		"-cells 1\n"
+		"-start_time 0\n"
+		"-time_step 0\n"
+		"DELETE # remove mix reaction in subsequent runs\n"
+		"-mix 1\n"
+		"END\n"
+		"RUN_CELLS\n"
+		"-cells 1\n";
+
+	int n = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(n >= 0);
+
+	char OUTPUT_FILE[80];
+	sprintf(OUTPUT_FILE, "phreeqc.%d.out", n);
+
+	if (::FileExists(OUTPUT_FILE))
+	{
+		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
+	}
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
+
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(n, "phreeqc.dat"));
+	::SetOutputFileOn(n, 0);
+	::SetErrorFileOn(n, 0);
+	::SetLogFileOn(n, 0);
+	::SetSelectedOutputFileOn(n, 0);
+	::SetDumpFileOn(n, 0);
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
+	CPPUNIT_ASSERT_EQUAL(0,     ::RunString(n, input));
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+	if (::FileExists(OUTPUT_FILE))
+	{
+		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
+	}
+}

@@ -63,6 +63,8 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLongUser_Punch );
 	CPPUNIT_TEST( TestBasicSURF );
 	CPPUNIT_TEST( TestCErrorReporter );
+	CPPUNIT_TEST( TestDelete );
+
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -126,6 +128,8 @@ public:
 	void TestLongUser_Punch(void);
 	void TestBasicSURF(void);
 	void TestCErrorReporter(void);
+	void TestDelete(void);
+
 
 protected:
 	void TestFileOnOff(const char* FILENAME, bool output_file_on, bool error_file_on, bool log_file_on, bool selected_output_file_on, bool dump_file_on);

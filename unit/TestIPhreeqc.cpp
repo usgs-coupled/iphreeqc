@@ -3417,4 +3417,53 @@ void TestIPhreeqc::TestCErrorReporter(void)
 	//printf("\ntime = %g\n", double(t - t0));
 }
 
+void TestIPhreeqc::TestDelete(void)
+{
+	const char input[] =
+		"SOLUTION 1 # definition of intial condition 1\n"
+		"COPY cell 1 7405 # copy cell 1 to placeholder cell with index larger than the number of cells in the model domain\n"
+		"END\n"
+		"DELETE # delete initial condition 1 to allow for a redefinition of all reactions\n"
+		"-cell 1\n"
+		"END\n"
+		"# define other initial conditions and copy to another placeholder cell\n"
+		"\n"
+		"COPY cell 7405    1 # copy back from placeholder cell to domain cell 1\n"
+		"END\n"
+		"MIX    1 # mix according to initial moisture content\n"
+		"   1 0.25\n"
+		"END\n"
+		"RUN_CELLS\n"
+		"-cells 1\n"
+		"-start_time 0\n"
+		"-time_step 0\n"
+		"DELETE # remove mix reaction in subsequent runs\n"
+		"-mix 1\n"
+		"END\n"
+		"RUN_CELLS\n"
+		"-cells 1\n";
 
+	IPhreeqc obj;
+
+	char OUTPUT_FILE[80];
+	sprintf(OUTPUT_FILE, "phreeqc.%lu.out", (unsigned long)obj.Index);
+
+	if (::FileExists(OUTPUT_FILE))
+	{
+		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
+	}
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
+	CPPUNIT_ASSERT_EQUAL(0,     obj.LoadDatabase("phreeqc.dat"));
+	obj.SetOutputFileOn(0);
+	obj.SetErrorFileOn(0);
+	obj.SetLogFileOn(0);
+	obj.SetSelectedOutputFileOn(0);
+	obj.SetDumpFileOn(0);
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
+	CPPUNIT_ASSERT_EQUAL(0,     obj.RunString(input));
+	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
+	if (::FileExists(OUTPUT_FILE))
+	{
+		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
+	}
+}
