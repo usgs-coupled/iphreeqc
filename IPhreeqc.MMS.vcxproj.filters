@@ -86,9 +86,6 @@
     <ClCompile Include="src\phreeqcpp\KineticsComp.cxx">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
-    <ClCompile Include="src\phreeqcpp\Model_eqns.cpp">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
     <ClCompile Include="src\phreeqcpp\NameDouble.cxx">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
@@ -278,6 +275,9 @@
     <ClCompile Include="src\phreeqcpp\utilities.cpp">
       <Filter>Source Files\phreeqcpp\phreeqc</Filter>
     </ClCompile>
+    <ClCompile Include="src\phreeqcpp\Model_eqns.cpp">
+      <Filter>Source Files\phreeqcpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CVar.hxx">
@@ -461,6 +461,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\phreeqcpp\Model_eqns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

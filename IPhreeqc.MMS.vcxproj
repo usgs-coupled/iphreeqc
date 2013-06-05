@@ -415,6 +415,7 @@
     <ClCompile Include="src\fwrap8.cpp" />
     <ClCompile Include="src\IPhreeqc.cpp" />
     <ClCompile Include="src\IPhreeqcLib.cpp" />
+    <ClCompile Include="src\phreeqcpp\Model_eqns.cpp" />
     <ClCompile Include="src\SelectedOutput.cpp" />
     <ClCompile Include="src\Var.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">CompileAsCpp</CompileAs>
@@ -433,7 +434,6 @@
     <ClCompile Include="src\phreeqcpp\ISolutionComp.cxx" />
     <ClCompile Include="src\phreeqcpp\Keywords.cpp" />
     <ClCompile Include="src\phreeqcpp\KineticsComp.cxx" />
-    <ClCompile Include="src\phreeqcpp\Model_eqns.cpp" />
     <ClCompile Include="src\phreeqcpp\NameDouble.cxx" />
     <ClCompile Include="src\phreeqcpp\NumKeyword.cxx" />
     <ClCompile Include="src\phreeqcpp\Parser.cxx" />
@@ -528,6 +528,7 @@
     <ClInclude Include="src\phreeqcpp\Keywords.h" />
     <ClInclude Include="src\phreeqcpp\kinetics.h" />
     <ClInclude Include="src\phreeqcpp\KineticsComp.h" />
+    <ClInclude Include="src\phreeqcpp\Model_eqns.h" />
     <ClInclude Include="src\phreeqcpp\NameDouble.h" />
     <ClInclude Include="src\phreeqcpp\NumKeyword.h" />
     <ClInclude Include="src\phreeqcpp\nvector.h" />
