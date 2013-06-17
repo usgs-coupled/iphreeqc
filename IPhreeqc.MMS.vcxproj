@@ -415,7 +415,10 @@
     <ClCompile Include="src\fwrap8.cpp" />
     <ClCompile Include="src\IPhreeqc.cpp" />
     <ClCompile Include="src\IPhreeqcLib.cpp" />
-    <ClCompile Include="src\phreeqcpp\Model_eqns.cpp" />
+    <ClCompile Include="src\phreeqcpp\Model_eqns.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\SelectedOutput.cpp" />
     <ClCompile Include="src\Var.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">CompileAsCpp</CompileAs>
