@@ -1684,7 +1684,7 @@ void TestIPhreeqc::TestGetDumpStringLineCount(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 30,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 31,        obj.GetDumpStringLineCount() );
 }
 
 void TestIPhreeqc::TestGetDumpStringLine(void)
@@ -1710,12 +1710,13 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 30,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 31,        obj.GetDumpStringLineCount() );
 
 	int line = 0;
 
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "SOLUTION_RAW")                  != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-temp")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-pressure")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-total_h")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-cb")                           != NULL);
@@ -1880,6 +1881,7 @@ void TestIPhreeqc::TestSetDumpFileName(void)
 	int line = 0;
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "SOLUTION_RAW")                  != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-temp")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-pressure")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_h")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-cb")                           != NULL);

@@ -1806,7 +1806,7 @@ void TestIPhreeqcLib::TestGetDumpStringLineCount(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 30,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 31,     ::GetDumpStringLineCount(n) );
 
 	if (n >= 0)
 	{
@@ -1835,12 +1835,13 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 30,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 31,     ::GetDumpStringLineCount(n) );
 
 	int line = 0;
 
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "SOLUTION_RAW")                  != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-temp")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-pressure")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-total_h")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-cb")                           != NULL);
@@ -2330,6 +2331,7 @@ void TestIPhreeqcLib::TestSetDumpFileName(void)
 	int line = 0;
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "SOLUTION_RAW")                  != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-temp")                         != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-pressure")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_h")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-cb")                           != NULL);
