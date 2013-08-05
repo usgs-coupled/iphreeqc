@@ -275,9 +275,6 @@
     <ClCompile Include="src\phreeqcpp\utilities.cpp">
       <Filter>Source Files\phreeqcpp\phreeqc</Filter>
     </ClCompile>
-    <ClCompile Include="src\phreeqcpp\Model_eqns.cpp">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CVar.hxx">
