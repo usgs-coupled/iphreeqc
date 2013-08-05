@@ -463,6 +463,12 @@
     <ClInclude Include="src\phreeqcpp\Model_eqns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\IPhreeqc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IPhreeqc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\IPhreeqcF.f">

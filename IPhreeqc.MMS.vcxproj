@@ -507,6 +507,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CVar.hxx" />
+    <ClInclude Include="src\IPhreeqc.h" />
+    <ClInclude Include="src\IPhreeqc.hpp" />
     <ClInclude Include="src\phreeqcpp\cvdense.h" />
     <ClInclude Include="src\phreeqcpp\cvode.h" />
     <ClInclude Include="src\phreeqcpp\cxxKinetics.h" />
