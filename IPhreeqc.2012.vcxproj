@@ -246,7 +246,7 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "libx64\$(TargetName)$(TargetExt)"</Co
     <PostBuildEvent>
       <Command>IF NOT EXIST lib mkdir lib
 copy "$(OutDir)$(TargetName)$(TargetExt)" "lib\$(TargetName)$(TargetExt)"
-copy "$(OutDir)vc100.pdb" "lib\vc100.pdb"</Command>
+copy "$(OutDir)vc110.pdb" "lib\vc110.pdb"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
