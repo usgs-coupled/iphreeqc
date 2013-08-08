@@ -9,8 +9,9 @@ EQUILIBRIUM_PHASES 2
 SELECTED_OUTPUT
    -reset false
 USER_PUNCH
-   -Heading  charge    H   O   C   Ca  pH  SR(calcite)
+   -Heading  charge    H   O   C   Ca  pH  SR(calcite) Year
    10 PUNCH charge_balance
    20 PUNCH TOTMOLE("H"), TOTMOLE("O"), TOTMOLE("C"), TOTMOLE("Ca")
    30 PUNCH -LA("H+"), SR("calcite")
+   40 PUNCH CALLBACK(cell_no, -LA("H+"), "Year")
 END
