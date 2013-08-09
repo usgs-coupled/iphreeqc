@@ -31,7 +31,7 @@ end module MyData
 module Callback    
     contains
     double precision function MyCallback(x1, x2, str)
-    use MyData
+    use MyData, only : year
 !       
 !   Use of a callback is optional.
 !   
