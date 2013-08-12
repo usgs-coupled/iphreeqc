@@ -1273,6 +1273,118 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\SelectedOutput.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseDll|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseDll|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugDll|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugDll|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugCLR|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugCLR|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseCLR|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseCLR|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Solution.cxx"
 					>
 				</File>
@@ -1495,6 +1607,18 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
+				RelativePath=".\src\phreeqcpp\ChartHandler.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\ChartObject.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\CurveObject.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\CVar.hxx"
 				>
 			</File>
@@ -1512,6 +1636,10 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\cxxMix.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Debug.h"
 				>
 			</File>
 			<File
@@ -1543,11 +1671,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\GasComp.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\phreeqcpp\GasPhase.h"
 				>
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\global_structures.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\IPhreeqc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\IPhreeqc.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\IPhreeqcCallbacks.h"
 				>
 			</File>
 			<File
@@ -1564,6 +1708,10 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\KineticsComp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\NA.h"
 				>
 			</File>
 			<File
@@ -1635,6 +1783,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\SelectedOutput.h"
+				>
+			</File>
+			<File
 				RelativePath="src\SelectedOutput.hxx"
 				>
 			</File>
@@ -1699,11 +1851,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\thread.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\phreeqcpp\Use.h"
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\UserPunch.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\phreeqcpp\Utils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Var.h"
 				>
 			</File>
 		</Filter>

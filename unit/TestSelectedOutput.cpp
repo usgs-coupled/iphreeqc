@@ -421,20 +421,14 @@ TestSelectedOutput::TestTooManyHeadings()
 	// -headings 1.name 1.type 1.moles
 
 	p.PhreeqcPtr->n_user_punch_index        = 0;
-	p.PhreeqcPtr->user_punch_headings       = 0;
-	p.PhreeqcPtr->user_punch_count_headings = 0;
+	p.PhreeqcPtr->UserPunch_map[1]          = UserPunch();
+	p.PhreeqcPtr->current_user_punch        = &(p.PhreeqcPtr->UserPunch_map[1]);
 
-	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
-	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.name");
-	p.PhreeqcPtr->user_punch_count_headings++;
-
-	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
-	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.type");
-	p.PhreeqcPtr->user_punch_count_headings++;
-
-	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
-	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.moles");
-	p.PhreeqcPtr->user_punch_count_headings++;
+	std::vector< std::string > headings;
+	headings.push_back("1.name");
+	headings.push_back("1.type");
+	headings.push_back("1.moles");
+	p.PhreeqcPtr->UserPunch_map[1].Set_headings(headings);
 
 	CPPUNIT_ASSERT_EQUAL(0,   p.EndRow());
 	CPPUNIT_ASSERT_EQUAL((size_t)3, p.SelectedOutput->GetColCount());
@@ -446,14 +440,7 @@ TestSelectedOutput::TestTooManyHeadings()
 #endif
 
 	// clean up headings
-	//
-	for (int i = 0; i < p.PhreeqcPtr->user_punch_count_headings; ++i)
-	{
-		::free((void*)p.PhreeqcPtr->user_punch_headings[i]);
-	}
-	::free(p.PhreeqcPtr->user_punch_headings);
-	p.PhreeqcPtr->user_punch_headings = NULL;
-	p.PhreeqcPtr->user_punch_count_headings = 0;
+	p.PhreeqcPtr->UserPunch_map[1].Get_headings().empty();
 
 	CVar head0, head1, head2;
 	CVar val0, val1, val2;
