@@ -75,11 +75,11 @@ int main(int argc, char **argv)
 	s.startTimer();
 #endif
 
-// COMMENT: {8/12/2013 6:53:42 PM}	runner.addTest(TestVar::suite());
-// COMMENT: {8/12/2013 6:53:42 PM}	runner.addTest(TestCVar::suite());
-// COMMENT: {8/12/2013 6:53:42 PM}	runner.addTest(TestSelectedOutput::suite());
+	runner.addTest(TestVar::suite());
+	runner.addTest(TestCVar::suite());
+	runner.addTest(TestSelectedOutput::suite());
 	runner.addTest(TestIPhreeqc::suite());
-// COMMENT: {8/12/2013 6:53:42 PM}	runner.addTest(TestIPhreeqcLib::suite());
+	runner.addTest(TestIPhreeqcLib::suite());
 
 	runner.setOutputter(CppUnit::CompilerOutputter::defaultOutputter(&runner.result(), std::cout));
 
