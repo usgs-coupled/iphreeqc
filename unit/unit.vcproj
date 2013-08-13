@@ -446,15 +446,15 @@
 				Name="src"
 				>
 				<File
+					RelativePath="..\src\CSelectedOutput.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\IPhreeqc.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\src\IPhreeqcLib.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\SelectedOutput.cpp"
 					>
 				</File>
 				<File
@@ -939,6 +939,10 @@
 				Name="src"
 				>
 				<File
+					RelativePath="..\src\CSelectedOutput.hxx"
+					>
+				</File>
+				<File
 					RelativePath="..\src\CVar.hxx"
 					>
 				</File>
@@ -964,10 +968,6 @@
 				</File>
 				<File
 					RelativePath="..\src\IPhreeqcCallbacks.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\SelectedOutput.hxx"
 					>
 				</File>
 				<File

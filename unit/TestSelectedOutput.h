@@ -5,7 +5,7 @@
 #pragma warning(disable : 4786)   // disable truncation warning
 #endif
 
-#include "../src/SelectedOutput.hxx"
+#include "../src/CSelectedOutput.hxx"
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestFixture.h>
 
