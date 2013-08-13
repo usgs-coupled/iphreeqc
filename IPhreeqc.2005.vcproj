@@ -1791,10 +1791,6 @@
 				>
 			</File>
 			<File
-				RelativePath="src\SelectedOutput.hxx"
-				>
-			</File>
-			<File
 				RelativePath=".\src\phreeqcpp\smalldense.h"
 				>
 			</File>
