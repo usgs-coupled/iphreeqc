@@ -14,6 +14,20 @@ c_advect= \
     c/advect/ic \
     c/advect/phreeqc.dat
 
+# c++
+#
+example_cppdir = $(EXAMPLES_DIR)/cpp
+example_cpp_advectdir = $(EXAMPLES_DIR)/cpp/advect
+
+dist_example_cpp_advect_DATA = $(cpp_advect)
+
+cpp_advect= \
+    cpp/advect/advect.cpp \
+    cpp/advect/advect_c.sln \
+    cpp/advect/advect_c.vcproj \
+    cpp/advect/ic \
+    cpp/advect/phreeqc.dat
+
 # fortran
 #
 example_fortrandir = $(EXAMPLES_DIR)/fortran
