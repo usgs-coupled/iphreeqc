@@ -1469,7 +1469,7 @@ USER_PUNCH(IPhreeqc& obj, const char* element, int max)
 	oss << "10 n = sys(\"" << element << "\"" << ", count, names$, types$, moles)" << "\n";
 	oss << "20 n = " << max << "\n";
 	oss << "30 if count < " << max << " then n = count" << "\n";
-	oss << "40 for i = 1 to count" << "\n";
+	oss << "40 for i = 1 to n" << "\n";
 	oss << "50 PUNCH names$(i), types$(i), moles(i)" << "\n";
 	oss << "60 next i" << "\n";
 	oss << "70 list" << "\n";
