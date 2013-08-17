@@ -5,18 +5,19 @@
 #include <cassert>
 #include "IPhreeqc.hpp"
 #include "Phreeqc.h"
+#include "FileTest.h"
 #undef true
 #undef false
 #include "CVar.hxx"
 
-#if defined(_WIN32) || defined(__CYGWIN32__)
-// DeleteFile defined in <windows.h>
-#else
-int DeleteFile(const char* szPathName);
-#endif
-
-bool FileExists(const char *szPathName);
-size_t FileSize(const char *szPathName);
+// COMMENT: {8/16/2013 11:49:20 PM}#if defined(_WIN32) || defined(__CYGWIN32__)
+// COMMENT: {8/16/2013 11:49:20 PM}// DeleteFile defined in <windows.h>
+// COMMENT: {8/16/2013 11:49:20 PM}#else
+// COMMENT: {8/16/2013 11:49:20 PM}int DeleteFile(const char* szPathName);
+// COMMENT: {8/16/2013 11:49:20 PM}#endif
+// COMMENT: {8/16/2013 11:49:20 PM}
+// COMMENT: {8/16/2013 11:49:20 PM}bool FileExists(const char *szPathName);
+// COMMENT: {8/16/2013 11:49:20 PM}size_t FileSize(const char *szPathName);
 
 VRESULT SOLUTION(IPhreeqc& obj, double C, double Ca, double Na);
 VRESULT EQUILIBRIUM_PHASES(IPhreeqc& obj, const char* phase, double si, double amount);
@@ -3469,4 +3470,170 @@ void TestIPhreeqc::TestDelete(void)
 	{
 		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
 	}
+}
+
+void TestIPhreeqc::TestRunFileMultiPunchOn(void)
+{
+	if (::FileExists("multi_punch_1.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
+	}
+	if (::FileExists("multi_punch_2.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
+	}
+	if (::FileExists("multi_punch_3.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
+
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	obj.SetSelectedOutputFileOn(true);
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_1.sel") );
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_2.sel") );
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_3.sel") );
+
+	// CLEANUP
+	if (::FileExists("multi_punch_1.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
+	}
+	if (::FileExists("multi_punch_2.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
+	}
+	if (::FileExists("multi_punch_3.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
+	}
+}
+
+void TestIPhreeqc::TestRunFileMultiPunchOff(void)
+{
+	const char dump_file[] = "error.inp";
+
+	if (::FileExists("multi_punch_1.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
+	}
+	if (::FileExists("multi_punch_2.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
+	}
+	if (::FileExists("multi_punch_3.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
+
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	obj.SetOutputFileOn(false);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpFileOn(false);
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
+
+	// CLEANUP
+	if (::FileExists("multi_punch_1.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
+	}
+	if (::FileExists("multi_punch_2.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
+	}
+	if (::FileExists("multi_punch_3.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
+	}
+}
+
+void TestIPhreeqc::TestRunFileMultiPunchSet(void)
+{
+	if (::FileExists("multi_punch_1.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
+	}
+	if (::FileExists("multi_punch_2.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
+	}
+	if (::FileExists("multi_punch_3.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
+	}
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
+
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	obj.SetSelectedOutputFileOn(true);
+	obj.SetSelectedOutputFileName("XXX");
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("XXX") );
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_1.sel") );
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_2.sel") );
+	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_3.sel") );
+
+	// CLEANUP
+	if (::FileExists("multi_punch_1.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
+	}
+	if (::FileExists("multi_punch_2.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
+	}
+	if (::FileExists("multi_punch_3.sel"))
+	{
+		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
+	}
+}
+
+
+
+void TestIPhreeqc::TestRunFileMultiPunchNoSet(void)
+{
+	IPhreeqc obj;
+
+	FileTest set("XXX.sel");
+	CPPUNIT_ASSERT( set.RemoveExisting() );
+
+	FileTest unset1(obj.sel_file_name(1));
+	CPPUNIT_ASSERT( unset1.RemoveExisting() );
+
+	FileTest unset2(obj.sel_file_name(2));
+	CPPUNIT_ASSERT( unset2.RemoveExisting() );
+
+	FileTest unset3(obj.sel_file_name(3));
+	CPPUNIT_ASSERT( unset3.RemoveExisting() );
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	obj.SetSelectedOutputFileOn(true);
+	obj.SetSelectedOutputFileName(set.GetName().c_str());
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch_no_set"));
+
+	CPPUNIT_ASSERT( set.VerifyExists() );
+	CPPUNIT_ASSERT( !unset1.VerifyExists() );
+	CPPUNIT_ASSERT( unset2.VerifyExists() );
+	CPPUNIT_ASSERT( unset3.VerifyExists() );
 }
