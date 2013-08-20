@@ -10,15 +10,6 @@
 #undef false
 #include "CVar.hxx"
 
-// COMMENT: {8/16/2013 11:49:20 PM}#if defined(_WIN32) || defined(__CYGWIN32__)
-// COMMENT: {8/16/2013 11:49:20 PM}// DeleteFile defined in <windows.h>
-// COMMENT: {8/16/2013 11:49:20 PM}#else
-// COMMENT: {8/16/2013 11:49:20 PM}int DeleteFile(const char* szPathName);
-// COMMENT: {8/16/2013 11:49:20 PM}#endif
-// COMMENT: {8/16/2013 11:49:20 PM}
-// COMMENT: {8/16/2013 11:49:20 PM}bool FileExists(const char *szPathName);
-// COMMENT: {8/16/2013 11:49:20 PM}size_t FileSize(const char *szPathName);
-
 VRESULT SOLUTION(IPhreeqc& obj, double C, double Ca, double Na);
 VRESULT EQUILIBRIUM_PHASES(IPhreeqc& obj, const char* phase, double si, double amount);
 VRESULT USER_PUNCH(IPhreeqc& obj, const char* element, int max);
@@ -3474,21 +3465,14 @@ void TestIPhreeqc::TestDelete(void)
 
 void TestIPhreeqc::TestRunFileMultiPunchOn(void)
 {
-	if (::FileExists("multi_punch_1.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
-	}
-	if (::FileExists("multi_punch_2.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
-	}
-	if (::FileExists("multi_punch_3.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
-	}
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
+	FileTest set1("multi_punch_1.sel");
+	CPPUNIT_ASSERT( set1.RemoveExisting() );
+
+	FileTest set2("multi_punch_2.sel");
+	CPPUNIT_ASSERT( set2.RemoveExisting() );
+
+	FileTest set3("multi_punch_3.sel");
+	CPPUNIT_ASSERT( set3.RemoveExisting() );
 
 	IPhreeqc obj;
 
@@ -3496,44 +3480,21 @@ void TestIPhreeqc::TestRunFileMultiPunchOn(void)
 	obj.SetSelectedOutputFileOn(true);
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_1.sel") );
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_2.sel") );
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_3.sel") );
-
-	// CLEANUP
-	if (::FileExists("multi_punch_1.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
-	}
-	if (::FileExists("multi_punch_2.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
-	}
-	if (::FileExists("multi_punch_3.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
-	}
+	CPPUNIT_ASSERT( set1.VerifyExists() );
+	CPPUNIT_ASSERT( set2.VerifyExists() );
+	CPPUNIT_ASSERT( set3.VerifyExists() );
 }
 
 void TestIPhreeqc::TestRunFileMultiPunchOff(void)
 {
-	const char dump_file[] = "error.inp";
+	FileTest set1("multi_punch_1.sel");
+	CPPUNIT_ASSERT( set1.RemoveExisting() );
 
-	if (::FileExists("multi_punch_1.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
-	}
-	if (::FileExists("multi_punch_2.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
-	}
-	if (::FileExists("multi_punch_3.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
-	}
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
+	FileTest set2("multi_punch_2.sel");
+	CPPUNIT_ASSERT( set2.RemoveExisting() );
+
+	FileTest set3("multi_punch_3.sel");
+	CPPUNIT_ASSERT( set3.RemoveExisting() );
 
 	IPhreeqc obj;
 
@@ -3545,71 +3506,38 @@ void TestIPhreeqc::TestRunFileMultiPunchOff(void)
 	obj.SetDumpFileOn(false);
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
-
-	// CLEANUP
-	if (::FileExists("multi_punch_1.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
-	}
-	if (::FileExists("multi_punch_2.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
-	}
-	if (::FileExists("multi_punch_3.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
-	}
+	CPPUNIT_ASSERT( set1.VerifyMissing() );
+	CPPUNIT_ASSERT( set2.VerifyMissing() );
+	CPPUNIT_ASSERT( set3.VerifyMissing() );
 }
 
 void TestIPhreeqc::TestRunFileMultiPunchSet(void)
 {
-	if (::FileExists("multi_punch_1.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
-	}
-	if (::FileExists("multi_punch_2.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
-	}
-	if (::FileExists("multi_punch_3.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
-	}
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_1.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_2.sel") );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("multi_punch_3.sel") );
+	FileTest called("XXX.sel");
+	CPPUNIT_ASSERT( called.RemoveExisting() );
+
+	FileTest set1("multi_punch_1.sel");
+	CPPUNIT_ASSERT( set1.RemoveExisting() );
+
+	FileTest set2("multi_punch_2.sel");
+	CPPUNIT_ASSERT( set2.RemoveExisting() );
+
+	FileTest set3("multi_punch_3.sel");
+	CPPUNIT_ASSERT( set3.RemoveExisting() );
 
 	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
 	obj.SetSelectedOutputFileOn(true);
-	obj.SetSelectedOutputFileName("XXX");
+	obj.SetSelectedOutputFileName(called.GetName().c_str());
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("XXX") );
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_1.sel") );
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_2.sel") );
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists("multi_punch_3.sel") );
+	CPPUNIT_ASSERT( called.VerifyMissing() );
 
-	// CLEANUP
-	if (::FileExists("multi_punch_1.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_1.sel"));
-	}
-	if (::FileExists("multi_punch_2.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_2.sel"));
-	}
-	if (::FileExists("multi_punch_3.sel"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("multi_punch_3.sel"));
-	}
+	CPPUNIT_ASSERT( set1.VerifyExists() );
+	CPPUNIT_ASSERT( set2.VerifyExists() );
+	CPPUNIT_ASSERT( set3.VerifyExists() );
 }
-
-
 
 void TestIPhreeqc::TestRunFileMultiPunchNoSet(void)
 {
