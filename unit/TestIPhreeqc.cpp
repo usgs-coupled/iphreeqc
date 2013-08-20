@@ -3394,7 +3394,7 @@ void TestIPhreeqc::TestCErrorReporter(void)
 	obj.SetDumpFileOn(0);
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunAccumulated());
 
-	clock_t t0 = clock();
+	//clock_t t0 = clock();
 	int nrows = obj.GetSelectedOutputRowCount();
 	int ncols = obj.GetSelectedOutputColumnCount();
 	CVar var;
@@ -3408,7 +3408,7 @@ void TestIPhreeqc::TestCErrorReporter(void)
 			}
 		}
 	}
-	clock_t t = clock();
+	//clock_t t = clock();
 	//printf("\ntime = %g\n", double(t - t0));
 }
 
