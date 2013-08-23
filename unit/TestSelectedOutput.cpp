@@ -410,12 +410,12 @@ TestSelectedOutput::TestTooManyHeadings()
 {
 	IPhreeqc p;
 
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetRowCount());
 
-	p.SelectedOutput->Clear();
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetRowCount());
+	p.PtrSelectedOutput->Clear();
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetRowCount());
 
 	// USER_PUNCH
 	// -headings 1.name 1.type 1.moles
@@ -431,12 +431,12 @@ TestSelectedOutput::TestTooManyHeadings()
 	p.PhreeqcPtr->UserPunch_map[1].Set_headings(headings);
 
 	CPPUNIT_ASSERT_EQUAL(0,   p.EndRow());
-	CPPUNIT_ASSERT_EQUAL((size_t)3, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)2, p.SelectedOutput->GetRowCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, p.PtrSelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)2, p.PtrSelectedOutput->GetRowCount());
 
 
 #if defined(_DEBUG)
-	p.SelectedOutput->Dump("TestTooManyHeadings");
+	p.PtrSelectedOutput->Dump("TestTooManyHeadings");
 #endif
 
 	// clean up headings
@@ -445,13 +445,13 @@ TestSelectedOutput::TestTooManyHeadings()
 	CVar head0, head1, head2;
 	CVar val0, val1, val2;
 
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(0, 0, &head0));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(0, 1, &head1));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(0, 2, &head2));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(0, 0, &head0));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(0, 1, &head1));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(0, 2, &head2));
 
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(1, 0, &val0));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(1, 1, &val1));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(1, 2, &val2));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(1, 0, &val0));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(1, 1, &val1));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(1, 2, &val2));
 
 	CPPUNIT_ASSERT_EQUAL(TT_STRING, head0.type);
 	CPPUNIT_ASSERT_EQUAL(TT_STRING, head1.type);
@@ -466,15 +466,15 @@ TestSelectedOutput::TestTooManyHeadings()
 	CPPUNIT_ASSERT_EQUAL(std::string("1.moles"), std::string(head2.sVal));
 
 
-	CPPUNIT_ASSERT_EQUAL(0, p.SelectedOutput->PushBackLong("sim", 1));
-	CPPUNIT_ASSERT_EQUAL(0, p.SelectedOutput->PushBackString("state", "i_soln"));
-	CPPUNIT_ASSERT_EQUAL(0, p.SelectedOutput->PushBackLong("soln", 22));
+	CPPUNIT_ASSERT_EQUAL(0, p.PtrSelectedOutput->PushBackLong("sim", 1));
+	CPPUNIT_ASSERT_EQUAL(0, p.PtrSelectedOutput->PushBackString("state", "i_soln"));
+	CPPUNIT_ASSERT_EQUAL(0, p.PtrSelectedOutput->PushBackLong("soln", 22));
 
-	CPPUNIT_ASSERT_EQUAL(0,  p.SelectedOutput->EndRow());
-	CPPUNIT_ASSERT_EQUAL((size_t)6, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)3, p.SelectedOutput->GetRowCount());
+	CPPUNIT_ASSERT_EQUAL(0,  p.PtrSelectedOutput->EndRow());
+	CPPUNIT_ASSERT_EQUAL((size_t)6, p.PtrSelectedOutput->GetColCount());
+	CPPUNIT_ASSERT_EQUAL((size_t)3, p.PtrSelectedOutput->GetRowCount());
 #if defined(_DEBUG)
-	p.SelectedOutput->Dump("TestTooManyHeadings");
+	p.PtrSelectedOutput->Dump("TestTooManyHeadings");
 #endif
 }
 

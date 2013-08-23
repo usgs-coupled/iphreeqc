@@ -3476,7 +3476,7 @@ void TestIPhreeqc::TestRunFileMultiPunchOn(void)
 
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
 	obj.SetSelectedOutputFileOn(true);
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
@@ -3498,7 +3498,7 @@ void TestIPhreeqc::TestRunFileMultiPunchOff(void)
 
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
 	obj.SetOutputFileOn(false);
 	obj.SetErrorFileOn(false);
 	obj.SetLogFileOn(false);
@@ -3527,7 +3527,7 @@ void TestIPhreeqc::TestRunFileMultiPunchSet(void)
 
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetSelectedOutputFileName(called.GetName().c_str());
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
@@ -3555,7 +3555,7 @@ void TestIPhreeqc::TestRunFileMultiPunchNoSet(void)
 	FileTest unset3(obj.sel_file_name(3));
 	CPPUNIT_ASSERT( unset3.RemoveExisting() );
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetSelectedOutputFileName(set.GetName().c_str());
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch_no_set"));
@@ -3564,4 +3564,83 @@ void TestIPhreeqc::TestRunFileMultiPunchNoSet(void)
 	CPPUNIT_ASSERT( !unset1.VerifyExists() );
 	CPPUNIT_ASSERT( unset2.VerifyExists() );
 	CPPUNIT_ASSERT( unset3.VerifyExists() );
+}
+
+void TestIPhreeqc::TestMultiPunchSelectedOutputStringOn(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
+	obj.SetSelectedOutputStringOn(true);
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL(6, obj.GetSelectedOutputStringLineCount());
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "sim\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "state\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "soln\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "dist_x\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "time\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "step\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "pH\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "pe\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "reaction\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "temp\t")        != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "Alk\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "mu\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "mass_H2O\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "charge\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "pct_err\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "Na\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "Ca\t")          != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "m_Na+\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "m_HCO3-\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "la_Ca+2\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "la_CO3-2\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "CO2(g)\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "d_CO2(g)\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "dolomite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "d_dolomite\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Halite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "pressure\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "total mol\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "volume\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "g_N2(g)\t")     != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "k_Calcite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "dk_Calcite\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "s_Anhydrite\t") != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "s_Barite\t")    != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "V_TOTAL_C\t")   != NULL );
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(1), "  8\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), " 10\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), " 11\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), " 12\t")         != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), " 14\t")         != NULL );
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(1), "react\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), "react\t")       != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), "i_soln\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), "i_soln\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "react\t")       != NULL );
+
+	obj.SetCurrentSelectedOutputUserNumber(2);
+	CPPUNIT_ASSERT_EQUAL(7, obj.GetSelectedOutputStringLineCount());
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Halite\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Calcite\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), "Dummy1\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), "Dummy2\t")      != NULL );
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), "Dummy1\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), "Dummy2\t")      != NULL );
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), "Dummy1\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), "Dummy2\t")      != NULL );
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy1\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy2\t")      != NULL );
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Dummy1\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Dummy2\t")      != NULL );
 }
