@@ -3476,7 +3476,7 @@ void TestIPhreeqc::TestRunFileMultiPunchOn(void)
 
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
 	obj.SetSelectedOutputFileOn(true);
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
@@ -3498,7 +3498,7 @@ void TestIPhreeqc::TestRunFileMultiPunchOff(void)
 
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
 	obj.SetOutputFileOn(false);
 	obj.SetErrorFileOn(false);
 	obj.SetLogFileOn(false);
@@ -3527,7 +3527,7 @@ void TestIPhreeqc::TestRunFileMultiPunchSet(void)
 
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetSelectedOutputFileName(called.GetName().c_str());
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
@@ -3555,7 +3555,7 @@ void TestIPhreeqc::TestRunFileMultiPunchNoSet(void)
 	FileTest unset3(obj.sel_file_name(3));
 	CPPUNIT_ASSERT( unset3.RemoveExisting() );
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetSelectedOutputFileName(set.GetName().c_str());
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch_no_set"));
@@ -3570,7 +3570,7 @@ void TestIPhreeqc::TestMultiPunchSelectedOutputStringOn(void)
 {
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("..\\database\\phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
 	obj.SetSelectedOutputStringOn(true);
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
