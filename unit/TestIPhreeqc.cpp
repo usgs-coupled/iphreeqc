@@ -3625,7 +3625,7 @@ void TestIPhreeqc::TestMultiPunchSelectedOutputStringOn(void)
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "react\t")       != NULL );
 
 	obj.SetCurrentSelectedOutputUserNumber(2);
-	CPPUNIT_ASSERT_EQUAL(7, obj.GetSelectedOutputStringLineCount());
+	CPPUNIT_ASSERT_EQUAL(9, obj.GetSelectedOutputStringLineCount());
 
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Halite\t")   != NULL );
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Calcite\t")  != NULL );
@@ -3641,6 +3641,18 @@ void TestIPhreeqc::TestMultiPunchSelectedOutputStringOn(void)
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy1\t")      != NULL );
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy2\t")      != NULL );
 
-	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Dummy1\t")      != NULL );
-	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Dummy2\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Sum_resid\t")   != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Sum_Delta/U\t") != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "MaxFracErr\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2_min\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2_max\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3_min\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3_max\t")  != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Halite\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Halite_max\t")  != NULL );
+
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy1\t")      != NULL );
+	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy2\t")      != NULL );
 }
