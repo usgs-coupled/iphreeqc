@@ -48,7 +48,7 @@ TOBJS =	\
 SOBJS =	\
 	IPhreeqc.o \
 	IPhreeqcLib.o \
-	SelectedOutput.o \
+	CSelectedOutput.o \
 	Var.o
 
 # phreeqcpp objs
@@ -77,6 +77,7 @@ PPOBJS = \
 	Reaction.o \
 	ReadClass.o \
 	runner.o \
+	SelectedOutput.o \
 	Solution.o \
 	SolutionIsotope.o \
 	SSassemblage.o \
@@ -90,6 +91,7 @@ PPOBJS = \
 	System.o \
 	Temperature.o \
 	Use.o \
+	UserPunch.o \
 	Utils.o
 
 # phreeqc objs
@@ -142,6 +144,7 @@ clean:
 -include ./$(DEPDIR)/advection.Po
 -include ./$(DEPDIR)/basicsubs.Po
 -include ./$(DEPDIR)/cl1.Po
+-include ./$(DEPDIR)/CSelectedOutput.Po
 -include ./$(DEPDIR)/cvdense.Po
 -include ./$(DEPDIR)/cvode.Po
 -include ./$(DEPDIR)/cxxKinetics.Po
@@ -221,6 +224,7 @@ clean:
 -include ./$(DEPDIR)/tidy.Po
 -include ./$(DEPDIR)/transport.Po
 -include ./$(DEPDIR)/unit.Po
+-include ./$(DEPDIR)/UserPunch.Po
 -include ./$(DEPDIR)/utilities.Po
 -include ./$(DEPDIR)/Utils.Po
 -include ./$(DEPDIR)/Var.Po

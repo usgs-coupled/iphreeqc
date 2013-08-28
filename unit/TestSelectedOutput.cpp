@@ -408,87 +408,74 @@ TestSelectedOutput::TestEndRow2()
 void
 TestSelectedOutput::TestTooManyHeadings()
 {
-	IPhreeqc p;
-
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetRowCount());
-
-	p.SelectedOutput->Clear();
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)0, p.SelectedOutput->GetRowCount());
-
-	// USER_PUNCH
-	// -headings 1.name 1.type 1.moles
-
-	p.PhreeqcPtr->n_user_punch_index        = 0;
-	p.PhreeqcPtr->user_punch_headings       = 0;
-	p.PhreeqcPtr->user_punch_count_headings = 0;
-
-	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
-	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.name");
-	p.PhreeqcPtr->user_punch_count_headings++;
-
-	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
-	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.type");
-	p.PhreeqcPtr->user_punch_count_headings++;
-
-	p.PhreeqcPtr->user_punch_headings = (const char**)::realloc(p.PhreeqcPtr->user_punch_headings, (size_t) (p.PhreeqcPtr->user_punch_count_headings + 1) * sizeof(char *));
-	p.PhreeqcPtr->user_punch_headings[p.PhreeqcPtr->user_punch_count_headings] = ::strdup("1.moles");
-	p.PhreeqcPtr->user_punch_count_headings++;
-
-	CPPUNIT_ASSERT_EQUAL(0,   p.EndRow());
-	CPPUNIT_ASSERT_EQUAL((size_t)3, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)2, p.SelectedOutput->GetRowCount());
-
-
-#if defined(_DEBUG)
-	p.SelectedOutput->Dump("TestTooManyHeadings");
-#endif
-
-	// clean up headings
-	//
-	for (int i = 0; i < p.PhreeqcPtr->user_punch_count_headings; ++i)
-	{
-		::free((void*)p.PhreeqcPtr->user_punch_headings[i]);
-	}
-	::free(p.PhreeqcPtr->user_punch_headings);
-	p.PhreeqcPtr->user_punch_headings = NULL;
-	p.PhreeqcPtr->user_punch_count_headings = 0;
-
-	CVar head0, head1, head2;
-	CVar val0, val1, val2;
-
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(0, 0, &head0));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(0, 1, &head1));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(0, 2, &head2));
-
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(1, 0, &val0));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(1, 1, &val1));
-	CPPUNIT_ASSERT_EQUAL(VR_OK, p.SelectedOutput->Get(1, 2, &val2));
-
-	CPPUNIT_ASSERT_EQUAL(TT_STRING, head0.type);
-	CPPUNIT_ASSERT_EQUAL(TT_STRING, head1.type);
-	CPPUNIT_ASSERT_EQUAL(TT_STRING, head2.type);
-
-	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, val0.type);
-	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, val1.type);
-	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, val2.type);
-
-	CPPUNIT_ASSERT_EQUAL(std::string("1.name"), std::string(head0.sVal));
-	CPPUNIT_ASSERT_EQUAL(std::string("1.type"), std::string(head1.sVal));
-	CPPUNIT_ASSERT_EQUAL(std::string("1.moles"), std::string(head2.sVal));
-
-
-	CPPUNIT_ASSERT_EQUAL(0, p.SelectedOutput->PushBackLong("sim", 1));
-	CPPUNIT_ASSERT_EQUAL(0, p.SelectedOutput->PushBackString("state", "i_soln"));
-	CPPUNIT_ASSERT_EQUAL(0, p.SelectedOutput->PushBackLong("soln", 22));
-
-	CPPUNIT_ASSERT_EQUAL(0,  p.SelectedOutput->EndRow());
-	CPPUNIT_ASSERT_EQUAL((size_t)6, p.SelectedOutput->GetColCount());
-	CPPUNIT_ASSERT_EQUAL((size_t)3, p.SelectedOutput->GetRowCount());
-#if defined(_DEBUG)
-	p.SelectedOutput->Dump("TestTooManyHeadings");
-#endif
+// COMMENT: {8/26/2013 4:12:03 PM}	IPhreeqc p;
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetColCount());
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetRowCount());
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PtrSelectedOutput->Clear();
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetColCount());
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)0, p.PtrSelectedOutput->GetRowCount());
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	// USER_PUNCH
+// COMMENT: {8/26/2013 4:12:03 PM}	// -headings 1.name 1.type 1.moles
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PhreeqcPtr->n_user_punch_index        = 0;
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PhreeqcPtr->UserPunch_map[1]          = UserPunch();
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PhreeqcPtr->current_user_punch        = &(p.PhreeqcPtr->UserPunch_map[1]);
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	std::vector< std::string > headings;
+// COMMENT: {8/26/2013 4:12:03 PM}	headings.push_back("1.name");
+// COMMENT: {8/26/2013 4:12:03 PM}	headings.push_back("1.type");
+// COMMENT: {8/26/2013 4:12:03 PM}	headings.push_back("1.moles");
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PhreeqcPtr->UserPunch_map[1].Set_headings(headings);
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(0,   p.EndRow());
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)3, p.PtrSelectedOutput->GetColCount());
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)2, p.PtrSelectedOutput->GetRowCount());
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}#if defined(_DEBUG)
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PtrSelectedOutput->Dump("TestTooManyHeadings");
+// COMMENT: {8/26/2013 4:12:03 PM}#endif
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	// clean up headings
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PhreeqcPtr->UserPunch_map[1].Get_headings().empty();
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CVar head0, head1, head2;
+// COMMENT: {8/26/2013 4:12:03 PM}	CVar val0, val1, val2;
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(0, 0, &head0));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(0, 1, &head1));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(0, 2, &head2));
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(1, 0, &val0));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(1, 1, &val1));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(VR_OK, p.PtrSelectedOutput->Get(1, 2, &val2));
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(TT_STRING, head0.type);
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(TT_STRING, head1.type);
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(TT_STRING, head2.type);
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, val0.type);
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, val1.type);
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(TT_EMPTY, val2.type);
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(std::string("1.name"), std::string(head0.sVal));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(std::string("1.type"), std::string(head1.sVal));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(std::string("1.moles"), std::string(head2.sVal));
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(0, p.PtrSelectedOutput->PushBackLong("sim", 1));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(0, p.PtrSelectedOutput->PushBackString("state", "i_soln"));
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(0, p.PtrSelectedOutput->PushBackLong("soln", 22));
+// COMMENT: {8/26/2013 4:12:03 PM}
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL(0,  p.PtrSelectedOutput->EndRow());
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)6, p.PtrSelectedOutput->GetColCount());
+// COMMENT: {8/26/2013 4:12:03 PM}	CPPUNIT_ASSERT_EQUAL((size_t)3, p.PtrSelectedOutput->GetRowCount());
+// COMMENT: {8/26/2013 4:12:03 PM}#if defined(_DEBUG)
+// COMMENT: {8/26/2013 4:12:03 PM}	p.PtrSelectedOutput->Dump("TestTooManyHeadings");
+// COMMENT: {8/26/2013 4:12:03 PM}#endif
 }
 
 void
