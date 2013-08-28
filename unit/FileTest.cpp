@@ -146,3 +146,8 @@ int FileTest::Delete(void)
 	}
 	return TRUE;
 }
+
+size_t FileTest::Size(void)
+{
+	return ::FileSize(_fn.c_str());
+}

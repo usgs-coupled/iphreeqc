@@ -24,6 +24,7 @@ public:
 	bool VerifyExists(void);
 	bool Exists(void);
 	int Delete(void);
+	size_t Size(void);
 
 protected:
 	std::string _fn;
