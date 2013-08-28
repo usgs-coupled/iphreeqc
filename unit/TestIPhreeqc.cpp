@@ -196,12 +196,8 @@ void TestIPhreeqc::TestRunWithErrors(void)
 	const char dump_file[] = "error.inp";
 	IPhreeqc obj;
 
-	// remove dump file if it exists
-	//
-	if (::FileExists(dump_file))
-	{
-		CPPUNIT_ASSERT(::DeleteFile(dump_file));
-	}
+	FileTest dfile(dump_file);
+	CPPUNIT_ASSERT( dfile.RemoveExisting() );
 
 	bool files_on = false;
 	CPPUNIT_ASSERT_EQUAL(0,     obj.LoadDatabase("phreeqc.dat"));
@@ -229,22 +225,16 @@ void TestIPhreeqc::TestRunWithErrors(void)
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
 
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(dump_file) );
-	CPPUNIT_ASSERT( ::FileSize(dump_file) > 0 );
-	CPPUNIT_ASSERT( ::DeleteFile(dump_file) );
+	CPPUNIT_ASSERT( dfile.VerifyExists() );
+	CPPUNIT_ASSERT( dfile.Size() > 0 );
 }
 
 void TestIPhreeqc::TestRunFile(void)
 {
 	const char dump_file[] = "error.inp";
 
-	// remove dump file if it exists
-	//
-	if (::FileExists(dump_file))
-	{
-		CPPUNIT_ASSERT(::DeleteFile(dump_file));
-	}
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(dump_file) );
+	FileTest dfile(dump_file);
+	CPPUNIT_ASSERT( dfile.RemoveExisting() );
 
 	IPhreeqc obj;
 
@@ -263,9 +253,8 @@ void TestIPhreeqc::TestRunFile(void)
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
 
 	// Note: should this file exist since GetDumpFileOn is false?
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(dump_file) );
-	CPPUNIT_ASSERT( ::FileSize(dump_file) > 0 );
-	CPPUNIT_ASSERT( ::DeleteFile(dump_file) );
+	CPPUNIT_ASSERT( dfile.VerifyExists() );
+	CPPUNIT_ASSERT( dfile.Size() > 0 );
 }
 
 void TestIPhreeqc::TestRunString(void)
@@ -347,11 +336,10 @@ void TestIPhreeqc::TestRunString(void)
 
 	char OUTPUT_FILE[80];
 	sprintf(OUTPUT_FILE, "phreeqc.%lu.out", (unsigned long)obj.Index);
+	
+	FileTest ofile(OUTPUT_FILE);
+	CPPUNIT_ASSERT( ofile.RemoveExisting() );
 
-	if (::FileExists(OUTPUT_FILE))
-	{
-		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
-	}
 	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
 	CPPUNIT_ASSERT_EQUAL(0,     obj.LoadDatabase("phreeqc.dat"));
 	obj.SetOutputFileOn(1);
@@ -361,12 +349,9 @@ void TestIPhreeqc::TestRunString(void)
 	obj.SetDumpFileOn(0);
 	CPPUNIT_ASSERT_EQUAL(false, ::FileExists(OUTPUT_FILE));
 	CPPUNIT_ASSERT_EQUAL(0,     obj.RunString(input));
-	CPPUNIT_ASSERT_EQUAL(true,  ::FileExists(OUTPUT_FILE));
-	CPPUNIT_ASSERT(::FileSize(OUTPUT_FILE) > 0);
-	if (::FileExists(OUTPUT_FILE))
-	{
-		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
-	}
+
+	CPPUNIT_ASSERT( ofile.VerifyExists() );
+	CPPUNIT_ASSERT( ofile.Size() > 0 );
 }
 
 void TestIPhreeqc::TestGetSelectedOutputRowCount(void)
@@ -1094,12 +1079,8 @@ void TestIPhreeqc::TestCase1(void)
 	sprintf(SELECTED_OUT, "selected_1.%lu.out", (unsigned long)obj.Index);
 
 	// remove punch file if it exists
-	if (::FileExists(SELECTED_OUT))
-	{
-		CPPUNIT_ASSERT(::DeleteFile(SELECTED_OUT));
-	}
-	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists(SELECTED_OUT) );
-
+	FileTest sofile(SELECTED_OUT);
+	CPPUNIT_ASSERT( sofile.RemoveExisting() );
 
 	// clear all flags
 	CPPUNIT_ASSERT_EQUAL( 0,       obj.LoadDatabase("phreeqc.dat") );
@@ -1115,8 +1096,9 @@ void TestIPhreeqc::TestCase1(void)
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetDumpFileOn(false);
 	CPPUNIT_ASSERT_EQUAL( 0,          obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists(SELECTED_OUT) );
-	CPPUNIT_ASSERT( ::FileSize(SELECTED_OUT) > 0 );
+
+	CPPUNIT_ASSERT( sofile.VerifyExists() );
+	CPPUNIT_ASSERT( sofile.Size() > 0 );
 	CPPUNIT_ASSERT_EQUAL( 62,         obj.GetSelectedOutputColumnCount() );
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,      SOLUTION(obj, 1.0, 1.0, 1.0) );
@@ -1126,8 +1108,9 @@ void TestIPhreeqc::TestCase1(void)
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetDumpFileOn(false);
 	CPPUNIT_ASSERT_EQUAL( 0,          obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( true,       ::FileExists(SELECTED_OUT) );
-	CPPUNIT_ASSERT( ::FileSize(SELECTED_OUT) > 0 );
+
+	CPPUNIT_ASSERT( sofile.VerifyExists() );
+	CPPUNIT_ASSERT( sofile.Size() > 0 );
 	CPPUNIT_ASSERT_EQUAL( 62,         obj.GetSelectedOutputColumnCount() );
 }
 
@@ -1143,16 +1126,10 @@ void TestIPhreeqc::TestCase2(void)
 
 	// remove punch files if they exists
 	//
-	if (::FileExists("selected.out"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("selected.out"));
-	}
-	if (::FileExists("case2.punch"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("case2.punch"));
-	}
-	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("case2.punch") );
+	FileTest sofile("selected.out");
+	FileTest c2file("case2.punch");
+	CPPUNIT_ASSERT( sofile.RemoveExisting() );
+	CPPUNIT_ASSERT( c2file.RemoveExisting() );
 
 	// clear all flags
 	CPPUNIT_ASSERT_EQUAL( 0,       obj.LoadDatabase("phreeqc.dat") );
@@ -1168,24 +1145,15 @@ void TestIPhreeqc::TestCase2(void)
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetDumpFileOn(false);
 	CPPUNIT_ASSERT_EQUAL( 0,       obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( false,   ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( true,    ::FileExists("case2.punch") );
-	CPPUNIT_ASSERT( ::FileSize("case2.punch") > 0 );
+	CPPUNIT_ASSERT( sofile.VerifyMissing() );
+	CPPUNIT_ASSERT( c2file.VerifyExists() );
 	CPPUNIT_ASSERT_EQUAL( 62,      obj.GetSelectedOutputColumnCount() );
 
 
 	// remove punch files if they exist
 	//
-	if (::FileExists("selected.out"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("selected.out"));
-	}
-	if (::FileExists("case2.punch"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("case2.punch"));
-	}
-	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( false,    ::FileExists("case2.punch") );
+	CPPUNIT_ASSERT( sofile.RemoveExisting() );
+	CPPUNIT_ASSERT( c2file.RemoveExisting() );
 
 	CPPUNIT_ASSERT_EQUAL( VR_OK,    SOLUTION(obj, 1.0, 1.0, 1.0) );
 	CPPUNIT_ASSERT_EQUAL( VR_OK,    USER_PUNCH(obj, "Ca", 10) );
@@ -1195,16 +1163,9 @@ void TestIPhreeqc::TestCase2(void)
 	obj.SetSelectedOutputFileOn(true);
 	obj.SetDumpFileOn(false);
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists("selected.out") );
-	CPPUNIT_ASSERT_EQUAL( true,  ::FileExists("case2.punch") );
-	CPPUNIT_ASSERT( ::FileSize("case2.punch") > 0 );
+	CPPUNIT_ASSERT( sofile.VerifyMissing() );
+	CPPUNIT_ASSERT( c2file.VerifyExists() );
 	CPPUNIT_ASSERT_EQUAL( 62,    obj.GetSelectedOutputColumnCount() );
-
-	if (::FileExists("case2.punch"))
-	{
-		CPPUNIT_ASSERT(::DeleteFile("case2.punch"));
-	}
-	CPPUNIT_ASSERT_EQUAL( false,  ::FileExists("case2.punch") );
 }
 
 void TestIPhreeqc::TestPrintSelectedOutputFalse(void)
@@ -3655,4 +3616,189 @@ void TestIPhreeqc::TestMultiPunchSelectedOutputStringOn(void)
 
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy1\t")      != NULL );
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy2\t")      != NULL );
+}
+
+//#if 0
+#include <windows.h>
+#include "Debug.h"
+//#endif
+
+void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
+{
+	CVar var;
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL(6, obj.GetSelectedOutputRowCount());
+	CPPUNIT_ASSERT_EQUAL(35, obj.GetSelectedOutputColumnCount());
+
+//#if 0
+	char buffer[80];
+	for (int r = 0; r < obj.GetSelectedOutputRowCount(); ++r)
+	{
+		for (int c = 0; c < obj.GetSelectedOutputColumnCount(); ++c)
+		{
+			CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(r, c, &var));
+			switch (var.type)
+			{
+			case TT_EMPTY:
+				break;
+			case TT_LONG:
+				sprintf(buffer, "%d\t", (int)var.lVal);
+				::OutputDebugString(buffer);
+				break;
+			case TT_DOUBLE:
+				sprintf(buffer, "%g\t", var.dVal);
+				::OutputDebugString(buffer);
+				break;
+			case TT_STRING:
+				sprintf(buffer, "%s\t", var.sVal);
+				::OutputDebugString(buffer);
+				break;
+			default:
+				ASSERT(FALSE);
+			}
+		}
+		::OutputDebugString("\n");
+	}
+//#endif
+
+
+	// headings
+	int ncol = 0;
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("sim"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("state"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("soln"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("dist_x"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("time"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("step"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pH"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pe"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("reaction"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("temp(C)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Alk(eq/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("mu"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("mass_H2O"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("charge(eq)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pct_err"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Na(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Ca(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("m_Na+(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("m_HCO3-(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("la_Ca+2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("la_CO3-2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("CO2(g)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("d_CO2(g)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("dolomite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("d_dolomite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("si_Halite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pressure"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("total mol"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("volume"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("g_N2(g)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("k_Calcite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("dk_Calcite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("s_Anhydrite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("s_Barite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("V_TOTAL_C"), std::string(var.sVal));
+
+	// sim
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 0, &var));   CPPUNIT_ASSERT_EQUAL((long) 8, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)10, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)11, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)12, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)14, var.lVal);
+
+	// state
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("i_soln"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("i_soln"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
+
+	// pH
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.30496, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29787, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99738, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99698, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29441, var.dVal, ::pow(10., -5) );
+
+	// V_TOTAL_C
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00437229, var.dVal, ::pow(10., -8) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00430842, var.dVal, ::pow(10., -8) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00000000, var.dVal, ::pow(10., -8) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00000000, var.dVal, ::pow(10., -8) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00427777, var.dVal, ::pow(10., -5) );
+
+	// edge cases
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue(-1,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue( 6,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0, -1, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0, 35, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+
+
+	obj.SetCurrentSelectedOutputUserNumber(2);
+	CPPUNIT_ASSERT_EQUAL(7, obj.GetSelectedOutputRowCount());
+	CPPUNIT_ASSERT_EQUAL(16, obj.GetSelectedOutputColumnCount());
+
+//#if 0
+	for (int r = 0; r < obj.GetSelectedOutputRowCount(); ++r)
+	{
+		for (int c = 0; c < obj.GetSelectedOutputColumnCount(); ++c)
+		{
+			CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(r, c, &var));
+			switch (var.type)
+			{
+			case TT_EMPTY:
+				break;
+			case TT_LONG:
+				sprintf(buffer, "%d\t", (int)var.lVal);
+				::OutputDebugString(buffer);
+				break;
+			case TT_DOUBLE:
+				sprintf(buffer, "%g\t", var.dVal);
+				::OutputDebugString(buffer);
+				break;
+			case TT_STRING:
+				sprintf(buffer, "%s\t", var.sVal);
+				::OutputDebugString(buffer);
+				break;
+			default:
+				ASSERT(FALSE);
+			}
+		}
+		::OutputDebugString("\n");
+	}
+//#endif
+
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Halite\t")   != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Calcite\t")  != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), "Dummy1\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), "Dummy2\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), "Dummy1\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), "Dummy2\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), "Dummy1\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), "Dummy2\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy1\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy2\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Sum_resid\t")   != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Sum_Delta/U\t") != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "MaxFracErr\t")  != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2_min\t")  != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2_max\t")  != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3_min\t")  != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3_max\t")  != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Halite\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Halite_max\t")  != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy1\t")      != NULL );
+// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy2\t")      != NULL );
 }
