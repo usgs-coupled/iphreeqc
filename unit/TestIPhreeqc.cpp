@@ -3618,10 +3618,10 @@ void TestIPhreeqc::TestMultiPunchSelectedOutputStringOn(void)
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy2\t")      != NULL );
 }
 
-//#if 0
+#if 0
 #include <windows.h>
 #include "Debug.h"
-//#endif
+#endif
 
 void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 {
@@ -3634,7 +3634,7 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(6, obj.GetSelectedOutputRowCount());
 	CPPUNIT_ASSERT_EQUAL(35, obj.GetSelectedOutputColumnCount());
 
-//#if 0
+#if 0
 	char buffer[80];
 	for (int r = 0; r < obj.GetSelectedOutputRowCount(); ++r)
 	{
@@ -3663,7 +3663,7 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 		}
 		::OutputDebugString("\n");
 	}
-//#endif
+#endif
 
 
 	// headings
@@ -3743,7 +3743,7 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(7, obj.GetSelectedOutputRowCount());
 	CPPUNIT_ASSERT_EQUAL(16, obj.GetSelectedOutputColumnCount());
 
-//#if 0
+#if 0
 	for (int r = 0; r < obj.GetSelectedOutputRowCount(); ++r)
 	{
 		for (int c = 0; c < obj.GetSelectedOutputColumnCount(); ++c)
@@ -3771,7 +3771,7 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 		}
 		::OutputDebugString("\n");
 	}
-//#endif
+#endif
 
 // COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Halite\t")   != NULL );
 // COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Calcite\t")  != NULL );
