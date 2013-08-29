@@ -37,6 +37,7 @@ VPATH               = .:../src:../src/phreeqcpp
 
 # test objs
 TOBJS =	\
+	FileTest.o \
 	TestCVar.o \
 	TestIPhreeqc.o \
 	TestIPhreeqcLib.o \
