@@ -144,7 +144,7 @@ int FileTest::Delete(void)
 	{
 		return ::DeleteFile(_fn.c_str());
 	}
-	return TRUE;
+	return 1;
 }
 
 size_t FileTest::Size(void)

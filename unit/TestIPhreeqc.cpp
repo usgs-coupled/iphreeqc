@@ -1638,7 +1638,7 @@ void TestIPhreeqc::TestGetDumpStringLineCount(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 30,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 31,        obj.GetDumpStringLineCount() );
 }
 
 void TestIPhreeqc::TestGetDumpStringLine(void)
@@ -1664,13 +1664,13 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 30,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 31,        obj.GetDumpStringLineCount() );
 
 	int line = 0;
 
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "SOLUTION_RAW")                  != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-temp")                         != NULL);
-// COMMENT: {8/8/2013 12:36:46 AM}	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-pressure")                     != NULL);
+	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-pressure")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-total_h")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-cb")                           != NULL);
@@ -1835,7 +1835,7 @@ void TestIPhreeqc::TestSetDumpFileName(void)
 	int line = 0;
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "SOLUTION_RAW")                  != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-temp")                         != NULL);
-// COMMENT: {8/8/2013 12:35:17 AM}	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-pressure")                     != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-pressure")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_h")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-cb")                           != NULL);
@@ -1903,7 +1903,7 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(OUTPUT_FILENAME) );
 
-	std::string lines[101];
+	std::string lines[200];
 	std::ifstream ifs(OUTPUT_FILENAME);
 
 	size_t i = 0;
@@ -1912,7 +1912,7 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 		++i;
 	}
 
-	CPPUNIT_ASSERT_EQUAL( (size_t)98, i );
+	CPPUNIT_ASSERT_EQUAL( (size_t)100, i );
 
 	int line = 0;
 
@@ -1991,16 +1991,18 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------------------Saturation indices-------------------------------")  != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Phase               SI   log IAP   log K(298 K,   1 atm)")                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  Phase               SI** log IAP   log K(298 K,   1 atm)")                       != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Aragonite")                                                                     != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	Calcite")                                                                       != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CH4(g)")                                                                        != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	CO2(g)")                                                                        != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2(g)")                                                                         != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	H2O(g)")                                                                        != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "	O2(g)")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  Aragonite")                                                                      != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  Calcite")                                                                        != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  CH4(g)")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  CO2(g)")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  H2(g)")                                                                          != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  H2O(g)")                                                                         != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  O2(g)")                                                                          != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.")            != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "  For ideal gases, phi = 1.")                                                      != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "------------------")                                                               != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "End of simulation.")                                                               != NULL );
@@ -2123,7 +2125,7 @@ void TestIPhreeqc::TestGetOutputStringLineCount(void)
 	obj.SetOutputStringOn(true);
 
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 98,    obj.GetOutputStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 100,    obj.GetOutputStringLineCount() );
 
 
 	// add solution block
@@ -2186,7 +2188,7 @@ void TestIPhreeqc::TestGetOutputStringLine(void)
 	obj.SetOutputStringOn(true);
 
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 98,    obj.GetOutputStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 100,    obj.GetOutputStringLineCount() );
 
 	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------------"),                                                std::string(obj.GetOutputStringLine(0))  );
 	CPPUNIT_ASSERT_EQUAL( std::string("Reading input data for simulation 1."),                                                std::string(obj.GetOutputStringLine(1))  );
@@ -2195,8 +2197,8 @@ void TestIPhreeqc::TestGetOutputStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Description of solution----------------------------"),     std::string(obj.GetOutputStringLine(24)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("----------------------------Distribution of species----------------------------"),     std::string(obj.GetOutputStringLine(40)) );
 	CPPUNIT_ASSERT_EQUAL( std::string("------------------------------Saturation indices-------------------------------"),     std::string(obj.GetOutputStringLine(73)) );
-	CPPUNIT_ASSERT_EQUAL( std::string("End of Run"),                                                                          std::string(obj.GetOutputStringLine(95)).substr(0, 10) );
-	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                    std::string(obj.GetOutputStringLine(98)) );
+	CPPUNIT_ASSERT_EQUAL( std::string("End of Run"),                                                                          std::string(obj.GetOutputStringLine(97)).substr(0, 10) );
+	CPPUNIT_ASSERT_EQUAL( std::string(""),                                                                                    std::string(obj.GetOutputStringLine(100)) );
 
 	// add solution block
 	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
@@ -3719,18 +3721,18 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
 
 	// pH
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.30496, var.dVal, ::pow(10., -5) );
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29787, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.30475, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29765, var.dVal, ::pow(10., -5) );
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99738, var.dVal, ::pow(10., -5) );
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99698, var.dVal, ::pow(10., -5) );
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29441, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.2942 , var.dVal, ::pow(10., -5) );
 
 	// V_TOTAL_C
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00437229, var.dVal, ::pow(10., -8) );
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00430842, var.dVal, ::pow(10., -8) );
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00000000, var.dVal, ::pow(10., -8) );
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00000000, var.dVal, ::pow(10., -8) );
-	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.00427777, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.3729e-003, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.3090e-003, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0000e+000, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0000e+000, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.2784e-003, var.dVal, ::pow(10., -6) );
 
 	// edge cases
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue(-1,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
