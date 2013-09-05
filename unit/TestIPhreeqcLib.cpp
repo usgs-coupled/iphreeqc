@@ -2537,13 +2537,13 @@ void TestIPhreeqcLib::TestOutputStringOnOff(void)
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 
-	CPPUNIT_ASSERT_EQUAL( false,    ::GetOutputStringOn(n) != 0 );
+	CPPUNIT_ASSERT_EQUAL( false,  ::GetOutputStringOn(n) != 0 );
 
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetOutputStringOn(n, 1) );
-	CPPUNIT_ASSERT_EQUAL( true,     ::GetOutputStringOn(n) != 0 );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 1) );
+	CPPUNIT_ASSERT_EQUAL( true,   ::GetOutputStringOn(n) != 0 );
 
-	CPPUNIT_ASSERT_EQUAL( IPQ_OK,   ::SetOutputStringOn(n, 0) );
-	CPPUNIT_ASSERT_EQUAL( false,    ::GetOutputStringOn(n) != 0 );
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 0) );
+	CPPUNIT_ASSERT_EQUAL( false,  ::GetOutputStringOn(n) != 0 );
 
 	if (n >= 0)
 	{
@@ -2562,9 +2562,9 @@ void TestIPhreeqcLib::TestGetOutputString(void)
 	{
 		::DeleteFile(OUTPUT_FILENAME);
 	}
-	CPPUNIT_ASSERT_EQUAL( false, ::FileExists(OUTPUT_FILENAME) );
+	CPPUNIT_ASSERT_EQUAL( false,  ::FileExists(OUTPUT_FILENAME) );
 
-	CPPUNIT_ASSERT_EQUAL( 0,     ::LoadDatabase(n, "phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
 
 	// add solution block
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
@@ -2643,7 +2643,7 @@ void TestIPhreeqcLib::TestGetOutputStringLineCount(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetOutputStringOn(n, 1) );
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 100,     ::GetOutputStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 100,    ::GetOutputStringLineCount(n) );
 
 
 	// add solution block
@@ -3813,7 +3813,8 @@ void TestIPhreeqcLib::TestBasicSURF(void)
 	CPPUNIT_ASSERT_EQUAL(13,      ::GetSelectedOutputColumnCount(n));
 	CPPUNIT_ASSERT_EQUAL(3,       ::GetSelectedOutputRowCount(n));
 
-	CVar v;
+	VAR v;
+	VarInit(&v);
 
 	const int offset = 8;
 
@@ -3969,4 +3970,384 @@ void TestIPhreeqcLib::TestDelete(void)
 	{
 		CPPUNIT_ASSERT(::DeleteFile(OUTPUT_FILE));
 	}
+}
+
+void TestIPhreeqcLib::TestMultiPunchCSelectedOutput(void)
+{
+	VAR var;
+	::VarInit(&var);
+
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(id, "../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, ::RunFile(id, "multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL(6, ::GetSelectedOutputRowCount(id));
+	CPPUNIT_ASSERT_EQUAL(35, ::GetSelectedOutputColumnCount(id));
+
+	// headings
+	int ncol = 0;
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("sim"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("state"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("soln"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("dist_x"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("time"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("step"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pH"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pe"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("reaction"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("temp(C)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Alk(eq/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("mu"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("mass_H2O"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("charge(eq)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pct_err"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Na(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Ca(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("m_Na+(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("m_HCO3-(mol/kgw)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("la_Ca+2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("la_CO3-2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("CO2(g)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("d_CO2(g)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("dolomite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("d_dolomite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("si_Halite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("pressure"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("total mol"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("volume"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("g_N2(g)"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("k_Calcite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("dk_Calcite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("s_Anhydrite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("s_Barite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("V_TOTAL_C"), std::string(var.sVal));
+
+	// sim
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 0, &var));   CPPUNIT_ASSERT_EQUAL((long) 8, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)10, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)11, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)12, var.lVal);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 0, &var));   CPPUNIT_ASSERT_EQUAL((long)14, var.lVal);
+
+	// state
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("i_soln"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("i_soln"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
+
+	// pH
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.30475, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29765, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99738, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99698, var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.2942 , var.dVal, ::pow(10., -5) );
+
+	// V_TOTAL_C
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.3729e-003, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.3090e-003, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0000e+000, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0000e+000, var.dVal, ::pow(10., -6) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.2784e-003, var.dVal, ::pow(10., -6) );
+
+	// edge cases
+	int r = ::GetSelectedOutputRowCount(id);
+	int c = ::GetSelectedOutputColumnCount(id);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDROW, ::GetSelectedOutputValue(id, -1,  0, &var));
+	CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDROW, ::GetSelectedOutputValue(id,  r,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDCOL, ::GetSelectedOutputValue(id,  0, -1, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDCOL, ::GetSelectedOutputValue(id,  0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+
+	::SetCurrentSelectedOutputUserNumber(id, 2);
+	CPPUNIT_ASSERT_EQUAL(7, ::GetSelectedOutputRowCount(id));
+	CPPUNIT_ASSERT_EQUAL(16, ::GetSelectedOutputColumnCount(id));
+
+	// headings
+	ncol = 0;
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("si_Halite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("si_Calcite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("DUMMY_1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("DUMMY_2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_resid"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_Delta/U"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("MaxFracErr"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_min"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_max"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_min"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_max"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_min"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_max"), std::string(var.sVal));
+
+	// si_Halite
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.70857,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.67087,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.6362,   var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.60092,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.60411,  var.dVal, ::pow(10., -2) );
+
+	// si_Calcite
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.692077,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.678847,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.678847,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.672429,  var.dVal, ::pow(10., -2) );
+
+	// DUMMY_1
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 2, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+
+	// DUMMY_2
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 3, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+
+	// Sum_resid
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 4, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 3.69E-13,  var.dVal, ::pow(10., log10(3.69E-13)-2) );
+
+	// Sum_Delta/U
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 5, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+	
+	// MaxFracErr
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 7, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_min
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 8, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_max
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 9, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 10, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_min
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 11, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_max
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 12, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 13, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.001,  var.dVal, ::pow(10., -3) );
+
+	// Halite_min
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 14, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite_max
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 15, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// edge cases
+	r = ::GetSelectedOutputRowCount(id);
+	c = ::GetSelectedOutputColumnCount(id);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDROW, ::GetSelectedOutputValue(id, -1,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDROW, ::GetSelectedOutputValue(id,  r,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDCOL, ::GetSelectedOutputValue(id,  0, -1, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDCOL, ::GetSelectedOutputValue(id,  0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+
+	::SetCurrentSelectedOutputUserNumber(id, 3);
+	CPPUNIT_ASSERT_EQUAL(2, ::GetSelectedOutputRowCount(id));
+	CPPUNIT_ASSERT_EQUAL(12, ::GetSelectedOutputColumnCount(id));
+
+	// headings
+	ncol = 0;
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_resid"),   std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_Delta/U"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("MaxFracErr"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2"),      std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_min"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_max"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3"),      std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_min"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_max"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite"),      std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_min"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_max"),  std::string(var.sVal));
+
+	// Sum_resid
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 3.69E-13,  var.dVal, ::pow(10., log10(3.69E-13)-2) );
+
+	// Sum_Delta/U
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+	
+	// MaxFracErr
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 2, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 3, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_min
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 4, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_max
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 5, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_min
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 7, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_max
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 8, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 9, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.001,  var.dVal, ::pow(10., -3) );
+
+	// Halite_min
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 10, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite_max
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 11, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+
+	// edge cases
+	r = ::GetSelectedOutputRowCount(id);
+	c = ::GetSelectedOutputColumnCount(id);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDROW, ::GetSelectedOutputValue(id, -1,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDROW, ::GetSelectedOutputValue(id,  r,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDCOL, ::GetSelectedOutputValue(id,  0, -1, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDCOL, ::GetSelectedOutputValue(id,  0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, -1)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, 0)); 
+}
+
+void TestIPhreeqcLib::TestGetSelectedOutputCount(void)
+{
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0, ::GetSelectedOutputCount(id));
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(id, "../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, ::GetSelectedOutputCount(id));
+	CPPUNIT_ASSERT_EQUAL(0, ::RunFile(id, "multi_punch"));
+	CPPUNIT_ASSERT_EQUAL(3, ::GetSelectedOutputCount(id));
+}
+
+void TestIPhreeqcLib::TestGetNthSelectedOutputUserNumber(void)
+{
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0, ::LoadDatabase(id, "../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, ::RunFile(id, "multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL(3, ::GetSelectedOutputCount(id));
+
+	CPPUNIT_ASSERT_EQUAL(1, ::GetNthSelectedOutputUserNumber(id, 0));
+	CPPUNIT_ASSERT_EQUAL(2, ::GetNthSelectedOutputUserNumber(id, 1));
+	CPPUNIT_ASSERT_EQUAL(3, ::GetNthSelectedOutputUserNumber(id, 2));
+
+	// edge cases
+	CPPUNIT_ASSERT_EQUAL((int)IPQ_INVALIDARG, ::GetNthSelectedOutputUserNumber(id, -1));
+	CPPUNIT_ASSERT_EQUAL((int)IPQ_INVALIDARG, ::GetNthSelectedOutputUserNumber(id, 4));
+}
+
+void TestIPhreeqcLib::TestGetCurrentSelectedOutputUserNumber(void)
+{
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+	CPPUNIT_ASSERT_EQUAL(1,  ::GetCurrentSelectedOutputUserNumber(id));
+
+	CPPUNIT_ASSERT_EQUAL(0,  ::LoadDatabase(id, "../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(1,  ::GetCurrentSelectedOutputUserNumber(id));
+	CPPUNIT_ASSERT_EQUAL(0,  ::RunFile(id, "multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL(1,  ::GetCurrentSelectedOutputUserNumber(id));
+	CPPUNIT_ASSERT_EQUAL(6,  ::GetSelectedOutputRowCount(id));
+	CPPUNIT_ASSERT_EQUAL(35, ::GetSelectedOutputColumnCount(id));
+
+	::SetCurrentSelectedOutputUserNumber(id, 2);
+	CPPUNIT_ASSERT_EQUAL(2,  ::GetCurrentSelectedOutputUserNumber(id));
+	CPPUNIT_ASSERT_EQUAL(7,  ::GetSelectedOutputRowCount(id));
+	CPPUNIT_ASSERT_EQUAL(16, ::GetSelectedOutputColumnCount(id));
+
+	::SetCurrentSelectedOutputUserNumber(id, 3);
+	CPPUNIT_ASSERT_EQUAL(3,  ::GetCurrentSelectedOutputUserNumber(id));
+	CPPUNIT_ASSERT_EQUAL(2,  ::GetSelectedOutputRowCount(id));
+	CPPUNIT_ASSERT_EQUAL(12, ::GetSelectedOutputColumnCount(id));
+
+	// edge cases
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, -1)); 
+	CPPUNIT_ASSERT_EQUAL(3,              ::GetCurrentSelectedOutputUserNumber(id));
+	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, 0)); 
+	CPPUNIT_ASSERT_EQUAL(3,              ::GetCurrentSelectedOutputUserNumber(id));
 }

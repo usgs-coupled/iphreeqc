@@ -70,6 +70,9 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestRunFileMultiPunchNoSet );
 	CPPUNIT_TEST( TestMultiPunchSelectedOutputStringOn );
 	CPPUNIT_TEST( TestMultiPunchCSelectedOutput );
+	CPPUNIT_TEST( TestGetSelectedOutputCount );
+	CPPUNIT_TEST( TestGetNthSelectedOutputUserNumber );
+	CPPUNIT_TEST( TestGetCurrentSelectedOutputUserNumber );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -140,6 +143,9 @@ public:
 	void TestRunFileMultiPunchNoSet(void);
 	void TestMultiPunchSelectedOutputStringOn(void);
 	void TestMultiPunchCSelectedOutput(void);
+	void TestGetSelectedOutputCount(void);
+	void TestGetNthSelectedOutputUserNumber(void);
+	void TestGetCurrentSelectedOutputUserNumber(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, bool output_file_on, bool error_file_on, bool log_file_on, bool selected_output_file_on, bool dump_file_on);

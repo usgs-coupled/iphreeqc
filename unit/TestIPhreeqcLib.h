@@ -71,6 +71,10 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestBasicSURF );
 	CPPUNIT_TEST( TestIEEE );
 	CPPUNIT_TEST( TestDelete );
+	CPPUNIT_TEST( TestMultiPunchCSelectedOutput );
+	CPPUNIT_TEST( TestGetSelectedOutputCount );
+	CPPUNIT_TEST( TestGetNthSelectedOutputUserNumber );
+	CPPUNIT_TEST( TestGetCurrentSelectedOutputUserNumber );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -142,6 +146,10 @@ public:
 	void TestBasicSURF(void);
 	void TestIEEE(void);
 	void TestDelete(void);
+	void TestMultiPunchCSelectedOutput(void);
+	void TestGetSelectedOutputCount(void);
+	void TestGetNthSelectedOutputUserNumber(void);
+	void TestGetCurrentSelectedOutputUserNumber(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, int output_file_on, int error_file_on, int log_file_on, int selected_output_file_on, int dump_file_on);

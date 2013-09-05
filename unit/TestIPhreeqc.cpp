@@ -3620,11 +3620,6 @@ void TestIPhreeqc::TestMultiPunchSelectedOutputStringOn(void)
 	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy2\t")      != NULL );
 }
 
-#if 0
-#include <windows.h>
-#include "Debug.h"
-#endif
-
 void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 {
 	CVar var;
@@ -3635,38 +3630,6 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 
 	CPPUNIT_ASSERT_EQUAL(6, obj.GetSelectedOutputRowCount());
 	CPPUNIT_ASSERT_EQUAL(35, obj.GetSelectedOutputColumnCount());
-
-#if 0
-	char buffer[80];
-	for (int r = 0; r < obj.GetSelectedOutputRowCount(); ++r)
-	{
-		for (int c = 0; c < obj.GetSelectedOutputColumnCount(); ++c)
-		{
-			CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(r, c, &var));
-			switch (var.type)
-			{
-			case TT_EMPTY:
-				break;
-			case TT_LONG:
-				sprintf(buffer, "%d\t", (int)var.lVal);
-				::OutputDebugString(buffer);
-				break;
-			case TT_DOUBLE:
-				sprintf(buffer, "%g\t", var.dVal);
-				::OutputDebugString(buffer);
-				break;
-			case TT_STRING:
-				sprintf(buffer, "%s\t", var.sVal);
-				::OutputDebugString(buffer);
-				break;
-			default:
-				ASSERT(FALSE);
-			}
-		}
-		::OutputDebugString("\n");
-	}
-#endif
-
 
 	// headings
 	int ncol = 0;
@@ -3735,72 +3698,298 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.2784e-003, var.dVal, ::pow(10., -6) );
 
 	// edge cases
+	int r = obj.GetSelectedOutputRowCount();
+	int c = obj.GetSelectedOutputColumnCount();
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue(-1,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
-	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue( 6,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue( r,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0, -1, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
-	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0, 35, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
 
 
 	obj.SetCurrentSelectedOutputUserNumber(2);
 	CPPUNIT_ASSERT_EQUAL(7, obj.GetSelectedOutputRowCount());
 	CPPUNIT_ASSERT_EQUAL(16, obj.GetSelectedOutputColumnCount());
 
-#if 0
-	for (int r = 0; r < obj.GetSelectedOutputRowCount(); ++r)
-	{
-		for (int c = 0; c < obj.GetSelectedOutputColumnCount(); ++c)
-		{
-			CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(r, c, &var));
-			switch (var.type)
-			{
-			case TT_EMPTY:
-				break;
-			case TT_LONG:
-				sprintf(buffer, "%d\t", (int)var.lVal);
-				::OutputDebugString(buffer);
-				break;
-			case TT_DOUBLE:
-				sprintf(buffer, "%g\t", var.dVal);
-				::OutputDebugString(buffer);
-				break;
-			case TT_STRING:
-				sprintf(buffer, "%s\t", var.sVal);
-				::OutputDebugString(buffer);
-				break;
-			default:
-				ASSERT(FALSE);
-			}
-		}
-		::OutputDebugString("\n");
-	}
-#endif
+	// headings
+	ncol = 0;
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("si_Halite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("si_Calcite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("DUMMY_1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("DUMMY_2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_resid"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_Delta/U"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("MaxFracErr"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_min"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_max"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_min"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_max"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_min"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_max"), std::string(var.sVal));
 
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Halite\t")   != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(0), "si_Calcite\t")  != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), "Dummy1\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(2), "Dummy2\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), "Dummy1\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(3), "Dummy2\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), "Dummy1\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(4), "Dummy2\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy1\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(5), "Dummy2\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Sum_resid\t")   != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Sum_Delta/U\t") != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "MaxFracErr\t")  != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2_min\t")  != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_2_max\t")  != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3_min\t")  != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Soln_3_max\t")  != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Halite\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(6), "Halite_max\t")  != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy1\t")      != NULL );
-// COMMENT: {8/26/2013 11:32:00 PM}	CPPUNIT_ASSERT( ::strstr(obj.GetSelectedOutputStringLine(8), "Dummy2\t")      != NULL );
+	// si_Halite
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.70857,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.67087,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.6362,   var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.60092,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.60411,  var.dVal, ::pow(10., -2) );
+
+	// si_Calcite
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.692077,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.678847,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.678847,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.672429,  var.dVal, ::pow(10., -2) );
+
+	// DUMMY_1
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 2, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 2, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy1"), std::string(var.sVal));
+
+	// DUMMY_2
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 3, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 3, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Dummy2"), std::string(var.sVal));
+
+	// Sum_resid
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 4, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 3.69E-13,  var.dVal, ::pow(10., log10(3.69E-13)-2) );
+
+	// Sum_Delta/U
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 5, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+	
+	// MaxFracErr
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 6, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 7, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 7, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_min
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 8, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 8, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_max
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 9, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 9, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 10, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 10, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_min
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 11, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 11, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_max
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 12, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 12, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 13, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 13, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.001,  var.dVal, ::pow(10., -3) );
+
+	// Halite_min
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 14, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 14, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite_max
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 15, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(6, 15, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// edge cases
+	r = obj.GetSelectedOutputRowCount();
+	c = obj.GetSelectedOutputColumnCount();
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue(-1,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue( r,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0, -1, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+
+	obj.SetCurrentSelectedOutputUserNumber(3);
+	CPPUNIT_ASSERT_EQUAL(2, obj.GetSelectedOutputRowCount());
+	CPPUNIT_ASSERT_EQUAL(12, obj.GetSelectedOutputColumnCount());
+
+	// headings
+	ncol = 0;
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_resid"),   std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Sum_Delta/U"), std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("MaxFracErr"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2"),      std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_min"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_2_max"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3"),      std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_min"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Soln_3_max"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite"),      std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_min"),  std::string(var.sVal));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   CPPUNIT_ASSERT_EQUAL(std::string("Halite_max"),  std::string(var.sVal));
+
+	// Sum_resid
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 3.69E-13,  var.dVal, ::pow(10., log10(3.69E-13)-2) );
+
+	// Sum_Delta/U
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+	
+	// MaxFracErr
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 2, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 3, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_min
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 4, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_2_max
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 5, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 1,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_min
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 7, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Soln_3_max
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 8, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 9, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.001,  var.dVal, ::pow(10., -3) );
+
+	// Halite_min
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 10, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+	// Halite_max
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, 11, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0,  var.dVal, ::pow(10., -3) );
+
+
+	// edge cases
+	r = obj.GetSelectedOutputRowCount();
+	c = obj.GetSelectedOutputColumnCount();
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue(-1,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, obj.GetSelectedOutputValue( r,  0, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDROW, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0, -1, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
+
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(-1)); 
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(0)); 
+}
+
+void TestIPhreeqc::TestGetSelectedOutputCount(void)
+{
+	CVar var;
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.GetSelectedOutputCount());
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.GetSelectedOutputCount());
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+	CPPUNIT_ASSERT_EQUAL(3, obj.GetSelectedOutputCount());
+}
+
+void TestIPhreeqc::TestGetNthSelectedOutputUserNumber(void)
+{
+	CVar var;
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL(3, obj.GetSelectedOutputCount());
+
+	CPPUNIT_ASSERT_EQUAL(1, obj.GetNthSelectedOutputUserNumber(0));
+	CPPUNIT_ASSERT_EQUAL(2, obj.GetNthSelectedOutputUserNumber(1));
+	CPPUNIT_ASSERT_EQUAL(3, obj.GetNthSelectedOutputUserNumber(2));
+
+	// edge cases
+	CPPUNIT_ASSERT_EQUAL((int)VR_INVALIDARG, obj.GetNthSelectedOutputUserNumber(-1));
+	CPPUNIT_ASSERT_EQUAL((int)VR_INVALIDARG, obj.GetNthSelectedOutputUserNumber(4));
+}
+
+void TestIPhreeqc::TestGetCurrentSelectedOutputUserNumber(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL(1, obj.GetCurrentSelectedOutputUserNumber());
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(1, obj.GetCurrentSelectedOutputUserNumber());
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
+
+	CPPUNIT_ASSERT_EQUAL(1,  obj.GetCurrentSelectedOutputUserNumber());
+	CPPUNIT_ASSERT_EQUAL(6,  obj.GetSelectedOutputRowCount());
+	CPPUNIT_ASSERT_EQUAL(35, obj.GetSelectedOutputColumnCount());
+
+	obj.SetCurrentSelectedOutputUserNumber(2);
+	CPPUNIT_ASSERT_EQUAL(2,  obj.GetCurrentSelectedOutputUserNumber());
+	CPPUNIT_ASSERT_EQUAL(7,  obj.GetSelectedOutputRowCount());
+	CPPUNIT_ASSERT_EQUAL(16, obj.GetSelectedOutputColumnCount());
+
+	obj.SetCurrentSelectedOutputUserNumber(3);
+	CPPUNIT_ASSERT_EQUAL(3,  obj.GetCurrentSelectedOutputUserNumber());
+	CPPUNIT_ASSERT_EQUAL(2,  obj.GetSelectedOutputRowCount());
+	CPPUNIT_ASSERT_EQUAL(12, obj.GetSelectedOutputColumnCount());
+
+	// edge cases
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(-1)); 
+	CPPUNIT_ASSERT_EQUAL(3,             obj.GetCurrentSelectedOutputUserNumber());
+	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(0)); 
+	CPPUNIT_ASSERT_EQUAL(3,             obj.GetCurrentSelectedOutputUserNumber());
 }
