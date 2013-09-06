@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <IPhreeqc.h>
 
 #define TRUE  1
@@ -14,8 +16,11 @@ const char input[] =
   "   -reset false                                         \n"
   "USER_PUNCH                                              \n"
   "   -Heading  pH  SR(calcite)   Year                     \n"
-  "   30 PUNCH -LA(\"H+\"), SR(\"calcite\")                \n"
-  "   40 PUNCH CALLBACK(cell_no, -LA(\"H+\"), \"Year\")    \n"
+  "   10 PUNCH -LA(\"H+\"), SR(\"calcite\")                \n"
+  "   20 PUNCH CALLBACK(cell_no, -LA(\"H+\"), \"Year\")    \n"
+  "END                                                     \n"
+  "RUN_CELLS                                               \n"
+  "   -cells 1 2                                           \n"
   "END                                                     \n";
 
 struct MyData
@@ -40,7 +45,7 @@ double MyCallback(double x1, double x2, const char *str1, void *mydata)
   */
   if (strcmp(str1, "Year") == 0)
   {
-    fprintf(stderr, "\nCallback for cell %d: pH %8.2f\n", (int) x1, x2);
+    fprintf(stderr, "Callback for cell %d: pH %8.2f\n", (int) x1, x2);
     return ((struct MyData *) mydata)->year;
   }
   return -1;
