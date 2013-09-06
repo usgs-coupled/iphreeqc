@@ -1,5 +1,5 @@
 MODULE MyData
-  double precision year
+  DOUBLE PRECISION year
 END MODULE MyData
 
 MODULE Callback
@@ -32,8 +32,7 @@ PROGRAM Advect
   USE Callback
   USE MyData
   INCLUDE "IPhreeqc.f90.inc"
-  CHARACTER(len=1024) Istring 
-  INTEGER          :: Id
+  INTEGER :: Id
   
   !Create module, load database, define initial conditions and selected output
   year = 2012.
@@ -42,7 +41,7 @@ PROGRAM Advect
      CALL OutputErrorString(Id)
      STOP
   ENDIF
-  IF (SetSelectedOutputFileOn(id, 1) .NE. 0) THEN
+  IF (SetSelectedOutputFileOn(id, .TRUE.) .NE. 0) THEN
      CALL OutputErrorString(Id)
      STOP
   ENDIF
@@ -55,5 +54,5 @@ PROGRAM Advect
      STOP
   ENDIF
   !Destroy module 
-  IF (DestroyIPhreeqc(Id) .NE. 0) CALL OutputErrorString()
+  IF (DestroyIPhreeqc(Id) .NE. 0) CALL OutputErrorString(Id)
 END PROGRAM Advect

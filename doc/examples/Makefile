@@ -35,7 +35,8 @@ F90_TARGETS = \
 	F90GetOutputStringLine \
 	F90ClearAccumulatedLines \
 	F90GetSelectedOutputStringLine \
-	F90GetSelectedOutputValue
+	F90GetSelectedOutputValue \
+	F90SetBasicFortranCallback
 
 
 all: $(TARGETS) $(F90_TARGETS)
@@ -108,6 +109,9 @@ F90GetSelectedOutputStringLine: F90GetSelectedOutputStringLine.lo $(IPHREEQC_LA)
 F90GetSelectedOutputValue: F90GetSelectedOutputValue.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
+F90SetBasicFortranCallback: F90SetBasicFortranCallback.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
 .SUFFIXES: .c .cxx .f .f90 .lo
 
 
@@ -138,6 +142,7 @@ LO_FILES = \
 	GetSelectedOutputString.lo \
 	GetSelectedOutputValue.lo \
 	GetSelectedOutputValue2.lo \
+	SetBasicCallback.lo \
 	IPhreeqc.lo
 
 
@@ -152,7 +157,8 @@ F90_LO_FILES = \
 	F90GetLogStringLine.lo \
 	F90GetOutputStringLine.lo \
 	F90GetSelectedOutputStringLine.lo \
-	F90GetSelectedOutputValue.lo
+	F90GetSelectedOutputValue.lo \
+	F90SetBasicFortranCallback.lo
 
 
 clean:
