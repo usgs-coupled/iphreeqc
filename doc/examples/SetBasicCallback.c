@@ -20,11 +20,10 @@ const char input[] =
   "   20 PUNCH CALLBACK(cell_no, -LA(\"H+\"), \"Year\")    \n"
   "END                                                     \n"
   "RUN_CELLS                                               \n"
-  "   -cells 1 2                                           \n"
+  "   -cells 1-2                                           \n"
   "END                                                     \n";
 
-struct MyData
-{
+struct MyData {
   double year;
 };
 
@@ -53,8 +52,8 @@ double MyCallback(double x1, double x2, const char *str1, void *mydata)
 
 int main(void)
 {
-  struct MyData mydata;
   int id;
+  struct MyData mydata;
 
   mydata.year = 2012.0;
 
