@@ -56,6 +56,10 @@
 			<param name="Local" value="html\IPhreeqc_8h.html#a126e0c5f317a0dfb5235a0db6d923efe">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetCurrentSelectedOutputUserNumber">
+			<param name="Local" value="html\IPhreeqc_8h.html#ae4834247893b8afad3c40dac1036671d">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetDumpFileName">
 			<param name="Local" value="html\IPhreeqc_8h.html#ae1889e283d2443669e6e8e6aef91c321">
 			</OBJECT>
@@ -128,6 +132,10 @@
 			<param name="Local" value="html\IPhreeqc_8h.html#aec93dd8a4e98b97ef1f4f92e527a533e">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetNthSelectedOutputUserNumber">
+			<param name="Local" value="html\IPhreeqc_8h.html#a587dd64687d1bcf576b3a7e9d3e183c7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetOutputFileName">
 			<param name="Local" value="html\IPhreeqc_8h.html#a20c0cd67be86477dccfb20948a7a282b">
 			</OBJECT>
@@ -154,6 +162,10 @@
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetSelectedOutputColumnCount">
 			<param name="Local" value="html\IPhreeqc_8h.html#a6be0323b33b32d6d04f3593bed31fcae">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a3170186c203a0e52276f16b5a11e521a">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetSelectedOutputFileName">
@@ -234,6 +246,18 @@
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="RunString">
 			<param name="Local" value="html\IPhreeqc_8h.html#a1611647d6c8b31aba57982f324e2bd3f">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetBasicCallback">
+			<param name="Local" value="html\IPhreeqc_8h.html#a49e83d2b3195b8f1f55ab3b796f91c39">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetBasicFortranCallback">
+			<param name="Local" value="html\IPhreeqc_8h.html#a0e3a073a057f94232d89708ab362e41d">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetCurrentSelectedOutputUserNumber">
+			<param name="Local" value="html\IPhreeqc_8h.html#ac1925c31a3a3a7b291f50377e6e12754">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="SetDumpFileName">

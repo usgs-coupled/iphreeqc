@@ -17,6 +17,7 @@ EXAMPLES = \
 	examples/GetSelectedOutputString.c \
 	examples/GetSelectedOutputValue.c \
 	examples/GetSelectedOutputValue2.c \
+	examples/SetBasicCallback.c \
 	examples/IPhreeqc.cpp \
 	examples/F90ClearAccumulatedLines.f90 \
 	examples/F90CreateIPhreeqc.f90 \
@@ -26,7 +27,9 @@ EXAMPLES = \
 	examples/F90GetLogStringLine.f90 \
 	examples/F90GetOutputStringLine.f90 \
 	examples/F90GetSelectedOutputStringLine.f90 \
-	examples/F90GetSelectedOutputValue.f90
+	examples/F90GetSelectedOutputValue.f90 \
+	examples/F90SetBasicFortranCallback.f90 \
+	examples/ic
 
 
 all: $(TARGET)

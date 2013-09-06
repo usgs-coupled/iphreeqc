@@ -12,7 +12,7 @@ const char input[] =
   "   CO2(g) -1.5 10                                       \n"
   "EQUILIBRIUM_PHASES 2                                    \n"
   "   Calcite 0   10                                       \n"
-  "SELECTED_OUTPUT                                         \n"
+  "SELECTED_OUTPUT 1                                       \n"
   "   -reset false                                         \n"
   "USER_PUNCH                                              \n"
   "   -Heading  pH  SR(calcite)   Year                     \n"
