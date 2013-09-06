@@ -23,19 +23,19 @@ struct MyData
   double year;
 };
 
-double MyCallback(double x1, double x2, const char * str1, void *mydata)
+double MyCallback(double x1, double x2, const char *str1, void *mydata)
 {
   /*
     Use of a callback is optional.
-    
+
     The callback provides a way to obtain data from a Basic program
-    through the variables x1, x2, and str1, and send data to a 
+    through the variables x1, x2, and str1, and send data to a
     Basic program through the return value of the callback.
-    
+
     The void pointer mydata can be used to obtain data from the
     calling program; in this example, it points to a structure.
-    
-    The callback function is called whenever CALLBACK(x1, x2, str$)  
+
+    The callback function is called whenever CALLBACK(x1, x2, str$)
     is used in a Basic program (usually USER_PUNCH).
   */
   if (strcmp(str1, "Year") == 0)
@@ -50,9 +50,9 @@ int main(void)
 {
   struct MyData mydata;
   int id;
-  
+
   mydata.year = 2012.0;
-  
+
   id = CreateIPhreeqc();
   if (id < 0) {
     return EXIT_FAILURE;
@@ -62,12 +62,12 @@ int main(void)
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-  
+
   if (SetSelectedOutputFileOn(id, TRUE) != IPQ_OK) {
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-  
+
   if (SetBasicCallback(id, MyCallback, &mydata) != IPQ_OK) {
     OutputErrorString(id);
     return EXIT_FAILURE;
@@ -77,6 +77,6 @@ int main(void)
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-  
+
   return EXIT_SUCCESS;
 }
