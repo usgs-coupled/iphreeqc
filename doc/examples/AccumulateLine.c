@@ -4,7 +4,7 @@
 int main(void)
 {
   int id;
-
+  
   id = CreateIPhreeqc();
   if (id < 0) {
     return EXIT_FAILURE;
@@ -14,12 +14,12 @@ int main(void)
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-
+  
   if (AccumulateLine(id, "SOLUTION 1") != IPQ_OK) {
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-
+  
   if (AccumulateLine(id, "END") != IPQ_OK) {
     OutputErrorString(id);
     return EXIT_FAILURE;
