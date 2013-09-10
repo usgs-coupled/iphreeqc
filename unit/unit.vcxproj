@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -180,6 +180,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\CSelectedOutput.cpp" />
+    <ClCompile Include="..\src\phreeqcpp\SelectedOutput.cpp" />
+    <ClCompile Include="..\src\phreeqcpp\UserPunch.cpp" />
+    <ClCompile Include="FileTest.cpp" />
     <ClCompile Include="TestCVar.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -208,7 +212,6 @@
     </ClCompile>
     <ClCompile Include="..\src\IPhreeqc.cpp" />
     <ClCompile Include="..\src\IPhreeqcLib.cpp" />
-    <ClCompile Include="..\src\SelectedOutput.cpp" />
     <ClCompile Include="..\src\Var.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -225,12 +228,6 @@
     </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\cxxKinetics.cxx" />
     <ClCompile Include="..\src\phreeqcpp\cxxMix.cxx" />
-    <ClCompile Include="..\src\phreeqcpp\Dictionary.cxx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\dumper.cpp" />
     <ClCompile Include="..\src\phreeqcpp\Exchange.cxx" />
     <ClCompile Include="..\src\phreeqcpp\ExchComp.cxx" />
@@ -253,12 +250,6 @@
     <ClCompile Include="..\src\phreeqcpp\Reaction.cxx" />
     <ClCompile Include="..\src\phreeqcpp\ReadClass.cxx" />
     <ClCompile Include="..\src\phreeqcpp\runner.cpp" />
-    <ClCompile Include="..\src\phreeqcpp\SAXPhreeqc.cxx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\Solution.cxx" />
     <ClCompile Include="..\src\phreeqcpp\SolutionIsotope.cxx" />
     <ClCompile Include="..\src\phreeqcpp\SS.cxx" />

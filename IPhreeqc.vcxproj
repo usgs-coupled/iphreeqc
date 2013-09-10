@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="DebugDll|Win32">
@@ -421,6 +421,7 @@ copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CSelectedOutput.cpp" />
     <ClCompile Include="src\fwrap.cpp" />
     <ClCompile Include="src\fwrap2.cpp" />
     <ClCompile Include="src\fwrap3.cpp" />
@@ -446,7 +447,8 @@ copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
     </ClCompile>
     <ClCompile Include="src\IPhreeqc.cpp" />
     <ClCompile Include="src\IPhreeqcLib.cpp" />
-    <ClCompile Include="src\SelectedOutput.cpp" />
+    <ClCompile Include="src\phreeqcpp\SelectedOutput.cpp" />
+    <ClCompile Include="src\phreeqcpp\UserPunch.cpp" />
     <ClCompile Include="src\Var.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
