@@ -22,6 +22,7 @@ TARGETS = \
 	GetSelectedOutputString \
 	GetSelectedOutputValue \
 	GetSelectedOutputValue2 \
+	Multi \
 	SetBasicCallback \
 	IPhreeqc
 
@@ -69,6 +70,9 @@ GetSelectedOutputValue: GetSelectedOutputValue.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetSelectedOutputValue2: GetSelectedOutputValue2.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+Multi: Multi.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 SetBasicCallback: SetBasicCallback.lo $(IPHREEQC_LA)
@@ -142,6 +146,7 @@ LO_FILES = \
 	GetSelectedOutputString.lo \
 	GetSelectedOutputValue.lo \
 	GetSelectedOutputValue2.lo \
+	Multi.lo \
 	SetBasicCallback.lo \
 	IPhreeqc.lo
 
