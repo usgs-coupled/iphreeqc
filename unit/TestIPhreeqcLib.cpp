@@ -4287,7 +4287,8 @@ void TestIPhreeqcLib::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDCOL, ::GetSelectedOutputValue(id,  0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
 
 	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, -1)); 
-	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, 0)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetCurrentSelectedOutputUserNumber(id, 0)); 
+	CPPUNIT_ASSERT_EQUAL(0,              ::GetCurrentSelectedOutputUserNumber(id)); 
 }
 
 void TestIPhreeqcLib::TestGetSelectedOutputCount(void)
@@ -4348,6 +4349,10 @@ void TestIPhreeqcLib::TestGetCurrentSelectedOutputUserNumber(void)
 	// edge cases
 	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, -1)); 
 	CPPUNIT_ASSERT_EQUAL(3,              ::GetCurrentSelectedOutputUserNumber(id));
-	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, 0)); 
-	CPPUNIT_ASSERT_EQUAL(3,              ::GetCurrentSelectedOutputUserNumber(id));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetCurrentSelectedOutputUserNumber(id, 0)); 
+	CPPUNIT_ASSERT_EQUAL(0,              ::GetCurrentSelectedOutputUserNumber(id));
+
+	// unload database
+	CPPUNIT_ASSERT_EQUAL(0,  ::LoadDatabase(id, "../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(1,  ::GetCurrentSelectedOutputUserNumber(id));
 }

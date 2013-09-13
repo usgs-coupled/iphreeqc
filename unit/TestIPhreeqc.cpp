@@ -3440,6 +3440,11 @@ void TestIPhreeqc::TestRunFileMultiPunchOn(void)
 	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+	obj.SetCurrentSelectedOutputUserNumber(1);
+	obj.SetSelectedOutputFileOn(true);
+	obj.SetCurrentSelectedOutputUserNumber(2);
+	obj.SetSelectedOutputFileOn(true);
+	obj.SetCurrentSelectedOutputUserNumber(3);
 	obj.SetSelectedOutputFileOn(true);
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
@@ -3491,8 +3496,16 @@ void TestIPhreeqc::TestRunFileMultiPunchSet(void)
 	IPhreeqc obj;
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+
+	obj.SetCurrentSelectedOutputUserNumber(1);
 	obj.SetSelectedOutputFileOn(true);
+	obj.SetCurrentSelectedOutputUserNumber(2);
+	obj.SetSelectedOutputFileOn(true);
+	obj.SetCurrentSelectedOutputUserNumber(3);
+	obj.SetSelectedOutputFileOn(true);
+
 	obj.SetSelectedOutputFileName(called.GetName().c_str());
+
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch"));
 
 	CPPUNIT_ASSERT( called.VerifyMissing() );
@@ -3519,7 +3532,14 @@ void TestIPhreeqc::TestRunFileMultiPunchNoSet(void)
 	CPPUNIT_ASSERT( unset3.RemoveExisting() );
 
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+
+	obj.SetCurrentSelectedOutputUserNumber(1);
 	obj.SetSelectedOutputFileOn(true);
+	obj.SetCurrentSelectedOutputUserNumber(2);
+	obj.SetSelectedOutputFileOn(true);
+	obj.SetCurrentSelectedOutputUserNumber(3);
+	obj.SetSelectedOutputFileOn(true);
+
 	obj.SetSelectedOutputFileName(set.GetName().c_str());
 	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("multi_punch_no_set"));
 
@@ -3930,7 +3950,7 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, obj.GetSelectedOutputValue( 0,  c, &var));  CPPUNIT_ASSERT_EQUAL(TT_ERROR, var.type);  CPPUNIT_ASSERT_EQUAL(VR_INVALIDCOL, var.vresult);
 
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(-1)); 
-	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(0)); 
+	CPPUNIT_ASSERT_EQUAL(VR_OK,         obj.SetCurrentSelectedOutputUserNumber(0)); 
 }
 
 void TestIPhreeqc::TestGetSelectedOutputCount(void)
@@ -3990,6 +4010,12 @@ void TestIPhreeqc::TestGetCurrentSelectedOutputUserNumber(void)
 	// edge cases
 	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(-1)); 
 	CPPUNIT_ASSERT_EQUAL(3,             obj.GetCurrentSelectedOutputUserNumber());
-	CPPUNIT_ASSERT_EQUAL(VR_INVALIDARG, obj.SetCurrentSelectedOutputUserNumber(0)); 
-	CPPUNIT_ASSERT_EQUAL(3,             obj.GetCurrentSelectedOutputUserNumber());
+	CPPUNIT_ASSERT_EQUAL(VR_OK,         obj.SetCurrentSelectedOutputUserNumber(0)); 
+	CPPUNIT_ASSERT_EQUAL(0,             obj.GetCurrentSelectedOutputUserNumber());
+
+	// unload database
+	CPPUNIT_ASSERT_EQUAL(0,             obj.LoadDatabase("../database/phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(1,             obj.GetCurrentSelectedOutputUserNumber());
+	CPPUNIT_ASSERT_EQUAL(0,             obj.GetSelectedOutputCount());
+
 }
