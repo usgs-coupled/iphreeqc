@@ -13,6 +13,8 @@
 #include <cfloat>
 #include <stdlib.h>
 
+#include "FileTest.h"
+
 #if defined(_WIN32) || defined(__CYGWIN32__)
 // DeleteFile defined in <windows.h>
 #else
@@ -4039,11 +4041,11 @@ void TestIPhreeqcLib::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 1, &var));   CPPUNIT_ASSERT_EQUAL(std::string("react"),  std::string(var.sVal));
 
 	// pH
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.30475, var.dVal, ::pow(10., -5) );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29765, var.dVal, ::pow(10., -5) );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99738, var.dVal, ::pow(10., -5) );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99698, var.dVal, ::pow(10., -5) );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.2942 , var.dVal, ::pow(10., -5) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.30475, var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.29765, var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99738, var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 6.99698, var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 6, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 7.2942 , var.dVal, ::pow(10., -2) );
 
 	// V_TOTAL_C
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.3729e-003, var.dVal, ::pow(10., -6) );
@@ -4355,4 +4357,49 @@ void TestIPhreeqcLib::TestGetCurrentSelectedOutputUserNumber(void)
 	// unload database
 	CPPUNIT_ASSERT_EQUAL(0,  ::LoadDatabase(id, "../database/phreeqc.dat"));
 	CPPUNIT_ASSERT_EQUAL(1,  ::GetCurrentSelectedOutputUserNumber(id));
+}
+
+void TestIPhreeqcLib::TestMultiSetSelectedOutputFileName(void)
+{
+	FileTest set1("state.sel");
+	CPPUNIT_ASSERT( set1.RemoveExisting() );
+
+	FileTest set2("si.sel");
+	CPPUNIT_ASSERT( set2.RemoveExisting() );
+
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0,              ::LoadDatabase(id, "../database/phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetCurrentSelectedOutputUserNumber(id, 1)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetSelectedOutputStringOn(id, true)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetSelectedOutputFileOn(id, true)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetSelectedOutputFileName(id, set1.GetName().c_str()));
+	
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetCurrentSelectedOutputUserNumber(id, 2)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetSelectedOutputStringOn(id, true)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetSelectedOutputFileOn(id, true)); 
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetSelectedOutputFileName(id, set2.GetName().c_str())); 
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "TITLE Temperature dependence of solubility"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "      of gypsum and anhydrite             "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "SOLUTION 1 Pure water                     "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "        pH      7.0                       "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "        temp    25.0                      "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "EQUILIBRIUM_PHASES 1                      "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "        Gypsum          0.0     1.0       "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "        Anhydrite       0.0     1.0       "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "REACTION_TEMPERATURE 1                    "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "        25.0 75.0 in 51 steps             "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "SELECTED_OUTPUT 1                         "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "        -temperature                      "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "SELECTED_OUTPUT 2                         "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "        -si     anhydrite  gypsum         "));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "END                                       "));
+
+	CPPUNIT_ASSERT_EQUAL(0,              ::RunAccumulated(id));
+
+	CPPUNIT_ASSERT( set1.VerifyExists() );
+	CPPUNIT_ASSERT( set2.VerifyExists() );
 }

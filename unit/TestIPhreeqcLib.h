@@ -75,6 +75,7 @@ class TestIPhreeqcLib : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetSelectedOutputCount );
 	CPPUNIT_TEST( TestGetNthSelectedOutputUserNumber );
 	CPPUNIT_TEST( TestGetCurrentSelectedOutputUserNumber );
+	CPPUNIT_TEST( TestMultiSetSelectedOutputFileName );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -150,6 +151,7 @@ public:
 	void TestGetSelectedOutputCount(void);
 	void TestGetNthSelectedOutputUserNumber(void);
 	void TestGetCurrentSelectedOutputUserNumber(void);
+	void TestMultiSetSelectedOutputFileName(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, int output_file_on, int error_file_on, int log_file_on, int selected_output_file_on, int dump_file_on);
