@@ -1,0 +1,12 @@
+#! /bin/sh
+
+if [ ! -f doc/RELEASE ];then
+  ln phreeqc3-doc/RELEASE.TXT doc/RELEASE
+fi
+
+if [ ! -f doc/NOTICE ];then
+  ln phreeqc3-doc/NOTICE.TXT doc/NOTICE
+fi
+
+exec autoreconf -fvi
+

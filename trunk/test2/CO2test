@@ -1,0 +1,19 @@
+SELECTED_OUTPUT
+		 -reset false
+		 pH true
+SOLUTION 1
+		 units mol/kgw
+		 Na 0.1
+		 Cl 0.1
+USER_PUNCH
+		 -headings Ca name type conc etc
+##		 -headings Ca name type conc etc etc1 etc2 etc3 etc4 etc5 etc6 etc7 etc8 etc9 etc10 #etc11
+10 PUNCH TOT("Ca")
+20 totelt=SYS("Ca",n,n$,t$,c)
+30 FOR i=1 to n
+40    PUNCH n$(i),t$(i),c(i)
+50 NEXT i
+EQUILIBRIUM_PHASES		 
+CO2(g)		 -3.5 10
+Calcite 0 10
+END
