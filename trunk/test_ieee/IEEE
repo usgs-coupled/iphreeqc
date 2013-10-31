@@ -1,0 +1,63 @@
+PHASES
+Fix_H+; H+ = H+; log_k 0
+
+SELECTED_OUTPUT
+  -reset false
+USER_PUNCH
+  -heading  pH logfO2 pe Ast
+10 PUNCH -la("H+"), SI("O2(g)"), -la("e-"), log10(TOT("As"))
+-end
+
+  include$ cdmusic_hiemstra.dat         # CD-MUSIC database, resets convergence criterion
+
+  SOLUTION 1                           # initial solution calculation
+    Temp      20
+##    pH        1.8
+    pH        1.8
+    units     mol/kgw
+    Fe(2)     3.5e-1                   # total concns
+    As        1e-2
+    S(6)      1e-2                     # sulphide minerals can form but not adsorb
+    Na        1e-1
+    Cl        8e-1   charge
+  END
+
+
+# simulation 2
+  USE solution 1
+  EQUILIBRIUM_PHASES 1
+    Fix_H+     -8.4 NaOH
+      -force_equality true
+    O2(g)      -72.0
+
+    CO2(g)  -3.5 10
+
+    As_native                      0 0
+    Orpiment                       0 0
+    Realgar                        0 0
+    As2S3(am)                      0 0
+    Pyrite                         0 0
+    Arsenolite                     0 0
+    Claudetite                     0 0
+    Mackinawite                    0 0
+    FeS(ppt)                       0 0
+    Sulfur                         0 0
+    Fe(OH)3(a)                     0 0
+    Greigite                       0 0
+    Scorodite                      0 0
+    Mirabilite                     0 0
+    Melanterite                    0 0
+    Thenardite                     0 0
+    As2O5(cr)                      0 0
+    Jarosite-Na                    0 0
+    JarositeH                      0 0
+    Goethite                       0 0
+#   Magnetite                      0 0
+
+  SURFACE 1
+    Goe_uniOH1.5  Goethite 0.049886874 8707.79   # 3.5 sites/nm2,  98 m2/g, MWt = 88.855 g/mol
+    Goe_triOH0.5  Goethite 0.039041901 8707.79   # 2.7 sites/nm2
+     -cd_music
+     -cap    0.85  0.75                          # C1  C2  (in F/m2)
+     -equil 1
+END
