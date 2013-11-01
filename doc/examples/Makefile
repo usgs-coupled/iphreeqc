@@ -22,6 +22,7 @@ TARGETS = \
 	GetSelectedOutputString \
 	GetSelectedOutputValue \
 	GetSelectedOutputValue2 \
+	GetVersionString \
 	Multi \
 	SetBasicCallback \
 	IPhreeqc
@@ -34,6 +35,7 @@ F90_TARGETS = \
 	F90GetErrorStringLine \
 	F90GetLogStringLine \
 	F90GetOutputStringLine \
+	F90GetVersionString \
 	F90ClearAccumulatedLines \
 	F90GetSelectedOutputStringLine \
 	F90GetSelectedOutputValue \
@@ -70,6 +72,9 @@ GetSelectedOutputValue: GetSelectedOutputValue.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetSelectedOutputValue2: GetSelectedOutputValue2.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+GetVersionString: GetVersionString.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 Multi: Multi.lo $(IPHREEQC_LA)
@@ -113,6 +118,9 @@ F90GetSelectedOutputStringLine: F90GetSelectedOutputStringLine.lo $(IPHREEQC_LA)
 F90GetSelectedOutputValue: F90GetSelectedOutputValue.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
+F90GetVersionString: F90GetVersionString.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+
 F90SetBasicFortranCallback: F90SetBasicFortranCallback.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
 
@@ -146,6 +154,7 @@ LO_FILES = \
 	GetSelectedOutputString.lo \
 	GetSelectedOutputValue.lo \
 	GetSelectedOutputValue2.lo \
+	GetVersionString.lo \
 	Multi.lo \
 	SetBasicCallback.lo \
 	IPhreeqc.lo
@@ -163,6 +172,7 @@ F90_LO_FILES = \
 	F90GetOutputStringLine.lo \
 	F90GetSelectedOutputStringLine.lo \
 	F90GetSelectedOutputValue.lo \
+	F90GetVersionString.lo \
 	F90SetBasicFortranCallback.lo
 
 
