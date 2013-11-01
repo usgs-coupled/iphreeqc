@@ -31,7 +31,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLogFileOnOff );
 	CPPUNIT_TEST( TestDumpFileOnOff );
 	CPPUNIT_TEST( TestSelOutFileOnOff );
-	CPPUNIT_TEST( TestLongHeadings );
+CPPUNIT_TEST( TestLongHeadings );
 	CPPUNIT_TEST( TestDatabaseKeyword );
 	CPPUNIT_TEST( TestDumpString );
 	CPPUNIT_TEST( TestGetDumpStringLineCount );
@@ -74,6 +74,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetNthSelectedOutputUserNumber );
 	CPPUNIT_TEST( TestGetCurrentSelectedOutputUserNumber );
 	CPPUNIT_TEST( TestMultiSetSelectedOutputFileName );
+	CPPUNIT_TEST( TestRunIC );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -148,6 +149,7 @@ public:
 	void TestGetNthSelectedOutputUserNumber(void);
 	void TestGetCurrentSelectedOutputUserNumber(void);
 	void TestMultiSetSelectedOutputFileName(void);
+	void TestRunIC(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, bool output_file_on, bool error_file_on, bool log_file_on, bool selected_output_file_on, bool dump_file_on);

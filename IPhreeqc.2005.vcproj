@@ -1870,6 +1870,10 @@
 				RelativePath=".\src\Var.h"
 				>
 			</File>
+			<File
+				RelativePath=".\src\Version.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

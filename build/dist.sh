@@ -217,6 +217,7 @@ if [ -z "$ver_patch" ]; then
 fi
 
 SED_FILES="$DISTPATH/phreeqc3-doc/RELEASE.TXT \
+           $DISTPATH/src/Version.h \
            $DISTPATH/src/IPhreeqc.h"
 
 for vsn_file in $SED_FILES
