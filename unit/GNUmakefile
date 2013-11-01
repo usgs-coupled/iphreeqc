@@ -136,6 +136,13 @@ POBJS =	\
 
 all: $(TARGET)
 
+ifeq ($(HOSTNAME),parkplace.cr.usgs.gov)
+export LD_LIBRARY_PATH=/home/charlton/x64/lib
+endif
+
+check: $(TARGET)
+	./$(TARGET) 
+
 $(TARGET): $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS)
 	$(CXXLINK) $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS) $(LIBS)
 

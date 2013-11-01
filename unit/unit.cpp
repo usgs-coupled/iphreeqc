@@ -95,5 +95,5 @@ int main(int argc, char **argv)
 	std::cerr << s.getElapsedTime() << std::endl;
 #endif
 
-	return wasSucessful;
+	return wasSucessful ? 0 : 1;
 }
