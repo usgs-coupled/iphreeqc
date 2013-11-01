@@ -192,15 +192,22 @@ VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
 SED_FILES="$DISTPATH/configure.ac \
            $DISTPATH/phreeqc3-doc/RELEASE.TXT \
-           $DISTPATH/src/Makefile.am"
+           $DISTPATH/src/Makefile.am \
+           $DISTPATH/src/Version.h"
 
 for vsn_file in $SED_FILES
 do
   sed \
    -e "s/AC_INIT(.*)/AC_INIT([IPhreeqc], [$VERSION-$REVISION], [charlton@usgs.gov])/g" \
    -e "s/AM_LDFLAGS=-release.*/AM_LDFLAGS=-release $ver_major.$ver_minor.$ver_patch/g" \
+   -e "/#define *VER_MAJOR/s/[0-9]\+/$ver_major/" \
+   -e "/#define *VER_MINOR/s/[0-9]\+/$ver_minor/" \
+   -e "/#define *VER_PATCH/s/[0-9]\+/$ver_patch/" \
+   -e "/#define *VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
+   -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
    -e "s/@PHREEQC_VER@/$VER/g" \
    -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
+   -e "s/@REVISION_SVN@/$REVISION_SVN/g" \
     < "$vsn_file" > "$vsn_file.tmp"
   mv -f "$vsn_file.tmp" "$vsn_file"
   if [ -n "$WIN" ]; then
