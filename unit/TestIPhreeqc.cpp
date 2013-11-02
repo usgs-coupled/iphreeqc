@@ -4076,31 +4076,3 @@ void TestIPhreeqc::TestMultiSetSelectedOutputFileName(void)
 	CPPUNIT_ASSERT( set1.VerifyExists() );
 	CPPUNIT_ASSERT( set2.VerifyExists() );
 }
-
-void TestIPhreeqc::TestRunIC(void)
-{
-// COMMENT: {9/18/2013 8:54:17 PM}	const char dump_file[] = "error.inp";
-// COMMENT: {9/18/2013 8:54:17 PM}
-// COMMENT: {9/18/2013 8:54:17 PM}	FileTest dfile(dump_file);
-// COMMENT: {9/18/2013 8:54:17 PM}	CPPUNIT_ASSERT( dfile.RemoveExisting() );
-
-	IPhreeqc obj;
-
-	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("phreeqc.dat"));
-	obj.SetOutputFileOn(true);
-	obj.SetErrorFileOn(true);
-	obj.SetLogFileOn(true);
-	obj.SetSelectedOutputFileOn(true);
-	obj.SetDumpFileOn(true);
-	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("ic"));
-
-// COMMENT: {9/18/2013 8:54:49 PM}	const char expected[] =
-// COMMENT: {9/18/2013 8:54:49 PM}		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
-// COMMENT: {9/18/2013 8:54:49 PM}	const char* err = obj.GetErrorString();
-// COMMENT: {9/18/2013 8:54:49 PM}
-// COMMENT: {9/18/2013 8:54:49 PM}	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
-
-// COMMENT: {9/18/2013 8:54:23 PM}	// Note: should this file exist since GetDumpFileOn is false?
-// COMMENT: {9/18/2013 8:54:23 PM}	CPPUNIT_ASSERT( dfile.VerifyExists() );
-// COMMENT: {9/18/2013 8:54:23 PM}	CPPUNIT_ASSERT( dfile.Size() > 0 );
-}
