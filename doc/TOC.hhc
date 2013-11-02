@@ -204,6 +204,10 @@
 			<param name="Local" value="html\IPhreeqc_8h.html#a9aee55746fec18145252f0b06cda4e28">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetVersionString">
+			<param name="Local" value="html\IPhreeqc_8h.html#aa2a16cabed297405fa436333ef5668f3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetWarningString">
 			<param name="Local" value="html\IPhreeqc_8h.html#a507b10ac32383ddbc65719a0c17916ab">
 			</OBJECT>
