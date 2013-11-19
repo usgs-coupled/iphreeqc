@@ -8,28 +8,28 @@ int main(void)
   char buffer[30];
   FILE* f;
   VAR v;
-  
+
   id = CreateIPhreeqc();
   if (id < 0) {
     return EXIT_FAILURE;
   }
-  
+
   if (LoadDatabase(id, "phreeqc.dat") != 0) {
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-  
+
   if (RunFile(id, "multi_punch") != 0) {
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-  
+
   VarInit(&v);
 
   for (i = 0; i < GetSelectedOutputCount(id); ++i) {
     n = GetNthSelectedOutputUserNumber(id, i);
     sprintf(buffer, "sel_out.%d.out", n);
-    
+
     if ((f = fopen(buffer, "w"))) {
       SetCurrentSelectedOutputUserNumber(id, n);
 
@@ -38,7 +38,7 @@ int main(void)
         for (c = 0; c < GetSelectedOutputColumnCount(id); ++c) {
 
           if (GetSelectedOutputValue(id, r, c, &v) == VR_OK) {
-            
+
             switch (v.type) {
             case TT_LONG:
               fprintf(f, "%ld,", v.lVal);
@@ -65,11 +65,11 @@ int main(void)
       fclose(f);
     }
   }
-  
+
   if (DestroyIPhreeqc(id) != IPQ_OK) {
     OutputErrorString(id);
     return EXIT_FAILURE;
   }
-  
+
   return EXIT_SUCCESS;
 }
