@@ -14,6 +14,7 @@ IPHREEQC_LA = ../../_build/src/libiphreeqc.la
 TARGETS = \
 	AccumulateLine \
 	CreateIPhreeqc \
+	CurrentSelectedOutputUserNumber \
 	GetComponent \
 	GetDumpString \
 	GetErrorString \
@@ -51,6 +52,9 @@ CreateIPhreeqc: CreateIPhreeqc.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetComponent: GetComponent.lo $(IPHREEQC_LA)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
+
+CurrentSelectedOutputUserNumber: CurrentSelectedOutputUserNumber.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA)
 
 GetDumpString: GetDumpString.lo $(IPHREEQC_LA)
@@ -145,6 +149,7 @@ F90SetBasicFortranCallback: F90SetBasicFortranCallback.lo $(IPHREEQC_LA)
 LO_FILES = \
 	AccumulateLine.lo \
 	CreateIPhreeqc.lo \
+	CurrentSelectedOutputUserNumber.lo \
 	DestroyIPhreeqc.lo \
 	GetComponent.lo \
 	GetDumpString.lo \
