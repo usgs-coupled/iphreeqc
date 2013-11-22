@@ -176,6 +176,10 @@
 			<param name="Local" value="html\IPhreeqc_8h.html#a8f57d33809b84174e2cc6b69d000e096">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputRowCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a6e428ca1628248708ebbd1925a50837a">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetSelectedOutputString">
 			<param name="Local" value="html\IPhreeqc_8h.html#ad2f63040ff41e6e313417a2e3aa56660">
 			</OBJECT>
@@ -190,10 +194,6 @@
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetSelectedOutputStringOn">
 			<param name="Local" value="html\IPhreeqc_8h.html#a28f04f8405b3274b39a047b7c01352de">
-			</OBJECT>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="GetSelectedOutputRowCount">
-			<param name="Local" value="html\IPhreeqc_8h.html#a6e428ca1628248708ebbd1925a50837a">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="GetSelectedOutputValue">
