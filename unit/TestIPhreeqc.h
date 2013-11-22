@@ -31,7 +31,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLogFileOnOff );
 	CPPUNIT_TEST( TestDumpFileOnOff );
 	CPPUNIT_TEST( TestSelOutFileOnOff );
-CPPUNIT_TEST( TestLongHeadings );
+	CPPUNIT_TEST( TestLongHeadings );
 	CPPUNIT_TEST( TestDatabaseKeyword );
 	CPPUNIT_TEST( TestDumpString );
 	CPPUNIT_TEST( TestGetDumpStringLineCount );

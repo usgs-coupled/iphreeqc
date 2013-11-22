@@ -1651,7 +1651,7 @@ void TestIPhreeqc::TestGetDumpStringLineCount(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 31,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 32,        obj.GetDumpStringLineCount() );
 }
 
 void TestIPhreeqc::TestGetDumpStringLine(void)
@@ -1677,7 +1677,7 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 	obj.SetDumpStringOn(true);
 	CPPUNIT_ASSERT_EQUAL( true,      obj.GetDumpStringOn() );
 	CPPUNIT_ASSERT_EQUAL( 0,         obj.RunAccumulated() );
-	CPPUNIT_ASSERT_EQUAL( 31,        obj.GetDumpStringLineCount() );
+	CPPUNIT_ASSERT_EQUAL( 32,        obj.GetDumpStringLineCount() );
 
 	int line = 0;
 
@@ -1698,6 +1698,7 @@ void TestIPhreeqc::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-mu")                           != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-ah2o")                         != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-mass_water")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-soln_vol")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-total_alkalinity")             != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), "-activities")                   != NULL);
 	CPPUNIT_ASSERT(::strstr(obj.GetDumpStringLine(line++), " C(-4) ")                       != NULL);
@@ -1863,6 +1864,7 @@ void TestIPhreeqc::TestSetDumpFileName(void)
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-mu")                           != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-ah2o")                         != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-mass_water")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-soln_vol")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_alkalinity")             != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-activities")                   != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " C(-4) ")                       != NULL);

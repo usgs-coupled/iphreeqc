@@ -1809,7 +1809,7 @@ void TestIPhreeqcLib::TestGetDumpStringLineCount(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 31,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 32,     ::GetDumpStringLineCount(n) );
 
 	if (n >= 0)
 	{
@@ -1838,7 +1838,7 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 31,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 32,     ::GetDumpStringLineCount(n) );
 
 	int line = 0;
 
@@ -1859,6 +1859,7 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-mu")                           != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-ah2o")                         != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-mass_water")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-soln_vol")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-total_alkalinity")             != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-activities")                   != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " C(-4) ")                       != NULL);
@@ -2349,6 +2350,7 @@ void TestIPhreeqcLib::TestSetDumpFileName(void)
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-mu")                           != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-ah2o")                         != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-mass_water")                   != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-soln_vol")                     != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_alkalinity")             != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-activities")                   != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " C(-4) ")                       != NULL);
