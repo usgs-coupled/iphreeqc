@@ -179,11 +179,11 @@ echo "Exporting revision $REVISION of external phreeqc3-doc into sandbox..."
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/doc" \
 	     "$DISTNAME/phreeqc3-doc")
 
-echo "Exporting revision $REVISION of external HTMLversion into sandbox..."
+echo "Exporting revision $REVISION of external HTMLversion/phreeqc3.chm into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion" \
-	     "$DISTNAME/HTMLversion")
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion/phreeqc3.chm" \
+	     "$DISTNAME/doc")
 
 
 ver_major=`echo $VERSION | cut -d '.' -f 1`
@@ -224,8 +224,6 @@ done
 
 cp $DISTPATH/phreeqc3-doc/RELEASE.TXT     $DISTPATH/doc/RELEASE
 cp $DISTPATH/phreeqc3-doc/NOTICE.TXT      $DISTPATH/doc/NOTICE
-cp $DISTPATH/HTMLversion/phreeqc3.chm     $DISTPATH/doc/phreeqc3.chm
-rm -rf $DISTPATH/HTMLversion
 
 (cd "$DISTPATH/doc" && "doxygen")
 

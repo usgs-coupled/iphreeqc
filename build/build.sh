@@ -206,6 +206,7 @@ install() {
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/examples/fortran" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-win32/examples/fortran/advect" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm"                       "${instdir}/${FULLPKG}-vs2005-win32/doc/IPhreeqc.chm" && \
+  /usr/bin/install -m 755 "${objdir}/doc/phreeqc3.chm"                       "${instdir}/${FULLPKG}-vs2005-win32/doc/phreeqc3.chm" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.pdf"                       "${instdir}/${FULLPKG}-vs2005-win32/doc/IPhreeqc.pdf" && \
   /usr/bin/install -m 755 "${objdir}/phreeqc3-doc/NOTICE.TXT"                "${instdir}/${FULLPKG}-vs2005-win32/doc/NOTICE.txt" && \
   /usr/bin/install -m 755 "${objdir}/phreeqc3-doc/RELEASE.TXT"               "${instdir}/${FULLPKG}-vs2005-win32/doc/RELEASE.txt" && \
@@ -252,6 +253,7 @@ install() {
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/examples/fortran" && \
   mkdir "${instdir}/${FULLPKG}-vs2005-x64/examples/fortran/advect" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.chm"                       "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.chm" && \
+  /usr/bin/install -m 755 "${objdir}/doc/phreeqc3.chm"                       "${instdir}/${FULLPKG}-vs2005-x64/doc/phreeqc3.chm" && \
   /usr/bin/install -m 755 "${objdir}/doc/IPhreeqc.pdf"                       "${instdir}/${FULLPKG}-vs2005-x64/doc/IPhreeqc.pdf" && \
   /usr/bin/install -m 755 "${objdir}/phreeqc3-doc/NOTICE.TXT"                "${instdir}/${FULLPKG}-vs2005-x64/doc/NOTICE.txt" && \
   /usr/bin/install -m 755 "${objdir}/phreeqc3-doc/RELEASE.TXT"               "${instdir}/${FULLPKG}-vs2005-x64/doc/RELEASE.txt" && \

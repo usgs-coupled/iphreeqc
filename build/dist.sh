@@ -208,6 +208,17 @@ if [ $? != 0 ] ; then
   exit $?;
 fi
 
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion/phreeqc3.chm" \
+	     "$DISTNAME/doc")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
+
+
+
 ver_major=`echo $VERSION | cut -d '.' -f 1`
 ver_minor=`echo $VERSION | cut -d '.' -f 2`
 ver_patch=`echo $VERSION | cut -d '.' -f 3`
