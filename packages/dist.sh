@@ -183,7 +183,7 @@ echo "Exporting revision $REVISION of external HTMLversion/phreeqc3.chm into san
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion/phreeqc3.chm" \
-	     "$DISTNAME/doc")
+	     "$DISTNAME/doc/phreeqc3.chm")
 
 
 ver_major=`echo $VERSION | cut -d '.' -f 1`
