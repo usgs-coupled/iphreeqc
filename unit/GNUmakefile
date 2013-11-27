@@ -140,6 +140,10 @@ ifeq ($(HOSTNAME),parkplace.cr.usgs.gov)
 export LD_LIBRARY_PATH=/home/charlton/x64/lib
 endif
 
+ifeq ($(HOSTNAME),lobo02)
+export LD_LIBRARY_PATH=/z/parkplace/home/charlton/x64/lib
+endif
+
 check: $(TARGET)
 	./$(TARGET) 
 

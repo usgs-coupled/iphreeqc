@@ -22,8 +22,8 @@ unit_SOURCES=\
 	../src/IPhreeqc.h\
 	../src/IPhreeqc.hpp\
 	../src/IPhreeqcLib.cpp\
-	../src/SelectedOutput.cpp\
-	../src/SelectedOutput.hxx\
+	../src/CSelectedOutput.cpp\
+	../src/CSelectedOutput.hxx\
 	../src/Var.c\
 	../src/phreeqcpp/cxxKinetics.cxx\
 	../src/phreeqcpp/cxxKinetics.h\
