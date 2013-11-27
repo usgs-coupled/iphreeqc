@@ -8,5 +8,9 @@ if [ ! -f doc/NOTICE ];then
   ln phreeqc3-doc/NOTICE.TXT doc/NOTICE
 fi
 
+if [ ! -f doc/phreeqc3.chm ];then
+  ln -s ../HTMLversion/phreeqc3.chm doc/phreeqc3.chm
+fi
+
 exec autoreconf -fvi
 

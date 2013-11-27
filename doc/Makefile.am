@@ -7,6 +7,7 @@ dist_doc_DATA = $(DOCS)
 DOCS= \
 	NOTICE \
 	RELEASE \
+	phreeqc3.chm \
 	html/annotated.html \
 	html/classes.html \
 	html/classIPhreeqc.html \
