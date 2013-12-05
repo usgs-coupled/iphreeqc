@@ -92,7 +92,7 @@ int main(int argc, char **argv)
 
 #if defined(_MSC_VER)
 	s.stopTimer();
-	std::cerr << s.getElapsedTime() << std::endl;
+	std::cerr << "Elapsed time: " << s.getElapsedTime() << std::endl;
 #endif
 
 	return wasSucessful ? 0 : 1;

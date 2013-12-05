@@ -4078,3 +4078,83 @@ void TestIPhreeqc::TestMultiSetSelectedOutputFileName(void)
 	CPPUNIT_ASSERT( set1.VerifyExists() );
 	CPPUNIT_ASSERT( set2.VerifyExists() );
 }
+
+void TestIPhreeqc::TestWissmeier20131203(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL(0,      obj.LoadDatabase("../database/phreeqc.dat"));
+
+	obj.AccumulateLine("selected_output 1");
+	obj.AccumulateLine("-totals O");
+	obj.AccumulateLine("");
+	obj.AccumulateLine("END");
+	obj.AccumulateLine("selected_output 1");
+	obj.AccumulateLine("-totals H");
+	obj.AccumulateLine("");
+	obj.AccumulateLine("solution");
+	obj.AccumulateLine("END");
+	obj.AccumulateLine("selected_output");
+
+	// original asserts here
+	CPPUNIT_ASSERT_EQUAL(0,      obj.RunAccumulated());
+
+	CPPUNIT_ASSERT_EQUAL( 1,     obj.GetSelectedOutputCount() );
+
+	CPPUNIT_ASSERT_EQUAL( 9,     obj.GetSelectedOutputColumnCount() );
+	CPPUNIT_ASSERT_EQUAL( 2,     obj.GetSelectedOutputRowCount() );
+}
+
+void TestIPhreeqc::TestWissmeier20131203_2(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL(0,      obj.LoadDatabase("../database/phreeqc.dat"));
+
+	obj.AccumulateLine("selected_output 22");
+	obj.AccumulateLine("-totals O");
+	obj.AccumulateLine("");
+	obj.AccumulateLine("END");
+	obj.AccumulateLine("selected_output 22");
+	obj.AccumulateLine("-totals H");
+	obj.AccumulateLine("");
+	obj.AccumulateLine("solution");
+	obj.AccumulateLine("END");
+	obj.AccumulateLine("selected_output 22");
+
+	// original asserts here
+	CPPUNIT_ASSERT_EQUAL(0,      obj.RunAccumulated());
+
+	CPPUNIT_ASSERT_EQUAL( 1,     obj.GetSelectedOutputCount() );
+
+	CPPUNIT_ASSERT_EQUAL( VR_OK, obj.SetCurrentSelectedOutputUserNumber(22) );
+	CPPUNIT_ASSERT_EQUAL( 1,     obj.GetSelectedOutputColumnCount() );
+	CPPUNIT_ASSERT_EQUAL( 2,     obj.GetSelectedOutputRowCount() );
+}
+
+void TestIPhreeqc::TestWissmeier20131203_3(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0,      obj.LoadDatabase("../database/phreeqc.dat"));
+
+	obj.AccumulateLine("selected_output 1");
+	obj.AccumulateLine("-reset false");
+	obj.AccumulateLine("-totals O");
+	obj.AccumulateLine("");
+	obj.AccumulateLine("END");
+	obj.AccumulateLine("selected_output 1");
+	obj.AccumulateLine("-reset false");
+	obj.AccumulateLine("-totals H");
+	obj.AccumulateLine("");
+	obj.AccumulateLine("solution");
+	obj.AccumulateLine("END");
+	obj.AccumulateLine("selected_output");
+	obj.AccumulateLine("-reset false");
+
+	// original asserts here
+	CPPUNIT_ASSERT_EQUAL(0,      obj.RunAccumulated());
+
+	CPPUNIT_ASSERT_EQUAL( 1,     obj.GetSelectedOutputCount() );
+
+	CPPUNIT_ASSERT_EQUAL( 1,     obj.GetSelectedOutputColumnCount() );
+	CPPUNIT_ASSERT_EQUAL( 2,     obj.GetSelectedOutputRowCount() );
+}

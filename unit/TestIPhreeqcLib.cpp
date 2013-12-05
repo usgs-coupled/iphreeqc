@@ -4405,3 +4405,88 @@ void TestIPhreeqcLib::TestMultiSetSelectedOutputFileName(void)
 	CPPUNIT_ASSERT( set1.VerifyExists() );
 	CPPUNIT_ASSERT( set2.VerifyExists() );
 }
+
+void TestIPhreeqcLib::TestWissmeier20131203(void)
+{
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0,              ::LoadDatabase(id, "../database/phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output 1"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-totals O"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, ""));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "END"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output 1"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-totals H"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, ""));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "solution"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "END"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output"));
+
+	// original asserts here
+	CPPUNIT_ASSERT_EQUAL( 0,             ::RunAccumulated(id));
+
+	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputCount(id) );
+
+	CPPUNIT_ASSERT_EQUAL( 9,             ::GetSelectedOutputColumnCount(id) );
+	CPPUNIT_ASSERT_EQUAL( 2,             ::GetSelectedOutputRowCount(id) );
+}
+
+void TestIPhreeqcLib::TestWissmeier20131203_2(void)
+{
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0,              ::LoadDatabase(id, "../database/phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output 22"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-totals O"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, ""));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "END"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output 22"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-totals H"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, ""));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "solution"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "END"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output 22"));
+
+	// original asserts here
+	CPPUNIT_ASSERT_EQUAL( 0,             ::RunAccumulated(id));
+
+	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputCount(id) );
+
+	CPPUNIT_ASSERT_EQUAL( IPQ_OK,        ::SetCurrentSelectedOutputUserNumber(id, 22) );
+	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputColumnCount(id) );
+	CPPUNIT_ASSERT_EQUAL( 2,             ::GetSelectedOutputRowCount(id) );
+}
+
+void TestIPhreeqcLib::TestWissmeier20131203_3(void)
+{
+	int id = ::CreateIPhreeqc();
+	CPPUNIT_ASSERT(id >= 0);
+
+	CPPUNIT_ASSERT_EQUAL(0,              ::LoadDatabase(id, "../database/phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output 1"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-reset false"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-totals O"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, ""));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "END"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output 1"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-reset false"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-totals H"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, ""));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "solution"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "END"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "selected_output"));
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::AccumulateLine(id, "-reset false"));
+
+	// original asserts here
+	CPPUNIT_ASSERT_EQUAL( 0,             ::RunAccumulated(id));
+
+	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputCount(id) );
+
+	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputColumnCount(id) );
+	CPPUNIT_ASSERT_EQUAL( 2,             ::GetSelectedOutputRowCount(id) );
+}
