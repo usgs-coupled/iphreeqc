@@ -4490,3 +4490,28 @@ void TestIPhreeqcLib::TestWissmeier20131203_3(void)
 	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputColumnCount(id) );
 	CPPUNIT_ASSERT_EQUAL( 2,             ::GetSelectedOutputRowCount(id) );
 }
+
+void TestIPhreeqcLib::TestIsZeroInitialized(void)
+{
+	std::map<void*, void*> test_map;
+	CPPUNIT_ASSERT( test_map.find((void*)0) == test_map.end() );
+	CPPUNIT_ASSERT( test_map[(void*)0] == (void*)0 );
+
+	int i = int();
+	long l = long();
+	float f = float();
+	double d = double();
+
+	// these would fail
+	/**
+	int i;
+	long l;
+	float f;
+	double d;
+	**/
+
+	CPPUNIT_ASSERT_EQUAL( (int)0, i );
+	CPPUNIT_ASSERT_EQUAL( (long)0, l );
+	CPPUNIT_ASSERT_EQUAL( (float)0, f );
+	CPPUNIT_ASSERT_EQUAL( (double)0, d );
+}
