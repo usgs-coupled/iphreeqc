@@ -405,6 +405,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CSelectedOutput.cpp" />
     <ClCompile Include="src\fwrap.cpp" />
     <ClCompile Include="src\fwrap2.cpp" />
     <ClCompile Include="src\fwrap3.cpp" />
@@ -415,7 +416,8 @@
     <ClCompile Include="src\fwrap8.cpp" />
     <ClCompile Include="src\IPhreeqc.cpp" />
     <ClCompile Include="src\IPhreeqcLib.cpp" />
-    <ClCompile Include="src\SelectedOutput.cpp" />
+    <ClCompile Include="src\phreeqcpp\SelectedOutput.cpp" />
+    <ClCompile Include="src\phreeqcpp\UserPunch.cpp" />
     <ClCompile Include="src\Var.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
@@ -506,6 +508,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CSelectedOutput.hxx" />
     <ClInclude Include="src\CVar.hxx" />
     <ClInclude Include="src\IPhreeqc.h" />
     <ClInclude Include="src\IPhreeqc.hpp" />
@@ -551,6 +554,7 @@
     <ClInclude Include="src\phreeqcpp\Pressure.h" />
     <ClInclude Include="src\phreeqcpp\Reaction.h" />
     <ClInclude Include="src\phreeqcpp\runner.h" />
+    <ClInclude Include="src\phreeqcpp\UserPunch.h" />
     <ClInclude Include="src\SelectedOutput.hxx" />
     <ClInclude Include="src\phreeqcpp\smalldense.h" />
     <ClInclude Include="src\phreeqcpp\Solution.h" />

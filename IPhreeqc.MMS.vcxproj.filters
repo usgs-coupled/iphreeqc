@@ -47,9 +47,6 @@
     <ClCompile Include="src\IPhreeqcLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SelectedOutput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Var.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -275,6 +272,15 @@
     <ClCompile Include="src\phreeqcpp\utilities.cpp">
       <Filter>Source Files\phreeqcpp\phreeqc</Filter>
     </ClCompile>
+    <ClCompile Include="src\phreeqcpp\SelectedOutput.cpp">
+      <Filter>Source Files\phreeqcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSelectedOutput.cpp">
+      <Filter>Source Files\phreeqcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\phreeqcpp\UserPunch.cpp">
+      <Filter>Source Files\phreeqcpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CVar.hxx">
@@ -467,6 +473,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\IPhreeqc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSelectedOutput.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\phreeqcpp\UserPunch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
