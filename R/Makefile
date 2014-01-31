@@ -1,6 +1,9 @@
-DEST=phreeqc/src
-SRC=../src/phreeqcpp
 CP=cp -f
+IDEST=phreeqc/src
+DEST=phreeqc/src/phreeqcpp
+ISRC=../src
+SRC=../src/phreeqcpp
+
 
 PSRC = \
 	$(DEST)/advection.cpp \
@@ -10,59 +13,57 @@ PSRC = \
 	$(DEST)/ChartObject.cpp \
 	$(DEST)/ChartObject.h \
 	$(DEST)/cl1.cpp \
-	$(DEST)/cl1mp.cpp \
-	$(DEST)/class_main.cpp \
 	$(DEST)/CurveObject.cpp \
 	$(DEST)/CurveObject.h \
 	$(DEST)/cvdense.cpp \
 	$(DEST)/cvdense.h \
 	$(DEST)/cvode.cpp \
 	$(DEST)/cvode.h \
-	$(DEST)/cxxKinetics.cxx \
+	$(DEST)/cxxKinetics.cpp \
 	$(DEST)/cxxKinetics.h \
-	$(DEST)/cxxMix.cxx \
+	$(DEST)/cxxMix.cpp \
 	$(DEST)/cxxMix.h \
 	$(DEST)/dense.cpp \
 	$(DEST)/dense.h \
 	$(DEST)/dumper.cpp \
 	$(DEST)/dumper.h \
 	$(DEST)/dw.cpp \
-	$(DEST)/Exchange.cxx \
+	$(DEST)/Exchange.cpp \
 	$(DEST)/Exchange.h \
-	$(DEST)/ExchComp.cxx \
+	$(DEST)/ExchComp.cpp \
 	$(DEST)/ExchComp.h \
-	$(DEST)/GasComp.cxx \
+	$(DEST)/GasComp.cpp \
 	$(DEST)/GasComp.h \
 	$(DEST)/gases.cpp \
-	$(DEST)/GasPhase.cxx \
+	$(DEST)/GasPhase.cpp \
 	$(DEST)/GasPhase.h \
 	$(DEST)/global_structures.h \
 	$(DEST)/input.cpp \
 	$(DEST)/integrate.cpp \
 	$(DEST)/inverse.cpp \
-	$(DEST)/ISolution.cxx \
+	$(DEST)/ISolution.cpp \
 	$(DEST)/ISolution.h \
-	$(DEST)/ISolutionComp.cxx \
+	$(DEST)/ISolutionComp.cpp \
 	$(DEST)/ISolutionComp.h \
 	$(DEST)/isotopes.cpp \
 	$(DEST)/Keywords.cpp \
 	$(DEST)/Keywords.h \
 	$(DEST)/kinetics.cpp \
-	$(DEST)/KineticsComp.cxx \
+	$(DEST)/KineticsComp.cpp \
 	$(DEST)/KineticsComp.h \
 	$(DEST)/mainsubs.cpp \
 	$(DEST)/model.cpp \
 	$(DEST)/NA.h \
-	$(DEST)/NameDouble.cxx \
+	$(DEST)/NameDouble.cpp \
 	$(DEST)/NameDouble.h \
-	$(DEST)/NumKeyword.cxx \
+	$(DEST)/NumKeyword.cpp \
 	$(DEST)/NumKeyword.h \
 	$(DEST)/nvector.cpp \
 	$(DEST)/nvector.h \
 	$(DEST)/nvector_serial.cpp \
 	$(DEST)/nvector_serial.h \
 	$(DEST)/parse.cpp \
-	$(DEST)/Parser.cxx \
+	$(DEST)/Parser.cpp \
 	$(DEST)/Parser.h \
 	$(DEST)/PBasic.cpp \
 	$(DEST)/PBasic.h \
@@ -70,7 +71,7 @@ PSRC = \
 	$(DEST)/phqalloc.h \
 	$(DEST)/Phreeqc.cpp \
 	$(DEST)/Phreeqc.h \
-	$(DEST)/PHRQ_base.cxx \
+	$(DEST)/PHRQ_base.cpp \
 	$(DEST)/PHRQ_base.h \
 	$(DEST)/PHRQ_io.cpp \
 	$(DEST)/PHRQ_io.h \
@@ -78,18 +79,18 @@ PSRC = \
 	$(DEST)/phrqtype.h \
 	$(DEST)/pitzer.cpp \
 	$(DEST)/pitzer_structures.cpp \
-	$(DEST)/PPassemblage.cxx \
+	$(DEST)/PPassemblage.cpp \
 	$(DEST)/PPassemblage.h \
-	$(DEST)/PPassemblageComp.cxx \
+	$(DEST)/PPassemblageComp.cpp \
 	$(DEST)/PPassemblageComp.h \
 	$(DEST)/prep.cpp \
-	$(DEST)/Pressure.cxx \
+	$(DEST)/Pressure.cpp \
 	$(DEST)/Pressure.h \
 	$(DEST)/print.cpp \
-	$(DEST)/Reaction.cxx \
+	$(DEST)/Reaction.cpp \
 	$(DEST)/Reaction.h \
 	$(DEST)/read.cpp \
-	$(DEST)/ReadClass.cxx \
+	$(DEST)/ReadClass.cpp \
 	$(DEST)/readtr.cpp \
 	$(DEST)/runner.cpp \
 	$(DEST)/runner.h \
@@ -98,19 +99,19 @@ PSRC = \
 	$(DEST)/sit.cpp \
 	$(DEST)/smalldense.cpp \
 	$(DEST)/smalldense.h \
-	$(DEST)/Solution.cxx \
+	$(DEST)/Solution.cpp \
 	$(DEST)/Solution.h \
-	$(DEST)/SolutionIsotope.cxx \
+	$(DEST)/SolutionIsotope.cpp \
 	$(DEST)/SolutionIsotope.h \
 	$(DEST)/spread.cpp \
-	$(DEST)/SS.cxx \
+	$(DEST)/SS.cpp \
 	$(DEST)/SS.h \
-	$(DEST)/SSassemblage.cxx \
+	$(DEST)/SSassemblage.cpp \
 	$(DEST)/SSassemblage.h \
-	$(DEST)/SScomp.cxx \
+	$(DEST)/SScomp.cpp \
 	$(DEST)/SScomp.h \
 	$(DEST)/step.cpp \
-	$(DEST)/StorageBin.cxx \
+	$(DEST)/StorageBin.cpp \
 	$(DEST)/StorageBin.h \
 	$(DEST)/StorageBinList.cpp \
 	$(DEST)/StorageBinList.h \
@@ -118,16 +119,16 @@ PSRC = \
 	$(DEST)/sundialsmath.cpp \
 	$(DEST)/sundialsmath.h \
 	$(DEST)/sundialstypes.h \
-	$(DEST)/Surface.cxx \
+	$(DEST)/Surface.cpp \
 	$(DEST)/Surface.h \
-	$(DEST)/SurfaceCharge.cxx \
+	$(DEST)/SurfaceCharge.cpp \
 	$(DEST)/SurfaceCharge.h \
-	$(DEST)/SurfaceComp.cxx \
+	$(DEST)/SurfaceComp.cpp \
 	$(DEST)/SurfaceComp.h \
-	$(DEST)/System.cxx \
+	$(DEST)/System.cpp \
 	$(DEST)/System.h \
 	$(DEST)/tally.cpp \
-	$(DEST)/Temperature.cxx \
+	$(DEST)/Temperature.cpp \
 	$(DEST)/Temperature.h \
 	$(DEST)/tidy.cpp \
 	$(DEST)/transport.cpp \
@@ -136,11 +137,34 @@ PSRC = \
 	$(DEST)/UserPunch.cpp \
 	$(DEST)/UserPunch.h \
 	$(DEST)/utilities.cpp \
-	$(DEST)/Utils.cxx \
+	$(DEST)/Utils.cpp \
 	$(DEST)/Utils.h
 
+XSRC = \
+	$(IDEST)/CSelectedOutput.cpp \
+	$(IDEST)/CSelectedOutput.hxx \
+	$(IDEST)/CVar.hxx \
+	$(IDEST)/Debug.h \
+	$(IDEST)/ErrorReporter.hxx \
+	$(IDEST)/IPhreeqcCallbacks.h \
+	$(IDEST)/IPhreeqc.cpp \
+	$(IDEST)/IPhreeqc.h \
+	$(IDEST)/IPhreeqc.hpp \
+	$(IDEST)/IPhreeqcLib.cpp \
+	$(IDEST)/R.cpp \
+	$(IDEST)/thread.h \
+	$(IDEST)/Var.c \
+	$(IDEST)/Var.h \
+	$(IDEST)/Version.h \
+	$(IDEST)/Makevars
 
-all: $(PSRC)
+all: $(PSRC) $(XSRC)
+
+##$(PSRC): $(DEST)
+
+##$(ISRC): $(IDEST)
+
+##$(DEST) : $(IDEST)
 
 $(DEST)/advection.cpp : $(SRC)/advection.cpp
 	$(CP) $< $@
@@ -163,11 +187,11 @@ $(DEST)/ChartObject.h : $(SRC)/ChartObject.h
 $(DEST)/cl1.cpp : $(SRC)/cl1.cpp
 	$(CP) $< $@
 
-$(DEST)/cl1mp.cpp : $(SRC)/cl1mp.cpp
-	$(CP) $< $@
+##$(DEST)/cl1mp.cpp : $(SRC)/cl1mp.cpp
+##	$(CP) $< $@
 
-$(DEST)/class_main.cpp : $(SRC)/class_main.cpp
-	$(CP) $< $@
+##$(DEST)/class_main.cpp : $(SRC)/class_main.cpp
+##	$(CP) $< $@
 
 $(DEST)/CurveObject.cpp : $(SRC)/CurveObject.cpp
 	$(CP) $< $@
@@ -187,13 +211,13 @@ $(DEST)/cvode.cpp : $(SRC)/cvode.cpp
 $(DEST)/cvode.h : $(SRC)/cvode.h
 	$(CP) $< $@
 
-$(DEST)/cxxKinetics.cxx : $(SRC)/cxxKinetics.cxx
+$(DEST)/cxxKinetics.cpp : $(SRC)/cxxKinetics.cxx
 	$(CP) $< $@
 
 $(DEST)/cxxKinetics.h : $(SRC)/cxxKinetics.h
 	$(CP) $< $@
 
-$(DEST)/cxxMix.cxx : $(SRC)/cxxMix.cxx
+$(DEST)/cxxMix.cpp : $(SRC)/cxxMix.cxx
 	$(CP) $< $@
 
 $(DEST)/cxxMix.h : $(SRC)/cxxMix.h
@@ -214,19 +238,19 @@ $(DEST)/dumper.h : $(SRC)/dumper.h
 $(DEST)/dw.cpp : $(SRC)/dw.cpp
 	$(CP) $< $@
 
-$(DEST)/Exchange.cxx : $(SRC)/Exchange.cxx
+$(DEST)/Exchange.cpp : $(SRC)/Exchange.cxx
 	$(CP) $< $@
 
 $(DEST)/Exchange.h : $(SRC)/Exchange.h
 	$(CP) $< $@
 
-$(DEST)/ExchComp.cxx : $(SRC)/ExchComp.cxx
+$(DEST)/ExchComp.cpp : $(SRC)/ExchComp.cxx
 	$(CP) $< $@
 
 $(DEST)/ExchComp.h : $(SRC)/ExchComp.h
 	$(CP) $< $@
 
-$(DEST)/GasComp.cxx : $(SRC)/GasComp.cxx
+$(DEST)/GasComp.cpp : $(SRC)/GasComp.cxx
 	$(CP) $< $@
 
 $(DEST)/GasComp.h : $(SRC)/GasComp.h
@@ -235,7 +259,7 @@ $(DEST)/GasComp.h : $(SRC)/GasComp.h
 $(DEST)/gases.cpp : $(SRC)/gases.cpp
 	$(CP) $< $@
 
-$(DEST)/GasPhase.cxx : $(SRC)/GasPhase.cxx
+$(DEST)/GasPhase.cpp : $(SRC)/GasPhase.cxx
 	$(CP) $< $@
 
 $(DEST)/GasPhase.h : $(SRC)/GasPhase.h
@@ -253,13 +277,13 @@ $(DEST)/integrate.cpp : $(SRC)/integrate.cpp
 $(DEST)/inverse.cpp : $(SRC)/inverse.cpp
 	$(CP) $< $@
 
-$(DEST)/ISolution.cxx : $(SRC)/ISolution.cxx
+$(DEST)/ISolution.cpp : $(SRC)/ISolution.cxx
 	$(CP) $< $@
 
 $(DEST)/ISolution.h : $(SRC)/ISolution.h
 	$(CP) $< $@
 
-$(DEST)/ISolutionComp.cxx : $(SRC)/ISolutionComp.cxx
+$(DEST)/ISolutionComp.cpp : $(SRC)/ISolutionComp.cxx
 	$(CP) $< $@
 
 $(DEST)/ISolutionComp.h : $(SRC)/ISolutionComp.h
@@ -277,7 +301,7 @@ $(DEST)/Keywords.h : $(SRC)/Keywords.h
 $(DEST)/kinetics.cpp : $(SRC)/kinetics.cpp
 	$(CP) $< $@
 
-$(DEST)/KineticsComp.cxx : $(SRC)/KineticsComp.cxx
+$(DEST)/KineticsComp.cpp : $(SRC)/KineticsComp.cxx
 	$(CP) $< $@
 
 $(DEST)/KineticsComp.h : $(SRC)/KineticsComp.h
@@ -292,13 +316,13 @@ $(DEST)/model.cpp : $(SRC)/model.cpp
 $(DEST)/NA.h : $(SRC)/NA.h
 	$(CP) $< $@
 
-$(DEST)/NameDouble.cxx : $(SRC)/NameDouble.cxx
+$(DEST)/NameDouble.cpp : $(SRC)/NameDouble.cxx
 	$(CP) $< $@
 
 $(DEST)/NameDouble.h : $(SRC)/NameDouble.h
 	$(CP) $< $@
 
-$(DEST)/NumKeyword.cxx : $(SRC)/NumKeyword.cxx
+$(DEST)/NumKeyword.cpp : $(SRC)/NumKeyword.cxx
 	$(CP) $< $@
 
 $(DEST)/NumKeyword.h : $(SRC)/NumKeyword.h
@@ -319,7 +343,7 @@ $(DEST)/nvector_serial.h : $(SRC)/nvector_serial.h
 $(DEST)/parse.cpp : $(SRC)/parse.cpp
 	$(CP) $< $@
 
-$(DEST)/Parser.cxx : $(SRC)/Parser.cxx
+$(DEST)/Parser.cpp : $(SRC)/Parser.cxx
 	$(CP) $< $@
 
 $(DEST)/Parser.h : $(SRC)/Parser.h
@@ -343,7 +367,7 @@ $(DEST)/Phreeqc.cpp : $(SRC)/Phreeqc.cpp
 $(DEST)/Phreeqc.h : $(SRC)/Phreeqc.h
 	$(CP) $< $@
 
-$(DEST)/PHRQ_base.cxx : $(SRC)/PHRQ_base.cxx
+$(DEST)/PHRQ_base.cpp : $(SRC)/PHRQ_base.cxx
 	$(CP) $< $@
 
 $(DEST)/PHRQ_base.h : $(SRC)/PHRQ_base.h
@@ -367,13 +391,13 @@ $(DEST)/pitzer.cpp : $(SRC)/pitzer.cpp
 $(DEST)/pitzer_structures.cpp : $(SRC)/pitzer_structures.cpp
 	$(CP) $< $@
 
-$(DEST)/PPassemblage.cxx : $(SRC)/PPassemblage.cxx
+$(DEST)/PPassemblage.cpp : $(SRC)/PPassemblage.cxx
 	$(CP) $< $@
 
 $(DEST)/PPassemblage.h : $(SRC)/PPassemblage.h
 	$(CP) $< $@
 
-$(DEST)/PPassemblageComp.cxx : $(SRC)/PPassemblageComp.cxx
+$(DEST)/PPassemblageComp.cpp : $(SRC)/PPassemblageComp.cxx
 	$(CP) $< $@
 
 $(DEST)/PPassemblageComp.h : $(SRC)/PPassemblageComp.h
@@ -382,7 +406,7 @@ $(DEST)/PPassemblageComp.h : $(SRC)/PPassemblageComp.h
 $(DEST)/prep.cpp : $(SRC)/prep.cpp
 	$(CP) $< $@
 
-$(DEST)/Pressure.cxx : $(SRC)/Pressure.cxx
+$(DEST)/Pressure.cpp : $(SRC)/Pressure.cxx
 	$(CP) $< $@
 
 $(DEST)/Pressure.h : $(SRC)/Pressure.h
@@ -391,7 +415,7 @@ $(DEST)/Pressure.h : $(SRC)/Pressure.h
 $(DEST)/print.cpp : $(SRC)/print.cpp
 	$(CP) $< $@
 
-$(DEST)/Reaction.cxx : $(SRC)/Reaction.cxx
+$(DEST)/Reaction.cpp : $(SRC)/Reaction.cxx
 	$(CP) $< $@
 
 $(DEST)/Reaction.h : $(SRC)/Reaction.h
@@ -400,7 +424,7 @@ $(DEST)/Reaction.h : $(SRC)/Reaction.h
 $(DEST)/read.cpp : $(SRC)/read.cpp
 	$(CP) $< $@
 
-$(DEST)/ReadClass.cxx : $(SRC)/ReadClass.cxx
+$(DEST)/ReadClass.cpp : $(SRC)/ReadClass.cxx
 	$(CP) $< $@
 
 $(DEST)/readtr.cpp : $(SRC)/readtr.cpp
@@ -427,13 +451,13 @@ $(DEST)/smalldense.cpp : $(SRC)/smalldense.cpp
 $(DEST)/smalldense.h : $(SRC)/smalldense.h
 	$(CP) $< $@
 
-$(DEST)/Solution.cxx : $(SRC)/Solution.cxx
+$(DEST)/Solution.cpp : $(SRC)/Solution.cxx
 	$(CP) $< $@
 
 $(DEST)/Solution.h : $(SRC)/Solution.h
 	$(CP) $< $@
 
-$(DEST)/SolutionIsotope.cxx : $(SRC)/SolutionIsotope.cxx
+$(DEST)/SolutionIsotope.cpp : $(SRC)/SolutionIsotope.cxx
 	$(CP) $< $@
 
 $(DEST)/SolutionIsotope.h : $(SRC)/SolutionIsotope.h
@@ -442,19 +466,19 @@ $(DEST)/SolutionIsotope.h : $(SRC)/SolutionIsotope.h
 $(DEST)/spread.cpp : $(SRC)/spread.cpp
 	$(CP) $< $@
 
-$(DEST)/SS.cxx : $(SRC)/SS.cxx
+$(DEST)/SS.cpp : $(SRC)/SS.cxx
 	$(CP) $< $@
 
 $(DEST)/SS.h : $(SRC)/SS.h
 	$(CP) $< $@
 
-$(DEST)/SSassemblage.cxx : $(SRC)/SSassemblage.cxx
+$(DEST)/SSassemblage.cpp : $(SRC)/SSassemblage.cxx
 	$(CP) $< $@
 
 $(DEST)/SSassemblage.h : $(SRC)/SSassemblage.h
 	$(CP) $< $@
 
-$(DEST)/SScomp.cxx : $(SRC)/SScomp.cxx
+$(DEST)/SScomp.cpp : $(SRC)/SScomp.cxx
 	$(CP) $< $@
 
 $(DEST)/SScomp.h : $(SRC)/SScomp.h
@@ -463,7 +487,7 @@ $(DEST)/SScomp.h : $(SRC)/SScomp.h
 $(DEST)/step.cpp : $(SRC)/step.cpp
 	$(CP) $< $@
 
-$(DEST)/StorageBin.cxx : $(SRC)/StorageBin.cxx
+$(DEST)/StorageBin.cpp : $(SRC)/StorageBin.cxx
 	$(CP) $< $@
 
 $(DEST)/StorageBin.h : $(SRC)/StorageBin.h
@@ -487,25 +511,25 @@ $(DEST)/sundialsmath.h : $(SRC)/sundialsmath.h
 $(DEST)/sundialstypes.h : $(SRC)/sundialstypes.h
 	$(CP) $< $@
 
-$(DEST)/Surface.cxx : $(SRC)/Surface.cxx
+$(DEST)/Surface.cpp : $(SRC)/Surface.cxx
 	$(CP) $< $@
 
 $(DEST)/Surface.h : $(SRC)/Surface.h
 	$(CP) $< $@
 
-$(DEST)/SurfaceCharge.cxx : $(SRC)/SurfaceCharge.cxx
+$(DEST)/SurfaceCharge.cpp : $(SRC)/SurfaceCharge.cxx
 	$(CP) $< $@
 
 $(DEST)/SurfaceCharge.h : $(SRC)/SurfaceCharge.h
 	$(CP) $< $@
 
-$(DEST)/SurfaceComp.cxx : $(SRC)/SurfaceComp.cxx
+$(DEST)/SurfaceComp.cpp : $(SRC)/SurfaceComp.cxx
 	$(CP) $< $@
 
 $(DEST)/SurfaceComp.h : $(SRC)/SurfaceComp.h
 	$(CP) $< $@
 
-$(DEST)/System.cxx : $(SRC)/System.cxx
+$(DEST)/System.cpp : $(SRC)/System.cxx
 	$(CP) $< $@
 
 $(DEST)/System.h : $(SRC)/System.h
@@ -514,7 +538,7 @@ $(DEST)/System.h : $(SRC)/System.h
 $(DEST)/tally.cpp : $(SRC)/tally.cpp
 	$(CP) $< $@
 
-$(DEST)/Temperature.cxx : $(SRC)/Temperature.cxx
+$(DEST)/Temperature.cpp : $(SRC)/Temperature.cxx
 	$(CP) $< $@
 
 $(DEST)/Temperature.h : $(SRC)/Temperature.h
@@ -541,9 +565,77 @@ $(DEST)/UserPunch.h : $(SRC)/UserPunch.h
 $(DEST)/utilities.cpp : $(SRC)/utilities.cpp
 	$(CP) $< $@
 
-$(DEST)/Utils.cxx : $(SRC)/Utils.cxx
+$(DEST)/Utils.cpp : $(SRC)/Utils.cxx
 	$(CP) $< $@
 
 $(DEST)/Utils.h : $(SRC)/Utils.h
 	$(CP) $< $@
 
+###############################################
+
+
+$(IDEST)/CSelectedOutput.cpp : $(ISRC)/CSelectedOutput.cpp
+	$(CP) $< $@
+
+$(IDEST)/CSelectedOutput.hxx : $(ISRC)/CSelectedOutput.hxx
+	$(CP) $< $@
+
+$(IDEST)/CVar.hxx : $(ISRC)/CVar.hxx
+	$(CP) $< $@
+
+$(IDEST)/Debug.h : $(ISRC)/Debug.h
+	$(CP) $< $@
+
+$(IDEST)/ErrorReporter.hxx : $(ISRC)/ErrorReporter.hxx
+	$(CP) $< $@
+
+$(IDEST)/IPhreeqcCallbacks.h : ../src/IPhreeqcCallbacks.h
+	$(CP) $< $@
+
+$(IDEST)/IPhreeqc.cpp : $(ISRC)/IPhreeqc.cpp
+	$(CP) $< $@
+
+$(IDEST)/IPhreeqc.h : $(ISRC)/IPhreeqc.h
+	$(CP) $< $@
+
+$(IDEST)/IPhreeqc.hpp : $(ISRC)/IPhreeqc.hpp
+	$(CP) $< $@
+
+$(IDEST)/IPhreeqcLib.cpp : $(ISRC)/IPhreeqcLib.cpp
+	$(CP) $< $@
+
+$(IDEST)/thread.h : $(ISRC)/thread.h
+	$(CP) $< $@
+
+$(IDEST)/Var.c : $(ISRC)/Var.c
+	$(CP) $< $@
+
+$(IDEST)/Var.h : $(ISRC)/Var.h
+	$(CP) $< $@
+
+$(IDEST)/Version.h : $(ISRC)/Version.h
+	$(CP) $< $@
+
+
+########################################
+
+check : all
+	R CMD check phreeqc
+
+install : all
+	R CMD INSTALL phreeqc
+
+$(IDEST)/Makevars : Makevars
+	$(CP) $< $@
+
+$(IDEST)/R.cpp : R.cpp
+	$(CP) $< $@
+
+$(IDEST):
+	mkdir $(IDEST)
+
+$(DEST):
+	mkdir $(DEST)
+
+clean :
+	rm -f $(PSRC) $(ISRC) $(DEST)/*.o $(IDEST)/*.o $(DEST)/*.so
