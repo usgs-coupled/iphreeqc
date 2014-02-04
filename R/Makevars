@@ -1,0 +1,97 @@
+OBJECTS.root = \
+  CSelectedOutput.o \
+  IPhreeqcLib.o \
+  IPhreeqc.o \
+  R.o \
+  RPhreeqcDat.o \
+  Var.o
+
+OBJECTS.phreeqcpp = \
+  phreeqcpp/advection.o \
+  phreeqcpp/basicsubs.o \
+  phreeqcpp/ChartHandler.o \
+  phreeqcpp/ChartObject.o \
+  phreeqcpp/cl1.o \
+  phreeqcpp/CurveObject.o \
+  phreeqcpp/cvdense.o \
+  phreeqcpp/cvode.o \
+  phreeqcpp/cxxKinetics.o \
+  phreeqcpp/cxxMix.o \
+  phreeqcpp/dense.o \
+  phreeqcpp/dumper.o \
+  phreeqcpp/dw.o \
+  phreeqcpp/Exchange.o \
+  phreeqcpp/ExchComp.o \
+  phreeqcpp/GasComp.o \
+  phreeqcpp/gases.o \
+  phreeqcpp/GasPhase.o \
+  phreeqcpp/input.o \
+  phreeqcpp/integrate.o \
+  phreeqcpp/inverse.o \
+  phreeqcpp/ISolutionComp.o \
+  phreeqcpp/ISolution.o \
+  phreeqcpp/isotopes.o \
+  phreeqcpp/Keywords.o \
+  phreeqcpp/KineticsComp.o \
+  phreeqcpp/kinetics.o \
+  phreeqcpp/mainsubs.o \
+  phreeqcpp/model.o \
+  phreeqcpp/NameDouble.o \
+  phreeqcpp/NumKeyword.o \
+  phreeqcpp/nvector.o \
+  phreeqcpp/nvector_serial.o \
+  phreeqcpp/parse.o \
+  phreeqcpp/Parser.o \
+  phreeqcpp/PBasic.o \
+  phreeqcpp/phqalloc.o \
+  phreeqcpp/Phreeqc.o \
+  phreeqcpp/PHRQ_base.o \
+  phreeqcpp/PHRQ_io.o \
+  phreeqcpp/PHRQ_io_output.o \
+  phreeqcpp/pitzer.o \
+  phreeqcpp/pitzer_structures.o \
+  phreeqcpp/PPassemblageComp.o \
+  phreeqcpp/PPassemblage.o \
+  phreeqcpp/prep.o \
+  phreeqcpp/Pressure.o \
+  phreeqcpp/print.o \
+  phreeqcpp/Reaction.o \
+  phreeqcpp/ReadClass.o \
+  phreeqcpp/read.o \
+  phreeqcpp/readtr.o \
+  phreeqcpp/runner.o \
+  phreeqcpp/SelectedOutput.o \
+  phreeqcpp/sit.o \
+  phreeqcpp/smalldense.o \
+  phreeqcpp/SolutionIsotope.o \
+  phreeqcpp/Solution.o \
+  phreeqcpp/spread.o \
+  phreeqcpp/SSassemblage.o \
+  phreeqcpp/SScomp.o \
+  phreeqcpp/SS.o \
+  phreeqcpp/step.o \
+  phreeqcpp/StorageBinList.o \
+  phreeqcpp/StorageBin.o \
+  phreeqcpp/structures.o \
+  phreeqcpp/sundialsmath.o \
+  phreeqcpp/SurfaceCharge.o \
+  phreeqcpp/SurfaceComp.o \
+  phreeqcpp/Surface.o \
+  phreeqcpp/System.o \
+  phreeqcpp/tally.o \
+  phreeqcpp/Temperature.o \
+  phreeqcpp/tidy.o \
+  phreeqcpp/transport.o \
+  phreeqcpp/Use.o \
+  phreeqcpp/UserPunch.o \
+  phreeqcpp/utilities.o \
+  phreeqcpp/Utils.o
+
+OBJECTS = $(OBJECTS.root) $(OBJECTS.phreeqcpp)
+
+PKG_CPPFLAGS =-I. -Iphreeqcpp -DNDEBUG -DR_SO -DSWIG_SHARED_OBJ
+
+all: $(SHLIB)
+
+clean:
+	rm -f $(OBJECTS)
