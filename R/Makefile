@@ -3,6 +3,7 @@ IDEST=phreeqc/src
 DEST=phreeqc/src/phreeqcpp
 ISRC=../src
 SRC=../src/phreeqcpp
+INST=phreeqc/inst
 
 
 PSRC = \
@@ -152,13 +153,21 @@ XSRC = \
 	$(IDEST)/IPhreeqc.hpp \
 	$(IDEST)/IPhreeqcLib.cpp \
 	$(IDEST)/R.cpp \
+	$(IDEST)/RPhreeqcDat.c \
 	$(IDEST)/thread.h \
 	$(IDEST)/Var.c \
 	$(IDEST)/Var.h \
 	$(IDEST)/Version.h \
 	$(IDEST)/Makevars
 
-all: $(PSRC) $(XSRC)
+DATA = \
+	$(INST)/phreeqc.dat \
+	$(INST)/ex1 \
+	$(INST)/ex2
+
+
+
+all: $(PSRC) $(XSRC) $(DATA)
 
 ##$(PSRC): $(DEST)
 
@@ -616,6 +625,16 @@ $(IDEST)/Var.h : $(ISRC)/Var.h
 $(IDEST)/Version.h : $(ISRC)/Version.h
 	$(CP) $< $@
 
+########################################
+
+$(INST)/phreeqc.dat : ../database/phreeqc.dat
+	$(CP) $< $@
+
+$(INST)/ex1 : ../phreeqc3-examples/ex1
+	$(CP) $< $@
+
+$(INST)/ex2 : ../phreeqc3-examples/ex2
+	$(CP) $< $@
 
 ########################################
 
@@ -630,6 +649,13 @@ $(IDEST)/Makevars : Makevars
 
 $(IDEST)/R.cpp : R.cpp
 	$(CP) $< $@
+
+$(IDEST)/RPhreeqcDat.c : ../database/phreeqc.dat
+#	echo "extern \"C\" {" > $@
+	echo "const char PHREEQC_DAT[] = " >> $@
+	sed -e 's/\\/\\\\/g;s/"/\\"/g;s/\t/\\t/g;s/^/"/;s/$$/\\n"/' $< >> $@
+	echo ";" >> $@
+#	echo "} // extern \"C\"" >>  $@
 
 $(IDEST):
 	mkdir $(IDEST)
