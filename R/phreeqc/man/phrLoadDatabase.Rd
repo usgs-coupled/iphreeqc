@@ -1,28 +1,15 @@
 \name{phrLoadDatabase}
 \alias{phrLoadDatabase}
-\title{
-    Read phreeqc database file
-}
+\title{Load a phreeqc database file}
 \description{
-
-    phrLoadDatabase loads a phreeqc database file into ...
-}
-\synopsis{
-    phrLoadDatabase(filename)
+  Loads a phreeqc database into the IPhreeqcCOM object. Returns NULL if successful.
 }
 \usage{
-    phrLoadDatabase(filename)
+  phrLoadDatabase(filename)
 }
 \arguments{
-\item{filename}{
-    The file name of the database.
-} 
+  \item{filename}{The file name of the database.} 
 } %END arguments
-\details{
-
-    Any details about the operation of this function should go here.
-
-} %END details
 \value{
     This function returns NULL.
 }
@@ -30,18 +17,20 @@
     Literature references and web URLs can go here.
 }
 \author{
-    Scott Charlton <charlton@usgs.gov>
-
+  Scott Charlton \email{charlton@usgs.gov}
 } 
 \seealso{
-    \code{\link{phrReadString}},
-    \code{\link{phrRun}},
-    \code{\link{phrGetSelectedOutput}}
+    \code{\link{phrLoadDatabaseString}}
 }
 
 \examples{
 
-    # This will only work if phreeqc.dat is in the current directory
-    phrLoadDatabase("phreeqc/phreeqc.dat")
+# This will only work if phreeqc/phreeqc.dat is in the current directory
+if (is.null(phrLoadDatabase("phreeqc/phreeqc.dat"))) {
+  cat("database ok\n")
+} else {
+  cat("database contains errors\n")
+}
+
 }
 \keyword{interface}
