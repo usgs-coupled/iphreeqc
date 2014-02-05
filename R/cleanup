@@ -1,0 +1,12 @@
+rm -f phreeqc/src/*.c
+rm -f phreeqc/src/*.cpp
+rm -f phreeqc/src/*.h
+rm -f phreeqc/src/*.hpp
+rm -f phreeqc/src/*.hxx
+rm -f phreeqc/src/*.o
+rm -f phreeqc/src/Makevars
+rm -f phreeqc/src/phreeqc.so
+rm -f phreeqc/src/phreeqcpp/*.c
+rm -f phreeqc/src/phreeqcpp/*.cpp
+rm -f phreeqc/src/phreeqcpp/*.h
+rm -f phreeqc/src/phreeqcpp/*.o
