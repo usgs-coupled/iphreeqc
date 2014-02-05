@@ -1,0 +1,50 @@
+useDynLib(phreeqc)
+
+export(
+    "phrAccumulateLine",	
+    "phrClearAccumulatedLines",	
+    "phrGetAccumulatedLines",
+    "phrGetComponentList",
+    "phrGetErrorFileOn",
+#
+    "phrSetDumpFileOn",
+    "phrSetErrorFileOn",
+    "phrSetLogFileOn",
+    "phrSetOutputFileOn",
+    "phrSetSelectedOutputFileOn",
+#
+    "phrSetDumpStringOn",
+    "phrSetErrorStringOn",
+    "phrSetLogStringOn",
+    "phrSetOutputStringOn",
+    "phrSetSelectedOutputStringOn",
+#
+    "phrSetDumpFileName",
+    "phrSetErrorFileName",
+    "phrSetLogFileName",
+    "phrSetOutputFileName",
+    "phrSetSelectedOutputFileName",
+#
+    "phrGetDumpString",
+    "phrGetLogString",
+    "phrGetOutputString", 
+    "phrGetSelectedOutputString",
+    "phrGetWarningString",
+#
+    "phrGetDumpFileName",
+    "phrGetErrorFileName",
+    "phrGetLogFileName",
+    "phrGetOutputFileName",
+    "phrGetSelectedOutputFileName",
+#
+    "phrGetErrorString",
+    "phrGetSelectedOutput",
+    "phrLoadDatabase",
+    "phrLoadDatabaseString",
+    "phrPHREEQC_DAT",
+    "phrRunAccumulated",	
+    "phrRunFile",
+    "phrRunString"
+)
+
+

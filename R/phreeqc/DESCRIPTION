@@ -1,0 +1,20 @@
+Package: phreeqc
+Title: R interface to the phreeqc geochemical modeling program
+Version: 0.1-1
+Author: Scott Charlton and Lopaka Lee
+Description: R interface to the PHREEQC program.  PHREEQC is a geochemical
+    modeling program developed by the US Geological Survey that is designed to
+    perform a wide variety of low-temperature aqueous geochemical calculations.
+    PHREEQC is based on an ion-association aqueous model and has capabilities
+    for (1) speciation and saturation-index calculations; (2) batch-reaction
+    and one-dimensional (1D) transport calculations involving reversible
+    reactions, which include aqueous, mineral, gas, solid-solution,
+    surface-complexation, and ion-exchange equilibria, and irreversible
+    reactions, which include specified mole transfers of reactants, kinetically
+    controlled reactions, mixing of solutions, and temperature changes; and (3)
+    inverse modeling, which finds sets of mineral and gas mole transfers that
+    account for differences in composition between waters, within specified
+    compositional uncertainty limits.
+Maintainer: Lopaka Lee <rclee@usgs.gov>
+Depends: methods
+License: GPL version 2 or newer
