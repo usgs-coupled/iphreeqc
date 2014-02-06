@@ -2,7 +2,7 @@
 \alias{phrLoadDatabase}
 \title{Load a phreeqc database file}
 \description{
-  Loads a phreeqc database into the IPhreeqcCOM object. Returns NULL if successful.
+  Loads the given phreeqc database into phreeqc.  Returns NULL if successful.
 }
 \usage{
   phrLoadDatabase(filename)
