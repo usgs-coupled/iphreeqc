@@ -636,26 +636,26 @@ EXPECTED selected.out:
 	CPPUNIT_ASSERT_EQUAL(TT_LONG, v.type);
 	CPPUNIT_ASSERT_EQUAL( 1L, v.lVal );
 
-	// dist_x -- sometimes as double sometimes as long (depends on state)
+	// dist_x -- (always as double)
 	//
 	++col;
 	//   i_soln
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, col, &v));
-	CPPUNIT_ASSERT_EQUAL(TT_LONG, v.type);
-	CPPUNIT_ASSERT_EQUAL( -99L, v.lVal );
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_EQUAL( -99., v.dVal );
 	//   react
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, col, &v));
-	CPPUNIT_ASSERT_EQUAL(TT_LONG, v.type);
-	CPPUNIT_ASSERT_EQUAL( -99L, v.lVal );
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_EQUAL( -99., v.dVal );
 
 
-	// time -- sometimes as double sometimes as long (depends on state)
+	// time -- (always as double)
 	//
 	++col;
 	//   i_soln
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(1, col, &v));
-	CPPUNIT_ASSERT_EQUAL(TT_LONG, v.type);
-	CPPUNIT_ASSERT_EQUAL( -99L, v.lVal );
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_EQUAL( -99., v.dVal );
 	//   react
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(2, col, &v));
 	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);

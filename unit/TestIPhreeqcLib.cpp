@@ -760,12 +760,12 @@ void TestIPhreeqcLib::TestGetSelectedOutputValue(void)
 	++col;
 	//   i_soln
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(n, 1, col, &v));
-	CPPUNIT_ASSERT_EQUAL(TT_LONG, v.type);
-	CPPUNIT_ASSERT_EQUAL( -99L, v.lVal );
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_EQUAL( -99., v.dVal );
 	//   react
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(n, 2, col, &v));
-	CPPUNIT_ASSERT_EQUAL(TT_LONG, v.type);
-	CPPUNIT_ASSERT_EQUAL( -99L, v.lVal );
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_EQUAL( -99., v.dVal );
 
 
 	// time -- sometimes as double sometimes as long (depends on state)
@@ -773,8 +773,8 @@ void TestIPhreeqcLib::TestGetSelectedOutputValue(void)
 	++col;
 	//   i_soln
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(n, 1, col, &v));
-	CPPUNIT_ASSERT_EQUAL(TT_LONG, v.type);
-	CPPUNIT_ASSERT_EQUAL( -99L, v.lVal );
+	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
+	CPPUNIT_ASSERT_EQUAL( -99., v.dVal );
 	//   react
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(n, 2, col, &v));
 	CPPUNIT_ASSERT_EQUAL(TT_DOUBLE, v.type);
