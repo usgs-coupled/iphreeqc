@@ -37,5 +37,9 @@ Maintainer: Who to complain to <yourfault@somewhere.net>
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+phrLoadDatabase("phreeqc/phreeqc.dat")
+phrOutputFileOn(TRUE)
+if (is.null(phrRunFile("ex1")) {
+  cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
+}
 }
