@@ -1,7 +1,7 @@
 \name{phrGetErrorString}
 \alias{phrGetErrorString}
 \title{
-    Return error string
+    Return error string messages.
 }
 \description{
 

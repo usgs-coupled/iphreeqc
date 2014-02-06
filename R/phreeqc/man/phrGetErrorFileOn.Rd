@@ -2,7 +2,7 @@
 \alias{phrGetErrorFileOn}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Retrieves the current value of the error file switch.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

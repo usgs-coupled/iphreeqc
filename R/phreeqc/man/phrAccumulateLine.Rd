@@ -2,7 +2,7 @@
 \alias{phrAccumulateLine}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Accumlulate line(s) for input to phreeqc. 
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
