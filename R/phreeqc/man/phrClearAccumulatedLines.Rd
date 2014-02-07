@@ -5,7 +5,7 @@
 Clears the accumulated input buffer.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Clears the accumulated input buffer. The input buffer is accumulated from calls to the \code{\link{phrAccumulateLine}} method.
 }
 \usage{
 phrClearAccumulatedLines()
@@ -15,17 +15,14 @@ phrClearAccumulatedLines()
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+This function returns NULL.
 }
 \references{
-%% ~put references to the literature/web site here ~
+\url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \author{
-%%  ~~who you are~~
+David Parkhurst \email{dlpark@usgs.gov}\cr
+Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \note{
 %%  ~~further notes~~
@@ -34,17 +31,16 @@ phrClearAccumulatedLines()
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{phrAccumulateLine}}, \code{\link{phrGetAccumulatedLines}},  \code{\link{phrRunAccumulated}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function () 
-{
-  }
+# This example loads some keyword input, clears the input, and displays the results.
+phrAccumulateLine("SOLUTION 1")
+phrAccumulateLine("END")
+cat(paste("The accumulated input is:\n", phrGetAccumulatedLines(), sep=""))
+phrClearAccumulatedLines()
+WScript.Echo("The accumulated input now is:\n" + phrLines)
+cat(paste("The accumulated input now is:\n", phrGetAccumulatedLines(), sep=""))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
