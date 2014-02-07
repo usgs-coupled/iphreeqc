@@ -2,7 +2,7 @@
 \alias{phrGetComponentList}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Retrieves the current list of components.
+Retrieves a list containing the current list of components.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -15,17 +15,14 @@ phrGetComponentList()
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A list containing the names of the components defined in the current system.
 }
 \references{
-%% ~put references to the literature/web site here ~
+\url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \author{
-%%  ~~who you are~~
+David Parkhurst \email{dlpark@usgs.gov}\cr
+Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \note{
 %%  ~~further notes~~
@@ -37,14 +34,13 @@ phrGetComponentList()
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function () 
-{
-  }
+# This example runs the ex2  input file and echos the list of components.
+phrLoadDatabase("phreeqc.dat")
+phrRunFile("ex2")
+cat("components:\n")
+for (c in phrGetComponentList()) {
+  cat(c, "\n")
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
