@@ -39,7 +39,6 @@ phrAccumulateLine("SOLUTION 1")
 phrAccumulateLine("END")
 cat(paste("The accumulated input is:\n", phrGetAccumulatedLines(), sep=""))
 phrClearAccumulatedLines()
-WScript.Echo("The accumulated input now is:\n" + phrLines)
 cat(paste("The accumulated input now is:\n", phrGetAccumulatedLines(), sep=""))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
