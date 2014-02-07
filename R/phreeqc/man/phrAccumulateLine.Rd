@@ -5,7 +5,7 @@
 Accumlulate line(s) for input to phreeqc. 
 }
 \description{
-Appends a line of text to the input buffer to be run using \code{\link{phrRunAccumulated}}.
+Appends a line of text to the input buffer in order to be run using \code{\link{phrRunAccumulated}}.
 }
 \usage{
 phrAccumulateLine(line)
@@ -20,14 +20,10 @@ The line(s) to add for input to phreeqc.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+This function returns NULL.
 }
 \references{
-    \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc/index.html}
+    \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \author{
     David Parkhurst \email{dlpark@usgs.gov}\cr

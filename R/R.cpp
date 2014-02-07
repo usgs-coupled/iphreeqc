@@ -555,7 +555,7 @@ getCol(int ncol)
     for (r = 1; r < rows; ++r) {
       VarInit(&vv);
       s_iphreeqc.GetSelectedOutputValue(r, ncol, &vv);
-      if (vv.dVal == -999.999) {
+      if (vv.dVal == -999.999 || vv.dVal == -99.) {
 	REAL(ans)[r-1] = NA_REAL;
       }
       else {
