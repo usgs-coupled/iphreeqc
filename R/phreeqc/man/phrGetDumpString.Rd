@@ -34,18 +34,27 @@ phrGetDumpString()
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}},  \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function () 
-{
-  }
+phrLoadDatabase("phreeqc.dat")
+phrSetDumpStringOn(TRUE)
+
+input <-               "SOLUTION 1 Pure water     \n"
+input <- paste(input,  "EQUILIBRIUM_PHASES 1      \n"
+input <- paste(input,  "    Calcite 0 10          \n"
+input <- paste(input,  "SAVE solution 1           \n"
+input <- paste(input,  "SAVE equilibrium_phases 1 \n"
+input <- paste(input,  "DUMP                      \n"
+input <- paste(input,  "    -solution 1           \n"
+input <- paste(input,  "    -equilibrium_phases  1\n"
+
+if (!is.null(phrRunString(input))) {
+    cat(phrGetErrorString())
 }
+cat(phrGetDumpString())
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ~kwd1 }
