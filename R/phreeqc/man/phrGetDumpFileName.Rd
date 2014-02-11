@@ -15,17 +15,14 @@ phrGetDumpFileName()
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The name of the dump file as a string.
 }
 \references{
-%% ~put references to the literature/web site here ~
+    \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \author{
-%%  ~~who you are~~
+David Parkhurst \email{dlpark@usgs.gov}\cr
+Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \note{
 %%  ~~further notes~~
@@ -34,17 +31,26 @@ phrGetDumpFileName()
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpString}}, \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+phrLoadDatabase("phreeqc/phreeqc.dat")
+phrSetDumpFileOn(TRUE)
 
-## The function is currently defined as
-function () 
-{
-  }
+input <-              "SOLUTION 1 Pure water     \n"
+input <- paste(input, "EQUILIBRIUM_PHASES 1      \n")
+input <- paste(input, "    Calcite 0 10          \n")
+input <- paste(input, "SAVE solution 1           \n")
+input <- paste(input, "SAVE equilibrium_phases 1 \n")
+input <- paste(input, "DUMP                      \n")
+input <- paste(input, "    -solution 1           \n")
+input <- paste(input, "    -equilibrium_phases  1\n")
+
+if (!is.null(phrRunString(input))) {
+    cat(phrGetErrorString())
+}
+cat(paste("see ", phrGetDumpFileName(), "."))
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

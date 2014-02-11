@@ -15,17 +15,14 @@ phrGetDumpString()
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The dump output as a string.
 }
 \references{
-%% ~put references to the literature/web site here ~
+    \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \author{
-%%  ~~who you are~~
+David Parkhurst \email{dlpark@usgs.gov}\cr
+Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \note{
 %%  ~~further notes~~
@@ -54,6 +51,7 @@ if (!is.null(phrRunString(input))) {
     cat(phrGetErrorString())
 }
 cat(phrGetDumpString())
+
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
