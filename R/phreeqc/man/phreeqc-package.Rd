@@ -14,7 +14,7 @@ Package: \tab phreeqc\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2014-02-05\cr
-License: \tab What license is it under?\cr
+License: \tab Unlimited\cr
 }
 ~~ An overview of how to use the package, including the most important functions ~~
 }
@@ -23,7 +23,7 @@ License: \tab What license is it under?\cr
     Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \references{
-    \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc/index.html}
+    \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 ~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
 ~~ documentation directory ~~
