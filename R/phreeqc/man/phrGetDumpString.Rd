@@ -54,6 +54,7 @@ if (!is.null(phrRunString(input))) {
     cat(phrGetErrorString())
 }
 cat(phrGetDumpString())
+}
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
