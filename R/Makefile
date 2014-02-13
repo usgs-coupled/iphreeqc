@@ -4,6 +4,31 @@ DEST=phreeqc/src/phreeqcpp
 ISRC=../src
 SRC=../src/phreeqcpp
 INST=phreeqc/inst
+DBDIR=../database
+DATADIR=phreeqc/data
+EXDIR=../phreeqc3-examples
+
+DBS = \
+	$(DBDIR)/Amm.dat \
+	$(DBDIR)/iso.dat \
+	$(DBDIR)/llnl.dat \
+	$(DBDIR)/minteq.dat \
+	$(DBDIR)/minteq.v4.dat \
+	$(DBDIR)/pitzer.dat \
+	$(DBDIR)/sit.dat \
+	$(DBDIR)/phreeqc.dat \
+	$(DBDIR)/wateq4f.dat
+
+EXS = \
+	$(EXDIR)/ex1 \
+	$(EXDIR)/ex2 \
+	$(EXDIR)/ex3 \
+	$(EXDIR)/ex4 \
+	$(EXDIR)/ex5 \
+	$(EXDIR)/ex6 \
+	$(EXDIR)/ex7 \
+	$(EXDIR)/ex8 \
+	$(EXDIR)/ex9
 
 
 PSRC = \
@@ -161,13 +186,16 @@ XSRC = \
 	$(IDEST)/Makevars
 
 DATA = \
-	$(INST)/phreeqc.dat \
-	$(INST)/ex1 \
-	$(INST)/ex2
+	$(DATADIR)/databases.RData \
+	$(DATADIR)/examples.RData
 
+all: $(PSRC) $(XSRC) $(DATA) 
 
+$(DATADIR)/databases.RData : $(DBS) build-databases.R
+	R --no-save --no-restore CMD BATCH build-databases.R
 
-all: $(PSRC) $(XSRC) $(DATA)
+$(DATADIR)/examples.RData : $(EXS) build-examples.R
+	R --no-save --no-restore CMD BATCH build-examples.R
 
 ##$(PSRC): $(DEST)
 
@@ -650,12 +678,12 @@ $(IDEST)/Makevars : Makevars
 $(IDEST)/R.cpp : R.cpp
 	$(CP) $< $@
 
-$(IDEST)/RPhreeqcDat.c : ../database/phreeqc.dat
-#	echo "extern \"C\" {" > $@
-	echo "const char PHREEQC_DAT[] = " >> $@
-	sed -e 's/\\/\\\\/g;s/"/\\"/g;s/\t/\\t/g;s/^/"/;s/$$/\\n"/' $< >> $@
-	echo ";" >> $@
-#	echo "} // extern \"C\"" >>  $@
+##$(IDEST)/RPhreeqcDat.c : ../database/phreeqc.dat
+###	echo "extern \"C\" {" > $@
+##	echo "const char PHREEQC_DAT[] = " >> $@
+##	sed -e 's/\\/\\\\/g;s/"/\\"/g;s/\t/\\t/g;s/^/"/;s/$$/\\n"/' $< >> $@
+##	echo ";" >> $@
+###	echo "} // extern \"C\"" >>  $@
 
 $(IDEST):
 	mkdir $(IDEST)
