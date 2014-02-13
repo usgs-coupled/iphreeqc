@@ -1,0 +1,12 @@
+# databases
+Amm.dat       <- paste(scan("../database/Amm.dat",       what="", sep="\n"), collapse="\n")
+iso.dat       <- paste(scan("../database/iso.dat",       what="", sep="\n"), collapse="\n")
+llnl.dat      <- paste(scan("../database/llnl.dat",      what="", sep="\n"), collapse="\n")
+minteq.dat    <- paste(scan("../database/minteq.dat",    what="", sep="\n"), collapse="\n")
+minteq.v4.dat <- paste(scan("../database/minteq.v4.dat", what="", sep="\n"), collapse="\n")
+pitzer.dat    <- paste(scan("../database/pitzer.dat",    what="", sep="\n"), collapse="\n")
+sit.dat       <- paste(scan("../database/sit.dat",       what="", sep="\n"), collapse="\n")
+phreeqc.dat   <- paste(scan("../database/phreeqc.dat",   what="", sep="\n"), collapse="\n")
+wateq4f.dat   <- paste(scan("../database/wateq4f.dat",   what="", sep="\n"), collapse="\n")
+save(list = ls(all=TRUE), file="phreeqc/data/databases.RData")
+rm(list = ls(all=TRUE))

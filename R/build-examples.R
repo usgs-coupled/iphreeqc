@@ -1,0 +1,12 @@
+# examples
+ex1 <- paste(scan("../phreeqc3-examples/ex1", what="", sep="\n"), collapse="\n")
+ex2 <- paste(scan("../phreeqc3-examples/ex2", what="", sep="\n"), collapse="\n")
+ex3 <- paste(scan("../phreeqc3-examples/ex3", what="", sep="\n"), collapse="\n")
+ex4 <- paste(scan("../phreeqc3-examples/ex4", what="", sep="\n"), collapse="\n")
+ex5 <- paste(scan("../phreeqc3-examples/ex5", what="", sep="\n"), collapse="\n")
+ex6 <- paste(scan("../phreeqc3-examples/ex6", what="", sep="\n"), collapse="\n")
+ex7 <- paste(scan("../phreeqc3-examples/ex7", what="", sep="\n"), collapse="\n")
+ex8 <- paste(scan("../phreeqc3-examples/ex8", what="", sep="\n"), collapse="\n")
+ex9 <- paste(scan("../phreeqc3-examples/ex9", what="", sep="\n"), collapse="\n")
+save(list = ls(all=TRUE), file="phreeqc/data/examples.RData")
+rm(list = ls(all=TRUE))
