@@ -3,7 +3,6 @@ OBJECTS.root = \
   IPhreeqcLib.o \
   IPhreeqc.o \
   R.o \
-  RPhreeqcDat.o \
   Var.o
 
 OBJECTS.phreeqcpp = \

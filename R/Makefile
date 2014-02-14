@@ -178,7 +178,6 @@ XSRC = \
 	$(IDEST)/IPhreeqc.hpp \
 	$(IDEST)/IPhreeqcLib.cpp \
 	$(IDEST)/R.cpp \
-	$(IDEST)/RPhreeqcDat.c \
 	$(IDEST)/thread.h \
 	$(IDEST)/Var.c \
 	$(IDEST)/Var.h \
@@ -671,6 +670,9 @@ check : all
 
 install : all
 	R CMD INSTALL phreeqc
+	
+uninstall :
+	R CMD REMOVE phreeqc
 
 $(IDEST)/Makevars : Makevars
 	$(CP) $< $@

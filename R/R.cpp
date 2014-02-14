@@ -5,8 +5,15 @@
 #include "Var.h"
 #include "IPhreeqc.hpp"
 
-static IPhreeqc s_iphreeqc;
+#define CONVERT_TO_DATA_FRAME
 
+class R {
+public:
+  static IPhreeqc& singleton() {
+    static IPhreeqc instance;
+    return instance;
+  }
+};
 
 extern "C" {
 
@@ -22,9 +29,9 @@ accumLine(SEXP line)
 
   str_in = CHAR(STRING_ELT(line, 0));
 
-  if (s_iphreeqc.AccumulateLine(str_in) != VR_OK) {
+  if (R::singleton().AccumulateLine(str_in) != VR_OK) {
     std::ostringstream oss;
-    oss << s_iphreeqc.GetErrorString();
+    oss << R::singleton().GetErrorString();
     error(oss.str().c_str());
   }
 
@@ -34,7 +41,7 @@ accumLine(SEXP line)
 SEXP
 clearAccum(void)
 {
-  s_iphreeqc.ClearAccumulatedLines();
+  R::singleton().ClearAccumulatedLines();
   return(R_NilValue);
 }
 
@@ -43,7 +50,7 @@ getErrorFileOn(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(LGLSXP, 1));
-  if (s_iphreeqc.GetErrorFileOn()) {
+  if (R::singleton().GetErrorFileOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
   else {
@@ -61,7 +68,7 @@ setDumpFileOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetDumpFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetDumpFileOn(LOGICAL(value)[0]);
+  R::singleton().SetDumpFileOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -73,7 +80,7 @@ setErrorFileOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetErrorFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetErrorFileOn(LOGICAL(value)[0]);
+  R::singleton().SetErrorFileOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -85,7 +92,7 @@ setLogFileOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetLogFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetLogFileOn(LOGICAL(value)[0]);
+  R::singleton().SetLogFileOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -97,7 +104,7 @@ setOutputFileOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetOutputFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetOutputFileOn(LOGICAL(value)[0]);
+  R::singleton().SetOutputFileOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -109,7 +116,7 @@ setSelectedOutputFileOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetSelectedOutputFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetSelectedOutputFileOn(LOGICAL(value)[0]);
+  R::singleton().SetSelectedOutputFileOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -122,7 +129,7 @@ setDumpStringOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetDumpStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetDumpStringOn(LOGICAL(value)[0]);
+  R::singleton().SetDumpStringOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -134,7 +141,7 @@ setErrorStringOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetErrorStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetErrorStringOn(LOGICAL(value)[0]);
+  R::singleton().SetErrorStringOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -146,7 +153,7 @@ setLogStringOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetLogStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetLogStringOn(LOGICAL(value)[0]);
+  R::singleton().SetLogStringOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -158,11 +165,11 @@ setOutputStringOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetOutputStringOn(LOGICAL(value)[0]);
+  R::singleton().SetOutputStringOn(LOGICAL(value)[0]);
   return(ans);
 }
 
-SEXP  
+SEXP
 setSelectedOutputStringOn(SEXP value)
 {
   SEXP ans = R_NilValue;
@@ -170,7 +177,7 @@ setSelectedOutputStringOn(SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetSelectedOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-  s_iphreeqc.SetSelectedOutputStringOn(LOGICAL(value)[0]);
+  R::singleton().SetSelectedOutputStringOn(LOGICAL(value)[0]);
   return(ans);
 }
 
@@ -186,7 +193,7 @@ setDumpFileName(SEXP filename)
   }
 
   name = CHAR(STRING_ELT(filename, 0));
-  s_iphreeqc.SetDumpFileName(name);
+  R::singleton().SetDumpFileName(name);
   return(ans);
 }
 
@@ -201,7 +208,7 @@ setErrorFileName(SEXP filename)
   }
 
   name = CHAR(STRING_ELT(filename, 0));
-  s_iphreeqc.SetErrorFileName(name);
+  R::singleton().SetErrorFileName(name);
   return(ans);
 }
 
@@ -216,7 +223,7 @@ setLogFileName(SEXP filename)
   }
 
   name = CHAR(STRING_ELT(filename, 0));
-  s_iphreeqc.SetLogFileName(name);
+  R::singleton().SetLogFileName(name);
   return(ans);
 }
 
@@ -231,7 +238,7 @@ setOutputFileName(SEXP filename)
   }
 
   name = CHAR(STRING_ELT(filename, 0));
-  s_iphreeqc.SetOutputFileName(name);
+  R::singleton().SetOutputFileName(name);
   return(ans);
 }
 
@@ -246,7 +253,7 @@ setSelectedOutputFileName(SEXP filename)
   }
 
   name = CHAR(STRING_ELT(filename, 0));
-  s_iphreeqc.SetSelectedOutputFileName(name);
+  R::singleton().SetSelectedOutputFileName(name);
   return(ans);
 }
 //}}
@@ -257,7 +264,7 @@ getDumpString(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetDumpString()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetDumpString()));
   UNPROTECT(1);
   return ans;
 }
@@ -267,7 +274,7 @@ getLogString(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetLogString()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetLogString()));
   UNPROTECT(1);
   return ans;
 }
@@ -277,7 +284,7 @@ getOutputString(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetOutputString()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetOutputString()));
   UNPROTECT(1);
   return ans;
 }
@@ -287,7 +294,7 @@ getSelectedOutputString(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetSelectedOutputString()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetSelectedOutputString()));
   UNPROTECT(1);
   return ans;
 }
@@ -297,7 +304,7 @@ getWarningString(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetWarningString()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetWarningString()));
   UNPROTECT(1);
   return ans;
 }
@@ -309,7 +316,7 @@ getDumpFileName(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetDumpFileName()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetDumpFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -319,7 +326,7 @@ getErrorFileName(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetErrorFileName()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetErrorFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -329,7 +336,7 @@ getLogFileName(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetLogFileName()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetLogFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -339,7 +346,7 @@ getOutputFileName(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetOutputFileName()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetOutputFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -349,7 +356,7 @@ getSelectedOutputFileName(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetSelectedOutputFileName()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetSelectedOutputFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -360,7 +367,7 @@ listComps(void)
 {
   SEXP ans = R_NilValue;
 
-  std::list< std::string > lc = s_iphreeqc.ListComponents();
+  std::list< std::string > lc = R::singleton().ListComponents();
   if (lc.size() > 0) {
     PROTECT(ans = allocVector(STRSXP, lc.size()));
     std::list< std::string >::iterator li = lc.begin();
@@ -386,9 +393,9 @@ loadDB(SEXP filename)
 
   name = CHAR(STRING_ELT(filename, 0));
 
-  if (s_iphreeqc.LoadDatabase(name) != VR_OK) {
+  if (R::singleton().LoadDatabase(name) != VR_OK) {
     std::ostringstream oss;
-    oss << s_iphreeqc.GetErrorString();
+    oss << R::singleton().GetErrorString();
     error(oss.str().c_str());
   }
 
@@ -407,9 +414,9 @@ loadDBStr(SEXP input)
 
   string = CHAR(STRING_ELT(input, 0));
 
-  if (s_iphreeqc.LoadDatabaseString(string) != VR_OK) {
+  if (R::singleton().LoadDatabaseString(string) != VR_OK) {
     std::ostringstream oss;
-    oss << s_iphreeqc.GetErrorString();
+    oss << R::singleton().GetErrorString();
     error(oss.str().c_str());
   }
 
@@ -421,28 +428,28 @@ getAccumLines(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetAccumulatedLines().c_str()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetAccumulatedLines().c_str()));
   UNPROTECT(1);
   return ans;
 }
 
-SEXP
-phreeqcDat(void)
-{
-  extern const char PHREEQC_DAT[];
-  SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(PHREEQC_DAT));
-  UNPROTECT(1);
-  return ans;
-}
+//SEXP
+//phreeqcDat(void)
+//{
+//  extern const char PHREEQC_DAT[];
+//  SEXP ans = R_NilValue;
+//  PROTECT(ans = allocVector(STRSXP, 1));
+//  SET_STRING_ELT(ans, 0, mkChar(PHREEQC_DAT));
+//  UNPROTECT(1);
+//  return ans;
+//}
 
 SEXP
 runAccum(void)
 {
-  if (s_iphreeqc.RunAccumulated() != VR_OK) {
+  if (R::singleton().RunAccumulated() != VR_OK) {
     std::ostringstream oss;
-    oss << s_iphreeqc.GetErrorString();
+    oss << R::singleton().GetErrorString();
     error(oss.str().c_str());
   }
   return(R_NilValue);
@@ -459,9 +466,9 @@ runFile(SEXP filename)
   }
 
   name = CHAR(STRING_ELT(filename, 0));
-  if (s_iphreeqc.RunFile(name) != VR_OK) {
+  if (R::singleton().RunFile(name) != VR_OK) {
     std::ostringstream oss;
-    oss << s_iphreeqc.GetErrorString();
+    oss << R::singleton().GetErrorString();
     error(oss.str().c_str());
   }
 
@@ -479,9 +486,9 @@ runString(SEXP input)
   }
 
   in = CHAR(STRING_ELT(input, 0));
-  if (s_iphreeqc.RunString(in) != VR_OK) {
+  if (R::singleton().RunString(in) != VR_OK) {
     std::ostringstream oss;
-    oss << s_iphreeqc.GetErrorString();
+    oss << R::singleton().GetErrorString();
     error(oss.str().c_str());
   }
 
@@ -521,25 +528,25 @@ getCol(int ncol)
 
   SEXP ans = R_NilValue;
 
-  cols = s_iphreeqc.GetSelectedOutputColumnCount();
-  rows = s_iphreeqc.GetSelectedOutputRowCount();
+  cols = R::singleton().GetSelectedOutputColumnCount();
+  rows = R::singleton().GetSelectedOutputRowCount();
   if (cols == 0 || rows == 0) {
     //error("getColumn: no data\n");
     return ans;
   }
 
   VarInit(&vn);
-  s_iphreeqc.GetSelectedOutputValue(0, ncol, &vn);
+  R::singleton().GetSelectedOutputValue(0, ncol, &vn);
 
   VarInit(&vv);
-  s_iphreeqc.GetSelectedOutputValue(1, ncol, &vv);
+  R::singleton().GetSelectedOutputValue(1, ncol, &vv);
 
   switch (vv.type) {
   case TT_LONG:
     PROTECT(ans = allocVector(INTSXP, rows-1));
     for (r = 1; r < rows; ++r) {
       VarInit(&vv);
-      s_iphreeqc.GetSelectedOutputValue(r, ncol, &vv);
+      R::singleton().GetSelectedOutputValue(r, ncol, &vv);
       if (vv.lVal == -99) {
 	INTEGER(ans)[r-1] = NA_INTEGER;
       }
@@ -554,7 +561,7 @@ getCol(int ncol)
     PROTECT(ans = allocVector(REALSXP, rows-1));
     for (r = 1; r < rows; ++r) {
       VarInit(&vv);
-      s_iphreeqc.GetSelectedOutputValue(r, ncol, &vv);
+      R::singleton().GetSelectedOutputValue(r, ncol, &vv);
       if (vv.dVal == -999.999 || vv.dVal == -99.) {
 	REAL(ans)[r-1] = NA_REAL;
       }
@@ -569,7 +576,7 @@ getCol(int ncol)
     PROTECT(ans = allocVector(STRSXP, rows-1));
     for (r = 1; r < rows; ++r) {
       VarInit(&vv);
-      s_iphreeqc.GetSelectedOutputValue(r, ncol, &vv);
+      R::singleton().GetSelectedOutputValue(r, ncol, &vv);
       SET_STRING_ELT(ans, r-1, mkChar(vv.sVal));
       VarClear(&vv);
     }
@@ -596,8 +603,6 @@ getCol(int ncol)
 /*   return getCol(ncol); */
 /* } */
 
-#define CONVERT_TO_DATA_FRAME
-
 SEXP
 getSelOut(void)
 {
@@ -618,8 +623,8 @@ getSelOut(void)
 
   list = R_NilValue;
 
-  cols = s_iphreeqc.GetSelectedOutputColumnCount();
-  rows = s_iphreeqc.GetSelectedOutputRowCount();
+  cols = R::singleton().GetSelectedOutputColumnCount();
+  rows = R::singleton().GetSelectedOutputRowCount();
   if (cols == 0 || rows == 0) {
     return list;
   }
@@ -630,7 +635,7 @@ getSelOut(void)
   for (c = 0; c < cols; ++c) {
 
     VarInit(&vn);
-    s_iphreeqc.GetSelectedOutputValue(0, c, &vn);
+    R::singleton().GetSelectedOutputValue(0, c, &vn);
 
     PROTECT(col = getCol(c));
 
@@ -666,7 +671,7 @@ getErrStr()
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(s_iphreeqc.GetErrorString()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetErrorString()));
   UNPROTECT(1);
   return ans;
 }
