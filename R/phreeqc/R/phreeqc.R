@@ -13,9 +13,11 @@ function()
 }
 
 phrGetSelectedOutput =
-function()
+function(allow_ = TRUE)
 {
-  return(.Call("getSelOut", PACKAGE=.packageName))
+  sel_out <- .Call("getSelOut", PACKAGE=.packageName)
+  if(!is.null(sel_out)) names(sel_out) <- make.names(names(sel_out), unique = TRUE, allow_ = allow_)
+  return(sel_out)
 }
 
 phrGetErrorString =
@@ -59,8 +61,6 @@ function(value)
 {
   invisible(.Call("setSelectedOutputFileOn", as.logical(value), PACKAGE=.packageName))
 }
-
-
 
 phrSetDumpStringOn =
 function(value)
