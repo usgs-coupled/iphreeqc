@@ -4158,3 +4158,10 @@ void TestIPhreeqc::TestWissmeier20131203_3(void)
 	CPPUNIT_ASSERT_EQUAL( 1,     obj.GetSelectedOutputColumnCount() );
 	CPPUNIT_ASSERT_EQUAL( 2,     obj.GetSelectedOutputRowCount() );
 }
+
+void TestIPhreeqc::TestKinniburgh20140218(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/wateq4f.dat"));
+	CPPUNIT_ASSERT_EQUAL(0, obj.RunFile("kinn20140218"));
+}

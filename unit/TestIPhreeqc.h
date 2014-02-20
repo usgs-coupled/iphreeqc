@@ -77,6 +77,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestWissmeier20131203 );
 	CPPUNIT_TEST( TestWissmeier20131203_2 );
 	CPPUNIT_TEST( TestWissmeier20131203_3 );
+	CPPUNIT_TEST( TestKinniburgh20140218 );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -154,6 +155,7 @@ public:
 	void TestWissmeier20131203(void);
 	void TestWissmeier20131203_2(void);
 	void TestWissmeier20131203_3(void);
+	void TestKinniburgh20140218(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, bool output_file_on, bool error_file_on, bool log_file_on, bool selected_output_file_on, bool dump_file_on);
