@@ -267,10 +267,8 @@ void TestIPhreeqcLib::TestRunWithErrors()
 
 	// remove dump file if it exists
 	//
-	if (::FileExists(dump_file))
-	{
-		CPPUNIT_ASSERT(::DeleteFile(dump_file));
-	}
+	FileTest dump(dump_file);
+	CPPUNIT_ASSERT( dump.RemoveExisting() );
 
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
@@ -304,10 +302,7 @@ void TestIPhreeqcLib::TestRunWithErrors()
 	{
 		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
-	//::Sleep(100);
-	CPPUNIT_ASSERT_EQUAL( true, ::FileExists(dump_file) );
-	CPPUNIT_ASSERT( ::FileSize(dump_file) > 0 );
-	CPPUNIT_ASSERT(::DeleteFile(dump_file));
+	CPPUNIT_ASSERT( dump.VerifyExists() );
 }
 
 void TestIPhreeqcLib::TestRunFile(void)

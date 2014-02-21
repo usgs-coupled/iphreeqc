@@ -33,6 +33,28 @@ void TestIPhreeqc::TestLoadDatabase(void)
 		CPPUNIT_ASSERT(::FileSize("phreeqc.dat") > 0);
 		CPPUNIT_ASSERT_EQUAL(0,    obj.LoadDatabase("phreeqc.dat"));
 	}
+
+	// make sure settings are cleared
+	//
+
+	IPhreeqc obj2;
+	for (int i = 0; i < 10; ++i)
+	{
+		CPPUNIT_ASSERT_EQUAL(false, obj2.GetSelectedOutputFileOn());
+
+		obj2.SetSelectedOutputFileOn(true);
+		CPPUNIT_ASSERT_EQUAL(true, obj2.GetSelectedOutputFileOn());
+
+		obj2.SetSelectedOutputFileOn(true);
+		CPPUNIT_ASSERT_EQUAL(true, obj2.GetSelectedOutputFileOn());
+
+		CPPUNIT_ASSERT_EQUAL(true, ::FileExists("phreeqc.dat"));
+		CPPUNIT_ASSERT(::FileSize("phreeqc.dat") > 0);
+		CPPUNIT_ASSERT_EQUAL(0,    obj2.LoadDatabase("phreeqc.dat"));
+
+		// all previous definitions are cleared
+		CPPUNIT_ASSERT_EQUAL(false, obj2.GetSelectedOutputFileOn());
+	}
 }
 
 void TestIPhreeqc::TestLoadDatabaseString(void)
