@@ -15,7 +15,9 @@ public:
   }
 };
 
+
 extern "C" {
+
 
 SEXP
 accumLine(SEXP line)
@@ -120,7 +122,6 @@ setSelectedOutputFileOn(SEXP value)
   return(ans);
 }
 
-//{{
 SEXP
 setDumpStringOn(SEXP value)
 {
@@ -181,7 +182,6 @@ setSelectedOutputStringOn(SEXP value)
   return(ans);
 }
 
-//{{
 SEXP
 setDumpFileName(SEXP filename)
 {
@@ -256,9 +256,7 @@ setSelectedOutputFileName(SEXP filename)
   R::singleton().SetSelectedOutputFileName(name);
   return(ans);
 }
-//}}
 
-////{{
 SEXP
 getDumpString(void)
 {
@@ -308,9 +306,7 @@ getWarningString(void)
   UNPROTECT(1);
   return ans;
 }
-////}}
 
-//{{
 SEXP
 getDumpFileName(void)
 {
@@ -360,7 +356,6 @@ getSelectedOutputFileName(void)
   UNPROTECT(1);
   return ans;
 }
-//}}
 
 SEXP
 listComps(void)
@@ -495,97 +490,143 @@ runString(SEXP input)
   return(R_NilValue);
 }
 
-
-
-/* SEXP */
-/* getColumnCount() */
-/* { */
-/*   SEXP cols = R_NilValue; */
-/*   PROTECT(cols = allocVector(INTSXP, 1)); */
-/*   INTEGER(cols)[0] = GetSelectedOutputColumnCount(); */
-/*   UNPROTECT(1); */
-/*   return cols; */
-/* } */
-
-/* SEXP */
-/* getRowCount() */
-/* { */
-/*   SEXP rows = R_NilValue; */
-/*   PROTECT(rows = allocVector(INTSXP, 1)); */
-/*   INTEGER(rows)[0] = GetSelectedOutputRowCount(); */
-/*   UNPROTECT(1); */
-/*   return rows; */
-/* } */
-
 SEXP
 getCol(int ncol)
 {
-  int r;
-  int cols;
-  int rows;
-  VAR vn;
   VAR vv;
-
+  char buffer[80];
   SEXP ans = R_NilValue;
-
-  cols = R::singleton().GetSelectedOutputColumnCount();
-  rows = R::singleton().GetSelectedOutputRowCount();
+  
+  int cols = R::singleton().GetSelectedOutputColumnCount();
+  int rows = R::singleton().GetSelectedOutputRowCount();
   if (cols == 0 || rows == 0) {
-    //error("getColumn: no data\n");
     return ans;
   }
-
-  VarInit(&vn);
-  R::singleton().GetSelectedOutputValue(0, ncol, &vn);
-
-  VarInit(&vv);
-  R::singleton().GetSelectedOutputValue(1, ncol, &vv);
-
-  switch (vv.type) {
-  case TT_LONG:
-    PROTECT(ans = allocVector(INTSXP, rows-1));
-    for (r = 1; r < rows; ++r) {
-      VarInit(&vv);
-      R::singleton().GetSelectedOutputValue(r, ncol, &vv);
-      if (vv.lVal == -99) {
-	INTEGER(ans)[r-1] = NA_INTEGER;
-      }
-      else {
-	INTEGER(ans)[r-1] = vv.lVal;
-      }
-      VarClear(&vv);
+  
+  // count each type
+  int nd, nl, ns;
+  nd = nl = ns = 0;
+  for (int r = 1; r < rows && ns == 0; ++r) {
+    VarInit(&vv);
+    // may want to implement (int) GetSelectedOutputType(r,c)
+    R::singleton().GetSelectedOutputValue(r, ncol, &vv);
+    switch (vv.type) {
+    case TT_DOUBLE:  ++nd; break;
+    case TT_LONG:    ++nl; break;
+    case TT_STRING:  ++ns; break;
     }
-    UNPROTECT(1);
-    break;
-  case TT_DOUBLE:
-    PROTECT(ans = allocVector(REALSXP, rows-1));
-    for (r = 1; r < rows; ++r) {
-      VarInit(&vv);
-      R::singleton().GetSelectedOutputValue(r, ncol, &vv);
-      if (vv.dVal == -999.999 || vv.dVal == -99.) {
-	REAL(ans)[r-1] = NA_REAL;
-      }
-      else {
-	REAL(ans)[r-1] = vv.dVal;
-      }
-      VarClear(&vv);
-    }
-    UNPROTECT(1);
-    break;
-  case TT_STRING:
+    VarClear(&vv);
+  }
+  
+  
+  if (ns) {
+    // all strings
     PROTECT(ans = allocVector(STRSXP, rows-1));
-    for (r = 1; r < rows; ++r) {
+    for (int r = 1; r < rows; ++r) {
       VarInit(&vv);
       R::singleton().GetSelectedOutputValue(r, ncol, &vv);
-      SET_STRING_ELT(ans, r-1, mkChar(vv.sVal));
+      switch (vv.type) {
+      case TT_EMPTY:
+        SET_STRING_ELT(ans, r-1, mkChar(""));
+        break;
+      case TT_ERROR:
+        switch (vv.vresult) {
+        case VR_OK:          SET_STRING_ELT(ans, r-1, mkChar("VR_OK"));          break;
+        case VR_OUTOFMEMORY: SET_STRING_ELT(ans, r-1, mkChar("VR_OUTOFMEMORY")); break;
+        case VR_BADVARTYPE:  SET_STRING_ELT(ans, r-1, mkChar("VR_BADVARTYPE"));  break;
+        case VR_INVALIDARG:  SET_STRING_ELT(ans, r-1, mkChar("VR_INVALIDARG"));  break;
+        case VR_INVALIDROW:  SET_STRING_ELT(ans, r-1, mkChar("VR_INVALIDROW"));  break;
+        case VR_INVALIDCOL:  SET_STRING_ELT(ans, r-1, mkChar("VR_INVALIDCOL"));  break;
+        }
+        break;
+      case TT_LONG:
+        if (vv.lVal == -99) {
+          sprintf(buffer, "NA");
+        } else {
+          sprintf(buffer, "%ld", vv.lVal);
+        }
+        SET_STRING_ELT(ans, r-1, mkChar(buffer));
+        break;
+      case TT_DOUBLE:
+        if (vv.dVal == -999.999 || vv.dVal == -99.) {
+          sprintf(buffer, "NA");
+        } else {
+          sprintf(buffer, "%lg", vv.dVal);
+        }
+        SET_STRING_ELT(ans, r-1, mkChar(buffer));
+        break;
+      case TT_STRING:
+        SET_STRING_ELT(ans, r-1, mkChar(vv.sVal));
+        break;
+      }
       VarClear(&vv);
     }
     UNPROTECT(1);
-    break;
-  case TT_EMPTY:
-    break;
-  case TT_ERROR:
-    break;
+  } // if (ns)
+  else if (nd) {
+    // all reals
+    PROTECT(ans = allocVector(REALSXP, rows-1));
+    for (int r = 1; r < rows; ++r) {
+      VarInit(&vv);
+      R::singleton().GetSelectedOutputValue(r, ncol, &vv);
+      switch (vv.type) {
+      case TT_EMPTY:
+        REAL(ans)[r-1] = NA_REAL;
+        break;
+      case TT_ERROR:
+        REAL(ans)[r-1] = NA_REAL;
+        break;
+      case TT_LONG:
+        if (vv.lVal == -99) {
+          REAL(ans)[r-1] = NA_REAL;
+        } else {
+          REAL(ans)[r-1] = (double)vv.lVal;
+        }
+        break;
+      case TT_DOUBLE:
+        if (vv.dVal == -999.999 || vv.dVal == -99.) {
+          REAL(ans)[r-1] = NA_REAL;
+        } else {
+          REAL(ans)[r-1] = (double)vv.dVal;
+        }
+        break;
+      }
+      VarClear(&vv);
+    }
+    UNPROTECT(1);
+  } // if (nd)
+  else if (nl) {
+    // all ints
+    PROTECT(ans = allocVector(INTSXP, rows-1));
+    for (int r = 1; r < rows; ++r) {
+      VarInit(&vv);
+      R::singleton().GetSelectedOutputValue(r, ncol, &vv);
+      switch (vv.type) {
+      case TT_EMPTY:
+        INTEGER(ans)[r-1] = NA_INTEGER;
+        break;
+      case TT_ERROR:
+        INTEGER(ans)[r-1] = NA_INTEGER;
+        break;
+      case TT_LONG:
+        if (vv.lVal == -99) {
+          INTEGER(ans)[r-1] = NA_INTEGER;
+        } else {
+          INTEGER(ans)[r-1] = vv.lVal;
+        }
+        break;
+      }
+      VarClear(&vv);
+    }
+    UNPROTECT(1);
+  } // if (nl)
+  else {
+    // all NA
+    PROTECT(ans = allocVector(INTSXP, rows-1));
+    for (int r = 1; r < rows; ++r) {
+      INTEGER(ans)[r-1] = NA_INTEGER;
+    } // for
+    UNPROTECT(1);
   }
   return ans;
 }
@@ -616,10 +657,8 @@ getSelOut(void)
   SEXP attr;
   SEXP col;
 
-#if defined(CONVERT_TO_DATA_FRAME)
   SEXP klass;
   SEXP row_names;
-#endif
 
   list = R_NilValue;
 
@@ -628,7 +667,6 @@ getSelOut(void)
   if (cols == 0 || rows == 0) {
     return list;
   }
-
 
   PROTECT(list = allocVector(VECSXP, cols));
   PROTECT(attr = allocVector(STRSXP, cols));
@@ -647,8 +685,6 @@ getSelOut(void)
 
   setAttrib(list, R_NamesSymbol, attr);
 
-
-#if defined(CONVERT_TO_DATA_FRAME)
   /* Turn the data "list" into a "data.frame" */
   /* see model.c */
 
@@ -660,9 +696,41 @@ getSelOut(void)
   for (r = 0; r < rows-1; ++r) INTEGER(row_names)[r] = r+1;
   setAttrib(list, R_RowNamesSymbol, row_names);
   UNPROTECT(1);
-#endif
 
   UNPROTECT(2+cols);
+  return list;
+}
+
+SEXP
+getSelOuts(void)
+{
+  SEXP list;
+  SEXP attr;
+
+  list = R_NilValue;
+  
+  if (int n = R::singleton().GetSelectedOutputCount()) {
+    SEXP so;
+    char buffer[80];
+    
+    PROTECT(list = allocVector(VECSXP, n));
+    PROTECT(attr = allocVector(STRSXP, n));
+
+    int save = R::singleton().GetCurrentSelectedOutputUserNumber();
+    for (int i = 0; i < n; ++i) {
+      int d = R::singleton().GetNthSelectedOutputUserNumber(i);
+      ::sprintf(buffer, "n%d", d);
+      SET_STRING_ELT(attr, i, mkChar(buffer));
+      R::singleton().SetCurrentSelectedOutputUserNumber(d);      
+      PROTECT(so = getSelOut());
+      SET_VECTOR_ELT(list, i, so);
+      UNPROTECT(1);
+    }
+    R::singleton().SetCurrentSelectedOutputUserNumber(save);
+    setAttrib(list, R_NamesSymbol, attr);
+
+    UNPROTECT(2);
+  }
   return list;
 }
 
