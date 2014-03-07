@@ -19,20 +19,32 @@ License: \tab Unlimited\cr
 ~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
-    David Parkhurst \email{dlpark@usgs.gov}\cr
-    Maintainer: Scott Charlton \email{charlton@usgs.gov}
+    David L. Parkhurst \email{dlpark@usgs.gov}\cr
+    C.A.J. Appelo \email{appt@hydrochemistry.eu}\cr
+    Maintainer: Scott R. Charlton \email{charlton@usgs.gov}
 }
 \references{
     \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
-~~ documentation directory ~~
 \keyword{ package }
 \seealso{
 }
 \examples{
-phrLoadDatabase("phreeqc/phreeqc.dat")
-if (is.null(phrRunFile("phreeqc/ex2"))) {
-  phrGetSelectedOutput()
-}
+# load the phreeqc.dat database
+phrLoadDatabaseString(phreeqc.dat)
+
+# run example 2
+phrRunString(ex2)
+
+# retrieve selected_output as a list of data.frame
+so <- phrGetSelectedOutput()
+
+# plot the results
+attach(so$n1)
+title  <- "Gypsum-Anhydrite Stability"
+xlabel <- "Temperature, in degrees celcius"
+ylabel <- "Saturation index"
+plot(temp.C., si_gypsum, main=title, xlab=xlabel, ylab=ylabel, col="darkred", xlim=c(25, 75), ylim=c(-0.4, 0.0))
+points(temp.C., si_anhydrite, col="darkgreen")
+legend("bottomright", c("Gypsum", "Anhydrite"), col = c("darkred", "darkgreen"), pch = c(1, 1))
 }

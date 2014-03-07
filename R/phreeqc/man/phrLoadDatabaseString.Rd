@@ -1,54 +1,45 @@
 \name{phrLoadDatabaseString}
 \alias{phrLoadDatabaseString}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-TODO
-}
+\title{Load a phreeqc database as a string.}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+  Load the specified string as a database into phreeqc. Returns NULL if successful.
 }
 \usage{
-phrLoadDatabaseString(input)
+  phrLoadDatabaseString(input)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{input}{
-%%     ~~Describe \code{input} here~~
-}
-}
+  \item{input}{String containing data to be used as the phreeqc database.}
+} %END arguments
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  This function returns NULL.
 }
 \references{
-%% ~put references to the literature/web site here ~
+  \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \author{
-%%  ~~who you are~~
+  David Parkhurst \email{dlpark@usgs.gov}\cr
+  Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \note{
-%%  ~~further notes~~
+  All previous definitions are cleared.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link{phrLoadDatabase}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (input) 
-{
+\examples{
+  # this example loads the phreeqc.dat database, turns on the
+  # output file and runs ex2 as a string
+  phrLoadDatabaseString(phreeqc.dat.string)
+  phrSetOutputFileOn(TRUE)
+  if (is.null(phrRunString(ex2))) {
+    cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

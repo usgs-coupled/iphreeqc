@@ -29,12 +29,40 @@ accumLine(SEXP line)
     error("AccumulateLine:line is not a single string\n");
   }
 
-  str_in = CHAR(STRING_ELT(line, 0));
+  if (STRING_ELT(line, 0) != NA_STRING) {
+    str_in = CHAR(STRING_ELT(line, 0));    
+    if (R::singleton().AccumulateLine(str_in) != VR_OK) {
+      std::ostringstream oss;
+      oss << R::singleton().GetErrorString();
+      error(oss.str().c_str());
+    }
+  }
 
-  if (R::singleton().AccumulateLine(str_in) != VR_OK) {
-    std::ostringstream oss;
-    oss << R::singleton().GetErrorString();
-    error(oss.str().c_str());
+  return(R_NilValue);
+}
+
+SEXP
+accumLineLst(SEXP line)
+{
+  const char* str_in;
+
+  // check args
+  if (!isString(line)) {
+    error("a character vector argument expected");
+  }
+
+  int n = length(line);
+  std::ostringstream oss;
+
+  for (int i = 0; i < n; ++i) {
+    if (STRING_ELT(line, i) != NA_STRING) {
+      str_in = CHAR(STRING_ELT(line, 0));    
+      if (R::singleton().AccumulateLine(str_in) != VR_OK) {
+        std::ostringstream err;
+        err << R::singleton().GetErrorString();
+        error(err.str().c_str());
+      }
+    }
   }
 
   return(R_NilValue);
@@ -383,15 +411,15 @@ loadDB(SEXP filename)
 
   // check args
   if (!isString(filename) || length(filename) != 1) {
-    error("filename is not a single string\n");
+    error("'filename' is not a single string");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
 
   if (R::singleton().LoadDatabase(name) != VR_OK) {
-    std::ostringstream oss;
-    oss << R::singleton().GetErrorString();
-    error(oss.str().c_str());
+    std::ostringstream err;
+    err << R::singleton().GetErrorString();
+    error(err.str().c_str());
   }
 
   return(R_NilValue);
@@ -404,19 +432,46 @@ loadDBStr(SEXP input)
 
   // check args
   if (!isString(input) || length(input) != 1) {
-    error("input is not a single string\n");
+    error("'input' is not a single string");
   }
 
   string = CHAR(STRING_ELT(input, 0));
 
   if (R::singleton().LoadDatabaseString(string) != VR_OK) {
-    std::ostringstream oss;
-    oss << R::singleton().GetErrorString();
-    error(oss.str().c_str());
+    std::ostringstream err;
+    err << R::singleton().GetErrorString();
+    error(err.str().c_str());
   }
 
   return(R_NilValue);
 }
+
+SEXP
+loadDBLst(SEXP input)
+{
+  // check args
+  if (!isString(input)) {
+    error("a character vector argument expected");
+  }
+
+  int n = length(input);
+  std::ostringstream oss;
+
+  for (int i = 0; i < n; ++i) {
+    if (STRING_ELT(input, i) != NA_STRING) {
+      oss << CHAR(STRING_ELT(input, i)) << "\n";
+    }
+  }
+
+  if (R::singleton().LoadDatabaseString(oss.str().c_str()) != VR_OK) {
+    std::ostringstream err;
+    err << R::singleton().GetErrorString();
+    error(err.str().c_str());
+  }
+
+  return(R_NilValue);
+}
+
 
 SEXP
 getAccumLines(void)
@@ -456,8 +511,8 @@ runFile(SEXP filename)
   const char* name;
 
   // check args
-  if (!isString(filename) || length(filename) != 1) {
-    error("RunFile: filename is not a single string\n");
+  if (!isString(filename) || length(filename) != 1 || STRING_ELT(filename, 0) == NA_STRING) {
+    error("'filename' must be a single character string");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
@@ -476,8 +531,8 @@ runString(SEXP input)
   const char* in;
 
   // check args
-  if (!isString(input) || length(input) != 1) {
-    error("RunString: input is not a single string\n");
+  if (!isString(input)) {
+    error("a character vector argument expected");
   }
 
   in = CHAR(STRING_ELT(input, 0));
@@ -485,6 +540,34 @@ runString(SEXP input)
     std::ostringstream oss;
     oss << R::singleton().GetErrorString();
     error(oss.str().c_str());
+  }
+
+  return(R_NilValue);
+}
+
+SEXP
+runStringLst(SEXP input)
+{
+  const char* in;
+
+  // check args
+  if (!isString(input)) {
+    error("a character vector argument expected");
+  }
+
+  int n = length(input);
+  std::ostringstream oss;
+
+  for (int i = 0; i < n; ++i) {
+    if (STRING_ELT(input, i) != NA_STRING) {
+      oss << CHAR(STRING_ELT(input, i)) << "\n";
+    }
+  }
+
+  if (R::singleton().RunString(oss.str().c_str()) != VR_OK) {
+    std::ostringstream err;
+    err << R::singleton().GetErrorString();
+    error(err.str().c_str());
   }
 
   return(R_NilValue);
@@ -680,6 +763,7 @@ getSelOut(void)
     SET_VECTOR_ELT(list, c, col);
     SET_STRING_ELT(attr, c, mkChar(vn.sVal));
 
+    UNPROTECT(1);
     VarClear(&vn);
   }
 
@@ -697,12 +781,12 @@ getSelOut(void)
   setAttrib(list, R_RowNamesSymbol, row_names);
   UNPROTECT(1);
 
-  UNPROTECT(2+cols);
+  UNPROTECT(2);
   return list;
 }
 
 SEXP
-getSelOuts(void)
+getSelOutLst(void)
 {
   SEXP list;
   SEXP attr;

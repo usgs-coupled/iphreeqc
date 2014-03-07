@@ -5,7 +5,7 @@
 Retrieve the accumulated input string.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Returns the accumulated text in the input buffer of the phreeqc object.
 }
 \usage{
 phrGetAccumulatedLines()
@@ -15,17 +15,14 @@ phrGetAccumulatedLines()
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  The input as a single string.
 }
 \references{
-%% ~put references to the literature/web site here ~
+  \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \author{
-%%  ~~who you are~~
+  David Parkhurst \email{dlpark@usgs.gov}\cr
+  Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \note{
 %%  ~~further notes~~
@@ -34,17 +31,13 @@ phrGetAccumulatedLines()
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function () 
-{
-  }
+# This example loads some keyword input and displays the contents.
+phrAccumulateLine("SOLUTION 1")
+phrAccumulateLine("END")
+cat(paste("The accumulated input is:", phrGetAccumulatedLines(), sep="\n"))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

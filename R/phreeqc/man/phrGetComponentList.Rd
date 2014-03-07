@@ -35,8 +35,8 @@ Maintainer: Scott Charlton \email{charlton@usgs.gov}
 }
 \examples{
 # This example runs the ex2 input file and echos the list of components.
-phrLoadDatabase("phreeqc/phreeqc.dat")
-phrRunFile("phreeqc/ex2")
+phrLoadDatabaseString(phreeqc.dat)
+phrRunString(ex2)
 cat("components:\n")
 for (c in phrGetComponentList()) {
   cat(c, "\n")

@@ -40,11 +40,9 @@ export(
     "phrGetErrorString",
     "phrGetSelectedOutput",
     "phrLoadDatabase",
+    "phrLoadDatabaseList",
     "phrLoadDatabaseString",
-    "phrPHREEQC_DAT",
     "phrRunAccumulated",	
     "phrRunFile",
     "phrRunString"
 )
-
-

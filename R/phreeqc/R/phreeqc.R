@@ -3,7 +3,7 @@
 phrAccumulateLine =
 function(line)
 {
-  invisible(.Call("accumLine", as.character(line), PACKAGE=.packageName))
+  invisible(.Call("accumLineLst", as.character(line), PACKAGE=.packageName))
 }
 
 phrClearAccumulatedLines =
@@ -15,9 +15,15 @@ function()
 phrGetSelectedOutput =
 function(allow_ = TRUE)
 {
-  sel_out <- .Call("getSelOut", PACKAGE=.packageName)
-  if(!is.null(sel_out)) names(sel_out) <- make.names(names(sel_out), unique = TRUE, allow_ = allow_)
-  return(sel_out)
+  sel_outs <- .Call("getSelOutLst", PACKAGE=.packageName)
+  if (!is.null(sel_outs)) {
+    for (t in names(sel_outs)) {
+      if (!is.null(sel_outs[[t]])) {
+        names(sel_outs[[t]]) <- make.names(names(sel_outs[[t]]), unique = TRUE, allow_ = allow_)
+      }
+    }
+  }
+  return(sel_outs)
 }
 
 phrGetErrorString =
@@ -187,7 +193,6 @@ function()
 }
 
 
-
 phrGetComponentList =
 function()
 {
@@ -206,11 +211,10 @@ function(input)
   invisible(.Call("loadDBStr", as.character(input), PACKAGE=.packageName))
 }
 
-
-phrGetAccumulatedLines =
-function()
+phrLoadDatabaseList =
+function(input)
 {
-  return(.Call("getAccumLines", PACKAGE=.packageName))
+  invisible(.Call("loadDBLst", as.character(input), PACKAGE=.packageName))
 }
 
 phrGetAccumulatedLines =
@@ -219,11 +223,17 @@ function()
   return(.Call("getAccumLines", PACKAGE=.packageName))
 }
 
-phrPHREEQC_DAT =
+phrGetAccumulatedLines =
 function()
 {
-  return(.Call("phreeqcDat", PACKAGE=.packageName))
+  return(.Call("getAccumLines", PACKAGE=.packageName))
 }
+
+##phrPHREEQC_DAT =
+##function()
+##{
+##  return(.Call("phreeqcDat", PACKAGE=.packageName))
+##}
 
 phrRunAccumulated =
 function()
@@ -240,5 +250,5 @@ function(filename)
 phrRunString =
 function(input)
 {
-  invisible(.Call("runString", as.character(input), PACKAGE=.packageName))
+  invisible(.Call("runStringLst", as.character(input), PACKAGE=.packageName))
 }

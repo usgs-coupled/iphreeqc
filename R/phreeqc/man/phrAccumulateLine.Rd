@@ -23,11 +23,7 @@ The line(s) to add for input to phreeqc.
 This function returns NULL.
 }
 \references{
-    \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-}
-\author{
-    David Parkhurst \email{dlpark@usgs.gov}\cr
-    Maintainer: Scott Charlton \email{charlton@usgs.gov}
+  \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 }
 \note{
 %%  ~~further notes~~
