@@ -129,6 +129,131 @@ void TestIPhreeqc::TestLoadDatabaseString(void)
 	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabaseString(ex15_dat));
 }
 
+void TestIPhreeqc::TestLoadDatabaseStringBadInput(void)
+{
+	IPhreeqc obj;
+
+	for (int i = 0; i < 10; ++i)
+	{
+		CPPUNIT_ASSERT(0 != obj.LoadDatabaseString("phreeqc.dat.list"));
+	}
+}
+
+void TestIPhreeqc::TestLoadDatabaseEx14AsDB(void)
+{
+	const char ex14[] =
+		"TITLE Example 14.--Transport with equilibrium_phases, exchange, and surface reactions\n"
+		"#\n"
+		"# Use phreeqc.dat\n"
+		"# Dzombak and Morel (1990) aqueous and surface complexation models for arsenic\n"
+		"# are defined here\n"
+		"#\n"
+		"SURFACE_MASTER_SPECIES\n"
+		"        Surf    SurfOH\n"
+		"SURFACE_SPECIES\n"
+		"        SurfOH = SurfOH\n"
+		"                log_k   0.0\n"
+		"        SurfOH  + H+ = SurfOH2+\n"
+		"                log_k   7.29\n"
+		"        SurfOH = SurfO- + H+\n"
+		"                log_k   -8.93\n"
+		"        SurfOH + AsO4-3 + 3H+ = SurfH2AsO4 + H2O\n"
+		"                log_k   29.31\n"
+		"        SurfOH + AsO4-3 + 2H+ = SurfHAsO4- + H2O\n"
+		"                log_k   23.51\n"
+		"        SurfOH + AsO4-3 = SurfOHAsO4-3\n"
+		"                log_k   10.58\n"
+		"SOLUTION_MASTER_SPECIES\n"
+		"        As       H3AsO4        -1.0     74.9216    74.9216\n"
+		"SOLUTION_SPECIES\n"
+		"        H3AsO4 = H3AsO4\n"
+		"                log_k           0.0\n"
+		"        H3AsO4 = AsO4-3 + 3H+\n"
+		"                log_k   -20.7\n"
+		"        H+ + AsO4-3 = HAsO4-2\n"
+		"                log_k   11.50\n"
+		"        2H+ + AsO4-3 = H2AsO4-\n"
+		"                log_k           18.46\n"
+		"SOLUTION 1 Brine\n"
+		"        pH      5.713\n"
+		"        pe      4.0     O2(g)   -0.7\n"
+		"        temp    25.\n"
+		"        units   mol/kgw\n"
+		"        Ca      .4655\n"
+		"        Mg      .1609\n"
+		"        Na      5.402\n"
+		"        Cl      6.642           charge\n"
+		"        C       .00396\n"
+		"        S       .004725\n"
+		"        As      .025 umol/kgw\n"
+		"END\n"
+		"USE solution 1\n"
+		"EQUILIBRIUM_PHASES 1\n"
+		"        Dolomite        0.0     1.6\n"
+		"        Calcite         0.0     0.1\n"
+		"SAVE solution 1\n"
+		"# prints initial condition to the selected-output file\n"
+		"SELECTED_OUTPUT\n"
+		"        -file ex14.sel\n"
+		"        -reset false\n"
+		"        -step\n"
+		"USER_PUNCH\n"
+		"        -head  m_Ca m_Mg m_Na umol_As pH mmol_sorbedAs\n"
+		"  10 PUNCH TOT(\"Ca\"), TOT(\"Mg\"), TOT(\"Na\"), TOT(\"As\")*1e6, -LA(\"H+\"), SURF(\"As\", \"Surf\")*1000\n"
+		"END\n"
+		"PRINT\n"
+		"# skips print of initial exchange and initial surface to the selected-output file\n"
+		"        -selected_out false\n"
+		"EXCHANGE 1\n"
+		"        -equil with solution 1\n"
+		"        X       1.0\n"
+		"SURFACE 1\n"
+		"        -equil solution 1\n"
+		"# assumes 1/10 of iron is HFO\n"
+		"        SurfOH           0.07    600.    30.\n"
+		"END\n"
+		"SOLUTION 0 20 x precipitation\n"
+		"        pH      4.6\n"
+		"        pe      4.0     O2(g)   -0.7\n"
+		"        temp    25.\n"
+		"        units   mmol/kgw\n"
+		"        Ca      .191625\n"
+		"        Mg      .035797\n"
+		"        Na      .122668\n"
+		"        Cl      .133704\n"
+		"        C       .01096\n"
+		"        S       .235153         charge\n"
+		"EQUILIBRIUM_PHASES 0\n"
+		"        Dolomite        0.0     1.6\n"
+		"        Calcite         0.0     0.1\n"
+		"        CO2(g)          -1.5    10.\n"
+		"SAVE solution 0\n"
+		"END\n"
+		"PRINT\n"
+		"        -selected_out true\n"
+		"        -status false\n"
+		"ADVECTION\n"
+		"        -cells 1\n"
+		"        -shifts 200\n"
+		"        -print_frequency 200\n"
+		"USER_GRAPH 1 Example 14\n"
+		"        -headings PV As(ppb) Ca(M) Mg(M) Na(M) pH\n"
+		"        -chart_title \"Chemical Evolution of the Central Oklahoma Aquifer\"\n"
+		"        -axis_titles \"Pore volumes or shift number\" \"Log(Concentration, in ppb or molal)\" \"pH\"\n"
+		"        -axis_scale x_axis 0 200\n"
+		"        -axis_scale y_axis 1e-6 100 auto auto Log\n"
+		"  10 GRAPH_X STEP_NO\n"
+		"  20 GRAPH_Y TOT(\"As\") * 74.92e6, TOT(\"Ca\"), TOT(\"Mg\"), TOT(\"Na\")\n"
+		"  30 GRAPH_SY -LA(\"H+\")\n"
+		"END\n";
+
+	IPhreeqc obj;
+	for (int i = 0; i < 10; ++i)
+	{
+		CPPUNIT_ASSERT(0 != obj.LoadDatabaseString(ex14));
+	}
+}
+
 void TestIPhreeqc::TestLoadDatabaseMissingFile(void)
 {
 	CPPUNIT_ASSERT_EQUAL(false, ::FileExists("missing.file"));

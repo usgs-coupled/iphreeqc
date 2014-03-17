@@ -9,6 +9,8 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST_SUITE( TestIPhreeqc );
 	CPPUNIT_TEST( TestLoadDatabase );
 	CPPUNIT_TEST( TestLoadDatabaseString );
+	CPPUNIT_TEST( TestLoadDatabaseStringBadInput );
+	CPPUNIT_TEST( TestLoadDatabaseEx14AsDB );
 	CPPUNIT_TEST( TestLoadDatabaseMissingFile );
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
 	CPPUNIT_TEST( TestRunAccumulated );
@@ -87,6 +89,8 @@ public:
 public:
 	void TestLoadDatabase(void);
 	void TestLoadDatabaseString(void);
+	void TestLoadDatabaseStringBadInput(void);
+	void TestLoadDatabaseEx14AsDB(void);
 	void TestLoadDatabaseMissingFile(void);
 	void TestLoadDatabaseWithErrors(void);
 	void TestRunAccumulated(void);
