@@ -1,3 +1,4 @@
+
 #include <R.h>
 #include <Rdefines.h>
 #include <sstream>
@@ -25,7 +26,7 @@ accumLine(SEXP line)
   const char* str_in;
 
   // check args
-  if (!isString(line) || length(line) != 1) {
+  if (!isString(line) || length(line) != 1 || STRING_ELT(line, 0) == NA_STRING) {
     error("AccumulateLine:line is not a single string\n");
   }
 
@@ -95,8 +96,9 @@ setDumpFileOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
-    error("SetDumpFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!isLogical(value) || length(value) != 1 || LOGICAL(value)[0] == NA_LOGICAL) {
+    R::singleton().AddError("SetDumpFileOn: value must either be \"TRUE\" or \"FALSE\"");
+    error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetDumpFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -107,8 +109,9 @@ setErrorFileOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
-    error("SetErrorFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!isLogical(value) || length(value) != 1 || LOGICAL(value)[0] == NA_LOGICAL) {
+    R::singleton().AddError("SetErrorFileOn: value must either be \"TRUE\" or \"FALSE\"");
+    error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetErrorFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -120,7 +123,8 @@ setLogFileOn(SEXP value)
   SEXP ans = R_NilValue;
   // check args
   if (!isLogical(value) || length(value) != 1) {
-    error("SetLogFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
+    R::singleton().AddError("SetLogFileOn: value must either be \"TRUE\" or \"FALSE\"");
+    error("value must either be \"TRUE\" or \"FALSE\"");
   }
   R::singleton().SetLogFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -132,7 +136,7 @@ setOutputFileOn(SEXP value)
   SEXP ans = R_NilValue;
   // check args
   if (!isLogical(value) || length(value) != 1) {
-    error("SetOutputFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
+    error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetOutputFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -144,7 +148,7 @@ setSelectedOutputFileOn(SEXP value)
   SEXP ans = R_NilValue;
   // check args
   if (!isLogical(value) || length(value) != 1) {
-    error("SetSelectedOutputFileOn:value must either be \"TRUE\" or \"FALSE\"\n");
+    error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetSelectedOutputFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -329,9 +333,23 @@ SEXP
 getWarningString(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetWarningString()));
-  UNPROTECT(1);
+  const char* warning = R::singleton().GetWarningString();
+  if (::strlen(warning)) {
+    std::string warn(warning);
+    std::istringstream iss(warn);
+    std::string line;
+    std::vector< std::string > lines;
+    while (std::getline(iss, line))
+    {
+      lines.push_back(line);
+    }
+    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    for (int i = 0; i < lines.size(); ++i)
+    {
+      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+    }
+    UNPROTECT(1);
+  }
   return ans;
 }
 

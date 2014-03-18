@@ -17,6 +17,10 @@
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords package
 ##' @examples
+##'
+##' #########################################################################
+##' # Run ex2 and plot results
+##' #########################################################################
 ##' 
 ##' # load the phreeqc.dat database
 ##' phrLoadDatabaseString(phreeqc.dat)
@@ -35,11 +39,50 @@
 ##' plot(temp.C., si_gypsum, main=title, xlab=xlabel, ylab=ylabel, col="darkred", xlim=c(25, 75), ylim=c(-0.4, 0.0))
 ##' points(temp.C., si_anhydrite, col="darkgreen")
 ##' legend("bottomright", c("Gypsum", "Anhydrite"), col = c("darkred", "darkgreen"), pch = c(1, 1))
+##'
+##'
+##' 
+##' #########################################################################
+##' # Load data from CSV and calculate pCO2
+##' #########################################################################
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##'
+##' 
 ##' 
 NULL
 
 # Package Functions
-
 
 ##' Accumlulate line(s) for input to phreeqc.
 ##' 
@@ -56,11 +99,13 @@ NULL
 ##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' # this example loads the phreeqc.dat database, accumulates input, and
 ##' # runs it
-##' phrLoadDatabase("phreeqc/phreeqc.dat")
+##' phrLoadDatabaseString(phreeqc.dat.list)
 ##' phrAccumulateLine("TITLE Example 2.--Temperature dependence of solubility")
 ##' phrAccumulateLine("                  of gypsum and anhydrite")
 ##' phrAccumulateLine("SOLUTION 1 Pure water")
@@ -99,12 +144,12 @@ function(line)
 ##' @usage phrClearAccumulatedLines()
 ##' @return This function returns NULL.
 ##' @note %% ~~further notes~~
-##' @author David Parkhurst \email{dlpark@@usgs.gov}\cr Maintainer: Scott
-##' Charlton \email{charlton@@usgs.gov}
 ##' @seealso \code{\link{phrAccumulateLine}},
 ##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' # This example loads some keyword input, clears the input, and displays the results.
@@ -131,16 +176,16 @@ function()
 ##' @return A list containing the names of the components defined in the
 ##' current system.
 ##' @note %% ~~further notes~~
-##' @author David Parkhurst \email{dlpark@@usgs.gov}\cr Maintainer: Scott
-##' Charlton \email{charlton@@usgs.gov}
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' # This example runs the ex2 input file and echos the list of components.
-##' phrLoadDatabaseString(phreeqc.dat)
-##' phrRunString(ex2)
+##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrRunString(ex2.list)
 ##' cat("components:\n")
 ##' for (c in phrGetComponentList()) {
 ##'   cat(c, "\n")
@@ -153,39 +198,33 @@ function()
 }
 
 
-
-
-##' Returns the contents of the selected output as a data frame.
+##' Returns the contents of the selected output as a list of data frames.
 ##' 
-##' phrGetSelectedOutput return the results of a phreeqc run specified in the
-##' selected output block of a phreeqc input file.
-##' 
-##' Accessing selected outputs having a user number other than 1 requires
-##' setting the current selected output user number with
-##' \code{\link{phrSetCurrentSelectedOutputUserNumber}}.
-##' 
-##' *** Should we return a list of data.frames??? ***
+##' phrGetSelectedOutput returns a named list containing the resultant
+##' selected output blocks.  The names of each data frame are creating by
+##' concatenating the letter 'n' and the user number of the selected output
+##' block.
+##'
+##' %% ~~ If necessary, more details than the description above ~~
 ##' 
 ##' @usage phrGetSelectedOutput()
-##' @return Returns a data frame containing the selected_output from the
-##' previous run.
-##' @author David Parkhurst \email{dlpark@@usgs.gov}\cr Maintainer: Scott
-##' Charlton \email{charlton@@usgs.gov}
-##' @seealso \code{\link{phrGetCurrentSelectedOutputUserNumber}},
-##' \code{\link{phrGetSelectedOutputFileOn}},
-##' \code{\link{phrSetCurrentSelectedOutputUserNumber}},
+##' @return Returns a named list of data frames containing the selected_output
+##' from the previous run.
+##' @seealso \code{\link{phrGetSelectedOutputFileOn}} 
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' 
-##'     # Load database and run ex2
-##'     phrLoadDatabaseString(phreeqc.dat)
-##'     phrRunString(ex2)
-##'     
-##'     # display a summary of the results
-##'     df <- phrGetSelectedOutput()
-##'     summary(df)
+##'  # Load database and run ex2
+##'  phrLoadDatabaseString(phreeqc.dat.list)
+##'  phrRunString(ex2.list)
+##'
+##'  # display a summary of the results
+##'  df <- phrGetSelectedOutput()
+##'  summary(df$n1)
 ##' 
 phrGetSelectedOutput =
 function(allow_ = TRUE)
@@ -205,28 +244,30 @@ function(allow_ = TRUE)
 
 ##' Return error string messages.
 ##' 
+##' Returns a string containing any error messages that were generated
+##' during the last invocation of the following methods:
+##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
+##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
+##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}
 ##' 
-##' phrGetErrorString executes a phreeqc run
-##' 
-##' 
-##' Any details about the operation of this function should go here.
+##' This routine is rarely needed when running interactively since the error
+##' string is displayed when it occurs.
 ##' 
 ##' @usage phrGetErrorString()
 ##' @return This function returns the errors that occured during the previous
 ##' phrReadDB, phrRun, phrRunFile call.
-##' @author Scott Charlton <charlton@@usgs.gov>
-##' 
-##' Lopaka(Rob) Lee <rclee@@usgs.gov>
 ##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
 ##' \code{\link{phrRunFile}}, \code{\link{phrGetSelectedOutput}}
 ##' @references Literature references and web URLs can go here.
 ##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
-##'     # loaddatabase should fail
-##'     n <- try(phrLoadDatabase("missing.dat"), silent = TRUE)
-##'     # if n is non-NULL display error string
-##'     if (!is.null(n)) phrGetErrorString()
+##' # loaddatabase should fail
+##' n <- try(phrLoadDatabase("missing.dat"), silent = TRUE)
+##' # if n is non-NULL display error string
+##' if (!is.null(n)) phrGetErrorString()
 ##' 
 phrGetErrorString =
 function()
@@ -247,10 +288,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -282,10 +324,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -317,10 +360,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -352,10 +396,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -387,10 +432,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -422,10 +468,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -457,10 +504,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -492,10 +540,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -527,10 +576,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -562,10 +612,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -597,10 +648,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -633,10 +685,11 @@ function(value)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -668,10 +721,11 @@ function(filename)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -703,10 +757,11 @@ function(filename)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -738,10 +793,11 @@ function(filename)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -773,10 +829,11 @@ function(filename)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -806,16 +863,16 @@ function(filename)
 ##' @usage phrGetDumpFileName()
 ##' @return The name of the dump file as a string.
 ##' @note %% ~~further notes~~
-##' @author David Parkhurst \email{dlpark@@usgs.gov}\cr Maintainer: Scott
-##' Charlton \email{charlton@@usgs.gov}
 ##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpString}},
 ##' \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}},
 ##' \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
-##' phrLoadDatabase("phreeqc/phreeqc.dat")
+##' phrLoadDatabaseString(phreeqc.dat.list)
 ##' phrSetDumpFileOn(TRUE)
 ##' 
 ##' input <-              "SOLUTION 1 Pure water     \n"
@@ -852,10 +909,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -886,10 +944,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -920,10 +979,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -954,10 +1014,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -988,17 +1049,16 @@ function()
 ##' @usage phrGetDumpString()
 ##' @return The dump output as a string.
 ##' @note %% ~~further notes~~
-##' @author David Parkhurst \email{dlpark@@usgs.gov}\cr Maintainer: Scott
-##' Charlton \email{charlton@@usgs.gov}
 ##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}},
 ##' \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}},
 ##' \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
-##' 
-##' phrLoadDatabase("phreeqc/phreeqc.dat")
+##' phrLoadDatabaseString(phreeqc.dat.list)
 ##' phrSetDumpStringOn(TRUE)
 ##' 
 ##' input <-              "SOLUTION 1 Pure water     \n"
@@ -1016,6 +1076,24 @@ function()
 ##' cat(phrGetDumpString())
 ##' 
 ##' 
+##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrSetDumpStringOn(TRUE)
+##' 
+##' input <-              "SOLUTION 1 Pure water     \n"
+##' input <- paste(input, "EQUILIBRIUM_PHASES 1      \n")
+##' input <- paste(input, "    Calcite 0 10          \n")
+##' input <- paste(input, "SAVE solution 1           \n")
+##' input <- paste(input, "SAVE equilibrium_phases 1 \n")
+##' input <- paste(input, "DUMP                      \n")
+##' input <- paste(input, "    -solution 1           \n")
+##' input <- paste(input, "    -equilibrium_phases  1\n")
+##' 
+##' if (!is.null(phrRunString(input))) {
+##'     cat(phrGetErrorString())
+##' }
+##' cat(phrGetDumpString())
+##' 
+##'
 phrGetDumpString =
 function()
 {
@@ -1035,10 +1113,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -1069,10 +1148,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -1103,10 +1183,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -1126,40 +1207,43 @@ function()
 
 
 
-##' TODO
+##' Retrieve warning messages.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Returns a character vector containing any warning messages that were
+##' generated during the last invocation of the following methods:
+##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
+##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
+##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}
 ##' 
 ##' %% ~~ If necessary, more details than the description above ~~
 ##' 
 ##' @usage phrGetWarningString()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
+##' @return A character vector containing warning messages.
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
+##' # This example loads the phreeqc.dat database and attempts to use the
+##' # \code{DATABASE} keyword to set the database to wateq4f.dat.  A
+##' # warning is displayed stating that the DATABASE keyword is ignored
+##' # in the 'R' implementation.
+##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrAccumulateLine("DATABASE wateq4f.dat")
+##' phrAccumulateLine("SOLUTION 1")
+##' phrRunAccumulated()
+##' if (is.null(phrGetWarningString())) {
+##'   cat(phrGetWarningString())
+##' }
 ##' 
 phrGetWarningString =
 function()
 {
   return(.Call("getWarningString", PACKAGE=.packageName))
 }
-
-
-
 
 
 ##' Load a phreeqc database file
@@ -1170,10 +1254,11 @@ function()
 ##' @usage phrLoadDatabase(filename)
 ##' @param filename The file name of the database.
 ##' @return This function returns NULL.
-##' @author Scott Charlton \email{charlton@@usgs.gov}
 ##' @seealso \code{\link{phrLoadDatabaseString}}
 ##' @references Literature references and web URLs can go here.
 ##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' 
@@ -1192,10 +1277,9 @@ function(filename)
 }
 
 
-
-##' Load a phreeqc database as a string.
+##' Load a phreeqc database as a string or a list of strings.
 ##' 
-##' Load the specified string as a database into phreeqc. Returns NULL if
+##' Load the specified string(s) as a database into phreeqc. Returns NULL if
 ##' successful.
 ##' 
 ##' %% ~~ If necessary, more details than the description above ~~
@@ -1204,28 +1288,22 @@ function(filename)
 ##' @param input String containing data to be used as the phreeqc database.
 ##' @return This function returns NULL.
 ##' @note All previous definitions are cleared.
-##' @author David Parkhurst \email{dlpark@@usgs.gov}\cr Maintainer: Scott
-##' Charlton \email{charlton@@usgs.gov}
 ##' @seealso \code{\link{phrLoadDatabase}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##'   # this example loads the phreeqc.dat database, turns on the
 ##'   # output file and runs ex2 as a string
-##'   phrLoadDatabaseString(phreeqc.dat.string)
+##'   phrLoadDatabaseString(phreeqc.dat.list)
 ##'   phrSetOutputFileOn(TRUE)
-##'   if (is.null(phrRunString(ex2))) {
+##'   if (is.null(phrRunString(ex2.list))) {
 ##'     cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
 ##'   }
 ##' 
 phrLoadDatabaseString =
-function(input)
-{
-  invisible(.Call("loadDBStr", as.character(input), PACKAGE=.packageName))
-}
-
-phrLoadDatabaseList =
 function(input)
 {
   invisible(.Call("loadDBLst", as.character(input), PACKAGE=.packageName))
@@ -1242,11 +1320,11 @@ function(input)
 ##' @usage phrGetAccumulatedLines()
 ##' @return The input as a single string.
 ##' @note %% ~~further notes~~
-##' @author David Parkhurst \email{dlpark@@usgs.gov}\cr Maintainer: Scott
-##' Charlton \email{charlton@@usgs.gov}
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' # This example loads some keyword input and displays the contents.
@@ -1254,12 +1332,6 @@ function(input)
 ##' phrAccumulateLine("END")
 ##' cat(paste("The accumulated input is:", phrGetAccumulatedLines(), sep="\n"))
 ##' 
-phrGetAccumulatedLines =
-function()
-{
-  return(.Call("getAccumLines", PACKAGE=.packageName))
-}
-
 phrGetAccumulatedLines =
 function()
 {
@@ -1279,10 +1351,11 @@ function()
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
@@ -1313,13 +1386,12 @@ function()
 ##' @usage phrRunFile(filename)
 ##' @param filename The file name of the phreeqc input file.
 ##' @return This function returns NULL.
-##' @author Scott Charlton <charlton@@usgs.gov>
-##' 
-##' Lopaka(Rob) Lee <rclee@@usgs.gov>
 ##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
 ##' \code{\link{phrGetSelectedOutput}}
 ##' @references Literature references and web URLs can go here.
 ##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' 
@@ -1346,10 +1418,11 @@ function(filename)
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
-##' @author %% ~~who you are~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
 ##' @keywords ~kwd1 ~kwd2
+##' @useDynLib phreeqc
+##' @export
 ##' @examples
 ##' 
 ##' ##---- Should be DIRECTLY executable !! ----
