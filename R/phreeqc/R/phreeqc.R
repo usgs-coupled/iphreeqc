@@ -47,19 +47,20 @@
 ##' #########################################################################
 ##'
 ##' fSoln <- function(id, pH, alk) {
+##'   if (is.na(alk)) alk = 0.0
 ##'   c(
-##'     paste("SOLUTION",      id),
-##'     paste("  pH",          pH),
+##'     paste("SOLUTION",     id            ),
+##'     paste("  pH",         pH            ),
 ##'     paste("  Alkalinity", alk, "meq/kgw")
 ##'   )
 ##' }
 ##'
 ##' fSelOut <- function() {
 ##'   c(
-##'     "SELECTED_OUTPUT",
-##'     "  -reset false",
-##'     "  -solution true",
-##'     "  -gases CO2(g)"
+##'     "SELECTED_OUTPUT  ",
+##'     "  -reset false   ",
+##'     "  -solution true ",
+##'     "  -gases CO2(g)  "
 ##'   )
 ##' }
 ##'
@@ -72,7 +73,7 @@
 ##' # create input
 ##' input <- vector("list")
 ##' for (i in 1:length(df[,1])) {
-##'   input[i] <- fSoln(solns[i, 1], solns[i, 2], solns[i, 3])
+##'   input[[i]] <- fSoln(solns[i, 1], solns[i, 2], solns[i, 3])
 ##' }
 ##'
 ##' # add selected_output
@@ -80,9 +81,15 @@
 ##'
 ##' # load database
 ##' phrLoadDatabaseString(phreeqc.dat.list)
+##'
+##' # flatten each list of vectors into a single vector
+##' input <- unlist(input)
 ##' 
 ##' # run
-##' phrRunString(phreeqc.dat.list)
+##' phrRunString(input)
+##'
+##' #
+##' so <- phrGetSelectedOutput()
 ##' 
 NULL
 
