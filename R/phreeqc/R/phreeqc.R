@@ -46,39 +46,43 @@
 ##' # Load data from CSV and calculate pCO2
 ##' #########################################################################
 ##'
+##' fSoln <- function(id, pH, alk) {
+##'   c(
+##'     paste("SOLUTION",      id),
+##'     paste("  pH",          pH),
+##'     paste("  Alkalinity", alk, "meq/kgw")
+##'   )
+##' }
 ##'
+##' fSelOut <- function() {
+##'   c(
+##'     "SELECTED_OUTPUT",
+##'     "  -reset false",
+##'     "  -solution true",
+##'     "  -gases CO2(g)"
+##'   )
+##' }
 ##'
+##' # load data from csv
+##' df <- read.csv("SE_to_export_03142014.csv")
 ##'
+##' # pull out required data
+##' solns <- data.frame("id" = df[,1], "pH" = df[,3], "alkalinity" = df[,21])
 ##'
+##' # create input
+##' input <- vector("list")
+##' for (i in 1:length(df[,1])) {
+##'   input[i] <- fSoln(solns[i, 1], solns[i, 2], solns[i, 3])
+##' }
 ##'
+##' # add selected_output
+##' input[length(input)+1] <- fSelOut() 
 ##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
-##'
+##' # load database
+##' phrLoadDatabaseString(phreeqc.dat.list)
 ##' 
+##' # run
+##' phrRunString(phreeqc.dat.list)
 ##' 
 NULL
 
