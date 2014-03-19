@@ -338,6 +338,39 @@ void TestIPhreeqc::TestRunAccumulated(void)
 	CPPUNIT_ASSERT_EQUAL(0,     obj.RunAccumulated());
 }
 
+void TestIPhreeqc::TestRunAccumulatedWithDBKeyword(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL(0,     obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("DATABASE wateq4f.dat"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("SOLUTION 1"));
+	CPPUNIT_ASSERT_EQUAL(0,     obj.RunAccumulated());
+	CPPUNIT_ASSERT_EQUAL(0,     obj.RunAccumulated());
+	CPPUNIT_ASSERT_EQUAL(0,     obj.RunAccumulated());
+	CPPUNIT_ASSERT_EQUAL(0,     obj.RunAccumulated());
+	CPPUNIT_ASSERT_EQUAL(0,     obj.RunAccumulated());
+}
+
+void TestIPhreeqc::TestDatabaseNotFirstKeyword(void)
+{
+	IPhreeqc obj;
+	CPPUNIT_ASSERT_EQUAL(0,     obj.LoadDatabase("phreeqc.dat"));
+
+	for (int i = 0; i < 10; ++i)
+	{
+		CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("SOLUTION 1"));
+		CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("DATABASE wateq4f.dat"));
+		CPPUNIT_ASSERT_EQUAL(2,     obj.RunAccumulated());
+
+		const char expected[] =
+			"ERROR: DATABASE must be the first keyword in the input file.\n"
+			"ERROR: Calculations terminating due to input errors.\n";
+		const char* err = obj.GetErrorString();
+
+		CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
+	}
+}
+
 void TestIPhreeqc::TestRunWithErrors(void)
 {
 	const char dump_file[] = "error.inp";

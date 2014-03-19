@@ -14,6 +14,8 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestLoadDatabaseMissingFile );
 	CPPUNIT_TEST( TestLoadDatabaseWithErrors );
 	CPPUNIT_TEST( TestRunAccumulated );
+	CPPUNIT_TEST( TestRunAccumulatedWithDBKeyword );
+	CPPUNIT_TEST( TestDatabaseNotFirstKeyword );
 	CPPUNIT_TEST( TestRunWithErrors );
 	CPPUNIT_TEST( TestRunFile );
 	CPPUNIT_TEST( TestRunString );
@@ -94,6 +96,8 @@ public:
 	void TestLoadDatabaseMissingFile(void);
 	void TestLoadDatabaseWithErrors(void);
 	void TestRunAccumulated(void);
+	void TestRunAccumulatedWithDBKeyword(void);
+	void TestDatabaseNotFirstKeyword(void);
 	void TestRunWithErrors(void);
 	void TestRunFile(void);
 	void TestRunString(void);
