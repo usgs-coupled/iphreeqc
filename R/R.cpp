@@ -685,7 +685,7 @@ getCol(int ncol)
         }
         break;
       case TT_DOUBLE:
-        if (vv.dVal == -999.999 || vv.dVal == -99.) {
+        if (vv.dVal == -999.999 || vv.dVal == -99. || vv.dVal == 1e-99) {
           REAL(ans)[r-1] = NA_REAL;
         } else {
           REAL(ans)[r-1] = (double)vv.dVal;
