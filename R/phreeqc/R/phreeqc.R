@@ -77,7 +77,7 @@
 ##' }
 ##'
 ##' # add selected_output
-##' input[length(input)+1] <- fSelOut() 
+##' input[[length(input)+1]] <- fSelOut() 
 ##'
 ##' # load database
 ##' phrLoadDatabaseString(phreeqc.dat.list)
