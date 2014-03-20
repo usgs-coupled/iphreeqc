@@ -7,6 +7,7 @@ INST=phreeqc/inst
 DBDIR=../database
 DATADIR=phreeqc/data
 EXDIR=../phreeqc3-examples
+MAN=phreeqc/man
 
 DBS = \
 	$(DBDIR)/Amm.dat \
@@ -29,6 +30,46 @@ EXS = \
 	$(EXDIR)/ex7 \
 	$(EXDIR)/ex8 \
 	$(EXDIR)/ex9
+
+RDFILES = \
+	$(MAN)/phrAccumulateLine.Rd \
+	$(MAN)/phrClearAccumulatedLines.Rd \
+	$(MAN)/phreeqc-package.Rd \
+	$(MAN)/phrGetAccumulatedLines.Rd \
+	$(MAN)/phrGetComponentList.Rd \
+	$(MAN)/phrGetDumpFileName.Rd \
+	$(MAN)/phrGetDumpString.Rd \
+	$(MAN)/phrGetErrorFileName.Rd \
+	$(MAN)/phrGetErrorFileOn.Rd \
+	$(MAN)/phrGetErrorString.Rd \
+	$(MAN)/phrGetLogFileName.Rd \
+	$(MAN)/phrGetLogString.Rd \
+	$(MAN)/phrGetOutputFileName.Rd \
+	$(MAN)/phrGetOutputString.Rd \
+	$(MAN)/phrGetSelectedOutputFileName.Rd \
+	$(MAN)/phrGetSelectedOutput.Rd \
+	$(MAN)/phrGetSelectedOutputString.Rd \
+	$(MAN)/phrGetWarningString.Rd \
+	$(MAN)/phrLoadDatabase.Rd \
+	$(MAN)/phrLoadDatabaseString.Rd \
+	$(MAN)/phrRunAccumulated.Rd \
+	$(MAN)/phrRunFile.Rd \
+	$(MAN)/phrRunString.Rd \
+	$(MAN)/phrSetDumpFileName.Rd \
+	$(MAN)/phrSetDumpFileOn.Rd \
+	$(MAN)/phrSetDumpStringOn.Rd \
+	$(MAN)/phrSetErrorFileName.Rd \
+	$(MAN)/phrSetErrorFileOn.Rd \
+	$(MAN)/phrSetErrorStringOn.Rd \
+	$(MAN)/phrSetLogFileName.Rd \
+	$(MAN)/phrSetLogFileOn.Rd \
+	$(MAN)/phrSetLogStringOn.Rd \
+	$(MAN)/phrSetOutputFileName.Rd \
+	$(MAN)/phrSetOutputFileOn.Rd \
+	$(MAN)/phrSetOutputStringOn.Rd \
+	$(MAN)/phrSetSelectedOutputFileName.Rd \
+	$(MAN)/phrSetSelectedOutputFileOn.Rd \
+	$(MAN)/phrSetSelectedOutputStringOn.Rd
 
 
 PSRC = \
@@ -188,13 +229,17 @@ DATA = \
 	$(DATADIR)/databases.RData \
 	$(DATADIR)/examples.RData
 
-all: $(PSRC) $(XSRC) $(DATA) 
+all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
 $(DATADIR)/databases.RData : $(DBS) build-databases.R
 	R --no-save --no-restore CMD BATCH build-databases.R
 
 $(DATADIR)/examples.RData : $(EXS) build-examples.R
 	R --no-save --no-restore CMD BATCH build-examples.R
+
+roxygenize $(MAN)/phreeqc-package.Rd : phreeqc/R/phreeqc.R
+	R --no-save --no-restore CMD BATCH roxygenize.R
+	touch $(MAN)/phreeqc-package.Rd
 
 ##$(PSRC): $(DEST)
 
@@ -670,7 +715,7 @@ check : all
 
 install : all
 	R CMD INSTALL phreeqc
-	
+
 uninstall :
 	R CMD REMOVE phreeqc
 
