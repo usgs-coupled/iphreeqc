@@ -226,6 +226,7 @@ XSRC = \
 	$(IDEST)/Makevars
 
 DATA = \
+	$(DATADIR)/csv.RData \
 	$(DATADIR)/databases.RData \
 	$(DATADIR)/examples.RData
 
@@ -236,6 +237,9 @@ $(DATADIR)/databases.RData : $(DBS) build-databases.R
 
 $(DATADIR)/examples.RData : $(EXS) build-examples.R
 	R --no-save --no-restore CMD BATCH build-examples.R
+
+$(DATADIR)/csv.RData : SE_to_export_03142014.csv build-csv.R
+	R --no-save --no-restore CMD BATCH build-csv.R
 
 roxygenize $(MAN)/phreeqc-package.Rd : phreeqc/R/phreeqc.R
 	R --no-save --no-restore CMD BATCH roxygenize.R
