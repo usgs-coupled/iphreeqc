@@ -23,10 +23,10 @@
 ##' #########################################################################
 ##' 
 ##' # load the phreeqc.dat database
-##' phrLoadDatabaseString(phreeqc.dat)
+##' phrLoadDatabaseString(phreeqc.dat.list)
 ##' 
 ##' # run example 2
-##' phrRunString(ex2)
+##' phrRunString(ex2.list)
 ##' 
 ##' # retrieve selected_output as a list of data.frame
 ##' so <- phrGetSelectedOutput()
@@ -40,56 +40,68 @@
 ##' points(temp.C., si_anhydrite, col="darkgreen")
 ##' legend("bottomright", c("Gypsum", "Anhydrite"), col = c("darkred", "darkgreen"), pch = c(1, 1))
 ##'
-##'
 ##' 
 ##' #########################################################################
-##' # Load data from CSV and calculate pCO2
+##' # Load data from CSV and calculate CO2
 ##' #########################################################################
 ##'
-##' fSoln <- function(id, pH, alk) {
-##'   if (is.na(alk)) alk = 0.0
-##'   c(
-##'     paste("SOLUTION",     id            ),
-##'     paste("  pH",         pH            ),
-##'     paste("  Alkalinity", alk, "meq/kgw")
-##'   )
+##' 
+##' # append solution input to given vector
+##' fSoln <- function(vec, id, t, pH, alk) {
+##'     if (is.na(alk)) alk = 0.0
+##'     return(
+##'         c(
+##'             vec,
+##'             paste("SOLUTION    ", id            ),
+##'             paste("  temp      ", t             ),
+##'             paste("  pH        ", pH            ),
+##'             paste("  Alkalinity", alk, "ueq/kgw")
+##'             )
+##'         )
+##' }
+##' 
+##' # append selected_output definition to given vector
+##' fSelOut <- function(vec) {
+##'     return (
+##'         c(
+##'             vec,
+##'             "SELECTED_OUTPUT              ",
+##'             "  -reset false               ",
+##'             "  -solution true             ",
+##'             "  -saturation_indices CO2(g) ",
+##'             "USER_PUNCH                   ",
+##'             "  headings CO2_umol_l        ",
+##'             "  10 PUNCH MOL('CO2')*1e6    "
+##'             )
+##'         )
 ##' }
 ##'
-##' fSelOut <- function() {
-##'   c(
-##'     "SELECTED_OUTPUT  ",
-##'     "  -reset false   ",
-##'     "  -solution true ",
-##'     "  -gases CO2(g)  "
-##'   )
+##' # Note: CO2.df was created using the following:
+##' # CO2.df <- read.csv("SE_to_export_03142014.csv")
+##'
+##' # pull out pertinent data out of df and into solns
+##' solns <- data.frame("soln" = CO2.df[,1], "Temp" = CO2.df[,2], "pH" = CO2.df[,3], "alkalinity" = CO2.df[,21], "syringe_CO2" = CO2.df[,7])
+##' 
+##' # create input (as a character vector)
+##' input <- vector()
+##' for (i in 1:length(CO2.df[,1])) {
+##'     input <- fSoln(input, solns[i, 1], solns[i, 2], solns[i, 3], solns[i, 4])
 ##' }
-##'
-##' # load data from csv
-##' df <- read.csv("SE_to_export_03142014.csv")
-##'
-##' # pull out required data
-##' solns <- data.frame("id" = df[,1], "pH" = df[,3], "alkalinity" = df[,21])
-##'
-##' # create input
-##' input <- vector("list")
-##' for (i in 1:length(df[,1])) {
-##'   input[[i]] <- fSoln(solns[i, 1], solns[i, 2], solns[i, 3])
-##' }
-##'
-##' # add selected_output
-##' input[[length(input)+1]] <- fSelOut() 
-##'
+##' 
+##' # add selected_output definition
+##' input <- fSelOut(input)
+##' 
 ##' # load database
 ##' phrLoadDatabaseString(phreeqc.dat.list)
-##'
-##' # flatten each list of vectors into a single vector
-##' input <- unlist(input)
 ##' 
 ##' # run
 ##' phrRunString(input)
-##'
-##' #
-##' so <- phrGetSelectedOutput()
+##' 
+##' # get results
+##' selout <- phrGetSelectedOutput()
+##' 
+##' # merge the dataframes
+##' results <- merge(solns, selout$n1)
 ##' 
 NULL
 
@@ -109,7 +121,7 @@ NULL
 ##' @seealso \code{\link{phrClearAccumulatedLines}},
 ##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -158,7 +170,7 @@ function(line)
 ##' @seealso \code{\link{phrAccumulateLine}},
 ##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -189,7 +201,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -301,7 +313,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -337,7 +349,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -373,7 +385,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -409,7 +421,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -445,7 +457,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -481,7 +493,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -517,7 +529,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -553,7 +565,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -589,7 +601,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -625,7 +637,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -661,7 +673,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -698,7 +710,7 @@ function(value)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -734,7 +746,7 @@ function(filename)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -770,7 +782,7 @@ function(filename)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -806,7 +818,7 @@ function(filename)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -842,7 +854,7 @@ function(filename)
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -878,7 +890,7 @@ function(filename)
 ##' \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}},
 ##' \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -922,7 +934,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -957,7 +969,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -992,7 +1004,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1027,7 +1039,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1064,7 +1076,7 @@ function()
 ##' \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}},
 ##' \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1126,7 +1138,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1161,7 +1173,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1196,7 +1208,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1233,7 +1245,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1271,15 +1283,19 @@ function()
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
+##'
+##' # create temporary database file
+##' tf <- tempfile()
+##' writeLines(phreeqc.dat.list, tf)
 ##' 
-##' 
-##' # This will only work if phreeqc/phreeqc.dat is in the current directory
-##' if (is.null(phrLoadDatabase("phreeqc/phreeqc.dat"))) {
+##' if (is.null(phrLoadDatabase(tf))) {
 ##'   cat("database ok\n")
 ##' } else {
 ##'   cat("database contains errors\n")
 ##' }
-##' 
+##'
+##' # delete temporary database file
+##' unlink(tf)
 ##' 
 phrLoadDatabase =
 function(filename)
@@ -1301,7 +1317,7 @@ function(filename)
 ##' @note All previous definitions are cleared.
 ##' @seealso \code{\link{phrLoadDatabase}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1333,7 +1349,7 @@ function(input)
 ##' @note %% ~~further notes~~
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1364,7 +1380,7 @@ function()
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
@@ -1404,10 +1420,17 @@ function()
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
+##'
+##' # load the phreeqc.dat database
+##' phrLoadDatabaseString(phreeqc.dat.list)
+##'
+##' # create ex2 if it doesn't exist
+##' if (!file.exists("ex2")) writeLines(ex2.list, "ex2")
 ##' 
-##' 
-##'     # This will only work if ex1 is in the current directory
-##'     phrRunFile("phreeqc/ex1")
+##' # run ex2
+##' if (is.null(phrRunFile("ex2"))) {
+##'   cat("use phrGetSelectedOutput() to see results.")
+##' }
 ##' 
 phrRunFile =
 function(filename)
@@ -1417,33 +1440,46 @@ function(filename)
 
 
 
-##' TODO
+##' Runs phreeqc using the given string as input.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Runs phreeqc using the given string as input. Returns the number of
+##' errors encountered during the run.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' The \code{RunString} method cannot be called until a database has
+##' been successfully loaded by one of the following the LoadDatabase
+##' methods \code{\link{phrLoadDatabase}}, \code{\link{phrLoadDatabaseString}}.
 ##' 
 ##' @usage phrRunString(input)
-##' @param input %% ~~Describe \code{input} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
+##' @param input character vector containing phreeqc input
+##' @return The number of errors encountered during the run.
 ##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
-##' @keywords ~kwd1 ~kwd2
+##' @seealso \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (input) 
-##' {
-##'   }
+##'
+##' #
+##' # This example accumulates phreeqc input into a character vector
+##' # and runs it.
+##' #
+##'
+##' # load phreeqc.dat file
+##' phrLoadDatabaseString(phreeqc.dat.list)
+##'
+##' # create input
+##' input <- vector()
+##' input <- c(input, "SOLUTION 1") 
+##' input <- c(input, "  temp 25.0") 
+##' input <- c(input, "  pH    7.0")
+##'
+##' # turn on output
+##' phrSetOutputFileOn(TRUE)
+##'
+##' # run input
+##' phrRunString(input)
+##' cat(paste("see", phrGetOutputFileName(), ".")
 ##' 
 phrRunString =
 function(input)
