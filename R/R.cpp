@@ -290,53 +290,13 @@ setSelectedOutputFileName(SEXP filename)
 }
 
 SEXP
-getDumpString(void)
+getDumpStrings(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetDumpString()));
-  UNPROTECT(1);
-  return ans;
-}
-
-SEXP
-getLogString(void)
-{
-  SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetLogString()));
-  UNPROTECT(1);
-  return ans;
-}
-
-SEXP
-getOutputString(void)
-{
-  SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetOutputString()));
-  UNPROTECT(1);
-  return ans;
-}
-
-SEXP
-getSelectedOutputString(void)
-{
-  SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetSelectedOutputString()));
-  UNPROTECT(1);
-  return ans;
-}
-
-SEXP
-getWarningString(void)
-{
-  SEXP ans = R_NilValue;
-  const char* warning = R::singleton().GetWarningString();
-  if (::strlen(warning)) {
-    std::string warn(warning);
-    std::istringstream iss(warn);
+  const char* cstr = R::singleton().GetDumpString();
+  if (cstr && cstr[0]) {
+    std::string str(cstr);
+    std::istringstream iss(str);
     std::string line;
     std::vector< std::string > lines;
     while (std::getline(iss, line))
@@ -344,7 +304,103 @@ getWarningString(void)
       lines.push_back(line);
     }
     PROTECT(ans = allocVector(STRSXP, lines.size()));
-    for (int i = 0; i < lines.size(); ++i)
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+    }
+    UNPROTECT(1);
+  }
+  return ans;
+}
+
+SEXP
+getLogStrings(void)
+{
+  SEXP ans = R_NilValue;
+  const char* cstr = R::singleton().GetLogString();
+  if (cstr && cstr[0]) {
+    std::string str(cstr);
+    std::istringstream iss(str);
+    std::string line;
+    std::vector< std::string > lines;
+    while (std::getline(iss, line))
+    {
+      lines.push_back(line);
+    }
+    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+    }
+    UNPROTECT(1);
+  }
+  return ans;
+}
+
+SEXP
+getOutputStrings(void)
+{
+  SEXP ans = R_NilValue;
+  const char* cstr = R::singleton().GetOutputString();
+  if (cstr && cstr[0]) {
+    std::string str(cstr);
+    std::istringstream iss(str);
+    std::string line;
+    std::vector< std::string > lines;
+    while (std::getline(iss, line))
+    {
+      lines.push_back(line);
+    }
+    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+    }
+    UNPROTECT(1);
+  }
+  return ans;
+}
+
+SEXP
+getSelectedOutputStrings(void)
+{
+  SEXP ans = R_NilValue;
+  const char* cstr = R::singleton().GetSelectedOutputString();
+  if (cstr && cstr[0]) {
+    std::string str(cstr);
+    std::istringstream iss(str);
+    std::string line;
+    std::vector< std::string > lines;
+    while (std::getline(iss, line))
+    {
+      lines.push_back(line);
+    }
+    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+    }
+    UNPROTECT(1);
+  }
+  return ans;
+}
+
+SEXP
+getWarningStrings(void)
+{
+  SEXP ans = R_NilValue;
+  const char* cstr = R::singleton().GetWarningString();
+  if (cstr && cstr[0]) {
+    std::string str(cstr);
+    std::istringstream iss(str);
+    std::string line;
+    std::vector< std::string > lines;
+    while (std::getline(iss, line))
+    {
+      lines.push_back(line);
+    }
+    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    for (size_t i = 0; i < lines.size(); ++i)
     {
       SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
     }
@@ -495,9 +551,23 @@ SEXP
 getAccumLines(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetAccumulatedLines().c_str()));
-  UNPROTECT(1);
+  const char* cstr = R::singleton().GetAccumulatedLines().c_str();
+  if (cstr && cstr[0]) {
+    std::string str(cstr);
+    std::istringstream iss(str);
+    std::string line;
+    std::vector< std::string > lines;
+    while (std::getline(iss, line))
+    {
+      lines.push_back(line);
+    }
+    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+    }
+    UNPROTECT(1);
+  }
   return ans;
 }
 
@@ -566,8 +636,6 @@ runString(SEXP input)
 SEXP
 runStringLst(SEXP input)
 {
-  const char* in;
-
   // check args
   if (!isString(input)) {
     error("a character vector argument expected");
@@ -615,6 +683,7 @@ getCol(int ncol)
     case TT_DOUBLE:  ++nd; break;
     case TT_LONG:    ++nl; break;
     case TT_STRING:  ++ns; break;
+    default: break;
     }
     VarClear(&vv);
   }
@@ -691,6 +760,8 @@ getCol(int ncol)
           REAL(ans)[r-1] = (double)vv.dVal;
         }
         break;
+      default:
+        break;
       }
       VarClear(&vv);
     }
@@ -716,6 +787,8 @@ getCol(int ncol)
           INTEGER(ans)[r-1] = vv.lVal;
         }
         break;
+      default:
+        break;
       }
       VarClear(&vv);
     }
@@ -731,19 +804,6 @@ getCol(int ncol)
   }
   return ans;
 }
-
-
-/* SEXP */
-/* getColumn(SEXP column) */
-/* { */
-/*   int ncol; */
-
-/*   PROTECT(column = AS_INTEGER(column)); */
-/*   ncol = INTEGER_POINTER(column)[0]; */
-/*   UNPROTECT(1); */
-
-/*   return getCol(ncol); */
-/* } */
 
 SEXP
 getSelOut(void)
@@ -787,8 +847,8 @@ getSelOut(void)
 
   setAttrib(list, R_NamesSymbol, attr);
 
-  /* Turn the data "list" into a "data.frame" */
-  /* see model.c */
+  // Turn the data "list" into a "data.frame"
+  // see model.c
 
   PROTECT(klass = mkString("data.frame"));
   setAttrib(list, R_ClassSymbol, klass);
@@ -837,13 +897,38 @@ getSelOutLst(void)
 }
 
 SEXP
-getErrStr()
+getErrorStrings()
+{
+  SEXP ans = R_NilValue;
+  const char* cstr = R::singleton().GetErrorString();
+  if (cstr && cstr[0]) {
+    std::string str(cstr);
+    std::istringstream iss(str);
+    std::string line;
+    std::vector< std::string > lines;
+    while (std::getline(iss, line))
+    {
+      lines.push_back(line);
+    }
+    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+    }
+    UNPROTECT(1);
+  }
+  return ans;
+}
+
+SEXP
+getVersionString()
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetErrorString()));
+  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetVersionString()));
   UNPROTECT(1);
   return ans;
 }
+
 
 } // extern "C"

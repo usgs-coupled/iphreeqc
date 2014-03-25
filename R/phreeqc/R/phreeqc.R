@@ -178,9 +178,9 @@ function(line)
 ##' # This example loads some keyword input, clears the input, and displays the results.
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrAccumulateLine("END")
-##' cat(paste("The accumulated input is:\n", phrGetAccumulatedLines(), sep=""))
+##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep="\n")
 ##' phrClearAccumulatedLines()
-##' cat(paste("The accumulated input now is:\n", phrGetAccumulatedLines(), sep=""))
+##' cat("The accumulated input now is:\n", phrGetAccumulatedLines(), sep="\n")
 ##' 
 phrClearAccumulatedLines =
 function()
@@ -276,12 +276,12 @@ function(allow_ = TRUE)
 ##' This routine is rarely needed when running interactively since the error
 ##' string is displayed when it occurs.
 ##' 
-##' @usage phrGetErrorString()
+##' @usage phrGetErrorStrings()
 ##' @return This function returns the errors that occured during the previous
 ##' phrReadDB, phrRun, phrRunFile call.
 ##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
 ##' \code{\link{phrRunFile}}, \code{\link{phrGetSelectedOutput}}
-##' @references Literature references and web URLs can go here.
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -290,12 +290,12 @@ function(allow_ = TRUE)
 ##' # loaddatabase should fail
 ##' n <- try(phrLoadDatabase("missing.dat"), silent = TRUE)
 ##' # if n is non-NULL display error string
-##' if (!is.null(n)) phrGetErrorString()
+##' if (!is.null(n)) phrGetErrorStrings()
 ##' 
-phrGetErrorString =
+phrGetErrorStrings =
 function()
 {
-  return(.Call("getErrStr", PACKAGE=.packageName))
+  return(.Call("getErrorStrings", PACKAGE=.packageName))
 }
 
 
@@ -312,7 +312,7 @@ function()
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -348,7 +348,7 @@ function()
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -384,7 +384,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -420,7 +420,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -456,7 +456,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -492,7 +492,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -528,7 +528,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -564,7 +564,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -600,7 +600,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -636,7 +636,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -672,7 +672,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -709,7 +709,7 @@ function(value)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -745,7 +745,7 @@ function(filename)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -781,7 +781,7 @@ function(filename)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -817,7 +817,7 @@ function(filename)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -853,7 +853,7 @@ function(filename)
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -886,7 +886,7 @@ function(filename)
 ##' @usage phrGetDumpFileName()
 ##' @return The name of the dump file as a string.
 ##' @note %% ~~further notes~~
-##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpString}},
+##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}},
 ##' \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}},
 ##' \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
@@ -908,7 +908,7 @@ function(filename)
 ##' input <- paste(input, "    -equilibrium_phases  1\n")
 ##' 
 ##' if (!is.null(phrRunString(input))) {
-##'     cat(phrGetErrorString())
+##'     cat(phrGetErrorStrings())
 ##' }
 ##' cat(paste("see ", phrGetDumpFileName(), "."))
 ##' 
@@ -933,7 +933,7 @@ function()
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -968,7 +968,7 @@ function()
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1003,7 +1003,7 @@ function()
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1038,7 +1038,7 @@ function()
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1069,7 +1069,7 @@ function()
 ##' 
 ##' %% ~~ If necessary, more details than the description above ~~
 ##' 
-##' @usage phrGetDumpString()
+##' @usage phrGetDumpStrings()
 ##' @return The dump output as a string.
 ##' @note %% ~~further notes~~
 ##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}},
@@ -1091,36 +1091,17 @@ function()
 ##' input <- paste(input, "SAVE equilibrium_phases 1 \n")
 ##' input <- paste(input, "DUMP                      \n")
 ##' input <- paste(input, "    -solution 1           \n")
-##' input <- paste(input, "    -equilibrium_phases  1\n")
+##' input <- paste(input, "    -equilibrium_phases 1 \n")
 ##' 
 ##' if (!is.null(phrRunString(input))) {
-##'     cat(phrGetErrorString())
+##'     cat(phrGetErrorStrings())
 ##' }
-##' cat(phrGetDumpString())
-##' 
-##' 
-##' phrLoadDatabaseString(phreeqc.dat.list)
-##' phrSetDumpStringOn(TRUE)
-##' 
-##' input <-              "SOLUTION 1 Pure water     \n"
-##' input <- paste(input, "EQUILIBRIUM_PHASES 1      \n")
-##' input <- paste(input, "    Calcite 0 10          \n")
-##' input <- paste(input, "SAVE solution 1           \n")
-##' input <- paste(input, "SAVE equilibrium_phases 1 \n")
-##' input <- paste(input, "DUMP                      \n")
-##' input <- paste(input, "    -solution 1           \n")
-##' input <- paste(input, "    -equilibrium_phases  1\n")
-##' 
-##' if (!is.null(phrRunString(input))) {
-##'     cat(phrGetErrorString())
-##' }
-##' cat(phrGetDumpString())
-##' 
+##' cat(phrGetDumpStrings())
 ##'
-phrGetDumpString =
+phrGetDumpStrings =
 function()
 {
-  return(.Call("getDumpString", PACKAGE=.packageName))
+  return(.Call("getDumpStrings", PACKAGE=.packageName))
 }
 
 
@@ -1131,13 +1112,13 @@ function()
 ##' 
 ##' %% ~~ If necessary, more details than the description above ~~
 ##' 
-##' @usage phrGetLogString()
+##' @usage phrGetLogStrings()
 ##' @return %% ~Describe the value returned %% If it is a LIST, use %%
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1152,10 +1133,10 @@ function()
 ##' {
 ##'   }
 ##' 
-phrGetLogString =
+phrGetLogStrings =
 function()
 {
-  return(.Call("getLogString", PACKAGE=.packageName))
+  return(.Call("getLogStrings", PACKAGE=.packageName))
 }
 
 
@@ -1166,13 +1147,13 @@ function()
 ##' 
 ##' %% ~~ If necessary, more details than the description above ~~
 ##' 
-##' @usage phrGetOutputString()
+##' @usage phrGetOutputStrings()
 ##' @return %% ~Describe the value returned %% If it is a LIST, use %%
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1187,10 +1168,10 @@ function()
 ##' {
 ##'   }
 ##' 
-phrGetOutputString =
+phrGetOutputStrings =
 function()
 {
-  return(.Call("getOutputString", PACKAGE=.packageName))
+  return(.Call("getOutputStrings", PACKAGE=.packageName))
 }
 
 
@@ -1201,13 +1182,13 @@ function()
 ##' 
 ##' %% ~~ If necessary, more details than the description above ~~
 ##' 
-##' @usage phrGetSelectedOutputString()
+##' @usage phrGetSelectedOutputStrings()
 ##' @return %% ~Describe the value returned %% If it is a LIST, use %%
 ##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1222,10 +1203,10 @@ function()
 ##' {
 ##'   }
 ##' 
-phrGetSelectedOutputString =
+phrGetSelectedOutputStrings =
 function()
 {
-  return(.Call("getSelectedOutputString", PACKAGE=.packageName))
+  return(.Call("getSelectedOutputStrings", PACKAGE=.packageName))
 }
 
 
@@ -1238,34 +1219,34 @@ function()
 ##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
 ##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' A NULL value is returned if there are no warnings.
 ##' 
-##' @usage phrGetWarningString()
-##' @return A character vector containing warning messages.
+##' @usage phrGetWarningStrings()
+##' @return A character vector containing warning messages or NULL.
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
 ##' 
 ##' # This example loads the phreeqc.dat database and attempts to use the
-##' # \code{DATABASE} keyword to set the database to wateq4f.dat.  A
-##' # warning is displayed stating that the DATABASE keyword is ignored
-##' # in the 'R' implementation.
+##' # DATABASE keyword to set the database to wateq4f.dat.  A warning is
+##' # displayed stating that the DATABASE keyword is ignored in the 'R'
+##' # implementation.
 ##' phrLoadDatabaseString(phreeqc.dat.list)
 ##' phrAccumulateLine("DATABASE wateq4f.dat")
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrRunAccumulated()
-##' if (is.null(phrGetWarningString())) {
-##'   cat(phrGetWarningString())
+##' if (!is.null(phrGetWarningStrings())) {
+##'   cat(phrGetWarningStrings(), sep="\n")
 ##' }
 ##' 
-phrGetWarningString =
+phrGetWarningStrings =
 function()
 {
-  return(.Call("getWarningString", PACKAGE=.packageName))
+  return(.Call("getWarningStrings", PACKAGE=.packageName))
 }
 
 
@@ -1278,7 +1259,7 @@ function()
 ##' @param filename The file name of the database.
 ##' @return This function returns NULL.
 ##' @seealso \code{\link{phrLoadDatabaseString}}
-##' @references Literature references and web URLs can go here.
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1357,7 +1338,7 @@ function(input)
 ##' # This example loads some keyword input and displays the contents.
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrAccumulateLine("END")
-##' cat(paste("The accumulated input is:", phrGetAccumulatedLines(), sep="\n"))
+##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep="\n")
 ##' 
 phrGetAccumulatedLines =
 function()
@@ -1379,7 +1360,7 @@ function()
 ##' 'comp2'} %% ...
 ##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references %% ~put references to the literature/web site here ~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
@@ -1415,7 +1396,7 @@ function()
 ##' @return This function returns NULL.
 ##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
 ##' \code{\link{phrGetSelectedOutput}}
-##' @references Literature references and web URLs can go here.
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
