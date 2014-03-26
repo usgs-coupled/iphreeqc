@@ -1460,7 +1460,7 @@ function(filename)
 ##'
 ##' # run input
 ##' phrRunString(input)
-##' cat(paste("see", phrGetOutputFileName(), ".")
+##' cat(paste("see", phrGetOutputFileName(), "."))
 ##' 
 phrRunString =
 function(input)
