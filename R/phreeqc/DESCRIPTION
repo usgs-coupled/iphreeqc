@@ -1,7 +1,11 @@
 Package: phreeqc
+Version: 1.0.0
 Title: R interface to the phreeqc geochemical modeling program
-Version: 0.1-1
-Author: David Parkhurst
+License: Unlimited
+NeedsCompilation: yes
+Depends: methods
+Authors: David Parkhurst <dlpark@usgs.gov> and C.A.J. Appelo <appt@hydrochemistry.eu>
+URL: http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc
 Description: R interface to the PHREEQC program.  PHREEQC is a geochemical
     modeling program developed by the US Geological Survey that is designed to
     perform a wide variety of low-temperature aqueous geochemical calculations.
@@ -16,7 +20,4 @@ Description: R interface to the PHREEQC program.  PHREEQC is a geochemical
     account for differences in composition between waters, within specified
     compositional uncertainty limits.
 Maintainer: Scott Charlton <charlton@usgs.gov>
-Depends:
-    methods
-License: Unlimited
 LazyData: yes
