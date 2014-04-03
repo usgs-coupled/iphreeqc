@@ -718,7 +718,10 @@ check : all
 	R CMD check -as-cran phreeqc
 
 install : all
-	R CMD INSTALL phreeqc
+	R CMD INSTALL --build  phreeqc
+
+build : all
+	R CMD build phreeqc
 
 uninstall :
 	R CMD REMOVE phreeqc

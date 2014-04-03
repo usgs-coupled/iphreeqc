@@ -44,7 +44,6 @@
 ##' #########################################################################
 ##' # Load data from CSV and calculate CO2
 ##' #########################################################################
-##'
 ##' 
 ##' # append solution input to given vector
 ##' fSoln <- function(vec, id, t, pH, alk) {
