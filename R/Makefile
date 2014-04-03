@@ -715,7 +715,7 @@ $(INST)/ex2 : ../phreeqc3-examples/ex2
 ########################################
 
 check : all
-	R CMD check phreeqc
+	R CMD check -as-cran phreeqc
 
 install : all
 	R CMD INSTALL phreeqc
