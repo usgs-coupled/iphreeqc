@@ -23,10 +23,10 @@
 ##' #########################################################################
 ##' 
 ##' # load the phreeqc.dat database
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##' 
 ##' # run example 2
-##' phrRunString(ex2.list)
+##' phrRunString(ex2)
 ##' 
 ##' # retrieve selected_output as a list of data.frame
 ##' so <- phrGetSelectedOutput()
@@ -92,7 +92,7 @@
 ##' input <- fSelOut(input)
 ##' 
 ##' # load database
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##' 
 ##' # run
 ##' phrRunString(input)
@@ -128,7 +128,7 @@ NULL
 ##' 
 ##' # this example loads the phreeqc.dat database, accumulates input, and
 ##' # runs it
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrAccumulateLine("TITLE Example 2.--Temperature dependence of solubility")
 ##' phrAccumulateLine("                  of gypsum and anhydrite")
 ##' phrAccumulateLine("SOLUTION 1 Pure water")
@@ -207,8 +207,8 @@ function()
 ##' @examples
 ##' 
 ##' # This example runs the ex2 input file and echos the list of components.
-##' phrLoadDatabaseString(phreeqc.dat.list)
-##' phrRunString(ex2.list)
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrRunString(ex2)
 ##' cat("components:\n")
 ##' for (c in phrGetComponentList()) {
 ##'   cat(c, "\n")
@@ -242,8 +242,8 @@ function()
 ##' 
 ##' 
 ##'  # Load database and run ex2
-##'  phrLoadDatabaseString(phreeqc.dat.list)
-##'  phrRunString(ex2.list)
+##'  phrLoadDatabaseString(phreeqc.dat)
+##'  phrRunString(ex2)
 ##'
 ##'  # display a summary of the results
 ##'  df <- phrGetSelectedOutput()
@@ -895,7 +895,7 @@ function(filename)
 ##' @export
 ##' @examples
 ##' 
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetDumpFileOn(TRUE)
 ##' 
 ##' input <-              "SOLUTION 1 Pure water     \n"
@@ -1081,7 +1081,7 @@ function()
 ##' @export
 ##' @examples
 ##' 
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetDumpStringOn(TRUE)
 ##' 
 ##' input <-              "SOLUTION 1 Pure water     \n"
@@ -1235,7 +1235,7 @@ function()
 ##' # DATABASE keyword to set the database to wateq4f.dat.  A warning is
 ##' # displayed stating that the DATABASE keyword is ignored in the 'R'
 ##' # implementation.
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrAccumulateLine("DATABASE wateq4f.dat")
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrRunAccumulated()
@@ -1267,7 +1267,7 @@ function()
 ##'
 ##' # create temporary database file
 ##' tf <- tempfile()
-##' writeLines(phreeqc.dat.list, tf)
+##' writeLines(phreeqc.dat, tf)
 ##' 
 ##' if (is.null(phrLoadDatabase(tf))) {
 ##'   cat("database ok\n")
@@ -1305,9 +1305,9 @@ function(filename)
 ##' 
 ##'   # this example loads the phreeqc.dat database, turns on the
 ##'   # output file and runs ex2 as a string
-##'   phrLoadDatabaseString(phreeqc.dat.list)
+##'   phrLoadDatabaseString(phreeqc.dat)
 ##'   phrSetOutputFileOn(TRUE)
-##'   if (is.null(phrRunString(ex2.list))) {
+##'   if (is.null(phrRunString(ex2))) {
 ##'     cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
 ##'   }
 ##' 
@@ -1403,10 +1403,10 @@ function()
 ##' @examples
 ##'
 ##' # load the phreeqc.dat database
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##'
 ##' # create ex2 if it doesn't exist
-##' if (!file.exists("ex2")) writeLines(ex2.list, "ex2")
+##' if (!file.exists("ex2")) writeLines(ex2, "ex2")
 ##' 
 ##' # run ex2
 ##' if (is.null(phrRunFile("ex2"))) {
@@ -1447,7 +1447,7 @@ function(filename)
 ##' #
 ##'
 ##' # load phreeqc.dat file
-##' phrLoadDatabaseString(phreeqc.dat.list)
+##' phrLoadDatabaseString(phreeqc.dat)
 ##'
 ##' # create input
 ##' input <- vector()
