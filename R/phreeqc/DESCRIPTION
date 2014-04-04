@@ -3,8 +3,10 @@ Version: 1.0.0
 Title: R interface to the phreeqc geochemical modeling program
 License: Unlimited
 NeedsCompilation: yes
-Depends: methods
-Authors: David Parkhurst <dlpark@usgs.gov> and C.A.J. Appelo <appt@hydrochemistry.eu>
+Depends:
+    methods
+Author: David Parkhurst <dlpark@usgs.gov> and C.A.J. Appelo
+    <appt@hydrochemistry.eu>
 URL: http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc
 Description: R interface to the PHREEQC program.  PHREEQC is a geochemical
     modeling program developed by the US Geological Survey that is designed to
