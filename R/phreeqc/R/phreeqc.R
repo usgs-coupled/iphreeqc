@@ -36,13 +36,15 @@
 ##' title  <- "Gypsum-Anhydrite Stability"
 ##' xlabel <- "Temperature, in degrees celcius"
 ##' ylabel <- "Saturation index"
-##' plot(temp.C., si_gypsum, main=title, xlab=xlabel, ylab=ylabel, col="darkred", xlim=c(25, 75), ylim=c(-0.4, 0.0))
+##' plot(temp.C., si_gypsum, main=title, xlab=xlabel, ylab=ylabel,
+##'      col="darkred", xlim=c(25, 75), ylim=c(-0.4, 0.0))
 ##' points(temp.C., si_anhydrite, col="darkgreen")
-##' legend("bottomright", c("Gypsum", "Anhydrite"), col = c("darkred", "darkgreen"), pch = c(1, 1))
+##' legend("bottomright", c("Gypsum", "Anhydrite"),
+##'        col = c("darkred", "darkgreen"), pch = c(1, 1))
 ##'
 ##' 
 ##' #########################################################################
-##' # Load data from CSV and calculate CO2
+##' # Load data from .csv and calculate CO2
 ##' #########################################################################
 ##' 
 ##' # append solution input to given vector
@@ -84,7 +86,7 @@
 ##' # create input (as a character vector)
 ##' input <- vector()
 ##' for (i in 1:length(CO2.df[,1])) {
-##'     input <- fSoln(input, solns[i, 1], solns[i, 2], solns[i, 3], solns[i, 4])
+##'   input <- fSoln(input, solns[i, 1], solns[i, 2], solns[i, 3], solns[i, 4])
 ##' }
 ##' 
 ##' # add selected_output definition
@@ -174,7 +176,8 @@ function(line)
 ##' @export
 ##' @examples
 ##' 
-##' # This example loads some keyword input, clears the input, and displays the results.
+##' # This example loads some keyword input, clears the input, and displays
+##' # the results.
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrAccumulateLine("END")
 ##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep="\n")
@@ -209,8 +212,8 @@ function()
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrRunString(ex2)
 ##' cat("components:\n")
-##' for (c in phrGetComponentList()) {
-##'   cat(c, "\n")
+##' for (comp in phrGetComponentList()) {
+##'   cat(comp, "\n")
 ##' }
 ##' 
 phrGetComponentList =
@@ -1318,14 +1321,14 @@ function(input)
 
 
 
-##' Retrieve the accumulated input string.
+##' Retrieve the accumulated input.
 ##' 
-##' Returns the accumulated text in the input buffer of the phreeqc object.
+##' Returns the accumulated input as a character vector.
 ##' 
 ##' %% ~~ If necessary, more details than the description above ~~
 ##' 
 ##' @usage phrGetAccumulatedLines()
-##' @return The input as a single string.
+##' @return A character vector containing the accumulated input.
 ##' @note %% ~~further notes~~
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
@@ -1347,33 +1350,53 @@ function()
 
 
 
-##' TODO
+##' Runs the accumulated input.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Runs the input buffer as defined by calls to \code{\link{phrAccumulateLine}}.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' After calling \code{phrRunAccumulated} \code{\link{phrGetAccumulatedLines}} can
+##' be used in case of errors. The accumulated lines will be cleared on the next call
+##' to \code{\link{phrAccumulateLine}}.
 ##' 
 ##' @usage phrRunAccumulated()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @return This function returns NULL on success.
+##' @note The \code{phrAccumulateLine} method cannot be called until a database
+##' has been successfully loaded by calls to either \code{\link{phrLoadDatabase}} or \code{\link{phrLoadDatabaseString}}.
+##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrClearAccumulatedLines}},
+##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunFile}}, \code{\link{phrRunString}} 
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # turn on the output file
+##' phrSetOutputFileOn(TRUE)
 ##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
+##' # load the phreeqc.dat database
+##' phrLoadDatabaseString(phreeqc.dat)
 ##' 
+##' # accumulate the input
+##' phrAccumulateLine("TITLE Example 2.--Temperature dependence of solubility")
+##' phrAccumulateLine("                  of gypsum and anhydrite")
+##' phrAccumulateLine("SOLUTION 1 Pure water")
+##' phrAccumulateLine("        pH      7.0")
+##' phrAccumulateLine("        temp    25.0")
+##' phrAccumulateLine("EQUILIBRIUM_PHASES 1")
+##' phrAccumulateLine("        Gypsum          0.0     1.0")
+##' phrAccumulateLine("        Anhydrite       0.0     1.0")
+##' phrAccumulateLine("REACTION_TEMPERATURE 1")
+##' phrAccumulateLine("        25.0 75.0 in 51 steps")
+##' phrAccumulateLine("SELECTED_OUTPUT")
+##' phrAccumulateLine("        -file   ex2.sel")
+##' phrAccumulateLine("        -temperature")
+##' phrAccumulateLine("        -si     anhydrite  gypsum")
+##' phrAccumulateLine("END")
+##' 
+##' # run it and echo the name of the output file
+##' if (is.null(phrRunAccumulated())) {
+##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
+##' }
 phrRunAccumulated =
 function()
 {
@@ -1384,15 +1407,11 @@ function()
 
 ##' Run phreeqc input file
 ##' 
-##' 
-##' phrRunFile executes a phreeqc run
-##' 
-##' 
-##' Any details about the operation of this function should go here.
+##' phrRunFile executes a phreeqc run using a file as input
 ##' 
 ##' @usage phrRunFile(filename)
 ##' @param filename The file name of the phreeqc input file.
-##' @return This function returns NULL.
+##' @return This function returns NULL on success.
 ##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
 ##' \code{\link{phrGetSelectedOutput}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
@@ -1431,7 +1450,7 @@ function(filename)
 ##' 
 ##' @usage phrRunString(input)
 ##' @param input character vector containing phreeqc input
-##' @return The number of errors encountered during the run.
+##' @return This function returns NULL on success.
 ##' @note %% ~~further notes~~
 ##' @seealso \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
