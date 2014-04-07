@@ -1,4 +1,4 @@
-CP=cp -f
+P=cp -f
 IDEST=phreeqc/src
 DEST=phreeqc/src/phreeqcpp
 ISRC=../src
@@ -721,7 +721,7 @@ install : all
 	R CMD INSTALL --build  phreeqc
 
 build : all
-	R CMD build phreeqc
+	R CMD build --resave-data phreeqc
 
 uninstall :
 	R CMD REMOVE phreeqc
