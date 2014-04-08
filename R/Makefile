@@ -1,4 +1,4 @@
-P=cp -f
+CP=cp -f
 IDEST=phreeqc/src
 DEST=phreeqc/src/phreeqcpp
 ISRC=../src
