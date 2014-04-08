@@ -143,14 +143,20 @@ setOutputFileOn(SEXP value)
 }
 
 SEXP
-setSelectedOutputFileOn(SEXP value)
+setSelectedOutputFileOn(SEXP nuser, SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
+  if (!isInteger(nuser) || length(nuser) != 1) {
+    error("nuser must be a single integer\n");
+  }
   if (!isLogical(value) || length(value) != 1) {
     error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
+  int save = R::singleton().GetCurrentSelectedOutputUserNumber();
+  R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);      
   R::singleton().SetSelectedOutputFileOn(LOGICAL(value)[0]);
+  R::singleton().SetCurrentSelectedOutputUserNumber(save);
   return(ans);
 }
 
@@ -213,7 +219,6 @@ setSelectedOutputStringOn(SEXP nuser, SEXP value)
   if (!isLogical(value) || length(value) != 1) {
     error("SetSelectedOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
-
   int save = R::singleton().GetCurrentSelectedOutputUserNumber();
   R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);      
   R::singleton().SetSelectedOutputStringOn(LOGICAL(value)[0]);
@@ -282,17 +287,21 @@ setOutputFileName(SEXP filename)
 }
 
 SEXP
-setSelectedOutputFileName(SEXP filename)
+setSelectedOutputFileName(SEXP nuser, SEXP filename)
 {
-  const char* name;
   SEXP ans = R_NilValue;
   // check args
+  if (!isInteger(nuser) || length(nuser) != 1) {
+    error("SetSelectedOutputFileName:nuser must be a single integer\n");
+  }
   if (!isString(filename) || length(filename) != 1) {
     error("SetSelectedOutputFileName:filename is not a single string\n");
   }
-
-  name = CHAR(STRING_ELT(filename, 0));
+  int save = R::singleton().GetCurrentSelectedOutputUserNumber();
+  const char* name = CHAR(STRING_ELT(filename, 0));
+  R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);      
   R::singleton().SetSelectedOutputFileName(name);
+  R::singleton().SetCurrentSelectedOutputUserNumber(save);
   return(ans);
 }
 
@@ -937,7 +946,7 @@ getSelOutLst(void)
 }
 
 SEXP
-getErrorStrings()
+getErrorStrings(void)
 {
   SEXP ans = R_NilValue;
   const char* cstr = R::singleton().GetErrorString();
@@ -961,7 +970,7 @@ getErrorStrings()
 }
 
 SEXP
-getVersionString()
+getVersionString(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
