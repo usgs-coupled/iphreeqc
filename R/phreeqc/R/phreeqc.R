@@ -661,38 +661,37 @@ function(value)
 
 
 
-##' TODO
+##' Sets the selected output string on or off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the given selected output string switch on or off.  This switch controls
+##' whether or not the data normally sent to the given selected output file are
+##' stored in a buffer for retrieval.  The initial setting is off.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetSelectedOutputStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @usage phrSetSelectedOutputStringOn(nuser, value)
+##' @param \code{nuser} The user number specified within the SELECTED_OUTPUT block.
+##' @param \code{value} If TRUE, captures the output defined by the SELECTED_OUTPUT
+##' keyword into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetSelectedOutputFileOn}},
+##' \code{\link{phrGetSelectedOutputStringOn}},
+##' \code{\link{phrGetSelectedOutputStrings}},
+##' \code{\link{phrGetSelectedOutputFileOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetSelectedOutputStringOn(1, TRUE)
+##' if (is.null(phrRunString(ex2))) {
+##'   cat(phrGetSelectedOutputStrings()$n1)
+##' }
 ##' 
 phrSetSelectedOutputStringOn =
-function(value)
+function(nuser, value)
 {
-  invisible(.Call("setSelectedOutputStringOn", as.logical(value), PACKAGE=.packageName))
+  invisible(.Call("setSelectedOutputStringOn", as.integer(nuser), as.logical(value), PACKAGE=.packageName))
 }
 
 
@@ -1143,11 +1142,11 @@ function()
 
 
 
-##' Retrieves the string buffer containing phreeqc output.
+##' Retrieve standard phreeqc output.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Retrieves the phreeqc output as a character vector.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' A NULL value is returned when there is no selected-output.
 ##' 
 ##' @usage phrGetOutputStrings()
 ##' @return %% ~Describe the value returned %% If it is a LIST, use %%
@@ -1178,37 +1177,42 @@ function()
 
 
 
-##' TODO
+##' Retrieve the current SELECTED_OUTPUT.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' Returns the current SELECTED_OUTPUT as a character vector.
+##'
+##' Returns a named list containing the resultant selected output as character
+##' vectors. The names of each vector are creating by concatenating the letter
+##' 'n' and the user number of the selected output block.
 ##' 
 ##' @usage phrGetSelectedOutputStrings()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @return A character vector containing the current SELECTED_OUTPUT or
+##' NULL.
+##' @note \code{\link{phrSetSelectedOutputStringOn}} must have been set
+##' to TRUE in order to receive SELECTED_OUTPUT.
+##' @seealso \code{\link{phrGetSelectedOutputFileOn}},
+##' \code{\link{phrGetSelectedOutputFileOn}},
+##' \code{\link{phrGetSelectedOutputStringOn}},
+##' \code{\link{phrSetSelectedOutputFileOn}},
+##' \code{\link{phrSetSelectedOutputStringOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example runs ex2 and displays the selected-output string.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetSelectedOutputStringOn(1, TRUE)
 ##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
+##' if (is.null(phrRunString(ex2))) {
+##'   cat(phrGetSelectedOutputStrings()$n1, sep="\n")
+##' }
 ##' 
 phrGetSelectedOutputStrings =
 function()
 {
-  return(.Call("getSelectedOutputStrings", PACKAGE=.packageName))
+  return(.Call("getSelectedOutputStringLst", PACKAGE=.packageName))
 }
 
 
@@ -1219,7 +1223,7 @@ function()
 ##' generated during the last invocation of the following methods:
 ##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
 ##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
-##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}
+##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}.
 ##' 
 ##' A NULL value is returned if there are no warnings.
 ##' 

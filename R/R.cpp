@@ -203,14 +203,21 @@ setOutputStringOn(SEXP value)
 }
 
 SEXP
-setSelectedOutputStringOn(SEXP value)
+setSelectedOutputStringOn(SEXP nuser, SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
+  if (!isInteger(nuser) || length(nuser) != 1) {
+    error("SetSelectedOutputStringOn:nuser must be a single integer\n");
+  }
   if (!isLogical(value) || length(value) != 1) {
     error("SetSelectedOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
+
+  int save = R::singleton().GetCurrentSelectedOutputUserNumber();
+  R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);      
   R::singleton().SetSelectedOutputStringOn(LOGICAL(value)[0]);
+  R::singleton().SetCurrentSelectedOutputUserNumber(save);
   return(ans);
 }
 
@@ -383,6 +390,39 @@ getSelectedOutputStrings(void)
     UNPROTECT(1);
   }
   return ans;
+}
+
+SEXP
+getSelectedOutputStringLst(void)
+{
+  SEXP list;
+  SEXP attr;
+
+  list = R_NilValue;
+  
+  if (int n = R::singleton().GetSelectedOutputCount()) {
+    SEXP so;
+    char buffer[80];
+    
+    PROTECT(list = allocVector(VECSXP, n));
+    PROTECT(attr = allocVector(STRSXP, n));
+
+    int save = R::singleton().GetCurrentSelectedOutputUserNumber();
+    for (int i = 0; i < n; ++i) {
+      int d = R::singleton().GetNthSelectedOutputUserNumber(i);
+      ::sprintf(buffer, "n%d", d);
+      SET_STRING_ELT(attr, i, mkChar(buffer));
+      R::singleton().SetCurrentSelectedOutputUserNumber(d);      
+      PROTECT(so = getSelectedOutputStrings());
+      SET_VECTOR_ELT(list, i, so);
+      UNPROTECT(1);
+    }
+    R::singleton().SetCurrentSelectedOutputUserNumber(save);
+    setAttrib(list, R_NamesSymbol, attr);
+
+    UNPROTECT(2);
+  }
+  return list;
 }
 
 SEXP
