@@ -106,7 +106,11 @@
 ##' 
 NULL
 
+
+
 # Package Functions
+
+
 
 ##' Accumlulate line(s) for input to phreeqc.
 ##' 
@@ -191,6 +195,36 @@ function()
 }
 
 
+
+##' Retrieve the accumulated input.
+##' 
+##' Returns the accumulated input as a character vector.
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrGetAccumulatedLines()
+##' @return A character vector containing the accumulated input.
+##' @note %% ~~further notes~~
+##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' # This example loads some keyword input and displays the contents.
+##' phrAccumulateLine("SOLUTION 1")
+##' phrAccumulateLine("END")
+##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep="\n")
+##' 
+phrGetAccumulatedLines =
+function()
+{
+  return(.Call("getAccumLines", PACKAGE=.packageName))
+}
+
+
+
 ##' Retrieves a list containing the current list of components.
 ##' 
 ##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -221,660 +255,6 @@ function()
 {
   return(.Call("listComps", PACKAGE=.packageName))
 }
-
-
-##' Returns the contents of the selected output as a list of data frames.
-##' 
-##' phrGetSelectedOutput returns a named list containing the resultant
-##' selected output blocks.  The names of each data frame are creating by
-##' concatenating the letter 'n' and the user number of the selected output
-##' block.
-##'
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetSelectedOutput()
-##' @return Returns a named list of data frames containing the selected_output
-##' from the previous run.
-##' @seealso \code{\link{phrGetSelectedOutputFileOn}} 
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' 
-##'  # Load database and run ex2
-##'  phrLoadDatabaseString(phreeqc.dat)
-##'  phrRunString(ex2)
-##'
-##'  # display a summary of the results
-##'  df <- phrGetSelectedOutput()
-##'  summary(df$n1)
-##' 
-phrGetSelectedOutput =
-function(allow_ = TRUE)
-{
-  sel_outs <- .Call("getSelOutLst", PACKAGE=.packageName)
-  if (!is.null(sel_outs)) {
-    for (t in names(sel_outs)) {
-      if (!is.null(sel_outs[[t]])) {
-        names(sel_outs[[t]]) <- make.names(names(sel_outs[[t]]), unique = TRUE, allow_ = allow_)
-      }
-    }
-  }
-  return(sel_outs)
-}
-
-
-
-##' Return error string messages.
-##' 
-##' Returns a string containing any error messages that were generated
-##' during the last invocation of the following methods:
-##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
-##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
-##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}
-##' 
-##' This routine is rarely needed when running interactively since the error
-##' string is displayed when it occurs.
-##' 
-##' @usage phrGetErrorStrings()
-##' @return This function returns the errors that occured during the previous
-##' phrReadDB, phrRun, phrRunFile call.
-##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
-##' \code{\link{phrRunFile}}, \code{\link{phrGetSelectedOutput}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' # loaddatabase should fail
-##' n <- try(phrLoadDatabase("missing.dat"), silent = TRUE)
-##' # if n is non-NULL display error string
-##' if (!is.null(n)) phrGetErrorStrings()
-##' 
-phrGetErrorStrings =
-function()
-{
-  return(.Call("getErrorStrings", PACKAGE=.packageName))
-}
-
-
-
-##' Retrieves the current value of the error file switch.
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetErrorFileOn()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetErrorFileOn =
-function()
-{
-  return(.Call("getErrorFileOn", PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetDumpFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetDumpFileOn =
-function(value)
-{
-  invisible(.Call("setDumpFileOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetErrorFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetErrorFileOn =
-function(value)
-{
-  invisible(.Call("setErrorFileOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetLogFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetLogFileOn =
-function(value)
-{
-  invisible(.Call("setLogFileOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetOutputFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetOutputFileOn =
-function(value)
-{
-  invisible(.Call("setOutputFileOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' 
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetSelectedOutputFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetSelectedOutputFileOn =
-function(value)
-{
-  invisible(.Call("setSelectedOutputFileOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetDumpStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetDumpStringOn =
-function(value)
-{
-  invisible(.Call("setDumpStringOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetErrorStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetErrorStringOn =
-function(value)
-{
-  invisible(.Call("setErrorStringOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetLogStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetLogStringOn =
-function(value)
-{
-  invisible(.Call("setLogStringOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetOutputStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetOutputStringOn =
-function(value)
-{
-  invisible(.Call("setOutputStringOn", as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-##' Sets the selected output string on or off.
-##' 
-##' Sets the given selected output string switch on or off.  This switch controls
-##' whether or not the data normally sent to the given selected output file are
-##' stored in a buffer for retrieval.  The initial setting is off.
-##' 
-##' @usage phrSetSelectedOutputStringOn(nuser, value)
-##' @param \code{nuser} The user number specified within the SELECTED_OUTPUT block.
-##' @param \code{value} If TRUE, captures the output defined by the SELECTED_OUTPUT
-##' keyword into a buffer.
-##' @return NULL
-##' @seealso \code{\link{phrGetSelectedOutputFileOn}},
-##' \code{\link{phrGetSelectedOutputStringOn}},
-##' \code{\link{phrGetSelectedOutputStrings}},
-##' \code{\link{phrGetSelectedOutputFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##'
-##' phrLoadDatabaseString(phreeqc.dat)
-##' phrSetSelectedOutputStringOn(1, TRUE)
-##' if (is.null(phrRunString(ex2))) {
-##'   cat(phrGetSelectedOutputStrings()$n1)
-##' }
-##' 
-phrSetSelectedOutputStringOn =
-function(nuser, value)
-{
-  invisible(.Call("setSelectedOutputStringOn", as.integer(nuser), as.logical(value), PACKAGE=.packageName))
-}
-
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetDumpFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
-##' 
-phrSetDumpFileName =
-function(filename)
-{
-  invisible(.Call("setDumpFileName", as.character(filename), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetErrorFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
-##' 
-phrSetErrorFileName =
-function(filename)
-{
-  invisible(.Call("setErrorFileName", as.character(filename), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetLogFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
-##' 
-phrSetLogFileName =
-function(filename)
-{
-  invisible(.Call("setLogFileName", as.character(filename), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetOutputFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
-##' 
-phrSetOutputFileName =
-function(filename)
-{
-  invisible(.Call("setOutputFileName", as.character(filename), PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetSelectedOutputFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
-##' 
-phrSetSelectedOutputFileName =
-function(filename)
-{
-  invisible(.Call("setSelectedOutputFileName", as.character(filename), PACKAGE=.packageName))
-}
-
 
 
 
@@ -922,148 +302,6 @@ function()
 
 
 
-##' Retrieves the name of the error file.
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetErrorFileName()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetErrorFileName =
-function()
-{
-  return(.Call("getErrorFileName", PACKAGE=.packageName))
-}
-
-
-
-##' Retrieves the name of the log file.
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetLogFileName()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetLogFileName =
-function()
-{
-  return(.Call("getLogFileName", PACKAGE=.packageName))
-}
-
-
-
-##' Retrieves the name of the output file.
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetOutputFileName()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetOutputFileName =
-function()
-{
-  return(.Call("getOutputFileName", PACKAGE=.packageName))
-}
-
-
-
-##' TODO
-##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetSelectedOutputFileName()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetSelectedOutputFileName =
-function()
-{
-  return(.Call("getSelectedOutputFileName", PACKAGE=.packageName))
-}
-
-
-
-
-
 ##' Retrieves the string buffer containing DUMP output.
 ##' 
 ##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -1107,6 +345,146 @@ function()
 
 
 
+##' Retrieves the name of the error file.
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrGetErrorFileName()
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function () 
+##' {
+##'   }
+##' 
+phrGetErrorFileName =
+function()
+{
+  return(.Call("getErrorFileName", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieves the current value of the error file switch.
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrGetErrorFileOn()
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function () 
+##' {
+##'   }
+##' 
+phrGetErrorFileOn =
+function()
+{
+  return(.Call("getErrorFileOn", PACKAGE=.packageName))
+}
+
+
+
+##' Return error string messages.
+##' 
+##' Returns a string containing any error messages that were generated
+##' during the last invocation of the following methods:
+##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
+##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
+##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}
+##' 
+##' This routine is rarely needed when running interactively since the error
+##' string is displayed when it occurs.
+##' 
+##' @usage phrGetErrorStrings()
+##' @return This function returns the errors that occured during the previous
+##' phrReadDB, phrRun, phrRunFile call.
+##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
+##' \code{\link{phrRunFile}}, \code{\link{phrGetSelectedOutput}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' # loaddatabase should fail
+##' n <- try(phrLoadDatabase("missing.dat"), silent = TRUE)
+##' # if n is non-NULL display error string
+##' if (!is.null(n)) phrGetErrorStrings()
+##' 
+phrGetErrorStrings =
+function()
+{
+  return(.Call("getErrorStrings", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieves the name of the log file.
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrGetLogFileName()
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function () 
+##' {
+##'   }
+##' 
+phrGetLogFileName =
+function()
+{
+  return(.Call("getLogFileName", PACKAGE=.packageName))
+}
+
+
+
 ##' Retrieves the string buffer containing phreeqc log output.
 ##' 
 ##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -1138,6 +516,41 @@ phrGetLogStrings =
 function()
 {
   return(.Call("getLogStrings", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieves the name of the output file.
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrGetOutputFileName()
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function () 
+##' {
+##'   }
+##' 
+phrGetOutputFileName =
+function()
+{
+  return(.Call("getOutputFileName", PACKAGE=.packageName))
 }
 
 
@@ -1177,6 +590,85 @@ function()
 
 
 
+##' Returns the contents of the selected output as a list of data frames.
+##' 
+##' phrGetSelectedOutput returns a named list containing the resultant
+##' selected output blocks.  The names of each data frame are creating by
+##' concatenating the letter 'n' and the user number of the selected output
+##' block.
+##'
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrGetSelectedOutput()
+##' @return Returns a named list of data frames containing the selected_output
+##' from the previous run.
+##' @seealso \code{\link{phrGetSelectedOutputFileOn}} 
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' 
+##'  # Load database and run ex2
+##'  phrLoadDatabaseString(phreeqc.dat)
+##'  phrRunString(ex2)
+##'
+##'  # display a summary of the results
+##'  df <- phrGetSelectedOutput()
+##'  summary(df$n1)
+##' 
+phrGetSelectedOutput =
+function(allow_ = TRUE)
+{
+  sel_outs <- .Call("getSelOutLst", PACKAGE=.packageName)
+  if (!is.null(sel_outs)) {
+    for (t in names(sel_outs)) {
+      if (!is.null(sel_outs[[t]])) {
+        names(sel_outs[[t]]) <- make.names(names(sel_outs[[t]]), unique = TRUE, allow_ = allow_)
+      }
+    }
+  }
+  return(sel_outs)
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrGetSelectedOutputFileName()
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function () 
+##' {
+##'   }
+##' 
+phrGetSelectedOutputFileName =
+function()
+{
+  return(.Call("getSelectedOutputFileName", PACKAGE=.packageName))
+}
+
+
+
 ##' Retrieve the current SELECTED_OUTPUT.
 ##' 
 ##' Returns the current SELECTED_OUTPUT as a character vector.
@@ -1212,7 +704,7 @@ function()
 phrGetSelectedOutputStrings =
 function()
 {
-  return(.Call("getSelectedOutputStringLst", PACKAGE=.packageName))
+  return(.Call("getSelectedOutputStringsLst", PACKAGE=.packageName))
 }
 
 
@@ -1256,6 +748,7 @@ function()
 }
 
 
+
 ##' Load a phreeqc database file
 ##' 
 ##' Loads the given phreeqc database into phreeqc.  Returns NULL if successful.
@@ -1291,6 +784,7 @@ function(filename)
 }
 
 
+
 ##' Load a phreeqc database as a string or a list of strings.
 ##' 
 ##' Load the specified string(s) as a database into phreeqc. Returns NULL if
@@ -1321,35 +815,6 @@ phrLoadDatabaseString =
 function(input)
 {
   invisible(.Call("loadDBLst", as.character(input), PACKAGE=.packageName))
-}
-
-
-
-##' Retrieve the accumulated input.
-##' 
-##' Returns the accumulated input as a character vector.
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetAccumulatedLines()
-##' @return A character vector containing the accumulated input.
-##' @note %% ~~further notes~~
-##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
-##' @examples
-##' 
-##' # This example loads some keyword input and displays the contents.
-##' phrAccumulateLine("SOLUTION 1")
-##' phrAccumulateLine("END")
-##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep="\n")
-##' 
-phrGetAccumulatedLines =
-function()
-{
-  return(.Call("getAccumLines", PACKAGE=.packageName))
 }
 
 
@@ -1489,3 +954,544 @@ function(input)
 {
   invisible(.Call("runStringLst", as.character(input), PACKAGE=.packageName))
 }
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetDumpFileName(filename)
+##' @param filename %% ~~Describe \code{filename} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (filename) 
+##' {
+##'   }
+##' 
+phrSetDumpFileName =
+function(filename)
+{
+  invisible(.Call("setDumpFileName", as.character(filename), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetDumpFileOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetDumpFileOn =
+function(value)
+{
+  invisible(.Call("setDumpFileOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetDumpStringOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetDumpStringOn =
+function(value)
+{
+  invisible(.Call("setDumpStringOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetErrorFileName(filename)
+##' @param filename %% ~~Describe \code{filename} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (filename) 
+##' {
+##'   }
+##' 
+phrSetErrorFileName =
+function(filename)
+{
+  invisible(.Call("setErrorFileName", as.character(filename), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetErrorFileOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetErrorFileOn =
+function(value)
+{
+  invisible(.Call("setErrorFileOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetErrorStringOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetErrorStringOn =
+function(value)
+{
+  invisible(.Call("setErrorStringOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetLogFileName(filename)
+##' @param filename %% ~~Describe \code{filename} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (filename) 
+##' {
+##'   }
+##' 
+phrSetLogFileName =
+function(filename)
+{
+  invisible(.Call("setLogFileName", as.character(filename), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetLogFileOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetLogFileOn =
+function(value)
+{
+  invisible(.Call("setLogFileOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetLogStringOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetLogStringOn =
+function(value)
+{
+  invisible(.Call("setLogStringOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetOutputFileName(filename)
+##' @param filename %% ~~Describe \code{filename} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (filename) 
+##' {
+##'   }
+##' 
+phrSetOutputFileName =
+function(filename)
+{
+  invisible(.Call("setOutputFileName", as.character(filename), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetOutputFileOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetOutputFileOn =
+function(value)
+{
+  invisible(.Call("setOutputFileOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetOutputStringOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetOutputStringOn =
+function(value)
+{
+  invisible(.Call("setOutputStringOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' TODO
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetSelectedOutputFileName(filename)
+##' @param filename %% ~~Describe \code{filename} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (filename) 
+##' {
+##'   }
+##' 
+phrSetSelectedOutputFileName =
+function(filename)
+{
+  invisible(.Call("setSelectedOutputFileName", as.character(filename), PACKAGE=.packageName))
+}
+
+
+
+##' 
+##' 
+##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' 
+##' %% ~~ If necessary, more details than the description above ~~
+##' 
+##' @usage phrSetSelectedOutputFileOn(value)
+##' @param value %% ~~Describe \code{value} here~~
+##' @return %% ~Describe the value returned %% If it is a LIST, use %%
+##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+##' 'comp2'} %% ...
+##' @note %% ~~further notes~~
+##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##' 
+##' ##---- Should be DIRECTLY executable !! ----
+##' ##-- ==>  Define data, use random,
+##' ##--	or do  help(data=index)  for the standard data sets.
+##' 
+##' ## The function is currently defined as
+##' function (value) 
+##' {
+##'   }
+##' 
+phrSetSelectedOutputFileOn =
+function(value)
+{
+  invisible(.Call("setSelectedOutputFileOn", as.logical(value), PACKAGE=.packageName))
+}
+
+
+
+##' Sets the selected output string on or off.
+##' 
+##' Sets the given selected output string switch on or off.  This switch controls
+##' whether or not the data normally sent to the given selected output file are
+##' stored in a buffer for retrieval.  The initial setting is off.
+##' 
+##' @usage phrSetSelectedOutputStringOn(nuser, value)
+##' @param \code{nuser} The user number specified within the SELECTED_OUTPUT block.
+##' @param \code{value} If TRUE, captures the output defined by the SELECTED_OUTPUT
+##' keyword into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetSelectedOutputFileOn}},
+##' \code{\link{phrGetSelectedOutputStringOn}},
+##' \code{\link{phrGetSelectedOutputStrings}},
+##' \code{\link{phrGetSelectedOutputFileOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords interface
+##' @useDynLib phreeqc
+##' @export
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetSelectedOutputStringOn(1, TRUE)
+##' if (is.null(phrRunString(ex2))) {
+##'   cat(phrGetSelectedOutputStrings()$n1)
+##' }
+##' 
+phrSetSelectedOutputStringOn =
+function(nuser, value)
+{
+  invisible(.Call("setSelectedOutputStringOn", as.integer(nuser), as.logical(value), PACKAGE=.packageName))
+}
+
+
