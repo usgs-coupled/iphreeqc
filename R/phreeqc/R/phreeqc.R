@@ -1278,35 +1278,45 @@ function(value)
 
 
 
-##' TODO
+##' Set output strings on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Set the output string switch on or off.  This switch controls whether or
+##' not the data normally sent to the output file are stored in a buffer for
+##' retrieval. The initial setting is off.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' The output strings setting is only used by the Run methods:
+##' \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}},
+##' \code{\link{phrRunString}}.
 ##' 
-##' @usage phrSetOutputStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @usage phrSetOutputStringsOn(value)
+##' @param \code{value} If TRUE, captures output normally sent to the output
+##' file into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetOutputFileOn}},
+##' \code{\link{phrGetOutputStringsOn}},
+##' \code{\link{phrGetOutputStrings}},
+##' \code{\link{phrSetOutputFileOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
 ##' @useDynLib phreeqc
 ##' @export
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example equilibrates pure water with calcite and displays the results.
 ##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringOn(TRUE)
+##' input <- c( 
+##'             'SOLUTION 1 Pure water ',
+##'             'EQUILIBRIUM_PHASES 1  ',
+##'             '    Calcite 0 10      '
+##'             )
 ##' 
-phrSetOutputStringOn =
+##' if (!is.null(phrRunString(input))) {
+##'   cat(phrGetOutputStrings())
+##' }
+##' 
+phrSetOutputStringsOn =
 function(value)
 {
   invisible(.Call("setOutputStringOn", as.logical(value), PACKAGE=.packageName))
