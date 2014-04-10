@@ -1132,34 +1132,34 @@ function(filename)
 }
 
 
-
-##' TODO
+##' Set log file on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the log file switch on or off. This switch controls whether
+##' or not phreeqc writes log messages to the log file. The initial
+##' setting is off.
+##'
+##' Logging must be enabled through the use of the KNOBS -logfile
+##' option in order to receive an log messages.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetLogFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetLogFileOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, writes output to the the log file.
+##' @return NULL
+##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrGetLogStrings}}, \c
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example runs ex2 with the log file turned on.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetLogStringsOn(TRUE)
+##'
+##' # turn logging on
+##' phrAccumulateLine("KNOBS; -logfile true")
+##' phrRunAccumulated()
 ##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
+##' if (is.null(phrRunString(ex2))) {
+##'     cat("see", phrGetLogFileName(), "\n")
+##' }
 ##' 
 phrSetLogFileOn =
 function(value)
@@ -1183,7 +1183,7 @@ function(value)
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' # This example runs ex2 with the log file turned on.
+##' # This example runs ex2 with log strings turned on.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetLogStringsOn(TRUE)
 ##'
@@ -1243,8 +1243,8 @@ function(filename)
 ##' Set output file on/off.
 ##' 
 ##' Sets the output file switch on or off. This switch controls whether
-##' or not phreeqc writes to the phreeqc.0.out file. This is the output
-##' normally generated when phreeqc is run. Ths initial setting is off.
+##' or not phreeqc writes to the output file. This is the output normally
+##' generated when phreeqc is run. The initial setting is off.
 ##' 
 ##' @export phrSetOutputFileOn
 ##' @useDynLib phreeqc
