@@ -1169,35 +1169,33 @@ function(value)
 
 
 
-##' TODO
+##' Set log string on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the log string switch on or off.  This switch controls whether or
+##' not the data normally sent to the log file are stored in a buffer for
+##' retrieval. The initial setting is off.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetLogStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetLogStringsOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, captures output normally sent to the log file into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example runs ex2 with the log file turned on.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetLogStringsOn(TRUE)
+##'
+##' # turn logging on
+##' phrAccumulateLine("KNOBS; -logfile true")
+##' phrRunAccumulated()
 ##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
+##' if (is.null(phrRunString(ex2))) {
+##'     cat(phrGetLogStrings(), sep="\n")
+##' }
 ##' 
-phrSetLogStringOn =
+phrSetLogStringsOn =
 function(value)
 {
   invisible(.Call("setLogStringOn", as.logical(value), PACKAGE=.packageName))
@@ -1205,33 +1203,34 @@ function(value)
 
 
 
-##' TODO
+##' Set the name of the output file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the name of the output file. The default value is phreeqc.0.out.
+##'
+##' The output file must be turned on using the \code{\link{phrSetOutputFileOn}} function.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetOutputFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetOutputFileName
 ##' @useDynLib phreeqc
-##' @export
+##' @param filename the name of the file.
+##' @return NULL
+##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputFileOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example equilibrates pure water with calcite and displays
+##' # the resulting file name.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputFileOn(TRUE)
+##' phrSetOutputFileName("phreeqc.output")
+##' input <- c( 
+##'     'SOLUTION 1 Pure water ',
+##'     'EQUILIBRIUM_PHASES 1  ',
+##'     '    Calcite 0 10      '
+##'     )
 ##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
+##' if (is.null(phrRunString(input))) {
+##'     cat("see", phrGetOutputFileName(), "\n")
+##' }
 ##' 
 phrSetOutputFileName =
 function(filename)
