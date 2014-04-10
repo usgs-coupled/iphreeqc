@@ -10,15 +10,15 @@ EXDIR=../phreeqc3-examples
 MAN=phreeqc/man
 
 DBS = \
-	$(DBDIR)/Amm.dat \
-	$(DBDIR)/iso.dat \
-	$(DBDIR)/llnl.dat \
-	$(DBDIR)/minteq.dat \
-	$(DBDIR)/minteq.v4.dat \
-	$(DBDIR)/pitzer.dat \
-	$(DBDIR)/sit.dat \
-	$(DBDIR)/phreeqc.dat \
-	$(DBDIR)/wateq4f.dat
+	Amm.ascii \
+	iso.ascii \
+	llnl.ascii \
+	minteq.ascii \
+	minteq.v4.ascii \
+	pitzer.ascii \
+	sit.ascii \
+	phreeqc.ascii \
+	wateq4f.ascii
 
 EXS = \
 	$(EXDIR)/ex1 \
@@ -235,6 +235,9 @@ all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 $(DATADIR)/databases.RData : $(DBS) build-databases.R
 	R --no-save --no-restore CMD BATCH build-databases.R
 
+%.ascii : $(DBDIR)/%.dat
+	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
+
 $(DATADIR)/examples.RData : $(EXS) build-examples.R
 	R --no-save --no-restore CMD BATCH build-examples.R
 
@@ -242,8 +245,12 @@ $(DATADIR)/csv.RData : SE_to_export_03142014.csv build-csv.R
 	R --no-save --no-restore CMD BATCH build-csv.R
 
 roxygenize $(MAN)/phreeqc-package.Rd : phreeqc/R/phreeqc.R
+	rm -f $(RDFILES)
 	R --no-save --no-restore CMD BATCH roxygenize.R
 	touch $(MAN)/phreeqc-package.Rd
+
+
+
 
 ##$(PSRC): $(DEST)
 
