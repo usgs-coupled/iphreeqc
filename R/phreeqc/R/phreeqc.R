@@ -600,8 +600,7 @@ function()
 ##' %% ~~ If necessary, more details than the description above ~~
 ##' 
 ##' @usage phrGetSelectedOutput()
-##' @return Returns a named list of data frames containing the selected_output
-##' from the previous run.
+##' @return Returns a named list of data frames containing the selected_output from the previous run.
 ##' @seealso \code{\link{phrGetSelectedOutputFileOn}} 
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
@@ -1242,33 +1241,35 @@ function(filename)
 
 
 
-##' TODO
+##' Set output file on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the output file switch on or off. This switch controls whether
+##' or not phreeqc writes to the phreeqc.0.out file. This is the output
+##' normally generated when phreeqc is run. Ths initial setting is off.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetOutputFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetOutputFileOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, writes output to the the output file.
+##' @return NULL
+##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
+##' # This example runs ex2 with the output file turned on.
+##'
+##' # write temporary input file
+##' tf <- tempfile()
+##' writeLines(ex2, tf)
+##'
+##' # load database and run input file
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputFileOn(TRUE)
+##' if (is.null(phrRunFile(tf))) {
+##'     cat("see", phrGetOutputFileName(), "\n")
+##' }
+##'
+##' # delete temporary input file
+##' unlink(tf)
 ##' 
 phrSetOutputFileOn =
 function(value)
@@ -1287,22 +1288,17 @@ function(value)
 ##' The output strings setting is only used by the Run methods:
 ##' \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}},
 ##' \code{\link{phrRunString}}.
-##' 
-##' @param value if TRUE, captures output normally sent to the output
-##' file into a buffer.
-##' @return NULL
-##' @seealso \code{\link{phrGetOutputFileOn}},
-##' \code{\link{phrGetOutputStringsOn}},
-##' \code{\link{phrGetOutputStrings}},
-##' \code{\link{phrSetOutputFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##'
+##' @export phrSetOutputStringsOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, captures output normally sent to the output file into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputFileOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' # This example equilibrates pure water with calcite and displays the
-##' # results.
+##' # This example equilibrates pure water with calcite and displays
+##' # the results.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetOutputStringsOn(TRUE)
 ##' input <- c( 
@@ -1311,7 +1307,7 @@ function(value)
 ##'     '    Calcite 0 10      '
 ##'     )
 ##' 
-##' if (!is.null(phrRunString(input))) {
+##' if (is.null(phrRunString(input))) {
 ##'     cat(phrGetOutputStrings(), sep="\n")
 ##' }
 ##' 
