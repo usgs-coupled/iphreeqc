@@ -1288,8 +1288,7 @@ function(value)
 ##' \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}},
 ##' \code{\link{phrRunString}}.
 ##' 
-##' @usage phrSetOutputStringsOn(value)
-##' @param \code{value} If TRUE, captures output normally sent to the output
+##' @param value if TRUE, captures output normally sent to the output
 ##' file into a buffer.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetOutputFileOn}},
@@ -1302,18 +1301,18 @@ function(value)
 ##' @export
 ##' @examples
 ##' 
-##' # This example equilibrates pure water with calcite and displays the results.
-##' 
+##' # This example equilibrates pure water with calcite and displays the
+##' # results.
 ##' phrLoadDatabaseString(phreeqc.dat)
-##' phrSetOutputStringOn(TRUE)
+##' phrSetOutputStringsOn(TRUE)
 ##' input <- c( 
-##'             'SOLUTION 1 Pure water ',
-##'             'EQUILIBRIUM_PHASES 1  ',
-##'             '    Calcite 0 10      '
-##'             )
+##'     'SOLUTION 1 Pure water ',
+##'     'EQUILIBRIUM_PHASES 1  ',
+##'     '    Calcite 0 10      '
+##'     )
 ##' 
 ##' if (!is.null(phrRunString(input))) {
-##'   cat(phrGetOutputStrings())
+##'     cat(phrGetOutputStrings(), sep="\n")
 ##' }
 ##' 
 phrSetOutputStringsOn =
@@ -1321,3 +1320,5 @@ function(value)
 {
   invisible(.Call("setOutputStringOn", as.logical(value), PACKAGE=.packageName))
 }
+
+
