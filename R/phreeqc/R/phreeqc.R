@@ -1097,39 +1097,44 @@ function(value)
 
 
 
-##' TODO
+##' Set the name of the log file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the name of the log file. The default value is phreeqc.0.log
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' Logging must be enabled through the use of the KNOBS -logfile
+##' option in order to receive an log messages.
 ##' 
-##' @usage phrSetLogFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetLogFileName
 ##' @useDynLib phreeqc
-##' @export
+##' @param filename the name of the file.
+##' @return NULL
+##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example equilibrates pure water with calcite and displays
+##' # the log file name.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetLogFileOn(TRUE)
+##' phrSetLogFileName("phreeqc.log")
+##' input <- c( 
+##'     'SOLUTION 1 Pure water ',
+##'     'EQUILIBRIUM_PHASES 1  ',
+##'     '    Calcite 0 10      ',
+##'     'KNOBS                 ',
+##'     '    -logfile true     '
+##'     )
 ##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
+##' if (is.null(phrRunString(input))) {
+##'     cat("see", phrGetLogFileName(), "\n")
+##' }
 ##' 
 phrSetLogFileName =
 function(filename)
 {
   invisible(.Call("setLogFileName", as.character(filename), PACKAGE=.packageName))
 }
+
 
 
 ##' Set log file on/off.
