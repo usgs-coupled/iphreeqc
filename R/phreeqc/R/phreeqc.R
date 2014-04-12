@@ -117,18 +117,12 @@ NULL
 ##' Appends a line of text to the input buffer in order to be run using
 ##' \code{\link{phrRunAccumulated}}.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrAccumulateLine(line)
-##' @param line The line(s) to add for input to phreeqc.
-##' @return This function returns NULL.
-##' @note %% ~~further notes~~
-##' @seealso \code{\link{phrClearAccumulatedLines}},
-##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrAccumulateLine
 ##' @useDynLib phreeqc
-##' @export
+##' @param line the line(s) to add for input to phreeqc.
+##' @return NULL
+##' @seealso \code{\link{phrClearAccumulatedLines}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' # this example loads the phreeqc.dat database, accumulates input, and
@@ -162,22 +156,16 @@ function(line)
 
 
 
-##' Clears the accumulated input buffer.
+##' Clear the accumulated input buffer.
 ##' 
 ##' Clears the accumulated input buffer. The input buffer is accumulated from
 ##' calls to the \code{\link{phrAccumulateLine}} method.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrClearAccumulatedLines()
-##' @return This function returns NULL.
-##' @note %% ~~further notes~~
-##' @seealso \code{\link{phrAccumulateLine}},
-##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrClearAccumulatedLines
 ##' @useDynLib phreeqc
-##' @export
+##' @return NULL
+##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' # This example loads some keyword input, clears the input, and displays
@@ -200,16 +188,11 @@ function()
 ##' 
 ##' Returns the accumulated input as a character vector.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetAccumulatedLines()
+##' @export phrGetAccumulatedLines
+##' @useDynLib phreeqc
 ##' @return A character vector containing the accumulated input.
-##' @note %% ~~further notes~~
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
 ##' @examples
 ##' 
 ##' # This example loads some keyword input and displays the contents.
@@ -225,21 +208,12 @@ function()
 
 
 
-##' Retrieves a list containing the current list of components.
+##' Retrieve a list containing the current list of components.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetComponentList()
-##' @return A list containing the names of the components defined in the
-##' current system.
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetComponentList
 ##' @useDynLib phreeqc
-##' @export
+##' @return A list containing the names of the components defined in the current system.
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' # This example runs the ex2 input file and echos the list of components.
@@ -258,22 +232,16 @@ function()
 
 
 
-##' Retrieves the name of the dump file.
+##' Retrieve the name of the dump file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Retrieves the name of the dump file. This file name is used if not
+##' specified within DUMP input. The default value is dump.0.out.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetDumpFileName()
-##' @return The name of the dump file as a string.
-##' @note %% ~~further notes~~
-##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}},
-##' \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}},
-##' \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetDumpFileName
 ##' @useDynLib phreeqc
-##' @export
+##' @return The name of the dump file as a string.
+##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' phrLoadDatabaseString(phreeqc.dat)
@@ -302,26 +270,20 @@ function()
 
 
 
-##' Retrieves the string buffer containing DUMP output.
+##' Retrieve DUMP strings.
+##'
+##' Retrieves the string buffer containing DUMP output as a character
+##' vector.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetDumpStrings()
-##' @return The dump output as a string.
-##' @note %% ~~further notes~~
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}},
-##' \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}},
-##' \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetDumpStrings
 ##' @useDynLib phreeqc
-##' @export
+##' @return The dump output as a character vector.
+##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' phrLoadDatabaseString(phreeqc.dat)
-##' phrSetDumpStringOn(TRUE)
+##' phrSetDumpStringsOn(TRUE)
 ##' 
 ##' input <-              "SOLUTION 1 Pure water     \n"
 ##' input <- paste(input, "EQUILIBRIUM_PHASES 1      \n")
@@ -333,9 +295,9 @@ function()
 ##' input <- paste(input, "    -equilibrium_phases 1 \n")
 ##' 
 ##' if (!is.null(phrRunString(input))) {
-##'     cat(phrGetErrorStrings())
+##'     cat(phrGetErrorStrings(), sep="\n")
 ##' }
-##' cat(phrGetDumpStrings())
+##' cat(phrGetDumpStrings(), sep="\n")
 ##'
 phrGetDumpStrings =
 function()
@@ -345,25 +307,20 @@ function()
 
 
 
-##' Retrieves the name of the error file.
+##' Retrieve the name of the error file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Retrieves the name of the error file. The default value is phreeqc.0.err.
+##'
+##' The error file switch must be set using the \code{\link{phrSetErrorFileOn}} function.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetErrorFileName()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetErrorFileName
 ##' @useDynLib phreeqc
-##' @export
+##' @return The name of the error file as a string.
+##' @seealso \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileName}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
+##' # This example attempts to run ex1, fails, and displays the
 ##' ##-- ==>  Define data, use random,
 ##' ##--	or do  help(data=index)  for the standard data sets.
 ##' 
@@ -380,37 +337,130 @@ function()
 
 
 
-##' Retrieves the current value of the error file switch.
+##' Retrieve the current value of the dump file switch.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetErrorFileOn()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetDumpFileOn
 ##' @useDynLib phreeqc
-##' @export
-##' @examples
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+phrGetDumpFileOn =
+function()
+{
+  return(.Call("getDumpFileOn", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieve the current value of the dump strings switch.
 ##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
+##' @export phrGetDumpStringsOn
+##' @useDynLib phreeqc
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetDumpStringName}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrGetDumpStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' 
+phrGetDumpStringsOn =
+function()
+{
+  return(.Call("getDumpStringOn", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieve the current value of the error file switch.
+##' 
+##' @export phrGetErrorFileOn
+##' @useDynLib phreeqc
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
 phrGetErrorFileOn =
 function()
 {
   return(.Call("getErrorFileOn", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieve the current value of the error strings switch.
+##' 
+##' @export phrGetErrorStringsOn
+##' @useDynLib phreeqc
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetErrorStringsName}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrGetErrorStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' 
+phrGetErrorStringsOn =
+function()
+{
+  return(.Call("getErrorStringOn", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieve the current value of the log file switch.
+##' 
+##' @export phrGetLogFileOn
+##' @useDynLib phreeqc
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' 
+phrGetLogFileOn =
+function()
+{
+  return(.Call("getLogFileOn", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieve the current value of the log strings switch.
+##' 
+##' @export phrGetLogStringsOn
+##' @useDynLib phreeqc
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetLogStringsName}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrGetLogStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' 
+phrGetLogStringsOn =
+function()
+{
+  return(.Call("getLogStringOn", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieve the current value of the output file switch.
+##' 
+##' @export phrGetOutputFileOn
+##' @useDynLib phreeqc
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' 
+phrGetOutputFileOn =
+function()
+{
+  return(.Call("getOutputFileOn", PACKAGE=.packageName))
+}
+
+
+
+##' Retrieve the current value of the output strings switch.
+##' 
+##' @export phrGetOutputStringsOn
+##' @useDynLib phreeqc
+##' @return TRUE if errors are currently being written to file.
+##' @seealso \code{\link{phrGetOutputStringsName}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}},
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' 
+phrGetOutputStringsOn =
+function()
+{
+  return(.Call("getOutputStringOn", PACKAGE=.packageName))
 }
 
 
@@ -597,25 +647,25 @@ function()
 ##' concatenating the letter 'n' and the user number of the selected output
 ##' block.
 ##'
-##' %% ~~ If necessary, more details than the description above ~~
+##' phrGetSelectedOutput uses the \code{\link{make.names}} function to create valid column
+##' names. The allow_ variable is passed to \code{\link{make.names}} and is used for backward
+##' compatibility.
 ##' 
-##' @usage phrGetSelectedOutput()
-##' @return Returns a named list of data frames containing the selected_output from the previous run.
-##' @seealso \code{\link{phrGetSelectedOutputFileOn}} 
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetSelectedOutput
 ##' @useDynLib phreeqc
-##' @export
+##' @param allow_ for compatibility with R prior to 1.9.0 (default is TRUE).
+##' @return Returns a named list of data frames containing the selected_output from the previous run.
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' 
-##'  # Load database and run ex2
-##'  phrLoadDatabaseString(phreeqc.dat)
-##'  phrRunString(ex2)
+##' # Load database and run ex2
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrRunString(ex2)
 ##'
-##'  # display a summary of the results
-##'  df <- phrGetSelectedOutput()
-##'  summary(df$n1)
+##' # display a summary of the results
+##' df <- phrGetSelectedOutput()
+##' summary(df$n1)
 ##' 
 phrGetSelectedOutput =
 function(allow_ = TRUE)
@@ -881,33 +931,38 @@ function(input)
 
 
 
-##' TODO
+##' Set the name of the dump file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the name of the dump file. This file name is used if not specified
+##' within the DUMP keyword block. The default value is dump.0.out.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetDumpFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetDumpFileName
 ##' @useDynLib phreeqc
-##' @export
+##' @param filename the name of the file.
+##' @return NULL
+##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
+##'
+##' # This example equilibrates pure water with calcite and writes the 
+##' # dump results to file.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetDumpFileOn(TRUE)
+##' phrSetDumpFileName("phreeqc.dump")
+##' input <- c( 
+##'     'SOLUTION 1 Pure water     ',
+##'     'EQUILIBRIUM_PHASES 1      ',
+##'     '    Calcite 0 10          ',
+##'     'SAVE solution 1           ',
+##'     'SAVE equilibrium_phases 1 ',
+##'     'DUMP                      ',
+##'     '    -solution 1           ',
+##'     '    -equilibrium_phases 1 '
+##'     )
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
+##' if (is.null(phrRunString(input))) {
+##'     cat("see", phrGetDumpFileName(), "\n")
+##' }
 ##' 
 phrSetDumpFileName =
 function(filename)
@@ -917,33 +972,37 @@ function(filename)
 
 
 
-##' TODO
+##' Set the dump file on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the dump file switch on or off. This switch controls whether or
+##' not phreeqc writes to the dump file. The initial setting is off.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetDumpFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetDumpFileOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, captures output normally sent to the dump file into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example equilibrates pure water with calcite and writes the 
+##' # dump results to file.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetDumpFileOn(TRUE)
+##' input <- c( 
+##'     'SOLUTION 1 Pure water     ',
+##'     'EQUILIBRIUM_PHASES 1      ',
+##'     '    Calcite 0 10          ',
+##'     'SAVE solution 1           ',
+##'     'SAVE equilibrium_phases 1 ',
+##'     'DUMP                      ',
+##'     '    -solution 1           ',
+##'     '    -equilibrium_phases 1 '
+##'     )
 ##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
+##' if (is.null(phrRunString(input))) {
+##'     cat("see", phrGetDumpFileName(), "\n")
+##' }
 ##' 
 phrSetDumpFileOn =
 function(value)
@@ -953,35 +1012,41 @@ function(value)
 
 
 
-##' TODO
+##' Set dump strings on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetDumpStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' Sets the dump strings switch on or off. This switch controls whether or
+##' not the data normally sent to the dump file are stored in a buffer for
+##' retrieval. The initial setting is off.
+##'
+##' @export phrSetDumpStringsOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, captures output normally sent to the error file into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
+##'
+##' # This example equilibrates pure water with calcite and echos the 
+##' # dump strings.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetDumpStringsOn(TRUE)
+##' input <- c( 
+##'     'SOLUTION 1 Pure water     ',
+##'     'EQUILIBRIUM_PHASES 1      ',
+##'     '    Calcite 0 10          ',
+##'     'SAVE solution 1           ',
+##'     'SAVE equilibrium_phases 1 ',
+##'     'DUMP                      ',
+##'     '    -solution 1           ',
+##'     '    -equilibrium_phases 1 '
+##'     )
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' if (is.null(phrRunString(input))) {
+##'     cat("Dump:\n")
+##'     cat(phrGetDumpStrings(), sep="\n")
+##' }
 ##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetDumpStringOn =
+phrSetDumpStringsOn =
 function(value)
 {
   invisible(.Call("setDumpStringOn", as.logical(value), PACKAGE=.packageName))
@@ -989,33 +1054,32 @@ function(value)
 
 
 
-##' TODO
+##' Set the name of the error file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the name of the error file. The default value is phreeqc.0.err.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetErrorFileName(filename)
-##' @param filename %% ~~Describe \code{filename} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetErrorFileName
 ##' @useDynLib phreeqc
-##' @export
+##' @param filename the name of the file.
+##' @return NULL
+##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
+##'
+##' # This example equilibrates pure water with calcite and displays
+##' # the log file name.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetLogFileOn(TRUE)
+##' phrSetLogFileName("phreeqc.log")
+##' input <- c( 
+##'     'SOLUTION 1 Pure water ',
+##'     'EQUILIBRIUM_PHASES 1  ',
+##'     '    Calcite 0 10      '
+##'     )
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (filename) 
-##' {
-##'   }
+##' if (is.null(phrRunString(input))) {
+##'     cat("see", phrGetLogFileName(), "\n")
+##' }
 ##' 
 phrSetErrorFileName =
 function(filename)
@@ -1025,33 +1089,28 @@ function(filename)
 
 
 
-##' TODO
+##' Set error file on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the error file switch on or off. This switch controls whether
+##' or not phreeqc writes to the error file. The initial setting is off.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrSetErrorFileOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' The try is necessary to keep the error message from displaying immediately.
+##'
+##' @export phrSetErrorFileOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, writes output to the the error file.
+##' @return NULL
+##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrSetErrorStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
-##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
+##'
+##' # This example attempts to run ex1, fails, and writes the error
+##' # message to the error file (no database is loaded).
+##' phrSetErrorFileOn(TRUE)
+##' phrSetErrorFileName("phreeqc.errors")
+##' if (!is.null(try(phrRunString(ex1), silent=TRUE))) {
+##'     cat("see", phrGetErrorFileName(), "\n")
+##' }
 ##' 
 phrSetErrorFileOn =
 function(value)
@@ -1061,35 +1120,30 @@ function(value)
 
 
 
-##' TODO
+##' Set error strings on/off.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Sets the error strings switch on or off.  This switch controls whether or
+##' not the data normally sent to the error file are stored in a buffer for
+##' retrieval. The initial setting is on.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' The try is necessary to keep the error message from displaying immediately.
 ##' 
-##' @usage phrSetErrorStringOn(value)
-##' @param value %% ~~Describe \code{value} here~~
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrSetErrorStringsOn
 ##' @useDynLib phreeqc
-##' @export
+##' @param value if TRUE, captures output normally sent to the error file into a buffer.
+##' @return NULL
+##' @seealso \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
+##'
+##' # This example attempts to run ex1, fails, and displays the error message
+##' # (no database is loaded).
+##' phrSetErrorStringsOn(TRUE)
+##' if (!is.null(try(phrRunString(ex1), silent=TRUE))) {
+##'     cat(phrGetErrorStrings(), "\n")
+##' }
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function (value) 
-##' {
-##'   }
-##' 
-phrSetErrorStringOn =
+phrSetErrorStringsOn =
 function(value)
 {
   invisible(.Call("setErrorStringOn", as.logical(value), PACKAGE=.packageName))
@@ -1150,7 +1204,7 @@ function(filename)
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, writes output to the the log file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrGetLogStrings}}, \c
+##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrGetLogStrings}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
@@ -1174,9 +1228,9 @@ function(value)
 
 
 
-##' Set log string on/off.
+##' Set log strings on/off.
 ##' 
-##' Sets the log string switch on or off.  This switch controls whether or
+##' Sets the log strings switch on or off.  This switch controls whether or
 ##' not the data normally sent to the log file are stored in a buffer for
 ##' retrieval. The initial setting is off.
 ##' 

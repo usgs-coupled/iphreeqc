@@ -291,11 +291,101 @@ getErrorFileName(void)
 }
 
 SEXP
+getDumpFileOn(void)
+{
+  SEXP ans = R_NilValue;
+  PROTECT(ans = allocVector(LGLSXP, 1));
+  if (R::singleton().GetDumpFileOn()) {
+    LOGICAL(ans)[0] = TRUE;
+  }
+  else {
+    LOGICAL(ans)[0] = FALSE;
+  }
+  UNPROTECT(1);
+  return(ans);
+}
+
+SEXP
+getDumpStringOn(void)
+{
+  SEXP ans = R_NilValue;
+  PROTECT(ans = allocVector(LGLSXP, 1));
+  if (R::singleton().GetDumpStringOn()) {
+    LOGICAL(ans)[0] = TRUE;
+  }
+  else {
+    LOGICAL(ans)[0] = FALSE;
+  }
+  UNPROTECT(1);
+  return(ans);
+}
+
+SEXP
 getErrorFileOn(void)
 {
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(LGLSXP, 1));
   if (R::singleton().GetErrorFileOn()) {
+    LOGICAL(ans)[0] = TRUE;
+  }
+  else {
+    LOGICAL(ans)[0] = FALSE;
+  }
+  UNPROTECT(1);
+  return(ans);
+}
+
+SEXP
+getErrorStringOn(void)
+{
+  SEXP ans = R_NilValue;
+  PROTECT(ans = allocVector(LGLSXP, 1));
+  if (R::singleton().GetErrorStringOn()) {
+    LOGICAL(ans)[0] = TRUE;
+  }
+  else {
+    LOGICAL(ans)[0] = FALSE;
+  }
+  UNPROTECT(1);
+  return(ans);
+}
+
+SEXP
+getLogFileOn(void)
+{
+  SEXP ans = R_NilValue;
+  PROTECT(ans = allocVector(LGLSXP, 1));
+  if (R::singleton().GetLogFileOn()) {
+    LOGICAL(ans)[0] = TRUE;
+  }
+  else {
+    LOGICAL(ans)[0] = FALSE;
+  }
+  UNPROTECT(1);
+  return(ans);
+}
+
+SEXP
+getLogStringOn(void)
+{
+  SEXP ans = R_NilValue;
+  PROTECT(ans = allocVector(LGLSXP, 1));
+  if (R::singleton().GetLogStringOn()) {
+    LOGICAL(ans)[0] = TRUE;
+  }
+  else {
+    LOGICAL(ans)[0] = FALSE;
+  }
+  UNPROTECT(1);
+  return(ans);
+}
+
+SEXP
+getOutputStringOn(void)
+{
+  SEXP ans = R_NilValue;
+  PROTECT(ans = allocVector(LGLSXP, 1));
+  if (R::singleton().GetOutputStringOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
   else {
@@ -369,6 +459,21 @@ getOutputFileName(void)
   SEXP ans = R_NilValue;
   PROTECT(ans = allocVector(STRSXP, 1));
   SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetOutputFileName()));
+  UNPROTECT(1);
+  return ans;
+}
+
+SEXP
+getOutputFileOn(void)
+{
+  SEXP ans = R_NilValue;
+  PROTECT(ans = allocVector(LGLSXP, 1));
+  if (R::singleton().GetOutputFileOn()) {
+    LOGICAL(ans)[0] = 1;
+  }
+  else {
+    LOGICAL(ans)[0] = 0;
+  }
   UNPROTECT(1);
   return ans;
 }
