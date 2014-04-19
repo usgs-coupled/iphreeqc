@@ -443,7 +443,7 @@ function() {
 
 ##' Return error string messages.
 ##' 
-##' Returns a string containing any error messages that were generated
+##' Returns a character vector containing any error messages that were generated
 ##' during the last invocation of the following methods:
 ##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
 ##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulated}},
@@ -503,8 +503,8 @@ function() {
 ##' 
 ##' @export phrGetLogStrings
 ##' @useDynLib phreeqc
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+##' @return A character vector containing phreeqc log output.
+##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileName}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
