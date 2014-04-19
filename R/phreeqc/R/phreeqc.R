@@ -1303,17 +1303,120 @@ function(value) {
 
 
 ##' @name phreeqc.dat
-##' @title XXX YYY ZZZ
-##' @description This is the description TODO
+##' @title The phreeqc.dat database
+##' @description phreeqc.dat is a phreeqc database file derived from PHREEQE,
+##' which is consistent with wateq4f.dat, but has a smaller set of elements and
+##' aqueous species. The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @usage phreeqc.dat
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(phreeqc.dat)
+##' @keywords dataset 
 NULL
 
 
 
 ##' @name Amm.dat
-##' @title Title for Amm.dat
-##' @description This is the description for Amm.dat TODO
+##' @title The Amm.dat database.
+##' @description Amm.dat is the same as phreeqc.dat, except that ammmoniz redox
+##' state has been decoupled from the rest of the nitrogen system; that is,
+##' ammonia has been defined as a separate component. The database has been
+##' reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @usage Amm.dat
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(Amm.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name wateq4f.dat
+##' @title The wateq4f.dat database.
+##' @description wateq4f.dat is a database derived from WATEQ4F. The database
+##' has been reformatted for use by \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(wateq4f.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name llnl.dat
+##' @title The llnl.dat database.
+##' @description llnl.dat is a database derived from databases for EQ3/6 and
+##' Geochemist's Workbench that uses thermodynamic data compiled by the
+##' Lawrence Livermore National Laboratory. The database has been reformatted
+##' for use by \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(llnl.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name minteq.dat
+##' @title The minteq.dat database.
+##' @description minteq.dat is a database derived from the databases for the
+##' program MINTEQA2. The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(minteq.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name minteq.v4.dat
+##' @title The minteq.v4.dat database.
+##' @description minteq.v4.dat is a database derived from MINTEQA2 version 4.
+##' The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(minteq.v4.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name pitzer.dat
+##' @title The pitzer.dat database.
+##' @description pitzer.dat is a database for the specific-ion-interaction model
+##' of Pitzer as implemented in PHRQPITZ. The database has been reformatted for
+##' use by \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(pitzer.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name sit.dat
+##' @title The sit.dat database.
+##' @description sit.dat is a database derived from databases for EQ3/6 and
+##' Geochemist's Workbench that uses thermodynamic data compiled by the
+##' Lawrence Livermore National Laboratory. The database has been reformatted
+##' for use by \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(sit.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name iso.dat
+##' @title The iso.dat database.
+##' @description iso.dat is a partial implementation of the individual component
+##' approach to isotope calculations as described by Thorstenson and Parkhurst.
+##' The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage phrLoadDatabaseString(iso.dat)
+##' @keywords dataset 
 NULL
