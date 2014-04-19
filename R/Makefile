@@ -238,17 +238,16 @@ $(DATADIR)/databases.rda : $(DBS) build-databases.R
 %.ascii : $(DBDIR)/%.dat
 	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
 
-$(DATADIR)/examples.RData : $(EXS) build-examples.R
+$(DATADIR)/examples.rda : $(EXS) build-examples.R
 	R --no-save --no-restore CMD BATCH build-examples.R
 
-$(DATADIR)/csv.RData : SE_to_export_03142014.csv build-csv.R
+$(DATADIR)/csv.rda : SE_to_export_03142014.csv build-csv.R
 	R --no-save --no-restore CMD BATCH build-csv.R
 
 roxygenize $(MAN)/phreeqc-package.Rd : phreeqc/R/phreeqc.R
 	rm -f $(RDFILES)
 	R --no-save --no-restore CMD BATCH roxygenize.R
 	touch $(MAN)/phreeqc-package.Rd
-
 
 
 
