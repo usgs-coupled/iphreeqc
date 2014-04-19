@@ -5,8 +5,7 @@
 ##' Geochemical Calculations.
 ##' 
 ##' \tabular{ll}{ Package: \tab phreeqc\cr Type: \tab Package\cr Version: \tab
-##' 1.0\cr Date: \tab 2014-02-05\cr License: \tab Unlimited\cr } ~~ An overview
-##' of how to use the package, including the most important functions ~~
+##' 1.0\cr Date: \tab 2014-02-05\cr License: \tab Unlimited\cr }
 ##' 
 ##' @name phreeqc-package
 ##' @aliases phreeqc-package phreeqc
@@ -36,9 +35,9 @@
 ##' title  <- "Gypsum-Anhydrite Stability"
 ##' xlabel <- "Temperature, in degrees celcius"
 ##' ylabel <- "Saturation index"
-##' plot(temp.C., si_gypsum, main=title, xlab=xlabel, ylab=ylabel,
-##'      col="darkred", xlim=c(25, 75), ylim=c(-0.4, 0.0))
-##' points(temp.C., si_anhydrite, col="darkgreen")
+##' plot(temp.C., si_gypsum, main = title, xlab = xlabel, ylab = ylabel,
+##'      col = "darkred", xlim = c(25, 75), ylim = c(-0.4, 0.0))
+##' points(temp.C., si_anhydrite, col = "darkgreen")
 ##' legend("bottomright", c("Gypsum", "Anhydrite"),
 ##'        col = c("darkred", "darkgreen"), pch = c(1, 1))
 ##'
@@ -81,7 +80,9 @@
 ##' # CO2.df <- read.csv("SE_to_export_03142014.csv")
 ##'
 ##' # pull out pertinent data out of df and into solns
-##' solns <- data.frame("soln" = CO2.df[,1], "Temp" = CO2.df[,2], "pH" = CO2.df[,3], "alkalinity" = CO2.df[,21], "syringe_CO2" = CO2.df[,7])
+##' solns <- data.frame("soln" = CO2.df[,1], "Temp" = CO2.df[,2],
+##'                     "pH" = CO2.df[,3], "alkalinity" = CO2.df[,21],
+##'                     "syringe_CO2" = CO2.df[,7])
 ##' 
 ##' # create input (as a character vector)
 ##' input <- vector()
@@ -112,7 +113,7 @@ NULL
 
 
 
-##' Accumlulate line(s) for input to phreeqc.
+##' Accumulate line(s) for input to phreeqc.
 ##' 
 ##' Appends a line of text to the input buffer in order to be run using
 ##' \code{\link{phrRunAccumulated}}.
@@ -145,13 +146,12 @@ NULL
 ##' phrAccumulateLine("END")
 ##' phrSetOutputFileOn(TRUE)
 ##' if (is.null(phrRunAccumulated())) {
-##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
+##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep = ""))
 ##' }
 ##' 
-phrAccumulateLine =
-function(line)
-{
-  invisible(.Call("accumLineLst", as.character(line), PACKAGE=.packageName))
+phrAccumulateLine <-
+function(line) {
+  invisible(.Call("accumLineLst", as.character(line), PACKAGE = .packageName))
 }
 
 
@@ -172,14 +172,13 @@ function(line)
 ##' # the results.
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrAccumulateLine("END")
-##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep="\n")
+##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep = "\n")
 ##' phrClearAccumulatedLines()
-##' cat("The accumulated input now is:\n", phrGetAccumulatedLines(), sep="\n")
+##' cat("The accumulated input now is:\n", phrGetAccumulatedLines(), sep = "\n")
 ##' 
-phrClearAccumulatedLines =
-function()
-{
-  invisible(.Call("clearAccum", PACKAGE=.packageName))
+phrClearAccumulatedLines <-
+function() {
+  invisible(.Call("clearAccum", PACKAGE = .packageName))
 }
 
 
@@ -198,12 +197,11 @@ function()
 ##' # This example loads some keyword input and displays the contents.
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrAccumulateLine("END")
-##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep="\n")
+##' cat("The accumulated input is:", phrGetAccumulatedLines(), sep = "\n")
 ##' 
-phrGetAccumulatedLines =
-function()
-{
-  return(.Call("getAccumLines", PACKAGE=.packageName))
+phrGetAccumulatedLines <-
+function() {
+  return(.Call("getAccumLines", PACKAGE = .packageName))
 }
 
 
@@ -224,10 +222,9 @@ function()
 ##'   cat(comp, "\n")
 ##' }
 ##' 
-phrGetComponentList =
-function()
-{
-  return(.Call("listComps", PACKAGE=.packageName))
+phrGetComponentList <-
+function() {
+  return(.Call("listComps", PACKAGE = .packageName))
 }
 
 
@@ -257,15 +254,14 @@ function()
 ##' input <- paste(input, "    -equilibrium_phases  1\n")
 ##' 
 ##' if (!is.null(phrRunString(input))) {
-##'     cat(phrGetErrorStrings())
+##'   cat(phrGetErrorStrings())
 ##' }
 ##' cat(paste("see ", phrGetDumpFileName(), "."))
 ##' 
 ##' 
-phrGetDumpFileName =
-function()
-{
-  return(.Call("getDumpFileName", PACKAGE=.packageName))
+phrGetDumpFileName <-
+function() {
+  return(.Call("getDumpFileName", PACKAGE = .packageName))
 }
 
 
@@ -278,7 +274,7 @@ function()
 ##' @export phrGetDumpStrings
 ##' @useDynLib phreeqc
 ##' @return The dump output as a character vector.
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStringOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
@@ -295,14 +291,13 @@ function()
 ##' input <- paste(input, "    -equilibrium_phases 1 \n")
 ##' 
 ##' if (!is.null(phrRunString(input))) {
-##'     cat(phrGetErrorStrings(), sep="\n")
+##'   cat(phrGetErrorStrings(), sep = "\n")
 ##' }
-##' cat(phrGetDumpStrings(), sep="\n")
+##' cat(phrGetDumpStrings(), sep = "\n")
 ##'
-phrGetDumpStrings =
-function()
-{
-  return(.Call("getDumpStrings", PACKAGE=.packageName))
+phrGetDumpStrings <-
+function() {
+  return(.Call("getDumpStrings", PACKAGE = .packageName))
 }
 
 
@@ -318,21 +313,10 @@ function()
 ##' @return The name of the error file as a string.
 ##' @seealso \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileName}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @examples
 ##' 
-##' # This example attempts to run ex1, fails, and displays the
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetErrorFileName =
-function()
-{
-  return(.Call("getErrorFileName", PACKAGE=.packageName))
+phrGetErrorFileName <-
+function() {
+  return(.Call("getErrorFileName", PACKAGE = .packageName))
 }
 
 
@@ -342,13 +326,12 @@ function()
 ##' @export phrGetDumpFileOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}},
+##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetDumpFileOn =
-function()
-{
-  return(.Call("getDumpFileOn", PACKAGE=.packageName))
+phrGetDumpFileOn <-
+function() {
+  return(.Call("getDumpFileOn", PACKAGE = .packageName))
 }
 
 
@@ -358,13 +341,12 @@ function()
 ##' @export phrGetDumpStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetDumpStringName}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrGetDumpStrings}},
+##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetDumpStringsOn =
-function()
-{
-  return(.Call("getDumpStringOn", PACKAGE=.packageName))
+phrGetDumpStringsOn <-
+function() {
+  return(.Call("getDumpStringOn", PACKAGE = .packageName))
 }
 
 
@@ -377,10 +359,9 @@ function()
 ##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}},
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetErrorFileOn =
-function()
-{
-  return(.Call("getErrorFileOn", PACKAGE=.packageName))
+phrGetErrorFileOn <-
+function() {
+  return(.Call("getErrorFileOn", PACKAGE = .packageName))
 }
 
 
@@ -390,13 +371,12 @@ function()
 ##' @export phrGetErrorStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetErrorStringsName}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrGetErrorStrings}},
+##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}},
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetErrorStringsOn =
-function()
-{
-  return(.Call("getErrorStringOn", PACKAGE=.packageName))
+phrGetErrorStringsOn <-
+function() {
+  return(.Call("getErrorStringOn", PACKAGE = .packageName))
 }
 
 
@@ -409,10 +389,9 @@ function()
 ##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}},
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetLogFileOn =
-function()
-{
-  return(.Call("getLogFileOn", PACKAGE=.packageName))
+phrGetLogFileOn <-
+function() {
+  return(.Call("getLogFileOn", PACKAGE = .packageName))
 }
 
 
@@ -422,13 +401,12 @@ function()
 ##' @export phrGetLogStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetLogStringsName}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrGetLogStrings}},
+##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}},
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetLogStringsOn =
-function()
-{
-  return(.Call("getLogStringOn", PACKAGE=.packageName))
+phrGetLogStringsOn <-
+function() {
+  return(.Call("getLogStringOn", PACKAGE = .packageName))
 }
 
 
@@ -438,13 +416,12 @@ function()
 ##' @export phrGetOutputFileOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}},
+##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}},
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetOutputFileOn =
-function()
-{
-  return(.Call("getOutputFileOn", PACKAGE=.packageName))
+phrGetOutputFileOn <-
+function() {
+  return(.Call("getOutputFileOn", PACKAGE = .packageName))
 }
 
 
@@ -454,13 +431,12 @@ function()
 ##' @export phrGetOutputStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetOutputStringsName}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}},
+##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}},
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
-phrGetOutputStringsOn =
-function()
-{
-  return(.Call("getOutputStringOn", PACKAGE=.packageName))
+phrGetOutputStringsOn <-
+function() {
+  return(.Call("getOutputStringOn", PACKAGE = .packageName))
 }
 
 
@@ -470,21 +446,17 @@ function()
 ##' Returns a string containing any error messages that were generated
 ##' during the last invocation of the following methods:
 ##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
-##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
+##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulated}},
 ##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}
 ##' 
 ##' This routine is rarely needed when running interactively since the error
 ##' string is displayed when it occurs.
 ##' 
-##' @usage phrGetErrorStrings()
-##' @return This function returns the errors that occured during the previous
-##' phrReadDB, phrRun, phrRunFile call.
-##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
-##' \code{\link{phrRunFile}}, \code{\link{phrGetSelectedOutput}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetErrorStrings
 ##' @useDynLib phreeqc
-##' @export
+##' @return The error messages as a character vector.
+##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileName}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' # loaddatabase should fail
@@ -492,115 +464,100 @@ function()
 ##' # if n is non-NULL display error string
 ##' if (!is.null(n)) phrGetErrorStrings()
 ##' 
-phrGetErrorStrings =
-function()
-{
-  return(.Call("getErrorStrings", PACKAGE=.packageName))
+phrGetErrorStrings <-
+function() {
+  return(.Call("getErrorStrings", PACKAGE = .packageName))
 }
 
 
 
-##' Retrieves the name of the log file.
+##' Retrieve the name of the log file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Retrieves the name of the log file. The default name is phreeqc.0.log.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetLogFileName()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetLogFileName
 ##' @useDynLib phreeqc
-##' @export
+##' @return The name of the log file as a string.
+##' @seealso \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileName}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
+##'
+##' # This example checks to see if the log file is turned on
+##' # and prints the appropriate message
+##' if (phrGetLogFileOn()) {
+##'   cat("The name of the log file (is/will be):", phrGetLogFileName(), "\n")
+##' } else {
+##'   cat("The log file is not turned on\n")
+##' }
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
-##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetLogFileName =
-function()
-{
-  return(.Call("getLogFileName", PACKAGE=.packageName))
+phrGetLogFileName <-
+function() {
+  return(.Call("getLogFileName", PACKAGE = .packageName))
 }
 
 
 
+##' Retrieve log output.
+##' 
 ##' Retrieves the string buffer containing phreeqc log output.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetLogStrings()
+##' @export phrGetLogStrings
+##' @useDynLib phreeqc
 ##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
 ##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example equilibrates pure water with gypsum with the output file on.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputFileOn(TRUE)
+##'
+##' input <- vector(mode="character")
+##' input <- c(input, "SOLUTION 1 Pure water ")
+##' input <- c(input, "EQUILIBRIUM_PHASES 1  ")
+##' input <- c(input, "  Gypsum 0 10         ")
+##' input <- c(input, "KNOBS                 ")
+##' input <- c(input, "  -logfile TRUE       ")
+##'
+##' if (is.null(phrRunString(input))) {
+##'   log <- phrGetLogStrings()
+##' }
 ##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetLogStrings =
-function()
-{
-  return(.Call("getLogStrings", PACKAGE=.packageName))
+phrGetLogStrings <-
+function() {
+  return(.Call("getLogStrings", PACKAGE = .packageName))
 }
 
 
 
-##' Retrieves the name of the output file.
+##' Retrieve the name of the output file.
 ##' 
-##' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+##' Retrieves the name of the output file. The default name is phreeqc.0.out.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
-##' 
-##' @usage phrGetOutputFileName()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
 ##' @export
+##' @useDynLib phreeqc
+##' @return The name of the outputfile as a string.
+##' @seealso \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrSetOutputFileName}}, \code{\link{phrSetOutputFileOn}}, \code{\link{phrSetOutputStringsOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example equilibrates pure water with gypsum with the output file on.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputFileOn(TRUE)
+##'
+##' input <- vector(mode="character")
+##' input <- c(input, "SOLUTION 1 Pure water ")
+##' input <- c(input, "EQUILIBRIUM_PHASES 1  ")
+##' input <- c(input, "  Gypsum 0 10         ")
+##'
+##' if (is.null(phrRunString(input))) {
+##'   output <- readLines(phrGetOutputFileName())
+##'   unlink(phrGetOutputFileName())  # tidy up
+##' }
 ##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetOutputFileName =
-function()
-{
-  return(.Call("getOutputFileName", PACKAGE=.packageName))
+phrGetOutputFileName <-
+function() {
+  return(.Call("getOutputFileName", PACKAGE = .packageName))
 }
 
 
@@ -611,31 +568,30 @@ function()
 ##' 
 ##' A NULL value is returned when there is no selected-output.
 ##' 
-##' @usage phrGetOutputStrings()
-##' @return %% ~Describe the value returned %% If it is a LIST, use %%
-##' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-##' 'comp2'} %% ...
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetOutputStrings
 ##' @useDynLib phreeqc
-##' @export
+##' @return A character vector containing phreeqc output.
+##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrSetOutputFileOn}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
-##' ##---- Should be DIRECTLY executable !! ----
-##' ##-- ==>  Define data, use random,
-##' ##--	or do  help(data=index)  for the standard data sets.
+##' # This example equilibrates pure water with calcite and displays
+##' # the results
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##'
+##' input <- vector(mode="character")
+##' input <- c(input, "SOLUTION 1 Pure water ")
+##' input <- c(input, "EQUILIBRIUM_PHASES 1  ")
+##' input <- c(input, "  Gypsum 0 10         ")
+##'
+##' if (is.null(phrRunString(input))) {
+##'   cat(phrGetOutputStrings(), sep = "\n")
+##' }
 ##' 
-##' ## The function is currently defined as
-##' function () 
-##' {
-##'   }
-##' 
-phrGetOutputStrings =
-function()
-{
-  return(.Call("getOutputStrings", PACKAGE=.packageName))
+phrGetOutputStrings <-
+function() {
+  return(.Call("getOutputStrings", PACKAGE = .packageName))
 }
 
 
@@ -647,17 +603,16 @@ function()
 ##' concatenating the letter 'n' and the user number of the selected output
 ##' block.
 ##'
-##' phrGetSelectedOutput uses the \code{\link{make.names}} function to create valid column
-##' names. The allow_ variable is passed to \code{\link{make.names}} and is used for backward
-##' compatibility.
+##' phrGetSelectedOutput uses the \code{\link{make.names}} function to create
+##' valid column names. The allow_ variable is passed to
+##' \code{\link{make.names}} and is used for backward compatibility.
 ##' 
 ##' @export phrGetSelectedOutput
 ##' @useDynLib phreeqc
-##' @param allow_ for compatibility with R prior to 1.9.0 (default is TRUE).
+##' @param allow_ used for compatibility with R prior to 1.9.0 (default is TRUE).
 ##' @return Returns a named list of data frames containing the selected_output from the previous run.
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
-##' 
 ##' 
 ##' # Load database and run ex2
 ##' phrLoadDatabaseString(phreeqc.dat)
@@ -667,14 +622,14 @@ function()
 ##' df <- phrGetSelectedOutput()
 ##' summary(df$n1)
 ##' 
-phrGetSelectedOutput =
-function(allow_ = TRUE)
-{
-  sel_outs <- .Call("getSelOutLst", PACKAGE=.packageName)
+phrGetSelectedOutput <-
+function(allow_ = TRUE) {
+  sel_outs <- .Call("getSelOutLst", PACKAGE = .packageName)
   if (!is.null(sel_outs)) {
     for (t in names(sel_outs)) {
       if (!is.null(sel_outs[[t]])) {
-        names(sel_outs[[t]]) <- make.names(names(sel_outs[[t]]), unique = TRUE, allow_ = allow_)
+        names(sel_outs[[t]]) <- make.names(names(sel_outs[[t]]), unique = TRUE,
+                                           allow_ = allow_)
       }
     }
   }
@@ -688,19 +643,15 @@ function(allow_ = TRUE)
 ##' Returns a character vector containing any warning messages that were
 ##' generated during the last invocation of the following methods:
 ##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
-##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulatedeadString}},
+##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulated}},
 ##' \code{\link{phrRunFile}}, \code{\link{phrRunString}}.
 ##' 
 ##' A NULL value is returned if there are no warnings.
 ##' 
-##' @usage phrGetWarningStrings()
-##' @return A character vector containing warning messages or NULL.
-##' @note %% ~~further notes~~
-##' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrGetWarningStrings
 ##' @useDynLib phreeqc
-##' @export
+##' @return A character vector containing warning messages or NULL.
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' # This example loads the phreeqc.dat database and attempts to use the
@@ -712,13 +663,12 @@ function(allow_ = TRUE)
 ##' phrAccumulateLine("SOLUTION 1")
 ##' phrRunAccumulated()
 ##' if (!is.null(phrGetWarningStrings())) {
-##'   cat(phrGetWarningStrings(), sep="\n")
+##'   cat(phrGetWarningStrings(), sep = "\n")
 ##' }
 ##' 
-phrGetWarningStrings =
-function()
-{
-  return(.Call("getWarningStrings", PACKAGE=.packageName))
+phrGetWarningStrings <-
+function() {
+  return(.Call("getWarningStrings", PACKAGE = .packageName))
 }
 
 
@@ -728,14 +678,12 @@ function()
 ##' Loads the given phreeqc database into phreeqc.  Returns NULL if successful.
 ##' 
 ##' 
-##' @usage phrLoadDatabase(filename)
-##' @param filename The file name of the database.
+##' @export phrLoadDatabase
+##' @useDynLib phreeqc
+##' @param filename The name of the database file.
 ##' @return This function returns NULL.
 ##' @seealso \code{\link{phrLoadDatabaseString}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
 ##' @examples
 ##'
 ##' # create temporary database file
@@ -751,10 +699,9 @@ function()
 ##' # delete temporary database file
 ##' unlink(tf)
 ##' 
-phrLoadDatabase =
-function(filename)
-{
-  invisible(.Call("loadDB", as.character(filename), PACKAGE=.packageName))
+phrLoadDatabase <-
+function(filename) {
+  invisible(.Call("loadDB", as.character(filename), PACKAGE = .packageName))
 }
 
 
@@ -764,31 +711,28 @@ function(filename)
 ##' Load the specified string(s) as a database into phreeqc. Returns NULL if
 ##' successful.
 ##' 
-##' %% ~~ If necessary, more details than the description above ~~
+##' All previous definitions are cleared.
 ##' 
-##' @usage phrLoadDatabaseString(input)
+##' @export phrLoadDatabaseString
+##' @useDynLib phreeqc
 ##' @param input String containing data to be used as the phreeqc database.
 ##' @return This function returns NULL.
-##' @note All previous definitions are cleared.
 ##' @seealso \code{\link{phrLoadDatabase}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
 ##' @examples
 ##' 
-##'   # this example loads the phreeqc.dat database, turns on the
-##'   # output file and runs ex2 as a string
-##'   phrLoadDatabaseString(phreeqc.dat)
-##'   phrSetOutputFileOn(TRUE)
-##'   if (is.null(phrRunString(ex2))) {
-##'     cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
-##'   }
+##' # this example loads the phreeqc.dat database, turns on the
+##' # output file and runs ex2 as a string
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputFileOn(TRUE)
+##' if (is.null(phrRunString(ex2))) {
+##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep = ""))
+##' }
 ##' 
-phrLoadDatabaseString =
-function(input)
-{
-  invisible(.Call("loadDBLst", as.character(input), PACKAGE=.packageName))
+phrLoadDatabaseString <-
+function(input) {
+  invisible(.Call("loadDBLst", as.character(input), PACKAGE = .packageName))
 }
 
 
@@ -800,17 +744,16 @@ function(input)
 ##' After calling \code{phrRunAccumulated} \code{\link{phrGetAccumulatedLines}} can
 ##' be used in case of errors. The accumulated lines will be cleared on the next call
 ##' to \code{\link{phrAccumulateLine}}.
+##'
+##' The \code{phrAccumulateLine} method cannot be called until a database
+##' has been successfully loaded by calls to either
+##' \code{\link{phrLoadDatabase}} or \code{\link{phrLoadDatabaseString}}.
 ##' 
-##' @usage phrRunAccumulated()
-##' @return This function returns NULL on success.
-##' @note The \code{phrAccumulateLine} method cannot be called until a database
-##' has been successfully loaded by calls to either \code{\link{phrLoadDatabase}} or \code{\link{phrLoadDatabaseString}}.
-##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrClearAccumulatedLines}},
-##' \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunFile}}, \code{\link{phrRunString}} 
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
+##' @export phrRunAccumulated
 ##' @useDynLib phreeqc
-##' @export
+##' @return This function returns NULL on success.
+##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrClearAccumulatedLines}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunFile}}, \code{\link{phrRunString}}
+##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @examples
 ##' 
 ##' # turn on the output file
@@ -838,12 +781,11 @@ function(input)
 ##' 
 ##' # run it and echo the name of the output file
 ##' if (is.null(phrRunAccumulated())) {
-##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
+##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep = ""))
 ##' }
-phrRunAccumulated =
-function()
-{
-  invisible(.Call("runAccum", PACKAGE=.packageName))
+phrRunAccumulated <-
+function() {
+  invisible(.Call("runAccum", PACKAGE = .packageName))
 }
 
 
@@ -852,15 +794,12 @@ function()
 ##' 
 ##' phrRunFile executes a phreeqc run using a file as input
 ##' 
-##' @usage phrRunFile(filename)
+##' @export phrRunFile
+##' @useDynLib phreeqc
 ##' @param filename The file name of the phreeqc input file.
 ##' @return This function returns NULL on success.
-##' @seealso \code{\link{phrReadString}}, \code{\link{phrRun}},
-##' \code{\link{phrGetSelectedOutput}}
+##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}, \code{\link{phrGetSelectedOutput}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
 ##' @examples
 ##'
 ##' # load the phreeqc.dat database
@@ -873,11 +812,12 @@ function()
 ##' if (is.null(phrRunFile("ex2"))) {
 ##'   cat("use phrGetSelectedOutput() to see results.")
 ##' }
+##'
+##' unlink("ex2")  # tidy up
 ##' 
-phrRunFile =
-function(filename)
-{
-  invisible(.Call("runFile", as.character(filename), PACKAGE=.packageName))
+phrRunFile <-
+function(filename) {
+  invisible(.Call("runFile", as.character(filename), PACKAGE = .packageName))
 }
 
 
@@ -891,15 +831,13 @@ function(filename)
 ##' been successfully loaded by one of the following the LoadDatabase
 ##' methods \code{\link{phrLoadDatabase}}, \code{\link{phrLoadDatabaseString}}.
 ##' 
-##' @usage phrRunString(input)
+##' @export phrRunString
+##' @useDynLib phreeqc
 ##' @param input character vector containing phreeqc input
 ##' @return This function returns NULL on success.
-##' @note %% ~~further notes~~
 ##' @seealso \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}}
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords interface
-##' @useDynLib phreeqc
-##' @export
 ##' @examples
 ##'
 ##' #
@@ -923,10 +861,9 @@ function(filename)
 ##' phrRunString(input)
 ##' cat(paste("see", phrGetOutputFileName(), "."))
 ##' 
-phrRunString =
-function(input)
-{
-  invisible(.Call("runStringLst", as.character(input), PACKAGE=.packageName))
+phrRunString <-
+function(input) {
+  invisible(.Call("runStringLst", as.character(input), PACKAGE = .packageName))
 }
 
 
@@ -950,24 +887,23 @@ function(input)
 ##' phrSetDumpFileOn(TRUE)
 ##' phrSetDumpFileName("phreeqc.dump")
 ##' input <- c( 
-##'     'SOLUTION 1 Pure water     ',
-##'     'EQUILIBRIUM_PHASES 1      ',
-##'     '    Calcite 0 10          ',
-##'     'SAVE solution 1           ',
-##'     'SAVE equilibrium_phases 1 ',
-##'     'DUMP                      ',
-##'     '    -solution 1           ',
-##'     '    -equilibrium_phases 1 '
-##'     )
+##'   'SOLUTION 1 Pure water     ',
+##'   'EQUILIBRIUM_PHASES 1      ',
+##'   '    Calcite 0 10          ',
+##'   'SAVE solution 1           ',
+##'   'SAVE equilibrium_phases 1 ',
+##'   'DUMP                      ',
+##'   '    -solution 1           ',
+##'   '    -equilibrium_phases 1 '
+##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'     cat("see", phrGetDumpFileName(), "\n")
+##'   cat("see", phrGetDumpFileName(), "\n")
 ##' }
 ##' 
-phrSetDumpFileName =
-function(filename)
-{
-  invisible(.Call("setDumpFileName", as.character(filename), PACKAGE=.packageName))
+phrSetDumpFileName <-
+function(filename) {
+  invisible(.Call("setDumpFileName", as.character(filename), PACKAGE = .packageName))
 }
 
 
@@ -990,24 +926,23 @@ function(filename)
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetDumpFileOn(TRUE)
 ##' input <- c( 
-##'     'SOLUTION 1 Pure water     ',
-##'     'EQUILIBRIUM_PHASES 1      ',
-##'     '    Calcite 0 10          ',
-##'     'SAVE solution 1           ',
-##'     'SAVE equilibrium_phases 1 ',
-##'     'DUMP                      ',
-##'     '    -solution 1           ',
-##'     '    -equilibrium_phases 1 '
-##'     )
+##'   'SOLUTION 1 Pure water     ',
+##'   'EQUILIBRIUM_PHASES 1      ',
+##'   '    Calcite 0 10          ',
+##'   'SAVE solution 1           ',
+##'   'SAVE equilibrium_phases 1 ',
+##'   'DUMP                      ',
+##'   '    -solution 1           ',
+##'   '    -equilibrium_phases 1 '
+##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'     cat("see", phrGetDumpFileName(), "\n")
+##'   cat("see", phrGetDumpFileName(), "\n")
 ##' }
 ##' 
-phrSetDumpFileOn =
-function(value)
-{
-  invisible(.Call("setDumpFileOn", as.logical(value), PACKAGE=.packageName))
+phrSetDumpFileOn <-
+function(value) {
+  invisible(.Call("setDumpFileOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
@@ -1031,25 +966,24 @@ function(value)
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetDumpStringsOn(TRUE)
 ##' input <- c( 
-##'     'SOLUTION 1 Pure water     ',
-##'     'EQUILIBRIUM_PHASES 1      ',
-##'     '    Calcite 0 10          ',
-##'     'SAVE solution 1           ',
-##'     'SAVE equilibrium_phases 1 ',
-##'     'DUMP                      ',
-##'     '    -solution 1           ',
-##'     '    -equilibrium_phases 1 '
-##'     )
+##'   'SOLUTION 1 Pure water     ',
+##'   'EQUILIBRIUM_PHASES 1      ',
+##'   '    Calcite 0 10          ',
+##'   'SAVE solution 1           ',
+##'   'SAVE equilibrium_phases 1 ',
+##'   'DUMP                      ',
+##'   '    -solution 1           ',
+##'   '    -equilibrium_phases 1 '
+##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'     cat("Dump:\n")
-##'     cat(phrGetDumpStrings(), sep="\n")
+##'   cat("Dump:\n")
+##'   cat(phrGetDumpStrings(), sep = "\n")
 ##' }
 ##' 
-phrSetDumpStringsOn =
-function(value)
-{
-  invisible(.Call("setDumpStringOn", as.logical(value), PACKAGE=.packageName))
+phrSetDumpStringsOn <-
+function(value) {
+  invisible(.Call("setDumpStringOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
@@ -1072,19 +1006,18 @@ function(value)
 ##' phrSetLogFileOn(TRUE)
 ##' phrSetLogFileName("phreeqc.log")
 ##' input <- c( 
-##'     'SOLUTION 1 Pure water ',
-##'     'EQUILIBRIUM_PHASES 1  ',
-##'     '    Calcite 0 10      '
-##'     )
+##'   'SOLUTION 1 Pure water ',
+##'   'EQUILIBRIUM_PHASES 1  ',
+##'   '    Calcite 0 10      '
+##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'     cat("see", phrGetLogFileName(), "\n")
+##'   cat("see", phrGetErrorFileName(), "\n")
 ##' }
 ##' 
-phrSetErrorFileName =
-function(filename)
-{
-  invisible(.Call("setErrorFileName", as.character(filename), PACKAGE=.packageName))
+phrSetErrorFileName <-
+function(filename) {
+  invisible(.Call("setErrorFileName", as.character(filename), PACKAGE = .packageName))
 }
 
 
@@ -1109,13 +1042,12 @@ function(filename)
 ##' phrSetErrorFileOn(TRUE)
 ##' phrSetErrorFileName("phreeqc.errors")
 ##' if (!is.null(try(phrRunString(ex1), silent=TRUE))) {
-##'     cat("see", phrGetErrorFileName(), "\n")
+##'   cat("see", phrGetErrorFileName(), "\n")
 ##' }
 ##' 
-phrSetErrorFileOn =
-function(value)
-{
-  invisible(.Call("setErrorFileOn", as.logical(value), PACKAGE=.packageName))
+phrSetErrorFileOn <-
+function(value) {
+  invisible(.Call("setErrorFileOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
@@ -1140,13 +1072,12 @@ function(value)
 ##' # (no database is loaded).
 ##' phrSetErrorStringsOn(TRUE)
 ##' if (!is.null(try(phrRunString(ex1), silent=TRUE))) {
-##'     cat(phrGetErrorStrings(), "\n")
+##'   cat(phrGetErrorStrings(), "\n")
 ##' }
 ##' 
-phrSetErrorStringsOn =
-function(value)
-{
-  invisible(.Call("setErrorStringOn", as.logical(value), PACKAGE=.packageName))
+phrSetErrorStringsOn <-
+function(value) {
+  invisible(.Call("setErrorStringOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
@@ -1172,21 +1103,20 @@ function(value)
 ##' phrSetLogFileOn(TRUE)
 ##' phrSetLogFileName("phreeqc.log")
 ##' input <- c( 
-##'     'SOLUTION 1 Pure water ',
-##'     'EQUILIBRIUM_PHASES 1  ',
-##'     '    Calcite 0 10      ',
-##'     'KNOBS                 ',
-##'     '    -logfile true     '
-##'     )
+##'   'SOLUTION 1 Pure water ',
+##'   'EQUILIBRIUM_PHASES 1  ',
+##'   '    Calcite 0 10      ',
+##'   'KNOBS                 ',
+##'   '    -logfile true     '
+##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'     cat("see", phrGetLogFileName(), "\n")
+##'   cat("see", phrGetLogFileName(), "\n")
 ##' }
 ##' 
-phrSetLogFileName =
-function(filename)
-{
-  invisible(.Call("setLogFileName", as.character(filename), PACKAGE=.packageName))
+phrSetLogFileName <-
+function(filename) {
+  invisible(.Call("setLogFileName", as.character(filename), PACKAGE = .packageName))
 }
 
 
@@ -1217,13 +1147,12 @@ function(filename)
 ##' phrRunAccumulated()
 ##' 
 ##' if (is.null(phrRunString(ex2))) {
-##'     cat("see", phrGetLogFileName(), "\n")
+##'   cat("see", phrGetLogFileName(), "\n")
 ##' }
 ##' 
-phrSetLogFileOn =
-function(value)
-{
-  invisible(.Call("setLogFileOn", as.logical(value), PACKAGE=.packageName))
+phrSetLogFileOn <-
+function(value) {
+  invisible(.Call("setLogFileOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
@@ -1251,13 +1180,12 @@ function(value)
 ##' phrRunAccumulated()
 ##' 
 ##' if (is.null(phrRunString(ex2))) {
-##'     cat(phrGetLogStrings(), sep="\n")
+##'   cat(phrGetLogStrings(), sep = "\n")
 ##' }
 ##' 
-phrSetLogStringsOn =
-function(value)
-{
-  invisible(.Call("setLogStringOn", as.logical(value), PACKAGE=.packageName))
+phrSetLogStringsOn <-
+function(value) {
+  invisible(.Call("setLogStringOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
@@ -1282,19 +1210,18 @@ function(value)
 ##' phrSetOutputFileOn(TRUE)
 ##' phrSetOutputFileName("phreeqc.output")
 ##' input <- c( 
-##'     'SOLUTION 1 Pure water ',
-##'     'EQUILIBRIUM_PHASES 1  ',
-##'     '    Calcite 0 10      '
-##'     )
+##'   'SOLUTION 1 Pure water ',
+##'   'EQUILIBRIUM_PHASES 1  ',
+##'   '    Calcite 0 10      '
+##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'     cat("see", phrGetOutputFileName(), "\n")
+##'   cat("see", phrGetOutputFileName(), "\n")
 ##' }
 ##' 
-phrSetOutputFileName =
-function(filename)
-{
-  invisible(.Call("setOutputFileName", as.character(filename), PACKAGE=.packageName))
+phrSetOutputFileName <-
+function(filename) {
+  invisible(.Call("setOutputFileName", as.character(filename), PACKAGE = .packageName))
 }
 
 
@@ -1323,16 +1250,15 @@ function(filename)
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetOutputFileOn(TRUE)
 ##' if (is.null(phrRunFile(tf))) {
-##'     cat("see", phrGetOutputFileName(), "\n")
+##'   cat("see", phrGetOutputFileName(), "\n")
 ##' }
 ##'
 ##' # delete temporary input file
 ##' unlink(tf)
 ##' 
-phrSetOutputFileOn =
-function(value)
-{
-  invisible(.Call("setOutputFileOn", as.logical(value), PACKAGE=.packageName))
+phrSetOutputFileOn <-
+function(value) {
+  invisible(.Call("setOutputFileOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
@@ -1360,19 +1286,34 @@ function(value)
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetOutputStringsOn(TRUE)
 ##' input <- c( 
-##'     'SOLUTION 1 Pure water ',
-##'     'EQUILIBRIUM_PHASES 1  ',
-##'     '    Calcite 0 10      '
-##'     )
+##'   'SOLUTION 1 Pure water ',
+##'   'EQUILIBRIUM_PHASES 1  ',
+##'   '    Calcite 0 10      '
+##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'     cat(phrGetOutputStrings(), sep="\n")
+##'   cat(phrGetOutputStrings(), sep = "\n")
 ##' }
 ##' 
-phrSetOutputStringsOn =
-function(value)
-{
-  invisible(.Call("setOutputStringOn", as.logical(value), PACKAGE=.packageName))
+phrSetOutputStringsOn <-
+function(value) {
+  invisible(.Call("setOutputStringOn", as.logical(value), PACKAGE = .packageName))
 }
 
 
+
+##' @name phreeqc.dat
+##' @title XXX YYY ZZZ
+##' @description This is the description TODO
+##' @docType data
+##' @usage phreeqc.dat
+NULL
+
+
+
+##' @name Amm.dat
+##' @title Title for Amm.dat
+##' @description This is the description for Amm.dat TODO
+##' @docType data
+##' @usage Amm.dat
+NULL

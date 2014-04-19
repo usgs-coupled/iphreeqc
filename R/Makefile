@@ -226,13 +226,13 @@ XSRC = \
 	$(IDEST)/Makevars
 
 DATA = \
-	$(DATADIR)/csv.RData \
-	$(DATADIR)/databases.RData \
-	$(DATADIR)/examples.RData
+	$(DATADIR)/csv.rda \
+	$(DATADIR)/databases.rda \
+	$(DATADIR)/examples.rda
 
 all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
-$(DATADIR)/databases.RData : $(DBS) build-databases.R
+$(DATADIR)/databases.rda : $(DBS) build-databases.R
 	R --no-save --no-restore CMD BATCH build-databases.R
 
 %.ascii : $(DBDIR)/%.dat
