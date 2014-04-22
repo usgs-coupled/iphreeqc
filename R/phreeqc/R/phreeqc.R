@@ -13,7 +13,7 @@
 ##' @author David L. Parkhurst \email{dlpark@@usgs.gov}\cr C.A.J. Appelo
 ##' \email{appt@@hydrochemistry.eu}\cr Maintainer: Scott R. Charlton
 ##' \email{charlton@@usgs.gov}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @keywords package
 ##' @examples
 ##'
@@ -123,7 +123,7 @@ NULL
 ##' @param line the line(s) to add for input to phreeqc.
 ##' @return NULL
 ##' @seealso \code{\link{phrClearAccumulatedLines}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # this example loads the phreeqc.dat database, accumulates input, and
@@ -165,7 +165,7 @@ function(line) {
 ##' @useDynLib phreeqc
 ##' @return NULL
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example loads some keyword input, clears the input, and displays
@@ -191,7 +191,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return A character vector containing the accumulated input.
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example loads some keyword input and displays the contents.
@@ -211,7 +211,7 @@ function() {
 ##' @export phrGetComponentList
 ##' @useDynLib phreeqc
 ##' @return A list containing the names of the components defined in the current system.
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example runs the ex2 input file and echos the list of components.
@@ -238,7 +238,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the dump file as a string.
 ##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' phrLoadDatabaseString(phreeqc.dat)
@@ -275,7 +275,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The dump output as a character vector.
 ##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' phrLoadDatabaseString(phreeqc.dat)
@@ -312,7 +312,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the error file as a string.
 ##' @seealso \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileName}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetErrorFileName <-
 function() {
@@ -327,7 +327,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetDumpFileOn <-
 function() {
@@ -342,7 +342,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetDumpStringsOn <-
 function() {
@@ -357,7 +357,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}},
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetErrorFileOn <-
 function() {
@@ -372,7 +372,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}},
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetErrorStringsOn <-
 function() {
@@ -387,7 +387,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}},
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetLogFileOn <-
 function() {
@@ -417,7 +417,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}},
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetOutputFileOn <-
 function() {
@@ -432,7 +432,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}},
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetOutputStringsOn <-
 function() {
@@ -441,9 +441,9 @@ function() {
 
 
 
-##' Return error string messages.
+##' Retrieve error string messages.
 ##' 
-##' Returns a character vector containing any error messages that were generated
+##' Retrieves a character vector containing any error messages that were generated
 ##' during the last invocation of the following methods:
 ##' \code{\link{phrAccumulateLine}}, \code{\link{phrLoadDatabase}},
 ##' \code{\link{phrLoadDatabaseString}}, \code{\link{phrRunAccumulated}},
@@ -456,7 +456,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The error messages as a character vector.
 ##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileName}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # loaddatabase should fail
@@ -479,7 +479,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the log file as a string.
 ##' @seealso \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileName}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # This example checks to see if the log file is turned on
@@ -505,7 +505,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return A character vector containing phreeqc log output.
 ##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileName}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example equilibrates pure water with gypsum with the output file on.
@@ -538,7 +538,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the outputfile as a string.
 ##' @seealso \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrSetOutputFileName}}, \code{\link{phrSetOutputFileOn}}, \code{\link{phrSetOutputStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example equilibrates pure water with gypsum with the output file on.
@@ -572,7 +572,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return A character vector containing phreeqc output.
 ##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrSetOutputFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example equilibrates pure water with calcite and displays
@@ -611,7 +611,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @param allow_ used for compatibility with R prior to 1.9.0 (default is TRUE).
 ##' @return Returns a named list of data frames containing the selected_output from the previous run.
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # Load database and run ex2
@@ -651,7 +651,7 @@ function(allow_ = TRUE) {
 ##' @export phrGetWarningStrings
 ##' @useDynLib phreeqc
 ##' @return A character vector containing warning messages or NULL.
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example loads the phreeqc.dat database and attempts to use the
@@ -683,7 +683,7 @@ function() {
 ##' @param filename The name of the database file.
 ##' @return This function returns NULL.
 ##' @seealso \code{\link{phrLoadDatabaseString}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # create temporary database file
@@ -718,7 +718,7 @@ function(filename) {
 ##' @param input String containing data to be used as the phreeqc database.
 ##' @return This function returns NULL.
 ##' @seealso \code{\link{phrLoadDatabase}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @keywords interface
 ##' @examples
 ##' 
@@ -753,7 +753,7 @@ function(input) {
 ##' @useDynLib phreeqc
 ##' @return This function returns NULL on success.
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrClearAccumulatedLines}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunFile}}, \code{\link{phrRunString}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # turn on the output file
@@ -799,7 +799,7 @@ function() {
 ##' @param filename The file name of the phreeqc input file.
 ##' @return This function returns NULL on success.
 ##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}, \code{\link{phrGetSelectedOutput}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # load the phreeqc.dat database
@@ -836,7 +836,7 @@ function(filename) {
 ##' @param input character vector containing phreeqc input
 ##' @return This function returns NULL on success.
 ##' @seealso \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @keywords interface
 ##' @examples
 ##'
@@ -878,7 +878,7 @@ function(input) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # This example equilibrates pure water with calcite and writes the 
@@ -918,7 +918,7 @@ function(filename) {
 ##' @param value if TRUE, captures output normally sent to the dump file into a buffer.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example equilibrates pure water with calcite and writes the 
@@ -958,7 +958,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # This example equilibrates pure water with calcite and echos the 
@@ -997,7 +997,7 @@ function(value) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # This example equilibrates pure water with calcite and displays
@@ -1034,7 +1034,7 @@ function(filename) {
 ##' @param value if TRUE, writes output to the the error file.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrSetErrorStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # This example attempts to run ex1, fails, and writes the error
@@ -1065,7 +1065,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
 ##' # This example attempts to run ex1, fails, and displays the error message
@@ -1094,7 +1094,7 @@ function(value) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example equilibrates pure water with calcite and displays
@@ -1135,7 +1135,7 @@ function(filename) {
 ##' @param value if TRUE, writes output to the the log file.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrGetLogStrings}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example runs ex2 with the log file turned on.
@@ -1168,7 +1168,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the log file into a buffer.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example runs ex2 with log strings turned on.
@@ -1201,7 +1201,7 @@ function(value) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example equilibrates pure water with calcite and displays
@@ -1237,7 +1237,7 @@ function(filename) {
 ##' @param value if TRUE, writes output to the the output file.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputStringsOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example runs ex2 with the output file turned on.
@@ -1278,7 +1278,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the output file into a buffer.
 ##' @return NULL
 ##' @seealso \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputFileOn}}
-##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # This example equilibrates pure water with calcite and displays
@@ -1309,8 +1309,9 @@ function(value) {
 ##' aqueous species. The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(phreeqc.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage phreeqc.dat  # phrLoadDatabaseString(phreeqc.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1318,13 +1319,14 @@ NULL
 
 ##' @name Amm.dat
 ##' @title The Amm.dat database.
-##' @description Amm.dat is the same as phreeqc.dat, except that ammmoniz redox
+##' @description Amm.dat is the same as phreeqc.dat, except that ammmonia redox
 ##' state has been decoupled from the rest of the nitrogen system; that is,
 ##' ammonia has been defined as a separate component. The database has been
 ##' reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(Amm.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage Amm.dat  # phrLoadDatabaseString(Amm.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1335,8 +1337,9 @@ NULL
 ##' @description wateq4f.dat is a database derived from WATEQ4F. The database
 ##' has been reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(wateq4f.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage wateq4f.dat  # phrLoadDatabaseString(wateq4f.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1349,8 +1352,8 @@ NULL
 ##' Lawrence Livermore National Laboratory. The database has been reformatted
 ##' for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(llnl.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @usage llnl.dat  # phrLoadDatabaseString(llnl.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1362,8 +1365,9 @@ NULL
 ##' program MINTEQA2. The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(minteq.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage minteq.dat  # phrLoadDatabaseString(minteq.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1375,8 +1379,9 @@ NULL
 ##' The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(minteq.v4.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage minteq.v4.dat  # phrLoadDatabaseString(minteq.v4.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1388,8 +1393,9 @@ NULL
 ##' of Pitzer as implemented in PHRQPITZ. The database has been reformatted for
 ##' use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(pitzer.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage pitzer  # phrLoadDatabaseString(pitzer.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1402,8 +1408,9 @@ NULL
 ##' Lawrence Livermore National Laboratory. The database has been reformatted
 ##' for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(sit.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage sit.dat  # phrLoadDatabaseString(sit.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1416,7 +1423,31 @@ NULL
 ##' The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
-##' @source \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @usage phrLoadDatabaseString(iso.dat)
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage iso.dat  # phrLoadDatabaseString(iso.dat)
 ##' @keywords dataset 
 NULL
+
+
+
+##' @name ex1
+##' @title Example 1--Speciation Calculation
+##' @description This example calculates the distribution of aqueous species in
+##' seawater and the saturation state of seawater relative to a set of minerals.
+##' To demonstrate how to expand the model to new elements, uranium is added to
+##' the aqueous model defined by \code{\link{phreeqc.dat}}.  The example can be
+##' run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##' 
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex1)
+##' phrGetOutputStrings()
+##' 
+NULL
+
