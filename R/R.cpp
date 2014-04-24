@@ -503,12 +503,19 @@ getOutputStrings(void)
 }
 
 SEXP
-getSelectedOutputFileName(void)
+getSelectedOutputFileName(SEXP nuser)
 {
   SEXP ans = R_NilValue;
+  // check args
+  if (!isInteger(nuser) || length(nuser) != 1) {
+    error("GetSelectedOutputFileName:nuser must be a single integer\n");
+  }
+  int save = R::singleton().GetCurrentSelectedOutputUserNumber();
+  R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);
   PROTECT(ans = allocVector(STRSXP, 1));
   SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetSelectedOutputFileName()));
   UNPROTECT(1);
+  R::singleton().SetCurrentSelectedOutputUserNumber(save);
   return ans;
 }
 

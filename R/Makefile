@@ -11,6 +11,7 @@ MAN=phreeqc/man
 
 DBS = \
 	Amm.ascii \
+	ex15.ascii \
 	iso.ascii \
 	llnl.ascii \
 	minteq.ascii \
@@ -234,6 +235,9 @@ all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
 $(DATADIR)/databases.rda : $(DBS) build-databases.R
 	R --no-save --no-restore CMD BATCH build-databases.R
+
+ex15.ascii : $(EXDIR)/ex15.dat
+	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
 
 %.ascii : $(DBDIR)/%.dat
 	perl -pe 's/[^[:ascii:]]/?/g' $< > $@

@@ -122,7 +122,7 @@ NULL
 ##' @useDynLib phreeqc
 ##' @param line the line(s) to add for input to phreeqc.
 ##' @return NULL
-##' @seealso \code{\link{phrClearAccumulatedLines}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
+##' @family Accumulate
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -164,7 +164,7 @@ function(line) {
 ##' @export phrClearAccumulatedLines
 ##' @useDynLib phreeqc
 ##' @return NULL
-##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunAccumulated}}
+##' @family Accumulate
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -190,7 +190,7 @@ function() {
 ##' @export phrGetAccumulatedLines
 ##' @useDynLib phreeqc
 ##' @return A character vector containing the accumulated input.
-##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}
+##' @family Accumulate
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -237,7 +237,7 @@ function() {
 ##' @export phrGetDumpFileName
 ##' @useDynLib phreeqc
 ##' @return The name of the dump file as a string.
-##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -274,7 +274,7 @@ function() {
 ##' @export phrGetDumpStrings
 ##' @useDynLib phreeqc
 ##' @return The dump output as a character vector.
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileName}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -311,7 +311,7 @@ function() {
 ##' @export phrGetErrorFileName
 ##' @useDynLib phreeqc
 ##' @return The name of the error file as a string.
-##' @seealso \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileName}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
+##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetErrorFileName <-
@@ -326,7 +326,7 @@ function() {
 ##' @export phrGetDumpFileOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}
+##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetDumpFileOn <-
@@ -341,7 +341,7 @@ function() {
 ##' @export phrGetDumpStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}
+##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetDumpStringsOn <-
@@ -356,7 +356,7 @@ function() {
 ##' @export phrGetErrorFileOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}},
+##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetErrorFileOn <-
@@ -371,7 +371,7 @@ function() {
 ##' @export phrGetErrorStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}},
+##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetErrorStringsOn <-
@@ -386,7 +386,7 @@ function() {
 ##' @export phrGetLogFileOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}},
+##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetLogFileOn <-
@@ -401,7 +401,7 @@ function() {
 ##' @export phrGetLogStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}},
+##' @family Log
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
 phrGetLogStringsOn <-
@@ -416,7 +416,7 @@ function() {
 ##' @export phrGetOutputFileOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}},
+##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetOutputFileOn <-
@@ -431,7 +431,7 @@ function() {
 ##' @export phrGetOutputStringsOn
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
-##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}},
+##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
 phrGetOutputStringsOn <-
@@ -455,7 +455,7 @@ function() {
 ##' @export phrGetErrorStrings
 ##' @useDynLib phreeqc
 ##' @return The error messages as a character vector.
-##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileName}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
+##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -478,7 +478,7 @@ function() {
 ##' @export phrGetLogFileName
 ##' @useDynLib phreeqc
 ##' @return The name of the log file as a string.
-##' @seealso \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileName}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
+##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -504,7 +504,7 @@ function() {
 ##' @export phrGetLogStrings
 ##' @useDynLib phreeqc
 ##' @return A character vector containing phreeqc log output.
-##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileName}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
+##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -536,8 +536,8 @@ function() {
 ##' 
 ##' @export
 ##' @useDynLib phreeqc
-##' @return The name of the outputfile as a string.
-##' @seealso \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrSetOutputFileName}}, \code{\link{phrSetOutputFileOn}}, \code{\link{phrSetOutputStringsOn}}
+##' @return The name of the output file as a string.
+##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -571,7 +571,7 @@ function() {
 ##' @export phrGetOutputStrings
 ##' @useDynLib phreeqc
 ##' @return A character vector containing phreeqc output.
-##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrSetOutputFileOn}}
+##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -611,6 +611,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @param allow_ used for compatibility with R prior to 1.9.0 (default is TRUE).
 ##' @return Returns a named list of data frames containing the selected_output from the previous run.
+##' @family Selected Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -651,6 +652,7 @@ function(allow_ = TRUE) {
 ##' @export phrGetWarningStrings
 ##' @useDynLib phreeqc
 ##' @return A character vector containing warning messages or NULL.
+##' @family Warning
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -682,7 +684,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @param filename The name of the database file.
 ##' @return This function returns NULL.
-##' @seealso \code{\link{phrLoadDatabaseString}}
+##' @family Load Database
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -717,7 +719,7 @@ function(filename) {
 ##' @useDynLib phreeqc
 ##' @param input String containing data to be used as the phreeqc database.
 ##' @return This function returns NULL.
-##' @seealso \code{\link{phrLoadDatabase}}
+##' @family Load Database
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @keywords interface
 ##' @examples
@@ -752,7 +754,8 @@ function(input) {
 ##' @export phrRunAccumulated
 ##' @useDynLib phreeqc
 ##' @return This function returns NULL on success.
-##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrClearAccumulatedLines}}, \code{\link{phrGetAccumulatedLines}}, \code{\link{phrRunFile}}, \code{\link{phrRunString}}
+##' @family Accumulate
+##' @family Run
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -798,7 +801,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @param filename The file name of the phreeqc input file.
 ##' @return This function returns NULL on success.
-##' @seealso \code{\link{phrAccumulateLine}}, \code{\link{phrRunAccumulated}}, \code{\link{phrGetSelectedOutput}}
+##' @family Run
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -835,7 +838,7 @@ function(filename) {
 ##' @useDynLib phreeqc
 ##' @param input character vector containing phreeqc input
 ##' @return This function returns NULL on success.
-##' @seealso \code{\link{phrRunAccumulated}}, \code{\link{phrRunFile}}
+##' @family Run
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @keywords interface
 ##' @examples
@@ -877,7 +880,7 @@ function(input) {
 ##' @useDynLib phreeqc
 ##' @param filename the name of the file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -917,7 +920,7 @@ function(filename) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, captures output normally sent to the dump file into a buffer.
 ##' @return NULL
-##' @seealso \code{\link{phrGetDumpFileName}}, \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}, \code{\link{phrSetDumpStringsOn}}
+##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -957,7 +960,7 @@ function(value) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
-##' @seealso \code{\link{phrGetDumpFileOn}}, \code{\link{phrGetDumpStrings}}, \code{\link{phrGetDumpStringsOn}}, \code{\link{phrSetDumpFileOn}}
+##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -996,7 +999,7 @@ function(value) {
 ##' @useDynLib phreeqc
 ##' @param filename the name of the file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileOn}}, \code{\link{phrSetErrorStringsOn}}
+##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -1033,7 +1036,7 @@ function(filename) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, writes output to the the error file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetErrorFileName}}, \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrGetErrorStrings}}, \code{\link{phrSetErrorStringsOn}}
+##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -1064,7 +1067,7 @@ function(value) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
-##' @seealso \code{\link{phrGetErrorFileOn}}, \code{\link{phrGetErrorStringsOn}}, \code{\link{phrSetErrorFileOn}}
+##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
@@ -1087,13 +1090,13 @@ function(value) {
 ##' Sets the name of the log file. The default value is phreeqc.0.log
 ##' 
 ##' Logging must be enabled through the use of the KNOBS -logfile
-##' option in order to receive an log messages.
+##' option in order to receive any log messages.
 ##' 
 ##' @export phrSetLogFileName
 ##' @useDynLib phreeqc
 ##' @param filename the name of the file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStrings}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileOn}}, \code{\link{phrSetLogStringsOn}}
+##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -1134,7 +1137,7 @@ function(filename) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, writes output to the the log file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetLogFileName}}, \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrGetLogStrings}}
+##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -1167,7 +1170,7 @@ function(value) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, captures output normally sent to the log file into a buffer.
 ##' @return NULL
-##' @seealso \code{\link{phrGetLogFileOn}}, \code{\link{phrGetLogStringsOn}}, \code{\link{phrSetLogFileOn}}
+##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -1200,7 +1203,7 @@ function(value) {
 ##' @useDynLib phreeqc
 ##' @param filename the name of the file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputFileOn}}
+##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -1236,7 +1239,7 @@ function(filename) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, writes output to the the output file.
 ##' @return NULL
-##' @seealso \code{\link{phrGetOutputFileName}}, \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputStringsOn}}
+##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -1277,7 +1280,7 @@ function(value) {
 ##' @useDynLib phreeqc
 ##' @param value if TRUE, captures output normally sent to the output file into a buffer.
 ##' @return NULL
-##' @seealso \code{\link{phrGetOutputFileOn}}, \code{\link{phrGetOutputStringsOn}}, \code{\link{phrGetOutputStrings}}, \code{\link{phrSetOutputFileOn}}
+##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##' 
@@ -1302,6 +1305,137 @@ function(value) {
 
 
 
+##' Retrieve the name of the selected_output file.
+##' 
+##' Retrieves the name of the selected_output file. The default value is selected_{nuser}.0.out.
+##'
+##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
+##' 
+##' @export phrGetSelectedOutputFileName
+##' @useDynLib phreeqc
+##' @param nuser the user number specified in the SELECTED_OUTPUT block.
+##' @return The name of the selected_output file as a string.
+##' @family Selected Output
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @examples
+##' 
+##' # This example equilibrates pure water with calcite at various temperatures
+##' # and displays the name of the selected_output file.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetSelectedOutputFileOn(1, TRUE)
+##' phrSetSelectedOutputFileName(1, "ex2.sel")
+##'
+##' input <- c( 
+##'   'SOLUTION 1 Pure water     ',
+##'   'EQUILIBRIUM_PHASES 1      ',
+##'   '    Calcite    0.0   1.0  ',
+##'   'REACTION_TEMPERATURE 1    ',
+##'   '    25.0 75.0 in 51 steps ',
+##'   'SELECTED_OUTPUT 1         ',
+##'   '    -temperature          ',
+##'   '    -si     calcite       '
+##'   )
+##' 
+##' 
+##' if (is.null(phrRunString(input))) {
+##'   cat("see", phrGetSelectedOutputFileName(1))
+##' }
+##' 
+phrGetSelectedOutputFileName <-
+function(nuser) {
+  invisible(.Call("getSelectedOutputFileName", as.integer(nuser), PACKAGE = .packageName))
+}
+
+
+
+##' Set the name of the selected_output file.
+##' 
+##' Sets the name of the selected_output file. The default value is selected_{nuser}.0.out.
+##'
+##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
+##' 
+##' @export phrSetSelectedOutputFileName
+##' @useDynLib phreeqc
+##' @param nuser the user number specified in the SELECTED_OUTPUT block.
+##' @param filename the name of the selected_output file.
+##' @return NULL
+##' @family Selected Output
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @examples
+##' 
+##' # This example equilibrates pure water with calcite at various temperatures
+##' # and displays the name of the selected_output file.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetSelectedOutputFileOn(1, TRUE)
+##' phrSetSelectedOutputFileName(1, "ex2.sel")
+##'
+##' input <- c( 
+##'   'SOLUTION 1 Pure water     ',
+##'   'EQUILIBRIUM_PHASES 1      ',
+##'   '    Calcite    0.0   1.0  ',
+##'   'REACTION_TEMPERATURE 1    ',
+##'   '    25.0 75.0 in 51 steps ',
+##'   'SELECTED_OUTPUT 1         ',
+##'   '    -temperature          ',
+##'   '    -si     calcite       '
+##'   )
+##' 
+##' 
+##' if (is.null(phrRunString(input))) {
+##'   cat("see", phrGetSelectedOutputFileName(1))
+##' }
+##' 
+phrSetSelectedOutputFileName <-
+function(nuser, filename) {
+  invisible(.Call("setSelectedOutputFileName", as.integer(nuser), as.character(filename), PACKAGE = .packageName))
+}
+
+
+
+##' Set selected_output file on/off.
+##' 
+##' Sets the output file switch on or off. This switch controls whether
+##' or not phreeqc writes to the output file. This is the output normally
+##' generated when phreeqc is run. The initial setting is off.
+##' 
+##' @export phrSetSelectedOutputFileOn
+##' @useDynLib phreeqc
+##' @param nuser the user number specified in the SELECTED_OUTPUT block.
+##' @param value if TRUE, writes output to the the selected_output file.
+##' @return NULL
+##' @family Selected Output
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @examples
+##' 
+##' # This example equilibrates pure water with calcite at various temperatures
+##' # and displays the name of the selected_output file.
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetSelectedOutputFileOn(1, TRUE)
+##' phrSetSelectedOutputFileName(1, "ex2.sel")
+##'
+##' input <- c( 
+##'   'SOLUTION 1 Pure water     ',
+##'   'EQUILIBRIUM_PHASES 1      ',
+##'   '    Calcite    0.0   1.0  ',
+##'   'REACTION_TEMPERATURE 1    ',
+##'   '    25.0 75.0 in 51 steps ',
+##'   'SELECTED_OUTPUT 1         ',
+##'   '    -temperature          ',
+##'   '    -si     calcite       '
+##'   )
+##' 
+##' 
+##' if (is.null(phrRunString(input))) {
+##'   cat("see", phrGetSelectedOutputFileName(1))
+##' }
+##' 
+phrSetSelectedOutputFileOn <-
+function(nuser, value) {
+  invisible(.Call("setSelectedOutputFileOn", as.integer(nuser), as.logical(value), PACKAGE = .packageName))
+}
+
+
+
 ##' @name phreeqc.dat
 ##' @title The phreeqc.dat database
 ##' @description phreeqc.dat is a phreeqc database file derived from PHREEQE,
@@ -1309,9 +1443,25 @@ function(value) {
 ##' aqueous species. The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage phreeqc.dat  # phrLoadDatabaseString(phreeqc.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name ex15.dat
+##' @title The ex15.dat database
+##' @description ex15.dat is a database used by example 15 (\code{\link{ex15}}).
+##' The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage ex15.dat  # phrLoadDatabaseString(ex15.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1324,6 +1474,7 @@ NULL
 ##' ammonia has been defined as a separate component. The database has been
 ##' reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage Amm.dat  # phrLoadDatabaseString(Amm.dat)
@@ -1337,6 +1488,7 @@ NULL
 ##' @description wateq4f.dat is a database derived from WATEQ4F. The database
 ##' has been reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage wateq4f.dat  # phrLoadDatabaseString(wateq4f.dat)
@@ -1352,6 +1504,7 @@ NULL
 ##' Lawrence Livermore National Laboratory. The database has been reformatted
 ##' for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @usage llnl.dat  # phrLoadDatabaseString(llnl.dat)
 ##' @keywords dataset 
@@ -1365,6 +1518,7 @@ NULL
 ##' program MINTEQA2. The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage minteq.dat  # phrLoadDatabaseString(minteq.dat)
@@ -1379,6 +1533,7 @@ NULL
 ##' The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage minteq.v4.dat  # phrLoadDatabaseString(minteq.v4.dat)
@@ -1393,6 +1548,7 @@ NULL
 ##' of Pitzer as implemented in PHRQPITZ. The database has been reformatted for
 ##' use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage pitzer  # phrLoadDatabaseString(pitzer.dat)
@@ -1408,6 +1564,7 @@ NULL
 ##' Lawrence Livermore National Laboratory. The database has been reformatted
 ##' for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage sit.dat  # phrLoadDatabaseString(sit.dat)
@@ -1423,6 +1580,7 @@ NULL
 ##' The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
+##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage iso.dat  # phrLoadDatabaseString(iso.dat)
@@ -1439,6 +1597,7 @@ NULL
 ##' the aqueous model defined by \code{\link{phreeqc.dat}}.  The example can be
 ##' run using the \code{\link{phrRunString}} routine.
 ##' @docType data
+##' @family Examples
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
@@ -1451,3 +1610,655 @@ NULL
 ##' 
 NULL
 
+
+
+##' @name ex2
+##' @title Example 2--Equilibration With Pure Phases
+##' @description This example shows how to calculate the solubility and relative
+##' thermodynamic stability of two minerals, gypsum and anhydrite. The example
+##' can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##' 
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex2)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex3
+##' @title Example 3--Mixing
+##' @description This example demonstrates the capabilities of PHREEQC to
+##' perform a series of geochemical simulations, with the final simulations
+##' relying on results from previous simulations within the same run. The
+##' example investigates diagenetic reactions that may occur in zones where
+##' seawater mixes with carbonate groundwater. The example is divided into five
+##' simulations, labeled part A through part E. (A) Carbonate groundwater is
+##' defined by equilibrating pure water with calcite at a of 10-2.0 atm. (B)
+##' Seawater is defined by using the major-ion data given in table.9. (C) The
+##' two solutions are mixed together in the proportions 70 percent groundwater
+##' and 30 percent seawater. (D) The mixture is equilibrated with calcite and
+##' dolomite. (E) The mixture is equilibrated with calcite only to investigate
+##' the chemical evolution if dolomite precipitation is assumed to be
+##' negligible. The example can be run using the \code{\link{phrRunString}}
+##' routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##' 
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex3)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex4
+##' @title Example 4--Evaporation and Homogeneous Redox Reactions
+##' @description Evaporation is accomplished by removing water from the chemical
+##' system. Water can be removed by several methods: (1) water can be specified
+##' as an irreversible reactant with a negative reaction coefficient in the
+##' REACTION keyword input, (2) the solution can be mixed with pure water which
+##' is given a negative mixing fraction in MIX, or (3) "H2O" can be specified as
+##' the alternative reaction in EQUILIBRIUM_PHASES keyword input, in which case
+##' water is removed or added to the aqueous phase to attain equilibrium with a
+##' specified phase. This example uses the first method; the REACTION data block
+##' is used to simulate concentration of rainwater by approximately 20-fold by
+##' removing 95 percent of the water. The resulting solution contains only about
+##' 0.05 kg of water. In a subsequent simulation, the MIX keyword is used to
+##' generate a solution that has the same concentrations as the evaporated
+##' solution, but has a total mass of water of approximately 1 kg. The example
+##' can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##' 
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex4)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex5
+##' @title Example 5--Irreversible Reactions
+##' @description This example demonstrates the irreversible reaction
+##' capabilities of PHREEQC in modeling the oxidation of pyrite. Oxygen (O2) and
+##' NaCl are added irreversibly to pure water in six amounts (0.0, 0.001, 0.005,
+##' 0.01, 0.03, and 0.05 mol); the relative proportion of O2 to NaCl in the
+##' irreversible reaction is 1.0 to 0.5. Pyrite, calcite, and goethite are
+##' allowed to dissolve to equilibrium and the carbon dioxide partial pressure
+##' is maintained at 10-3.5 (atmospheric partial pressure). In addition, gypsum
+##' is allowed to precipitate if it becomes supersaturated. The example can be
+##' run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##' 
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex5)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex6
+##' @title Example 6--Reaction-Path Calculations
+##' @description In this example, the precipitation of phases as a result of
+##' incongruent dissolution of K-feldspar (microcline) is investigated. Only the
+##' four phases originally addressed by Helgeson and others (1969)--K-feldspar,
+##' gibbsite, kaolinite, and K-mica (muscovite)--are considered. The
+##' thermodynamic data for the phases (PHASES keyword) are derived from Robie
+##' and others (1978) and are the same as for test problem 5 in the PHREEQE
+##' manual (Parkhurst and others, 1980). The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##' 
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex6)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex7
+##' @title Example 7--Gas-Phase Calculations
+##' @description This example demonstrates the capabilities of PHREEQC to model
+##' the evolution of gas compositions in equilibrium with a solution with a
+##' fixed (total) pressure or a fixed volume of the gas phase. In the case of a
+##' fixed-pressure gas phase, a gas bubble forms as soon as the sum of the
+##' partial pressures of the component gases exceeds the specified pressure of
+##' the gas phase. Once the bubble forms, its volume and composition will vary
+##' with the extent of reactions. This case applies to gas bubbles forming in
+##' surface water or groundwater at a given depth, where the total pressure is
+##' constant. With a fixed-volume gas phase, the aqueous solution is in contact
+##' with a head space of a fixed volume, which is typical for a laboratory
+##' experiment with a closed bottle. The gas phase always exists in this head
+##' space, but its pressure and composition will vary with the reactions.
+##' Another way to model gas-liquid reactions in PHREEQC is to maintain a fixed
+##' partial pressure by using the EQUILIBRIUM_PHASES data block. This
+##' fixed-partial-pressure approach is illustrated in this example by fixing
+##' the CO2 pressure for a SOLUTION. The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##' 
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex7)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex8
+##' @title Example 8--Surface Complexation
+##' @description In all surface complexation models, sorption is a function of
+##' both chemical and electrostatic energy as described by the free energy
+##' relationship. Sorption is stronger when the Gibbs energy decreases. Thus, a
+##' counter-ion that carries a charge opposite to the surface charge tends to be
+##' sorbed electrostatically, while a co-ion that carries a charge with the same
+##' sign as the surface tends to be rejected. The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' # example 8 requires the selected_output file to be turned on
+##' phrSetSelectedOutputFileOn(1, TRUE)
+##' phrRunString(ex8)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex9
+##' @title Example 9--Kinetic Oxidation of Dissolved Ferrous Iron With Oxygen
+##' @description Kinetic rate expressions can be defined in a completely general
+##' way in PHREEQC by using Basic statements in the RATES data block. The rate
+##' expressions can be used in batch-reaction and transport calculations with
+##' the KINETICS data block. For transport calculations (ADVECTION or TRANSPORT),
+##' kinetic reactions can be defined cell by cell by the number range following
+##' the KINETICS keyword (KINETICS m-n). The rate expressions are integrated with
+##' an embedded (up to) 5th-order Runge-Kutta-Fehlberg algorithm, or with a
+##' stiff, variable-order, variable-step multistep solver (Cohen and Hindmarsh,
+##' 1996). Equilibrium is calculated before a kinetic calculation is initiated
+##' and again when a kinetic reaction increment is added. Equilibrium includes
+##' solution species equilibrium; exchange-, equilibrium-phase-, solid-solution-,
+##' and surface-assemblage equilibrium; and gas-phase equilibrium. A check is
+##' performed to ensure that the difference between estimates of the integrated
+##' rate over a time interval is smaller than a user-defined tolerance. If the
+##' tolerance is not satisfied, then the integration over the time interval is
+##' automatically restarted with a smaller time interval. The example can be run
+##' using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex9)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex10
+##' @title Example 10--Aragonite-Strontianite Solid Solution
+##' @description PHREEQC has the capability to model multicomponent ideal and
+##' binary nonideal solid solutions. For ideal solid solutions, the activity of
+##' each end member solid is equal to its mole fraction. For nonideal solid
+##' solutions, the activity of each end member is the product of the mole
+##' fraction and an activity coefficient, which is determined from the mole
+##' fraction and Guggenheim excess free-energy parameters. Example 10 considers
+##' an aragonite (CaCO3)-strontianite (SrCO3) solid solution and demonstrates
+##' how the composition of the solid solution and the aqueous phase change as
+##' strontium carbonate is added to an initially pure calcium carbonate system.
+##' The example can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex10)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex11
+##' @title Example 11--Transport and Cation Exchange
+##' @description The following example simulates the chemical composition of the
+##' effluent from a column containing a cation exchanger
+##' (Appelo and Postma, 2005). Initially, the column contains a
+##' sodium-potassium-nitrate solution in equilibrium with the exchanger. The
+##' column is flushed with three pore volumes of calcium chloride solution.
+##' Calcium, potassium, and sodium react to equilibrium with the exchanger at
+##' all times. The problem is run two ways—by using the ADVECTION data block,
+##' which models only advection, and by using the TRANSPORT data block, which
+##' simulates advection and dispersive mixing. The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex11)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex12
+##' @title Example 12--Advective and Diffusive Flux of Heat and Solutes
+##' @description This example demonstrates the capability of PHREEQC to
+##' calculate transient transport of heat and solutes in a column or along a 1D
+##' flowline. A column is initially filled with a dilute KCl solution at 25
+##' degrees C in equilibrium with a cation exchanger. A KNO3 solution then
+##' advects into the column and establishes a new temperature of 0 degrees C.
+##' Subsequently, a sodium chloride solution at 24 degrees C is allowed to
+##' diffuse from both ends of the column, assuming no heat is lost through the
+##' column walls. At one end, a constant boundary condition is imposed, and at
+##' the other end, the final cell is filled with the sodium chloride solution
+##' and a closed boundary condition is prescribed. For the column end with a
+##' constant boundary condition, an analytical solution is compared with PHREEQC
+##' results, for unretarded Cl- (R = 1.0) and retarded Na+ and temperature
+##' (R = 3.0). Finally, the second-order accuracy of the numerical method is
+##' verified by increasing the number of cells by a factor of three and
+##' demonstrating a decrease in the error of the numerical solution by
+##' approximately one order of magnitude relative to the analytical solution.
+##' The example can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex12)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @rdname ex13
+##' @name ex13a
+##' @aliases ex13a ex13b ex13c
+##' @title Example 13--Aragonite-Strontianite Solid Solution
+##' @description PHREEQC has the capability to model multicomponent ideal and
+##' binary nonideal solid solutions. For ideal solid solutions, the activity of
+##' each end member solid is equal to its mole fraction. For nonideal solid
+##' solutions, the activity of each end member is the product of the mole
+##' fraction and an activity coefficient, which is determined from the mole
+##' fraction and Guggenheim excess free-energy parameters. Example 10 considers
+##' an aragonite (CaCO3)-strontianite (SrCO3) solid solution and demonstrates
+##' how the composition of the solid solution and the aqueous phase change as
+##' strontium carbonate is added to an initially pure calcium carbonate system.
+##' The example can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex13a)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex14
+##' @title Example 14--Advective Transport, Cation Exchange, Surface
+##' Complexation, and Mineral Equilibria
+##' @description This example uses the phase-equilibrium, cation-exchange, and
+##' surface-complexation reaction capabilities of PHREEQC in combination with
+##' advective-transport capabilities to model the evolution of water in the
+##' Central Oklahoma aquifer. The geochemistry of the aquifer has been described
+##' by Parkhurst and others (1996). Two predominant water types occur in the
+##' aquifer: a calcium magnesium bicarbonate water with pH in the range of 7.0
+##' to 7.5 in the unconfined part of the aquifer and a sodium bicarbonate water
+##' with pH in the range of 8.5 to 9.2 in the confined part of the aquifer. In
+##' addition, marine-derived sodium chloride brines exist below the aquifer and
+##' presumably in fluid inclusions and dead-end pore spaces within the aquifer.
+##' Large concentrations of arsenic, selenium, chromium, and uranium occur
+##' naturally within the aquifer. Arsenic is associated almost exclusively with
+##' the high-pH, sodium bicarbonate water type. The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex14)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex15
+##' @title Example 15--1D Transport: Kinetic Biodegradation, Cell Growth, and
+##' Sorption
+##' @description A test problem for advective-dispersive-reactive transport was
+##' developed by Tebes-Stevens and Valocchi (1997) and Tebes-Stevens and others
+##' (1998). Although based on relatively simple speciation chemistry, the
+##' solution to the problem demonstrates several interacting chemical processes
+##' that are common to many environmental problems: bacterially mediated
+##' degradation of an organic substrate; bacterial cell growth and decay; metal
+##' sorption; and aqueous speciation, including metal-ligand complexation. In
+##' this example, the test problem is solved with PHREEQC, which produces
+##' results almost identical to those of Tebes-Stevens and Valocchi (1997) and
+##' Tebes-Stevens and others (1998). The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(ex15.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex15)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex16
+##' @title Example 16--Inverse Modeling of Sierra Spring Waters
+##' @description This example repeats the inverse modeling calculations of the
+##' chemical evolution of spring-water compositions in the Sierra Nevada that
+##' are described in a classic paper by Garrels and Mackenzie (1967). The same
+##' example is described in the manual for the inverse-modeling program NETPATH
+##' (Plummer and others, 1991 and 1994). The example uses two spring-water
+##' compositions, one from an ephemeral spring, which is less chemically
+##' evolved, and one from a perennial spring, which probably has had a longer
+##' residence time in the subsoil. The differences in composition between the
+##' ephemeral spring and the perennial spring are assumed to be caused by
+##' reactions between the water and the minerals and gases it contacts. The
+##' object of inverse modeling in this example is to find sets of minerals and
+##' gases that, when reacted in appropriate amounts, account for the differences
+##' in composition between the two solutions. The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex16)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex17
+##' @title Example 17--Inverse Modeling With Evaporation
+##' @description Evaporation is handled in the same manner as other
+##' heterogeneous reactions for inverse modeling. To model evaporation (or
+##' dilution), it is necessary to include a phase with the composition “H2O”.
+##' The important concept in modeling evaporation is the water mole-balance
+##' equation (see Parkhurst and Appelo, 1999, “Equations and Numerical Method
+##' for Inverse Modeling”). The moles of water in the initial solutions times
+##' their mixing fractions, plus water gained or lost by dissolution or
+##' precipitation of phases, plus water gained or lost through redox reactions,
+##' must equal the moles of water in the final solution. The equation is still
+##' approximate because it does not include the moles of water gained or lost in
+##' hydrolysis and complexation reactions in the solutions. The results of
+##' inverse modeling are compared with a forward model using Pitzer equations to
+##' calculate the sequence of salts that precipitate during evaporation. The
+##' example can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(pitzer.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex17)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex18
+##' @title Example 18--Inverse Modeling of the Madison Aquifer
+##' @description In this example, inverse modeling, including isotope
+##' mole-balance modeling, is applied to the evolution of water in the Madison
+##' aquifer in Montana. Plummer and others (1990) used mole-balance modeling to
+##' quantify the extent of dedolomitization at locations throughout the aquifer.
+##' In the dedolomitization process, anhydrite dissolution causes the
+##' precipitation of calcite and dissolution of dolomite. Additional reactions
+##' identified by mole-balance modeling include sulfate reduction, cation
+##' exchange, and halite and sylvite dissolution (Plummer and others, 1990). Del
+##' 13C and del 34S data were used to corroborate the mole-balance models and
+##' carbon-14 was used to estimate groundwater ages (Plummer and others, 1990).
+##' Initial and final water samples were selected from a flow path that extends
+##' from north-central Wyoming northeast across Montana (Plummer and others,
+##' 1990, flow path 3). This pair of water samples was selected specifically
+##' because it was one of the few pairs that showed a relatively large
+##' discrepancy between previous mole-balance approaches and the mole-balance
+##' approach of PHREEQC, which includes uncertainties; results for most sample
+##' pairs were not significantly different between the two approaches. In
+##' addition, this pair of samples was selected because it was modeled in detail
+##' in Plummer and others (1990) to determine the sensitivity of mole-balance
+##' results to various model assumptions and was used as an example in the
+##' NETPATH manual (Plummer and others, 1994, example 6). Results of PHREEQC
+##' calculations are compared to NETPATH calculations. This example is also
+##' discussed in Parkhurst (1997). The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex18)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex19
+##' @title Example 19--Modeling Cd+2 Sorption With Linear, Freundlich, and
+##' Langmuir Isotherms, and With a Deterministic Distribution of Sorption Sites
+##' for Organic Matter, Clay Minerals, and Iron Oxyhydroxides
+##' @description Sorption of heavy metals and organic pollutants on natural
+##' materials can be described by linear, Freundlich, or Langmuir isotherms. All
+##' three isotherms can be calculated by PHREEQC, as shown in this example for
+##' Cd+2 sorbing on a loamy soil (Christensen, 1984; Appelo and Postma, 2005). A
+##' more mechanistic approach, also illustrated here, is to model the
+##' distribution of Cd+2 over the sorbing components in the soil, in this case,
+##' in and on organic matter, clay minerals, and iron oxyhydroxides. The example
+##' can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex19)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @rdname ex20
+##' @name ex20a
+##' @aliases ex20a ex20b
+##' @title Example 20--Distribution of Isotopes Between Water and Calcite
+##' @description The database \code{\link{iso.dat}} implements the approach to
+##' isotope reactions described by Thorstenson and Parkhurst (2002, 2004), in
+##' which minor isotopes are treated as individual thermodynamic components. The
+##' aqueous and solid species of minor isotopes have slightly different
+##' equilibrium constants than those of the major isotopes, which account for
+##' fractionation processes. The treatment of isotopes in gases requires a
+##' separate species for each isotopic variant of a gas; for example, the
+##' isotopic variants of carbon dioxide are CO2, C18OO, C18O2, 13CO2, 13C18OO,
+##' and 13C18O2. Similarly, every isotopic variant of a mineral must be included
+##' as a component of a solid solution to represent completely the isotopic
+##' composition of the solid. The equilibrium constants in iso.dat are derived
+##' from empirical fractionation factors, from statistical mechanical theory,
+##' or, where no data are available (the most common case), by assuming no
+##' fractionation. However, the database is a framework that can be expanded as
+##' additional isotopic thermodynamic data become available. The example can be
+##' run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(iso.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex20a)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex21
+##' @title Example 21--Modeling Diffusion of HTO, 36Cl-, 22Na+, and Cs+ in a
+##' Radial Diffusion Cell
+##' @description This example illustrates how PHREEQC version 3 can simulate a
+##' diffusion experiment, as is now often performed for assessing the properties
+##' of a repository for nuclear waste in a clay formation. A sample is cut from
+##' a core of clay, enveloped in filters, and placed in a diffusion cell (see
+##' Van Loon and others, 2004, for details). Solutions with tracers are
+##' circulated at the surfaces of the filters, the tracers diffuse into and out
+##' of the clay, and the solutions are sampled and analyzed regularly in time.
+##' The concentration changes are interpreted with Fick’s diffusion equations to
+##' obtain transport parameters for modeling the rates of migration of elements
+##' away from a waste repository. Transport in clays is mainly diffusive because
+##' of the low hydraulic conductivity, and solutes are further retarded by
+##' sorption (cations) and by exclusion from part of the pore space (anions).
+##' The example can be run using the \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' # example 21 requires the selected_output file to be turned on
+##' phrSetSelectedOutputFileOn(1, TRUE)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex21)
+##' phrGetOutputStrings()
+##' 
+NULL
+
+
+
+##' @name ex22
+##' @title Example 22--Modeling Gas Solubilities: CO2 at High Pressures
+##' @description PHREEQC calculates the fugacity coefficient with the
+##' Peng-Robinson equation of state (Peng and Robinson, 1976) from the critical
+##' pressure and temperature, and the acentric factor of the gas in a gas
+##' mixture to obtain the limiting volume and the attraction factor in the Van
+##' der Waals equation. The fugacity coefficient is close to 1 when the total
+##' pressure of the gas phase is less than about 10 atm, and it can be neglected
+##' in the solubility calculation. At higher pressures, the effect can be
+##' substantial. At low pressures, the concentration of CO2 increases
+##' near-linearly with pressure. At 25 degrees C and pressures higher than 62
+##' atm, the concentration increases more gradually because the fugacity
+##' coefficient drops rapidly. The example can be run using the
+##' \code{\link{phrRunString}} routine.
+##' @docType data
+##' @family Examples
+##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @keywords dataset 
+##' @examples
+##'
+##' phrLoadDatabaseString(phreeqc.dat)
+##' phrSetOutputStringsOn(TRUE)
+##' phrRunString(ex22)
+##' phrGetOutputStrings()
+##' 
+NULL
