@@ -1813,15 +1813,14 @@ NULL
 ##' @name ex11
 ##' @title Example 11--Transport and Cation Exchange
 ##' @description The following example simulates the chemical composition of the
-##' effluent from a column containing a cation exchanger
-##' (Appelo and Postma, 2005). Initially, the column contains a
-##' sodium-potassium-nitrate solution in equilibrium with the exchanger. The
-##' column is flushed with three pore volumes of calcium chloride solution.
-##' Calcium, potassium, and sodium react to equilibrium with the exchanger at
-##' all times. The problem is run two ways—by using the ADVECTION data block,
-##' which models only advection, and by using the TRANSPORT data block, which
-##' simulates advection and dispersive mixing. The example can be run using the
-##' \code{\link{phrRunString}} routine.
+##' effluent from a column containing a cation exchanger (Appelo and Postma,
+##' 2005). Initially, the column contains a sodium-potassium-nitrate solution
+##' in equilibrium with the exchanger. The column is flushed with three pore
+##' volumes of calcium chloride solution. Calcium, potassium, and sodium react
+##' to equilibrium with the exchanger at all times. The problem is run two
+##' ways--by using the ADVECTION data block, which models only advection, and by
+##' using the TRANSPORT data block, which simulates advection and dispersive
+##' mixing. The example can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
@@ -1957,9 +1956,10 @@ NULL
 ##' @keywords dataset 
 ##' @examples
 ##'
+##' # this example takes longer than 5 seconds
 ##' phrLoadDatabaseString(ex15.dat)
 ##' phrSetOutputStringsOn(TRUE)
-##' phrRunString(ex15)
+##' \dontrun{phrRunString(ex15)}
 ##' phrGetOutputStrings()
 ##' 
 NULL
@@ -2002,10 +2002,10 @@ NULL
 ##' @title Example 17--Inverse Modeling With Evaporation
 ##' @description Evaporation is handled in the same manner as other
 ##' heterogeneous reactions for inverse modeling. To model evaporation (or
-##' dilution), it is necessary to include a phase with the composition “H2O”.
+##' dilution), it is necessary to include a phase with the composition "H2O".
 ##' The important concept in modeling evaporation is the water mole-balance
-##' equation (see Parkhurst and Appelo, 1999, “Equations and Numerical Method
-##' for Inverse Modeling”). The moles of water in the initial solutions times
+##' equation (see Parkhurst and Appelo, 1999, "Equations and Numerical Method
+##' for Inverse Modeling"). The moles of water in the initial solutions times
 ##' their mixing fractions, plus water gained or lost by dissolution or
 ##' precipitation of phases, plus water gained or lost through redox reactions,
 ##' must equal the moles of water in the final solution. The equation is still
@@ -2146,7 +2146,7 @@ NULL
 ##' Van Loon and others, 2004, for details). Solutions with tracers are
 ##' circulated at the surfaces of the filters, the tracers diffuse into and out
 ##' of the clay, and the solutions are sampled and analyzed regularly in time.
-##' The concentration changes are interpreted with Fick’s diffusion equations to
+##' The concentration changes are interpreted with Fick's diffusion equations to
 ##' obtain transport parameters for modeling the rates of migration of elements
 ##' away from a waste repository. Transport in clays is mainly diffusive because
 ##' of the low hydraulic conductivity, and solutes are further retarded by
@@ -2163,7 +2163,8 @@ NULL
 ##' # example 21 requires the selected_output file to be turned on
 ##' phrSetSelectedOutputFileOn(1, TRUE)
 ##' phrSetOutputStringsOn(TRUE)
-##' phrRunString(ex21)
+##' # this takes longer than 5 seconds
+##' \dontrun{phrRunString(ex21)}
 ##' phrGetOutputStrings()
 ##' 
 NULL

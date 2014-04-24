@@ -234,6 +234,7 @@ all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
 $(DATADIR)/databases.rda : $(DBS) build-databases.R
 	R --no-save --no-restore CMD BATCH build-databases.R
+	rm -f .RData
 
 ex15.ascii : $(EXDIR)/ex15.dat
 	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
@@ -243,6 +244,7 @@ ex15.ascii : $(EXDIR)/ex15.dat
 
 $(DATADIR)/examples.rda : $(EXS) build-examples.R
 	R --no-save --no-restore CMD BATCH build-examples.R
+	rm -f .RData
 
 roxygenize $(MAN)/phreeqc-package.Rd : phreeqc/R/phreeqc.R
 	rm -f $(RDFILES)
