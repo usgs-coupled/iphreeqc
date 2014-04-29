@@ -210,14 +210,14 @@ PSRC = \
 
 XSRC = \
 	$(IDEST)/CSelectedOutput.cpp \
-	$(IDEST)/CSelectedOutput.hxx \
-	$(IDEST)/CVar.hxx \
+	$(IDEST)/CSelectedOutputhxx.h \
+	$(IDEST)/CVarhxx.h \
 	$(IDEST)/Debug.h \
-	$(IDEST)/ErrorReporter.hxx \
+	$(IDEST)/ErrorReporterhxx.h \
 	$(IDEST)/IPhreeqcCallbacks.h \
 	$(IDEST)/IPhreeqc.cpp \
 	$(IDEST)/IPhreeqc.h \
-	$(IDEST)/IPhreeqc.hpp \
+	$(IDEST)/IPhreeqchpp.h \
 	$(IDEST)/IPhreeqcLib.cpp \
 	$(IDEST)/R.cpp \
 	$(IDEST)/thread.h \
@@ -667,40 +667,80 @@ $(DEST)/Utils.h : $(SRC)/Utils.h
 
 
 $(IDEST)/CSelectedOutput.cpp : $(ISRC)/CSelectedOutput.cpp
-	$(CP) $< $@
+	sed \
+	 -e 's/#include "CSelectedOutput.hxx"/#include "CSelectedOutputhxx.h"/g' \
+	 -e 's/\.lVal/.u.lVal/g' \
+	 -e 's/->lVal/->u.lVal/g' \
+	 -e 's/\.dVal/.u.dVal/g' \
+	 -e 's/->dVal/->u.dVal/g' \
+	 -e 's/\.sVal/.u.sVal/g' \
+	 -e 's/->sVal/->u.sVal/g' \
+	 -e 's/\.vresult/.u.vresult/g' \
+	 -e 's/->vresult/->u.vresult/g' \
+	< $< > $@
 
-$(IDEST)/CSelectedOutput.hxx : $(ISRC)/CSelectedOutput.hxx
-	$(CP) $< $@
+$(IDEST)/CSelectedOutputhxx.h : $(ISRC)/CSelectedOutput.hxx
+	sed 's/#include "CVar.hxx"/#include "CVarhxx.h"/g' $< > $@
 
-$(IDEST)/CVar.hxx : $(ISRC)/CVar.hxx
-	$(CP) $< $@
+$(IDEST)/CVarhxx.h : $(ISRC)/CVar.hxx
+	sed \
+	 -e 's/\.lVal/.u.lVal/g' \
+	 -e 's/->lVal/->u.lVal/g' \
+	 -e 's/\.dVal/.u.dVal/g' \
+	 -e 's/->dVal/->u.dVal/g' \
+	 -e 's/\.sVal/.u.sVal/g' \
+	 -e 's/->sVal/->u.sVal/g' \
+	 -e 's/\.vresult/.u.vresult/g' \
+	 -e 's/->vresult/->u.vresult/g' \
+	< $< > $@
 
 $(IDEST)/Debug.h : $(ISRC)/Debug.h
 	$(CP) $< $@
 
-$(IDEST)/ErrorReporter.hxx : $(ISRC)/ErrorReporter.hxx
+$(IDEST)/ErrorReporterhxx.h : $(ISRC)/ErrorReporter.hxx
 	$(CP) $< $@
 
 $(IDEST)/IPhreeqcCallbacks.h : ../src/IPhreeqcCallbacks.h
 	$(CP) $< $@
 
 $(IDEST)/IPhreeqc.cpp : $(ISRC)/IPhreeqc.cpp
-	$(CP) $< $@
+	sed \
+	 -e 's/#include "IPhreeqc.hpp"/#include "IPhreeqchpp.h"/g' \
+	 -e 's/#include "ErrorReporter.hxx"/#include "ErrorReporterhxx.h"/g' \
+	 -e 's/#include "CSelectedOutput.hxx"/#include "CSelectedOutputhxx.h"/g' \
+	 -e 's/\.lVal/.u.lVal/g' \
+	 -e 's/->lVal/->u.lVal/g' \
+	 -e 's/\.dVal/.u.dVal/g' \
+	 -e 's/->dVal/->u.dVal/g' \
+	 -e 's/\.sVal/.u.sVal/g' \
+	 -e 's/->sVal/->u.sVal/g' \
+	 -e 's/\.vresult/.u.vresult/g' \
+	 -e 's/->vresult/->u.vresult/g' \
+	< $< > $@
 
 $(IDEST)/IPhreeqc.h : $(ISRC)/IPhreeqc.h
 	$(CP) $< $@
 
-$(IDEST)/IPhreeqc.hpp : $(ISRC)/IPhreeqc.hpp
+$(IDEST)/IPhreeqchpp.h : $(ISRC)/IPhreeqc.hpp
 	$(CP) $< $@
 
 $(IDEST)/IPhreeqcLib.cpp : $(ISRC)/IPhreeqcLib.cpp
-	$(CP) $< $@
+	sed 's/#include "IPhreeqc.hpp"/#include "IPhreeqchpp.h"/g' $< > $@
 
 $(IDEST)/thread.h : $(ISRC)/thread.h
 	$(CP) $< $@
 
 $(IDEST)/Var.c : $(ISRC)/Var.c
-	$(CP) $< $@
+	sed \
+	 -e 's/\.lVal/.u.lVal/g' \
+	 -e 's/->lVal/->u.lVal/g' \
+	 -e 's/\.dVal/.u.dVal/g' \
+	 -e 's/->dVal/->u.dVal/g' \
+	 -e 's/\.sVal/.u.sVal/g' \
+	 -e 's/->sVal/->u.sVal/g' \
+	 -e 's/\.vresult/.u.vresult/g' \
+	 -e 's/->vresult/->u.vresult/g' \
+	< $< > $@
 
 $(IDEST)/Var.h : $(ISRC)/Var.h
 	$(CP) $< $@
@@ -737,14 +777,9 @@ $(IDEST)/Makevars : Makevars
 	$(CP) $< $@
 
 $(IDEST)/R.cpp : R.cpp
-	$(CP) $< $@
-
-##$(IDEST)/RPhreeqcDat.c : ../database/phreeqc.dat
-###	echo "extern \"C\" {" > $@
-##	echo "const char PHREEQC_DAT[] = " >> $@
-##	sed -e 's/\\/\\\\/g;s/"/\\"/g;s/\t/\\t/g;s/^/"/;s/$$/\\n"/' $< >> $@
-##	echo ";" >> $@
-###	echo "} // extern \"C\"" >>  $@
+	sed \
+	 -e 's/#include "IPhreeqc.hpp"/#include "IPhreeqchpp.h"/g' \
+	< $< > $@
 
 $(IDEST):
 	mkdir $(IDEST)
@@ -753,4 +788,4 @@ $(DEST):
 	mkdir $(DEST)
 
 clean :
-	rm -f $(PSRC) $(ISRC) $(DEST)/*.o $(IDEST)/*.o $(DEST)/*.so
+	rm -f $(PSRC) $(XSRC) $(DEST)/*.o $(IDEST)/*.o $(DEST)/*.so

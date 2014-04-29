@@ -88,7 +88,8 @@ OBJECTS.phreeqcpp = \
 
 OBJECTS = $(OBJECTS.root) $(OBJECTS.phreeqcpp)
 
-PKG_CPPFLAGS =-I. -Iphreeqcpp -DNDEBUG -DR_SO -DSWIG_SHARED_OBJ
+PKG_CPPFLAGS =-I. -Iphreeqcpp -DNDEBUG -DR_SO -DSWIG_SHARED_OBJ -DVAR_UNION_NAME=u -pedantic
+##PKG_CPPFLAGS =-I. -Iphreeqcpp -DNDEBUG -DR_SO -DSWIG_SHARED_OBJ -pedantic
 
 all: $(SHLIB)
 

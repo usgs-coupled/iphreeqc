@@ -141,7 +141,7 @@ getCol(int ncol)
         SET_STRING_ELT(ans, r-1, mkChar(""));
         break;
       case TT_ERROR:
-        switch (vv.vresult) {
+        switch (vv.u.vresult) {
         case VR_OK:          SET_STRING_ELT(ans, r-1, mkChar("VR_OK"));          break;
         case VR_OUTOFMEMORY: SET_STRING_ELT(ans, r-1, mkChar("VR_OUTOFMEMORY")); break;
         case VR_BADVARTYPE:  SET_STRING_ELT(ans, r-1, mkChar("VR_BADVARTYPE"));  break;
@@ -151,23 +151,23 @@ getCol(int ncol)
         }
         break;
       case TT_LONG:
-        if (vv.lVal == -99) {
+        if (vv.u.lVal == -99) {
           sprintf(buffer, "NA");
         } else {
-          sprintf(buffer, "%ld", vv.lVal);
+          sprintf(buffer, "%ld", vv.u.lVal);
         }
         SET_STRING_ELT(ans, r-1, mkChar(buffer));
         break;
       case TT_DOUBLE:
-        if (vv.dVal == -999.999 || vv.dVal == -99.) {
+        if (vv.u.dVal == -999.999 || vv.u.dVal == -99.) {
           sprintf(buffer, "NA");
         } else {
-          sprintf(buffer, "%lg", vv.dVal);
+          sprintf(buffer, "%g", vv.u.dVal);
         }
         SET_STRING_ELT(ans, r-1, mkChar(buffer));
         break;
       case TT_STRING:
-        SET_STRING_ELT(ans, r-1, mkChar(vv.sVal));
+        SET_STRING_ELT(ans, r-1, mkChar(vv.u.sVal));
         break;
       }
       VarClear(&vv);
@@ -188,17 +188,17 @@ getCol(int ncol)
         REAL(ans)[r-1] = NA_REAL;
         break;
       case TT_LONG:
-        if (vv.lVal == -99) {
+        if (vv.u.lVal == -99) {
           REAL(ans)[r-1] = NA_REAL;
         } else {
-          REAL(ans)[r-1] = (double)vv.lVal;
+          REAL(ans)[r-1] = (double)vv.u.lVal;
         }
         break;
       case TT_DOUBLE:
-        if (vv.dVal == -999.999 || vv.dVal == -99. || vv.dVal == 1e-99) {
+        if (vv.u.dVal == -999.999 || vv.u.dVal == -99. || vv.u.dVal == 1e-99) {
           REAL(ans)[r-1] = NA_REAL;
         } else {
-          REAL(ans)[r-1] = (double)vv.dVal;
+          REAL(ans)[r-1] = (double)vv.u.dVal;
         }
         break;
       default:
@@ -222,10 +222,10 @@ getCol(int ncol)
         INTEGER(ans)[r-1] = NA_INTEGER;
         break;
       case TT_LONG:
-        if (vv.lVal == -99) {
+        if (vv.u.lVal == -99) {
           INTEGER(ans)[r-1] = NA_INTEGER;
         } else {
-          INTEGER(ans)[r-1] = vv.lVal;
+          INTEGER(ans)[r-1] = vv.u.lVal;
         }
         break;
       default:
@@ -610,7 +610,7 @@ getSelOut(void)
     PROTECT(col = getCol(c));
 
     SET_VECTOR_ELT(list, c, col);
-    SET_STRING_ELT(attr, c, mkChar(vn.sVal));
+    SET_STRING_ELT(attr, c, mkChar(vn.u.sVal));
 
     UNPROTECT(1);
     VarClear(&vn);
