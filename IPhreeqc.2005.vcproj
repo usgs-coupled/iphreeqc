@@ -86,7 +86,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=lib&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -159,7 +159,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;libx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=libx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -232,7 +232,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName)d.lib&quot; &quot;lib\$(TargetName)d.lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;lib\.&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=lib&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -306,7 +306,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir libx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName)d.lib&quot; &quot;libx64\$(TargetName)d.lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;libx64\.&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=libx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -388,7 +388,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dll\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=dll&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -471,7 +471,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName).dll&quot; &quot;dllx64\$(ProjectName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=dllx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -554,7 +554,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dll &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dll\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dll\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;dll\.&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=dll&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -639,7 +639,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir dllx64 &gt; NUL&#x0D;&#x0A;copy &quot;$(OutDir)\$(ProjectName)d.dll&quot; &quot;dllx64\$(ProjectName)d.dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;dllx64\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;dllx64\.&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=dllx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -724,7 +724,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clr&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clr&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -811,7 +811,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clrx64&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clrx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -894,7 +894,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clr&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clr&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -978,7 +978,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clrx64&#x0D;&#x0A;mkdir %DEST% &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=clrx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;%DEST%\$(TargetName).dll&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -1032,14 +1032,62 @@
 			<File
 				RelativePath=".\src\fwrap6.cpp"
 				>
+				<FileConfiguration
+					Name="Release|x64"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\fwrap7.cpp"
 				>
+				<FileConfiguration
+					Name="Release|x64"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\fwrap8.cpp"
 				>
+				<FileConfiguration
+					Name="Release|x64"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\src\IPhreeqc.cpp"
