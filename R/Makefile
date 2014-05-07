@@ -770,8 +770,8 @@ check : all
 
 install : all
 	R CMD INSTALL --build phreeqc
-	
-export : 
+
+export :
 	sed \
 	 -e 's/@REVISION_SVN@/$(RELEASE)/g' \
 	< DESCRIPTION.in > $(TOPDIR)/DESCRIPTION
