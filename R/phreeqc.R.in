@@ -4,14 +4,7 @@
 ##' Speciation, Batch-Reaction, One-Dimensional Transport, and Inverse
 ##' Geochemical Calculations.
 ##' 
-##' \tabular{ll}
-##' { 
-##' Package: \tab phreeqc\cr
-##' Type: \tab Package\cr
-##' Version: \tab 1.0-@REVISION_SVN@\cr
-##' Date: \tab @RELEASE_DATE@\cr
-##' License: \tab Unlimited\cr
-##' }
+##' \tabular{ll}{Package: \tab phreeqc\cr Type: \tab Package\cr Version: \tab 1.0-@REVISION_SVN@\cr Date: \tab @RELEASE_DATE@\cr License: \tab Unlimited\cr}
 ##' 
 ##' @name phreeqc-package
 ##' @aliases phreeqc-package phreeqc
