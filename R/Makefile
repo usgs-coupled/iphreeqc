@@ -1,4 +1,5 @@
 CP=cp -f
+TOPDIR=phreeqc
 IDEST=phreeqc/src
 DEST=phreeqc/src/phreeqcpp
 ISRC=../src
@@ -8,6 +9,9 @@ DBDIR=../database
 DATADIR=phreeqc/data
 EXDIR=../phreeqc3-examples
 MAN=phreeqc/man
+
+SVN_URL := http://internalbrr.cr.usgs.gov/svn_GW
+RELEASE ?= $(shell svn info $(SVN_URL) | egrep "Revision:" | cut -b 10- | ( read one two ; echo $$one ) )
 
 DBS = \
 	Amm.ascii \
@@ -230,7 +234,7 @@ DATA = \
 	$(DATADIR)/databases.rda \
 	$(DATADIR)/examples.rda
 
-all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
+all: export $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
 $(DATADIR)/databases.rda : $(DBS) build-databases.R
 	R --no-save --no-restore CMD BATCH build-databases.R
@@ -766,6 +770,11 @@ check : all
 
 install : all
 	R CMD INSTALL --build phreeqc
+	
+export : 
+	sed \
+	 -e 's/@REVISION_SVN@/$(RELEASE)/g' \
+	< DESCRIPTION.in > $(TOPDIR)/DESCRIPTION
 
 build : all
 	R CMD build phreeqc
