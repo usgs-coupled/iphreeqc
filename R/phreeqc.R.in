@@ -4,8 +4,14 @@
 ##' Speciation, Batch-Reaction, One-Dimensional Transport, and Inverse
 ##' Geochemical Calculations.
 ##' 
-##' \tabular{ll}{ Package: \tab phreeqc\cr Type: \tab Package\cr Version: \tab
-##' 1.0\cr Date: \tab 2014-02-05\cr License: \tab Unlimited\cr }
+##' \tabular{ll}
+##' { 
+##' Package: \tab phreeqc\cr
+##' Type: \tab Package\cr
+##' Version: \tab 1.0-@REVISION_SVN@\cr
+##' Date: \tab @RELEASE_DATE@\cr
+##' License: \tab Unlimited\cr
+##' }
 ##' 
 ##' @name phreeqc-package
 ##' @aliases phreeqc-package phreeqc
@@ -13,7 +19,7 @@
 ##' @author David L. Parkhurst \email{dlpark@@usgs.gov}\cr C.A.J. Appelo
 ##' \email{appt@@hydrochemistry.eu}\cr Maintainer: Scott R. Charlton
 ##' \email{charlton@@usgs.gov}
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf} \url{http://computation.llnl.gov/casc/sundials/main.html}
 ##' @keywords package
 ##' @examples
 ##'
