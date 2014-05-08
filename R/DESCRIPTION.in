@@ -5,8 +5,9 @@ License: BSD_3_clause + file LICENSE
 NeedsCompilation: yes
 Depends:
     R (>= 2.10)
-Author: David Parkhurst <dlpark@usgs.gov> and C.A.J. Appelo
-    <appt@hydrochemistry.eu>
+Author: D.L. Parkhurst and C.A.J. Appelo, with contributions from S.D. Cohen,
+    A.C. Hindmarsh, R. Serban, D. Shumaker, and A.G. Taylor for CVODE (SUNDIALS)
+    and D. Gillespie for Chipmunk BASIC (p2c).
 URL: http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc
 Description: R interface to the PHREEQC program.  PHREEQC is a geochemical
     modeling program developed by the US Geological Survey that is designed to
@@ -21,5 +22,5 @@ Description: R interface to the PHREEQC program.  PHREEQC is a geochemical
     inverse modeling, which finds sets of mineral and gas mole transfers that
     account for differences in composition between waters, within specified
     compositional uncertainty limits.
-Maintainer: Scott Charlton <charlton@usgs.gov>
+Maintainer: S.R. Charlton <charlton@usgs.gov>
 LazyData: yes

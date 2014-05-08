@@ -9,9 +9,7 @@
 ##' @name phreeqc-package
 ##' @aliases phreeqc-package phreeqc
 ##' @docType package
-##' @author David L. Parkhurst \email{dlpark@@usgs.gov}\cr C.A.J. Appelo
-##' \email{appt@@hydrochemistry.eu}\cr Maintainer: Scott R. Charlton
-##' \email{charlton@@usgs.gov}
+##' @author D.L. Parkhurst and C.A.J. Appelo, with contributions from S.D. Cohen, A.C. Hindmarsh, R. Serban, D. Shumaker, and A.G. Taylor for CVODE (SUNDIALS) and D. Gillespie for Chipmunk BASIC (p2c) \cr Maintainer: S.R. Charlton \email{charlton@@usgs.gov}
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}\cr \url{http://computation.llnl.gov/casc/sundials/main.html}
 ##' @keywords package
 ##' @examples
