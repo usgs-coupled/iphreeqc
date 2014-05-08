@@ -1,0 +1,25 @@
+
+citHeader("Suggested citation for R phreeqc package:")
+
+
+citEntry(entry="Manual",
+         title =  "Description of input and examples for PHREEQC version 3--A computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculations",
+         author = personList(as.person("D. L. Parkhurst"), 
+                             as.person("C. A. J. Appelo")),
+	 publisher = "U.S. Geological Survey",
+         year         = "2013",
+         series       = "Techniques and Methods",
+         volume       = "book 6",
+         chapter      = "A43",
+         pages        = "497",
+         url          = "http://pubs.usgs.gov/tm/06/a43",
+
+	textVersion = 
+		paste("Parkhurst, D.L., and Appelo, C.A.J., 2013, Description of",
+                        "input and examples for PHREEQC version 3--A computer",
+                        "program for speciation, batch- reaction, one-dimensional",
+                        "transport, and inverse geochemical calculations: U.S.",
+                        "Geological Survey Techniques and Methods, book 6, chap.",
+                        "A43, 497 p., available only at",
+                        "http://pubs.usgs.gov/tm/06/a43.")
+}
