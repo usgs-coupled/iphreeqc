@@ -5,22 +5,14 @@ License: BSD_3_clause + file LICENSE
 NeedsCompilation: yes
 Depends:
     R (>= 2.10)
-Author: D.L. Parkhurst and C.A.J. Appelo, with contributions from D. Gillespie 
-    for Chipmunk BASIC (p2c) and S.D. Cohen, A.C. Hindmarsh, R. Serban, 
-    D. Shumaker, and A.G. Taylor for CVODE (SUNDIALS)
+Author: S.R. Charlton, D.L. Parkhurst, and C.A.J. Appelo, with contributions  
+    from D. Gillespie for Chipmunk BASIC and S.D. Cohen, A.C. Hindmarsh,  
+    R. Serban, D. Shumaker, and A.G. Taylor for CVODE/SUNDIALS
 URL: http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc
-Description: R interface to the PHREEQC program.  PHREEQC is a geochemical
-    modeling program developed by the US Geological Survey that is designed to
-    perform a wide variety of low-temperature aqueous geochemical calculations.
-    PHREEQC is based on an ion-association aqueous model and has capabilities
-    for (1) speciation and saturation-index calculations; (2) batch-reaction
-    and one-dimensional (1D) transport calculations involving reversible
-    reactions, which include aqueous, mineral, gas, solid-solution,
-    surface-complexation, and ion-exchange equilibria, and irreversible
-    reactions, which include specified mole transfers of reactants, kinetically
-    controlled reactions, mixing of solutions, and temperature changes; and (3)
-    inverse modeling, which finds sets of mineral and gas mole transfers that
-    account for differences in composition between waters, within specified
-    compositional uncertainty limits.
+Description: R interface to PHREEQC (Version 3). PHREEQC is a geochemical
+    modeling program developed by the US Geological Survey that is designed
+    to perform a wide variety of aqueous geochemical calculations, 
+    including speciation, batch-reaction, one-dimensional 
+    reactive-transport, and inverse geochemical calculations.    
 Maintainer: S.R. Charlton <charlton@usgs.gov>
 LazyData: yes
