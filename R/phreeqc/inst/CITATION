@@ -23,3 +23,22 @@ citEntry(entry="Manual",
                         "A43, 497 p., available only at",
                         "http://pubs.usgs.gov/tm/06/a43.")
 )
+
+
+citEntry(entry="Article",
+         title = "Modules based on the geochemical model PHREEQC for use in scripting and programming languages",
+         author = personList(as.person("S. R. Charlton"), 
+                             as.person("D. L. Parkhurst")),
+         year         = "2011",
+	 journal      = "Computers & Geosciences",
+         volume       = "37",
+         pages        = "1653-1663",
+         url             = "http://dx.doi.org/10.1016/j.cageo.2011.02.005",
+
+	textVersion = 
+		paste("Charlton, S.R., and Parkhurst, D.L, 2011, Modules based ",
+		        "on the geochemical model PHREEQC for use in scripting",
+		        "and programming languages: Computers & Geosciences,",
+		        "v. 37, p. 1653-1663."
+)
+
