@@ -4333,21 +4333,21 @@ x64/gccRelease/src/phreeqcpp/utilities.o: src/phreeqcpp/utilities.cpp
 # Creates the intermediate and output folders for each configuration...
 .PHONY: create_folders
 create_folders:
-	mkdir -p gccDebugDll/source
+	mkdir -p gccDebugDll/src
 	mkdir -p ../../gccDebugDll
-	mkdir -p x64/gccDebugDll/source
+	mkdir -p x64/gccDebugDll/src
 	mkdir -p ../../x64/gccDebugDll
-	mkdir -p gccDebug/source
+	mkdir -p gccDebug/src
 	mkdir -p ../../gccDebug
-	mkdir -p x64/gccDebug/source
+	mkdir -p x64/gccDebug/src
 	mkdir -p ../../x64/gccDebug
-	mkdir -p gccReleaseDll/source
+	mkdir -p gccReleaseDll/src
 	mkdir -p ../../gccReleaseDll
-	mkdir -p x64/gccReleaseDll/source
+	mkdir -p x64/gccReleaseDll/src
 	mkdir -p ../../x64/gccReleaseDll
-	mkdir -p gccRelease/source
+	mkdir -p gccRelease/src
 	mkdir -p ../../gccRelease
-	mkdir -p x64/gccRelease/source
+	mkdir -p x64/gccRelease/src
 	mkdir -p ../../x64/gccRelease
 
 # Cleans intermediate and output files (objects, libraries, executables)...
