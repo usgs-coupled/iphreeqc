@@ -147,6 +147,9 @@ endif
 check: $(TARGET)
 	./$(TARGET) 
 
+valgrind: $(TARGET)
+	valgrind --leak-check=yes --log-file=$(TARGET).valgrind.out  ./$(TARGET)
+
 $(TARGET): $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS)
 	$(CXXLINK) $(TOBJS) $(POBJS) $(PPOBJS) $(SOBJS) $(LIBS)
 
