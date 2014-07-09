@@ -405,7 +405,7 @@ void TestIPhreeqc::TestRunWithErrors(void)
 	CPPUNIT_ASSERT_EQUAL(1,     obj.RunAccumulated());
 
 	const char expected[] =
-		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
+		"ERROR: Numerical method failed on all combinations of convergence parameters, cell/soln/mix 1\n";
 	const char* err = obj.GetErrorString();
 
 	CPPUNIT_ASSERT_EQUAL( std::string(expected), std::string(err) );
@@ -432,7 +432,7 @@ void TestIPhreeqc::TestRunFile(void)
 	CPPUNIT_ASSERT_EQUAL(1, obj.RunFile("conv_fail.in"));
 
 	const char expected[] =
-		"ERROR: Numerical method failed on all combinations of convergence parameters\n";
+		"ERROR: Numerical method failed on all combinations of convergence parameters, cell/soln/mix 1\n";
 	const char* err = obj.GetErrorString();
 
 	CPPUNIT_ASSERT_EQUAL(std::string(expected), std::string(err));
@@ -2802,10 +2802,10 @@ void TestIPhreeqc::TestSetErrorFileName(void)
 		CPPUNIT_ASSERT_EQUAL( (size_t)84, i );
 	}
 
-	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Maximum iterations exceeded, 100"),                                    lines[0] );
-	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Numerical method failed with this set of convergence parameters."),    lines[2] );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Numerical method failed on all combinations of convergence parameters"), lines[82] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                    lines[83] );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Maximum iterations exceeded, 100"),                                                     lines[0] );
+	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Numerical method failed with this set of convergence parameters."),                     lines[2] );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Numerical method failed on all combinations of convergence parameters, cell/soln/mix 1"), lines[82] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                                     lines[83] );
 
 	if (::FileExists(ERR_FILENAME))
 	{
@@ -2874,7 +2874,7 @@ void TestIPhreeqc::TestGetErrorString(void)
 	CPPUNIT_ASSERT_EQUAL( true,  ::FileExists(ERR_FILENAME) );
 	
 	{
-		std::string fline("ERROR: Numerical method failed on all combinations of convergence parameters\n");
+		std::string fline("ERROR: Numerical method failed on all combinations of convergence parameters, cell/soln/mix 1\n");
 
 		std::string sline(obj.GetErrorString());
 		CPPUNIT_ASSERT( sline.size() > 0 );
