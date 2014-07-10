@@ -2525,6 +2525,11 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
+
 	if (::FileExists(OUTPUT_FILENAME))
 	{
 		::DeleteFile(OUTPUT_FILENAME);
@@ -2830,6 +2835,11 @@ void TestIPhreeqcLib::TestSetLogFileName(void)
 	{
 		::DeleteFile(LOG_FILENAME);
 	}
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
 }
 
 void TestIPhreeqcLib::TestLogStringOnOff(void)
@@ -2908,6 +2918,11 @@ void TestIPhreeqcLib::TestGetLogString(void)
 	{
 		::DeleteFile(LOG_FILENAME);
 	}
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
 }
 
 void TestIPhreeqcLib::TestGetLogStringLineCount(void)
@@ -2973,6 +2988,11 @@ void TestIPhreeqcLib::TestGetLogStringLineCount(void)
 
 	CPPUNIT_ASSERT_EQUAL(      0, ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL(      0, ::GetLogStringLineCount(n) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
 }
 
 void TestIPhreeqcLib::TestGetLogStringLine(void)
@@ -3093,6 +3113,11 @@ void TestIPhreeqcLib::TestGetLogStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -2)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -3)) );
 	CPPUNIT_ASSERT_EQUAL( std::string(""),  std::string(::GetLogStringLine(n, -4)) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
 }
 
 void TestIPhreeqcLib::TestSetErrorFileName(void)
@@ -3155,6 +3180,11 @@ void TestIPhreeqcLib::TestSetErrorFileName(void)
 	if (::FileExists(ERR_FILENAME))
 	{
 		::DeleteFile(ERR_FILENAME);
+	}
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
 	}
 }
 
@@ -3241,6 +3271,11 @@ void TestIPhreeqcLib::TestGetErrorString(void)
 	{
 		::DeleteFile(ERR_FILENAME);
 	}
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
 }
 
 void TestIPhreeqcLib::TestGetErrorStringLineCount(void)
@@ -3299,6 +3334,11 @@ void TestIPhreeqcLib::TestGetErrorStringLineCount(void)
 
 	CPPUNIT_ASSERT_EQUAL(      1, ::RunAccumulated(n) );
 	CPPUNIT_ASSERT_EQUAL(      0, ::GetErrorStringLineCount(n) );
+
+	if (n >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(n));
+	}
 }
 
 void TestIPhreeqcLib::TestSetSelectedOutputFileName(void)
@@ -4305,6 +4345,11 @@ void TestIPhreeqcLib::TestGetSelectedOutputCount(void)
 	CPPUNIT_ASSERT_EQUAL(0, ::GetSelectedOutputCount(id));
 	CPPUNIT_ASSERT_EQUAL(0, ::RunFile(id, "multi_punch"));
 	CPPUNIT_ASSERT_EQUAL(3, ::GetSelectedOutputCount(id));
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestGetNthSelectedOutputUserNumber(void)
@@ -4324,6 +4369,11 @@ void TestIPhreeqcLib::TestGetNthSelectedOutputUserNumber(void)
 	// edge cases
 	CPPUNIT_ASSERT_EQUAL((int)IPQ_INVALIDARG, ::GetNthSelectedOutputUserNumber(id, -1));
 	CPPUNIT_ASSERT_EQUAL((int)IPQ_INVALIDARG, ::GetNthSelectedOutputUserNumber(id, 4));
+	
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestGetCurrentSelectedOutputUserNumber(void)
@@ -4359,6 +4409,11 @@ void TestIPhreeqcLib::TestGetCurrentSelectedOutputUserNumber(void)
 	// unload database
 	CPPUNIT_ASSERT_EQUAL(0,  ::LoadDatabase(id, "../database/phreeqc.dat"));
 	CPPUNIT_ASSERT_EQUAL(1,  ::GetCurrentSelectedOutputUserNumber(id));
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestMultiSetSelectedOutputFileName(void)
@@ -4404,6 +4459,11 @@ void TestIPhreeqcLib::TestMultiSetSelectedOutputFileName(void)
 
 	CPPUNIT_ASSERT( set1.VerifyExists() );
 	CPPUNIT_ASSERT( set2.VerifyExists() );
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestWissmeier20131203(void)
@@ -4431,6 +4491,11 @@ void TestIPhreeqcLib::TestWissmeier20131203(void)
 
 	CPPUNIT_ASSERT_EQUAL( 9,             ::GetSelectedOutputColumnCount(id) );
 	CPPUNIT_ASSERT_EQUAL( 2,             ::GetSelectedOutputRowCount(id) );
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestWissmeier20131203_2(void)
@@ -4459,6 +4524,11 @@ void TestIPhreeqcLib::TestWissmeier20131203_2(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK,        ::SetCurrentSelectedOutputUserNumber(id, 22) );
 	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputColumnCount(id) );
 	CPPUNIT_ASSERT_EQUAL( 2,             ::GetSelectedOutputRowCount(id) );
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestWissmeier20131203_3(void)
@@ -4489,6 +4559,11 @@ void TestIPhreeqcLib::TestWissmeier20131203_3(void)
 
 	CPPUNIT_ASSERT_EQUAL( 1,             ::GetSelectedOutputColumnCount(id) );
 	CPPUNIT_ASSERT_EQUAL( 2,             ::GetSelectedOutputRowCount(id) );
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestIsZeroInitialized(void)
