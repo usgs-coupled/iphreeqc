@@ -4288,6 +4288,11 @@ void TestIPhreeqcLib::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(IPQ_INVALIDARG, ::SetCurrentSelectedOutputUserNumber(id, -1)); 
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK,         ::SetCurrentSelectedOutputUserNumber(id, 0)); 
 	CPPUNIT_ASSERT_EQUAL(0,              ::GetCurrentSelectedOutputUserNumber(id)); 
+
+	if (id >= 0)
+	{
+		CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::DestroyIPhreeqc(id));
+	}
 }
 
 void TestIPhreeqcLib::TestGetSelectedOutputCount(void)
