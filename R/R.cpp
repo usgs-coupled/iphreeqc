@@ -14,6 +14,10 @@ public:
     static IPhreeqc instance;
     return instance;
   }
+  static std::string& err_str() {
+    static std::string instance;
+    return instance;
+  }
 };
 
 
@@ -33,9 +37,7 @@ accumLine(SEXP line)
   if (STRING_ELT(line, 0) != NA_STRING) {
     str_in = CHAR(STRING_ELT(line, 0));
     if (R::singleton().AccumulateLine(str_in) != VR_OK) {
-      std::ostringstream oss;
-      oss << R::singleton().GetErrorString();
-      error(oss.str().c_str());
+      error(R::singleton().GetErrorString());
     }
   }
 
@@ -53,15 +55,13 @@ accumLineLst(SEXP line)
   }
 
   int n = length(line);
-  std::ostringstream oss;
+  //std::ostringstream oss;
 
   for (int i = 0; i < n; ++i) {
     if (STRING_ELT(line, i) != NA_STRING) {
       str_in = CHAR(STRING_ELT(line, 0));
       if (R::singleton().AccumulateLine(str_in) != VR_OK) {
-        std::ostringstream err;
-        err << R::singleton().GetErrorString();
-        error(err.str().c_str());
+        error(R::singleton().GetErrorString());
       }
     }
   }
@@ -733,9 +733,7 @@ loadDB(SEXP filename)
   name = CHAR(STRING_ELT(filename, 0));
 
   if (R::singleton().LoadDatabase(name) != VR_OK) {
-    std::ostringstream err;
-    err << R::singleton().GetErrorString();
-    error(err.str().c_str());
+    error(R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -750,20 +748,21 @@ loadDBLst(SEXP input)
   }
 
   int n = length(input);
-  std::ostringstream oss;
+  std::ostringstream *poss = new std::ostringstream();
 
   for (int i = 0; i < n; ++i) {
     if (STRING_ELT(input, i) != NA_STRING) {
-      oss << CHAR(STRING_ELT(input, i)) << "\n";
+      (*poss) << CHAR(STRING_ELT(input, i)) << "\n";
     }
   }
 
-  if (R::singleton().LoadDatabaseString(oss.str().c_str()) != VR_OK) {
-    std::ostringstream err;
-    err << R::singleton().GetErrorString();
-    error(err.str().c_str());
+  if (R::singleton().LoadDatabaseString((*poss).str().c_str()) != VR_OK) {
+    // all dtors must be called before error
+    delete poss;
+    error(R::singleton().GetErrorString());
   }
 
+  delete poss;
   return(R_NilValue);
 }
 
@@ -780,9 +779,7 @@ loadDBStr(SEXP input)
   string = CHAR(STRING_ELT(input, 0));
 
   if (R::singleton().LoadDatabaseString(string) != VR_OK) {
-    std::ostringstream err;
-    err << R::singleton().GetErrorString();
-    error(err.str().c_str());
+    error(R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -792,9 +789,7 @@ SEXP
 runAccum(void)
 {
   if (R::singleton().RunAccumulated() != VR_OK) {
-    std::ostringstream oss;
-    oss << R::singleton().GetErrorString();
-    error(oss.str().c_str());
+    error(R::singleton().GetErrorString());
   }
   return(R_NilValue);
 }
@@ -811,9 +806,7 @@ runFile(SEXP filename)
 
   name = CHAR(STRING_ELT(filename, 0));
   if (R::singleton().RunFile(name) != VR_OK) {
-    std::ostringstream oss;
-    oss << R::singleton().GetErrorString();
-    error(oss.str().c_str());
+    error(R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -831,9 +824,7 @@ runString(SEXP input)
 
   in = CHAR(STRING_ELT(input, 0));
   if (R::singleton().RunString(in) != VR_OK) {
-    std::ostringstream oss;
-    oss << R::singleton().GetErrorString();
-    error(oss.str().c_str());
+    error(R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -848,20 +839,20 @@ runStringLst(SEXP input)
   }
 
   int n = length(input);
-  std::ostringstream oss;
+  std::ostringstream *poss = new std::ostringstream();
 
   for (int i = 0; i < n; ++i) {
     if (STRING_ELT(input, i) != NA_STRING) {
-      oss << CHAR(STRING_ELT(input, i)) << "\n";
+      (*poss) << CHAR(STRING_ELT(input, i)) << "\n";
     }
   }
 
-  if (R::singleton().RunString(oss.str().c_str()) != VR_OK) {
-    std::ostringstream err;
-    err << R::singleton().GetErrorString();
-    error(err.str().c_str());
+  if (R::singleton().RunString((*poss).str().c_str()) != VR_OK) {
+    delete poss;
+    error(R::singleton().GetErrorString());
   }
 
+  delete poss;
   return(R_NilValue);
 }
 
