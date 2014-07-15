@@ -769,6 +769,9 @@ $(INST)/ex2 : ../phreeqc3-examples/ex2
 check : all
 	R CMD check --as-cran phreeqc
 
+valgrind : install
+	R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < cran/phreeqc.Rcheck/phreeqc-Ex.R 2>&1 | tee valgrind.full.out
+
 install : all
 	R CMD INSTALL --build phreeqc
 
