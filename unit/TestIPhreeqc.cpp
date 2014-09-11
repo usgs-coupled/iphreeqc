@@ -4475,3 +4475,24 @@ void TestIPhreeqc::TestGetAccumulatedLinesAfterRunString(void)
 		CPPUNIT_ASSERT_EQUAL( std::string(expected), obj.GetAccumulatedLines() );
 	}
 }
+
+void TestIPhreeqc::TestPBasicStopThrow(void)
+{
+	IPhreeqc obj;
+
+	CPPUNIT_ASSERT_EQUAL(0, obj.LoadDatabase("../database/phreeqc.dat"));
+
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("SOLUTION 1 # Mine water from Bain et al., 2001"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("USER_PRINT"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("10 print -(0.006^0.9)"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("20 print TOTMOL(\"H\"), TOTMOLE(\"H\"), TOTMOLES(\"H\")"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("110 print (-0.2)^3"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("120 print (-0.2)^3.0"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("130 print (-0.2)^-2"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("140 print (-0.2)^-3"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("150 print -0.2^2.2"));
+	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.AccumulateLine("END"));
+
+	obj.SetOutputFileOn(true);
+	CPPUNIT_ASSERT_EQUAL(    5, obj.RunAccumulated() );
+}

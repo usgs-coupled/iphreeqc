@@ -85,6 +85,7 @@ class TestIPhreeqc : public CppUnit::TestFixture
 	CPPUNIT_TEST( TestGetAccumulatedLines );
 	CPPUNIT_TEST( TestGetAccumulatedLinesAfterRunFile );
 	CPPUNIT_TEST( TestGetAccumulatedLinesAfterRunString );
+	CPPUNIT_TEST( TestPBasicStopThrow );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -170,6 +171,7 @@ public:
 	void TestGetAccumulatedLines(void);
 	void TestGetAccumulatedLinesAfterRunFile(void);
 	void TestGetAccumulatedLinesAfterRunString(void);
+	void TestPBasicStopThrow(void);
 
 protected:
 	void TestFileOnOff(const char* FILENAME, bool output_file_on, bool error_file_on, bool log_file_on, bool selected_output_file_on, bool dump_file_on);
