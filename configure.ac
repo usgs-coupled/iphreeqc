@@ -10,8 +10,6 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/IPhreeqc.cpp])
 
 AC_DEFINE(SWIG_SHARED_OBJ)
-AC_DEFINE(PHREEQC_CPP)
-AC_DEFINE(PHREEQC_CLASS)
 AC_DEFINE(USE_PHRQ_ALLOC)
 AC_DEFINE(NDEBUG)
 
@@ -23,6 +21,7 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
+AM_PROG_AR
 
 # Check if the fortran interface should be included
 AC_MSG_CHECKING([if Fortran interface included])
