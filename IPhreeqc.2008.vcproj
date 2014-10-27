@@ -48,7 +48,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -121,7 +121,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -192,7 +192,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -233,7 +233,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="mkdir lib &gt; NUL&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;lib\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc80.pdb&quot; &quot;lib\vc80.pdb&quot;&#x0D;&#x0A;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=lib&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;copy &quot;$(TargetDir)vc*.pdb&quot; &quot;%DEST%\.&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -266,7 +266,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -340,7 +340,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -422,7 +422,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -502,7 +502,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -585,7 +585,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/phreeqc"
+				AdditionalIncludeDirectories="src;src/phreeqcpp"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -647,6 +647,10 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;f90;for;f;fpp"
 			>
+			<File
+				RelativePath=".\src\CSelectedOutput.cpp"
+				>
+			</File>
 			<File
 				RelativePath=".\src\fwrap.cpp"
 				>
@@ -724,10 +728,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\SelectedOutput.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\Var.c"
 				>
 				<FileConfiguration
@@ -767,6 +767,38 @@
 				Name="phreeqcpp"
 				>
 				<File
+					RelativePath=".\src\phreeqcpp\advection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\basicsubs.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\ChartHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\ChartObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\cl1.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\CurveObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\cvdense.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\cvode.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\cxxKinetics.cxx"
 					>
 				</File>
@@ -775,7 +807,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\dense.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\dumper.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\dw.cpp"
 					>
 				</File>
 				<File
@@ -791,7 +831,23 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\gases.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\GasPhase.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\input.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\integrate.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\inverse.cpp"
 					>
 				</File>
 				<File
@@ -803,11 +859,27 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\isotopes.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Keywords.cpp"
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\kinetics.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\KineticsComp.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\mainsubs.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\model.cpp"
 					>
 				</File>
 				<File
@@ -819,11 +891,27 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\nvector.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\nvector_serial.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\parse.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Parser.cxx"
 					>
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\PBasic.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\phqalloc.cpp"
 					>
 				</File>
 				<File
@@ -839,6 +927,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\PHRQ_io_output.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\pitzer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\pitzer_structures.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\PPassemblage.cxx"
 					>
 				</File>
@@ -847,7 +947,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\prep.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Pressure.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\print.cpp"
 					>
 				</File>
 				<File
@@ -855,11 +963,31 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\read.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\ReadClass.cxx"
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\readtr.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\runner.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\SelectedOutput.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\sit.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\smalldense.cpp"
 					>
 				</File>
 				<File
@@ -868,6 +996,10 @@
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\SolutionIsotope.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\spread.cpp"
 					>
 				</File>
 				<File
@@ -883,11 +1015,23 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\step.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\StorageBin.cxx"
 					>
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\StorageBinList.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\structures.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\sundialsmath.cpp"
 					>
 				</File>
 				<File
@@ -907,7 +1051,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\tally.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Temperature.cxx"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\tidy.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\transport.cpp"
 					>
 				</File>
 				<File
@@ -915,157 +1071,17 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\UserPunch.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\phreeqcpp\utilities.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\Utils.cxx"
 					>
 				</File>
-				<Filter
-					Name="phreeqc"
-					>
-					<File
-						RelativePath=".\src\phreeqcpp\advection.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\basicsubs.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\cl1.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\cvdense.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\cvode.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\dense.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\dw.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\gases.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\input.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\integrate.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\inverse.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\isotopes.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\kinetics.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\mainsubs.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\model.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\nvector.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\nvector_serial.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\parse.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\phqalloc.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\PHRQ_io_output.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\pitzer.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\pitzer_structures.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\prep.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\print.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\read.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\readtr.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\sit.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\smalldense.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\spread.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\step.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\structures.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\sundialsmath.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\tally.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\tidy.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\transport.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\phreeqcpp\utilities.cpp"
-						>
-					</File>
-				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
