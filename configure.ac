@@ -22,6 +22,7 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AM_PROG_AR
+AC_PROG_LIBTOOL
 
 # Check if the fortran interface should be included
 AC_MSG_CHECKING([if Fortran interface included])
@@ -44,7 +45,6 @@ else
 fi
 AM_CONDITIONAL([BUILD_FORTRAN], [test "X$IPQ_FORTRAN" = "Xyes"])
 
-AC_PROG_LIBTOOL
 
 # Checks for libraries.
 
