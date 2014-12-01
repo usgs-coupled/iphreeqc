@@ -1,0 +1,43 @@
+citHeader("Suggested citation for R phreeqc package:")
+
+
+citEntry(entry="Manual",
+         title        = "Description of input and examples for PHREEQC version 3--A computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculations",
+         author       = personList(as.person("D. L. Parkhurst"), 
+                                   as.person("C. A. J. Appelo")),
+	 publisher    = "U.S. Geological Survey",
+         year         = "2013",
+         series       = "Techniques and Methods",
+         volume       = "book 6",
+         chapter      = "A43",
+         pages        = "497",
+         url          = "http://pubs.usgs.gov/tm/06/a43",
+
+	 textVersion  =
+         paste("Parkhurst, D.L., and Appelo, C.A.J., 2013, Description of",
+               "input and examples for PHREEQC version 3--A computer",
+               "program for speciation, batch- reaction, one-dimensional",
+               "transport, and inverse geochemical calculations: U.S.",
+               "Geological Survey Techniques and Methods, book 6, chap.",
+               "A43, 497 p., available only at",
+               "http://pubs.usgs.gov/tm/06/a43.")
+)
+
+
+citEntry(entry="Article",
+         title        = "Modules based on the geochemical model PHREEQC for use in scripting and programming languages",
+         author       = personList(as.person("S. R. Charlton"), 
+                                   as.person("D. L. Parkhurst")),
+         year         = "2011",
+	 journal      = "Computers & Geosciences",
+         volume       = "37",
+         pages        = "1653-1663",
+         url          = "http://dx.doi.org/10.1016/j.cageo.2011.02.005",
+         
+	 textVersion  =
+         paste("Charlton, S.R., and Parkhurst, D.L, 2011, Modules based ",
+               "on the geochemical model PHREEQC for use in scripting",
+               "and programming languages: Computers & Geosciences,",
+               "v. 37, p. 1653-1663.")
+)
+

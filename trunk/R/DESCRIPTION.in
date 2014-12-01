@@ -1,0 +1,18 @@
+Package: phreeqc
+Version: 1.0-@REVISION_SVN@
+Title: R interface to the phreeqc geochemical modeling program
+License: GPL-3 + file LICENSE
+NeedsCompilation: yes
+Depends:
+    R (>= 2.10)
+Author: S.R. Charlton, D.L. Parkhurst, and C.A.J. Appelo, with contributions  
+    from D. Gillespie for Chipmunk BASIC and S.D. Cohen, A.C. Hindmarsh,  
+    R. Serban, D. Shumaker, and A.G. Taylor for CVODE/SUNDIALS
+URL: http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc
+Description: R interface to PHREEQC (Version 3). PHREEQC is a geochemical
+    modeling program developed by the US Geological Survey that is designed
+    to perform a wide variety of aqueous geochemical calculations, 
+    including speciation, batch-reaction, one-dimensional 
+    reactive-transport, and inverse geochemical calculations.    
+Maintainer: S.R. Charlton <charlton@usgs.gov>
+LazyData: yes

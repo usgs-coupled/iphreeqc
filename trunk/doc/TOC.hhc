@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Classes">
+		<param name="Local" value="html\annotated.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="IPhreeqc Class Reference">
+			<param name="Local" value="html\classIPhreeqc.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="C/Fortran Reference">
+		<param name="Local" value="html\IPhreeqc_8h.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AccumulateLine">
+			<param name="Local" value="html\IPhreeqc_8h.html#a82972801e7c56235dfd1e227b1febc98">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AddError">
+			<param name="Local" value="html\IPhreeqc_8h.html#af3f2f3e5a3da135b37bd43e943b3dc38">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AddWarning">
+			<param name="Local" value="html\IPhreeqc_8h.html#ae8393fd0ef3939bed93943dcac17a0a1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ClearAccumulatedLines">
+			<param name="Local" value="html\IPhreeqc_8h.html#a9b0cbb3bbc80c9e8b4e43d99e831cb69">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="CreateIPhreeqc">
+			<param name="Local" value="html\IPhreeqc_8h.html#a41aaa94cba576380802f4b4993bfd9b3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="DestroyIPhreeqc">
+			<param name="Local" value="html\IPhreeqc_8h.html#a6cd7cb5d8a1662683c85703e30375f4b">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetComponent">
+			<param name="Local" value="html\IPhreeqc_8h.html#a733e7ccd9b4f369ce7adc7aaadc1fad1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetComponentCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a126e0c5f317a0dfb5235a0db6d923efe">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetCurrentSelectedOutputUserNumber">
+			<param name="Local" value="html\IPhreeqc_8h.html#ae4834247893b8afad3c40dac1036671d">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetDumpFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#ae1889e283d2443669e6e8e6aef91c321">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetDumpFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#adea778349f00938b1020ad949015e060">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetDumpString">
+			<param name="Local" value="html\IPhreeqc_8h.html#a795f85d188e946cf4646af1c141f232f">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetDumpStringLine">
+			<param name="Local" value="html\IPhreeqc_8h.html#af8a7353287defcdfe16f767539266967">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetDumpStringLineCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a1c7b481d3352629abbbe32c5bbf4f972">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetDumpStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#af9f4d364d5cbaa1495a216ae767db947">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetErrorFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a3665d6cbaed75fb2134b91092b9efbfc">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetErrorFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#adafcb7ab9968f865720076a6bf667c92">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetErrorString">
+			<param name="Local" value="html\IPhreeqc_8h.html#abf5be1942c0ec59c142591af9b390914">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetErrorStringLine">
+			<param name="Local" value="html\IPhreeqc_8h.html#a196ea153b3ec0889ccb9a65bc07f9aba">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetErrorStringLineCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#af80210eb54aea8b21afa47d38e856fe4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetErrorStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a7d1ab3a6e53b2a15bc5d79116a8bcec4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetLogFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a8f0287e1ab781909ba07d7ae66f6be0d">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetLogFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a486ab4152e5e154acb46150768c31856">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetLogString">
+			<param name="Local" value="html\IPhreeqc_8h.html#aa4a621f41d3a341183a276e9f51a91f0">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetLogStringLine">
+			<param name="Local" value="html\IPhreeqc_8h.html#af9200b2aaeaa96739911e12424e317f3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetLogStringLineCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a0a9697750322533e28113486db20f695">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetLogStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#aec93dd8a4e98b97ef1f4f92e527a533e">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetNthSelectedOutputUserNumber">
+			<param name="Local" value="html\IPhreeqc_8h.html#a587dd64687d1bcf576b3a7e9d3e183c7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetOutputFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a20c0cd67be86477dccfb20948a7a282b">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetOutputFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#ab3ba0e68c70c401edafda79356ae728c">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetOutputString">
+			<param name="Local" value="html\IPhreeqc_8h.html#a520bf77245b557ac7a4cf9f1034ff082">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetOutputStringLine">
+			<param name="Local" value="html\IPhreeqc_8h.html#ab1307dfd5285f1fed2612cc93ab95822">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetOutputStringLineCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a0efd34d995a494a823979c1a128c712e">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetOutputStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a5a22fd0bf102ef037005311d9a01f09e">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputColumnCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a6be0323b33b32d6d04f3593bed31fcae">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a3170186c203a0e52276f16b5a11e521a">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#aaa0e499bc4dda8333cdc559fec6a692d">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a8f57d33809b84174e2cc6b69d000e096">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputRowCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a6e428ca1628248708ebbd1925a50837a">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputString">
+			<param name="Local" value="html\IPhreeqc_8h.html#ad2f63040ff41e6e313417a2e3aa56660">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputStringLine">
+			<param name="Local" value="html\IPhreeqc_8h.html#ab74a33e3e2932b5b692d677a3729f52b">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputStringLineCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#ad626efaa7aabc86e51aacf6c53994dcb">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a28f04f8405b3274b39a047b7c01352de">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputValue">
+			<param name="Local" value="html\IPhreeqc_8h.html#a9f0ffd11e25a7e8f05d800623b14acf5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetSelectedOutputValue2">
+			<param name="Local" value="html\IPhreeqc_8h.html#a9aee55746fec18145252f0b06cda4e28">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetVersionString">
+			<param name="Local" value="html\IPhreeqc_8h.html#aa2a16cabed297405fa436333ef5668f3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetWarningString">
+			<param name="Local" value="html\IPhreeqc_8h.html#a507b10ac32383ddbc65719a0c17916ab">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetWarningStringLine">
+			<param name="Local" value="html\IPhreeqc_8h.html#aa18244445778abc4e8f91c2a816eccc1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetWarningStringLineCount">
+			<param name="Local" value="html\IPhreeqc_8h.html#a699640f23ff6cfbd0908ced7b2ce4d30">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="LoadDatabase">
+			<param name="Local" value="html\IPhreeqc_8h.html#a70c26c381ccef7650c56cbc77f3af965">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="LoadDatabaseString">
+			<param name="Local" value="html\IPhreeqc_8h.html#ab487cb2d69ea7fa6a9b4fb4dbbf4b1b5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="OutputAccumulatedLines">
+			<param name="Local" value="html\IPhreeqc_8h.html#a5b801756566ea89bb42de8fa785bcde8">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="OutputErrorString">
+			<param name="Local" value="html\IPhreeqc_8h.html#a65d2988db80bd291531cec30e4fb3973">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="OutputWarningString">
+			<param name="Local" value="html\IPhreeqc_8h.html#a1cee4ac673c605afcc6c0e586ee793af">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="RunAccumulated">
+			<param name="Local" value="html\IPhreeqc_8h.html#a0605b37fe9233253e10cb437a3f2bc97">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="RunFile">
+			<param name="Local" value="html\IPhreeqc_8h.html#a45d0b70c814196bab5c70b8097d4c550">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="RunString">
+			<param name="Local" value="html\IPhreeqc_8h.html#a1611647d6c8b31aba57982f324e2bd3f">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetBasicCallback">
+			<param name="Local" value="html\IPhreeqc_8h.html#a49e83d2b3195b8f1f55ab3b796f91c39">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetBasicFortranCallback">
+			<param name="Local" value="html\IPhreeqc_8h.html#a0e3a073a057f94232d89708ab362e41d">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetCurrentSelectedOutputUserNumber">
+			<param name="Local" value="html\IPhreeqc_8h.html#ac1925c31a3a3a7b291f50377e6e12754">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetDumpFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a323d4060e0116eb410778b8c269edec9">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetDumpFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#ab0c24319b7af8a14b30420225b9d733f">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetDumpStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a8480eec4aaf89a29783f309319748744">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetErrorFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a160a61474e7a5283379be57862c84bf3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetErrorFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a78abbed50e239711c98e264349cdf131">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetErrorStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a76760484184e886627c3aee5f4017813">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetLogFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a88781f2963ff933cb6c308969b389366">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetLogFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#ada8ba9229990f9231240e1637af03267">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetLogStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a89b0f2b7a4f0fcb5f6ffc57a709a918e">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetOutputFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a44f18103f1ba9bd871e0ef85e678af6e">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetOutputFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a2bcc81d2232da722b5232ee8717bc013">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetOutputStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#ae2b75936532e87285916309db259944a">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetSelectedOutputFileName">
+			<param name="Local" value="html\IPhreeqc_8h.html#a682c0da830c579b20a24b40171318ac1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetSelectedOutputFileOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#aab495f8b0729402876405d1be19ecded">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetSelectedOutputStringOn">
+			<param name="Local" value="html\IPhreeqc_8h.html#a35825d293e22b86f09bec51c3ca5f412">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="C/C++ VAR Reference">
+		<param name="Local" value="html\Var_8h.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarAllocString">
+			<param name="Local" value="html\Var_8h.html#a4bc9504b10b2cce50efd0312703ac1f9">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarClear">
+			<param name="Local" value="html\Var_8h.html#a697bc568210799b851797b8232d6ddea">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarCopy">
+			<param name="Local" value="html\Var_8h.html#a87ebbf36638bfb913ab9ab9acf87bb45">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarFreeString">
+			<param name="Local" value="html\Var_8h.html#a323d0b3678b4187a3dbba35a5ded0f1f">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="VarInit">
+			<param name="Local" value="html\Var_8h.html#a54f8cc0deea8289bec3aceceb71c9ef3">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>
