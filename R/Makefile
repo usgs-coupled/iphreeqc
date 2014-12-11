@@ -238,6 +238,7 @@ DATA = \
 all: export_sed $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
 $(DATADIR)/databases.rda : $(DBS) build-databases.R
+	rm -f .RData
 	R --no-save --no-restore CMD BATCH build-databases.R
 	rm -f .RData
 
@@ -248,11 +249,13 @@ ex15.ascii : $(EXDIR)/ex15.dat
 	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
 
 $(DATADIR)/examples.rda : $(EXS) build-examples.R
+	rm -f .RData
 	R --no-save --no-restore CMD BATCH build-examples.R
 	rm -f .RData
 
 roxygenize $(MAN)/phreeqc-package.Rd : phreeqc/R/phreeqc.R
 	rm -f $(RDFILES)
+	rm -f .RData
 	R --no-save --no-restore CMD BATCH roxygenize.R
 	touch $(MAN)/phreeqc-package.Rd
 
@@ -790,7 +793,7 @@ export_sed :
 	< phreeqc.R.in > $(TOPDIR)/R/phreeqc.R
 
 build : all
-	R CMD build phreeqc
+	R CMD build --resave-data phreeqc
 
 uninstall :
 	R CMD REMOVE phreeqc
