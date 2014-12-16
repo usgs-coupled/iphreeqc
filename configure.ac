@@ -21,7 +21,7 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AM_PROG_AR
+# AM_PROG_AR (added automake >= 1.11.2)
 AC_PROG_LIBTOOL
 
 # Check if the fortran interface should be included
