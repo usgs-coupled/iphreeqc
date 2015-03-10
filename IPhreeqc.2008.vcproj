@@ -48,7 +48,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -121,7 +121,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -160,7 +160,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=libx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;"
+				CommandLine="SETLOCAL&#x0D;&#x0A;set DEST=libx64&#x0D;&#x0A;if not exist %DEST% mkdir %DEST%&#x0D;&#x0A;copy &quot;$(TargetDir)$(TargetName).lib&quot; &quot;%DEST%\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -192,7 +192,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -266,7 +266,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -339,7 +339,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -421,7 +421,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -501,7 +501,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -584,7 +584,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="src;src/phreeqcpp"
+				AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -993,7 +993,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\Keywords.cpp"
+					RelativePath=".\src\phreeqcpp\PhreeqcKeywords\Keywords.cpp"
 					>
 				</File>
 				<File
