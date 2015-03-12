@@ -234,11 +234,13 @@ include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords")
 
 
-OPTION (BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
+OPTION(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
 SET(LIB_TYPE STATIC)
 if (BUILD_SHARED_LIBS)
   SET(LIB_TYPE SHARED)
-  OPTION (BUILD_CLR_LIBS "Build CLR Libraries" OFF)
+  if (MSVC)
+    OPTION(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
+  endif()
 endif()
 add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
 set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
@@ -267,6 +269,10 @@ if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
   # Remove /RTC1 from CMAKE_CXX_FLAGS_DEBUG
   STRING(REPLACE " /RTC1" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
   ADD_DEFINITIONS(-DMULTICHART)  
+endif()
+
+if (BUILD_CLR_LIBS AND MSVC AND MSVC_VERSION < 1600)
+  message(FATAL_ERROR "CLR options must be set manually for Visual Studio versions prior to 2010")
 endif()
 
 if (MSVC10)
