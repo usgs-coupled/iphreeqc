@@ -268,16 +268,14 @@ if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
   STRING(REPLACE " /EHsc" " /EHa /clr" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
   # Remove /RTC1 from CMAKE_CXX_FLAGS_DEBUG
   STRING(REPLACE " /RTC1" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-  ADD_DEFINITIONS(-DMULTICHART)  
-endif()
-
-if (BUILD_CLR_LIBS AND MSVC AND MSVC_VERSION < 1600)
-  message(FATAL_ERROR "CLR options must be set manually for Visual Studio versions prior to 2010")
-endif()
-
-if (MSVC10)
-  # turn off warnings on VS2010
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4793 /wd4945")
+  if (MSVC10)
+    # turn off warnings on VS2010
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4793 /wd4945")
+  endif()  
+  if (MSVC_VERSION LESS 1600)
+    message(FATAL_ERROR "CLR options must be set manually for versions prior to Visual Studio 2010")
+  endif()  
+  ADD_DEFINITIONS(-DMULTICHART)
 endif()
 
 
