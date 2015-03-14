@@ -1,10 +1,10 @@
-cmake_minimum_required (VERSION 2.8.11)
+cmake_minimum_required (VERSION 3.0.2)
 
-##include(CheckLanguage)
-##check_language(Fortran)
-##if (CMAKE_Fortran_COMPILER)
-##  enable_language(Fortran)
-##endif()
+include(CheckLanguage)
+check_language(Fortran)
+if (CMAKE_Fortran_COMPILER)
+  enable_language(Fortran)
+endif()
 
 if (POLICY CMP0054)
   cmake_policy(PUSH)
@@ -21,22 +21,21 @@ endif()
 ##  set(CMAKE_INSTALL_DOCDIR "doc")
 ##endif()
 
-### Maybe this should be in subdir Tests
-###
-##if (NOT PHREEQCRM_BUILD_FORTRAN)
-##  if (NOT CMAKE_Fortran_COMPILER OR CMAKE_Fortran_COMPILER STREQUAL "CMAKE_Fortran_COMPILER-NOTFOUND")
-##    option (PHREEQCRM_BUILD_FORTRAN "Build FORTRAN support" OFF)
-##  else()
-##    option (PHREEQCRM_BUILD_FORTRAN "Build FORTRAN support" ON)
-##  endif()
-##else()
-##  if (PHREEQCRM_BUILD_FORTRAN)
-##    enable_language(Fortran)
-##    ##include(FortranCInterface)
-##    ##FortranCInterface_HEADER(FC.h MACRO_NAMESPACE "FC_")
-##    ##FortranCInterface_VERIFY(CXX QUIET)
-##  endif()  
-##endif()
+# Fortran
+if (NOT IPHREEQC_BUILD_FORTRAN)
+  if (NOT CMAKE_Fortran_COMPILER OR CMAKE_Fortran_COMPILER STREQUAL "CMAKE_Fortran_COMPILER-NOTFOUND")
+    option (IPHREEQC_BUILD_FORTRAN "Build FORTRAN support" OFF)
+  else()
+    option (IPHREEQC_BUILD_FORTRAN "Build FORTRAN support" ON)
+  endif()
+else()
+  if (IPHREEQC_BUILD_FORTRAN)
+    enable_language(Fortran)
+    ##include(FortranCInterface)
+    ##FortranCInterface_HEADER(FC.h MACRO_NAMESPACE "FC_")
+    ##FortranCInterface_VERIFY(CXX QUIET)
+  endif()  
+endif()
 
 include(GNUInstallDirs)
 
@@ -60,6 +59,7 @@ src/ErrorReporter.hxx
 src/IPhreeqc.cpp
 src/IPhreeqc.h
 src/IPhreeqc.hpp
+src/IPhreeqc_interface_F.cpp
 src/IPhreeqcCallbacks.h
 src/IPhreeqcLib.cpp
 src/Var.c
@@ -212,20 +212,20 @@ SET_SOURCE_FILES_PROPERTIES(src/Var.c PROPERTIES LANGUAGE CXX)
 ##endif ()
 
 
-if (IPHREEQC_BUILD_FORTRAN AND MSVC)
-  SET(IPhreeqc_SOURCES
-  ${IPhreeqc_SOURCES}
-  src/fwrap.cpp
-  src/fwrap1.cpp
-  src/fwrap2.cpp
-  src/fwrap3.cpp
-  src/fwrap4.cpp
-  src/fwrap5.cpp
-  src/fwrap6.cpp      
-  src/fwrap7.cpp
-  src/fwrap8.cpp      
-  )
-endif ()
+##if (IPHREEQC_BUILD_FORTRAN AND MSVC)
+##  SET(IPhreeqc_SOURCES
+##  ${IPhreeqc_SOURCES}
+##  src/fwrap.cpp
+##  src/fwrap1.cpp
+##  src/fwrap2.cpp
+##  src/fwrap3.cpp
+##  src/fwrap4.cpp
+##  src/fwrap5.cpp
+##  src/fwrap6.cpp      
+##  src/fwrap7.cpp
+##  src/fwrap8.cpp      
+##  )
+##endif ()
 
 # setup include directories
 include_directories("${PROJECT_SOURCE_DIR}")
@@ -329,7 +329,7 @@ endif()
 ##    )
 ##ENDIF(MSVC)
 
-### tests
-##enable_testing()
-##
-##add_subdirectory(Tests)
+# tests
+enable_testing()
+
+add_subdirectory(tests)

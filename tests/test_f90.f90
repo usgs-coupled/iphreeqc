@@ -1,7 +1,7 @@
 FUNCTION F_MAIN()
-  
+  USE IPhreeqc
   IMPLICIT NONE
-  INCLUDE 'IPhreeqc.f90.inc'
+  !!INCLUDE 'IPhreeqc.f90.inc'
   INTEGER(KIND=4) id
   
   INTEGER(KIND=4)   r
