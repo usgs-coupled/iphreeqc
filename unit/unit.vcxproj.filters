@@ -78,9 +78,6 @@
     <ClCompile Include="..\src\phreeqcpp\ISolutionComp.cxx">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\phreeqcpp\Keywords.cpp">
-      <Filter>Source Files\src\phreeqcpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\KineticsComp.cxx">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
@@ -287,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="FileTest.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\phreeqcpp\PhreeqcKeywords\Keywords.cpp">
+      <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
