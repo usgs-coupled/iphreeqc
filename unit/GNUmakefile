@@ -3,10 +3,11 @@ CPPUNIT             = /z/parkplace/home/charlton
 CXX                 = g++
 CXXCOMPILE          = $(CXX) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CXXFLAGS)
 CXXFLAGS            = -g -O2 -Wall -fno-var-tracking-assignments
+##CXXFLAGS            = -fprofile-arcs -ftest-coverage
 CXXLINK             = $(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@
 DEFS                = -DNDEBUG -DSWIG_SHARED_OBJ -DPHREEQC_CPP -DPHREEQC_CLASS -DUSE_PHRQ_ALLOC -DCPPUNIT
 DEPDIR              = .deps
-INCLUDES            = -I../src -I../src/phreeqcpp -I../src/phreeqcpp/phreeqc -I$(CPPUNIT)/include
+INCLUDES            = -I../src -I../src/phreeqcpp -I../src/phreeqcpp/PhreeqcKeywords -I$(CPPUNIT)/include
 LDFLAGS             = -L$(CPPUNIT)/lib 
 LIBS                = -lcppunit -ldl -lm
 MKDIR_P             = /bin/mkdir -p
@@ -14,7 +15,7 @@ MV                  = mv -f
 RANLIB              = ranlib
 RM                  = rm -f
 TARGET              = unit
-VPATH               = .:../src:../src/phreeqcpp
+VPATH               = .:../src:../src/phreeqcpp:../src/phreeqcpp/PhreeqcKeywords
 
 %.o: %.c
 	test -z "$(DEPDIR)" || $(MKDIR_P) "$(DEPDIR)"
