@@ -48,7 +48,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -133,7 +133,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -212,7 +212,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -293,7 +293,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 			/>
@@ -655,7 +655,7 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\Keywords.cpp"
+						RelativePath="..\src\phreeqcpp\PhreeqcKeywords\Keywords.cpp"
 						>
 					</File>
 					<File
@@ -1020,7 +1020,7 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\Keywords.h"
+						RelativePath="..\src\phreeqcpp\PhreeqcKeywords\Keywords.h"
 						>
 					</File>
 					<File
