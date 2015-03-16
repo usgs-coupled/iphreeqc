@@ -82,7 +82,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPUNIT;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -114,7 +114,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPUNIT;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -139,7 +139,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPUNIT;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPUNIT;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -181,6 +181,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CSelectedOutput.cpp" />
+    <ClCompile Include="..\src\phreeqcpp\PhreeqcKeywords\Keywords.cpp" />
     <ClCompile Include="..\src\phreeqcpp\SelectedOutput.cpp" />
     <ClCompile Include="..\src\phreeqcpp\UserPunch.cpp" />
     <ClCompile Include="FileTest.cpp" />
@@ -235,7 +236,6 @@
     <ClCompile Include="..\src\phreeqcpp\GasPhase.cxx" />
     <ClCompile Include="..\src\phreeqcpp\ISolution.cxx" />
     <ClCompile Include="..\src\phreeqcpp\ISolutionComp.cxx" />
-    <ClCompile Include="..\src\phreeqcpp\Keywords.cpp" />
     <ClCompile Include="..\src\phreeqcpp\KineticsComp.cxx" />
     <ClCompile Include="..\src\phreeqcpp\NameDouble.cxx" />
     <ClCompile Include="..\src\phreeqcpp\NumKeyword.cxx" />
