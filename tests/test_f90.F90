@@ -1,7 +1,11 @@
 FUNCTION F_MAIN()
+#ifndef IPHREEQC_NO_FORTRAN_MODULE
   USE IPhreeqc
+#endif
   IMPLICIT NONE
-  !!INCLUDE 'IPhreeqc.f90.inc'
+#ifdef IPHREEQC_NO_FORTRAN_MODULE
+  INCLUDE 'IPhreeqc.f90.inc'
+#endif
   INTEGER(KIND=4) id
   
   INTEGER(KIND=4)   r
@@ -128,9 +132,14 @@ END FUNCTION F_MAIN
 
 
 FUNCTION TestGetSet(id,getFunc,setFunc)
-  
+#ifndef IPHREEQC_NO_FORTRAN_MODULE
+  USE IPhreeqc
+#endif
+
   IMPLICIT NONE
+#ifdef IPHREEQC_NO_FORTRAN_MODULE
   INCLUDE 'IPhreeqc.f90.inc'
+#endif
   INTEGER(KIND=4) id
   INTEGER(KIND=4) TestGetSet
   INTERFACE
@@ -180,9 +189,14 @@ END FUNCTION TestGetSet
 
 
 FUNCTION TestGetSetName(id,getFuncName,setFuncName)
+#ifndef IPHREEQC_NO_FORTRAN_MODULE
+  USE IPhreeqc
+#endif
   
   IMPLICIT NONE
+#ifdef IPHREEQC_NO_FORTRAN_MODULE
   INCLUDE 'IPhreeqc.f90.inc'
+#endif
   INTEGER(KIND=4) id
   INTEGER(KIND=4) TestGetSetName
   INTERFACE

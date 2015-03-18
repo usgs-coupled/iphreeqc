@@ -17,15 +17,21 @@ test_cxx_LDADD = $(top_builddir)/src/libiphreeqc.la
 if BUILD_FORTRAN
 ##TESTS += test_f test_f90
 ##check_PROGRAMS += test_f test_f90
+
 TESTS += test_f90
 check_PROGRAMS += test_f90
 
 ##test_f_SOURCES = test_f.f main_fortran.cxx
 ##test_f_LDADD = $(top_builddir)/src/libiphreeqc.la $(FCLIBS)
 
-test_f90_SOURCES = test_f90.f90 main_fortran.cxx $(top_srcdir)/src/IPhreeqc_interface.F90
+test_f90_SOURCES = test_f90.F90 main_fortran.cxx IPhreeqc_interface.F90
 test_f90_LDADD = $(top_builddir)/src/libiphreeqc.la $(FCLIBS)
 
-test_f90.o : test_f90.f90 ../src/IPhreeqc_interface.o
+test_f90.$(OBJEXT) : test_f90.F90 IPhreeqc_interface.$(OBJEXT)
+
+IPhreeqc_interface.$(OBJEXT) : $(srcdir)/IPhreeqc_interface.F90
+
+$(srcdir)/IPhreeqc_interface.F90:
+	cd $(srcdir) && $(LN_S) ../src/IPhreeqc_interface.F90 .
 
 endif
