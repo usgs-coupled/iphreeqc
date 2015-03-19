@@ -3,11 +3,9 @@
   <navindex>
     <!-- new -->
     <tab type="mainpage" visible="yes" title="Home"/>
-    <!--
     <tab type="user" url="IPhreeqc_8h.html" title="C/Fortran Documentation"/>
     <tab type="user" url="IPhreeqc_8hpp.html" title="C++ Documentation"/>
     <tab type="user" url="Var_8h.html" title="IPhreeqc VARIANT Documentation"/>
-    -->
     <!-- end new -->
     <!--
     <tab type="mainpage" visible="yes" title=""/>
