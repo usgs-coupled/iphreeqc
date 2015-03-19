@@ -39,6 +39,14 @@ if test "X$IPQ_FORTRAN" = "Xyes"; then
   AC_FC_LIBRARY_LDFLAGS
   AC_FC_WRAPPERS 
   AC_FC_MAIN
+  m4_ifdef([AC_FC_MODULE_EXTENSION], [AC_FC_MODULE_EXTENSION], [
+    AX_F90_MODULE_EXTENSION
+    FC_MODEXT=mod
+    if test x$ax_cv_f90_modext != xunknown ; then
+      FC_MODEXT=$ax_cv_f90_modext
+    fi
+    AC_SUBST(FC_MODEXT)
+  ])
   AC_SUBST(F77, $FC)
   AC_SUBST(FFLAGS, $FCFLAGS) 
 else
