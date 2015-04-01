@@ -17,30 +17,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\fwrap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fwrap2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fwrap3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fwrap4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fwrap5.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fwrap6.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fwrap7.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fwrap8.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\IPhreeqc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,9 +51,6 @@
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="src\phreeqcpp\ISolutionComp.cxx">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="src\phreeqcpp\Keywords.cpp">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="src\phreeqcpp\KineticsComp.cxx">
@@ -281,6 +254,12 @@
     <ClCompile Include="src\phreeqcpp\UserPunch.cpp">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
+    <ClCompile Include="src\phreeqcpp\PhreeqcKeywords\Keywords.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IPhreeqc_interface_F.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CVar.hxx">
@@ -335,12 +314,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\ISolutionComp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\Keywords.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\kinetics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\KineticsComp.h">
@@ -481,10 +454,11 @@
     <ClInclude Include="src\phreeqcpp\UserPunch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="src\IPhreeqcF.f">
-      <Filter>Source Files</Filter>
-    </CustomBuild>
+    <ClInclude Include="src\phreeqcpp\PhreeqcKeywords\Keywords.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IPhreeqc_interface_F.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

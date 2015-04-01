@@ -164,7 +164,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -195,7 +195,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -222,7 +222,7 @@
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -252,7 +252,7 @@
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -280,7 +280,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -314,7 +314,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -344,7 +344,7 @@
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -377,7 +377,7 @@
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -406,16 +406,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\CSelectedOutput.cpp" />
-    <ClCompile Include="src\fwrap.cpp" />
-    <ClCompile Include="src\fwrap2.cpp" />
-    <ClCompile Include="src\fwrap3.cpp" />
-    <ClCompile Include="src\fwrap4.cpp" />
-    <ClCompile Include="src\fwrap5.cpp" />
-    <ClCompile Include="src\fwrap6.cpp" />
-    <ClCompile Include="src\fwrap7.cpp" />
-    <ClCompile Include="src\fwrap8.cpp" />
     <ClCompile Include="src\IPhreeqc.cpp" />
     <ClCompile Include="src\IPhreeqcLib.cpp" />
+    <ClCompile Include="src\IPhreeqc_interface_F.cpp" />
+    <ClCompile Include="src\phreeqcpp\PhreeqcKeywords\Keywords.cpp" />
     <ClCompile Include="src\phreeqcpp\SelectedOutput.cpp" />
     <ClCompile Include="src\phreeqcpp\UserPunch.cpp" />
     <ClCompile Include="src\Var.c">
@@ -433,7 +427,6 @@
     <ClCompile Include="src\phreeqcpp\GasPhase.cxx" />
     <ClCompile Include="src\phreeqcpp\ISolution.cxx" />
     <ClCompile Include="src\phreeqcpp\ISolutionComp.cxx" />
-    <ClCompile Include="src\phreeqcpp\Keywords.cpp" />
     <ClCompile Include="src\phreeqcpp\KineticsComp.cxx" />
     <ClCompile Include="src\phreeqcpp\NameDouble.cxx" />
     <ClCompile Include="src\phreeqcpp\NumKeyword.cxx" />
@@ -500,18 +493,11 @@
     <ClCompile Include="src\phreeqcpp\utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="src\IPhreeqcF.f">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="src\CSelectedOutput.hxx" />
     <ClInclude Include="src\CVar.hxx" />
     <ClInclude Include="src\IPhreeqc.h" />
     <ClInclude Include="src\IPhreeqc.hpp" />
+    <ClInclude Include="src\IPhreeqc_interface_F.h" />
     <ClInclude Include="src\phreeqcpp\cvdense.h" />
     <ClInclude Include="src\phreeqcpp\cvode.h" />
     <ClInclude Include="src\phreeqcpp\cxxKinetics.h" />
@@ -529,8 +515,6 @@
     <ClInclude Include="src\phreeqcpp\input.h" />
     <ClInclude Include="src\phreeqcpp\ISolution.h" />
     <ClInclude Include="src\phreeqcpp\ISolutionComp.h" />
-    <ClInclude Include="src\phreeqcpp\Keywords.h" />
-    <ClInclude Include="src\phreeqcpp\kinetics.h" />
     <ClInclude Include="src\phreeqcpp\KineticsComp.h" />
     <ClInclude Include="src\phreeqcpp\Model_eqns.h" />
     <ClInclude Include="src\phreeqcpp\NameDouble.h" />
@@ -543,6 +527,7 @@
     <ClInclude Include="src\phreeqcpp\PBasic.h" />
     <ClInclude Include="src\phreeqcpp\phqalloc.h" />
     <ClInclude Include="src\phreeqcpp\Phreeqc.h" />
+    <ClInclude Include="src\phreeqcpp\PhreeqcKeywords\Keywords.h" />
     <ClInclude Include="src\phreeqcpp\Phreeqc_class.h" />
     <ClInclude Include="src\phreeqcpp\PHRQ_base.h" />
     <ClInclude Include="src\phreeqcpp\PHRQ_io.h" />
