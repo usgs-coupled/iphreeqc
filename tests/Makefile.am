@@ -14,6 +14,11 @@ test_c_LINK = $(CXXLINK)
 test_cxx_SOURCES = test_cxx.cxx
 test_cxx_LDADD = $(top_builddir)/src/libiphreeqc.la
 
+CLEANFILES =\
+	XYZ\
+	phreeqc.0.log\
+	phreeqc.0.err
+
 if BUILD_FORTRAN
 ##TESTS += test_f test_f90
 ##check_PROGRAMS += test_f test_f90
@@ -26,6 +31,11 @@ check_PROGRAMS += test_f90
 
 test_f90_SOURCES = test_f90.F90 main_fortran.cxx IPhreeqc_interface.F90
 test_f90_LDADD = $(top_builddir)/src/libiphreeqc.la $(FCLIBS)
+
+mostlyclean-local: clean-modules
+.PHONY: clean-modules
+clean-modules:
+	-test -z $(FC_MODEXT) || $(RM) *.$(FC_MODEXT)
 
 test_f90.$(OBJEXT) : test_f90.F90 IPhreeqc_interface.$(OBJEXT)
 
