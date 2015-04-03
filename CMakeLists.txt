@@ -38,12 +38,13 @@ endif()
 
 # Disable deprecation warnings for standard C and STL functions in VS2005
 # and later
-IF(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
-  ADD_DEFINITIONS(-D_CRT_SECURE_NO_DEPRECATE)
-  ADD_DEFINITIONS(-D_SCL_SECURE_NO_WARNINGS)
-ENDIF(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400) 
-ADD_DEFINITIONS(-DSWIG_SHARED_OBJ)
-ADD_DEFINITIONS(-DUSE_PHRQ_ALLOC)
+if(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
+  add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+  add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+endif(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400) 
+
+add_definitions(-DSWIG_SHARED_OBJ)
+add_definitions(-DUSE_PHRQ_ALLOC)
 
 
 SET(IPhreeqc_SOURCES
@@ -222,13 +223,16 @@ include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords")
 
 
-OPTION(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
-SET(LIB_TYPE STATIC)
+if (STANDALONE_BUILD EQUAL 1)
+  option(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
+  set(LIB_TYPE STATIC)
+endif()
+
 if (BUILD_SHARED_LIBS)
-  SET(LIB_TYPE SHARED)
+  set(LIB_TYPE SHARED)
   if (STANDALONE_BUILD EQUAL 1)
     if (MSVC)
-      OPTION(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
+      option(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
     endif()
   endif()
 endif()
