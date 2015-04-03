@@ -1,43 +1,40 @@
 cmake_minimum_required (VERSION 2.8)
 
-include(CheckLanguage)
-check_language(Fortran)
-if (CMAKE_Fortran_COMPILER)
-  enable_language(Fortran)
-endif()
-
-if (POLICY CMP0054)
-  cmake_policy(PUSH)
-  cmake_policy(SET CMP0054 OLD)
-endif()
 project (IPhreeqc CXX C)
-if (POLICY CMP0054)
-  cmake_policy(POP)
+
+# check if this is the root project
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+  set(STANDALONE_BUILD 1)
+else()
+  set(STANDALONE_BUILD 0)
 endif()
 
-### overide docdir on windows
-##if(WIN32 AND NOT CMAKE_INSTALL_DOCDIR)
-##  set(CMAKE_INSTALL_DOCDIR "" CACHE PATH "documentation root (doc)")
-##  set(CMAKE_INSTALL_DOCDIR "doc")
-##endif()
+
+# overide docdir on windows
+if(WIN32 AND NOT CMAKE_INSTALL_DOCDIR)
+  set(CMAKE_INSTALL_DOCDIR "" CACHE PATH "documentation root (doc)")
+  set(CMAKE_INSTALL_DOCDIR "doc")
+endif()
+
+# set standard directory locations
+include(GNUInstallDirs)
+
 
 # Fortran
-if (NOT IPHREEQC_BUILD_FORTRAN)
-  if (NOT CMAKE_Fortran_COMPILER OR CMAKE_Fortran_COMPILER STREQUAL "CMAKE_Fortran_COMPILER-NOTFOUND")
-    option (IPHREEQC_BUILD_FORTRAN "Build FORTRAN support" OFF)
+if (STANDALONE_BUILD EQUAL 1)
+  if (NOT IPHREEQC_FORTRAN_TESTING)
+    if (NOT CMAKE_Fortran_COMPILER OR CMAKE_Fortran_COMPILER STREQUAL "CMAKE_Fortran_COMPILER-NOTFOUND")
+      option (IPHREEQC_FORTRAN_TESTING "Build Fortran test" OFF)
+    else()
+      option (IPHREEQC_FORTRAN_TESTING "Build Fortran test" ON)
+    endif()
   else()
-    option (IPHREEQC_BUILD_FORTRAN "Build FORTRAN support" ON)
+    if (IPHREEQC_FORTRAN_TESTING)
+      enable_language(Fortran)
+    endif()  
   endif()
-else()
-  if (IPHREEQC_BUILD_FORTRAN)
-    enable_language(Fortran)
-    ##include(FortranCInterface)
-    ##FortranCInterface_HEADER(FC.h MACRO_NAMESPACE "FC_")
-    ##FortranCInterface_VERIFY(CXX QUIET)
-  endif()  
 endif()
 
-include(GNUInstallDirs)
 
 # Disable deprecation warnings for standard C and STL functions in VS2005
 # and later
@@ -80,7 +77,7 @@ src/phreeqcpp/dense.cpp
 src/phreeqcpp/dense.h
 src/phreeqcpp/dumper.cpp
 src/phreeqcpp/dumper.h
-src/phreeqcpp/dw.cpp
+#src/phreeqcpp/dw.cpp
 src/phreeqcpp/gases.cpp
 src/phreeqcpp/global_structures.h
 src/phreeqcpp/input.cpp
@@ -203,29 +200,20 @@ src/phreeqcpp/Utils.h
 # compile Var.c as c++
 SET_SOURCE_FILES_PROPERTIES(src/Var.c PROPERTIES LANGUAGE CXX)
 
-### maybe always include?
-##if (PHREEQCRM_BUILD_FORTRAN)
-##  SET(PhreeqcRM_SOURCES
-##  ${PhreeqcRM_SOURCES}
-##  RM_interface_F.cpp
-##  )
-##endif ()
-
-
-##if (IPHREEQC_BUILD_FORTRAN AND MSVC)
-##  SET(IPhreeqc_SOURCES
-##  ${IPhreeqc_SOURCES}
-##  src/fwrap.cpp
-##  src/fwrap1.cpp
-##  src/fwrap2.cpp
-##  src/fwrap3.cpp
-##  src/fwrap4.cpp
-##  src/fwrap5.cpp
-##  src/fwrap6.cpp      
-##  src/fwrap7.cpp
-##  src/fwrap8.cpp      
-##  )
-##endif ()
+# always include fwrap files
+SET(IPhreeqc_SOURCES
+${IPhreeqc_SOURCES}
+src/fimpl.h
+src/fwrap.cpp
+src/fwrap1.cpp
+src/fwrap2.cpp
+src/fwrap3.cpp
+src/fwrap4.cpp
+src/fwrap5.cpp
+src/fwrap6.cpp      
+src/fwrap7.cpp
+src/fwrap8.cpp      
+)
 
 # setup include directories
 include_directories("${PROJECT_SOURCE_DIR}")
@@ -238,28 +226,24 @@ OPTION(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
 SET(LIB_TYPE STATIC)
 if (BUILD_SHARED_LIBS)
   SET(LIB_TYPE SHARED)
-  if (MSVC)
-    OPTION(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
+  if (STANDALONE_BUILD EQUAL 1)
+    if (MSVC)
+      OPTION(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
+    endif()
   endif()
 endif()
 add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
 set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
 
 SET(IPhreeqc_Headers
+${PROJECT_SOURCE_DIR}/src/IPhreeqc.f.inc
+${PROJECT_SOURCE_DIR}/src/IPhreeqc.f90.inc
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.h
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.hpp
 ${PROJECT_SOURCE_DIR}/src/IPhreeqcCallbacks.h
 ${PROJECT_SOURCE_DIR}/src/Var.h
 )
 
-##if (PHREEQCRM_BUILD_FORTRAN)
-##  SET(PhreeqcRM_Headers
-##  ${PhreeqcRM_Headers}
-##  $(PROJECT_SOURCE_DIR)/RM_interface_F.h
-##  $(PROJECT_SOURCE_DIR)/IPhreeqcPhast/IPhreeqc/IPhreeqc.f90.inc
-##  $(PROJECT_SOURCE_DIR)/IPhreeqcPhast/IPhreeqc/IPhreeqc.f.inc
-##  )
-##endif ()
 
 # Setup references for /CLR
 if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
@@ -305,10 +289,12 @@ if (WIN32)
 endif()
 
 # install
-install(TARGETS IPhreeqc DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-if (BUILD_CLR_LIBS)
-  install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_LIBDIR})
+if (STANDALONE_BUILD EQUAL 1)
+  install(TARGETS IPhreeqc DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  if (BUILD_CLR_LIBS)
+    install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  endif()
 endif()
 
 ##IF(MSVC)
@@ -329,7 +315,10 @@ endif()
 ##    )
 ##ENDIF(MSVC)
 
-# tests
-enable_testing()
 
-add_subdirectory(tests)
+if (STANDALONE_BUILD EQUAL 1)
+  # tests
+  enable_testing()
+
+  add_subdirectory(tests)
+endif()
