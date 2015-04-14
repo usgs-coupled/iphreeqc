@@ -138,11 +138,19 @@ void TestIPhreeqcLib::TestLoadDatabase(void)
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 
-	for (int i = 0; i < 10; ++i)
+	std::string FILES[] = {"../database/phreeqc.dat", "../database/pitzer.dat", "../database/wateq4f.dat",
+		"../database/Amm.dat", "../database/frezchem.dat", "../database/iso.dat",
+		"../database/llnl.dat", "../database/minteq.dat", "../database/minteq.v4.dat",
+		"../database/sit.dat"
+	};
+	for (int j = 0; j < sizeof(FILES)/sizeof(std::string); ++j)
 	{
-		CPPUNIT_ASSERT_EQUAL(true,   ::FileExists("phreeqc.dat"));
-		CPPUNIT_ASSERT(::FileSize("phreeqc.dat") > 0);
-		CPPUNIT_ASSERT_EQUAL(0,      ::LoadDatabase(n, "phreeqc.dat"));
+		for (int i = 0; i < 10; ++i)
+		{
+			CPPUNIT_ASSERT_EQUAL(true,   ::FileExists(FILES[j].c_str()));
+			CPPUNIT_ASSERT(::FileSize(FILES[j].c_str()) > 0);
+			CPPUNIT_ASSERT_EQUAL(0,      ::LoadDatabase(n, FILES[j].c_str()));
+		}
 	}
 
 	if (n >= 0)

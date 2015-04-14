@@ -26,34 +26,42 @@ TestIPhreeqc::~TestIPhreeqc(void)
 
 void TestIPhreeqc::TestLoadDatabase(void)
 {
-	IPhreeqc obj;
-	for (int i = 0; i < 10; ++i)
+	std::string FILES[] = {"../database/phreeqc.dat", "../database/pitzer.dat", "../database/wateq4f.dat",
+		"../database/Amm.dat", "../database/frezchem.dat", "../database/iso.dat",
+		"../database/llnl.dat", "../database/minteq.dat", "../database/minteq.v4.dat",
+		"../database/sit.dat"
+	};
+	for (int j = 0; j < sizeof(FILES)/sizeof(std::string); ++j)
 	{
-		CPPUNIT_ASSERT_EQUAL(true, ::FileExists("phreeqc.dat"));
-		CPPUNIT_ASSERT(::FileSize("phreeqc.dat") > 0);
-		CPPUNIT_ASSERT_EQUAL(0,    obj.LoadDatabase("phreeqc.dat"));
-	}
+		IPhreeqc obj;
+		for (int i = 0; i < 10; ++i)
+		{
+			CPPUNIT_ASSERT_EQUAL(true, ::FileExists(FILES[j].c_str()));
+			CPPUNIT_ASSERT(::FileSize(FILES[j].c_str()) > 0);
+			CPPUNIT_ASSERT_EQUAL(0,    obj.LoadDatabase(FILES[j].c_str()));
+		}
 
-	// make sure settings are cleared
-	//
+		// make sure settings are cleared
+		//
 
-	IPhreeqc obj2;
-	for (int i = 0; i < 10; ++i)
-	{
-		CPPUNIT_ASSERT_EQUAL(false, obj2.GetSelectedOutputFileOn());
+		IPhreeqc obj2;
+		for (int i = 0; i < 10; ++i)
+		{
+			CPPUNIT_ASSERT_EQUAL(false, obj2.GetSelectedOutputFileOn());
 
-		obj2.SetSelectedOutputFileOn(true);
-		CPPUNIT_ASSERT_EQUAL(true, obj2.GetSelectedOutputFileOn());
+			obj2.SetSelectedOutputFileOn(true);
+			CPPUNIT_ASSERT_EQUAL(true, obj2.GetSelectedOutputFileOn());
 
-		obj2.SetSelectedOutputFileOn(true);
-		CPPUNIT_ASSERT_EQUAL(true, obj2.GetSelectedOutputFileOn());
+			obj2.SetSelectedOutputFileOn(true);
+			CPPUNIT_ASSERT_EQUAL(true, obj2.GetSelectedOutputFileOn());
 
-		CPPUNIT_ASSERT_EQUAL(true, ::FileExists("phreeqc.dat"));
-		CPPUNIT_ASSERT(::FileSize("phreeqc.dat") > 0);
-		CPPUNIT_ASSERT_EQUAL(0,    obj2.LoadDatabase("phreeqc.dat"));
+			CPPUNIT_ASSERT_EQUAL(true, ::FileExists(FILES[j].c_str()));
+			CPPUNIT_ASSERT(::FileSize(FILES[j].c_str()) > 0);
+			CPPUNIT_ASSERT_EQUAL(0,    obj2.LoadDatabase(FILES[j].c_str()));
 
-		// all previous definitions are cleared
-		CPPUNIT_ASSERT_EQUAL(false, obj2.GetSelectedOutputFileOn());
+			// all previous definitions are cleared
+			CPPUNIT_ASSERT_EQUAL(false, obj2.GetSelectedOutputFileOn());
+		}
 	}
 }
 
