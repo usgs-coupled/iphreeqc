@@ -79,7 +79,7 @@ endif()
 ## Test Fortran
 ##
 
-if (IPHREEQC_BUILD_FORTRAN)
+if (IPHREEQC_FORTRAN_TESTING)
 
   project(test_f90 Fortran)
    
