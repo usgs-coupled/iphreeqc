@@ -26,6 +26,7 @@
 #   specified, it will build a release tarball.
 #  
 #   To build a Windows package pass -win.
+NAME=IPhreeqc
 
 # echo everything
 # set -x
@@ -123,7 +124,7 @@ else
   REPOS_PATH="`echo $REPOS_PATH | sed 's/^\/*//'`"
 fi
 
-DISTNAME="IPhreeqc-${VERSION}${VER_NUMTAG}"
+DISTNAME="${NAME}-${VERSION}${VER_NUMTAG}"
 DIST_SANDBOX=.dist_sandbox
 DISTPATH="$DIST_SANDBOX/$DISTNAME"
 
@@ -217,7 +218,7 @@ do
    -e "s/@REVISION_SVN@/$REVISION_SVN/g" \
     < "$vsn_file" > "$vsn_file.tmp"
   mv -f "$vsn_file.tmp" "$vsn_file"
-  if [ -n "$WIN" ]; then
+  if [ -n "$WIN" ] && [ "$vsn_file" != "$DISTPATH/configure.ac" ]; then
     unix2dos "$vsn_file"
   fi  
   cp "$vsn_file" "$vsn_file.dist"
