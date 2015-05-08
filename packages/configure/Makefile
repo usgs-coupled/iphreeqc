@@ -20,13 +20,17 @@ REL := $(shell svn st -v ../../configure.ac | cut -b 10- | ( read one two ; echo
 
 CONF_PKG := $(LNAME)-$(VER)-$(REL).tar.gz
 
+CMAKE_PKG := $(LNAME)-$(VER)-$(REL).zip
+
 TARBALL  := $(NAME)-$(VER)-$(REL).tar.gz
+
+ZIPBALL  := $(NAME)-$(VER)-$(REL).zip
 
 REPOS_PATH ?= trunk
 
 
 
-all : $(CONF_PKG)
+all : $(CONF_PKG) $(CMAKE_PKG)
 	@echo "DATE=$(DATE)"        >> history
 	@echo "VER=$(VER)"          >> history
 	@echo "REL=$(REL)"          >> history
@@ -42,6 +46,22 @@ $(CONF_PKG) : ../$(TARBALL)
 	cd $(NAME)-$(VER)-$(REL) && cd _build && $(MAKE) distcheck
 	mv $(NAME)-$(VER)-$(REL)/_build/$(CONF_PKG) .
 	rm -rf $(NAME)-$(VER)-$(REL)
+
+$(CMAKE_PKG) : ../$(ZIPBALL) $(CONF_PKG)
+	rm -rf $(NAME)-$(VER)-$(REL)
+	unzip ../$(ZIPBALL)
+	cd $(NAME)-$(VER)-$(REL) && autoreconf -fvi
+	cd $(NAME)-$(VER)-$(REL) && mkdir _build
+	cd $(NAME)-$(VER)-$(REL) && cd _build && ../configure
+	cd $(NAME)-$(VER)-$(REL) && cd _build && $(MAKE) dist-zip
+	mv $(NAME)-$(VER)-$(REL)/_build/$(CONF_PKG) .
+	rm -rf $(NAME)-$(VER)-$(REL)
+
+
+../$(TARBALL) :
+	cd .. && $(MAKE) DATE=$(DATE) VER=$(VER) REL=$(REL)
+
+../$(ZIPBALL) : ../$(TARBALL)
 
 usage:
 	@echo ""
