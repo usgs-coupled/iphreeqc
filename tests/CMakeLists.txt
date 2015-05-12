@@ -85,10 +85,22 @@ if (IPHREEQC_FORTRAN_TESTING)
    
   # source
   SET(test_f90_SOURCES
-    ../src/IPhreeqc_interface.F90
     main.f90
-    test_f90.f90
+    test_f90.F90
   )
+  
+  if (IPHREEQC_ENABLE_MODULE)
+    SET(test_f90_SOURCES
+      ${test_f90_SOURCES}
+      ../src/IPhreeqc_interface.F90
+    )
+  endif()
+  
+  # place [*.F[90]] files into "Source Files"
+  source_group("Source Files" FILES "test_f90.F90")
+  if (IPHREEQC_ENABLE_MODULE)
+    source_group("Source Files" FILES "../src/IPhreeqc_interface.F90")
+  endif()
   
   # test executable
   add_executable(test_f90 ${test_f90_SOURCES})

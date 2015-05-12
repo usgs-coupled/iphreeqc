@@ -21,6 +21,7 @@ include(GNUInstallDirs)
 
 
 # Fortran
+option (IPHREEQC_ENABLE_MODULE "Enable Fortran module" ON)
 if (STANDALONE_BUILD EQUAL 1)
   if (NOT IPHREEQC_FORTRAN_TESTING)
     if (NOT CMAKE_Fortran_COMPILER OR CMAKE_Fortran_COMPILER STREQUAL "CMAKE_Fortran_COMPILER-NOTFOUND")
@@ -201,20 +202,23 @@ src/phreeqcpp/Utils.h
 # compile Var.c as c++
 SET_SOURCE_FILES_PROPERTIES(src/Var.c PROPERTIES LANGUAGE CXX)
 
-# always include fwrap files
-SET(IPhreeqc_SOURCES
-${IPhreeqc_SOURCES}
-src/fimpl.h
-src/fwrap.cpp
-src/fwrap1.cpp
-src/fwrap2.cpp
-src/fwrap3.cpp
-src/fwrap4.cpp
-src/fwrap5.cpp
-src/fwrap6.cpp      
-src/fwrap7.cpp
-src/fwrap8.cpp      
-)
+# fwrap files
+if (NOT IPHREEQC_ENABLE_MODULE)
+  add_definitions(-DIPHREEQC_NO_FORTRAN_MODULE)
+  SET(IPhreeqc_SOURCES
+  ${IPhreeqc_SOURCES}
+  src/fimpl.h
+  src/fwrap.cpp
+  src/fwrap1.cpp
+  src/fwrap2.cpp
+  src/fwrap3.cpp
+  src/fwrap4.cpp
+  src/fwrap5.cpp
+  src/fwrap6.cpp      
+  src/fwrap7.cpp
+  src/fwrap8.cpp      
+ )
+endif()
 
 # setup include directories
 include_directories("${PROJECT_SOURCE_DIR}")
@@ -240,13 +244,19 @@ add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
 set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
 
 SET(IPhreeqc_Headers
-${PROJECT_SOURCE_DIR}/src/IPhreeqc.f.inc
-${PROJECT_SOURCE_DIR}/src/IPhreeqc.f90.inc
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.h
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.hpp
 ${PROJECT_SOURCE_DIR}/src/IPhreeqcCallbacks.h
 ${PROJECT_SOURCE_DIR}/src/Var.h
 )
+
+if (NOT IPHREEQC_ENABLE_MODULE)
+  SET(IPhreeqc_Headers
+  ${IPhreeqc_Headers}
+  ${PROJECT_SOURCE_DIR}/src/IPhreeqc.f.inc
+  ${PROJECT_SOURCE_DIR}/src/IPhreeqc.f90.inc
+  )
+endif()
 
 
 # Setup references for /CLR
