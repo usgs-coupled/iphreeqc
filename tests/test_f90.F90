@@ -201,14 +201,14 @@ FUNCTION TestGetSetName(id,getFuncName,setFuncName)
   INTEGER(KIND=4) TestGetSetName
   INTERFACE
      SUBROUTINE getFuncName(id,fname)
-       INTEGER(KIND=4) id
-       CHARACTER(LEN=*) fname
+       INTEGER(KIND=4),  INTENT(in)  :: id
+       CHARACTER(LEN=*), INTENT(out) :: fname
      END SUBROUTINE getFuncName
   END INTERFACE
   INTERFACE
      FUNCTION setFuncName(id,fname)
-       INTEGER(KIND=4) id
-       CHARACTER(LEN=*) fname
+       INTEGER(KIND=4),  INTENT(in) :: id
+       CHARACTER(LEN=*), INTENT(in) :: fname
        INTEGER(KIND=4) setFuncName
      END FUNCTION setFuncName
   END INTERFACE
