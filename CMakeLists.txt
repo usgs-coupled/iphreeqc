@@ -47,7 +47,6 @@ endif(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
 add_definitions(-DSWIG_SHARED_OBJ)
 add_definitions(-DUSE_PHRQ_ALLOC)
 
-
 SET(IPhreeqc_SOURCES
 src/thread.h
 src/CSelectedOutput.cpp
