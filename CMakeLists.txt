@@ -343,5 +343,6 @@ if (STANDALONE_BUILD EQUAL 1)
   enable_testing()
 
   add_subdirectory(database)
+  add_subdirectory(examples)
   add_subdirectory(tests)
 endif()
