@@ -121,5 +121,6 @@ AC_CONFIG_FILES([
   tests/Makefile
   tests/phreeqc.dat
   tests/ex2
+  database/Makefile
 ])
 AC_OUTPUT
