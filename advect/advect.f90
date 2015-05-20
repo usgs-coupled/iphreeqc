@@ -6,7 +6,13 @@ module Subs
   contains
   
   subroutine ExtractWrite(cell)
-    include "IPhreeqc.f90.inc"
+#ifndef IPHREEQC_NO_FORTRAN_MODULE
+    USE IPhreeqc
+#endif
+    IMPLICIT NONE
+#ifdef IPHREEQC_NO_FORTRAN_MODULE
+    INCLUDE 'IPhreeqc.f90.inc'
+#endif
     integer    (kind=4), intent(in) :: cell
     do j = 1, 8
       ! Headings are on row 0
@@ -18,7 +24,13 @@ module Subs
   end subroutine ExtractWrite
   
   subroutine EHandler()
-    include "IPhreeqc.f90.inc"
+#ifndef IPHREEQC_NO_FORTRAN_MODULE
+    USE IPhreeqc
+#endif
+    IMPLICIT NONE
+#ifdef IPHREEQC_NO_FORTRAN_MODULE
+    INCLUDE 'IPhreeqc.f90.inc'
+#endif
     call OutputErrorString(Id)
     stop
   end subroutine EHandler    
@@ -58,7 +70,13 @@ program Advect
   use Subs
   use Callback
   use MyData
-  include "IPhreeqc.f90.inc"
+#ifndef IPHREEQC_NO_FORTRAN_MODULE
+  USE IPhreeqc
+#endif
+  IMPLICIT NONE
+#ifdef IPHREEQC_NO_FORTRAN_MODULE
+  INCLUDE 'IPhreeqc.f90.inc'
+#endif
   character(len=1024) Istring 
   
 !Create module, load database, define initial conditions and selected output
