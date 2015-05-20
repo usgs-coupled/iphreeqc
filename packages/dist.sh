@@ -218,6 +218,8 @@ do
    -e "s/@PHREEQC_VER@/$VER/g" \
    -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
    -e "s/@REVISION_SVN@/$REVISION_SVN/g" \
+   -e "s/@VERSION@/$VERSION/g" \
+   -e "s/@REVISION@/$REVISION/g" \
     < "$vsn_file" > "$vsn_file.tmp"
   mv -f "$vsn_file.tmp" "$vsn_file"
   if [ -n "$WIN" ] && [ "$vsn_file" != "$DISTPATH/configure.ac" ]; then
