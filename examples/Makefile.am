@@ -1,3 +1,15 @@
+EXTRA_DIST =\
+	CMakeLists.txt\
+	c/CMakeLists.txt\
+	c/advect/CMakeLists.txt\
+	com/CMakeLists.txt\
+	com/excel/CMakeLists.txt\
+	com/python/CMakeLists.txt\
+	cpp/CMakeLists.txt\
+	cpp/advect/CMakeLists.txt\
+	fortran/CMakeLists.txt\
+	fortran/advect/CMakeLists.txt
+
 EXAMPLES_DIR = $(docdir)/examples
 
 # c
