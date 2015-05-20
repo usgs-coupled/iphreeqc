@@ -3,6 +3,7 @@ EXTRA_DIST =\
 	c/CMakeLists.txt\
 	c/advect/CMakeLists.txt\
 	com/CMakeLists.txt\
+	com/README.TXT\
 	com/excel/CMakeLists.txt\
 	com/python/CMakeLists.txt\
 	cpp/CMakeLists.txt\
