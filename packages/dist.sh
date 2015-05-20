@@ -200,6 +200,7 @@ VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
 SED_FILES="$DISTPATH/configure.ac \
            $DISTPATH/phreeqc3-doc/RELEASE.TXT \
+           $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT \
            $DISTPATH/src/IPhreeqc.h \
            $DISTPATH/src/Makefile.am \
            $DISTPATH/src/Version.h"
