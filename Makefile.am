@@ -4,4 +4,4 @@ EXTRA_DIST =\
 	INSTALL\
 	IPhreeqc.rc\
 	resource.h
-SUBDIRS = src tests examples doc
+SUBDIRS = src tests examples doc database
