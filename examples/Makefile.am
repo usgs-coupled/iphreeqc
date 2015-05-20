@@ -44,8 +44,9 @@ example_com_exceldir = $(EXAMPLES_DIR)/com/excel
 dist_example_com_excel_DATA = $(com_excel)
 
 com_excel= \
+    com/excel/phreeqc.dat \
     com/excel/runphreeqc.xls \
-    com/excel/phreeqc.dat
+    com/excel/withcallback.xls
 
 # com python
 #
@@ -55,7 +56,7 @@ dist_example_com_python_DATA = $(com_python)
 
 com_python= \
     com/python/Gypsum.py \
-    com/python/wateq4f.dat \
-    com/python/pitzer.dat \
     com/python/parallel_advect.py \
-    com/python/phreeqc.dat
+    com/python/phreeqc.dat \
+    com/python/pitzer.dat \
+    com/python/wateq4f.dat
