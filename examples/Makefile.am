@@ -9,8 +9,6 @@ dist_example_c_advect_DATA = $(c_advect)
 
 c_advect= \
     c/advect/advect.c \
-    c/advect/advect_c.sln \
-    c/advect/advect_c.vcproj \
     c/advect/ic \
     c/advect/phreeqc.dat
 
@@ -23,8 +21,6 @@ dist_example_cpp_advect_DATA = $(cpp_advect)
 
 cpp_advect= \
     cpp/advect/advect.cpp \
-    cpp/advect/advect_c.sln \
-    cpp/advect/advect_c.vcproj \
     cpp/advect/ic \
     cpp/advect/phreeqc.dat
 
@@ -37,8 +33,6 @@ dist_example_fortran_advect_DATA = $(fortran_advect)
 
 fortran_advect= \
     fortran/advect/advect.f90 \
-    fortran/advect/advect.sln \
-    fortran/advect/advect.vfproj \
     fortran/advect/ic \
     fortran/advect/phreeqc.dat
 
