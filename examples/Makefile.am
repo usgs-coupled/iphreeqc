@@ -1,4 +1,4 @@
-EXAMPLES_DIR = $(datadir)/doc/$(PACKAGE_TARNAME)-$(VERSION)/examples
+EXAMPLES_DIR = $(docdir)/examples
 
 # c
 #
