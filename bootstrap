@@ -1,16 +1,25 @@
 #! /bin/sh
 
 if [ ! -f doc/RELEASE ];then
-  ln phreeqc3-doc/RELEASE.TXT doc/RELEASE
+  cd doc
+  ln -s ../phreeqc3-doc/RELEASE.TXT RELEASE
+  cd ..
 fi
 
 if [ ! -f doc/NOTICE ];then
-  ln phreeqc3-doc/NOTICE.TXT doc/NOTICE
+  cd doc
+  ln -s ../phreeqc3-doc/NOTICE.TXT NOTICE
+  cd ..
 fi
 
 if [ ! -f doc/phreeqc3.chm ];then
   svn export http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion/phreeqc3.chm doc/phreeqc3.chm
 fi
 
-exec autoreconf -fvi
+if [ ! -f doc/README ];then
+  cd doc
+  ln -s ../phreeqc3-doc/README.IPhreeqc.TXT README
+  cd ..
+fi
 
+exec autoreconf -fvi

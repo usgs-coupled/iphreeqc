@@ -3,6 +3,5 @@ EXTRA_DIST =\
 	CMakeLists.txt\
 	INSTALL\
 	IPhreeqc.rc\
-	README\
 	resource.h
 SUBDIRS = src tests examples doc

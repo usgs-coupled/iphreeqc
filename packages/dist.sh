@@ -225,8 +225,9 @@ do
   cp "$vsn_file" "$vsn_file.dist"
 done
 
-cp $DISTPATH/phreeqc3-doc/RELEASE.TXT     $DISTPATH/doc/RELEASE
-cp $DISTPATH/phreeqc3-doc/NOTICE.TXT      $DISTPATH/doc/NOTICE
+cp $DISTPATH/phreeqc3-doc/RELEASE.TXT          $DISTPATH/doc/RELEASE
+cp $DISTPATH/phreeqc3-doc/NOTICE.TXT           $DISTPATH/doc/NOTICE
+cp $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT  $DISTPATH/doc/README
 
 (cd "$DISTPATH/doc" && "doxygen")
 
