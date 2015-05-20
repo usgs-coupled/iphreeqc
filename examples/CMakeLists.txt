@@ -1,4 +1,4 @@
-SET(EXAMPLES_DIR $(docdir)/examples)
+SET(EXAMPLES_DIR ${CMAKE_INSTALL_DOCDIR}/examples)
 
 add_subdirectory(c)
 add_subdirectory(com)
