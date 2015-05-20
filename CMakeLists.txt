@@ -241,6 +241,8 @@ if (BUILD_SHARED_LIBS)
 endif()
 add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
 set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
+set_target_properties(IPhreeqc PROPERTIES MINSIZEREL_POSTFIX "msr")
+set_target_properties(IPhreeqc PROPERTIES RELWITHDEBINFO_POSTFIX "rwdi")
 
 SET(IPhreeqc_Headers
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.h
@@ -257,6 +259,10 @@ if (NOT IPHREEQC_ENABLE_MODULE)
   )
 endif()
 
+
+SET(IPhreeqc_SRC
+${PROJECT_SOURCE_DIR}/src/IPhreeqc_interface.F90
+)
 
 # Setup references for /CLR
 if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
@@ -305,6 +311,9 @@ endif()
 if (STANDALONE_BUILD EQUAL 1)
   install(TARGETS IPhreeqc DESTINATION ${CMAKE_INSTALL_LIBDIR})
   install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  if (IPHREEQC_ENABLE_MODULE)
+    install(FILES ${IPhreeqc_SRC} DESTINATION src)
+  endif()
   if (BUILD_CLR_LIBS)
     install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_LIBDIR})
   endif()
@@ -333,5 +342,6 @@ if (STANDALONE_BUILD EQUAL 1)
   # tests
   enable_testing()
 
+  add_subdirectory(database)
   add_subdirectory(tests)
 endif()
