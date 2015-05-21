@@ -45,7 +45,7 @@ example_fortran_advectdir = $(EXAMPLES_DIR)/fortran/advect
 dist_example_fortran_advect_DATA = $(fortran_advect)
 
 fortran_advect= \
-    fortran/advect/advect.f90 \
+    fortran/advect/advect.F90 \
     fortran/advect/ic \
     fortran/advect/phreeqc.dat
 
