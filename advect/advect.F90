@@ -6,13 +6,10 @@ module Subs
   contains
   
   subroutine ExtractWrite(cell)
-#ifndef IPHREEQC_NO_FORTRAN_MODULE
-    USE IPhreeqc
-#endif
+    use IPhreeqc
     IMPLICIT NONE
-#ifdef IPHREEQC_NO_FORTRAN_MODULE
-    INCLUDE 'IPhreeqc.f90.inc'
-#endif
+    integer :: j
+    integer :: Ierr
     integer    (kind=4), intent(in) :: cell
     do j = 1, 8
       ! Headings are on row 0
@@ -24,13 +21,8 @@ module Subs
   end subroutine ExtractWrite
   
   subroutine EHandler()
-#ifndef IPHREEQC_NO_FORTRAN_MODULE
-    USE IPhreeqc
-#endif
+    use IPhreeqc
     IMPLICIT NONE
-#ifdef IPHREEQC_NO_FORTRAN_MODULE
-    INCLUDE 'IPhreeqc.f90.inc'
-#endif
     call OutputErrorString(Id)
     stop
   end subroutine EHandler    
@@ -70,20 +62,18 @@ program Advect
   use Subs
   use Callback
   use MyData
-#ifndef IPHREEQC_NO_FORTRAN_MODULE
-  USE IPhreeqc
-#endif
+  use IPhreeqc
   IMPLICIT NONE
-#ifdef IPHREEQC_NO_FORTRAN_MODULE
-  INCLUDE 'IPhreeqc.f90.inc'
-#endif
+  integer :: Ierr
   character(len=1024) Istring 
   
 !Create module, load database, define initial conditions and selected output
   year = 2012.
   Id = CreateIPhreeqc()
   if (LoadDatabase(Id, "phreeqc.dat") .ne. 0) call EHandler()
+#if 0
   if (SetBasicFortranCallback(id, MyCallback) .ne. 0) call EHandler()
+#endif
   If (RunFile(Id, "ic") .ne. 0) call EHandler()
 
 !Run cell 1, extract/write result
