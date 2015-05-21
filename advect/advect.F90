@@ -71,9 +71,7 @@ program Advect
   year = 2012.
   Id = CreateIPhreeqc()
   if (LoadDatabase(Id, "phreeqc.dat") .ne. 0) call EHandler()
-#if 0
-  if (SetBasicFortranCallback(id, MyCallback) .ne. 0) call EHandler()
-#endif
+!???  if (SetBasicFortranCallback(id, MyCallback) .ne. 0) call EHandler()
   If (RunFile(Id, "ic") .ne. 0) call EHandler()
 
 !Run cell 1, extract/write result
