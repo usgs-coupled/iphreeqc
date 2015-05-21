@@ -1,5 +1,5 @@
 PROGRAM example
-  INCLUDE "IPhreeqc.f90.inc"
+  USE IPhreeqc
   INTEGER(KIND=4) :: id
   INTEGER(KIND=4) :: i
   CHARACTER(LEN=40) :: comp

@@ -1,13 +1,15 @@
 CC = gcc
-CPPFLAGS = -I../../src -I../../src/phreeqcpp
+CPPFLAGS = -I../../src -I../../src/phreeqcpp -I../../src/phreeqcpp/PhreeqcKeywords
 CXX = g++
 DEFS = -DNDEBUG=1 -DFC_FUNC\(name,NAME\)=name\ \#\#\ _ -DFC_FUNC_\(name,NAME\)=name\ \#\#\ _ -DFC_MAIN=MAIN__ 
 F77 = gfortran
 FC = gfortran
 CFLAGS = -g -O2 -Wall
 FFLAGS = -I../../src -g -O2 -Wall
-FCLIBS =  -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1 -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/../../.. -lgfortranbegin -lgfortran -lm
-LIBTOOL = /bin/sh ../../_build/libtool
+#FCLIBS =  -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1 -L/usr/lib/gcc/i586-manbo-linux-gnu/4.4.1/../../.. -lgfortranbegin -lgfortran -lm
+FCLIBS = -L/usr/lib/gcc/x86_64-linux-gnu/4.8 -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../.. -lgfortran -lm -lquadmath
+#LIBTOOL = /bin/sh ../../_build/libtool
+LIBTOOL = /usr/bin/libtool
 LDFLAGS = 
 IPHREEQC_LA = ../../_build/src/libiphreeqc.la
 
@@ -92,40 +94,40 @@ IPhreeqc: IPhreeqc.lo $(IPHREEQC_LA)
 
 
 F90AccumulateLine: F90AccumulateLine.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
-F90CreateIPhreeqc: F90CreateIPhreeqc.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+F90CreateIPhreeqc: F90CreateIPhreeqc.lo $(IPHREEQC_LA) 
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetComponent: F90GetComponent.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetDumpStringLine: F90GetDumpStringLine.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetErrorStringLine: F90GetErrorStringLine.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetLogStringLine: F90GetLogStringLine.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetOutputStringLine: F90GetOutputStringLine.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90ClearAccumulatedLines: F90ClearAccumulatedLines.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetSelectedOutputStringLine: F90GetSelectedOutputStringLine.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetSelectedOutputValue: F90GetSelectedOutputValue.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90GetVersionString: F90GetVersionString.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 F90SetBasicFortranCallback: F90SetBasicFortranCallback.lo $(IPHREEQC_LA)
-	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< $(IPHREEQC_LA) $(FCLIBS)
+	$(LIBTOOL) --mode=link $(CXX) $(LDFLAGS) -o $@ $< IPhreeqc_interface.lo $(IPHREEQC_LA) $(FCLIBS)
 
 .SUFFIXES: .c .cxx .f .f90 .lo
 
@@ -145,6 +147,13 @@ F90SetBasicFortranCallback: F90SetBasicFortranCallback.lo $(IPHREEQC_LA)
 .f90.lo:
 	$(LIBTOOL) --mode=compile $(FC) $(FFLAGS) -c -o $@ $<
 
+
+F90CreateIPhreeqc.lo: IPhreeqc_interface.lo 
+
+IPhreeqc_interface.lo: ../../src/IPhreeqc_interface.F90
+	$(LIBTOOL) --mode=compile $(FC) $(FFLAGS) -c -o $@ $<
+
+
 LO_FILES = \
 	AccumulateLine.lo \
 	CreateIPhreeqc.lo \
@@ -158,6 +167,7 @@ LO_FILES = \
 	GetSelectedOutputValue.lo \
 	GetSelectedOutputValue2.lo \
 	GetVersionString.lo \
+	IPhreeqc_interface.lo \
 	Multi.lo \
 	SetBasicCallback.lo \
 	SetCurrentSelectedOutputUserNumber.lo \
@@ -179,6 +189,10 @@ F90_LO_FILES = \
 	F90GetVersionString.lo \
 	F90SetBasicFortranCallback.lo
 
+MOD_FILES = \
+	callback.mod \
+	iphreeqc.mod \
+	mydata.mod
 
 clean:
-	$(LIBTOOL) --mode=clean rm -f *~ $(TARGETS) $(F90_TARGETS) $(LO_FILES) $(F90_LO_FILES)
+	$(LIBTOOL) --mode=clean rm -f *~ $(TARGETS) $(F90_TARGETS) $(LO_FILES) $(F90_LO_FILES) $(MOD_FILES)

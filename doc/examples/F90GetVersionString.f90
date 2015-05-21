@@ -1,5 +1,5 @@
 PROGRAM example
-  INCLUDE "IPhreeqc.f90.inc"
+  USE IPhreeqc
   CHARACTER(LEN=80) :: version
 
   WRITE(*,*) "Version:"

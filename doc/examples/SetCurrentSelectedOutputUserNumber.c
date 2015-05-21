@@ -37,7 +37,7 @@ int main(void)
 
         for (c = 0; c < GetSelectedOutputColumnCount(id); ++c) {
 
-          if (GetSelectedOutputValue(id, r, c, &v) == VR_OK) {
+          if (GetSelectedOutputValue(id, r, c, &v) == IPQ_OK) {
 
             switch (v.type) {
             case TT_LONG:

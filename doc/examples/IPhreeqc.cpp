@@ -49,6 +49,12 @@ int main(void)
         case TT_STRING:
           std::cout << v.sVal << " ";
           break;
+	case TT_EMPTY:
+          std::cout << "<empty> ";
+	  break;
+	case TT_ERROR:
+          std::cout << "<error> ";
+	  break;
         }
       }
       ::VarClear(&v);

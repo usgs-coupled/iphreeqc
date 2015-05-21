@@ -6,6 +6,7 @@ MODULE Callback
 CONTAINS
   DOUBLE PRECISION FUNCTION MyCallback(x1, x2, str)
     USE MyData, ONLY : year
+    USE ISO_C_BINDING
     !       
     !   Use of a callback is optional.
     !   
@@ -31,7 +32,7 @@ END MODULE Callback
 PROGRAM Advect
   USE Callback
   USE MyData
-  INCLUDE "IPhreeqc.f90.inc"
+  USE IPhreeqc
   INTEGER :: Id
   
   !Create module, load database, define initial conditions and selected output
@@ -45,10 +46,10 @@ PROGRAM Advect
      CALL OutputErrorString(Id)
      STOP
   ENDIF
-  IF (SetBasicFortranCallback(id, MyCallback) .NE. 0) THEN
-     CALL OutputErrorString(Id)
-     STOP
-  ENDIF
+  !???IF (SetBasicFortranCallback(id, MyCallback) .NE. 0) THEN
+  !???   CALL OutputErrorString(Id)
+  !???   STOP
+  !???ENDIF
   IF (RunFile(Id, "ic") .NE. 0) THEN
      CALL OutputErrorString(Id)
      STOP

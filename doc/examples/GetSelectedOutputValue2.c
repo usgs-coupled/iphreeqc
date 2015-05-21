@@ -28,7 +28,7 @@ int main(void)
   printf("selected-output:\n");
   for (i = 0; i < GetSelectedOutputRowCount(id); ++i) {
     for (j = 0; j < GetSelectedOutputColumnCount(id); ++j) {
-      if (GetSelectedOutputValue2(id, i, j, &vtype, &dvalue, svalue, SVALUE_LENGTH) == VR_OK) {
+      if (GetSelectedOutputValue2(id, i, j, &vtype, &dvalue, svalue, SVALUE_LENGTH) == IPQ_OK) {
         switch (vtype) {
         case TT_LONG:
           printf("%ld ", (long)dvalue);
@@ -39,6 +39,9 @@ int main(void)
         case TT_STRING:
           printf("%s ", svalue);
           break;
+	case TT_EMPTY:
+	  printf("<empty> ");
+	  break;
         }
       }
     }
