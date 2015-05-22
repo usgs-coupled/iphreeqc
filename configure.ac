@@ -28,11 +28,11 @@ AC_PROG_MAKE_SET
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_LIBTOOL
 
-# Check if the fortran interface should be included
-AC_MSG_CHECKING([if Fortran interface included])
-AC_ARG_ENABLE([fortran],
-     [AC_HELP_STRING([--enable-fortran],
-                     [include the Fortran interface @<:@default=yes@:>@])],
+# Check if the fortran test should be included
+AC_MSG_CHECKING([if test Fortran])
+AC_ARG_ENABLE([fortran-test],
+     [AC_HELP_STRING([--enable-fortran-test],
+                     [test the Fortran interface @<:@default=yes@:>@])],
      [IPQ_FORTRAN=$enableval],
      [IPQ_FORTRAN=yes])
 
