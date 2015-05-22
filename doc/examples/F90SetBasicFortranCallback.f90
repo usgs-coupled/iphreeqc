@@ -4,7 +4,7 @@ END MODULE MyData
 
 MODULE Callback
 CONTAINS
-  DOUBLE PRECISION FUNCTION MyCallback(x1, x2, str)
+  REAL(kind=C_DOUBLE) FUNCTION MyCallback(x1, x2, str, l) BIND(C, name='MyCallback')
     USE MyData, ONLY : year
     USE ISO_C_BINDING
     !       
@@ -17,11 +17,16 @@ CONTAINS
     !   The callback function is called whenever CALLBACK(x1, x2, str$)  
     !   is used in a Basic program (usually USER_PUNCH). See file "ic".
     !   
-    DOUBLE PRECISION, INTENT(in) :: x1, x2
-    CHARACTER(*), INTENT(in)     :: str
+    REAL(kind=C_DOUBLE),    INTENT(in)        :: x1, x2
+    CHARACTER(kind=C_CHAR), INTENT(in)        :: str(*)
+    INTEGER(kind=C_INT),    INTENT(in), value :: l
+    character(len=l) fstr
     MyCallback = -1.0
     ! An example of a datum available in main program
-    IF (TRIM(str) .EQ. "Year") THEN
+    do i = 1, l
+       fstr(i:i) = str(i)
+    enddo
+    IF (TRIM(fstr) .EQ. "Year") THEN
        WRITE (*,"(/a,i2,a,f8.2)") "Callback for cell ", INT(x1), ": pH ", x2
        MyCallback = year
     ENDIF
@@ -46,10 +51,10 @@ PROGRAM Advect
      CALL OutputErrorString(Id)
      STOP
   ENDIF
-  !???IF (SetBasicFortranCallback(id, MyCallback) .NE. 0) THEN
-  !???   CALL OutputErrorString(Id)
-  !???   STOP
-  !???ENDIF
+  IF (SetBasicFortranCallback(id, MyCallback) .NE. 0) THEN
+     CALL OutputErrorString(Id)
+     STOP
+  ENDIF
   IF (RunFile(Id, "ic") .NE. 0) THEN
      CALL OutputErrorString(Id)
      STOP
