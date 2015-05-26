@@ -251,18 +251,22 @@ ${PROJECT_SOURCE_DIR}/src/IPhreeqcCallbacks.h
 ${PROJECT_SOURCE_DIR}/src/Var.h
 )
 
-if (NOT IPHREEQC_ENABLE_MODULE)
+SET(IPhreeqc_SRC
+${PROJECT_SOURCE_DIR}/src/IPhreeqc_interface.F90
+)
+
+if (IPHREEQC_ENABLE_MODULE)
+  SET(IPhreeqc_SRC
+  ${PROJECT_SOURCE_DIR}/src/IPhreeqc_interface.F90
+  ${PROJECT_SOURCE_DIR}/src/README.Fortran
+  )
+else()
   SET(IPhreeqc_Headers
   ${IPhreeqc_Headers}
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc.f.inc
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc.f90.inc
   )
 endif()
-
-
-SET(IPhreeqc_SRC
-${PROJECT_SOURCE_DIR}/src/IPhreeqc_interface.F90
-)
 
 # Setup references for /CLR
 if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
@@ -312,7 +316,11 @@ if (STANDALONE_BUILD EQUAL 1)
   install(TARGETS IPhreeqc DESTINATION ${CMAKE_INSTALL_LIBDIR})
   install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
   if (IPHREEQC_ENABLE_MODULE)
-    install(FILES ${IPhreeqc_SRC} DESTINATION src)
+    if (WIN32)
+      install(FILES ${IPhreeqc_SRC} DESTINATION src)
+    else()
+      install(FILES ${IPhreeqc_SRC} DESTINATION ${CMAKE_INSTALL_DOCDIR}/src)
+    endif()
   endif()
   if (BUILD_CLR_LIBS)
     install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_LIBDIR})
