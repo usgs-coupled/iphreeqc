@@ -28,16 +28,18 @@ AC_PROG_MAKE_SET
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_LIBTOOL
 
-# Check if the fortran test should be included
-AC_MSG_CHECKING([if test Fortran])
-AC_ARG_ENABLE([fortran-test],
-     [AC_HELP_STRING([--enable-fortran-test],
-                     [test the Fortran interface @<:@default=yes@:>@])],
-     [IPQ_FORTRAN=$enableval],
-     [IPQ_FORTRAN=yes])
+# Check if the iphreeqc fortran module is enabled
+AC_MSG_CHECKING([whether to enable the IPhreeqc Fortran module])
+AC_ARG_ENABLE([fortran-module],
+     [AC_HELP_STRING([--enable-fortran-module],
+                     [enable the IPhreeqc Fortran module @<:@default=yes@:>@])],
+     [IPQ_FORTRAN_MODULE=$enableval],
+     [IPQ_FORTRAN_MODULE=yes])
 
-if test "X$IPQ_FORTRAN" = "Xyes"; then
+if test "X$IPQ_FORTRAN_MODULE" = "Xyes"; then
   AC_MSG_RESULT(yes)
+else
+  AC_MSG_RESULT(no)
   AC_PROG_FC
   AC_FC_LIBRARY_LDFLAGS
   AC_FC_WRAPPERS 
@@ -52,11 +54,40 @@ if test "X$IPQ_FORTRAN" = "Xyes"; then
   ])
   AC_SUBST(F77, $FC)
   AC_SUBST(FFLAGS, $FCFLAGS) 
+  AC_DEFINE(IPHREEQC_NO_FORTRAN_MODULE)  
+fi
+AM_CONDITIONAL([FORTRAN_MODULE], [test "X$IPQ_FORTRAN_MODULE" = "Xyes"])
+
+# Check if the fortran test should be included
+AC_MSG_CHECKING([whether to enable the IPhreeqc Fortran test])
+AC_ARG_ENABLE([fortran-test],
+     [AC_HELP_STRING([--enable-fortran-test],
+                     [enable the IPhreeqc Fortran test @<:@default=no@:>@])],
+     [IPQ_FORTRAN=$enableval],
+     [IPQ_FORTRAN=no])
+
+if test "X$IPQ_FORTRAN" = "Xyes"; then
+  AC_MSG_RESULT(yes)
+  if test "X$IPQ_FORTRAN_MODULE" != "Xyes"; then
+    AC_PROG_FC
+    AC_FC_LIBRARY_LDFLAGS
+    AC_FC_WRAPPERS 
+    AC_FC_MAIN
+    m4_ifdef([AC_FC_MODULE_EXTENSION], [AC_FC_MODULE_EXTENSION], [
+      AX_F90_MODULE_EXTENSION
+      FC_MODEXT=mod
+      if test x$ax_cv_f90_modext != xunknown ; then
+        FC_MODEXT=$ax_cv_f90_modext
+      fi
+      AC_SUBST(FC_MODEXT)
+    ])
+    AC_SUBST(F77, $FC)
+    AC_SUBST(FFLAGS, $FCFLAGS)
+  fi 
 else
   AC_MSG_RESULT(no)
 fi
 AM_CONDITIONAL([BUILD_FORTRAN], [test "X$IPQ_FORTRAN" = "Xyes"])
-
 
 # Checks for libraries.
 
