@@ -68,7 +68,7 @@ AC_ARG_ENABLE([fortran-test],
 
 if test "X$IPQ_FORTRAN" = "Xyes"; then
   AC_MSG_RESULT(yes)
-  if test "X$IPQ_FORTRAN_MODULE" != "Xyes"; then
+  if test "X$IPQ_FORTRAN_MODULE" = "Xyes"; then
     AC_PROG_FC
     AC_FC_LIBRARY_LDFLAGS
     AC_FC_WRAPPERS 
