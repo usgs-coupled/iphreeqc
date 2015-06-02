@@ -248,6 +248,8 @@ SET(IPhreeqc_Headers
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.h
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.hpp
 ${PROJECT_SOURCE_DIR}/src/IPhreeqcCallbacks.h
+${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords/Keywords.h
+${PROJECT_SOURCE_DIR}/src/phreeqcpp/PHRQ_io.h
 ${PROJECT_SOURCE_DIR}/src/Var.h
 )
 
