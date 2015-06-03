@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.61])
-AC_INIT([IPhreeqc], [2.17.2-4665], [charlton@usgs.gov])
+AC_INIT([IPhreeqc], [3.2.0-9765], [charlton@usgs.gov])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -24,7 +24,6 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-# AM_PROG_AR (added automake >= 1.11.2)
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_LIBTOOL
 
@@ -40,20 +39,6 @@ if test "X$IPQ_FORTRAN_MODULE" = "Xyes"; then
   AC_MSG_RESULT(yes)
 else
   AC_MSG_RESULT(no)
-  AC_PROG_FC
-  AC_FC_LIBRARY_LDFLAGS
-  AC_FC_WRAPPERS 
-  AC_FC_MAIN
-  m4_ifdef([AC_FC_MODULE_EXTENSION], [AC_FC_MODULE_EXTENSION], [
-    AX_F90_MODULE_EXTENSION
-    FC_MODEXT=mod
-    if test x$ax_cv_f90_modext != xunknown ; then
-      FC_MODEXT=$ax_cv_f90_modext
-    fi
-    AC_SUBST(FC_MODEXT)
-  ])
-  AC_SUBST(F77, $FC)
-  AC_SUBST(FFLAGS, $FCFLAGS) 
   AC_DEFINE(IPHREEQC_NO_FORTRAN_MODULE)  
 fi
 AM_CONDITIONAL([FORTRAN_MODULE], [test "X$IPQ_FORTRAN_MODULE" = "Xyes"])
@@ -68,7 +53,12 @@ AC_ARG_ENABLE([fortran-test],
 
 if test "X$IPQ_FORTRAN" = "Xyes"; then
   AC_MSG_RESULT(yes)
-  if test "X$IPQ_FORTRAN_MODULE" = "Xyes"; then
+else
+  AC_MSG_RESULT(no)
+fi
+AM_CONDITIONAL([BUILD_FORTRAN], [test "X$IPQ_FORTRAN" = "Xyes"])
+
+if test "X$IPQ_FORTRAN_MODULE" = "Xno" || test "X$IPQ_FORTRAN" = "Xyes"; then
     AC_PROG_FC
     AC_FC_LIBRARY_LDFLAGS
     AC_FC_WRAPPERS 
@@ -83,11 +73,7 @@ if test "X$IPQ_FORTRAN" = "Xyes"; then
     ])
     AC_SUBST(F77, $FC)
     AC_SUBST(FFLAGS, $FCFLAGS)
-  fi 
-else
-  AC_MSG_RESULT(no)
 fi
-AM_CONDITIONAL([BUILD_FORTRAN], [test "X$IPQ_FORTRAN" = "Xyes"])
 
 # Checks for libraries.
 

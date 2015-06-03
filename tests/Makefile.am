@@ -32,7 +32,10 @@ test_f90_SOURCES += $(top_srcdir)/src/IPhreeqc_interface.F90
 
 test_f90.$(OBJEXT) : test_f90.F90 IPhreeqc_interface.$(OBJEXT)
 
-IPhreeqc_interface.$(OBJEXT) : $(top_srcdir)/src/IPhreeqc_interface.F90
+IPhreeqc_interface.$(OBJEXT) : $(srcdir)/IPhreeqc_interface.F90
+
+$(srcdir)/IPhreeqc_interface.F90 :
+	cd $(srcdir) && $(LN_S) ../src/IPhreeqc_interface.F90 .
 endif
 
 mostlyclean-local: clean-modules
