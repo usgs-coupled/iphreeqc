@@ -287,7 +287,7 @@ install() {
 ##  zip -r ${FULLPKG}-vs2005-x64.zip ${FULLPKG}-vs2005-x64 && \
 ##  7z a -r ${FULLPKG}-vs2005-win32.7z ${FULLPKG}-vs2005-win32 && \
 ##  7z a -r ${FULLPKG}-vs2005-x64.7z ${FULLPKG}-vs2005-x64 && \
-  rm -fr ${FULLPKG}-vs2005-win32
+  rm -fr ${FULLPKG}-vs2005-win32 )
 ##  rm -fr ${FULLPKG}-vs2005-x64 )
 }
 strip() {
