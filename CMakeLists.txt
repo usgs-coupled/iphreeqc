@@ -355,4 +355,12 @@ if (STANDALONE_BUILD EQUAL 1)
   add_subdirectory(doc)
   add_subdirectory(examples)
   add_subdirectory(tests)
+
+  # enable dashboard scripting
+  include (CTest)
+
+  # enable distribution creation
+  set(CPACK_PACKAGE_VERSION "3.2.0")
+  set(CPACK_PACKAGE_VENDOR "USGS")
+  include (CPack)
 endif()
