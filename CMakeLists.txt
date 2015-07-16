@@ -387,8 +387,10 @@ if (STANDALONE_BUILD EQUAL 1)
   add_subdirectory(examples)
   add_subdirectory(tests)
 
-  # enable dashboard scripting
-  include (CTest)
+  if (EXISTS "CTestConfig.cmake")
+    # enable dashboard scripting
+    include (CTest)
+  endif()
 
   # enable distribution creation
   set(CPACK_PACKAGE_VERSION "3.2.0")
