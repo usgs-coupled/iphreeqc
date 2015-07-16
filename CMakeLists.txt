@@ -346,6 +346,37 @@ endif()
 ##    )
 ##ENDIF(MSVC)
 
+if (STANDALONE_BUILD EQUAL 1 AND MSVC)
+  option (IPHREEQC_STATIC_RUNTIME "Build with a static runtime" OFF)  
+  if (IPHREEQC_STATIC_RUNTIME)    
+    # compile with static runtime
+    
+    set(CompilerFlags
+    CMAKE_CXX_FLAGS
+    CMAKE_CXX_FLAGS_DEBUG
+    CMAKE_CXX_FLAGS_RELEASE
+    CMAKE_C_FLAGS
+    CMAKE_C_FLAGS_DEBUG
+    CMAKE_C_FLAGS_RELEASE
+    )
+
+    foreach(CompilerFlag ${CompilerFlags})
+      if(${CompilerFlag} MATCHES "/MD")
+        string(REGEX REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
+      endif()
+    endforeach()
+  
+    set(FortranCompilerFlags
+    CMAKE_Fortran_FLAGS
+    )
+  
+    foreach(FortranCompilerFlags ${FortranCompilerFlags})
+      if(${FortranCompilerFlags} MATCHES "/libs:dll")
+        string(REGEX REPLACE "/libs:dll" "/libs:static" ${FortranCompilerFlags} "${${FortranCompilerFlags}}")
+      endif()  
+    endforeach()
+  endif()
+endif()
 
 if (STANDALONE_BUILD EQUAL 1)
   # tests
