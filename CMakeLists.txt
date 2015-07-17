@@ -387,7 +387,7 @@ if (STANDALONE_BUILD EQUAL 1)
   add_subdirectory(examples)
   add_subdirectory(tests)
 
-  if (EXISTS "CTestConfig.cmake")
+  if (EXISTS "${PROJECT_SOURCE_DIR}/CTestConfig.cmake")
     # enable dashboard scripting
     include (CTest)
   endif()
