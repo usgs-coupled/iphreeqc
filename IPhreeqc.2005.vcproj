@@ -1098,6 +1098,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\IPhreeqc_interface_F.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\IPhreeqcF.f"
 				>
 				<FileConfiguration
