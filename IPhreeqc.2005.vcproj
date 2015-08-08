@@ -1154,6 +1154,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\phreeqcpp\common\Parser.cxx"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\common\PHRQ_base.cxx"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\common\PHRQ_io.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\common\Utils.cxx"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Var.c"
 				>
 				<FileConfiguration
@@ -1275,6 +1291,102 @@
 				<File
 					RelativePath=".\src\phreeqcpp\dw.cpp"
 					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseDll|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseDll|x64"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugDll|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugDll|x64"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugCLR|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DebugCLR|x64"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseCLR|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="ReleaseCLR|x64"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\Exchange.cxx"
@@ -1361,10 +1473,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\phreeqcpp\Parser.cxx"
-					>
-				</File>
-				<File
 					RelativePath=".\src\phreeqcpp\PBasic.cpp"
 					>
 				</File>
@@ -1374,14 +1482,6 @@
 				</File>
 				<File
 					RelativePath=".\src\phreeqcpp\Phreeqc.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\phreeqcpp\PHRQ_base.cxx"
-					>
-				</File>
-				<File
-					RelativePath=".\src\phreeqcpp\PHRQ_io.cpp"
 					>
 				</File>
 				<File
@@ -1644,10 +1744,6 @@
 					RelativePath=".\src\phreeqcpp\utilities.cpp"
 					>
 				</File>
-				<File
-					RelativePath=".\src\phreeqcpp\Utils.cxx"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -1755,7 +1851,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\Keywords.h"
+				RelativePath=".\src\phreeqcpp\PhreeqcKeywords\Keywords.h"
 				>
 			</File>
 			<File
@@ -1783,7 +1879,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\Parser.h"
+				RelativePath=".\src\phreeqcpp\common\Parser.h"
 				>
 			</File>
 			<File
@@ -1799,15 +1895,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\PHRQ_base.h"
+				RelativePath=".\src\phreeqcpp\common\PHRQ_base.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\PHRQ_io.h"
+				RelativePath=".\src\phreeqcpp\common\PHRQ_io.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\phrqtype.h"
+				RelativePath=".\src\phreeqcpp\common\phrqtype.h"
 				>
 			</File>
 			<File
@@ -1911,7 +2007,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\phreeqcpp\Utils.h"
+				RelativePath=".\src\phreeqcpp\common\Utils.h"
 				>
 			</File>
 			<File

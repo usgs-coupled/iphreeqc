@@ -6,7 +6,7 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/PhreeqcKeywords"
+		AdditionalIncludeDirectories="src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords"
 		PreprocessorDefinitions="SWIG_SHARED_OBJ;PHREEQC_CPP;PHREEQC_CLASS;USE_PHRQ_ALLOC;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS"
 	/>
 </VisualStudioPropertySheet>

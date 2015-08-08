@@ -48,7 +48,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -133,7 +133,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -212,7 +212,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -293,7 +293,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 			/>
@@ -695,8 +695,44 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\Parser.cxx"
+						RelativePath="..\src\phreeqcpp\common\Parser.cxx"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\src\phreeqcpp\PBasic.cpp"
@@ -711,12 +747,84 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\PHRQ_base.cxx"
+						RelativePath="..\src\phreeqcpp\common\PHRQ_base.cxx"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\PHRQ_io.cpp"
+						RelativePath="..\src\phreeqcpp\common\PHRQ_io.cpp"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\src\phreeqcpp\PHRQ_io_output.cpp"
@@ -871,8 +979,44 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\Utils.cxx"
+						RelativePath="..\src\phreeqcpp\common\Utils.cxx"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\$(InputName)1.obj"
+								XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+							/>
+						</FileConfiguration>
 					</File>
 				</Filter>
 			</Filter>
@@ -1048,7 +1192,7 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\Parser.h"
+						RelativePath="..\src\phreeqcpp\common\Parser.h"
 						>
 					</File>
 					<File
@@ -1064,15 +1208,15 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\PHRQ_base.h"
+						RelativePath="..\src\phreeqcpp\common\PHRQ_base.h"
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\PHRQ_io.h"
+						RelativePath="..\src\phreeqcpp\common\PHRQ_io.h"
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\phrqtype.h"
+						RelativePath="..\src\phreeqcpp\common\phrqtype.h"
 						>
 					</File>
 					<File
@@ -1168,7 +1312,7 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\Utils.h"
+						RelativePath="..\src\phreeqcpp\common\Utils.h"
 						>
 					</File>
 				</Filter>
