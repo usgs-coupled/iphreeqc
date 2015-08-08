@@ -29,9 +29,6 @@
     <ClCompile Include="src\IPhreeqcLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SelectedOutput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Var.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,9 +59,6 @@
     <ClCompile Include="src\phreeqcpp\ISolutionComp.cxx">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
-    <ClCompile Include="src\phreeqcpp\Keywords.cpp">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
     <ClCompile Include="src\phreeqcpp\KineticsComp.cxx">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
@@ -74,19 +68,10 @@
     <ClCompile Include="src\phreeqcpp\NumKeyword.cxx">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
-    <ClCompile Include="src\phreeqcpp\Parser.cxx">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
     <ClCompile Include="src\phreeqcpp\PBasic.cpp">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="src\phreeqcpp\Phreeqc.cpp">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="src\phreeqcpp\PHRQ_base.cxx">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="src\phreeqcpp\PHRQ_io.cpp">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="src\phreeqcpp\PPassemblage.cxx">
@@ -144,9 +129,6 @@
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="src\phreeqcpp\Use.cpp">
-      <Filter>Source Files\phreeqcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="src\phreeqcpp\Utils.cxx">
       <Filter>Source Files\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="src\phreeqcpp\advection.cpp">
@@ -295,9 +277,6 @@
     <ClInclude Include="src\phreeqcpp\dense.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\phreeqcpp\Dictionary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\phreeqcpp\dumper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -316,25 +295,13 @@
     <ClInclude Include="src\phreeqcpp\GasPhase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\phreeqcpp\global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\phreeqcpp\global_structures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\ISolution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\ISolutionComp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\Keywords.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\kinetics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\KineticsComp.h">
@@ -352,15 +319,6 @@
     <ClInclude Include="src\phreeqcpp\nvector_serial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\phreeqcpp\output.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\p2c.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\Parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\phreeqcpp\PBasic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -368,24 +326,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\Phreeqc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\Phreeqc_class.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\PHRQ_base.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\PHRQ_io.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\phrqtype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\pitzer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\pitzer_structures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\PPassemblage.h">
@@ -401,9 +341,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\runner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SelectedOutput.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\smalldense.h">
@@ -452,9 +389,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\phreeqcpp\Use.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\phreeqcpp\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

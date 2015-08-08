@@ -155,7 +155,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -191,7 +191,7 @@ copy "$(OutDir)vc100.pdb" "lib\vc100.pdb"
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -220,7 +220,7 @@ copy "$(OutDir)$(TargetName)$(TargetExt)" "libx64\$(TargetName)$(TargetExt)"</Co
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -255,7 +255,7 @@ copy "$(OutDir)vc110.pdb" "lib\vc110.pdb"</Command>
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -289,7 +289,7 @@ copy "$(OutDir)vc100.pdb" "libx64\vc100.pdb"
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -326,7 +326,7 @@ copy "$(OutDir)$(TargetName).lib" "dll\$(TargetName).lib"
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -358,7 +358,7 @@ copy "$(OutDir)$(TargetName).lib" "dllx64\$(TargetName).lib"
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -396,7 +396,7 @@ copy "$(OutDir)vc100.pdb" "dll\vc100.pdb"
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/phreeqc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/phreeqcpp;src/phreeqcpp/common;src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -455,7 +455,6 @@ copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
     </ClCompile>
     <ClCompile Include="src\IPhreeqc.cpp" />
     <ClCompile Include="src\IPhreeqcLib.cpp" />
-    <ClCompile Include="src\SelectedOutput.cpp" />
     <ClCompile Include="src\Var.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
@@ -471,15 +470,11 @@ copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
     <ClCompile Include="src\phreeqcpp\GasPhase.cxx" />
     <ClCompile Include="src\phreeqcpp\ISolution.cxx" />
     <ClCompile Include="src\phreeqcpp\ISolutionComp.cxx" />
-    <ClCompile Include="src\phreeqcpp\Keywords.cpp" />
     <ClCompile Include="src\phreeqcpp\KineticsComp.cxx" />
     <ClCompile Include="src\phreeqcpp\NameDouble.cxx" />
     <ClCompile Include="src\phreeqcpp\NumKeyword.cxx" />
-    <ClCompile Include="src\phreeqcpp\Parser.cxx" />
     <ClCompile Include="src\phreeqcpp\PBasic.cpp" />
     <ClCompile Include="src\phreeqcpp\Phreeqc.cpp" />
-    <ClCompile Include="src\phreeqcpp\PHRQ_base.cxx" />
-    <ClCompile Include="src\phreeqcpp\PHRQ_io.cpp" />
     <ClCompile Include="src\phreeqcpp\PPassemblage.cxx" />
     <ClCompile Include="src\phreeqcpp\PPassemblageComp.cxx" />
     <ClCompile Include="src\phreeqcpp\Pressure.cxx" />
@@ -499,7 +494,6 @@ copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
     <ClCompile Include="src\phreeqcpp\System.cxx" />
     <ClCompile Include="src\phreeqcpp\Temperature.cxx" />
     <ClCompile Include="src\phreeqcpp\Use.cpp" />
-    <ClCompile Include="src\phreeqcpp\Utils.cxx" />
     <ClCompile Include="src\phreeqcpp\advection.cpp" />
     <ClCompile Include="src\phreeqcpp\basicsubs.cpp" />
     <ClCompile Include="src\phreeqcpp\cl1.cpp" />
@@ -553,43 +547,28 @@ copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
     <ClInclude Include="src\phreeqcpp\cxxKinetics.h" />
     <ClInclude Include="src\phreeqcpp\cxxMix.h" />
     <ClInclude Include="src\phreeqcpp\dense.h" />
-    <ClInclude Include="src\phreeqcpp\Dictionary.h" />
     <ClInclude Include="src\phreeqcpp\dumper.h" />
     <ClInclude Include="src\ErrorReporter.hxx" />
     <ClInclude Include="src\phreeqcpp\Exchange.h" />
     <ClInclude Include="src\phreeqcpp\ExchComp.h" />
     <ClInclude Include="src\fwrap.h" />
     <ClInclude Include="src\phreeqcpp\GasPhase.h" />
-    <ClInclude Include="src\phreeqcpp\global.h" />
     <ClInclude Include="src\phreeqcpp\global_structures.h" />
-    <ClInclude Include="src\phreeqcpp\input.h" />
     <ClInclude Include="src\phreeqcpp\ISolution.h" />
     <ClInclude Include="src\phreeqcpp\ISolutionComp.h" />
-    <ClInclude Include="src\phreeqcpp\Keywords.h" />
-    <ClInclude Include="src\phreeqcpp\kinetics.h" />
     <ClInclude Include="src\phreeqcpp\KineticsComp.h" />
     <ClInclude Include="src\phreeqcpp\NameDouble.h" />
     <ClInclude Include="src\phreeqcpp\NumKeyword.h" />
     <ClInclude Include="src\phreeqcpp\nvector.h" />
     <ClInclude Include="src\phreeqcpp\nvector_serial.h" />
-    <ClInclude Include="src\phreeqcpp\output.h" />
-    <ClInclude Include="src\phreeqcpp\p2c.h" />
-    <ClInclude Include="src\phreeqcpp\Parser.h" />
     <ClInclude Include="src\phreeqcpp\PBasic.h" />
     <ClInclude Include="src\phreeqcpp\phqalloc.h" />
     <ClInclude Include="src\phreeqcpp\Phreeqc.h" />
-    <ClInclude Include="src\phreeqcpp\Phreeqc_class.h" />
-    <ClInclude Include="src\phreeqcpp\PHRQ_base.h" />
-    <ClInclude Include="src\phreeqcpp\PHRQ_io.h" />
-    <ClInclude Include="src\phreeqcpp\phrqtype.h" />
-    <ClInclude Include="src\phreeqcpp\pitzer.h" />
-    <ClInclude Include="src\phreeqcpp\pitzer_structures.h" />
     <ClInclude Include="src\phreeqcpp\PPassemblage.h" />
     <ClInclude Include="src\phreeqcpp\PPassemblageComp.h" />
     <ClInclude Include="src\phreeqcpp\Pressure.h" />
     <ClInclude Include="src\phreeqcpp\Reaction.h" />
     <ClInclude Include="src\phreeqcpp\runner.h" />
-    <ClInclude Include="src\SelectedOutput.hxx" />
     <ClInclude Include="src\phreeqcpp\smalldense.h" />
     <ClInclude Include="src\phreeqcpp\Solution.h" />
     <ClInclude Include="src\phreeqcpp\SolutionIsotope.h" />
@@ -606,7 +585,6 @@ copy "$(OutDir)vc100.pdb" "dllx64\vc100.pdb"
     <ClInclude Include="src\phreeqcpp\System.h" />
     <ClInclude Include="src\phreeqcpp\Temperature.h" />
     <ClInclude Include="src\phreeqcpp\Use.h" />
-    <ClInclude Include="src\phreeqcpp\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
