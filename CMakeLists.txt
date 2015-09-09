@@ -9,6 +9,17 @@ else()
   set(STANDALONE_BUILD 0)
 endif()
 
+# swig
+find_package(SWIG REQUIRED)
+include(${SWIG_USE_FILE})
+
+# swig python
+find_package(PythonLibs)
+include_directories(${PYTHON_INCLUDE_PATH})
+
+# swig python
+find_package(JNI)
+include_directories(${JAVA_INCLUDE_PATH})
 
 # overide docdir on windows
 if(WIN32 AND NOT CMAKE_INSTALL_DOCDIR)
@@ -224,6 +235,7 @@ include_directories("${PROJECT_SOURCE_DIR}/src")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/common")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords")
+##include_directories("${swig_include_dirs}") nope
 
 
 if (STANDALONE_BUILD EQUAL 1)
@@ -400,4 +412,12 @@ if (STANDALONE_BUILD EQUAL 1)
   set(CPACK_PACKAGE_VERSION "3.2.0")
   set(CPACK_PACKAGE_VENDOR "USGS")
   include (CPack)
+
+  # swig
+  SET_SOURCE_FILES_PROPERTIES(IPhreeqc.i PROPERTIES CPLUSPLUS ON)
+  SET_SOURCE_FILES_PROPERTIES(IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
+  SET_SOURCE_FILES_PROPERTIES(IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
+  SWIG_ADD_MODULE(iphreeqc python IPhreeqc.i ${IPhreeqc_SOURCES})
+  SWIG_ADD_MODULE(iphreeqc java IPhreeqc.i ${IPhreeqc_SOURCES})
+  SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
 endif()
