@@ -9,20 +9,35 @@ else()
   set(STANDALONE_BUILD 0)
 endif()
 
+# enable swig java
+option (SWIG_ENABLE_JAVA "Generate java wrappers using SWIG" OFF)
+
+# enable swig python
+option (SWIG_ENABLE_PYTHON "Generate python wrappers using SWIG" OFF)
+
+# enable swig ruby
+if (NOT WIN32) # not yet on windows
+  option (SWIG_ENABLE_RUBY "Generate ruby wrappers using SWIG" OFF)
+endif()
+
 # swig
-find_package(SWIG REQUIRED)
-include(${SWIG_USE_FILE})
+if (SWIG_ENABLE_JAVA OR SWIG_ENABLE_PYTHON OR SWIG_ENABLE_RUBY)
+  find_package(SWIG REQUIRED)
+  include(${SWIG_USE_FILE})
+endif()
 
 # swig python
-find_package(PythonLibs)
-include_directories(${PYTHON_INCLUDE_PATH})
+if (SWIG_ENABLE_PYTHON)
+  find_package(PythonLibs)
+  include_directories(${PYTHON_INCLUDE_PATH})
+endif()
 
 # swig java
-find_package(JNI)
-include_directories(${JAVA_INCLUDE_PATH})
-##if (JAVA_INCLUDE_PATH2)
+if (SWIG_ENABLE_JAVA)
+  find_package(JNI)
+  include_directories(${JAVA_INCLUDE_PATH})
   include_directories(${JAVA_INCLUDE_PATH2})
-##endif()
+endif()
 
 # overide docdir on windows
 if(WIN32 AND NOT CMAKE_INSTALL_DOCDIR)
@@ -423,17 +438,34 @@ if (STANDALONE_BUILD EQUAL 1)
   include (CPack)
 
   # swig
-  set(CMAKE_SWIG_OUTDIR "${CMAKE_BINARY_DIR}/swig")
-  SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES CPLUSPLUS ON)
-  SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
-  SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
-  file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/src)
-  
-  # swig python
-  SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
-  SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
+  if (SWIG_FOUND)
+    set(CMAKE_SWIG_OUTDIR "${CMAKE_BINARY_DIR}/swig")
+    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES CPLUSPLUS ON)
+    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
+    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/src)
+    
+    # swig python
+    if (SWIG_ENABLE_PYTHON)
+      SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
+      SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
+    endif()
 
-  # swig java  
-  SWIG_ADD_MODULE(iphreeqc_java java src/IPhreeqc.i ${IPhreeqc_SOURCES})
-  install(TARGETS iphreeqc_java DESTINATION ${EXAMPLES_DIR}/java)
+    # swig java  
+    if (SWIG_ENABLE_JAVA)
+      SWIG_ADD_MODULE(iphreeqc_java java src/IPhreeqc.i ${IPhreeqc_SOURCES})
+      install(TARGETS iphreeqc_java DESTINATION ${EXAMPLES_DIR}/java)
+    endif()
+    
+    # swig ruby  
+    if (SWIG_ENABLE_RUBY)
+      find_package(Ruby)
+      include_directories(${RUBY_INCLUDE_PATH})    
+    
+      SWIG_ADD_MODULE(iphreeqc_ruby ruby src/IPhreeqc.i ${IPhreeqc_SOURCES})
+      ##SWIG_LINK_LIBRARIES(iphreeqc_ruby ${RUBY_LIBRARY})
+      ##install(TARGETS iphreeqc_ruby DESTINATION ${EXAMPLES_DIR}/java)
+    endif()
+  endif()
+  
 endif()
