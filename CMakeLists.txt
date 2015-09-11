@@ -421,6 +421,7 @@ if (STANDALONE_BUILD EQUAL 1)
   SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES CPLUSPLUS ON)
   SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
   SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
+  file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/src)
   
   # swig python
   SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
@@ -428,5 +429,5 @@ if (STANDALONE_BUILD EQUAL 1)
   
   # swig java  
   SWIG_ADD_MODULE(iphreeqc_java java src/IPhreeqc.i ${IPhreeqc_SOURCES})
-  install(TARGETS iphreeqc_java DESTINATION examples/java)
+  install(TARGETS iphreeqc_java DESTINATION ${CMAKE_INSTALL_DOCDIR}/examples/java)
 endif()
