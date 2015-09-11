@@ -1,4 +1,8 @@
-%module swig
+#ifdef SWIGJAVA
+%module iphreeqc_java
+#else
+%module iphreeqc
+#endif
 %{
 #include "IPhreeqc.hpp"
 %}

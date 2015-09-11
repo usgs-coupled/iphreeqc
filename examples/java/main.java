@@ -1,6 +1,6 @@
 public class main {
 	public static void main(String argv[]) {
-		System.loadLibrary("swig_iphreeqc_java");
+		System.loadLibrary("iphreeqc_java");
 		IPhreeqc i = new IPhreeqc();
 
 		if (i.LoadDatabase("phreeqc.dat") != 0) {

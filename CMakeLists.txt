@@ -17,9 +17,12 @@ include(${SWIG_USE_FILE})
 find_package(PythonLibs)
 include_directories(${PYTHON_INCLUDE_PATH})
 
-# swig python
+# swig java
 find_package(JNI)
 include_directories(${JAVA_INCLUDE_PATH})
+##if (JAVA_INCLUDE_PATH2)
+  include_directories(${JAVA_INCLUDE_PATH2})
+##endif()
 
 # overide docdir on windows
 if(WIN32 AND NOT CMAKE_INSTALL_DOCDIR)
@@ -414,10 +417,16 @@ if (STANDALONE_BUILD EQUAL 1)
   include (CPack)
 
   # swig
-  SET_SOURCE_FILES_PROPERTIES(IPhreeqc.i PROPERTIES CPLUSPLUS ON)
-  SET_SOURCE_FILES_PROPERTIES(IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
-  SET_SOURCE_FILES_PROPERTIES(IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
-  SWIG_ADD_MODULE(iphreeqc python IPhreeqc.i ${IPhreeqc_SOURCES})
-  SWIG_ADD_MODULE(iphreeqc java IPhreeqc.i ${IPhreeqc_SOURCES})
+  set(CMAKE_SWIG_OUTDIR "${CMAKE_BINARY_DIR}/swig")
+  SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES CPLUSPLUS ON)
+  SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
+  SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
+  
+  # swig python
+  SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
   SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
+  
+  # swig java  
+  SWIG_ADD_MODULE(iphreeqc_java java src/IPhreeqc.i ${IPhreeqc_SOURCES})
+  install(TARGETS iphreeqc_java DESTINATION examples/java)
 endif()
