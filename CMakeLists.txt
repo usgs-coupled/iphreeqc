@@ -33,6 +33,12 @@ endif()
 # set standard directory locations
 include(GNUInstallDirs)
 
+# set examples directory
+if (WIN32)
+  set(EXAMPLES_DIR examples)
+else()
+  set(EXAMPLES_DIR ${CMAKE_INSTALL_DOCDIR}/examples)
+endif()
 
 # Fortran
 option (IPHREEQC_ENABLE_MODULE "Enable Fortran module" ON)
@@ -426,8 +432,8 @@ if (STANDALONE_BUILD EQUAL 1)
   # swig python
   SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
   SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
-  
+
   # swig java  
   SWIG_ADD_MODULE(iphreeqc_java java src/IPhreeqc.i ${IPhreeqc_SOURCES})
-  install(TARGETS iphreeqc_java DESTINATION ${CMAKE_INSTALL_DOCDIR}/examples/java)
+  install(TARGETS iphreeqc_java DESTINATION ${EXAMPLES_DIR}/java)
 endif()
