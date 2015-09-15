@@ -259,8 +259,6 @@ include_directories("${PROJECT_SOURCE_DIR}/src")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/common")
 include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords")
-##include_directories("${swig_include_dirs}") nope
-
 
 if (STANDALONE_BUILD EQUAL 1)
   option(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
@@ -419,6 +417,39 @@ if (STANDALONE_BUILD EQUAL 1 AND MSVC)
 endif()
 
 if (STANDALONE_BUILD EQUAL 1)
+  # swig
+  if (SWIG_FOUND)
+    set(CMAKE_SWIG_OUTDIR "${CMAKE_BINARY_DIR}/swig")
+    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES CPLUSPLUS ON)
+    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
+    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/src)
+    
+    # swig python
+    if (SWIG_ENABLE_PYTHON)
+      SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
+      SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
+      install(TARGETS ${SWIG_MODULE_iphreeqc_REAL_NAME} DESTINATION ${EXAMPLES_DIR}/swig/python)
+    endif()
+
+    # swig java  
+    if (SWIG_ENABLE_JAVA)
+      SWIG_ADD_MODULE(iphreeqc_java java src/IPhreeqc.i ${IPhreeqc_SOURCES})
+      ##install(TARGETS iphreeqc_java DESTINATION ${EXAMPLES_DIR}/swig/java)
+      install(TARGETS ${SWIG_MODULE_iphreeqc_java_REAL_NAME} DESTINATION ${EXAMPLES_DIR}/swig/java)
+    endif()
+    
+    # swig ruby  
+    if (SWIG_ENABLE_RUBY)
+      find_package(Ruby)
+      include_directories(${RUBY_INCLUDE_PATH})    
+    
+      SWIG_ADD_MODULE(iphreeqc_ruby ruby src/IPhreeqc.i ${IPhreeqc_SOURCES})
+      ##SWIG_LINK_LIBRARIES(iphreeqc_ruby ${RUBY_LIBRARY})
+      ##install(TARGETS iphreeqc_ruby DESTINATION ${EXAMPLES_DIR}/java)
+    endif()
+  endif()
+
   # tests
   enable_testing()
 
@@ -437,35 +468,4 @@ if (STANDALONE_BUILD EQUAL 1)
   set(CPACK_PACKAGE_VENDOR "USGS")
   include (CPack)
 
-  # swig
-  if (SWIG_FOUND)
-    set(CMAKE_SWIG_OUTDIR "${CMAKE_BINARY_DIR}/swig")
-    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES CPLUSPLUS ON)
-    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-includeall")
-    SET_SOURCE_FILES_PROPERTIES(src/IPhreeqc.i PROPERTIES SWIG_FLAGS "-Wall")
-    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/src)
-    
-    # swig python
-    if (SWIG_ENABLE_PYTHON)
-      SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
-      SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
-    endif()
-
-    # swig java  
-    if (SWIG_ENABLE_JAVA)
-      SWIG_ADD_MODULE(iphreeqc_java java src/IPhreeqc.i ${IPhreeqc_SOURCES})
-      install(TARGETS iphreeqc_java DESTINATION ${EXAMPLES_DIR}/java)
-    endif()
-    
-    # swig ruby  
-    if (SWIG_ENABLE_RUBY)
-      find_package(Ruby)
-      include_directories(${RUBY_INCLUDE_PATH})    
-    
-      SWIG_ADD_MODULE(iphreeqc_ruby ruby src/IPhreeqc.i ${IPhreeqc_SOURCES})
-      ##SWIG_LINK_LIBRARIES(iphreeqc_ruby ${RUBY_LIBRARY})
-      ##install(TARGETS iphreeqc_ruby DESTINATION ${EXAMPLES_DIR}/java)
-    endif()
-  endif()
-  
 endif()

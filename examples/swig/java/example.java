@@ -1,4 +1,4 @@
-public class main {
+public class example {
     public static void main(String argv[]) {
 	System.loadLibrary("iphreeqc_java");
 	IPhreeqc i = new IPhreeqc();

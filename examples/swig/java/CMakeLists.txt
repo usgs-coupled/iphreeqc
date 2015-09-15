@@ -1,11 +1,11 @@
 # files
 SET(Java_Files
-main.java
-phreeqc.dat
+example.java
+${CMAKE_SOURCE_DIR}/database/phreeqc.dat
 )
 
 # install directory
-SET(Java_Dir ${EXAMPLES_DIR}/java)
+SET(Java_Dir ${EXAMPLES_DIR}/swig/java)
 
 # install
 install(FILES ${Java_Files} DESTINATION ${Java_Dir})
