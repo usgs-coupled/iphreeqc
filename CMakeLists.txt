@@ -29,7 +29,7 @@ endif()
 # swig python
 if (SWIG_ENABLE_PYTHON)
   find_package(PythonLibs)
-  include_directories(${PYTHON_INCLUDE_PATH})
+  ##include_directories(${PYTHON_INCLUDE_PATH})
 endif()
 
 # swig java
@@ -427,6 +427,7 @@ if (STANDALONE_BUILD EQUAL 1)
     
     # swig python
     if (SWIG_ENABLE_PYTHON)
+      include_directories(${PYTHON_INCLUDE_PATH})
       SWIG_ADD_MODULE(iphreeqc python src/IPhreeqc.i ${IPhreeqc_SOURCES})
       SWIG_LINK_LIBRARIES(iphreeqc ${PYTHON_LIBRARIES})
       install(TARGETS ${SWIG_MODULE_iphreeqc_REAL_NAME} DESTINATION ${EXAMPLES_DIR}/swig/python)
@@ -445,8 +446,8 @@ if (STANDALONE_BUILD EQUAL 1)
       include_directories(${RUBY_INCLUDE_PATH})    
     
       SWIG_ADD_MODULE(iphreeqc_ruby ruby src/IPhreeqc.i ${IPhreeqc_SOURCES})
-      ##SWIG_LINK_LIBRARIES(iphreeqc_ruby ${RUBY_LIBRARY})
-      ##install(TARGETS iphreeqc_ruby DESTINATION ${EXAMPLES_DIR}/java)
+      SWIG_LINK_LIBRARIES(iphreeqc_ruby ${RUBY_LIBRARY})
+      install(TARGETS ${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} DESTINATION ${EXAMPLES_DIR}/swig/ruby)
     endif()
   endif()
 
