@@ -12,6 +12,7 @@ EXTRA_DIST=\
 	fwrap8.cpp\
 	IPhreeqc_interface.F90\
 	IPhreeqc.f.inc\
+	IPhreeqc.i\
 	IPhreeqc.f90.inc\
 	phreeqcpp/ChartHandler.cpp\
 	phreeqcpp/ChartHandler.h\

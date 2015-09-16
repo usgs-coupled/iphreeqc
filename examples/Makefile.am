@@ -9,7 +9,14 @@ EXTRA_DIST =\
 	cpp/CMakeLists.txt\
 	cpp/advect/CMakeLists.txt\
 	fortran/CMakeLists.txt\
-	fortran/advect/CMakeLists.txt
+	fortran/advect/CMakeLists.txt\
+	swig/CMakeLists.txt\
+	swig/java/CMakeLists.txt\
+	swig/java/example.java\
+	swig/python/CMakeLists.txt\
+	swig/python/example.py\
+	swig/ruby/CMakeLists.txt\
+	swig/ruby/example.py
 
 EXAMPLES_DIR = $(docdir)/examples
 
