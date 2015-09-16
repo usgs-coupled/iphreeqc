@@ -156,7 +156,7 @@ fi
 	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/src" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/src" \
 	     "$DISTNAME/src/phreeqcpp")
 if [ $? != 0 ] ; then
   echo "svn checkout error"
@@ -165,7 +165,7 @@ fi
 	     	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/doc" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/doc" \
 	     "$DISTNAME/phreeqc3-doc")
 if [ $? != 0 ] ; then
   echo "svn checkout error"
@@ -174,7 +174,7 @@ fi
 	     	     
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/database" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/database" \
 	     "$DISTNAME/database")
 if [ $? != 0 ] ; then
   echo "svn checkout error"
