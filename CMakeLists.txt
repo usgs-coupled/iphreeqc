@@ -446,6 +446,10 @@ if (STANDALONE_BUILD EQUAL 1)
       include_directories(${RUBY_INCLUDE_PATH})    
     
       SWIG_ADD_MODULE(iphreeqc_ruby ruby src/IPhreeqc.i ${IPhreeqc_SOURCES})
+
+      # must not prefix ruby .so on linux
+      SET_TARGET_PROPERTIES(iphreeqc_ruby PROPERTIES PREFIX "" OUTPUT_NAME "iphreeqc_ruby")
+      
       SWIG_LINK_LIBRARIES(iphreeqc_ruby ${RUBY_LIBRARY})
       install(TARGETS ${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} DESTINATION ${EXAMPLES_DIR}/swig/ruby)
     endif()
