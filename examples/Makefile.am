@@ -16,7 +16,7 @@ EXTRA_DIST =\
 	swig/python/CMakeLists.txt\
 	swig/python/example.py\
 	swig/ruby/CMakeLists.txt\
-	swig/ruby/example.py
+	swig/ruby/example.rb
 
 EXAMPLES_DIR = $(docdir)/examples
 
