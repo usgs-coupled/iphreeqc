@@ -10,6 +10,7 @@
 #include "Var.h"
 %}
 
+%include "stl.i"
 %include "std_except.i"
 %include "IPhreeqc.hpp"
 %include "Var.h"
