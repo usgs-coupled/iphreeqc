@@ -14,8 +14,8 @@
 %include "std_except.i"
 
 /* ignore callbacks */
-%ignore SetBasicCallback
-%ignore SetBasicFortranCallback
+%ignore SetBasicCallback;
+%ignore SetBasicFortranCallback;
 
 /* unnecessary PHRQ_io routines */
 %ignore fpunchf_end_row;
