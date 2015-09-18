@@ -181,6 +181,12 @@ FUNCTION TestGetSet(id,getFunc,setFunc)
      WRITE(*,*) "FAILURE" 
      RETURN
   END IF
+
+  IF (getFunc(id)) THEN
+     TestGetSet = EXIT_FAILURE
+     WRITE(*,*) "FAILURE" 
+     RETURN
+  END IF
   
   TestGetSet = EXIT_SUCCESS
   RETURN
