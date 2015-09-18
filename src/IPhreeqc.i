@@ -13,11 +13,11 @@
 %include "stl.i"
 %include "std_except.i"
 
-# ignore callbacks
+/* ignore callbacks */
 %ignore SetBasicCallback
 %ignore SetBasicFortranCallback
 
-# unnecessary PHRQ_io routines
+/* unnecessary PHRQ_io routines */
 %ignore fpunchf_end_row;
 %ignore error_msg;
 %ignore fpunchf;
