@@ -2,8 +2,8 @@
 SET(Python_Files
 callback.py
 example.py
-${CMAKE_SOURCE_DIR}/examples/cpp/advect/ic
 ${CMAKE_SOURCE_DIR}/database/phreeqc.dat
+${CMAKE_SOURCE_DIR}/examples/cpp/advect/ic
 )
 
 # install directory
