@@ -39,6 +39,20 @@ typedef enum {
 	VR_INVALIDCOL    = -5   /*!< Failure, Invalid column */
 } VRESULT;
 
+#if defined(NESTED_UNION_NOT_SUPPORTED) || defined(SWIGPYTHON)
+
+/*! \brief Datatype used to store SELECTED_OUTPUT values.
+*/
+typedef struct {
+	VAR_TYPE type;     /*!< holds datatype of <code>VAR</code>          */
+	long     lVal;     /*!< valid when <code>(type == TT_LONG)</code>   */
+	double   dVal;     /*!< valid when <code>(type == TT_DOUBLE)</code> */
+	char*    sVal;     /*!< valid when <code>(type == TT_STRING)</code> */
+	VRESULT  vresult;  /*!< valid when <code>(type == TT_ERROR)</code>  */
+} VAR;
+
+#else
+
 /*! \brief Datatype used to store SELECTED_OUTPUT values.
 */
 typedef struct {
@@ -51,6 +65,7 @@ typedef struct {
 	} VAR_UNION_NAME;
 } VAR;
 
+#endif
 
 #if defined(__cplusplus)
 extern "C" {

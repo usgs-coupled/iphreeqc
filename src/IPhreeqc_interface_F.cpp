@@ -402,6 +402,8 @@ RunStringF(int *id, char* input)
 	int n = ::RunString(*id, input);
 	return n;
 }
+
+#ifndef SWIG_DIRECTOR
 #ifdef IPHREEQC_NO_FORTRAN_MODULE
 IPQ_RESULT
 SetBasicFortranCallbackF(int *id, double (*fcn)(double *x1, double *x2, char *str, size_t l))
@@ -415,6 +417,8 @@ SetBasicFortranCallbackF(int *id, double (*fcn)(double *x1, double *x2, const ch
 	return ::SetBasicFortranCallback(*id, fcn);
 }
 #endif
+
+#endif /* SWIG_DIRECTOR */
 
 IPQ_RESULT
 SetCurrentSelectedOutputUserNumberF(int *id, int *n)

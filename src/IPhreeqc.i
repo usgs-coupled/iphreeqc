@@ -5,6 +5,7 @@
 #else
 %module iphreeqc
 #endif
+
 %{
 #include "IPhreeqc.hpp"
 #include "Var.h"

@@ -1614,6 +1614,7 @@ Headings
  */
 	IPQ_DLL_EXPORT int         RunString(int id, const char* input);
 
+#ifndef SWIG_DIRECTOR
 /**
  *  Sets a C callback function for Basic programs. The syntax for the Basic command is
  *  10 result = CALLBACK(x1, x2, string$)
@@ -1691,6 +1692,7 @@ Headings
 	IPQ_DLL_EXPORT IPQ_RESULT  SetBasicFortranCallback(int id, double (*fcn)(double *x1, double *x2, const char *str, int l));
 #endif
 
+#endif  /* SWIG_DIRECTOR */
 
 /**
  *  Sets the current <B>SELECTED_OUTPUT</B> user number for use in subsequent calls to (@ref GetSelectedOutputColumnCount,
