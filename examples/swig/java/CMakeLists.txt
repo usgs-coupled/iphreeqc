@@ -1,6 +1,6 @@
 # files
 SET(Java_Files
-callback.java
+advect.java
 example.java
 ${CMAKE_SOURCE_DIR}/database/phreeqc.dat
 ${CMAKE_SOURCE_DIR}/examples/cpp/advect/ic
