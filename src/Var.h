@@ -108,7 +108,9 @@ IPQ_DLL_EXPORT void    VarInit(VAR* pvar);
 }
 #endif
 
-#if defined(__cplusplus)
+#if !(defined(SWIG) || defined(SWIG_IPHREEQC))
+
+#if defined(__cplusplus) 
 
 #include <ostream> // std::ostream
 
@@ -167,5 +169,7 @@ inline std::ostream& operator<< (std::ostream &os, const VRESULT& vr)
 	return os;
 }
 #endif /* __cplusplus */
+
+#endif /* !(defined(SWIG) || defined(SWIG_IPHREEQC)) */
 
 #endif /* __VAR_H_INC */

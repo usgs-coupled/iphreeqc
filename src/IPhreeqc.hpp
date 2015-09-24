@@ -25,6 +25,10 @@ class IErrorReporter;
 class CSelectedOutput;
 class SelectedOutput;
 
+#if defined(SWIG) || defined(SWIG_IPHREEQC)
+class BasicCallback;
+#endif
+
 /**
  * @class IPhreeqcStop
  *
@@ -703,7 +707,11 @@ public:
 	 *  @param cookie1          A user defined value to be passed to the callback function.
 	 *  @see                    SetBasicFortranCallback
 	 */
+#if defined(SWIG) || defined(SWIG_IPHREEQC)
+    void                     SetBasicCallback(BasicCallback *cb);
+#else
 	void                     SetBasicCallback(double (*fcn)(double x1, double x2, const char *str, void *cookie), void * cookie1);
+#endif
 
 	/**
 	 *  Sets a Fortran callback function for Basic programs. The syntax for the Basic command is

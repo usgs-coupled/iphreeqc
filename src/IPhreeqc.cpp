@@ -911,7 +911,12 @@ int IPhreeqc::RunString(const char* input)
 	return this->PhreeqcPtr->get_input_errors();
 }
 
-#ifndef SWIG_DIRECTOR
+#if defined(SWIG) || defined(SWIG_IPHREEQC)
+void IPhreeqc::SetBasicCallback(BasicCallback *cb)
+{
+	this->PhreeqcPtr->SetCallback(cb);
+}
+#else  /* defined(SWIG) || defined(SWIG_IPHREEQC) */
 void IPhreeqc::SetBasicCallback(double (*fcn)(double x1, double x2, const char *str, void *cookie), void *cookie1)
 {
 	this->PhreeqcPtr->register_basic_callback(fcn, cookie1);
@@ -927,7 +932,7 @@ void IPhreeqc::SetBasicFortranCallback(double (*fcn)(double *x1, double *x2, con
 	this->PhreeqcPtr->register_fortran_basic_callback(fcn);
 }
 #endif
-#endif  /* SWIG_DIRECTOR */
+#endif  /* defined(SWIG) || defined(SWIG_IPHREEQC) */
 VRESULT IPhreeqc::SetCurrentSelectedOutputUserNumber(int n)
 {
 	if (0 <= n)

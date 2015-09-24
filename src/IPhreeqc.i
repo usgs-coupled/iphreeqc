@@ -1,21 +1,23 @@
 #ifdef SWIGJAVA
-%module iphreeqc_java
+%module(directors="1") iphreeqc_java
 #elif SWIGRUBY
-%module iphreeqc_ruby
+%module(directors="1") iphreeqc_ruby
 #else
-%module iphreeqc
+%module(directors="1") iphreeqc
 #endif
 
 %{
 #include "IPhreeqc.hpp"
 #include "Var.h"
+#include "BasicCallback.h"
 %}
+
+%feature("director") BasicCallback;
 
 %include "stl.i"
 %include "std_except.i"
 
 /* ignore callbacks */
-%ignore SetBasicCallback;
 %ignore SetBasicFortranCallback;
 
 /* unnecessary PHRQ_io routines */
@@ -32,3 +34,4 @@
 
 %include "IPhreeqc.hpp"
 %include "Var.h"
+%include "BasicCallback.h"

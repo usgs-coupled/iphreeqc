@@ -420,7 +420,7 @@ if (STANDALONE_BUILD EQUAL 1)
       swig_link_libraries(iphreeqc ${PYTHON_LIBRARIES})
       
       target_include_directories(${SWIG_MODULE_iphreeqc_REAL_NAME} BEFORE PUBLIC ${PYTHON_INCLUDE_PATH})
-      target_compile_definitions(${SWIG_MODULE_iphreeqc_REAL_NAME} PUBLIC NESTED_UNION_NOT_SUPPORTED SWIG_DIRECTOR)
+      target_compile_definitions(${SWIG_MODULE_iphreeqc_REAL_NAME} PUBLIC NESTED_UNION_NOT_SUPPORTED SWIG_IPHREEQC)
 
       install(TARGETS ${SWIG_MODULE_iphreeqc_REAL_NAME} DESTINATION ${EXAMPLES_DIR}/swig/python)
     endif()
@@ -433,7 +433,7 @@ if (STANDALONE_BUILD EQUAL 1)
       swig_link_libraries(${SWIG_MODULE_iphreeqc_java_REAL_NAME} ${JNI_LIBRARIES})
       
       target_include_directories(${SWIG_MODULE_iphreeqc_java_REAL_NAME} BEFORE PUBLIC ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})      
-      target_compile_definitions(${SWIG_MODULE_iphreeqc_java_REAL_NAME} PUBLIC SWIG_DIRECTOR)
+      target_compile_definitions(${SWIG_MODULE_iphreeqc_java_REAL_NAME} PUBLIC SWIG_IPHREEQC)
       
       install(TARGETS ${SWIG_MODULE_iphreeqc_java_REAL_NAME} DESTINATION ${EXAMPLES_DIR}/swig/java)
     endif()
@@ -446,7 +446,7 @@ if (STANDALONE_BUILD EQUAL 1)
       swig_link_libraries(iphreeqc_ruby ${RUBY_LIBRARY})
       
       target_include_directories(${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} BEFORE PUBLIC ${RUBY_INCLUDE_PATH})
-      target_compile_definitions(${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} PUBLIC SWIG_DIRECTOR)
+      target_compile_definitions(${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} PUBLIC SWIG_IPHREEQC)
 
       # must not prefix ruby .so on linux
       set_target_properties(iphreeqc_ruby PROPERTIES PREFIX "" OUTPUT_NAME "iphreeqc_ruby")      

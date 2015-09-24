@@ -770,7 +770,7 @@ RunString(int id, const char* input)
 	return IPQ_BADINSTANCE;
 }
 
-#ifndef SWIG_DIRECTOR
+#if !(defined(SWIG) || defined(SWIG_IPHREEQC))
 
 IPQ_RESULT
 SetBasicCallback(int id, double (*fcn)(double x1, double x2, const char *str, void *cookie), void *cookie1)
@@ -809,7 +809,7 @@ SetBasicFortranCallback(int id, double (*fcn)(double *x1, double *x2, const char
 }
 #endif
 
-#endif /* SWIG_DIRECTOR */
+#endif  /* !(defined(SWIG) || defined(SWIG_IPHREEQC)) */
 
 IPQ_RESULT
 SetCurrentSelectedOutputUserNumber(int id, int n)

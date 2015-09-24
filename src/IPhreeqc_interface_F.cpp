@@ -403,7 +403,8 @@ RunStringF(int *id, char* input)
 	return n;
 }
 
-#ifndef SWIG_DIRECTOR
+#if !(defined(SWIG) || defined(SWIG_IPHREEQC))
+
 #ifdef IPHREEQC_NO_FORTRAN_MODULE
 IPQ_RESULT
 SetBasicFortranCallbackF(int *id, double (*fcn)(double *x1, double *x2, char *str, size_t l))
@@ -418,7 +419,7 @@ SetBasicFortranCallbackF(int *id, double (*fcn)(double *x1, double *x2, const ch
 }
 #endif
 
-#endif /* SWIG_DIRECTOR */
+#endif /* !(defined(SWIG) || defined(SWIG_IPHREEQC)) */
 
 IPQ_RESULT
 SetCurrentSelectedOutputUserNumberF(int *id, int *n)
