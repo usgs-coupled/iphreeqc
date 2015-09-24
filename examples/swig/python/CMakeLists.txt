@@ -1,6 +1,6 @@
 # files
 SET(Python_Files
-callback.py
+advect.py
 example.py
 ${CMAKE_SOURCE_DIR}/database/phreeqc.dat
 ${CMAKE_SOURCE_DIR}/examples/cpp/advect/ic

@@ -1,9 +1,12 @@
 import sys
 import iphreeqc
 
-#class MyData(iphreeqc.Callback):
-class MyData:
+class MyData(iphreeqc.BasicCallback):
 	def __init__(self):
+		# must call base class ctor
+		iphreeqc.BasicCallback.__init__(self)
+		
+		# Create module
 		self.iphreeqc = iphreeqc.IPhreeqc()
 		self.results  = []
 		self.year     = 0.0
@@ -22,28 +25,36 @@ class MyData:
 	def EHandler(self):
 		sys.exit(self.iphreeqc.GetErrorString())
 		
-	def MyCallback(self, x1, x2, s1):
+	def Callback(self, x1, x2, s1):
 		if (s1 == "Year"):
-			print '\nCallback for cell ' + str(x1) + ': pH ' + str(x2) + '\n'
-			return self.year
-		return -1
-		
+			print '\nCallback for cell {0}: pH {1:.2f}'.format(int(x1), x2)
+			return float(self.year)
+		return float(-1)
 
 	def Exec(self):
+		# Load database
 		if (self.iphreeqc.LoadDatabase('phreeqc.dat') != 0):
 			self.EHandler()
 
+		# Set callback
+		self.iphreeqc.SetBasicCallback(self)
+		
+		# Define initial conditions and selected output
 		self.year = 2014
 		if (self.iphreeqc.RunFile('ic') != 0):
 			self.EHandler()
-			
+		
+		# Run cell 1
 		if (self.iphreeqc.RunString('RUN_CELLS; -cells; 1; END') != 0):
 			self.EHandler()
 		
+        # Extract/write results
 		self.ExtractWrite(1)
 		
+		# Advect cell 1 solution to cell 2
 		self.year += 1
 		
+		# Define new solution composition for cell 2 from cell 1 selected-output
 		s = 'SOLUTION_MODIFY 2' + '\n'
 		s += '   -cb      ' + str(self.results[0].dVal) + '\n'		
 		s += '   -total_h ' + str(self.results[1].dVal) + '\n'
