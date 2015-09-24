@@ -1,4 +1,4 @@
-public class callback extends BasicCallback {
+public class advect extends BasicCallback {
 
 	// data members
     public int year;
@@ -15,7 +15,7 @@ public class callback extends BasicCallback {
         }
     }
 
-    public callback() {
+    public advect() {
         year = 0;
         iphreeqc = null;
         results = null;
@@ -87,14 +87,14 @@ public class callback extends BasicCallback {
         year += 1;
 
 		// Define new solution composition for cell 2 from cell 1 selected-output
-        java.lang.StringBuffer input = new java.lang.StringBuffer();
+        StringBuffer input = new StringBuffer();
         input.append("SOLUTION_MODIFY 2\n");
-        input.append("   -cb      " + java.lang.Double.toString(results.get(0).getDVal()) + "\n");
-        input.append("   -total_h " + java.lang.Double.toString(results.get(1).getDVal()) + "\n");
-        input.append("   -total_o " + java.lang.Double.toString(results.get(2).getDVal()) + "\n");
+        input.append("   -cb      " + Double.toString(results.get(0).getDVal()) + "\n");
+        input.append("   -total_h " + Double.toString(results.get(1).getDVal()) + "\n");
+        input.append("   -total_o " + Double.toString(results.get(2).getDVal()) + "\n");
         input.append("   -totals  \n");
-        input.append("      C     " + java.lang.Double.toString(results.get(3).getDVal()) + "\n");
-        input.append("      Ca    " + java.lang.Double.toString(results.get(4).getDVal()) + "\n");
+        input.append("      C     " + Double.toString(results.get(3).getDVal()) + "\n");
+        input.append("      Ca    " + Double.toString(results.get(4).getDVal()) + "\n");
         // run cell 2
         input.append("RUN_CELLS; -cells; 2; END\n");
         if (iphreeqc.RunString(input.toString()) != 0) {
@@ -105,7 +105,7 @@ public class callback extends BasicCallback {
     }
 
     public static void main(String argv[]) {
-        callback c = new callback();
-        c.Exec();
+        advect a = new advect();
+        a.Exec();
     }
 }
