@@ -39,7 +39,7 @@ typedef enum {
 	VR_INVALIDCOL    = -5   /*!< Failure, Invalid column */
 } VRESULT;
 
-#if defined(NESTED_UNION_NOT_SUPPORTED) || defined(SWIGPYTHON)
+#if defined(NESTED_UNION_NOT_SUPPORTED) || defined(SWIGPYTHON) || defined(SWIGRUBY)
 
 /*! \brief Datatype used to store SELECTED_OUTPUT values.
 */

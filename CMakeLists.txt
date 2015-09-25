@@ -446,7 +446,7 @@ if (STANDALONE_BUILD EQUAL 1)
       swig_link_libraries(iphreeqc_ruby ${RUBY_LIBRARY})
       
       target_include_directories(${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} BEFORE PUBLIC ${RUBY_INCLUDE_PATH})
-      target_compile_definitions(${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} PUBLIC SWIG_IPHREEQC)
+      target_compile_definitions(${SWIG_MODULE_iphreeqc_ruby_REAL_NAME} PUBLIC NESTED_UNION_NOT_SUPPORTED SWIG_IPHREEQC)
 
       # must not prefix ruby .so on linux
       set_target_properties(iphreeqc_ruby PROPERTIES PREFIX "" OUTPUT_NAME "iphreeqc_ruby")      

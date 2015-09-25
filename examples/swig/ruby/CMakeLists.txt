@@ -1,7 +1,9 @@
 # files
 SET(Ruby_Files
 example.rb
+advect.rb
 ${CMAKE_SOURCE_DIR}/database/phreeqc.dat
+${CMAKE_SOURCE_DIR}/examples/cpp/advect/ic
 )
 
 # install directory
