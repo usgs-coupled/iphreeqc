@@ -48,7 +48,7 @@ class MyData(iphreeqc.BasicCallback):
 		if (self.iphreeqc.RunString('RUN_CELLS; -cells; 1; END') != 0):
 			self.EHandler()
 		
-        # Extract/write results
+		# Extract/write results
 		self.ExtractWrite(1)
 		
 		# Advect cell 1 solution to cell 2
