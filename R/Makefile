@@ -392,10 +392,10 @@ $(DEST)/ISolutionComp.h : $(SRC)/ISolutionComp.h
 $(DEST)/isotopes.cpp : $(SRC)/isotopes.cpp
 	$(CP) $< $@
 
-$(DEST)/Keywords.cpp : $(SRC)/Keywords.cpp
+$(DEST)/Keywords.cpp : $(SRC)/PhreeqcKeywords/Keywords.cpp
 	$(CP) $< $@
 
-$(DEST)/Keywords.h : $(SRC)/Keywords.h
+$(DEST)/Keywords.h : $(SRC)/PhreeqcKeywords/Keywords.h
 	$(CP) $< $@
 
 $(DEST)/kinetics.cpp : $(SRC)/kinetics.cpp
@@ -443,10 +443,10 @@ $(DEST)/nvector_serial.h : $(SRC)/nvector_serial.h
 $(DEST)/parse.cpp : $(SRC)/parse.cpp
 	$(CP) $< $@
 
-$(DEST)/Parser.cpp : $(SRC)/Parser.cxx
+$(DEST)/Parser.cpp : $(SRC)/common/Parser.cxx
 	$(CP) $< $@
 
-$(DEST)/Parser.h : $(SRC)/Parser.h
+$(DEST)/Parser.h : $(SRC)/common/Parser.h
 	$(CP) $< $@
 
 $(DEST)/PBasic.cpp : $(SRC)/PBasic.cpp
@@ -467,22 +467,22 @@ $(DEST)/Phreeqc.cpp : $(SRC)/Phreeqc.cpp
 $(DEST)/Phreeqc.h : $(SRC)/Phreeqc.h
 	$(CP) $< $@
 
-$(DEST)/PHRQ_base.cpp : $(SRC)/PHRQ_base.cxx
+$(DEST)/PHRQ_base.cpp : $(SRC)/common/PHRQ_base.cxx
 	$(CP) $< $@
 
-$(DEST)/PHRQ_base.h : $(SRC)/PHRQ_base.h
+$(DEST)/PHRQ_base.h : $(SRC)/common/PHRQ_base.h
 	$(CP) $< $@
 
-$(DEST)/PHRQ_io.cpp : $(SRC)/PHRQ_io.cpp
+$(DEST)/PHRQ_io.cpp : $(SRC)/common/PHRQ_io.cpp
 	$(CP) $< $@
 
-$(DEST)/PHRQ_io.h : $(SRC)/PHRQ_io.h
+$(DEST)/PHRQ_io.h : $(SRC)/common/PHRQ_io.h
 	$(CP) $< $@
 
 $(DEST)/PHRQ_io_output.cpp : $(SRC)/PHRQ_io_output.cpp
 	$(CP) $< $@
 
-$(DEST)/phrqtype.h : $(SRC)/phrqtype.h
+$(DEST)/phrqtype.h : $(SRC)/common/phrqtype.h
 	$(CP) $< $@
 
 $(DEST)/pitzer.cpp : $(SRC)/pitzer.cpp
@@ -665,10 +665,10 @@ $(DEST)/UserPunch.h : $(SRC)/UserPunch.h
 $(DEST)/utilities.cpp : $(SRC)/utilities.cpp
 	$(CP) $< $@
 
-$(DEST)/Utils.cpp : $(SRC)/Utils.cxx
+$(DEST)/Utils.cpp : $(SRC)/common/Utils.cxx
 	$(CP) $< $@
 
-$(DEST)/Utils.h : $(SRC)/Utils.h
+$(DEST)/Utils.h : $(SRC)/common/Utils.h
 	$(CP) $< $@
 
 ###############################################
