@@ -16,7 +16,7 @@ option (SWIG_ENABLE_JAVA "Generate java wrappers using SWIG" OFF)
 option (SWIG_ENABLE_PYTHON "Generate python wrappers using SWIG" OFF)
 
 # enable swig ruby
-if (NOT WIN32) # not yet on windows
+if (NOT MSVC)
   option (SWIG_ENABLE_RUBY "Generate ruby wrappers using SWIG" OFF)
 endif()
 
