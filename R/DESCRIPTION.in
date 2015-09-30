@@ -1,6 +1,6 @@
 Package: phreeqc
-Version: 1.0-@REVISION_SVN@
-Title: R interface to Geochemical Modeling Software
+Version: @VERSION@
+Title: R Interface to Geochemical Modeling Software
 License: GPL-3 + file LICENSE
 NeedsCompilation: yes
 Depends:

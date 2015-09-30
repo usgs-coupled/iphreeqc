@@ -6,7 +6,7 @@
 ##' including speciation, batch-reaction, one-dimensional 
 ##' reactive-transport, and inverse geochemical calculations.    
 ##' 
-##' \tabular{ll}{Package: \tab phreeqc\cr Type: \tab Package\cr Version: \tab 1.0-@REVISION_SVN@\cr Date: \tab @RELEASE_DATE@\cr License: \tab BSD_3_clause + file LICENSE\cr}
+##' \tabular{ll}{Package: \tab phreeqc\cr Type: \tab Package\cr Version: \tab @VERSION@\cr Date: \tab @RELEASE_DATE@\cr License: \tab BSD_3_clause + file LICENSE\cr}
 ##' 
 ##' @name phreeqc-package
 ##' @aliases phreeqc-package phreeqc
