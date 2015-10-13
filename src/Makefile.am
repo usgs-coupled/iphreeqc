@@ -1,4 +1,5 @@
 EXTRA_DIST=\
+	BasicCallback.h\
 	fimpl.h\
 	fwrap.h\
 	fwrap.cpp\

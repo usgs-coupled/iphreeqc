@@ -11,10 +11,13 @@ EXTRA_DIST =\
 	fortran/CMakeLists.txt\
 	fortran/advect/CMakeLists.txt\
 	swig/CMakeLists.txt\
+	swig/java/advect.java\
 	swig/java/CMakeLists.txt\
 	swig/java/example.java\
+	swig/python/advect.py\
 	swig/python/CMakeLists.txt\
 	swig/python/example.py\
+	swig/ruby/advect.rb\
 	swig/ruby/CMakeLists.txt\
 	swig/ruby/example.rb
 
