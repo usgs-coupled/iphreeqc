@@ -28,7 +28,7 @@
 #   To build a Windows zip file package pass -zip.
 
 # echo everything
-set -x
+# set -x
 
 # A quick and dirty usage message
 USAGE="USAGE: ./dist.sh -v VERSION -r REVISION -d RELEASE_DATE \
