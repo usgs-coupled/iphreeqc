@@ -1,10 +1,10 @@
 #!/bin/sh
-# $Id: dist.sh 4132 2010-02-24 05:35:35Z charlton $
+# $Id: dist.sh 4710 2010-08-09 22:22:55Z charlton $
 
 #
-# USAGE: ./dist.sh -v VERSION -r REVISION -d RELEASE_DATE 
+# USAGE: ./dist.sh -v VERSION -r REVISION -d RELEASE_DATE
 #                  [-rs REVISION-SVN] [-pr REPOS-PATH]
-#                  [-zip] [-alpha ALPHA_NUM|-beta BETA_NUM|-rc RC_NUM]
+#                  [-win] [-alpha ALPHA_NUM|-beta BETA_NUM|-rc RC_NUM]
 #
 #   Create a distribution tarball, labelling it with the given VERSION.
 #   The REVISION or REVISION-SVN will be used in the version string.
@@ -12,7 +12,7 @@
 #   If REPOS-PATH is not specified then the default is "branches/VERSION".
 #   For example, the command line:
 #
-#      ./dist.sh -v 0.24.2 -r 6284
+#      ./dist.sh -v 0.24.2 -r 6284 -d 2/7/05
 #
 #   from the top-level of a branches/0.24.2 working copy will create
 #   the 0.24.2 release tarball.
@@ -25,7 +25,8 @@
 #   If neither an -alpha, -beta or -rc option with a number is
 #   specified, it will build a release tarball.
 #  
-#   To build a Windows zip file package pass -zip.
+#   To build a Windows package pass -win.
+NAME=IPhreeqc
 
 # echo everything
 # set -x
@@ -34,14 +35,9 @@
 USAGE="USAGE: ./dist.sh -v VERSION -r REVISION -d RELEASE_DATE \
 [-rs REVISION-SVN ] [-pr REPOS-PATH] \
 [-alpha ALPHA_NUM|-beta BETA_NUM|-rc RC_NUM] \
-[-zip]
- EXAMPLES: ./dist.sh -v 0.36.0 -r 8278 -d 2/7/05
-           ./dist.sh -v 0.36.0 -r 8278 -d 2/7/05 -pr trunk
-           ./dist.sh -v 0.36.0 -r 8282 -d 2/7/05 -rs 8278 -pr tags/0.36.0
-           ./dist.sh -v 0.36.0 -r 8282 -d 2/7/05 -rs 8278 -pr tags/0.36.0 -alpha
-           ./dist.sh -v 0.36.0 -r 8282 -d 2/7/05 -rs 8278 -pr tags/0.36.0 -beta 1"
-
-
+[-win]
+ EXAMPLES: ./dist.sh -v 1.1 -r 150 -d 2/7/05
+           ./dist.sh -v 1.1 -r 150 -d 2/7/05 -pr trunk"
 
 
 # Let's check and set all the arguments
@@ -71,8 +67,9 @@ do
       -v|-r|-rs|-pr|-beta|-rc|-alpha|-d)
         ARG_PREV=$ARG
         ;;
-      -zip)
-        ZIP=1
+      -win)
+        WIN=1
+        EXTRA_EXPORT_OPTIONS="--native-eol CRLF"
         ARG_PREV=""
 	;;
       *)
@@ -105,24 +102,22 @@ else
   VER_TAG="r$REVISION_SVN"
   VER_NUMTAG="-$REVISION"
 fi
-  
-if [ -n "$ZIP" ] ; then
-  EXTRA_EXPORT_OPTIONS="--native-eol CRLF"
-fi
+
+case `uname` in
+  CYGWIN*)  WIN=1;;
+esac
 
 if [ -z "$VERSION" ] || [ -z "$REVISION" ] || [ -z "$RDATE" ]; then
   echo " $USAGE"
   exit 1
 fi
 
-VER="$VERSION"
-REL="$REVISION"
 LOWER='abcdefghijklmnopqrstuvwxyz'
 UPPER='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-VER_UC=`echo $VER | sed -e "y/$LOWER/$UPPER/"`
+VER_UC=`echo $VERSION | sed -e "y/$LOWER/$UPPER/"`
 
-RELEASE_DATE="`date -d "$RDATE" "+%B %e, %G"`"
-V_FIXDATE="`date -d "$RDATE" "+%d-%b-%G"`"
+# format date string
+RELEASE_DATE="`date -d $RDATE  "+%B %e, %G"`"
 
 if [ -z "$REPOS_PATH" ]; then
   REPOS_PATH="branches/$VERSION"
@@ -130,10 +125,11 @@ else
   REPOS_PATH="`echo $REPOS_PATH | sed 's/^\/*//'`"
 fi
 
-DISTNAME="IPhreeqc-${VERSION}${VER_NUMTAG}"
-##DIST_SANDBOX=.dist_sandbox
-##DISTPATH="$DIST_SANDBOX/$DISTNAME"
+DISTNAME="${NAME}-${VERSION}${VER_NUMTAG}"
+DIST_SANDBOX=.dist_sandbox
+#DISTPATH="$DIST_SANDBOX/$DISTNAME"
 DISTPATH="."
+
 
 echo "Distribution will be named: $DISTNAME"
 echo " release branch's revision: $REVISION"
@@ -150,74 +146,48 @@ echo "              release date: $RELEASE_DATE"
 ## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 ##	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/$REPOS_PATH" \
 ##	     "$DISTNAME")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
-##	     
+##
+##echo "Exporting revision $REVISION of external database into sandbox..."
 ##(cd "$DIST_SANDBOX" && \
 ## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/src" \
-##	     "$DISTNAME/src/phreeqcpp")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
-##	     	     
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/doc" \
-##	     "$DISTNAME/phreeqc3-doc")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
-##	     	     
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/$REPOS_PATH/database" \
+##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/database" \
 ##	     "$DISTNAME/database")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
-##	     
+##
+##echo "Exporting revision $REVISION of external phreeqcpp into sandbox..."
+##(cd "$DIST_SANDBOX" && \
+## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/src" \
+##	     "$DISTNAME/src/phreeqcpp")
+##
+##echo "Exporting revision $REVISION of external examples/c into sandbox..."
 ##(cd "$DIST_SANDBOX" && \
 ## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 ##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/c" \
 ##	     "$DISTNAME/examples/c")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
 ##
+##echo "Exporting revision $REVISION of external examples/com into sandbox..."
 ##(cd "$DIST_SANDBOX" && \
 ## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 ##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/com" \
 ##	     "$DISTNAME/examples/com")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
 ##
+##echo "Exporting revision $REVISION of external examples/fortran into sandbox..."
 ##(cd "$DIST_SANDBOX" && \
 ## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 ##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/fortran" \
 ##	     "$DISTNAME/examples/fortran")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
 ##
+##echo "Exporting revision $REVISION of external phreeqc3-doc into sandbox..."
+##(cd "$DIST_SANDBOX" && \
+## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/doc" \
+##	     "$DISTNAME/phreeqc3-doc")
+##
+##echo "Exporting revision $REVISION of external HTMLversion/phreeqc3.chm into sandbox..."
 ##(cd "$DIST_SANDBOX" && \
 ## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 ##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion/phreeqc3.chm" \
-##	     "$DISTNAME/doc")
-##if [ $? != 0 ] ; then
-##  echo "svn checkout error"
-##  exit $?;
-##fi
-##
+##	     "$DISTNAME/doc/phreeqc3.chm")
 
 
 ver_major=`echo $VERSION | cut -d '.' -f 1`
@@ -228,13 +198,20 @@ if [ -z "$ver_patch" ]; then
   ver_patch="0"
 fi
 
-SED_FILES="$DISTPATH/phreeqc3-doc/RELEASE.TXT \
-           $DISTPATH/src/Version.h \
-           $DISTPATH/src/IPhreeqc.h"
+VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
+
+SED_FILES="$DISTPATH/configure.ac \
+           $DISTPATH/phreeqc3-doc/RELEASE.TXT \
+           $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT \
+           $DISTPATH/src/IPhreeqc.h \
+           $DISTPATH/src/Makefile.am \
+           $DISTPATH/src/Version.h"
 
 for vsn_file in $SED_FILES
 do
   sed \
+   -e "s/AC_INIT(.*)/AC_INIT([IPhreeqc], [$VERSION-$REVISION], [charlton@usgs.gov])/g" \
+   -e "s/AM_LDFLAGS=-release.*/AM_LDFLAGS=-release $ver_major.$ver_minor.$ver_patch/g" \
    -e "/#define *VER_MAJOR/s/[0-9]\+/$ver_major/" \
    -e "/#define *VER_MINOR/s/[0-9]\+/$ver_minor/" \
    -e "/#define *VER_PATCH/s/[0-9]\+/$ver_patch/" \
@@ -243,30 +220,55 @@ do
    -e "s/@PHREEQC_VER@/$VER/g" \
    -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
    -e "s/@REVISION_SVN@/$REVISION_SVN/g" \
+   -e "s/@VERSION@/$VERSION/g" \
+   -e "s/@REVISION@/$REVISION/g" \
     < "$vsn_file" > "$vsn_file.tmp"
-  unix2dos "$vsn_file.tmp" 2> /dev/null
   mv -f "$vsn_file.tmp" "$vsn_file"
+  if [ -n "$WIN" ] && [ "$vsn_file" != "$DISTPATH/configure.ac" ]; then
+    unix2dos "$vsn_file"
+  fi  
   cp "$vsn_file" "$vsn_file.dist"
 done
 
+cp $DISTPATH/phreeqc3-doc/RELEASE.TXT          $DISTPATH/doc/RELEASE
+cp $DISTPATH/phreeqc3-doc/NOTICE.TXT           $DISTPATH/doc/NOTICE
+cp $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT  $DISTPATH/doc/README
 
-##if [ -z "$ZIP" ]; then
-##  echo "Rolling $DISTNAME.tar ..."
-##  (cd "$DIST_SANDBOX" > /dev/null && tar c "$DISTNAME") > \
-##    "$DISTNAME.tar"
-##  echo "Compressing to $DISTNAME.tar.gz ..."
-##  gzip -9f "$DISTNAME.tar"
-##else
+##(cd "$DISTPATH/doc" && "doxygen")
+##
+##if [ -n "$WIN" ]; then
 ##  echo "Rolling $DISTNAME.zip ..."
 ##  (cd "$DIST_SANDBOX" > /dev/null && zip -q -r - "$DISTNAME") > \
 ##    "$DISTNAME.zip"
-##fi
-##echo "Removing sandbox..."
-##rm -rf "$DIST_SANDBOX"
 ##
-##echo ""
-##echo "Done:"
-##if [ -z "$ZIP" ]; then
+##  echo "Removing sandbox..."
+##  rm -rf "$DIST_SANDBOX"
+##
+##  echo ""
+##  echo "Done:"
+##  ls -l "$DISTNAME.zip"
+##  echo ""
+##  echo "md5sums:"
+##  md5sum "$DISTNAME.zip"
+##  type sha1sum > /dev/null 2>&1
+##  if [ $? -eq 0 ]; then
+##    echo ""
+##    echo "sha1sums:"
+##    sha1sum "$DISTNAME.zip"
+##  fi
+##else
+##  echo "Rolling $DISTNAME.tar ..."
+##  (cd "$DIST_SANDBOX" > /dev/null && tar c "$DISTNAME") > \
+##    "$DISTNAME.tar"
+##
+##  echo "Compressing to $DISTNAME.tar.gz ..."
+##  gzip -9f "$DISTNAME.tar"
+##
+##  echo "Removing sandbox..."
+##  rm -rf "$DIST_SANDBOX"
+##
+##  echo ""
+##  echo "Done:"
 ##  ls -l "$DISTNAME.tar.gz"
 ##  echo ""
 ##  echo "md5sums:"
@@ -276,16 +278,5 @@ done
 ##    echo ""
 ##    echo "sha1sums:"
 ##    sha1sum "$DISTNAME.tar.gz"
-##  fi
-##else
-##  ls -l "$DISTNAME.zip"
-##  echo ""
-##  echo "md5sum:"
-##  md5sum "$DISTNAME.zip"
-##  type sha1sum > /dev/null 2>&1
-##  if [ $? -eq 0 ]; then
-##    echo ""
-##    echo "sha1sum:"
-##    sha1sum "$DISTNAME.zip"
 ##  fi
 ##fi
