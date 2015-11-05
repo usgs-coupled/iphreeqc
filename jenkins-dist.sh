@@ -207,9 +207,6 @@ SED_FILES="$DISTPATH/configure.ac \
            $DISTPATH/src/Makefile.am \
            $DISTPATH/src/Version.h"
 
-pwd
-find -type f
-
 for vsn_file in $SED_FILES
 do
   sed \
