@@ -3926,9 +3926,9 @@ void TestIPhreeqc::TestMultiPunchCSelectedOutput(void)
 #endif
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(3, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0000e+000, var.dVal, ::pow(10., -6) );
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(4, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0000e+000, var.dVal, ::pow(10., -6) );
-#ifdef SKIP_TEST
+        //#ifdef SKIP_TEST
 	CPPUNIT_ASSERT_EQUAL(VR_OK, obj.GetSelectedOutputValue(5, 34, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.2784e-003, var.dVal, ::pow(10., -6) );
-#endif
+        //#endif
 
 	// edge cases
 	int r = obj.GetSelectedOutputRowCount();
