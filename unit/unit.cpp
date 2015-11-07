@@ -7,6 +7,12 @@
 #include <cassert>
 #include <cppunit/ui/text/TestRunner.h>
 #include <cppunit/CompilerOutputter.h>
+//{{
+#include <cppunit/TestResult.h>
+#include <cppunit/TestResultCollector.h>
+#include <cppunit/BriefTestProgressListener.h>
+#include <cppunit/XmlOutputter.h>
+//}}
 
 #include "TestVar.h"
 #include "TestCVar.h"
@@ -94,6 +100,14 @@ int main(int argc, char **argv)
 #endif
 
 	CppUnit::TextUi::TestRunner runner;
+        //{{
+        CppUnit::TestResult testresult;
+        CppUnit::TestResultCollector collectedresults;
+        testresult.addListener(&collectedresults);
+
+        CppUnit::BriefTestProgressListener progress;
+        testresult.addListener(&progress);
+        //}}
 
 #if defined(_MSC_VER)
 	CStopWatch s;
@@ -106,19 +120,26 @@ int main(int argc, char **argv)
 	runner.addTest(TestIPhreeqc::suite());
 	runner.addTest(TestIPhreeqcLib::suite());
 
-	runner.setOutputter(CppUnit::CompilerOutputter::defaultOutputter(&runner.result(), std::cout));
+	//runner.setOutputter(CppUnit::CompilerOutputter::defaultOutputter(&runner.result(), std::cout));
 
 #if defined(_WIN32)
 	int n = ::_fcloseall();
 	assert(n == 0);
 #endif
 
-	bool wasSucessful = runner.run("", false);
+	//bool wasSucessful = runner.run("", false);
+	runner.run(testresult);
+
+        // output xml for jenkins
+        std::ofstream xml("results.xml");
+        CppUnit::XmlOutputter xmlOut(&collectedresults, xml);
+        xmlOut.write();
 
 #if defined(_MSC_VER)
 	s.stopTimer();
 	std::cerr << "Elapsed time: " << s.getElapsedTime() << std::endl;
 #endif
 
-	return wasSucessful ? 0 : 1;
+	//return wasSucessful ? 0 : 1;
+        return collectedresults.wasSuccessful() ? 0 : 1;
 }
