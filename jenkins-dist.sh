@@ -238,9 +238,17 @@ do
   fi
 done
 
-cp $DISTPATH/phreeqc3-doc/RELEASE.TXT          $DISTPATH/doc/RELEASE
-cp $DISTPATH/phreeqc3-doc/NOTICE.TXT           $DISTPATH/doc/NOTICE
-cp $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT  $DISTPATH/doc/README
+if [ -e $DISTPATH/phreeqc3-doc/RELEASE.TXT ]; then
+  cp $DISTPATH/phreeqc3-doc/RELEASE.TXT         $DISTPATH/doc/RELEASE
+fi
+
+if [ -e $DISTPATH/phreeqc3-doc/NOTICE.TXT ]; then
+  cp $DISTPATH/phreeqc3-doc/NOTICE.TXT          $DISTPATH/doc/NOTICE
+fi
+
+if [ -e $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT ]; then
+  cp $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT $DISTPATH/doc/README
+fi
 
 ##(cd "$DISTPATH/doc" && "doxygen")
 ##
