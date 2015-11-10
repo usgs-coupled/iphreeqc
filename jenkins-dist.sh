@@ -215,25 +215,27 @@ SED_FILES="$DISTPATH/configure.ac \
 
 for vsn_file in $SED_FILES
 do
-  sed \
-   -e "s/AC_INIT(.*)/AC_INIT([$NAME$REPOS_TAG], [$VERSION-$REVISION], [charlton@usgs.gov])/g" \
-   -e "s/AM_LDFLAGS=-release.*/AM_LDFLAGS=-release $ver_major.$ver_minor.$ver_patch/g" \
-   -e "/#define *VER_MAJOR/s/[0-9]\+/$ver_major/" \
-   -e "/#define *VER_MINOR/s/[0-9]\+/$ver_minor/" \
-   -e "/#define *VER_PATCH/s/[0-9]\+/$ver_patch/" \
-   -e "/#define *VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
-   -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
-   -e "s/@PHREEQC_VER@/$VER/g" \
-   -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
-   -e "s/@REVISION_SVN@/$REVISION_SVN/g" \
-   -e "s/@VERSION@/$VERSION/g" \
-   -e "s/@REVISION@/$REVISION/g" \
-    < "$vsn_file" > "$vsn_file.tmp"
-  mv -f "$vsn_file.tmp" "$vsn_file"
-  if [ -n "$WIN" ] && [ "$vsn_file" != "$DISTPATH/configure.ac" ]; then
-    unix2dos "$vsn_file"
-  fi  
-  cp "$vsn_file" "$vsn_file.dist"
+  if [ -e "$vsn_file" ]; then
+    sed \
+     -e "s/AC_INIT(.*)/AC_INIT([$NAME$REPOS_TAG], [$VERSION-$REVISION], [charlton@usgs.gov])/g" \
+     -e "s/AM_LDFLAGS=-release.*/AM_LDFLAGS=-release $ver_major.$ver_minor.$ver_patch/g" \
+     -e "/#define *VER_MAJOR/s/[0-9]\+/$ver_major/" \
+     -e "/#define *VER_MINOR/s/[0-9]\+/$ver_minor/" \
+     -e "/#define *VER_PATCH/s/[0-9]\+/$ver_patch/" \
+     -e "/#define *VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
+     -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
+     -e "s/@PHREEQC_VER@/$VER/g" \
+     -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
+     -e "s/@REVISION_SVN@/$REVISION_SVN/g" \
+     -e "s/@VERSION@/$VERSION/g" \
+     -e "s/@REVISION@/$REVISION/g" \
+      < "$vsn_file" > "$vsn_file.tmp"
+    mv -f "$vsn_file.tmp" "$vsn_file"
+    if [ -n "$WIN" ] && [ "$vsn_file" != "$DISTPATH/configure.ac" ]; then
+      unix2dos "$vsn_file"
+    fi  
+    cp "$vsn_file" "$vsn_file.dist"
+  fi
 done
 
 cp $DISTPATH/phreeqc3-doc/RELEASE.TXT          $DISTPATH/doc/RELEASE
