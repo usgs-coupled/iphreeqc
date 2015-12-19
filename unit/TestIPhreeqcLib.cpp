@@ -3131,7 +3131,7 @@ void TestIPhreeqcLib::TestGetLogStringLine(void)
 void TestIPhreeqcLib::TestSetErrorFileName(void)
 {
 	char ERR_FILENAME[80];
-	sprintf(ERR_FILENAME, "error.%06d.out", ::rand());
+	sprintf(ERR_FILENAME, "error.%s.out", "TestIPhreeqcLib-TestSetErrorFileName");
 	if (::FileExists(ERR_FILENAME))
 	{
 		::DeleteFile(ERR_FILENAME);
@@ -3177,13 +3177,13 @@ void TestIPhreeqcLib::TestSetErrorFileName(void)
 			++i;
 		}
 
-		CPPUNIT_ASSERT_EQUAL( (size_t)84, i );
+		CPPUNIT_ASSERT_EQUAL( (size_t)90, i );
 	}
 
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Maximum iterations exceeded, 100"),                                                     lines[0] );
 	CPPUNIT_ASSERT_EQUAL( std::string("WARNING: Numerical method failed with this set of convergence parameters."),                     lines[2] );
-	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Numerical method failed on all combinations of convergence parameters, cell/soln/mix 1"), lines[82] );
-	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                                     lines[83] );
+	CPPUNIT_ASSERT_EQUAL( std::string("ERROR: Numerical method failed on all combinations of convergence parameters, cell/soln/mix 1"), lines[88] );
+	CPPUNIT_ASSERT_EQUAL( std::string("Stopping."),                                                                                     lines[89] );
 
 	if (::FileExists(ERR_FILENAME))
 	{
