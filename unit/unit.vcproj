@@ -133,7 +133,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_VS2005)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;_DEBUG;_CONSOLE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -152,7 +152,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="cppunitd.lib"
-				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1_10)/libx64"
+				AdditionalLibraryDirectories="&quot;$(DEV_CPPUNIT_VS2005)/libx64&quot;"
 				GenerateDebugInformation="true"
 			/>
 			<Tool
@@ -293,7 +293,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
-				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_1_10)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
+				AdditionalIncludeDirectories="&quot;$(DEV_CPPUNIT_VS2005)/include&quot;;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords"
 				PreprocessorDefinitions="CPPUNIT;WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 			/>
@@ -309,7 +309,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="cppunit.lib"
-				AdditionalLibraryDirectories="$(DEV_CPPUNIT_1_10)/libx64"
+				AdditionalLibraryDirectories="&quot;$(DEV_CPPUNIT_VS2005)/libx64&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
