@@ -603,6 +603,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\src\phreeqcpp\Dictionary.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\src\phreeqcpp\dumper.cpp"
 						>
 					</File>
@@ -883,6 +887,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\src\phreeqcpp\Serializer.cxx"
+						>
+					</File>
+					<File
 						RelativePath="..\src\phreeqcpp\sit.cpp"
 						>
 					</File>
@@ -1128,6 +1136,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\src\phreeqcpp\Dictionary.h"
+						>
+					</File>
+					<File
 						RelativePath="..\src\phreeqcpp\dumper.h"
 						>
 					</File>
@@ -1241,6 +1253,10 @@
 					</File>
 					<File
 						RelativePath="..\src\phreeqcpp\SelectedOutput.h"
+						>
+					</File>
+					<File
+						RelativePath="..\src\phreeqcpp\Serializer.h"
 						>
 					</File>
 					<File
