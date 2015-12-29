@@ -87,6 +87,8 @@ src/phreeqcpp/cxxMix.cxx
 src/phreeqcpp/cxxMix.h
 src/phreeqcpp/dense.cpp
 src/phreeqcpp/dense.h
+src/phreeqcpp/Dictionary.cpp
+src/phreeqcpp/Dictionary.h
 src/phreeqcpp/dumper.cpp
 src/phreeqcpp/dumper.h
 src/phreeqcpp/Exchange.cxx
@@ -150,6 +152,8 @@ src/phreeqcpp/runner.cpp
 src/phreeqcpp/runner.h
 src/phreeqcpp/SelectedOutput.cpp
 src/phreeqcpp/SelectedOutput.h
+src/phreeqcpp/Serializer.cxx
+src/phreeqcpp/Serializer.h
 src/phreeqcpp/sit.cpp
 src/phreeqcpp/smalldense.cpp
 src/phreeqcpp/smalldense.h
