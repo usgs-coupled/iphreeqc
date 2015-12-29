@@ -58,6 +58,7 @@ SOBJS =	\
 PPOBJS = \
 	cxxKinetics.o \
 	cxxMix.o \
+	Dictionary.o \
 	dumper.o \
 	Exchange.o \
 	ExchComp.o \
@@ -81,6 +82,7 @@ PPOBJS = \
 	ReadClass.o \
 	runner.o \
 	SelectedOutput.o \
+	Serializer.o \
 	Solution.o \
 	SolutionIsotope.o \
 	SSassemblage.o \
@@ -167,7 +169,8 @@ clean:
 -include ./$(DEPDIR)/cxxKinetics.Po
 -include ./$(DEPDIR)/cxxMix.Po
 -include ./$(DEPDIR)/dense.Po
--include ./$(DEPDIR)/dumper.Po
+-include ./$(DEPDIR)/dense.Po
+-include ./$(DEPDIR)/Dictionary.Po
 -include ./$(DEPDIR)/dw.Po
 -include ./$(DEPDIR)/Exchange.Po
 -include ./$(DEPDIR)/ExchComp.Po
@@ -213,6 +216,7 @@ clean:
 -include ./$(DEPDIR)/readtr.Po
 -include ./$(DEPDIR)/runner.Po
 -include ./$(DEPDIR)/SelectedOutput.Po
+-include ./$(DEPDIR)/Serializer.Po
 -include ./$(DEPDIR)/sit.Po
 -include ./$(DEPDIR)/smalldense.Po
 -include ./$(DEPDIR)/SolutionIsotopeList.Po
