@@ -99,6 +99,8 @@ PSRC = \
 	$(DEST)/cxxMix.h \
 	$(DEST)/dense.cpp \
 	$(DEST)/dense.h \
+	$(DEST)/Dictionary.cpp \
+	$(DEST)/Dictionary.h \
 	$(DEST)/dumper.cpp \
 	$(DEST)/dumper.h \
 	$(DEST)/dw.cpp \
@@ -170,6 +172,8 @@ PSRC = \
 	$(DEST)/runner.h \
 	$(DEST)/SelectedOutput.cpp \
 	$(DEST)/SelectedOutput.h \
+	$(DEST)/Serializer.cpp \
+	$(DEST)/Serializer.h \
 	$(DEST)/sit.cpp \
 	$(DEST)/smalldense.cpp \
 	$(DEST)/smalldense.h \
@@ -328,6 +332,12 @@ $(DEST)/dense.cpp : $(SRC)/dense.cpp
 	$(CP) $< $@
 
 $(DEST)/dense.h : $(SRC)/dense.h
+	$(CP) $< $@
+
+$(DEST)/Dictionary.cpp : $(SRC)/Dictionary.cpp
+	$(CP) $< $@
+
+$(DEST)/Dictionary.h : $(SRC)/Dictionary.h
 	$(CP) $< $@
 
 $(DEST)/dumper.cpp : $(SRC)/dumper.cpp
@@ -541,6 +551,12 @@ $(DEST)/SelectedOutput.cpp : $(SRC)/SelectedOutput.cpp
 	$(CP) $< $@
 
 $(DEST)/SelectedOutput.h : $(SRC)/SelectedOutput.h
+	$(CP) $< $@
+
+$(DEST)/Serializer.cpp : $(SRC)/Serializer.cxx
+	$(CP) $< $@
+
+$(DEST)/Serializer.h : $(SRC)/Serializer.h
 	$(CP) $< $@
 
 $(DEST)/sit.cpp : $(SRC)/sit.cpp

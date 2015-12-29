@@ -17,6 +17,7 @@ OBJECTS.phreeqcpp = \
   phreeqcpp/cxxKinetics.o \
   phreeqcpp/cxxMix.o \
   phreeqcpp/dense.o \
+  phreeqcpp/Dictionary.o \
   phreeqcpp/dumper.o \
   phreeqcpp/dw.o \
   phreeqcpp/Exchange.o \
@@ -60,6 +61,7 @@ OBJECTS.phreeqcpp = \
   phreeqcpp/readtr.o \
   phreeqcpp/runner.o \
   phreeqcpp/SelectedOutput.o \
+  phreeqcpp/Serializer.o \
   phreeqcpp/sit.o \
   phreeqcpp/smalldense.o \
   phreeqcpp/SolutionIsotope.o \
