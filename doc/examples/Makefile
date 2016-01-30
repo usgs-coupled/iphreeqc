@@ -1,5 +1,5 @@
 CC = gcc
-CPPFLAGS = -I../../src -I../../src/phreeqcpp -I../../src/phreeqcpp/PhreeqcKeywords
+CPPFLAGS = -I../../src -I../../src/phreeqcpp -I../../src/phreeqcpp/common -I../../src/phreeqcpp/PhreeqcKeywords
 CXX = g++
 DEFS = -DNDEBUG=1 -DFC_FUNC\(name,NAME\)=name\ \#\#\ _ -DFC_FUNC_\(name,NAME\)=name\ \#\#\ _ -DFC_MAIN=MAIN__ 
 F77 = gfortran

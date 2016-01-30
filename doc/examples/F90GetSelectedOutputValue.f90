@@ -6,6 +6,7 @@ PROGRAM example
   INTEGER(KIND=4)   :: vt
   REAL(KIND=8)      :: dv
   CHARACTER(LEN=40) :: sv
+  INTEGER(KIND=4)   :: sl
   
   id = CreateIPhreeqc()
   IF (id.LT.0) THEN
@@ -21,15 +22,19 @@ PROGRAM example
      CALL OutputErrorString(id)
      STOP
   END IF
-  
+
   WRITE(*,*) "selected-output:"
   DO i=0,GetSelectedOutputRowCount(id)
      DO j=1,GetSelectedOutputColumnCount(id)
-        IF (GetSelectedOutputValue(id, i, j, vt, dv, sv).EQ.IPQ_OK) THEN
+        IF (GetSelectedOutputValue(id, i, j, vt, dv, sv, sl).EQ.IPQ_OK) THEN          
            IF (vt.EQ.TT_DOUBLE) THEN
               WRITE(*,"(g12.6,A1)",ADVANCE="NO") dv, " "
            ELSE IF (vt.EQ.TT_STRING) THEN
-              WRITE(*,"(A12,A1)",ADVANCE="NO") sv, " "
+              IF (sl.EQ.0) THEN
+                 WRITE(*,"(A12,A1)",ADVANCE="NO") sv, " "
+              ELSE
+                 WRITE(*,"(A12,A1)",ADVANCE="NO") "#ERR", " "
+              END IF
            END IF
         END IF
      END DO
