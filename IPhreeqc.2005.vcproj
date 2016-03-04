@@ -1289,6 +1289,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\phreeqcpp\Dictionary.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\phreeqcpp\dumper.cpp"
 					>
 				</File>
@@ -1796,6 +1800,10 @@
 			</File>
 			<File
 				RelativePath=".\src\phreeqcpp\dense.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\phreeqcpp\Dictionary.h"
 				>
 			</File>
 			<File
