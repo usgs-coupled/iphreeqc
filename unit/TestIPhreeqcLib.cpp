@@ -2458,7 +2458,7 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                       pH  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                       pe  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                        Activity of water  =  ")                                   != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                           Ionic strength  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                 Ionic strength (mol/kgw)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Mass of water (kg)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                 Total alkalinity (eq/kg)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Total CO2 (mol/kg)  =  ")                                   != NULL );
