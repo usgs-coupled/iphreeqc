@@ -149,9 +149,6 @@
     <ClCompile Include="src\phreeqcpp\dense.cpp">
       <Filter>Source Files\phreeqcpp\phreeqc</Filter>
     </ClCompile>
-    <ClCompile Include="src\phreeqcpp\dw.cpp">
-      <Filter>Source Files\phreeqcpp\phreeqc</Filter>
-    </ClCompile>
     <ClCompile Include="src\phreeqcpp\gases.cpp">
       <Filter>Source Files\phreeqcpp\phreeqc</Filter>
     </ClCompile>
