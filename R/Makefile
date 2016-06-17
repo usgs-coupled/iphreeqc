@@ -103,7 +103,6 @@ PSRC = \
 	$(DEST)/Dictionary.h \
 	$(DEST)/dumper.cpp \
 	$(DEST)/dumper.h \
-	$(DEST)/dw.cpp \
 	$(DEST)/Exchange.cpp \
 	$(DEST)/Exchange.h \
 	$(DEST)/ExchComp.cpp \
@@ -344,9 +343,6 @@ $(DEST)/dumper.cpp : $(SRC)/dumper.cpp
 	$(CP) $< $@
 
 $(DEST)/dumper.h : $(SRC)/dumper.h
-	$(CP) $< $@
-
-$(DEST)/dw.cpp : $(SRC)/dw.cpp
 	$(CP) $< $@
 
 $(DEST)/Exchange.cpp : $(SRC)/Exchange.cxx
