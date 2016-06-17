@@ -107,7 +107,6 @@ POBJS =	\
 	cvdense.o \
 	cvode.o \
 	dense.o \
-	dw.o \
 	gases.o \
 	input.o \
 	integrate.o \
@@ -171,7 +170,6 @@ clean:
 -include ./$(DEPDIR)/dense.Po
 -include ./$(DEPDIR)/Dictionary.Po
 -include ./$(DEPDIR)/dumper.Po
--include ./$(DEPDIR)/dw.Po
 -include ./$(DEPDIR)/Exchange.Po
 -include ./$(DEPDIR)/ExchComp.Po
 -include ./$(DEPDIR)/files
