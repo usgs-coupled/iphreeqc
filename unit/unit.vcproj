@@ -611,10 +611,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\src\phreeqcpp\dw.cpp"
-						>
-					</File>
-					<File
 						RelativePath="..\src\phreeqcpp\Exchange.cxx"
 						>
 					</File>
