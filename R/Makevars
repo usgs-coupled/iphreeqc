@@ -19,7 +19,6 @@ OBJECTS.phreeqcpp = \
   phreeqcpp/dense.o \
   phreeqcpp/Dictionary.o \
   phreeqcpp/dumper.o \
-  phreeqcpp/dw.o \
   phreeqcpp/Exchange.o \
   phreeqcpp/ExchComp.o \
   phreeqcpp/GasComp.o \
