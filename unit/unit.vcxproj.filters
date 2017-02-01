@@ -19,6 +19,9 @@
       <UniqueIdentifier>{669fe4ce-b3a3-4cf3-9041-941eea1eff9b}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Source Files\src\phreeqcpp\common">
+      <UniqueIdentifier>{1d4c4b49-5315-439b-afa0-4a52b432661e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestCVar.cpp">
@@ -87,19 +90,10 @@
     <ClCompile Include="..\src\phreeqcpp\NumKeyword.cxx">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\phreeqcpp\Parser.cxx">
-      <Filter>Source Files\src\phreeqcpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\PBasic.cpp">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\Phreeqc.cpp">
-      <Filter>Source Files\src\phreeqcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\phreeqcpp\PHRQ_base.cxx">
-      <Filter>Source Files\src\phreeqcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\phreeqcpp\PHRQ_io.cpp">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\PPassemblage.cxx">
@@ -159,9 +153,6 @@
     <ClCompile Include="..\src\phreeqcpp\Use.cpp">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\phreeqcpp\Utils.cxx">
-      <Filter>Source Files\src\phreeqcpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\CSelectedOutput.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -187,9 +178,6 @@
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\dense.cpp">
-      <Filter>Source Files\src\phreeqcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\phreeqcpp\dw.cpp">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\gases.cpp">
@@ -286,6 +274,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\phreeqcpp\PhreeqcKeywords\Keywords.cpp">
+      <Filter>Source Files\src\phreeqcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\phreeqcpp\common\Parser.cxx">
+      <Filter>Source Files\src\phreeqcpp\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\phreeqcpp\common\PHRQ_base.cxx">
+      <Filter>Source Files\src\phreeqcpp\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\phreeqcpp\common\PHRQ_io.cpp">
+      <Filter>Source Files\src\phreeqcpp\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\phreeqcpp\common\Utils.cxx">
+      <Filter>Source Files\src\phreeqcpp\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\phreeqcpp\Dictionary.cpp">
       <Filter>Source Files\src\phreeqcpp</Filter>
     </ClCompile>
   </ItemGroup>

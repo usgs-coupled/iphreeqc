@@ -35,6 +35,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -114,7 +115,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPUNIT;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -168,19 +169,26 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEV_CPPUNIT_VS2010)/include;../src;../src/phreeqcpp;../src/phreeqcpp/common;../src/phreeqcpp/PhreeqcKeywords;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CPPUNIT;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>cppunit.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DEV_CPPUNIT_VS2010)/libx64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>cppunit.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CSelectedOutput.cpp" />
+    <ClCompile Include="..\src\phreeqcpp\common\Parser.cxx" />
+    <ClCompile Include="..\src\phreeqcpp\common\PHRQ_base.cxx" />
+    <ClCompile Include="..\src\phreeqcpp\common\PHRQ_io.cpp" />
+    <ClCompile Include="..\src\phreeqcpp\common\Utils.cxx" />
+    <ClCompile Include="..\src\phreeqcpp\Dictionary.cpp" />
     <ClCompile Include="..\src\phreeqcpp\PhreeqcKeywords\Keywords.cpp" />
     <ClCompile Include="..\src\phreeqcpp\SelectedOutput.cpp" />
     <ClCompile Include="..\src\phreeqcpp\UserPunch.cpp" />
@@ -239,11 +247,8 @@
     <ClCompile Include="..\src\phreeqcpp\KineticsComp.cxx" />
     <ClCompile Include="..\src\phreeqcpp\NameDouble.cxx" />
     <ClCompile Include="..\src\phreeqcpp\NumKeyword.cxx" />
-    <ClCompile Include="..\src\phreeqcpp\Parser.cxx" />
     <ClCompile Include="..\src\phreeqcpp\PBasic.cpp" />
     <ClCompile Include="..\src\phreeqcpp\Phreeqc.cpp" />
-    <ClCompile Include="..\src\phreeqcpp\PHRQ_base.cxx" />
-    <ClCompile Include="..\src\phreeqcpp\PHRQ_io.cpp" />
     <ClCompile Include="..\src\phreeqcpp\PPassemblage.cxx" />
     <ClCompile Include="..\src\phreeqcpp\PPassemblageComp.cxx" />
     <ClCompile Include="..\src\phreeqcpp\Pressure.cxx" />
@@ -263,7 +268,6 @@
     <ClCompile Include="..\src\phreeqcpp\System.cxx" />
     <ClCompile Include="..\src\phreeqcpp\Temperature.cxx" />
     <ClCompile Include="..\src\phreeqcpp\Use.cpp" />
-    <ClCompile Include="..\src\phreeqcpp\Utils.cxx" />
     <ClCompile Include="..\src\phreeqcpp\advection.cpp" />
     <ClCompile Include="..\src\phreeqcpp\basicsubs.cpp" />
     <ClCompile Include="..\src\phreeqcpp\cl1.cpp" />
@@ -276,7 +280,6 @@
     <ClCompile Include="..\src\phreeqcpp\cvdense.cpp" />
     <ClCompile Include="..\src\phreeqcpp\cvode.cpp" />
     <ClCompile Include="..\src\phreeqcpp\dense.cpp" />
-    <ClCompile Include="..\src\phreeqcpp\dw.cpp" />
     <ClCompile Include="..\src\phreeqcpp\gases.cpp" />
     <ClCompile Include="..\src\phreeqcpp\input.cpp" />
     <ClCompile Include="..\src\phreeqcpp\integrate.cpp" />
