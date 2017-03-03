@@ -17,6 +17,7 @@ VERSION ?= 1.0
 
 DBS = \
 	Amm.ascii \
+	ColdChem.ascii \
 	ex15.ascii \
 	iso.ascii \
 	llnl.ascii \

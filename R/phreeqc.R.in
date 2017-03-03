@@ -1403,7 +1403,7 @@ NULL
 
 ##' @name Amm.dat
 ##' @title The Amm.dat database.
-##' @description Amm.dat is the same as phreeqc.dat, except that ammmonia redox
+##' @description Amm.dat is the same as phreeqc.dat, except that ammonia redox
 ##' state has been decoupled from the rest of the nitrogen system; that is,
 ##' ammonia has been defined as a separate component. The database has been
 ##' reformatted for use by \code{\link{phrLoadDatabaseString}}.
@@ -1412,6 +1412,21 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage Amm.dat  # phrLoadDatabaseString(Amm.dat)
+##' @keywords dataset 
+NULL
+
+
+
+##' @name ColdChem.dat
+##' @title The ColdChem.dat database.
+##' @description ColdChem.dat is a low-temperature thermodynamic model for the
+##' Na-K-Ca-Mg-Cl system incorporating new experimental heat capacities in
+##' KCl, MgCl2, and CaCl2 solutions. Jonathan D. Toner and David C. Catling
+##' The database has been reformatted for use by \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage ColdChem.dat  # phrLoadDatabaseString(ColdChem.dat)
 ##' @keywords dataset 
 NULL
 

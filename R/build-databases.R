@@ -1,5 +1,6 @@
 # databases
 ##Amm.dat.string       <- paste(scan("../database/Amm.dat",       what="", sep="\n"), collapse="\n")
+##ColdChem.dat.string  <- paste(scan("../database/ColdChem.dat",  what="", sep="\n"), collapse="\n")
 ##iso.dat.string       <- paste(scan("../database/iso.dat",       what="", sep="\n"), collapse="\n")
 ##llnl.dat.string      <- paste(scan("../database/llnl.dat",      what="", sep="\n"), collapse="\n")
 ##minteq.dat.string    <- paste(scan("../database/minteq.dat",    what="", sep="\n"), collapse="\n")
@@ -10,6 +11,7 @@
 ##wateq4f.dat.string   <- paste(scan("../database/wateq4f.dat",   what="", sep="\n"), collapse="\n")
 # lists
 Amm.dat         <- scan("Amm.ascii",       what="", sep="\n")
+ColdChem.dat    <- scan("ColdChem.ascii",  what="", sep="\n")
 ex15.dat        <- scan("ex15.ascii",      what="", sep="\n")
 iso.dat         <- scan("iso.ascii",       what="", sep="\n")
 llnl.dat        <- scan("llnl.ascii",      what="", sep="\n")
@@ -19,5 +21,5 @@ pitzer.dat      <- scan("pitzer.ascii",    what="", sep="\n")
 sit.dat         <- scan("sit.ascii",       what="", sep="\n")
 phreeqc.dat     <- scan("phreeqc.ascii",   what="", sep="\n")
 wateq4f.dat     <- scan("wateq4f.ascii",   what="", sep="\n")
-save(list = ls(all = TRUE), file = "phreeqc/data/databases.rda")
+save(list = ls(all = TRUE), file = "phreeqc/data/databases.rda", compress = "xz")
 rm(list = ls(all = TRUE))
