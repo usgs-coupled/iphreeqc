@@ -14,6 +14,10 @@ if [ -z "$VER" ]; then
  ver_patch=$((ver_patch+1))
  VER="${ver_major}.${ver_minor}.${ver_patch}"
 fi
+HEAD=`svn st -v configure.ac | awk '{print $1}')`
+if [ "$REL" = 'HEAD' ]; then
+ REL="$HEAD"
+fi
 # sed files
 /bin/sh jenkins-dist.sh -v ${VER} -r ${REL} -d ${DATE} -pr ${TAG}
 cd R
