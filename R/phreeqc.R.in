@@ -53,7 +53,7 @@ NULL
 ##' \code{\link{phrRunAccumulated}}.
 ##' 
 ##' @export phrAccumulateLine
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param line the line(s) to add for input to phreeqc.
 ##' @return NULL
 ##' @family Accumulate
@@ -96,7 +96,7 @@ function(line) {
 ##' calls to the \code{\link{phrAccumulateLine}} method.
 ##' 
 ##' @export phrClearAccumulatedLines
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return NULL
 ##' @family Accumulate
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -122,7 +122,7 @@ function() {
 ##' Returns the accumulated input as a character vector.
 ##' 
 ##' @export phrGetAccumulatedLines
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return A character vector containing the accumulated input.
 ##' @family Accumulate
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -143,7 +143,7 @@ function() {
 ##' Retrieve a list containing the current list of components.
 ##' 
 ##' @export phrGetComponentList
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return A list containing the names of the components defined in the current system.
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
@@ -169,7 +169,7 @@ function() {
 ##' specified within DUMP input. The default value is dump.0.out.
 ##' 
 ##' @export phrGetDumpFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return The name of the dump file as a string.
 ##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -206,7 +206,7 @@ function() {
 ##' vector.
 ##' 
 ##' @export phrGetDumpStrings
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return The dump output as a character vector.
 ##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -243,7 +243,7 @@ function() {
 ##' The error file switch must be set using the \code{\link{phrSetErrorFileOn}} function.
 ##' 
 ##' @export phrGetErrorFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return The name of the error file as a string.
 ##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -258,7 +258,7 @@ function() {
 ##' Retrieve the current value of the dump file switch.
 ##' 
 ##' @export phrGetDumpFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -273,7 +273,7 @@ function() {
 ##' Retrieve the current value of the dump strings switch.
 ##' 
 ##' @export phrGetDumpStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -288,7 +288,7 @@ function() {
 ##' Retrieve the current value of the error file switch.
 ##' 
 ##' @export phrGetErrorFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -303,7 +303,7 @@ function() {
 ##' Retrieve the current value of the error strings switch.
 ##' 
 ##' @export phrGetErrorStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -318,7 +318,7 @@ function() {
 ##' Retrieve the current value of the log file switch.
 ##' 
 ##' @export phrGetLogFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -333,7 +333,7 @@ function() {
 ##' Retrieve the current value of the log strings switch.
 ##' 
 ##' @export phrGetLogStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Log
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
@@ -348,7 +348,7 @@ function() {
 ##' Retrieve the current value of the output file switch.
 ##' 
 ##' @export phrGetOutputFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -363,7 +363,7 @@ function() {
 ##' Retrieve the current value of the output strings switch.
 ##' 
 ##' @export phrGetOutputStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -387,7 +387,7 @@ function() {
 ##' string is displayed when it occurs.
 ##' 
 ##' @export phrGetErrorStrings
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return The error messages as a character vector.
 ##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -410,7 +410,7 @@ function() {
 ##' Retrieves the name of the log file. The default name is phreeqc.0.log.
 ##' 
 ##' @export phrGetLogFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return The name of the log file as a string.
 ##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -436,7 +436,7 @@ function() {
 ##' Retrieves the string buffer containing phreeqc log output.
 ##' 
 ##' @export phrGetLogStrings
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return A character vector containing phreeqc log output.
 ##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -469,7 +469,7 @@ function() {
 ##' Retrieves the name of the output file. The default name is phreeqc.0.out.
 ##' 
 ##' @export
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return The name of the output file as a string.
 ##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -503,7 +503,7 @@ function() {
 ##' A NULL value is returned when there is no selected-output.
 ##' 
 ##' @export phrGetOutputStrings
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return A character vector containing phreeqc output.
 ##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -542,7 +542,7 @@ function() {
 ##' \code{\link{make.names}} and is used for backward compatibility.
 ##' 
 ##' @export phrGetSelectedOutput
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param allow_ used for compatibility with R prior to 1.9.0 (default is TRUE).
 ##' @return Returns a named list of data frames containing the selected_output from the previous run.
 ##' @family Selected Output
@@ -584,7 +584,7 @@ function(allow_ = TRUE) {
 ##' A NULL value is returned if there are no warnings.
 ##' 
 ##' @export phrGetWarningStrings
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return A character vector containing warning messages or NULL.
 ##' @family Warning
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
@@ -615,7 +615,7 @@ function() {
 ##' 
 ##' 
 ##' @export phrLoadDatabase
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param filename The name of the database file.
 ##' @return This function returns NULL.
 ##' @family Load Database
@@ -650,7 +650,7 @@ function(filename) {
 ##' All previous definitions are cleared.
 ##' 
 ##' @export phrLoadDatabaseString
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param input String containing data to be used as the phreeqc database.
 ##' @return This function returns NULL.
 ##' @family Load Database
@@ -686,7 +686,7 @@ function(input) {
 ##' \code{\link{phrLoadDatabase}} or \code{\link{phrLoadDatabaseString}}.
 ##' 
 ##' @export phrRunAccumulated
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @return This function returns NULL on success.
 ##' @family Accumulate
 ##' @family Run
@@ -732,7 +732,7 @@ function() {
 ##' phrRunFile executes a phreeqc run using a file as input
 ##' 
 ##' @export phrRunFile
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param filename The file name of the phreeqc input file.
 ##' @return This function returns NULL on success.
 ##' @family Run
@@ -769,7 +769,7 @@ function(filename) {
 ##' methods \code{\link{phrLoadDatabase}}, \code{\link{phrLoadDatabaseString}}.
 ##' 
 ##' @export phrRunString
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param input character vector containing phreeqc input
 ##' @return This function returns NULL on success.
 ##' @family Run
@@ -811,7 +811,7 @@ function(input) {
 ##' within the DUMP keyword block. The default value is dump.0.out.
 ##' 
 ##' @export phrSetDumpFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Dump
@@ -851,7 +851,7 @@ function(filename) {
 ##' not phreeqc writes to the dump file. The initial setting is off.
 ##' 
 ##' @export phrSetDumpFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, captures output normally sent to the dump file into a buffer.
 ##' @return NULL
 ##' @family Dump
@@ -891,7 +891,7 @@ function(value) {
 ##' retrieval. The initial setting is off.
 ##'
 ##' @export phrSetDumpStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
 ##' @family Dump
@@ -930,7 +930,7 @@ function(value) {
 ##' Sets the name of the error file. The default value is phreeqc.0.err.
 ##' 
 ##' @export phrSetErrorFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Error
@@ -967,7 +967,7 @@ function(filename) {
 ##' The try is necessary to keep the error message from displaying immediately.
 ##'
 ##' @export phrSetErrorFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, writes output to the the error file.
 ##' @return NULL
 ##' @family Error
@@ -998,7 +998,7 @@ function(value) {
 ##' The try is necessary to keep the error message from displaying immediately.
 ##' 
 ##' @export phrSetErrorStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
 ##' @family Error
@@ -1027,7 +1027,7 @@ function(value) {
 ##' option in order to receive any log messages.
 ##' 
 ##' @export phrSetLogFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Log
@@ -1068,7 +1068,7 @@ function(filename) {
 ##' option in order to receive an log messages.
 ##' 
 ##' @export phrSetLogFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, writes output to the the log file.
 ##' @return NULL
 ##' @family Log
@@ -1101,7 +1101,7 @@ function(value) {
 ##' retrieval. The initial setting is off.
 ##' 
 ##' @export phrSetLogStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, captures output normally sent to the log file into a buffer.
 ##' @return NULL
 ##' @family Log
@@ -1134,7 +1134,7 @@ function(value) {
 ##' The output file must be turned on using the \code{\link{phrSetOutputFileOn}} function.
 ##' 
 ##' @export phrSetOutputFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Output
@@ -1170,7 +1170,7 @@ function(filename) {
 ##' generated when phreeqc is run. The initial setting is off.
 ##' 
 ##' @export phrSetOutputFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, writes output to the the output file.
 ##' @return NULL
 ##' @family Output
@@ -1211,7 +1211,7 @@ function(value) {
 ##' \code{\link{phrRunString}}.
 ##'
 ##' @export phrSetOutputStringsOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param value if TRUE, captures output normally sent to the output file into a buffer.
 ##' @return NULL
 ##' @family Output
@@ -1246,7 +1246,7 @@ function(value) {
 ##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
 ##' 
 ##' @export phrGetSelectedOutputFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param nuser the user number specified in the SELECTED_OUTPUT block.
 ##' @return The name of the selected_output file as a string.
 ##' @family Selected Output
@@ -1289,7 +1289,7 @@ function(nuser) {
 ##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
 ##' 
 ##' @export phrSetSelectedOutputFileName
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param nuser the user number specified in the SELECTED_OUTPUT block.
 ##' @param filename the name of the selected_output file.
 ##' @return NULL
@@ -1333,7 +1333,7 @@ function(nuser, filename) {
 ##' generated when phreeqc is run. The initial setting is off.
 ##' 
 ##' @export phrSetSelectedOutputFileOn
-##' @useDynLib phreeqc
+##' @useDynLib phreeqc, .registration = TRUE
 ##' @param nuser the user number specified in the SELECTED_OUTPUT block.
 ##' @param value if TRUE, writes output to the the selected_output file.
 ##' @return NULL

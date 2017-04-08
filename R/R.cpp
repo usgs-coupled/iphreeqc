@@ -1071,4 +1071,20 @@ setSelectedOutputStringOn(SEXP nuser, SEXP value)
 }
 
 
+#include <R_ext/Rdynload.h>
+
+#define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
+
+const static R_CallMethodDef R_CallDef[] = {
+  CALLDEF(loadDB, 1),
+  CALLDEF(loadDBLst, 1),
+  {NULL, NULL, 0}
+};
+
+void R_init_phreeqc(DllInfo *dll)
+{
+  R_registerRoutines(dll, NULL, R_CallDef, NULL, NULL);
+  R_useDynamicSymbols(dll, FALSE);
+}
+
 } // extern "C"
