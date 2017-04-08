@@ -14,6 +14,8 @@ if [ -z "$VER" ]; then
  ver_patch=$((ver_patch+1))
  VER="${ver_major}.${ver_minor}.${ver_patch}"
 fi
+# sed files
+/bin/sh jenkins-dist.sh -v ${VER} -r ${REL} -d ${DATE} -pr ${TAG}
 cd R
 make VERSION=${VER} RELEASE_DATE=${DATE} build
 make VERSION=${VER} RELEASE_DATE=${DATE} check
