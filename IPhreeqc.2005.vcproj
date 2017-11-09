@@ -1936,7 +1936,8 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 			>
 			<File
-				RelativePath=".\src\phreeqcpp\Form1.resX"
+				RelativePath=".\src\phreeqcpp\Form1.2005.resX"
+				SubType="Designer"
 				>
 			</File>
 		</Filter>
