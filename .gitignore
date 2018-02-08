@@ -1,0 +1,209 @@
+
+# /
+/All.2005.ncb
+/All.2005.suo
+/Debug
+/DebugCLR
+/DebugDll
+/IPhreeqc.MMS.vcxproj.user
+/IPhreeqc.vcxproj.user
+/Makefile.in
+/Release
+/ReleaseCLR
+/ReleaseDll
+/_vs2008-64
+/clr
+/clrx64
+/configure
+/dll
+/dllx64
+/lib
+/libx64
+/x64
+
+# /R/
+/R/Amm.ascii
+/R/iso.ascii
+/R/llnl.ascii
+/R/minteq.ascii
+/R/minteq.v4.ascii
+/R/phreeqc.ascii
+/R/pitzer.ascii
+/R/sit.ascii
+/R/wateq4f.ascii
+/R/phreeqc.Rcheck
+/R/build-databases.Rout
+/R/build-examples.Rout
+/R/.RData
+
+# /R/phreeqc/
+/R/phreeqc/NAMESPACE
+
+# /R/phreeqc/data/
+/R/phreeqc/data/csv.RData
+/R/phreeqc/data/databases.RData
+/R/phreeqc/data/examples.RData
+
+# /R/phreeqc/man/
+/R/phreeqc/man/*.Rd
+
+# /R/phreeqc/src/
+/R/phreeqc/src/Makevars
+/R/phreeqc/src/*.c
+/R/phreeqc/src/*.cpp
+/R/phreeqc/src/*.h
+/R/phreeqc/src/*.hpp
+/R/phreeqc/src/*.hxx
+/R/phreeqc/src/phreeqc.dll
+/R/phreeqc/src/symbols.rds
+
+# /R/phreeqc/src/phreeqcpp/
+/R/phreeqc/src/phreeqcpp/*.cpp
+/R/phreeqc/src/phreeqcpp/*.h
+
+# /all/
+/all/advect.u2d
+
+# /all/c/
+/all/c/Debug
+/all/c/DebugCLR
+/all/c/DebugDll
+/all/c/Release
+/all/c/ReleaseCLR
+/all/c/ReleaseDll
+/all/c/x64
+
+# /all/fortran/
+/all/fortran/Debug
+/all/fortran/DebugCLR
+/all/fortran/DebugDll
+/all/fortran/Release
+/all/fortran/ReleaseCLR
+/all/fortran/ReleaseDll
+/all/fortran/advect.u2d
+/all/fortran/x64
+
+# /build/
+/build/*.bz2
+/build/*.gz
+/build/*.log
+/build/*.tstamp
+
+# /doc/
+/doc/IPhreeqc.chm
+/doc/html
+/doc/latex
+
+# /examples/
+/examples/Makefile.in
+
+# /memory_leak_f/
+/memory_leak_f/Debug
+/memory_leak_f/memory_leak_f.u2d
+/memory_leak_f/phreeqc.0.err
+/memory_leak_f/phreeqc.0.log
+/memory_leak_f/phreeqc.0.out
+/memory_leak_f/Release
+/memory_leak_f/selected.0.out
+/memory_leak_f/test_memory_leak.log
+
+# /packages/
+/packages/dist*.log
+/packages/IPhreeqc-*.tar.gz
+/packages/history
+
+# /packages/configure/
+/packages/configure/iphreeqc-*.tar.gz
+
+# /src/
+/src/Makefile.in
+/src/.deps
+/src/.dirstamp
+
+# /test/
+/test/Debug
+/test/DebugDll
+/test/MemDebug
+/test/Profile
+/test/Release
+/test/ReleaseDll
+/test/kinn
+/test/kinn.exe
+/test/phreeqc.err
+/test/phreeqc.log
+/test/phreeqc.out
+/test/selected.out
+/test/test.dep
+/test/test.mak
+/test/test.ncb
+/test/test.opt
+/test/test.plg
+
+# /test2/
+/test2/Debug
+/test2/DebugDll
+/test2/MemDebug
+/test2/Profile
+/test2/Release
+/test2/ReleaseDll
+/test2/error.inp
+/test2/phreeqc.err
+/test2/phreeqc.log
+/test2/phreeqc.out
+/test2/test2.dep
+/test2/test2.exe
+/test2/test2.mak
+/test2/test2.ncb
+/test2/test2.opt
+/test2/test2.plg
+
+# /test_ieee/
+/test_ieee/Debug
+/test_ieee/Release
+/test_ieee/phreeqc.0.err
+/test_ieee/phreeqc.0.log
+/test_ieee/phreeqc.0.out
+/test_ieee/selected.0.out
+/test_ieee/vc100.pdb
+/test_ieee/x64
+
+# /testcpp/
+/testcpp/Debug
+/testcpp/DebugDll
+/testcpp/Release
+/testcpp/ReleaseDll
+
+# /tests/
+/tests/ex2
+/tests/phreeqc.dat
+/tests/Makefile.in
+/tests/Debug
+/tests/DebugCLR
+/tests/DebugDll
+/tests/Release
+/tests/ReleaseCLR
+/tests/ReleaseDll
+/tests/test_f.u2d
+/tests/test_f90.u2d
+/tests/x64
+
+# /unit/
+/unit/*.err
+/unit/*.log
+/unit/*.out
+/unit/.deps
+/unit/Debug
+/unit/MemDebug
+/unit/Profile
+/unit/Release
+/unit/error.inp
+/unit/unit
+/unit/unit.2005.ncb
+/unit/unit.2005.suo
+/unit/unit.dep
+/unit/unit.exe
+/unit/unit.mak
+/unit/unit.ncb
+/unit/unit.opt
+/unit/unit.plg
+/unit/x64
