@@ -137,11 +137,11 @@ void TestIPhreeqcLib::TestLoadDatabase(void)
 {
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
-
-	std::string FILES[] = {"../database/phreeqc.dat", "../database/pitzer.dat", "../database/wateq4f.dat",
+	std::string FILES[] = { "../database/phreeqc.dat", "../database/pitzer.dat", "../database/wateq4f.dat",
 		"../database/Amm.dat", "../database/frezchem.dat", "../database/iso.dat",
 		"../database/llnl.dat", "../database/minteq.dat", "../database/minteq.v4.dat",
-		"../database/sit.dat"
+		"../database/sit.dat","../database/ColdChem.dat","../database/core10.dat",
+		"../database/Tipping_Hurley.dat"
 	};
 	for (int j = 0; j < sizeof(FILES)/sizeof(std::string); ++j)
 	{
