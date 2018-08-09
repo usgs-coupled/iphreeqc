@@ -33,7 +33,7 @@ ex18  <- scan("../phreeqc3-examples/ex18",  what="", sep="\n")
 ex19  <- scan("../phreeqc3-examples/ex19",  what="", sep="\n")
 ex20a <- scan("../phreeqc3-examples/ex20a", what="", sep="\n")
 ex20b <- scan("../phreeqc3-examples/ex20b", what="", sep="\n")
-ex21  <- scan("../phreeqc3-examples/ex21",  what="", sep="\n")
+ex21  <- scan("ex21.ascii",                 what="", sep="\n")
 ex22  <- scan("../phreeqc3-examples/ex22",  what="", sep="\n")
 
 save(list = ls(all=TRUE), file="phreeqc/data/examples.rda")
