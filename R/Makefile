@@ -37,7 +37,23 @@ EXS = \
 	$(EXDIR)/ex6 \
 	$(EXDIR)/ex7 \
 	$(EXDIR)/ex8 \
-	$(EXDIR)/ex9
+	$(EXDIR)/ex9 \
+	$(EXDIR)/ex10 \
+	$(EXDIR)/ex11 \
+	$(EXDIR)/ex12 \
+	$(EXDIR)/ex13a \
+	$(EXDIR)/ex13b \
+	$(EXDIR)/ex13c \
+	$(EXDIR)/ex14 \
+	$(EXDIR)/ex15 \
+	$(EXDIR)/ex16 \
+	$(EXDIR)/ex17 \
+	$(EXDIR)/ex18 \
+	$(EXDIR)/ex19 \
+	$(EXDIR)/ex20a \
+	$(EXDIR)/ex20b \
+	ex21.ascii \
+	$(EXDIR)/ex22
 
 RDFILES = \
 	$(MAN)/phrAccumulateLine.Rd \
