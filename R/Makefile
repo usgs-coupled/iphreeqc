@@ -250,6 +250,9 @@ $(DATADIR)/databases.rda : $(DBS) build-databases.R
 ex15.ascii : $(EXDIR)/ex15.dat
 	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
 
+ex21.ascii : $(EXDIR)/ex21
+	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
+
 %.ascii : $(DBDIR)/%.dat
 	perl -pe 's/[^[:ascii:]]/?/g' $< > $@
 
