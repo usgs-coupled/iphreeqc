@@ -225,7 +225,7 @@ do
      -e "/#define *VER_MINOR/s/[0-9]\+/$ver_minor/" \
      -e "/#define *VER_PATCH/s/[0-9]\+/$ver_patch/" \
      -e "/#define *VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
-     -e "/#define *GIT_COMMIT/s/[0-9a-f]\{40}/$GIT_COMMIT/" \
+     -e "/#define *GIT_COMMIT/s/[0-9a-f]\{40\}/$GIT_COMMIT/" \
      -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
      -e "s/@PHREEQC_VER@/$VER/g" \
      -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
