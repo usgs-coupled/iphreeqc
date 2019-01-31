@@ -14,8 +14,8 @@ if [ -z "$VER" ]; then
  ver_patch=$((ver_patch+1))
  VER="${ver_major}.${ver_minor}.${ver_patch}"
 fi
-HEAD=`svn st -v configure.ac | awk '{print $1}')`
 if [ "$REL" = 'HEAD' ]; then
+ HEAD=`svn st -v configure.ac | awk '{print $1}')`
  REL="$HEAD"
 fi
 export VER
