@@ -1,4 +1,86 @@
 Version @PHREEQC_VER@: @PHREEQC_DATE@
+
+ 	-----------------
+	May 31, 2019
+	-----------------
+	
+	PHREEQC: A new option for TRANSPORT invokes an implicit method for 
+	multicomponent diffusion-only systems. In multicomponent diffusion, 
+	each aqueous species diffuses according to its individual diffusion 
+	coefficient. The new method allows greater time steps and thus speeds 
+	the overall calculation. There is one parameter for the implicit 	
+	method, which is the maximum mixing factor (max_mixf) that is allowed, 
+	max_mixf = D * delta_t / delta_x^2. The default value of max_mixf = 1, 
+	but it can be increased often to > 4 (depending on the required 
+	accuracy and the chemistry of the system), with possible speedups of 
+	about an order of magnitude relative to the default method. If max_mixf 
+	is too large, calculations may not converge. With implicit true, 
+	electro-migration calculations are more stable and usually (possibly) 
+	avoid disturbing warnings of 'negative moles'. The implicit 
+	calculations 	have been implemented for a regular (equally spaced) 
+	column, not for stagnant cells, and not for interlayer diffusion. 	
+	
+	TRANSPORT
+	-implicit true 2.0
+	
+	The activity-coefficient effect for multicomponent diffusion was 
+	modified, previous versions could give an erroneously large correction.
+
+	The column boundary cells 0 and count_cells + 1 are now 
+	print-/punched by default when the boundary conditions are not 
+	'closed'.
+
+ 	-----------------
+	May 7, 2019
+	-----------------
+	
+	PHREEQC: Added Alkalinity to iso.dat. Added error message if Alkalinity is
+	missing for inverse modeling.
+
+ 	-----------------
+	February 4, 2019
+	-----------------
+	
+	PHREEQC: Fixed bug in MIX_GAS_PHASE. Formula for mixing pressures was incorrect.
+	
+ 	-----------------
+	February 4, 2019
+	-----------------
+	PHREEQC: A series of new keyword data blocks are available to mix reactants. Input
+	is parallel to the input for the keyword MIX, which is a series of user number and
+	fraction pairs. Mixtures can be formed of solutions, exchangers, equilibrium_phases, 
+	gas phases, kinetic reactions, solid solutions, and surfaces. 	Synonyms of keywords 
+	are in parentheses.
+
+	SOLUTION_MIX           (MIX_SOLUTION)
+	EXCHANGE_MIX           (MIX_EXCHANGE)
+	EQUILIBRIUM_PHASES_MIX (MIX_EQUILIBRIUM_PHASES, EQUILIBRIUM_PHASE_MIX, MIX_EQUILIBRIUM_PHASE)
+	GAS_PHASE_MIX          (MIX_GAS_PHASE)
+	KINETICS_MIX           (MIX_KINETICS)
+	SOLID_SOLUTIONS_MIX    (MIX_SOLID_SOLUTIONS, SOLID_SOLUTIONS_MIX, MIX_SOLID_SOLUTION)
+	SURFACE_MIX            (MIX_SURFACE) 
+	
+	These _MIX keywords do not invoke any type of speciation or reaction calculation 
+	and mostly involve a summation of moles of the various reactants. Thus, MIX differs 
+	from SOLUTION_MIX in that MIX produces a reaction calculation and a distribution of 
+	species, whereas SOLUTION_MIX does not. The final events of a simulation occur in the 
+	order of RUN_CELLS, _MIX, COPY, DUMP, and DELETE. 
+	
+	Here is an example of SOLUTION_MIX, which creates a mixture of previously defined 
+	solutions: 
+	
+	SOLUTION_MIX 2-4 # new solutions 2, 3 and 4: 
+    1 0.5      # solution number, fraction 
+    4 1.5      # solution number, fraction 
+    6 0.3      # etc. 
+
+ 	-----------------
+	January 31, 2019
+	-----------------
+	
+	PHREEQC: Revised numerical method for solid solutions to respond better to
+	KNOBS -step and -pe_step convergence parameters.
+	
  	-----------------
 	January 28, 2019
 	-----------------
