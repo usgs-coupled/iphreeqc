@@ -1500,7 +1500,7 @@ NULL
 ##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @usage pitzer  # phrLoadDatabaseString(pitzer.dat)
+##' @usage pitzer.dat  # phrLoadDatabaseString(pitzer.dat)
 ##' @keywords dataset 
 NULL
 
@@ -1756,6 +1756,8 @@ NULL
 ##' phrSetSelectedOutputFileOn(1, TRUE)
 ##' phrRunString(ex8)
 ##' phrGetOutputStrings()
+##' # cleanup
+##' unlink(c("Zn1e_7", "Zn1e_4"))ls
 ##' 
 NULL
 
