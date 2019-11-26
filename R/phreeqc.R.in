@@ -1757,7 +1757,7 @@ NULL
 ##' phrRunString(ex8)
 ##' phrGetOutputStrings()
 ##' # cleanup
-##' unlink(c("Zn1e_7", "Zn1e_4"))ls
+##' unlink(c("Zn1e_7", "Zn1e_4"))
 ##' 
 NULL
 
