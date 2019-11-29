@@ -79,6 +79,7 @@ NULL
 ##' phrAccumulateLine("        -si     anhydrite  gypsum")
 ##' phrAccumulateLine("END")
 ##' phrSetOutputFileOn(TRUE)
+##' phrSetOutputFileName(file.path(tempdir(), "ex2.output"))
 ##' if (is.null(phrRunAccumulated())) {
 ##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep = ""))
 ##' }
@@ -177,6 +178,7 @@ function() {
 ##' 
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetDumpFileOn(TRUE)
+##' phrSetDumpFileName(file.path(tempdir(), "dump.out"))
 ##' 
 ##' input <-              "SOLUTION 1 Pure water     \n"
 ##' input <- paste(input, "EQUILIBRIUM_PHASES 1      \n")
@@ -190,7 +192,7 @@ function() {
 ##' if (!is.null(phrRunString(input))) {
 ##'   cat(phrGetErrorStrings())
 ##' }
-##' cat(paste("see ", phrGetDumpFileName(), "."))
+##' cat(paste("see ", phrGetDumpFileName(), ".\n", sep = ""))
 ##' 
 ##' 
 phrGetDumpFileName <-
@@ -259,7 +261,7 @@ function() {
 ##' 
 ##' @export phrGetDumpFileOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if output as defined by the DUMP data block are currently being written to file.
 ##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
@@ -274,7 +276,7 @@ function() {
 ##' 
 ##' @export phrGetDumpStringsOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if output as defined by the DUMP data block are currently being stored as a character vector.
 ##' @family Dump
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
@@ -289,7 +291,7 @@ function() {
 ##' 
 ##' @export phrGetErrorFileOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if error messages are currently being written to file.
 ##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
@@ -304,7 +306,7 @@ function() {
 ##' 
 ##' @export phrGetErrorStringsOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if error messages are currently being stored as a character vector.
 ##' @family Error
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
@@ -319,7 +321,7 @@ function() {
 ##' 
 ##' @export phrGetLogFileOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if log messages are currently being written to file.
 ##' @family Log
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
@@ -334,7 +336,7 @@ function() {
 ##' 
 ##' @export phrGetLogStringsOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if log messages are currently being stored as a character vector.
 ##' @family Log
 ##' @references \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' 
@@ -349,7 +351,7 @@ function() {
 ##' 
 ##' @export phrGetOutputFileOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if output messages are currently being written to file.
 ##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
@@ -364,7 +366,7 @@ function() {
 ##' 
 ##' @export phrGetOutputStringsOn
 ##' @useDynLib phreeqc, .registration = TRUE
-##' @return TRUE if errors are currently being written to file.
+##' @return TRUE if output messages are currently being stored as a character vector.
 ##' @family Output
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' 
@@ -444,7 +446,7 @@ function() {
 ##' 
 ##' # This example equilibrates pure water with gypsum with the output file on.
 ##' phrLoadDatabaseString(phreeqc.dat)
-##' phrSetOutputFileOn(TRUE)
+##' phrSetLogStringsOn(TRUE)
 ##'
 ##' input <- vector(mode="character")
 ##' input <- c(input, "SOLUTION 1 Pure water ")
@@ -468,7 +470,7 @@ function() {
 ##' 
 ##' Retrieves the name of the output file. The default name is phreeqc.0.out.
 ##' 
-##' @export
+##' @export phrGetOutputFileName
 ##' @useDynLib phreeqc, .registration = TRUE
 ##' @return The name of the output file as a string.
 ##' @family Output
@@ -478,6 +480,7 @@ function() {
 ##' # This example equilibrates pure water with gypsum with the output file on.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetOutputFileOn(TRUE)
+##' phrSetOutputFileName(file.path(tempdir(), "gypsum.out"))
 ##'
 ##' input <- vector(mode="character")
 ##' input <- c(input, "SOLUTION 1 Pure water ")
@@ -662,6 +665,7 @@ function(filename) {
 ##' # output file and runs ex2 as a string
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetOutputFileOn(TRUE)
+##' phrSetOutputFileName(file.path(tempdir(), "ex2.load-database.out"))
 ##' if (is.null(phrRunString(ex2))) {
 ##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep = ""))
 ##' }
@@ -695,6 +699,7 @@ function(input) {
 ##' 
 ##' # turn on the output file
 ##' phrSetOutputFileOn(TRUE)
+##' phrSetOutputFileName(file.path(tempdir(), "ex2.out"))
 ##' 
 ##' # load the phreeqc.dat database
 ##' phrLoadDatabaseString(phreeqc.dat)
@@ -747,7 +752,7 @@ function() {
 ##' 
 ##' # run ex2
 ##' if (is.null(phrRunFile("ex2"))) {
-##'   cat("use phrGetSelectedOutput() to see results.")
+##'   cat("use phrGetSelectedOutput() to see results.\n")
 ##' }
 ##'
 ##' unlink("ex2")  # tidy up
@@ -793,10 +798,11 @@ function(filename) {
 ##'
 ##' # turn on output
 ##' phrSetOutputFileOn(TRUE)
+##' phrSetOutputFileName(file.path(tempdir(), "pure_water.out"))
 ##'
 ##' # run input
 ##' phrRunString(input)
-##' cat(paste("see", phrGetOutputFileName(), "."))
+##' cat(paste("see ", phrGetOutputFileName(), ".\n", sep=""))
 ##' 
 phrRunString <-
 function(input) {
@@ -822,7 +828,7 @@ function(input) {
 ##' # dump results to file.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetDumpFileOn(TRUE)
-##' phrSetDumpFileName("phreeqc.dump")
+##' phrSetDumpFileName(file.path(tempdir(), "phreeqc.dump"))
 ##' input <- c( 
 ##'   'SOLUTION 1 Pure water     ',
 ##'   'EQUILIBRIUM_PHASES 1      ',
@@ -835,7 +841,7 @@ function(input) {
 ##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetDumpFileName(), "\n")
+##'   cat(paste("see ", phrGetDumpFileName(), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetDumpFileName <-
@@ -874,7 +880,7 @@ function(filename) {
 ##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetDumpFileName(), "\n")
+##'   cat(paste("see ", phrGetDumpFileName(), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetDumpFileOn <-
@@ -937,11 +943,10 @@ function(value) {
 ##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
 ##' @examples
 ##'
-##' # This example equilibrates pure water with calcite and displays
-##' # the log file name.
-##' phrLoadDatabaseString(phreeqc.dat)
-##' phrSetLogFileOn(TRUE)
-##' phrSetLogFileName("phreeqc.log")
+##' # This example attempts to run a input string, fails and writes
+##' # the error message to the error file (no database is loaded).
+##' phrSetErrorFileOn(TRUE)
+##' phrSetErrorFileName(file.path(tempdir(), "phreeqc.errors"))
 ##' input <- c( 
 ##'   'SOLUTION 1 Pure water ',
 ##'   'EQUILIBRIUM_PHASES 1  ',
@@ -949,7 +954,7 @@ function(value) {
 ##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetErrorFileName(), "\n")
+##'   cat(paste("see ", phrGetErrorFileName(), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetErrorFileName <-
@@ -977,9 +982,9 @@ function(filename) {
 ##' # This example attempts to run ex1, fails, and writes the error
 ##' # message to the error file (no database is loaded).
 ##' phrSetErrorFileOn(TRUE)
-##' phrSetErrorFileName("phreeqc.errors")
+##' phrSetErrorFileName(file.path(tempdir(), "phreeqc.errors"))
 ##' if (!is.null(try(phrRunString(ex1), silent=TRUE))) {
-##'   cat("see", phrGetErrorFileName(), "\n")
+##'   cat(paste("see ", phrGetErrorFileName(), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetErrorFileOn <-
@@ -1038,7 +1043,7 @@ function(value) {
 ##' # the log file name.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetLogFileOn(TRUE)
-##' phrSetLogFileName("phreeqc.log")
+##' phrSetLogFileName(file.path(tempdir(), "phreeqc.log"))
 ##' input <- c( 
 ##'   'SOLUTION 1 Pure water ',
 ##'   'EQUILIBRIUM_PHASES 1  ',
@@ -1048,7 +1053,7 @@ function(value) {
 ##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetLogFileName(), "\n")
+##'   cat(paste("see ", phrGetLogFileName(), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetLogFileName <-
@@ -1077,14 +1082,15 @@ function(filename) {
 ##' 
 ##' # This example runs ex2 with the log file turned on.
 ##' phrLoadDatabaseString(phreeqc.dat)
-##' phrSetLogStringsOn(TRUE)
+##' phrSetLogFileOn(TRUE)
+##' phrSetLogFileName(file.path(tempdir(), "ex2.log"))
 ##'
 ##' # turn logging on
 ##' phrAccumulateLine("KNOBS; -logfile true")
 ##' phrRunAccumulated()
 ##' 
 ##' if (is.null(phrRunString(ex2))) {
-##'   cat("see", phrGetLogFileName(), "\n")
+##'   cat(paste("see ", phrGetLogFileName(), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetLogFileOn <-
@@ -1145,7 +1151,7 @@ function(value) {
 ##' # the resulting file name.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetOutputFileOn(TRUE)
-##' phrSetOutputFileName("phreeqc.output")
+##' phrSetOutputFileName(file.path(tempdir(), "calcite.out"))
 ##' input <- c( 
 ##'   'SOLUTION 1 Pure water ',
 ##'   'EQUILIBRIUM_PHASES 1  ',
@@ -1153,7 +1159,7 @@ function(value) {
 ##'   )
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetOutputFileName(), "\n")
+##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetOutputFileName <-
@@ -1186,8 +1192,9 @@ function(filename) {
 ##' # load database and run input file
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetOutputFileOn(TRUE)
+##' phrSetOutputFileName(file.path(tempdir(), "ex2.out"))
 ##' if (is.null(phrRunFile(tf))) {
-##'   cat("see", phrGetOutputFileName(), "\n")
+##'   cat(paste("see ", phrGetOutputFileName(), ".\n", sep = ""))
 ##' }
 ##'
 ##' # delete temporary input file
@@ -1257,7 +1264,7 @@ function(value) {
 ##' # and displays the name of the selected_output file.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetSelectedOutputFileOn(1, TRUE)
-##' phrSetSelectedOutputFileName(1, "ex2.sel")
+##' phrSetSelectedOutputFileName(1, file.path(tempdir(), "ex2.sel"))
 ##'
 ##' input <- c( 
 ##'   'SOLUTION 1 Pure water     ',
@@ -1272,7 +1279,7 @@ function(value) {
 ##' 
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetSelectedOutputFileName(1))
+##'   cat(paste("see ", phrGetSelectedOutputFileName(1), ".\n", sep = ""))
 ##' }
 ##' 
 phrGetSelectedOutputFileName <-
@@ -1301,7 +1308,7 @@ function(nuser) {
 ##' # and displays the name of the selected_output file.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetSelectedOutputFileOn(1, TRUE)
-##' phrSetSelectedOutputFileName(1, "ex2.sel")
+##' phrSetSelectedOutputFileName(1, file.path(tempdir(), "ex2.sel"))
 ##'
 ##' input <- c( 
 ##'   'SOLUTION 1 Pure water     ',
@@ -1316,7 +1323,7 @@ function(nuser) {
 ##' 
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetSelectedOutputFileName(1))
+##'   cat(paste("see ", phrGetSelectedOutputFileName(1), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetSelectedOutputFileName <-
@@ -1345,7 +1352,7 @@ function(nuser, filename) {
 ##' # and displays the name of the selected_output file.
 ##' phrLoadDatabaseString(phreeqc.dat)
 ##' phrSetSelectedOutputFileOn(1, TRUE)
-##' phrSetSelectedOutputFileName(1, "ex2.sel")
+##' phrSetSelectedOutputFileName(1, file.path(tempdir(), "ex2.sel"))
 ##'
 ##' input <- c( 
 ##'   'SOLUTION 1 Pure water     ',
@@ -1360,7 +1367,7 @@ function(nuser, filename) {
 ##' 
 ##' 
 ##' if (is.null(phrRunString(input))) {
-##'   cat("see", phrGetSelectedOutputFileName(1))
+##'   cat(paste("see ", phrGetSelectedOutputFileName(1), ".\n", sep = ""))
 ##' }
 ##' 
 phrSetSelectedOutputFileOn <-
@@ -1757,7 +1764,7 @@ NULL
 ##' phrRunString(ex8)
 ##' phrGetOutputStrings()
 ##' # cleanup
-##' unlink(c("Zn1e_7", "Zn1e_4"))
+##' unlink(c("ex8.sel", "Zn1e_7", "Zn1e_4"))
 ##' 
 NULL
 
