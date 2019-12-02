@@ -1,6 +1,10 @@
 # project
 project(example_advect_c C)
 
+configure_file(phreeqc.dat phreeqc.dat COPYONLY)
+
+configure_file(ic ic COPYONLY)
+
 # files
 SET(C_Advect_Files
 advect.c

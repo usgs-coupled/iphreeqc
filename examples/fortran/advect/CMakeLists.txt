@@ -1,6 +1,10 @@
 # project
 if (IPHREEQC_FORTRAN_TESTING AND IPHREEQC_ENABLE_MODULE)
   project(example_advect_f90 Fortran)
+
+  configure_file(phreeqc.dat phreeqc.dat COPYONLY)
+
+  configure_file(ic ic COPYONLY)  
 endif()
 
 # files
