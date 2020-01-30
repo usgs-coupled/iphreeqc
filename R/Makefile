@@ -20,7 +20,7 @@ DBS = \
 	ColdChem.ascii \
 	core10.ascii \
 	ex15.ascii \
-	frezchem.dat \
+	frezchem.ascii \
 	iso.ascii \
 	llnl.ascii \
 	minteq.ascii \
