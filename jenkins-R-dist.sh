@@ -15,15 +15,19 @@ if [ -z "$VER" ]; then
  VER="${ver_major}.${ver_minor}.${ver_patch}"
 fi
 if [ "$REL" = 'HEAD' ]; then
- HEAD=`svn st -v configure.ac | awk '{print $1}')`
+ HEAD=13021
  REL="$HEAD"
+fi
+if [ -z "$REL" ]; then
+ REL=13021
 fi
 export VER
 # sed files
 /bin/sh jenkins-dist.sh -v ${VER} -r ${REL} -d ${DATE} -pr ${TAG}
 cd R
+mkdir -p phreeqc/man
+mkdir -p phreeqc/src/phreeqcpp
+mkdir -p phreeqc/R
+mkdir -p phreeqc/data
 make VERSION=${VER} RELEASE_DATE=${DATE} build
 make VERSION=${VER} RELEASE_DATE=${DATE} check
-
-
-

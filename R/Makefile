@@ -18,14 +18,17 @@ VERSION ?= 1.0
 DBS = \
 	Amm.ascii \
 	ColdChem.ascii \
+	core10.ascii \
 	ex15.ascii \
+	frezchem.ascii \
 	iso.ascii \
 	llnl.ascii \
 	minteq.ascii \
 	minteq.v4.ascii \
+	phreeqc.ascii \
 	pitzer.ascii \
 	sit.ascii \
-	phreeqc.ascii \
+	Tipping_Hurley.ascii \
 	wateq4f.ascii
 
 EXS = \

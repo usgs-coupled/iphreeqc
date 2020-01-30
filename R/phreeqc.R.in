@@ -1388,7 +1388,7 @@ function(nuser, value) {
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage phreeqc.dat  # phrLoadDatabaseString(phreeqc.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1403,7 +1403,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage ex15.dat  # phrLoadDatabaseString(ex15.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1419,7 +1419,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage Amm.dat  # phrLoadDatabaseString(Amm.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1434,7 +1434,53 @@ NULL
 ##' @family Databases
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage ColdChem.dat  # phrLoadDatabaseString(ColdChem.dat)
-##' @keywords dataset 
+##' @keywords dataset
+NULL
+
+
+
+##' @name core10.dat
+##' @title The core10.dat database
+##' @description core10.dat is a database derived from phreeqc.dat and
+##' llnl.dat, with careful data checking, use of SUPCRT for temperature
+##' dependence, and addition of molar volumes for pressure dependence.
+##' Contributed by Marc Neveu. The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @references \url{https://dx.doi.org/10.1016/j.gca.2017.06.023}
+##' @source \url{https://github.com/MarcNeveu/IcyDwarf/blob/master/IcyDwarf/PHREEQC-3.1.2/core10.dat}
+##' @usage core10.dat  # phrLoadDatabaseString(core10.dat)
+##' @keywords dataset
+NULL
+
+
+
+##' @name Tipping_Hurley.dat
+##' @title The Tipping_Hurley.dat database
+##' @description Tipping_Hurley.dat is a database for organic-ligand
+##' binding approximating WHAM by Tipping and Hurley.
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @usage Tipping_Hurley.dat  # phrLoadDatabaseString(Tipping_Hurley.dat)
+##' @keywords dataset
+NULL
+
+
+
+##' @name frezchem.dat
+##' @title The frezchem.dat database
+##' @description frezchem.dat is a database from Jonathon Toner and the
+##' developers for the frezchem code (Toner and Sletten (2013), Marion
+##' and coworkers). Frezchem is a Pitzer model for temperatures of 0 C
+##' and below.
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @references \url{http://www.dri.edu/frezchem}
+##' @usage frezchem.dat  # phrLoadDatabaseString(frezchem.dat)
+##' @keywords dataset
 NULL
 
 
@@ -1448,7 +1494,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage wateq4f.dat  # phrLoadDatabaseString(wateq4f.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1463,7 +1509,7 @@ NULL
 ##' @family Databases
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @usage llnl.dat  # phrLoadDatabaseString(llnl.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1478,7 +1524,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage minteq.dat  # phrLoadDatabaseString(minteq.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1493,7 +1539,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage minteq.v4.dat  # phrLoadDatabaseString(minteq.v4.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1508,7 +1554,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage pitzer.dat  # phrLoadDatabaseString(pitzer.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1524,7 +1570,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage sit.dat  # phrLoadDatabaseString(sit.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
@@ -1540,7 +1586,7 @@ NULL
 ##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage iso.dat  # phrLoadDatabaseString(iso.dat)
-##' @keywords dataset 
+##' @keywords dataset
 NULL
 
 
