@@ -11,7 +11,7 @@ citEntry(entry="Manual",
          volume       = "book 6",
          chapter      = "A43",
          pages        = "497",
-         url          = "http://pubs.usgs.gov/tm/06/a43",
+         url          = "https://pubs.usgs.gov/tm/06/a43",
 
 	 textVersion  =
          paste("Parkhurst, D.L., and Appelo, C.A.J., 2013, Description of",
@@ -20,7 +20,7 @@ citEntry(entry="Manual",
                "transport, and inverse geochemical calculations: U.S.",
                "Geological Survey Techniques and Methods, book 6, chap.",
                "A43, 497 p., available only at",
-               "http://pubs.usgs.gov/tm/06/a43.")
+               "https://pubs.usgs.gov/tm/06/a43.")
 )
 
 

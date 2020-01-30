@@ -8,7 +8,7 @@ Depends:
 Author: S.R. Charlton, D.L. Parkhurst, and C.A.J. Appelo, with contributions  
     from D. Gillespie for Chipmunk BASIC and S.D. Cohen, A.C. Hindmarsh,  
     R. Serban, D. Shumaker, and A.G. Taylor for CVODE/SUNDIALS
-URL: http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc
+URL: https://www.usgs.gov/software/phreeqc-version-3
 Description: A geochemical modeling program developed by the US Geological
     Survey that is designed to perform a wide variety of aqueous geochemical
     calculations, including speciation, batch-reaction, one-dimensional 
