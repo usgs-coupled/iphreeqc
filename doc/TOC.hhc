@@ -10,12 +10,16 @@
 <UL>
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Classes">
-		<param name="Local" value="html\annotated.html">
+		<param name="Local" value="html\index.html">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="IPhreeqc Class Reference">
 			<param name="Local" value="html\classIPhreeqc.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="IPhreeqcStop Class Reference">
+			<param name="Local" value="html\classIPhreeqcStop.html">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
