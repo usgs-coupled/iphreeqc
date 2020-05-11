@@ -1478,7 +1478,6 @@ NULL
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://www.dri.edu/frezchem}
 ##' @usage frezchem.dat  # phrLoadDatabaseString(frezchem.dat)
 ##' @keywords dataset
 NULL
