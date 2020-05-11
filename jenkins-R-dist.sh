@@ -30,4 +30,4 @@ mkdir -p phreeqc/src/phreeqcpp
 mkdir -p phreeqc/R
 mkdir -p phreeqc/data
 make VERSION=${VER} RELEASE_DATE=${DATE} build
-make VERSION=${VER} RELEASE_DATE=${DATE} check
+##make VERSION=${VER} RELEASE_DATE=${DATE} check
