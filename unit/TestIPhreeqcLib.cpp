@@ -2394,7 +2394,7 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	int n = ::CreateIPhreeqc();
 	CPPUNIT_ASSERT(n >= 0);
 
-	CPPUNIT_ASSERT_EQUAL( 0,     ::LoadDatabase(n, "phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,     ::LoadDatabase(n, "phreeqc.dat.old"));
 
 	// add solution block
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0) );
@@ -2627,7 +2627,7 @@ void TestIPhreeqcLib::TestGetOutputStringLineCount(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
-	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat.old"));
 	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
 
 	// add solution block
@@ -2683,7 +2683,7 @@ void TestIPhreeqcLib::TestGetOutputStringLine(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
-	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,      ::LoadDatabase(n, "phreeqc.dat.old"));
 	CPPUNIT_ASSERT_EQUAL( 0,      ::GetOutputStringLineCount(n) );
 
 	// add solution block
