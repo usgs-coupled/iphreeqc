@@ -2093,7 +2093,7 @@ void TestIPhreeqc::TestSetOutputFileName(void)
 
 	IPhreeqc obj;
 
-	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat.old"));
 
 	// add solution block
 	CPPUNIT_ASSERT_EQUAL( VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0) );
@@ -2305,7 +2305,7 @@ void TestIPhreeqc::TestGetOutputStringLineCount(void)
 	IPhreeqc obj;
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
 
-	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat.old"));
 
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
 
@@ -2356,7 +2356,7 @@ void TestIPhreeqc::TestGetOutputStringLine(void)
 	IPhreeqc obj;
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
 
-	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat"));
+	CPPUNIT_ASSERT_EQUAL( 0,     obj.LoadDatabase("phreeqc.dat.old"));
 
 	CPPUNIT_ASSERT_EQUAL( 0,     obj.GetOutputStringLineCount() );
 
