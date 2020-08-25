@@ -1,17 +1,17 @@
-cmake_minimum_required (VERSION 2.8)
+# CMAKE_MSVC_RUNTIME_LIBRARY requires 3.15
+cmake_minimum_required(VERSION 3.15)
 
 project (IPhreeqc CXX C)
 
 # check if this is the root project
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set(STANDALONE_BUILD 1)
 else()
   set(STANDALONE_BUILD 0)
 endif()
 
-
 # overide docdir on windows
-if(WIN32 AND NOT CMAKE_INSTALL_DOCDIR)
+if (WIN32 AND NOT CMAKE_INSTALL_DOCDIR)
   set(CMAKE_INSTALL_DOCDIR "" CACHE PATH "documentation root (doc)")
   set(CMAKE_INSTALL_DOCDIR "doc")
 endif()
@@ -19,33 +19,27 @@ endif()
 # set standard directory locations
 include(GNUInstallDirs)
 
-
-# Fortran
-option (IPHREEQC_ENABLE_MODULE "Enable Fortran module" ON)
-if (STANDALONE_BUILD EQUAL 1)
-  if (NOT IPHREEQC_FORTRAN_TESTING)
-    if (NOT CMAKE_Fortran_COMPILER OR CMAKE_Fortran_COMPILER STREQUAL "CMAKE_Fortran_COMPILER-NOTFOUND")
-      option (IPHREEQC_FORTRAN_TESTING "Build Fortran test" OFF)
-    else()
-      option (IPHREEQC_FORTRAN_TESTING "Build Fortran test" ON)
-    endif()
-  else()
-    if (IPHREEQC_FORTRAN_TESTING)
-      enable_language(Fortran)
-    endif()  
+if (STANDALONE_BUILD AND MSVC)
+  option (IPHREEQC_STATIC_RUNTIME "Build with a static runtime" OFF)  
+  if (IPHREEQC_STATIC_RUNTIME)
+    # compile with static runtime
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   endif()
 endif()
 
-
-# Disable deprecation warnings for standard C and STL functions in VS2005
-# and later
-if(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
-  add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
-  add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-endif(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400) 
-
-add_definitions(-DSWIG_SHARED_OBJ)
-add_definitions(-DUSE_PHRQ_ALLOC)
+# Fortran
+option (IPHREEQC_ENABLE_MODULE "Enable Fortran module" ON)
+if (STANDALONE_BUILD)
+  if (IPHREEQC_FORTRAN_TESTING)
+    enable_language(Fortran)
+  else()
+    if (CMAKE_Fortran_COMPILER)
+      option (IPHREEQC_FORTRAN_TESTING "Build Fortran test" ON)
+    else()
+      option (IPHREEQC_FORTRAN_TESTING "Build Fortran test" OFF)
+    endif()
+  endif()
+endif()
 
 SET(IPhreeqc_SOURCES
 src/CSelectedOutput.cpp
@@ -202,12 +196,11 @@ src/Version.h
 )
 
 # compile Var.c as c++
-SET_SOURCE_FILES_PROPERTIES(src/Var.c PROPERTIES LANGUAGE CXX)
+set_source_files_properties(src/Var.c PROPERTIES LANGUAGE CXX)
 
 # fwrap files
 if (NOT IPHREEQC_ENABLE_MODULE)
-  add_definitions(-DIPHREEQC_NO_FORTRAN_MODULE)
-  SET(IPhreeqc_SOURCES
+  set(IPhreeqc_SOURCES
   ${IPhreeqc_SOURCES}
   src/fimpl.h
   src/fwrap.cpp
@@ -216,39 +209,84 @@ if (NOT IPHREEQC_ENABLE_MODULE)
   src/fwrap3.cpp
   src/fwrap4.cpp
   src/fwrap5.cpp
-  src/fwrap6.cpp      
+  src/fwrap6.cpp
   src/fwrap7.cpp
-  src/fwrap8.cpp      
+  src/fwrap8.cpp
  )
 endif()
 
-# setup include directories
-include_directories("${PROJECT_SOURCE_DIR}")
-include_directories("${PROJECT_SOURCE_DIR}/src")
-include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp")
-include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/common")
-include_directories("${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords")
-
-
-if (STANDALONE_BUILD EQUAL 1)
+if (STANDALONE_BUILD)
   option(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
   set(LIB_TYPE STATIC)
 endif()
 
 if (BUILD_SHARED_LIBS)
   set(LIB_TYPE SHARED)
-  if (STANDALONE_BUILD EQUAL 1)
+  if (STANDALONE_BUILD)
     if (MSVC)
       option(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
     endif()
   endif()
 endif()
 add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
+
+# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src")
+# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src/phreeqcpp")
+# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src/phreeqcpp/common")
+# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords")
+
+# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp>)
+# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/common>)
+# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>)
+# # target_include_directories(IPhreeqc PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
+# target_include_directories(IPhreeqc
+#     PUBLIC
+#         "${PROJECT_SOURCE_DIR}/src"
+#         "${PROJECT_SOURCE_DIR}/src/phreeqcpp"
+#         "${PROJECT_SOURCE_DIR}/src/phreeqcpp/common"
+#         "${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords"
+# )
+
+target_include_directories(IPhreeqc
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/common>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
+
+# target_include_directories(IPhreeqc
+#     PUBLIC
+#         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+#         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+# )
+
+target_compile_definitions(IPhreeqc PRIVATE "SWIG_SHARED_OBJ")
+target_compile_definitions(IPhreeqc PRIVATE "USE_PHRQ_ALLOC")
+
+if (NOT IPHREEQC_ENABLE_MODULE)
+  target_compile_definitions(IPhreeqc PUBLIC "IPHREEQC_NO_FORTRAN_MODULE")
+endif()
+
+if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+  target_compile_options(IPhreeqc PRIVATE /wd4251 /wd4275 /wd4793)
+endif()
+
+# Disable deprecation warnings for standard C and STL functions in VS2005
+# and later
+if (MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
+  target_compile_definitions(IPhreeqc PUBLIC "_CRT_SECURE_NO_DEPRECATE")
+  target_compile_definitions(IPhreeqc PUBLIC "_SCL_SECURE_NO_WARNINGS")
+endif(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400) 
+
 set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
 set_target_properties(IPhreeqc PROPERTIES MINSIZEREL_POSTFIX "msr")
-set_target_properties(IPhreeqc PROPERTIES RELWITHDEBINFO_POSTFIX "rwdi")
+set_target_properties(IPhreeqc PROPERTIES RELWITHDEBINFO_POSTFIX "rwd")
 
-SET(IPhreeqc_Headers
+set(IPhreeqc_Headers
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.h
 ${PROJECT_SOURCE_DIR}/src/IPhreeqc.hpp
 ${PROJECT_SOURCE_DIR}/src/IPhreeqcCallbacks.h
@@ -258,78 +296,104 @@ ${PROJECT_SOURCE_DIR}/src/Var.h
 )
 
 if (IPHREEQC_ENABLE_MODULE)
-  SET(IPhreeqc_SRC
+  set(IPhreeqc_SRC
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc_interface.F90
   ${PROJECT_SOURCE_DIR}/src/README.Fortran
   )
 else()
   # always install README.Fortran
-  SET(IPhreeqc_SRC
+  set(IPhreeqc_SRC
   ${PROJECT_SOURCE_DIR}/src/README.Fortran
   )
   # install old fortran include files
-  SET(IPhreeqc_Headers
+  set(IPhreeqc_Headers
   ${IPhreeqc_Headers}
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc.f.inc
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc.f90.inc
   )
 endif()
 
+
 # Setup references for /CLR
 if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
-  set_target_properties(IPhreeqc PROPERTIES VS_DOTNET_REFERENCES "System;System.Drawing;System.Windows.Forms;${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll")  
-  # Remove /EHsc from CMAKE_CXX_FLAGS
-  STRING(REPLACE " /EHsc" " /EHa /clr" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-  # Remove /RTC1 from CMAKE_CXX_FLAGS_DEBUG
-  STRING(REPLACE " /RTC1" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-  if (MSVC10)
-    # turn off warnings on VS2010
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4793 /wd4945")
-  endif()  
   if (MSVC_VERSION LESS 1600)
     message(FATAL_ERROR "CLR options must be set manually for versions prior to Visual Studio 2010")
-  endif()  
-  ADD_DEFINITIONS(-DMULTICHART)
-endif()
-
-
-# install
-if (WIN32)
-  if (BUILD_CLR_LIBS)
-    if("${CMAKE_SIZEOF_VOID_P}" EQUAL 8)
-      SET(CMAKE_INSTALL_LIBDIR "clrx64")
-    else()
-      SET(CMAKE_INSTALL_LIBDIR "clr")
-    endif()
-  else()
-    if("${CMAKE_SIZEOF_VOID_P}" EQUAL 8)
-      if (BUILD_SHARED_LIBS)
-        SET(CMAKE_INSTALL_LIBDIR "dllx64")
-      else()
-        SET(CMAKE_INSTALL_LIBDIR "libx64")
-      endif()
-    else()
-      if (BUILD_SHARED_LIBS)
-        SET(CMAKE_INSTALL_LIBDIR "dll")
-      else()
-        SET(CMAKE_INSTALL_LIBDIR "lib")
-      endif()
-    endif()
   endif()
+  set_target_properties(IPhreeqc PROPERTIES VS_DOTNET_REFERENCES "System;System.Drawing;System.Windows.Forms;${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll")
+  set_target_properties(IPhreeqc PROPERTIES COMMON_LANGUAGE_RUNTIME "")
+  target_compile_definitions(IPhreeqc PRIVATE "MULTICHART")
 endif()
 
 # install
-if (STANDALONE_BUILD EQUAL 1)
-  install(TARGETS IPhreeqc DESTINATION ${CMAKE_INSTALL_LIBDIR})
+# if (WIN32)
+#   if (BUILD_CLR_LIBS)
+#     if ("${CMAKE_SIZEOF_VOID_P}" EQUAL 8)
+#       SET(CMAKE_INSTALL_LIBDIR "clrx64")
+#     else()
+#       SET(CMAKE_INSTALL_LIBDIR "clr")
+#     endif()
+#   else()
+#     if ("${CMAKE_SIZEOF_VOID_P}" EQUAL 8)
+#       if (BUILD_SHARED_LIBS)
+#         SET(CMAKE_INSTALL_LIBDIR "dllx64")
+#       else()
+#         SET(CMAKE_INSTALL_LIBDIR "libx64")
+#       endif()
+#     else()
+#       if (BUILD_SHARED_LIBS)
+#         SET(CMAKE_INSTALL_LIBDIR "dll")
+#       else()
+#         SET(CMAKE_INSTALL_LIBDIR "lib")
+#       endif()
+#     endif()
+#   endif()
+# endif()
+
+# install
+if (STANDALONE_BUILD)
+  # install(TARGETS IPhreeqc DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+  #{{
+
+  include(CMakePackageConfigHelpers)
+  
+  configure_package_config_file(IPhreeqcConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/IPhreeqcConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/IPhreeqc
+  )
+
+  write_basic_package_version_file("IPhreeqcConfigVersion.cmake"
+    VERSION 3.2.0
+    COMPATIBILITY SameMajorVersion
+  )
+
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/IPhreeqcConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/IPhreeqcConfigVersion.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/IPhreeqc
+  )
+
+  install(TARGETS  IPhreeqc
+          EXPORT   IPhreeqcTargets
+          LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
+          INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+  )
+  install(EXPORT IPhreeqcTargets
+          FILE IPhreeqcTargets.cmake
+          NAMESPACE IPhreeqc::
+          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/IPhreeqc
+  )  
+  ##}}
+
   install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-  if (WIN32)
-    install(FILES ${IPhreeqc_SRC} DESTINATION src)
-  else()
-    install(FILES ${IPhreeqc_SRC} DESTINATION ${CMAKE_INSTALL_DOCDIR}/src)
-  endif()
-  if (BUILD_CLR_LIBS)
-    install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  endif()
+  # if (WIN32)
+  #   install(FILES ${IPhreeqc_SRC} DESTINATION src)
+  # else()
+  #   install(FILES ${IPhreeqc_SRC} DESTINATION ${CMAKE_INSTALL_DOCDIR}/src)
+  # endif()
+  # if (BUILD_CLR_LIBS)
+  #   install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  # endif()
 endif()
 
 ##IF(MSVC)
@@ -350,54 +414,74 @@ endif()
 ##    )
 ##ENDIF(MSVC)
 
-if (STANDALONE_BUILD EQUAL 1 AND MSVC)
-  option (IPHREEQC_STATIC_RUNTIME "Build with a static runtime" OFF)  
-  if (IPHREEQC_STATIC_RUNTIME)    
-    # compile with static runtime
-    
-    set(CompilerFlags
-    CMAKE_CXX_FLAGS
-    CMAKE_CXX_FLAGS_DEBUG
-    CMAKE_CXX_FLAGS_RELEASE
-    CMAKE_CXX_FLAGS_MINSIZEREL
-    CMAKE_CXX_FLAGS_RELWITHDEBINFO
-    CMAKE_C_FLAGS
-    CMAKE_C_FLAGS_DEBUG
-    CMAKE_C_FLAGS_RELEASE
-    CMAKE_C_FLAGS_MINSIZEREL
-    CMAKE_C_FLAGS_RELWITHDEBINFO
-    )
-
-    foreach(CompilerFlag ${CompilerFlags})
-      if(${CompilerFlag} MATCHES "/MD")
-        string(REGEX REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
-      endif()
-    endforeach()
-  
-    set(FortranCompilerFlags
-    CMAKE_Fortran_FLAGS
-    )
-  
-    foreach(FortranCompilerFlags ${FortranCompilerFlags})
-      if(${FortranCompilerFlags} MATCHES "/libs:dll")
-        string(REGEX REPLACE "/libs:dll" "/libs:static" ${FortranCompilerFlags} "${${FortranCompilerFlags}}")
-      endif()  
-    endforeach()
-  endif()
+if (BUILD_CLR_LIBS AND IPHREEQC_STATIC_RUNTIME)
+  message(FATAL_ERROR "BUILD_CLR_LIBS and IPHREEQC_STATIC_RUNTIME are mutually exclusive")
 endif()
 
-if (STANDALONE_BUILD EQUAL 1)
-  # tests
-  enable_testing()
+if (EXISTS "${PROJECT_SOURCE_DIR}/CTestConfig.cmake")
+  # enable dashboard scripting
+  include (CTest)
+endif()
+
+if (STANDALONE_BUILD)
 
   add_subdirectory(database)
   add_subdirectory(doc)
   add_subdirectory(examples)
-  add_subdirectory(tests)
 
-  if (EXISTS "${PROJECT_SOURCE_DIR}/CTestConfig.cmake")
-    # enable dashboard scripting
-    include (CTest)
+  if (BUILD_TESTING)
+    add_subdirectory(tests)
+  endif()
+
+
+  if (BUILD_TESTING)
+    include(FetchContent)
+
+    FetchContent_Declare(
+      googletest
+      URL https://github.com/google/googletest/archive/release-1.8.1.tar.gz
+      URL_HASH MD5=2e6fbeb6a91310a16efe181886c59596
+    )
+
+    mark_as_advanced(
+      FETCHCONTENT_BASE_DIR
+      FETCHCONTENT_FULLY_DISCONNECTED
+      FETCHCONTENT_QUIET
+      FETCHCONTENT_SOURCE_DIR_GOOGLETEST
+      FETCHCONTENT_UPDATES_DISCONNECTED
+      FETCHCONTENT_UPDATES_DISCONNECTED_GOOGLETEST
+    )
+
+    # Prevent GoogleTest from overriding our compiler/linker options
+    # when building with Visual Studio
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+    set(BUILD_GTEST ON CACHE BOOL "" FORCE)
+    set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+
+    set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+    set(INSTALL_GMOCK OFF CACHE BOOL "" FORCE)
+
+    mark_as_advanced(
+      BUILD_GTEST
+      BUILD_GMOCK
+      INSTALL_GTEST
+      INSTALL_GMOCK
+      gmock_build_tests
+      gtest_build_tests
+      gtest_build_samples
+      gtest_disable_pthreads
+      gtest_force_shared_crt
+      gtest_hide_internal_symbols
+    )
+
+    FetchContent_GetProperties(googletest)
+    if (NOT googletest_POPULATED)
+      FetchContent_Populate(googletest)
+      add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+    endif()
+
+    add_subdirectory(gtest)
   endif()
 
   # enable distribution creation
