@@ -220,34 +220,16 @@ if (STANDALONE_BUILD)
   set(LIB_TYPE STATIC)
 endif()
 
-if (BUILD_SHARED_LIBS)
-  set(LIB_TYPE SHARED)
-  if (STANDALONE_BUILD)
-    if (MSVC)
-      option(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
-    endif()
+if (STANDALONE_BUILD)
+  if (MSVC)
+    option(BUILD_CLR_LIBS "Build CLR Libraries" OFF)
   endif()
 endif()
+
+if (BUILD_SHARED_LIBS)
+  set(LIB_TYPE SHARED)
+endif()
 add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
-
-# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src")
-# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src/phreeqcpp")
-# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src/phreeqcpp/common")
-# target_include_directories(IPhreeqc PUBLIC "${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords")
-
-# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
-# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp>)
-# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/common>)
-# # target_include_directories(IPhreeqc PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>)
-# # target_include_directories(IPhreeqc PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-
-# target_include_directories(IPhreeqc
-#     PUBLIC
-#         "${PROJECT_SOURCE_DIR}/src"
-#         "${PROJECT_SOURCE_DIR}/src/phreeqcpp"
-#         "${PROJECT_SOURCE_DIR}/src/phreeqcpp/common"
-#         "${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords"
-# )
 
 target_include_directories(IPhreeqc
     PUBLIC
@@ -257,12 +239,6 @@ target_include_directories(IPhreeqc
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-
-# target_include_directories(IPhreeqc
-#     PUBLIC
-#         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-#         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-# )
 
 target_compile_definitions(IPhreeqc PRIVATE "SWIG_SHARED_OBJ")
 target_compile_definitions(IPhreeqc PRIVATE "USE_PHRQ_ALLOC")
@@ -280,7 +256,7 @@ endif()
 if (MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
   target_compile_definitions(IPhreeqc PUBLIC "_CRT_SECURE_NO_DEPRECATE")
   target_compile_definitions(IPhreeqc PUBLIC "_SCL_SECURE_NO_WARNINGS")
-endif(MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400) 
+endif()
 
 set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
 set_target_properties(IPhreeqc PROPERTIES MINSIZEREL_POSTFIX "msr")
@@ -296,13 +272,15 @@ ${PROJECT_SOURCE_DIR}/src/Var.h
 )
 
 if (IPHREEQC_ENABLE_MODULE)
-  set(IPhreeqc_SRC
+  set(IPhreeqc_SOURCES
+  ${IPhreeqc_SOURCES}
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc_interface.F90
   ${PROJECT_SOURCE_DIR}/src/README.Fortran
   )
 else()
   # always install README.Fortran
-  set(IPhreeqc_SRC
+  set(IPhreeqc_SOURCES
+  ${IPhreeqc_SOURCES}
   ${PROJECT_SOURCE_DIR}/src/README.Fortran
   )
   # install old fortran include files
@@ -325,35 +303,7 @@ if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
 endif()
 
 # install
-# if (WIN32)
-#   if (BUILD_CLR_LIBS)
-#     if ("${CMAKE_SIZEOF_VOID_P}" EQUAL 8)
-#       SET(CMAKE_INSTALL_LIBDIR "clrx64")
-#     else()
-#       SET(CMAKE_INSTALL_LIBDIR "clr")
-#     endif()
-#   else()
-#     if ("${CMAKE_SIZEOF_VOID_P}" EQUAL 8)
-#       if (BUILD_SHARED_LIBS)
-#         SET(CMAKE_INSTALL_LIBDIR "dllx64")
-#       else()
-#         SET(CMAKE_INSTALL_LIBDIR "libx64")
-#       endif()
-#     else()
-#       if (BUILD_SHARED_LIBS)
-#         SET(CMAKE_INSTALL_LIBDIR "dll")
-#       else()
-#         SET(CMAKE_INSTALL_LIBDIR "lib")
-#       endif()
-#     endif()
-#   endif()
-# endif()
-
-# install
 if (STANDALONE_BUILD)
-  # install(TARGETS IPhreeqc DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-  #{{
 
   include(CMakePackageConfigHelpers)
   
@@ -383,39 +333,26 @@ if (STANDALONE_BUILD)
           NAMESPACE IPhreeqc::
           DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/IPhreeqc
   )  
-  ##}}
 
   install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-  # if (WIN32)
-  #   install(FILES ${IPhreeqc_SRC} DESTINATION src)
-  # else()
-  #   install(FILES ${IPhreeqc_SRC} DESTINATION ${CMAKE_INSTALL_DOCDIR}/src)
-  # endif()
-  # if (BUILD_CLR_LIBS)
-  #   install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  # endif()
+  if (WIN32)
+    install(FILES ${IPhreeqc_SOURCES} DESTINATION src)
+  else()
+    install(FILES ${IPhreeqc_SOURCES} DESTINATION ${CMAKE_INSTALL_DOCDIR}/src)
+  endif()
+  if (BUILD_CLR_LIBS)
+    install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_BINDIR})
+  endif()
 endif()
 
-##IF(MSVC)
-##  message("PROJECT_BINARY_DIR = ${PROJECT_BINARY_DIR}")
-##  INSTALL(
-##    DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
-##    DESTINATION ${CMAKE_INSTALL_LIBDIR}
-##    CONFIGURATIONS Debug
-##    FILES_MATCHING
-##    PATTERN "*.pdb"
-##    )
-##  INSTALL(
-##    FILES
-##    ${LIBRARY_OUTPUT_PATH}/Debug/${target_prefix}${target_name}.pdb
-##    DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
-##    DESTINATION ${CMAKE_INSTALL_LIBDIR}
-##    CONFIGURATIONS Debug
-##    )
-##ENDIF(MSVC)
+if (BUILD_CLR_LIBS)
+  if (NOT BUILD_SHARED_LIBS)
+    message(FATAL_ERROR "BUILD_CLR_LIBS requires that BUILD_SHARED_LIBS be set")
+  endif()
 
-if (BUILD_CLR_LIBS AND IPHREEQC_STATIC_RUNTIME)
-  message(FATAL_ERROR "BUILD_CLR_LIBS and IPHREEQC_STATIC_RUNTIME are mutually exclusive")
+  if (IPHREEQC_STATIC_RUNTIME)
+    message(FATAL_ERROR "BUILD_CLR_LIBS and IPHREEQC_STATIC_RUNTIME are mutually exclusive")
+  endif()
 endif()
 
 if (EXISTS "${PROJECT_SOURCE_DIR}/CTestConfig.cmake")
@@ -434,7 +371,7 @@ if (STANDALONE_BUILD)
   endif()
 
 
-  if (BUILD_TESTING)
+  if (BUILD_TESTING)  # may need to add MSVC version check
     include(FetchContent)
 
     FetchContent_Declare(
@@ -457,7 +394,7 @@ if (STANDALONE_BUILD)
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
     set(BUILD_GTEST ON CACHE BOOL "" FORCE)
-    set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+    set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
 
     set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
     set(INSTALL_GMOCK OFF CACHE BOOL "" FORCE)
@@ -475,10 +412,19 @@ if (STANDALONE_BUILD)
       gtest_hide_internal_symbols
     )
 
+    if (BUILD_SHARED_LIBS)
+      ##target_compile_definitions(gtest PRIVATE "GTEST_CREATE_SHARED_LIBRARY")
+      ###add_definitions(-DGTEST_CREATE_SHARED_LIBRARY)
+    endif()
+
     FetchContent_GetProperties(googletest)
     if (NOT googletest_POPULATED)
       FetchContent_Populate(googletest)
       add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+    endif()
+
+    if (BUILD_SHARED_LIBS)
+    ###remove_definitions(-DGTEST_CREATE_SHARED_LIBRARY)
     endif()
 
     add_subdirectory(gtest)
