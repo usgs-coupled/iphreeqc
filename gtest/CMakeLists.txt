@@ -10,11 +10,7 @@ add_executable(TestIPhreeqcLib TestIPhreeqcLib.cpp FileTest.cpp)
 target_link_libraries(TestIPhreeqcLib IPhreeqc gtest gtest_main)
 
 add_executable(TestIPhreeqc TestIPhreeqc.cpp FileTest.cpp)
-##if (BUILD_SHARED_LIBS)
-##  target_compile_definitions(TestIPhreeqc PRIVATE "GTEST_LINKED_AS_SHARED_LIBRARY")
-##endif()
-target_link_libraries(TestIPhreeqc IPhreeqc gmock gtest gtest_main)
-##target_link_libraries(TestIPhreeqc IPhreeqc gtest gtest_main)
+target_link_libraries(TestIPhreeqc IPhreeqc gtest gtest_main)
 
 add_executable(TestSelectedOutput TestSelectedOutput.cpp)
 target_link_libraries(TestSelectedOutput IPhreeqc gtest gtest_main)
@@ -35,9 +31,6 @@ if (MSVC AND BUILD_SHARED_LIBS)
   )
   add_custom_command(TARGET TestCVar POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestCVar>
-  )
-  add_custom_command(TARGET TestIPhreeqc POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gmock> $<TARGET_FILE_DIR:TestIPhreeqc>
   )
 endif()
 

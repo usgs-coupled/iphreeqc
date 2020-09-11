@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
 #include <cmath>
 #include <cfloat>
@@ -10,8 +9,6 @@
 #undef true
 #undef false
 #include "CVar.hxx"
-
-using ::testing::StartsWith;
 
 VRESULT SOLUTION(IPhreeqc& obj, double C, double Ca, double Na);
 VRESULT EQUILIBRIUM_PHASES(IPhreeqc& obj, const char* phase, double si, double amount);
@@ -2211,109 +2208,115 @@ TEST(TestIPhreeqc, TestSetOutputFileName)
 
 	int line = 0;
 
-	//ASSERT_THAT(lines[line++], StartsWith("------------------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith("Reading input data for simulation 1."));
-	//ASSERT_THAT(lines[line++], StartsWith("------------------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("	SOLUTION 1"));
-	//ASSERT_THAT(lines[line++], StartsWith("	C 1"));
-	//ASSERT_THAT(lines[line++], StartsWith("	Ca 1"));
-	//ASSERT_THAT(lines[line++], StartsWith("	Na 1"));
-	//ASSERT_THAT(lines[line++], StartsWith("	DUMP"));
-	//ASSERT_THAT(lines[line++], StartsWith("	-solution 1"));
-	//ASSERT_THAT(lines[line++], StartsWith("-------------------------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith("Beginning of initial solution calculations."));
-	//ASSERT_THAT(lines[line++], StartsWith("-------------------------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("Initial solution 1.	"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("-----------------------------Solution composition--------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("	Elements           Molality       Moles"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("	C                "));
-	//ASSERT_THAT(lines[line++], StartsWith("	Ca               "));
-	//ASSERT_THAT(lines[line++], StartsWith("	Na               "));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("----------------------------Description of solution------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("                                       pH  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                                       pe  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                        Activity of water  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                 Ionic strength (mol/kgw)  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                       Mass of water (kg)  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                 Total alkalinity (eq/kg)  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                       Total CO2 (mol/kg)  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                         Temperature (°C)  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                  Electrical balance (eq)  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith(" Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                               Iterations  =  "));
-	//ASSERT_THAT(lines[line++], StartsWith("                                  Total H  = "));
-	//ASSERT_THAT(lines[line++], StartsWith("                                  Total O  = "));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("----------------------------Distribution of species----------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("                                               Log       Log       Log    mole V"));
-	//ASSERT_THAT(lines[line++], StartsWith("   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("   OH- "));
-	//ASSERT_THAT(lines[line++], StartsWith("   H+ "));
-	//ASSERT_THAT(lines[line++], StartsWith("   H2O "));
-	//ASSERT_THAT(lines[line++], StartsWith("C(-4) "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CH4 "));
-	//ASSERT_THAT(lines[line++], StartsWith("C(4) "));
-	//ASSERT_THAT(lines[line++], StartsWith("   HCO3- "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CO2 "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CaHCO3+ "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CaCO3 "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CO3-2 "));
-	//ASSERT_THAT(lines[line++], StartsWith("   NaHCO3 "));
-	//ASSERT_THAT(lines[line++], StartsWith("   NaCO3- "));
-	//ASSERT_THAT(lines[line++], StartsWith("Ca "));
-	//ASSERT_THAT(lines[line++], StartsWith("   Ca+2 "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CaHCO3+ "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CaCO3 "));
-	//ASSERT_THAT(lines[line++], StartsWith("   CaOH+ "));
-	//ASSERT_THAT(lines[line++], StartsWith("H(0) "));
-	//ASSERT_THAT(lines[line++], StartsWith("   H2 "));
-	//ASSERT_THAT(lines[line++], StartsWith("Na "));
-	//ASSERT_THAT(lines[line++], StartsWith("   Na+ "));
-	//ASSERT_THAT(lines[line++], StartsWith("   NaHCO3 "));
-	//ASSERT_THAT(lines[line++], StartsWith("   NaCO3- "));
-	//ASSERT_THAT(lines[line++], StartsWith("   NaOH "));
-	//ASSERT_THAT(lines[line++], StartsWith("O(0) "));
-	//ASSERT_THAT(lines[line++], StartsWith("   O2 "));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("------------------------------Saturation indices-------------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("  Phase               SI** log IAP   log K(298 K,   1 atm)"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("  Aragonite"));
-	//ASSERT_THAT(lines[line++], StartsWith("  Calcite"));
-	//ASSERT_THAT(lines[line++], StartsWith("  CH4(g)"));
-	//ASSERT_THAT(lines[line++], StartsWith("  CO2(g)"));
-	//ASSERT_THAT(lines[line++], StartsWith("  H2(g)"));
-	//ASSERT_THAT(lines[line++], StartsWith("  H2O(g)"));
-	//ASSERT_THAT(lines[line++], StartsWith("  O2(g)"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm."));
-	//ASSERT_THAT(lines[line++], StartsWith("  For ideal gases, phi = 1."));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith("End of simulation."));
-	//ASSERT_THAT(lines[line++], StartsWith("------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("------------------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith("Reading input data for simulation 2."));
-	//ASSERT_THAT(lines[line++], StartsWith("------------------------------------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith("----------------"));
-	//ASSERT_THAT(lines[line++], StartsWith("End of Run after "));
-	//ASSERT_THAT(lines[line++], StartsWith("----------------"));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
-	//ASSERT_THAT(lines[line++], StartsWith(""));
+	// it would be better to use:
+	// ASSERT_THAT(lines[line++], StartsWith("------------------------------------"));
+	// but seems to not work when BUILD_SHARED_LIBS is set gtest 1.8.1
+	// see aa178fd6fac2d1c0a867385538071031e2ddedde of gtest branch
+	//
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Reading input data for simulation 1.") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	SOLUTION 1") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	C 1") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Ca 1") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Na 1") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	DUMP") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	-solution 1") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-------------------------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Beginning of initial solution calculations.") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-------------------------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Initial solution 1.	") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-----------------------------Solution composition--------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Elements           Molality       Moles") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	C                ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Ca               ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Na               ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------------------Description of solution------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                       pH  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                       pe  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                        Activity of water  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                 Ionic strength (mol/kgw)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                       Mass of water (kg)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                 Total alkalinity (eq/kg)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                       Total CO2 (mol/kg)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                         Temperature (°C)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                  Electrical balance (eq)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), " Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                               Iterations  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                  Total H  = ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                  Total O  = ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------------------Distribution of species----------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                               Log       Log       Log    mole V") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   OH- ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   H+ ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   H2O ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "C(-4) ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CH4 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "C(4) ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   HCO3- ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CO2 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaHCO3+ ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaCO3 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CO3-2 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaHCO3 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaCO3- ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Ca ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Ca+2 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaHCO3+ ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaCO3 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaOH+ ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "H(0) ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   H2 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Na ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Na+ ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaHCO3 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaCO3- ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaOH ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "O(0) ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   O2 ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------Saturation indices-------------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  Phase               SI** log IAP   log K(298 K,   1 atm)") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  Aragonite") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  Calcite") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  CH4(g)") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  CO2(g)") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  H2(g)") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  H2O(g)") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  O2(g)") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  For ideal gases, phi = 1.") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "End of simulation.") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Reading input data for simulation 2.") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "End of Run after ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+
 
 	if (::FileExists(OUTPUT_FILENAME))
 	{
