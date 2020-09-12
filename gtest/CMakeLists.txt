@@ -25,13 +25,13 @@ if (MSVC AND BUILD_SHARED_LIBS)
   # copy dlls
   add_custom_command(TARGET TestCVar POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestCVar>
-  )
+    )
   add_custom_command(TARGET TestCVar POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestCVar>
-  )
+    )
   add_custom_command(TARGET TestCVar POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestCVar>
-  )
+    )
 endif()
 
 
