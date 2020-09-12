@@ -16,3 +16,4 @@ Build example:
 2. mkdir _build
 3. cmake -DCMAKE_PREFIX_PATH:PATH=c:/Users/charlton/iphreeqc/lib/cmake/IPhreeqc ..
 4. cmake --build . --config release
+
