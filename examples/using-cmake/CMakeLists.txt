@@ -1,20 +1,23 @@
-# set minimum cmake version
-cmake_minimum_required(VERSION 3.10)
+# configure_file(ex2 ex2 COPYONLY)
+# configure_file(main.cpp main.cpp COPYONLY)
+# configure_file(phreeqc.dat phreeqc.dat COPYONLY)
+# configure_file(README.txt README.txt COPYONLY)
 
-# set project name along with language
-project(cmake-example CXX)
+configure_file(CMakeLists.txt.in CMakeLists.txt)
 
-# copy necessary files into build directory
-configure_file(phreeqc.dat phreeqc.dat COPYONLY)
-configure_file(ex2 ex2 COPYONLY)
+# 
+SET(example_FILES
+  ${IPhreeqc_BINARY_DIR}/examples/using-cmake/CMakeLists.txt
+  ex2
+  main.cpp
+  phreeqc.dat
+  README.txt
+  )
 
-# find IPhreeqc export package
-# set CMAKE_PREFIX_PATH or IPhreeqc_DIR to the
-# location of the IPhreeqcConfig.cmake file
-find_package(IPhreeqc)
+# install directory
+SET(example_DIR ${EXAMPLES_DIR}/using-cmake)
 
-# add executable target
-add_executable(example main.cpp)
+# install
+install(FILES ${example_FILES} DESTINATION ${example_DIR})
 
-# set link libraries as well as include paths
-target_link_libraries(example IPhreeqc::IPhreeqc)
+

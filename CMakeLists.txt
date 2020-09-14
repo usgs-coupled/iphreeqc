@@ -1,13 +1,27 @@
 # CMAKE_MSVC_RUNTIME_LIBRARY requires 3.15
 cmake_minimum_required(VERSION 3.15)
 
-project (IPhreeqc CXX C)
+project (IPhreeqc
+  VERSION 3.6.3
+  LANGUAGES CXX C)
 
 # check if this is the root project
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set(STANDALONE_BUILD 1)
 else()
   set(STANDALONE_BUILD 0)
+endif()
+
+if (STANDALONE_BUILD)
+  # Set a default build type if none was specified
+  set(default_build_type "Release")
+  if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
+      STRING "Choose the type of build." FORCE)
+    # Set the possible values of build type for cmake-gui
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+      "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+  endif()
 endif()
 
 # overide docdir on windows
@@ -233,18 +247,18 @@ add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
 
 target_include_directories(IPhreeqc
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/common>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>
+  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src>
+  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp>
+  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp/common>
+  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   )
 
-target_compile_definitions(IPhreeqc PRIVATE "SWIG_SHARED_OBJ")
-target_compile_definitions(IPhreeqc PRIVATE "USE_PHRQ_ALLOC")
+target_compile_definitions(IPhreeqc PRIVATE SWIG_SHARED_OBJ)
+target_compile_definitions(IPhreeqc PRIVATE USE_PHRQ_ALLOC)
 
 if (NOT IPHREEQC_ENABLE_MODULE)
-  target_compile_definitions(IPhreeqc PUBLIC "IPHREEQC_NO_FORTRAN_MODULE")
+  target_compile_definitions(IPhreeqc PUBLIC IPHREEQC_NO_FORTRAN_MODULE)
 endif()
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
@@ -254,8 +268,8 @@ endif()
 # Disable deprecation warnings for standard C and STL functions in VS2005
 # and later
 if (MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
-  target_compile_definitions(IPhreeqc PUBLIC "_CRT_SECURE_NO_DEPRECATE")
-  target_compile_definitions(IPhreeqc PUBLIC "_SCL_SECURE_NO_WARNINGS")
+  target_compile_definitions(IPhreeqc PUBLIC _CRT_SECURE_NO_DEPRECATE)
+  target_compile_definitions(IPhreeqc PUBLIC _SCL_SECURE_NO_WARNINGS)
 endif()
 
 set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
@@ -313,7 +327,7 @@ if (STANDALONE_BUILD)
     )
 
   write_basic_package_version_file("IPhreeqcConfigVersion.cmake"
-    VERSION 3.2.0
+    VERSION ${IPhreeqc_VERSION}
     COMPATIBILITY SameMajorVersion
     )
   
@@ -420,9 +434,10 @@ if (STANDALONE_BUILD)
 
     add_subdirectory(gtest)
   endif()
-
-  # enable distribution creation
-  set(CPACK_PACKAGE_VERSION "3.2.0")
-  set(CPACK_PACKAGE_VENDOR "USGS")
-  include (CPack)
 endif()
+
+# get_cmake_property(_variableNames VARIABLES)
+# list (SORT _variableNames)
+# foreach (_variableName ${_variableNames})
+#   message(STATUS "${_variableName}=${${_variableName}}")
+# endforeach()
