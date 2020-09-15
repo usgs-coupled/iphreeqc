@@ -286,15 +286,13 @@ set(IPhreeqc_Headers
   )
 
 if (IPHREEQC_ENABLE_MODULE)
-  set(IPhreeqc_SOURCES
-    ${IPhreeqc_SOURCES}
+  set(IPhreeqc_SRC
     ${PROJECT_SOURCE_DIR}/src/IPhreeqc_interface.F90
     ${PROJECT_SOURCE_DIR}/src/README.Fortran
     )
 else()
   # always install README.Fortran
-  set(IPhreeqc_SOURCES
-    ${IPhreeqc_SOURCES}
+  set(IPhreeqc_SRC
     ${PROJECT_SOURCE_DIR}/src/README.Fortran
     )
   # install old fortran include files
@@ -350,9 +348,9 @@ if (STANDALONE_BUILD)
   
   install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
   if (WIN32)
-    install(FILES ${IPhreeqc_SOURCES} DESTINATION src)
+    install(FILES ${IPhreeqc_SRC} DESTINATION src)
   else()
-    install(FILES ${IPhreeqc_SOURCES} DESTINATION ${CMAKE_INSTALL_DOCDIR}/src)
+    install(FILES ${IPhreeqc_SRC} DESTINATION ${CMAKE_INSTALL_DOCDIR}/src)
   endif()
   if (BUILD_CLR_LIBS)
     install(FILES "${PROJECT_SOURCE_DIR}/src/phreeqcpp/ZedGraph.dll" DESTINATION ${CMAKE_INSTALL_BINDIR})
