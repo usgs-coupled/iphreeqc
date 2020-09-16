@@ -168,6 +168,7 @@ PSRC = \
 	$(DEST)/Phreeqc.h \
 	$(DEST)/PHRQ_base.cpp \
 	$(DEST)/PHRQ_base.h \
+	$(DEST)/PHRQ_exports.h \
 	$(DEST)/PHRQ_io.cpp \
 	$(DEST)/PHRQ_io.h \
 	$(DEST)/PHRQ_io_output.cpp \
@@ -501,6 +502,9 @@ $(DEST)/PHRQ_base.cpp : $(SRC)/common/PHRQ_base.cxx
 	$(CP) $< $@
 
 $(DEST)/PHRQ_base.h : $(SRC)/common/PHRQ_base.h
+	$(CP) $< $@
+
+$(DEST)/PHRQ_exports.h : $(SRC)/common/PHRQ_exports.h
 	$(CP) $< $@
 
 $(DEST)/PHRQ_io.cpp : $(SRC)/common/PHRQ_io.cpp

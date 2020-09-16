@@ -78,6 +78,7 @@ SET(IPhreeqc_SOURCES
   src/phreeqcpp/common/Parser.h
   src/phreeqcpp/common/PHRQ_base.cxx
   src/phreeqcpp/common/PHRQ_base.h
+  src/phreeqcpp/common/PHRQ_exports.h
   src/phreeqcpp/common/PHRQ_io.cpp
   src/phreeqcpp/common/PHRQ_io.h
   src/phreeqcpp/common/phrqtype.h
@@ -281,6 +282,7 @@ set(IPhreeqc_Headers
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc.hpp
   ${PROJECT_SOURCE_DIR}/src/IPhreeqcCallbacks.h
   ${PROJECT_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords/Keywords.h
+  ${PROJECT_SOURCE_DIR}/src/phreeqcpp/common/PHRQ_exports.h
   ${PROJECT_SOURCE_DIR}/src/phreeqcpp/common/PHRQ_io.h
   ${PROJECT_SOURCE_DIR}/src/Var.h
   )
