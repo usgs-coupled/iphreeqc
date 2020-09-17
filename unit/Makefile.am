@@ -59,6 +59,7 @@ unit_SOURCES=\
 	../src/phreeqcpp/Phreeqc.h\
 	../src/phreeqcpp/PHRQ_base.cxx\
 	../src/phreeqcpp/PHRQ_base.h\
+	../src/phreeqcpp/PHRQ_export.h\
 	../src/phreeqcpp/PHRQ_io.cpp\
 	../src/phreeqcpp/PHRQ_io.h\
 	../src/phreeqcpp/Phreeqc_class.h\

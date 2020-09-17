@@ -9,7 +9,13 @@ EXTRA_DIST =\
 	cpp/CMakeLists.txt\
 	cpp/advect/CMakeLists.txt\
 	fortran/CMakeLists.txt\
-	fortran/advect/CMakeLists.txt
+	fortran/advect/CMakeLists.txt\
+	using-cmake/CMakeLists.txt\
+	using-cmake/CMakeLists.txt.in\
+	using-cmake/ex2\
+	using-cmake/main.cpp\
+	using-cmake/phreeqc.dat\
+	using-cmake/README.txt
 
 EXAMPLES_DIR = $(docdir)/examples
 
