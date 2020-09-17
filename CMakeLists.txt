@@ -1,9 +1,11 @@
 # CMAKE_MSVC_RUNTIME_LIBRARY requires 3.15
 cmake_minimum_required(VERSION 3.15)
 
-project (IPhreeqc
+project (
+  IPhreeqc
   VERSION 3.6.3
-  LANGUAGES CXX C)
+  LANGUAGES CXX C
+  )
 
 # check if this is the root project
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
@@ -315,6 +317,11 @@ if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
   set_target_properties(IPhreeqc PROPERTIES COMMON_LANGUAGE_RUNTIME "")
   target_compile_definitions(IPhreeqc PRIVATE "MULTICHART")
 endif()
+
+set_target_properties(IPhreeqc PROPERTIES
+  VERSION "${IPhreeqc_VERSION}"
+  SOVERSION "${IPhreeqc_VERSION_MAJOR}"
+  )
 
 # install
 if (STANDALONE_BUILD)
