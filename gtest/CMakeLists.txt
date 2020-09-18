@@ -1,25 +1,26 @@
 project(unit)
 
+include(GoogleTest)
+
 add_executable(TestCVar TestCVar.cpp)
 target_link_libraries(TestCVar IPhreeqc gtest gtest_main)
+gtest_discover_tests(TestCVar)
 
 add_executable(TestVar TestVar.cpp)
 target_link_libraries(TestVar IPhreeqc gtest gtest_main)
+gtest_discover_tests(TestVar)
 
 add_executable(TestIPhreeqcLib TestIPhreeqcLib.cpp FileTest.cpp)
 target_link_libraries(TestIPhreeqcLib IPhreeqc gtest gtest_main)
+gtest_discover_tests(TestIPhreeqcLib)
 
 add_executable(TestIPhreeqc TestIPhreeqc.cpp FileTest.cpp)
 target_link_libraries(TestIPhreeqc IPhreeqc gtest gtest_main)
+gtest_discover_tests(TestIPhreeqc)
 
 add_executable(TestSelectedOutput TestSelectedOutput.cpp)
 target_link_libraries(TestSelectedOutput IPhreeqc gtest gtest_main)
-
-add_test(TestCVar TestCVar)
-add_test(TestVar TestVar)
-add_test(TestIPhreeqc TestIPhreeqc)
-add_test(TestIPhreeqcLib TestIPhreeqcLib)
-add_test(TestSelectedOutput TestSelectedOutput)
+gtest_discover_tests(TestSelectedOutput)
 
 if (MSVC AND BUILD_SHARED_LIBS)
   # copy dlls
