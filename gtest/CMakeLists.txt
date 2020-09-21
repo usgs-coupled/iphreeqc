@@ -38,7 +38,7 @@ endif()
 
 # databases
 configure_file(
-  ../unit/phreeqc.dat.old
+  phreeqc.dat.old
   phreeqc.dat.old
   COPYONLY
   )
@@ -76,12 +76,6 @@ configure_file(
 configure_file(
   ../database/iso.dat
   iso.dat
-  COPYONLY
-  )
-
-configure_file(
-  ../unit/llnl.dat.old
-  llnl.dat.old
   COPYONLY
   )
 

@@ -376,10 +376,7 @@ if (BUILD_CLR_LIBS)
   endif()
 endif()
 
-if (EXISTS "${PROJECT_SOURCE_DIR}/CTestConfig.cmake")
-  # enable dashboard scripting
-  include (CTest)
-endif()
+include (CTest)
 
 if (STANDALONE_BUILD)
   
