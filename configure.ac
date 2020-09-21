@@ -134,6 +134,7 @@ AC_CONFIG_FILES([
   Makefile
   doc/Makefile
   examples/Makefile
+  gtest/Makefile
   src/Makefile
   tests/Makefile
   tests/phreeqc.dat

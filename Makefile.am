@@ -5,4 +5,4 @@ EXTRA_DIST =\
 	IPhreeqcConfig.cmake.in\
 	IPhreeqc.rc\
 	resource.h
-SUBDIRS = src tests examples doc database
+SUBDIRS = src tests examples doc database gtest
