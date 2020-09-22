@@ -24,14 +24,58 @@ gtest_discover_tests(TestSelectedOutput)
 
 if (MSVC AND BUILD_SHARED_LIBS)
   # copy dlls
-  add_custom_command(TARGET TestCVar POST_BUILD
+  add_custom_command(TARGET TestCVar PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestCVar>
     )
-  add_custom_command(TARGET TestCVar POST_BUILD
+  add_custom_command(TARGET TestCVar PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestCVar>
     )
-  add_custom_command(TARGET TestCVar POST_BUILD
+  add_custom_command(TARGET TestCVar PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestCVar>
+    )
+
+  # copy dlls
+  add_custom_command(TARGET TestVar PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestVar>
+    )
+  add_custom_command(TARGET TestVar PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestVar>
+    )
+  add_custom_command(TARGET TestVar PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestVar>
+    )
+
+  # copy dlls
+  add_custom_command(TARGET TestIPhreeqcLib PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestIPhreeqcLib>
+    )
+  add_custom_command(TARGET TestIPhreeqcLib PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestIPhreeqcLib>
+    )
+  add_custom_command(TARGET TestIPhreeqcLib PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestIPhreeqcLib>
+    )
+
+  # copy dlls
+  add_custom_command(TARGET TestIPhreeqc PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestIPhreeqc>
+    )
+  add_custom_command(TARGET TestIPhreeqc PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestIPhreeqc>
+    )
+  add_custom_command(TARGET TestIPhreeqc PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestIPhreeqc>
+    )
+
+  # copy dlls
+  add_custom_command(TARGET TestSelectedOutput PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestSelectedOutput>
+    )
+  add_custom_command(TARGET TestSelectedOutput PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestSelectedOutput>
+    )
+  add_custom_command(TARGET TestSelectedOutput PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestSelectedOutput>
     )
 endif()
 
