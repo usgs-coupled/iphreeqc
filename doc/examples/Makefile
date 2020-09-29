@@ -148,7 +148,20 @@ F90SetBasicFortranCallback: F90SetBasicFortranCallback.lo $(IPHREEQC_LA)
 	$(LIBTOOL) --mode=compile $(FC) $(FFLAGS) -c -o $@ $<
 
 
-F90CreateIPhreeqc.lo: IPhreeqc_interface.lo 
+F90CreateIPhreeqc.lo: IPhreeqc_interface.lo
+F90ClearAccumulatedLines.lo: IPhreeqc_interface.lo
+F90CreateIPhreeqc.lo: IPhreeqc_interface.lo
+F90DestroyIPhreeqc.lo: IPhreeqc_interface.lo
+F90GetComponent.lo: IPhreeqc_interface.lo
+F90GetDumpStringLine.lo: IPhreeqc_interface.lo
+F90GetErrorStringLine.lo: IPhreeqc_interface.lo
+F90GetLogStringLine.lo: IPhreeqc_interface.lo
+F90GetOutputStringLine.lo: IPhreeqc_interface.lo
+F90GetSelectedOutputStringLine.lo: IPhreeqc_interface.lo
+F90GetSelectedOutputValue.lo: IPhreeqc_interface.lo
+F90GetVersionString.lo: IPhreeqc_interface.lo
+F90SetBasicFortranCallback.lo: IPhreeqc_interface.lo
+
 
 IPhreeqc_interface.lo: ../../src/IPhreeqc_interface.F90
 	$(LIBTOOL) --mode=compile $(FC) $(FFLAGS) -c -o $@ $<
