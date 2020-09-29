@@ -209,6 +209,7 @@ fi
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
 SED_FILES="$DISTPATH/configure.ac \
+           $DISTPATH/examples/using-cmake/README.txt \
            $DISTPATH/phreeqc3-doc/RELEASE.TXT \
            $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT \
            $DISTPATH/src/IPhreeqc.h \
