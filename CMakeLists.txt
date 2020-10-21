@@ -275,9 +275,19 @@ if (MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
   target_compile_definitions(IPhreeqc PUBLIC _SCL_SECURE_NO_WARNINGS)
 endif()
 
-set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
-set_target_properties(IPhreeqc PROPERTIES MINSIZEREL_POSTFIX "msr")
-set_target_properties(IPhreeqc PROPERTIES RELWITHDEBINFO_POSTFIX "rwd")
+# Allow user to override POSTFIX properties (but mandate them so that
+# all builds can be installed to the same directory)
+if (NOT CMAKE_DEBUG_POSTFIX)
+  set_target_properties(IPhreeqc PROPERTIES DEBUG_POSTFIX "d")
+endif()
+
+if (NOT CMAKE_MINSIZEREL_POSTFIX)
+  set_target_properties(IPhreeqc PROPERTIES MINSIZEREL_POSTFIX "msr")
+endif()
+
+if (NOT CMAKE_RELWITHDEBINFO_POSTFIX)
+  set_target_properties(IPhreeqc PROPERTIES RELWITHDEBINFO_POSTFIX "rwd")
+endif()
 
 set(IPhreeqc_Headers
   ${PROJECT_SOURCE_DIR}/src/IPhreeqc.h
