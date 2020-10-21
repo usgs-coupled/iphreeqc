@@ -15,8 +15,9 @@ Configure, build and install IPhreeqc
 Build example:
 1. cd c:\Users\charlton\iphreeqc\examples\using-cmake
 2. mkdir _build
-3. cmake -DCMAKE_PREFIX_PATH:PATH=c:/Users/charlton/iphreeqc/lib/cmake/IPhreeqc ..
-4. cmake --build . --config release
+3. cd _build
+4. cmake -DCMAKE_PREFIX_PATH:PATH=c:/Users/charlton/iphreeqc ..
+5. cmake --build . --config release
 
 --------------------------------------------------------------------------------------
 Linux/macOS
