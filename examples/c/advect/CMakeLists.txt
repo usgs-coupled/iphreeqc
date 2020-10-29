@@ -11,6 +11,7 @@ ${IPhreeqc_BINARY_DIR}/examples/c/advect/CMakeLists.txt
 advect.c
 ic
 phreeqc.dat
+README.txt
 )
 
 # src
