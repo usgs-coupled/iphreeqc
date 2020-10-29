@@ -209,6 +209,9 @@ fi
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
 SED_FILES="$DISTPATH/configure.ac \
+           $DISTPATH/examples/c/advect/README.txt \
+           $DISTPATH/examples/cpp/advect/README.txt \
+           $DISTPATH/examples/fortran/advect/README.txt \
            $DISTPATH/examples/using-cmake/README.txt \
            $DISTPATH/phreeqc3-doc/RELEASE.TXT \
            $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT \
