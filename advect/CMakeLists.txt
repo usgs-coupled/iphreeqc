@@ -14,6 +14,7 @@ ${IPhreeqc_BINARY_DIR}/examples/fortran/advect/CMakeLists.txt
 advect.F90
 ic
 phreeqc.dat
+README.txt
 )
 
 if (IPHREEQC_FORTRAN_TESTING AND IPHREEQC_ENABLE_MODULE)
