@@ -71,10 +71,6 @@ SET(IPhreeqc_SOURCES
   src/IPhreeqcLib.cpp
   src/phreeqcpp/advection.cpp
   src/phreeqcpp/basicsubs.cpp
-  src/phreeqcpp/ChartHandler.cpp
-  src/phreeqcpp/ChartHandler.h
-  src/phreeqcpp/ChartObject.cpp
-  src/phreeqcpp/ChartObject.h
   src/phreeqcpp/cl1.cpp
   src/phreeqcpp/common/Parser.cxx
   src/phreeqcpp/common/Parser.h
@@ -86,8 +82,6 @@ SET(IPhreeqc_SOURCES
   src/phreeqcpp/common/phrqtype.h
   src/phreeqcpp/common/Utils.cxx
   src/phreeqcpp/common/Utils.h
-  src/phreeqcpp/CurveObject.cpp
-  src/phreeqcpp/CurveObject.h
   src/phreeqcpp/cvdense.cpp
   src/phreeqcpp/cvdense.h
   src/phreeqcpp/cvode.cpp
@@ -384,6 +378,17 @@ if (BUILD_CLR_LIBS)
   if (IPHREEQC_STATIC_RUNTIME)
     message(FATAL_ERROR "BUILD_CLR_LIBS and IPHREEQC_STATIC_RUNTIME are mutually exclusive")
   endif()
+
+  # CLR files
+  set(IPhreeqc_SOURCES
+    ${IPhreeqc_SOURCES}
+    src/phreeqcpp/ChartHandler.cpp
+    src/phreeqcpp/ChartHandler.h
+    src/phreeqcpp/ChartObject.cpp
+    src/phreeqcpp/ChartObject.h
+    src/phreeqcpp/CurveObject.cpp
+    src/phreeqcpp/CurveObject.h
+    )
 endif()
 
 include (CTest)
