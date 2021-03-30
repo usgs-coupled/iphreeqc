@@ -19,10 +19,9 @@ add_elt_list(struct elt_list *elt_list_ptr, LDBLE coef)
 	for (elt_list_ptr1 = elt_list_ptr; elt_list_ptr1->elt != NULL;
 		 elt_list_ptr1++)
 	{
-		if (count_elts >= max_elts)
+		if (count_elts >= (int)elt_list.size())
 		{
-			space((void **) ((void *) &elt_list), count_elts, &max_elts,
-				  sizeof(struct elt_list));
+			elt_list.resize((size_t)count_elts + 1);
 		}
 		elt_list[count_elts].elt = elt_list_ptr1->elt;
 		elt_list[count_elts].coef = elt_list_ptr1->coef * coef;
@@ -65,10 +64,9 @@ add_elt_list_multi_surf(struct elt_list *elt_list_ptr, LDBLE coef, struct elemen
 		for (elt_list_ptr1 = elt_list_ptr; elt_list_ptr1->elt != NULL;
 			elt_list_ptr1++)
 		{
-			if (count_elts >= max_elts)
+			if (count_elts >= (int)elt_list.size())
 			{
-				space((void **) ((void *) &elt_list), count_elts, &max_elts,
-					sizeof(struct elt_list));
+				elt_list.resize((size_t)count_elts + 1);
 			}
 			if (elt_list_ptr1->elt == surf_elt_ptr)
 			{
@@ -93,10 +91,9 @@ add_elt_list_multi_surf(struct elt_list *elt_list_ptr, LDBLE coef, struct elemen
 		for (elt_list_ptr1 = elt_list_ptr; elt_list_ptr1->elt != NULL;
 			elt_list_ptr1++)
 		{
-			if (count_elts >= max_elts)
+			if (count_elts >= (int)elt_list.size())
 			{
-				space((void **) ((void *) &elt_list), count_elts, &max_elts,
-					sizeof(struct elt_list));
+				elt_list.resize((size_t)count_elts + 1);
 			}
 			if (elt_list_ptr1->elt == surf_elt_ptr)
 			{
@@ -115,10 +112,9 @@ add_elt_list(const cxxNameDouble & nd, LDBLE coef)
 	cxxNameDouble::const_iterator cit = nd.begin();
 	for ( ; cit != nd.end(); cit++)
 	{
-		if (count_elts >= max_elts)
+		if (count_elts >= (int)elt_list.size())
 		{
-			space((void **) ((void *) &elt_list), count_elts, &max_elts,
-				  sizeof(struct elt_list));
+			elt_list.resize((size_t)count_elts + 1);
 		}
 		elt_list[count_elts].elt = element_store(cit->first.c_str());
 		elt_list[count_elts].coef = cit->second * coef;
@@ -407,15 +403,6 @@ copy_token(char *token_ptr, char **ptr, int *length)
 	}
 	token_ptr[i] = '\0';
 	*length = i;
-#ifdef PHREEQ98
-	if ((return_value == DIGIT) && (strstr(token_ptr, ",") != NULL))
-	{
-		error_string = sformatf(
-				"Commas are not allowed as decimal separator: %s.",
-				token_ptr);
-		error_msg(error_string, CONTINUE);
-	}
-#endif
 	return (return_value);
 }
 /* ---------------------------------------------------------------------- */
@@ -484,15 +471,6 @@ copy_token(std::string &token, char **ptr)
 		token.append(c_char);
 		(*ptr)++;
 	}
-#ifdef PHREEQ98
-	if ((return_value == DIGIT) && (strstr(token_ptr, ",") != NULL))
-	{
-		error_string = sformatf(
-				"Commas are not allowed as decimal separator: %s.",
-				token_ptr);
-		error_msg(error_string, CONTINUE);
-	}
-#endif
 	return (return_value);
 }
 #if defined PHREEQ98 
@@ -599,20 +577,9 @@ dup_print(const char *ptr, int emphasis)
 
 	if (pr.headings == FALSE)
 		return (OK);
-#ifdef PHREEQ98
-	if ((CreateToC == TRUE) && (AutoLoadOutputFile == TRUE))
-	{
-		if (strstr(ptr, "Reading") == ptr)
-			AddToCEntry((char *) ptr, 1, outputlinenr);
-		else if (strstr(ptr, "Beginning") == ptr)
-			AddToCEntry((char *) ptr, 2, outputlinenr);
-		else if ((strstr(ptr, "TITLE") != ptr) && (strstr(ptr, "End") != ptr))
-			AddToCEntry((char *) ptr, 3, outputlinenr);
-	}
-#endif
 	std::string save_in(ptr);
 	l = (int) strlen(ptr);
-	dash = (char *) PHRQ_malloc((size_t) (l + 2) * sizeof(char));
+	dash = (char *) PHRQ_malloc(((size_t)l + 2) * sizeof(char));
 	if (dash == NULL)
 		malloc_error();
 	if (emphasis == TRUE)
@@ -1001,10 +968,6 @@ print_centered(const char *string)
 	int i, l, l1, l2;
 	char token[MAX_LENGTH];
 
-#ifdef PHREEQ98
-	if ((CreateToC == TRUE) && (AutoLoadOutputFile == TRUE))
-		AddToCEntry((char *) string, 4, outputlinenr);
-#endif
 	l = (int) strlen(string);
 	l1 = (79 - l) / 2;
 	l2 = 79 - l - l1;
@@ -1224,7 +1187,10 @@ strcmp_nocase(const char *str1, const char *str2)
 		return (-1);
 	return (1);
 }
-
+void Phreeqc::str_tolower(std::string &name)
+{
+	std::transform(name.begin(), name.end(), name.begin(), tolower);
+}
 /* ---------------------------------------------------------------------- */
 int Phreeqc::
 strcmp_nocase_arg1(const char *str1, const char *str2)
@@ -1262,7 +1228,7 @@ string_duplicate(const char *token)
 #if !defined(NDEBUG) && defined(WIN32_MEMORY_DEBUG)
 	str = (char *) _malloc_dbg((size_t) (l + 1) * sizeof(char), _NORMAL_BLOCK, szFileName, nLine);
 #else
-	str = (char *) PHRQ_malloc((size_t) (l + 1) * sizeof(char));
+	str = (char *) PHRQ_malloc(((size_t)l + 1) * sizeof(char));
 #endif
 
 	if (str == NULL)
@@ -1270,54 +1236,7 @@ string_duplicate(const char *token)
 	strcpy(str, token);
 	return (str);
 }
-#ifdef HASH
-/* ---------------------------------------------------------------------- */
-const char * Phreeqc::
-string_hsave(const char *str)
-/* ---------------------------------------------------------------------- */
-{
-/*
- *      Save character string str
- *
- *      Arguments:
- *         str   input string to save.
- *
- *      Returns:
- *         starting address of saved string (str)
- */
-	std::hash_map<std::string, std::string *>::const_iterator it;
-	it = strings_hash.find(str);
-	if (it != strings_hash.end())
-	{
-		return (it->second->c_str());
-	}
 
-	std::string *stdstr = new std::string(str);
-	strings_map[*stdstr] = stdstr;
-	return(stdstr->c_str());
-}
-/* ---------------------------------------------------------------------- */
-void Phreeqc::
-strings_hash_clear()
-/* ---------------------------------------------------------------------- */
-{
-/*
- *      Save character string str
- *
- *      Arguments:
- *         str   input string to save.
- *
- *      Returns:
- *         starting address of saved string (str)
- */
-	std::hash_map<std::string, std::string *>::iterator it;
-	for (it = strings_hash.begin(); it != strings_hash.end(); it++)
-	{
-		delete it->second;
-	}
-	strings_hash.clear();
-}
-#else
 /* ---------------------------------------------------------------------- */
 const char * Phreeqc::
 string_hsave(const char *str)
@@ -1343,7 +1262,6 @@ string_hsave(const char *str)
 	strings_map[*stdstr] = stdstr;
 	return(stdstr->c_str());
 }
-#endif
 /* ---------------------------------------------------------------------- */
 void Phreeqc::
 strings_map_clear()
@@ -1397,12 +1315,6 @@ status(int count, const char *str, bool rk_string)
 	char spin_str[2];
 	clock_t t2;
 
-#ifdef PHREEQ98
-	if (ProcessMessages)
-		ApplicationProcessMessages();
-	if (stop_calculations == TRUE)
-		error_msg("Execution canceled by user.", STOP);
-#endif
 	if (pr.status == FALSE || phast == TRUE)
 		return (OK);
 
@@ -1570,300 +1482,7 @@ status(int count, const char *str, bool rk_string)
 */
 
 /* rewrote to remove MUL and DIV */
-# define MOD(x,y)		((x) & ((y)-1))
-
-/*
-** Local data
-*/
-
-#ifdef HASH_STATISTICS
- long HashAccesses, HashCollisions;
-#endif
-
-/*
-** Code
-*/
-
-int Phreeqc::
-hcreate_multi(unsigned Count, HashTable ** HashTable_ptr)
-{
-	int i;
-	HashTable *Table;
-	/*
-	 ** Adjust Count to be nearest higher power of 2,
-	 ** minimum SegmentSize, then convert into segments.
-	 */
-	i = SegmentSize;
-	while (i < (int) Count)
-		i <<= 1;
-/*    Count = DIV(i,SegmentSize); */
-	Count = ((i) >> (SegmentSizeShift));
-
-	Table = (HashTable *) PHRQ_calloc(sizeof(HashTable), 1);
-	*HashTable_ptr = Table;
-
-	if (Table == NULL)
-		return (0);
-	/*
-	 ** resets are redundant - done by calloc(3)
-	 **
-	 Table->SegmentCount = Table->p = Table->KeyCount = 0;
-	 */
-	/*
-	 ** Allocate initial 'i' segments of buckets
-	 */
-	for (i = 0; i < (int) Count; i++)
-	{
-		Table->Directory[i] =
-			(Segment *) PHRQ_calloc(sizeof(Segment), SegmentSize);
-		if (Table->Directory[i] == NULL)
-		{
-			hdestroy_multi(Table);
-			return (0);
-		}
-		Table->SegmentCount++;
-	}
-/*    Table->maxp = MUL(Count,SegmentSize); */
-	Table->maxp = (short) ((Count) << (SegmentSizeShift));
-	Table->MinLoadFactor = 1;
-	Table->MaxLoadFactor = DefaultMaxLoadFactor;
-#ifdef HASH_STATISTICS
-	HashAccesses = HashCollisions = 0;
-#endif
-	return (1);
-}
-
-void Phreeqc::
-hdestroy_multi(HashTable * Table)
-{
-	int i, j;
-	Segment *seg;
-	Element *p, *q;
-
-	if (Table != NULL)
-	{
-		for (i = 0; i < Table->SegmentCount; i++)
-		{
-			/* test probably unnecessary        */
-			if ((seg = Table->Directory[i]) != NULL)
-			{
-				for (j = 0; j < SegmentSize; j++)
-				{
-					p = seg[j];
-					while (p != NULL)
-					{
-						q = p->Next;
-						PHRQ_free((void *) p);
-						p = q;
-					}
-				}
-				PHRQ_free(Table->Directory[i]);
-			}
-		}
-		PHRQ_free(Table);
-		/*      Table = NULL; */
-	}
-}
-
-ENTRY * Phreeqc::
-hsearch_multi(HashTable * Table, ENTRY item, ACTION action)
-/* ACTION       FIND/ENTER	*/
-{
-	Address h;
-	Segment *CurrentSegment;
-	int SegmentIndex;
-	int SegmentDir;
-	Segment *p, q;
-
-	assert(Table != NULL);		/* Kinder really than return(NULL);     */
-#ifdef HASH_STATISTICS
-	HashAccesses++;
-#endif
-	h = Hash_multi(Table, item.key);
-/*    SegmentDir = DIV(h,SegmentSize); */
-	SegmentDir = ((h) >> (SegmentSizeShift));
-	SegmentIndex = MOD(h, SegmentSize);
-	/*
-	 ** valid segment ensured by Hash()
-	 */
-	CurrentSegment = Table->Directory[SegmentDir];
-	assert(CurrentSegment != NULL);	/* bad failure if tripped       */
-	p = &CurrentSegment[SegmentIndex];
-	q = *p;
-	/*
-	 ** Follow collision chain
-	 */
-	while (q != NULL && strcmp(q->Key, item.key))
-	{
-		p = &q->Next;
-		q = *p;
-#ifdef HASH_STATISTICS
-		HashCollisions++;
-#endif
-	}
-	if (q != NULL				/* found        */
-		|| action == FIND		/* not found, search only       */
-		)
-	{
-		return ((ENTRY *) q);
-	}
-	else if ((q = (Element *) PHRQ_calloc(sizeof(Element), 1)) == NULL)
-	{
-		malloc_error();
-	}
-	*p = q;						/* link into chain      */
-	/*
-	 ** Initialize new element
-	 */
-	q->Key = item.key;
-	q->Data = (char *) item.data;
-	/*
-	 ** cleared by calloc(3)
-	 q->Next = NULL;
-	 */
-	/*
-	 ** Table over-full?
-	 */
-/*    if (++Table->KeyCount / MUL(Table->SegmentCount,SegmentSize) > Table->MaxLoadFactor) */
-	if (++Table->KeyCount / ((Table->SegmentCount) << (SegmentSizeShift)) >
-		Table->MaxLoadFactor)
-		ExpandTable_multi(Table);	/* doesn`t affect q     */
-	return ((ENTRY *) q);
-}
-
-/*
-** Internal routines
-*/
-
- Address Phreeqc::
-Hash_multi(HashTable * Table, const char *Key)
-{
-	Address h, address;
-	unsigned char *k = (unsigned char *) Key;
-
-	h = 0;
-	/*
-	 ** Convert string to integer
-	 */
-	while (*k)
-		h = h * Prime1 ^ (*k++ - ' ');
-	h %= Prime2;
-	address = MOD(h, Table->maxp);
-	if (address < (unsigned long) Table->p)
-		address = MOD(h, (Table->maxp << 1));	/* h % (2*Table->maxp)  */
-	return (address);
-}
-
-void Phreeqc::
-ExpandTable_multi(HashTable * Table)
-{
-	Address NewAddress;
-	int OldSegmentIndex, NewSegmentIndex;
-	int OldSegmentDir, NewSegmentDir;
-	Segment *OldSegment, *NewSegment;
-	Element *Current, **Previous, **LastOfNew;
-
-/*    if (Table->maxp + Table->p < MUL(DirectorySize,SegmentSize)) */
-	if (Table->maxp + Table->p < ((DirectorySize) << (SegmentSizeShift)))
-	{
-		/*
-		 ** Locate the bucket to be split
-		 */
-/*	OldSegmentDir = DIV(Table->p,SegmentSize); */
-		OldSegmentDir = ((Table->p) >> (SegmentSizeShift));
-		OldSegment = Table->Directory[OldSegmentDir];
-		OldSegmentIndex = MOD(Table->p, SegmentSize);
-		/*
-		 ** Expand address space; if necessary create a new segment
-		 */
-		NewAddress = Table->maxp + Table->p;
-/*	NewSegmentDir = DIV(NewAddress,SegmentSize); */
-		NewSegmentDir = ((NewAddress) >> (SegmentSizeShift));
-		NewSegmentIndex = MOD(NewAddress, SegmentSize);
-		if (NewSegmentIndex == 0)
-		{
-			Table->Directory[NewSegmentDir] =
-				(Segment *) PHRQ_calloc(sizeof(Segment), SegmentSize);
-			if (Table->Directory[NewSegmentDir] == NULL)
-			{
-				malloc_error();
-			}
-		}
-		NewSegment = Table->Directory[NewSegmentDir];
-		/*
-		 ** Adjust state variables
-		 */
-		Table->p++;
-		if (Table->p == Table->maxp)
-		{
-			Table->maxp <<= 1;	/* Table->maxp *= 2     */
-			Table->p = 0;
-		}
-		Table->SegmentCount++;
-		/*
-		 ** Relocate records to the new bucket
-		 */
-		Previous = &OldSegment[OldSegmentIndex];
-		Current = *Previous;
-		LastOfNew = &NewSegment[NewSegmentIndex];
-		*LastOfNew = NULL;
-		while (Current != NULL)
-		{
-			if (Hash_multi(Table, Current->Key) == NewAddress)
-			{
-				/*
-				 ** Attach it to the end of the new chain
-				 */
-				*LastOfNew = Current;
-				/*
-				 ** Remove it from old chain
-				 */
-				*Previous = Current->Next;
-				LastOfNew = &Current->Next;
-				Current = Current->Next;
-				*LastOfNew = NULL;
-			}
-			else
-			{
-				/*
-				 ** leave it on the old chain
-				 */
-				Previous = &Current->Next;
-				Current = Current->Next;
-			}
-		}
-	}
-}
-
-
-void Phreeqc::
-free_hash_strings(HashTable * Table)
-{
-	int i, j;
-	Segment *seg;
-	Element *p, *q;
-
-	if (Table != NULL)
-	{
-		for (i = 0; i < Table->SegmentCount; i++)
-		{
-			/* test probably unnecessary        */
-			if ((seg = Table->Directory[i]) != NULL)
-			{
-				for (j = 0; j < SegmentSize; j++)
-				{
-					p = seg[j];
-					while (p != NULL)
-					{
-						q = p->Next;
-						p->Data = (char *) free_check_null((void *) p->Data);
-						p = q;
-					}
-				}
-			}
-		}
-	}
-}
+//# define MOD(x,y)		((x) & ((y)-1))
 
 /* ---------------------------------------------------------------------- */
 int Phreeqc::
@@ -2016,7 +1635,7 @@ string_pad(const char *str, int i)
 	max = l;
 	if (l < i)
 		max = i;
-	str_ptr = (char *) PHRQ_malloc((size_t) ((max + 1) * sizeof(char)));
+	str_ptr = (char *) PHRQ_malloc((((size_t)max + 1) * sizeof(char)));
 	if (str_ptr == NULL)
 		malloc_error();
 	strcpy(str_ptr, str);
@@ -2030,29 +1649,6 @@ string_pad(const char *str, int i)
 	}
 	return (str_ptr);
 }
-
-/* ---------------------------------------------------------------------- */
-void Phreeqc::
-zero_double(LDBLE * target, int n)
-/* ---------------------------------------------------------------------- */
-{
-	int i;
-
-	if (n > zeros_max)
-	{
-		zeros = (LDBLE *) PHRQ_realloc(zeros, (size_t) (n * sizeof(LDBLE)));
-		if (zeros == NULL)
-			malloc_error();
-		for (i = zeros_max; i < n; i++)
-		{
-			zeros[i] = 0.0;
-		}
-		zeros_max = n;
-	}
-	memcpy((void *) target, (void *) zeros, (size_t) (n * sizeof(LDBLE)));
-	return;
-}
-
 /* ---------------------------------------------------------------------- */
 int Phreeqc::
 get_input_errors()

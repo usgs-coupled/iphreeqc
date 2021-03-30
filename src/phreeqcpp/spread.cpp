@@ -210,7 +210,7 @@ read_solution_spread(void)
 					break;
 				case 14: /* pressure */
 				case 15: /* press */
-					sscanf(next_char, SCANFORMAT, &(soln_defaults.pressure));
+					(void)sscanf(next_char, SCANFORMAT, &(soln_defaults.pressure));
 					break;
 				}
 			}
@@ -269,7 +269,7 @@ read_solution_spread(void)
 			break;
 		case 0:				/* temperature */
 		case 1:
-			sscanf(next_char, SCANFORMAT, &(soln_defaults.temp));
+			(void)sscanf(next_char, SCANFORMAT, &(soln_defaults.temp));
 			break;
 		case 2:				/* density */
 		case 3:
@@ -331,7 +331,7 @@ read_solution_spread(void)
 			break;
 		case 6:				/* ph */
 			copy_token(token, &next_char);
-			sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.ph));
+			(void)sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.ph));
 			if (copy_token(token, &next_char) != EMPTY)
 			{
 				warning_msg
@@ -340,7 +340,7 @@ read_solution_spread(void)
 			break;
 		case 7:				/* pe */
 			copy_token(token, &next_char);
-			sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.pe));
+			(void)sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.pe));
 			if (copy_token(token, &next_char) != EMPTY)
 			{
 				warning_msg
@@ -377,11 +377,8 @@ read_solution_spread(void)
 				}
 				if (i == soln_defaults.count_iso)
 				{
-					soln_defaults.iso =
-						(struct iso *) PHRQ_realloc(soln_defaults.iso,
-						(size_t) (i +
-						1) *
-						sizeof(struct iso));
+					soln_defaults.iso = (struct iso *) PHRQ_realloc(soln_defaults.iso,
+						((size_t)i + 1) * sizeof(struct iso));
 					if (soln_defaults.iso == NULL)
 					{
 						malloc_error();
@@ -409,7 +406,7 @@ read_solution_spread(void)
 					}
 					else
 					{
-						sscanf(token.c_str(), SCANFORMAT,
+						(void)sscanf(token.c_str(), SCANFORMAT,
 							&(soln_defaults.iso[i].uncertainty));
 					}
 				}
@@ -431,7 +428,7 @@ read_solution_spread(void)
 				}
 				else
 				{
-					sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.water));
+					(void)sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.water));
 				}
 			}
 			break;
@@ -463,11 +460,8 @@ read_solution_spread(void)
 				}
 				if (i == soln_defaults.count_iso)
 				{
-					soln_defaults.iso =
-						(struct iso *) PHRQ_realloc(soln_defaults.iso,
-						(size_t) (i +
-						1) *
-						sizeof(struct iso));
+					soln_defaults.iso = (struct iso *) PHRQ_realloc(soln_defaults.iso,
+						((size_t)i + 1) * sizeof(struct iso));
 					if (soln_defaults.iso == NULL)
 					{
 						malloc_error();
@@ -489,7 +483,7 @@ read_solution_spread(void)
 					error_msg(error_string, CONTINUE);
 					break;
 				}
-				sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.iso[i].value));
+				(void)sscanf(token.c_str(), SCANFORMAT, &(soln_defaults.iso[i].value));
 				/* read and store isotope ratio uncertainty */
 				int j;
 				if ((j = copy_token(token, &next_char)) != EMPTY)
@@ -504,14 +498,14 @@ read_solution_spread(void)
 					}
 					else
 					{
-						sscanf(token.c_str(), SCANFORMAT,
+						(void)sscanf(token.c_str(), SCANFORMAT,
 							&(soln_defaults.iso[i].uncertainty));
 					}
 				}
 			}
 			break;
 		case 14: /* pressure */
-			sscanf(next_char, SCANFORMAT, &(soln_defaults.pressure));
+			(void)sscanf(next_char, SCANFORMAT, &(soln_defaults.pressure));
 			break;
 		case 100:				/* read headings */
 			heading = string_to_spread_row(line);
@@ -720,14 +714,14 @@ spread_row_to_solution(struct spread_row *heading, struct spread_row *units,
 			break;
 		case 0:				/* temperature */
 		case 1:
-			sscanf(next_char, SCANFORMAT, &dummy);
+			(void)sscanf(next_char, SCANFORMAT, &dummy);
 			temp_solution.Set_tc(dummy);
 			break;
 		case 2:				/* density */
 		case 3:
 			{
 				int j = copy_token(token, &next_char);
-				sscanf(token.c_str(), SCANFORMAT, &dummy);
+				(void)sscanf(token.c_str(), SCANFORMAT, &dummy);
 				temp_solution.Set_density(dummy);
 				j = copy_token(token, &next_char);
 				if (j != EMPTY)
@@ -915,7 +909,7 @@ spread_row_to_solution(struct spread_row *heading, struct spread_row *units,
 					free_check_null(char_string);
 					continue;
 				}
-				sscanf(token.c_str(), SCANFORMAT, &dummy);
+				(void)sscanf(token.c_str(), SCANFORMAT, &dummy);
 				temp_isotope.Set_ratio(dummy);
 				temp_isotope.Set_ratio_uncertainty(NAN);
 
@@ -932,7 +926,7 @@ spread_row_to_solution(struct spread_row *heading, struct spread_row *units,
 						free_check_null(char_string);
 						continue;
 					}
-					sscanf(token.c_str(), SCANFORMAT, &dummy);
+					(void)sscanf(token.c_str(), SCANFORMAT, &dummy);
 					temp_isotope.Set_ratio_uncertainty(dummy);
 				}
 				temp_solution.Get_isotopes()[temp_isotope.Get_isotope_name()] = temp_isotope;
@@ -956,7 +950,7 @@ spread_row_to_solution(struct spread_row *heading, struct spread_row *units,
 				}
 				else
 				{
-					sscanf(token.c_str(), SCANFORMAT, &dummy);
+					(void)sscanf(token.c_str(), SCANFORMAT, &dummy);
 					temp_solution.Set_mass_water(dummy);
 				}
 			}

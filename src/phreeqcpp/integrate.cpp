@@ -53,7 +53,7 @@ calc_all_g(void)
 /*
  *   calculate g for given surface for each species
  */
-		for (int i = 0; i < count_s_x; i++)
+		for (int i = 0; i < (int)this->s_x.size(); i++)
 		{
 			if (s_x[i]->type > HPLUS)
 				continue;
@@ -252,7 +252,7 @@ g_function(LDBLE x_value)
 	{
 		it->second.Set_psi_to_z(exp(ln_x_value * it->first) - 1.0);
 	}
-	for (i = 0; i < count_s_x; i++)
+	for (i = 0; i < (int)this->s_x.size(); i++)
 	{
 		if (s_x[i]->type < H2O && s_x[i]->z != 0.0)
 		{
@@ -265,7 +265,7 @@ g_function(LDBLE x_value)
 		sum1 = 0.0;
 		output_msg(sformatf(
 				   "Species\tmoles\tX**z-1\tsum\tsum charge\n"));
-		for (i = 0; i < count_s_x; i++)
+		for (i = 0; i < (int)this->s_x.size(); i++)
 		{
 			if (s_x[i]->type < H2O && s_x[i]->z != 0.0)
 			{
@@ -305,10 +305,10 @@ polint(LDBLE * xa, LDBLE * ya, int n, LDBLE xv, LDBLE * yv, LDBLE * dy)
 /*
  *   Malloc work space
  */
-	c = (LDBLE *) PHRQ_malloc((size_t) (n + 1) * sizeof(LDBLE));
+	c = (LDBLE *) PHRQ_malloc(((size_t)n + 1) * sizeof(LDBLE));
 	if (c == NULL)
 		malloc_error();
-	d = (LDBLE *) PHRQ_malloc((size_t) (n + 1) * sizeof(LDBLE));
+	d = (LDBLE *) PHRQ_malloc(((size_t)n + 1) * sizeof(LDBLE));
 	if (d == NULL)
 		malloc_error();
 
@@ -479,7 +479,7 @@ calc_init_g(void)
 /*
  *   calculate g for given surface for each species
  */
-		for (int i = 0; i < count_s_x; i++)
+		for (int i = 0; i < (int)this->s_x.size(); i++)
 		{
 			if (s_x[i]->type > HPLUS)
 				continue;
@@ -703,7 +703,7 @@ sum_diffuse_layer(cxxSurfaceCharge *charge_ptr)
 	count_elts = 0;
 	paren_count = 0;
 	mass_water_surface = charge_ptr->Get_mass_water();
-	for (int j = 0; j < count_s_x; j++)
+	for (int j = 0; j < (int)this->s_x.size(); j++)
 	{
 		if (s_x[j]->type > HPLUS)
 			continue;
@@ -723,13 +723,7 @@ sum_diffuse_layer(cxxSurfaceCharge *charge_ptr)
 		add_elt_list(s_x[j]->next_elt, moles_surface);
 	}
 	add_elt_list(s_h2o->next_elt, mass_water_surface / gfw_water);
-
-	if (count_elts > 0)
-	{
-		qsort(elt_list, (size_t) count_elts,
-			  (size_t) sizeof(struct elt_list), elt_list_compare);
-		elt_list_combine();
-	}
+	elt_list_combine();
 	return (OK);
 }
 /* ---------------------------------------------------------------------- */
@@ -771,7 +765,7 @@ calc_all_donnan(void)
 			it->second = 0.0;
 		}
 		charge_group_map.clear();
-		for (int i = 0; i < count_s_x; i++)
+		for (int i = 0; i < (int)this->s_x.size(); i++)
 		{
 			if (s_x[i]->type > HPLUS)
 				continue;
@@ -781,7 +775,7 @@ calc_all_donnan(void)
 		A_surf = charge_ptr->Get_specific_area() * charge_ptr->Get_grams();
 		if (use.Get_surface_ptr()->Get_type() == cxxSurface::CD_MUSIC)
 		{
-			f_psi = x[j + 2]->master[0]->s->la * LOG_10;	/* -FPsi/RT */
+			f_psi = x[(size_t)j + 2]->master[0]->s->la * LOG_10;	/* -FPsi/RT */
 			f_psi = f_psi / 2;
 			cd_m = 1;
 		} else
@@ -925,7 +919,7 @@ calc_init_donnan(void)
 	charge_group_map.clear();
 	charge_group_map[0.0] = 0.0;
 
-	for (int i = 0; i < count_s_x; i++)
+	for (int i = 0; i < (int)this->s_x.size(); i++)
 	{
 		if (s_x[i]->type > HPLUS)
 			continue;
@@ -952,7 +946,7 @@ calc_init_donnan(void)
 		A_surf = charge_ptr->Get_specific_area() * charge_ptr->Get_grams();
 		if (use.Get_surface_ptr()->Get_type() == cxxSurface::CD_MUSIC)
 		{
-			f_psi = x[j + 2]->master[0]->s->la * LOG_10;	/* -FPsi/RT */
+			f_psi = x[(size_t)j + 2]->master[0]->s->la * LOG_10;	/* -FPsi/RT */
 			f_psi = f_psi / 2;
 		} else
 			f_psi = x[j]->master[0]->s->la * LOG_10;
@@ -989,7 +983,7 @@ calc_init_donnan(void)
 				charge_ptr->Get_g_map()[z].Set_dg(-z);
 			}
 			/* save g for species */
-			for (int i = 0; i < count_s_x; i++)
+			for (int i = 0; i < (int)this->s_x.size(); i++)
 			{
 				int is = s_x[i]->number;
 				assert (is < (int) s_diff_layer.size());

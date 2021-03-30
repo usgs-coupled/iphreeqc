@@ -266,15 +266,9 @@ setup_inverse(struct inverse *inv_ptr)
 /*
  *   Malloc space for arrays
  */
-	my_array = (LDBLE *) free_check_null(my_array);
-	my_array =
-		(LDBLE *) PHRQ_malloc((size_t) max_column_count * max_row_count *
-							  sizeof(LDBLE));
-	if (my_array == NULL)
-		malloc_error();
+	my_array.resize((size_t)max_column_count * (size_t)max_row_count);
 
-	array1 =
-		(LDBLE *) PHRQ_malloc((size_t) max_column_count * max_row_count *
+	array1 = (LDBLE *) PHRQ_malloc((size_t) max_column_count * max_row_count *
 							  sizeof(LDBLE));
 	if (array1 == NULL)
 		malloc_error();
@@ -288,10 +282,7 @@ setup_inverse(struct inverse *inv_ptr)
 	if (row_name == NULL)
 		malloc_error();
 
-	delta = (LDBLE *) free_check_null(delta);
-	delta = (LDBLE *) PHRQ_malloc((size_t) max_column_count * sizeof(LDBLE));
-	if (delta == NULL)
-		malloc_error();
+	delta.resize((size_t)max_column_count);
 
 	inv_delta1 = (LDBLE *) PHRQ_malloc((size_t) max_column_count * sizeof(LDBLE));
 	if (inv_delta1 == NULL)
@@ -349,8 +340,8 @@ setup_inverse(struct inverse *inv_ptr)
 		   (size_t) max_column_count * sizeof(LDBLE));
 	for (i = 0; i < max_row_count; i++)
 	{
-		memcpy((void *) &(my_array[i * max_column_count]), (void *) &(inv_zero[0]),
-			   (size_t) max_column_count * sizeof(LDBLE));
+		memcpy((void *) &(my_array[(size_t)i * (size_t)max_column_count]), (void *) &(inv_zero[0]),
+			   (size_t)max_column_count * sizeof(LDBLE));
 	}
 /*
  *   begin filling array
@@ -380,7 +371,7 @@ setup_inverse(struct inverse *inv_ptr)
  */
 
 	/* initialize master species */
-	for (i = 0; i < count_master; i++)
+	for (i = 0; i < (int)master.size(); i++)
 	{
 		master[i]->in = -1;
 		if (strstr(master[i]->elt->name, "Alk") == master[i]->elt->name)
@@ -439,21 +430,21 @@ setup_inverse(struct inverse *inv_ptr)
 		column = i;
 		sprintf(token, "soln %d", i);
 		col_name[column] = string_hsave(token);
-		for (j = 0; j < count_master; j++)
+		for (j = 0; j < (int)master.size(); j++)
 		{
 			if (master[j]->in >= 0)
 			{
-				my_array[master[j]->in * max_column_count + i] =
+				my_array[(size_t)master[j]->in * (size_t)max_column_count + (size_t)i] =
 					f * master[j]->total;
 				if (master[j]->s == s_eminus)
 				{
-					my_array[master[j]->in * max_column_count + i] = 0.0;
+					my_array[(size_t)master[j]->in * (size_t)max_column_count + (size_t)i] = 0.0;
 				}
 			}
 		}
 		/* calculate charge balance for elements in model */
 		cb = 0;
-		for (j = 0; j < count_master; j++)
+		for (j = 0; j < (int)master.size(); j++)
 		{
 			if (master[j]->in >= 0)
 			{
@@ -474,7 +465,7 @@ setup_inverse(struct inverse *inv_ptr)
 		}
 		if (fabs(cb) < toler)
 			cb = 0.0;
-		my_array[(row_charge + i) * max_column_count + i] = cb;
+		my_array[((size_t)row_charge + (size_t)i) * (size_t)max_column_count + (size_t)i] = cb;
 	}
 
 /*   mass_balance: phase data */
@@ -520,11 +511,11 @@ setup_inverse(struct inverse *inv_ptr)
 			coef = master_ptr->coef;
 			if (coef <= 0)
 				coef = 1.0;
-			my_array[row * max_column_count + column] =
+			my_array[(size_t)row * (size_t)max_column_count + (size_t)column] =
 				rxn_ptr->token[j].coef * coef;
 		}
 		row = master_alk->in;	/* include alkalinity for phase */
-		my_array[row * max_column_count + column] = calc_alk(rxn_ptr);
+		my_array[(size_t)row * (size_t)max_column_count + (size_t)column] = calc_alk(rxn_ptr);
 	}
 
 /*   mass balance: redox reaction data */
@@ -572,14 +563,14 @@ setup_inverse(struct inverse *inv_ptr)
 				assert(row * max_column_count + column < max_column_count * max_row_count);
 				assert(row >= 0);
 				assert(column >= 0);
-				my_array[row * max_column_count + column] =
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] =
 					rxn_ptr->token[j].coef;
 				/* if coefficient of element is not 1.0 in master species */
 				if (j != 0)
-					my_array[row * max_column_count + column] /= coef;
+					my_array[(size_t)row * (size_t)max_column_count + (size_t)column] /= coef;
 			}
 			row = master_alk->in;	/* include alkalinity for redox reaction */
-			my_array[row * max_column_count + column] =
+			my_array[(size_t)row * (size_t)max_column_count + (size_t)column] =
 				(calc_alk(rxn_ptr) - inv_ptr->elts[i].master->s->alk) / coef;
 		}
 	}
@@ -594,15 +585,15 @@ setup_inverse(struct inverse *inv_ptr)
 		{
 			if (j < (inv_ptr->count_solns - 1))
 			{
-				my_array[row * max_column_count + column] = 1.0;
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] = 1.0;
 			}
 			else
 			{
-				my_array[row * max_column_count + column] = -1.0;
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] = -1.0;
 			}
 			if (inv_ptr->elts[i].master->s == s_eminus)
 			{
-				my_array[row * max_column_count + column] = 0.0;
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] = 0.0;
 			}
 			sprintf(token, "%s %d", row_name[row], j);
 			col_name[column] = string_hsave(token);
@@ -664,19 +655,19 @@ setup_inverse(struct inverse *inv_ptr)
 		solution_ptr = Utilities::Rxn_find(Rxn_solution_map, inv_ptr->solns[i]);
 		if (i < inv_ptr->count_solns - 1)
 		{
-			my_array[count_rows * max_column_count + i] =
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] =
 				1.0 / gfw_water * solution_ptr->Get_mass_water();
 		}
 		else
 		{
-			my_array[count_rows * max_column_count + inv_ptr->count_solns - 1] =
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)inv_ptr->count_solns - 1] =
 				-1.0 / gfw_water * solution_ptr->Get_mass_water();
 		}
 	}
 	/* coefficient for water uncertainty */
 	if (inv_ptr->water_uncertainty > 0)
 	{
-		my_array[count_rows * max_column_count + col_water] = 1.0;
+		my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)col_water] = 1.0;
 	}
 	row_name[count_rows] = string_hsave("H2O");
 	row_water = count_rows;
@@ -686,8 +677,8 @@ setup_inverse(struct inverse *inv_ptr)
  *   Final solution fraction equals 1.0
  */
 
-	my_array[count_rows * max_column_count + inv_ptr->count_solns - 1] = 1.0;
-	my_array[count_rows * max_column_count + count_unknowns] = 1.0;
+	my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)inv_ptr->count_solns - 1] = 1.0;
+	my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)count_unknowns] = 1.0;
 	row_name[count_rows] = string_hsave("fract, final");
 	count_rows++;
 
@@ -698,7 +689,7 @@ setup_inverse(struct inverse *inv_ptr)
 	for (i = 0; i < inv_ptr->count_solns; i++)
 	{
 /*		solution_ptr = solution_bsearch(inv_ptr->solns[i], &j, TRUE); */
-/*		array[count_rows * max_column_count + i] = solution_ptr->cb; */
+/*		array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] = solution_ptr->cb; */
 		for (j = 0; j < inv_ptr->count_elts; j++)
 		{
 			column = col_epsilon + j * inv_ptr->count_solns + i;
@@ -709,10 +700,10 @@ setup_inverse(struct inverse *inv_ptr)
 			{
 				coef = -1.0;
 			}
-			my_array[count_rows * max_column_count + column] = coef;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = coef;
 			if (inv_ptr->elts[j].master->s == s_eminus)
 			{
-				my_array[count_rows * max_column_count + column] = 0.0;
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = 0.0;
 			}
 		}
 		sprintf(token, "%s %d", "charge", i);
@@ -730,12 +721,12 @@ setup_inverse(struct inverse *inv_ptr)
 		if (inv_ptr->dalk_dph[i] != 0 || inv_ptr->dalk_dc[i] != 0)
 		{
 			column = col_ph + i;
-			my_array[count_rows * max_column_count + column] =
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] =
 				inv_ptr->dalk_dph[i];
 			column = col_epsilon + i_alk * inv_ptr->count_solns + i;
-			my_array[count_rows * max_column_count + column] = -1.0;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = -1.0;
 			column = col_epsilon + i_carb * inv_ptr->count_solns + i;
-			my_array[count_rows * max_column_count + column] =
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] =
 				inv_ptr->dalk_dc[i];
 		}
 		sprintf(token, "%s %d", "dAlk", i);
@@ -781,9 +772,8 @@ setup_inverse(struct inverse *inv_ptr)
 			}
 			else
 			{
-				coef =
-					my_array[inv_ptr->elts[j].master->in * max_column_count +
-						  i] * coef;
+				coef = my_array[(size_t)inv_ptr->elts[j].master->in * 
+					(size_t)max_column_count + (size_t)i] * coef;
 				coef = fabs(coef);
 			}
 
@@ -795,7 +785,7 @@ setup_inverse(struct inverse *inv_ptr)
 			{
 				for (k = 0; k < count_rows; k++)
 				{
-					my_array[k * max_column_count + column] = 0.0;
+					my_array[(size_t)k * (size_t)max_column_count + (size_t)column] = 0.0;
 				}
 				continue;
 			}
@@ -807,12 +797,12 @@ setup_inverse(struct inverse *inv_ptr)
 
 			if (coef < toler)
 			{
-				my_array[(column - col_epsilon) * max_column_count + column] =
+				my_array[((size_t)column - (size_t)col_epsilon) * (size_t)max_column_count + (size_t)column] =
 					SCALE_EPSILON / toler;
 			}
 			else
 			{
-				my_array[(column - col_epsilon) * max_column_count + column] =
+				my_array[((size_t)column - (size_t)col_epsilon) * (size_t)max_column_count + (size_t)column] =
 					SCALE_EPSILON / coef;
 			}
 
@@ -826,15 +816,14 @@ setup_inverse(struct inverse *inv_ptr)
 			{
 				f = 1.0;
 			}
-			my_array[count_rows * max_column_count + column] = 1.0 * f;
-			my_array[count_rows * max_column_count + i] = -coef * f;
-			sprintf(token, "%s %s", inv_ptr->elts[j].master->elt->name,
-					"eps+");
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = 1.0 * f;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] = -coef * f;
+			sprintf(token, "%s %s", inv_ptr->elts[j].master->elt->name, "eps+");
 			row_name[count_rows] = string_hsave(token);
 			count_rows++;
 
 /* set lower limit of change in negative direction */
-			conc = my_array[inv_ptr->elts[j].master->in * max_column_count + i];
+			conc = my_array[(size_t)inv_ptr->elts[j].master->in * (size_t)max_column_count + (size_t)i];
 
 			/* if concentration is zero, only positive direction allowed */
 			if (conc == 0.0)
@@ -861,8 +850,8 @@ setup_inverse(struct inverse *inv_ptr)
 				 inv_ptr->elts[j].master->elt->name))
 				coef = fabs(conc) + toler;
 
-			my_array[count_rows * max_column_count + i] = -coef * f;
-			my_array[count_rows * max_column_count + column] = -1.0 * f;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] = -coef * f;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = -1.0 * f;
 			sprintf(token, "%s %s", inv_ptr->elts[j].master->elt->name,
 					"eps-");
 			row_name[count_rows] = string_hsave(token);
@@ -882,21 +871,21 @@ setup_inverse(struct inverse *inv_ptr)
 
 /* scale epsilon in optimization equation */
 
-			my_array[(column - col_epsilon) * max_column_count + column] =
+			my_array[((size_t)column - (size_t)col_epsilon) * (size_t)max_column_count + (size_t)column] =
 				SCALE_EPSILON / coef;
 
 /* set upper limit of change in positive direction */
 
-			my_array[count_rows * max_column_count + column] = 1.0;
-			my_array[count_rows * max_column_count + i] = -coef;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = 1.0;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] = -coef;
 			sprintf(token, "%s %s", "pH", "eps+");
 			row_name[count_rows] = string_hsave(token);
 			count_rows++;
 
 /* set lower limit of change in negative direction */
 
-			my_array[count_rows * max_column_count + column] = -1.0;
-			my_array[count_rows * max_column_count + i] = -coef;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = -1.0;
+			my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] = -coef;
 			sprintf(token, "%s %s", "pH", "eps-");
 			row_name[count_rows] = string_hsave(token);
 			count_rows++;
@@ -911,16 +900,16 @@ setup_inverse(struct inverse *inv_ptr)
 	if (coef > 0.0)
 	{
 /* set upper limit of change in positive direction */
-		my_array[count_rows * max_column_count + column] = 1.0;
-		my_array[count_rows * max_column_count + count_unknowns] = coef;
+		my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = 1.0;
+		my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)count_unknowns] = coef;
 		sprintf(token, "%s %s", "water", "eps+");
 		row_name[count_rows] = string_hsave(token);
 		count_rows++;
 
 /* set lower limit of change in negative direction */
 
-		my_array[count_rows * max_column_count + column] = -1.0;
-		my_array[count_rows * max_column_count + count_unknowns] = coef;
+		my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = -1.0;
+		my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)count_unknowns] = coef;
 		sprintf(token, "%s %s", "water", "eps-");
 		row_name[count_rows] = string_hsave(token);
 		count_rows++;
@@ -952,12 +941,12 @@ setup_inverse(struct inverse *inv_ptr)
 
 /* scale epsilon in optimization equation */
 
-						my_array[(column - col_epsilon) * max_column_count +
-							  column] = SCALE_EPSILON / coef;
+						my_array[((size_t)column - (size_t)col_epsilon) * (size_t)max_column_count +
+							(size_t)column] = SCALE_EPSILON / coef;
 
 /* set upper limit of change in positive direction */
-						my_array[count_rows * max_column_count + column] = 1.0;
-						my_array[count_rows * max_column_count + i] = -coef;
+						my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = 1.0;
+						my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] = -coef;
 						sprintf(token, "%d%s %s",
 								(int) kit->second.Get_isotope_number(),
 								kit->second.Get_elt_name().c_str(), "eps+");
@@ -966,8 +955,8 @@ setup_inverse(struct inverse *inv_ptr)
 
 /* set lower limit of change in negative direction */
 
-						my_array[count_rows * max_column_count + column] = -1.0;
-						my_array[count_rows * max_column_count + i] = -coef;
+						my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = -1.0;
+						my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)i] = -coef;
 						sprintf(token, "%d%s %s",
 								(int) kit->second.Get_isotope_number(),
 								kit->second.Get_elt_name().c_str(), "eps-");
@@ -996,11 +985,11 @@ setup_inverse(struct inverse *inv_ptr)
 	{
 		if (inv_ptr->phases[i].constraint == PRECIPITATE)
 		{
-			delta[col_phases + i] = -1.0;
+			delta[(size_t)col_phases + (size_t)i] = -1.0;
 		}
 		else if (inv_ptr->phases[i].constraint == DISSOLVE)
 		{
-			delta[col_phases + i] = 1.0;
+			delta[(size_t)col_phases + (size_t)i] = 1.0;
 		}
 	}
 	for (i = 0; i < (inv_ptr->count_solns - 1); i++)
@@ -1012,7 +1001,7 @@ setup_inverse(struct inverse *inv_ptr)
  */
 	for (i = 0; i < max_column_count; i++)
 	{
-		my_array[row_water * max_column_count + i] *= SCALE_WATER;
+		my_array[(size_t)row_water * (size_t)max_column_count + (size_t)i] *= SCALE_WATER;
 	}
 /*
  *   Arrays are complete
@@ -1034,8 +1023,8 @@ setup_inverse(struct inverse *inv_ptr)
 					output_msg(sformatf( "\n"));
 					k = 0;
 				}
-				output_msg(sformatf( "%11.2e",
-						   (double) my_array[i * max_column_count + j]));
+				output_msg(sformatf("%11.2e",
+					(double)my_array[(size_t)i * (size_t)max_column_count + (size_t)j]));
 				k++;
 			}
 			if (k != 0)
@@ -1124,8 +1113,8 @@ solve_inverse(struct inverse *inv_ptr)
 	inv_cu = (LDBLE *) PHRQ_malloc((size_t) 2 * nklmd * sizeof(LDBLE));
 	if (inv_cu == NULL)
 		malloc_error();
-	memset(inv_cu, 0, ((size_t) (2 * nklmd * sizeof(LDBLE))));
-	inv_iu = (int *) PHRQ_malloc((size_t) 2 * nklmd * sizeof(int));
+	memset(inv_cu, 0, ((2 * (size_t)nklmd * sizeof(LDBLE))));
+	inv_iu = (int *) PHRQ_malloc(2 * (size_t)nklmd * sizeof(int));
 	if (inv_iu == NULL)
 		malloc_error();
 	inv_is = (int *) PHRQ_malloc((size_t) klmd * sizeof(int));
@@ -1332,8 +1321,8 @@ solve_inverse(struct inverse *inv_ptr)
 		output_msg(sformatf( "\tNumber of calls to cl1: %d\n",
 				   count_calls));
 	}
-	my_array = (LDBLE *) free_check_null(my_array);
-	delta = (LDBLE *) free_check_null(delta);
+	my_array.clear();
+	delta.clear();
 	array1 = (LDBLE *) free_check_null(array1);
 	inv_zero = (LDBLE *) free_check_null(inv_zero);
 	inv_res = (LDBLE *) free_check_null(inv_res);
@@ -1462,7 +1451,7 @@ solve_with_mask(struct inverse *inv_ptr, unsigned long cur_bits)
 	memcpy((void *) &(delta_save[0]), (void *) &(inv_zero[0]),
 		   (size_t) max_column_count * sizeof(LDBLE));
 
-	shrink(inv_ptr, my_array, array1,
+	shrink(inv_ptr, &my_array[0], array1,
 		   &k, &l, &m, &n, cur_bits, delta2, col_back, row_back);
 	/*
 	 *  Save delta constraints
@@ -2068,7 +2057,7 @@ print_model(struct inverse *inv_ptr)
 			(double)d1, (double)d2, (double)d3, inv_ptr->phases[i - col_phases].phase->formula));
 
 		i1 = 0;
-		for (; i1 < count_phases; i1++)
+		for (; i1 < (int)phases.size(); i1++)
 		{
 			if (Utilities::strcmp_nocase(phases[i1]->name, col_name[i]))
 				continue;
@@ -2223,100 +2212,6 @@ punch_model_heading(struct inverse *inv_ptr)
 	punch_flush();
 	return (OK);
 }
-#ifdef SKIP
-/* ---------------------------------------------------------------------- */
-int Phreeqc::
-punch_model_heading(struct inverse *inv_ptr)
-/* ---------------------------------------------------------------------- */
-{
-/*
- *   Prints model headings to selected output file
- */
-	int i;
-	char token[MAX_LENGTH];
-	//if (/*punch.in == FALSE ||*/ pr.punch == FALSE || punch.inverse == FALSE)
-	//	return (OK);
-	std::vector<std::string> heading_names;
-	std::map < int, SelectedOutput >::iterator so_it = SelectedOutput_map.begin(); 
-	for ( ; so_it != SelectedOutput_map.end(); so_it++)
-	{
-		// set punch file
-		current_selected_output = &(so_it->second);
-		if (pr.punch == FALSE ||
-			current_selected_output == NULL || 
-			current_selected_output->punch_ostream == NULL ||
-			!current_selected_output->Get_inverse() ||
-			!current_selected_output->Get_active())
-			continue;
-		phrq_io->Set_punch_ostream(current_selected_output->punch_ostream);
-
-		int l = (!current_selected_output->Get_high_precision()) ? 15 : 20;
-		heading_names.clear();
-		/*
-		*  Print sum of residuals and maximum fractional error
-		*/
-		heading_names.push_back(sformatf("%*s\t", l, "Sum_resid"));
-		heading_names.push_back(sformatf("%*s\t", l, "Sum_Delta/U"));
-		heading_names.push_back(sformatf("%*s\t", l, "MaxFracErr"));
-
-		/*
-		*   Print solution numbers
-		*/
-		for (i = 0; i < inv_ptr->count_solns; i++)
-		{
-			sprintf(token, "Soln_%d", inv_ptr->solns[i]);
-			std::string tok1(token);
-			tok1.append("_min");
-			std::string tok2(token);
-			tok2.append("_max");
-
-			heading_names.push_back(sformatf("%*s\t", l, token));
-			heading_names.push_back(sformatf("%*s\t", l, tok1.c_str()));
-			heading_names.push_back(sformatf("%*s\t", l, tok2.c_str()));
-		}
-		/*
-		*   Print phase names
-		*/
-		for (i = col_phases; i < col_redox; i++)
-		{
-
-			std::string tok1(col_name[i]);
-			tok1.append("_max");
-			std::string tok2(col_name[i]);
-			tok2.append("_max");
-
-			heading_names.push_back(sformatf("%*s\t", l, col_name[i]));
-			heading_names.push_back(sformatf("%*s\t", l, tok1.c_str()));
-			heading_names.push_back(sformatf("%*s\t", l, tok2.c_str()));
-
-		}
-
-		size_t j;
-
-		// punch headings
-		//user_punch_count_headings = (int) heading_names.size();
-		//user_punch_headings = (const char **) PHRQ_realloc(user_punch_headings,
-		//	(size_t) (user_punch_count_headings + 1) * sizeof(char *));
-		//if (user_punch_headings == NULL)
-		//	malloc_error();
-
-		for (j = 0; j < heading_names.size(); j++)
-		{
-			fpunchf_heading(heading_names[j].c_str());
-			//user_punch_headings[j] = string_hsave(heading_names[j].c_str());
-		}
-		fpunchf_heading("\n");
-	}
-	current_selected_output = NULL;
-	phrq_io->Set_punch_ostream(NULL);
-	inverse_heading_names = heading_names;
-/*
- *   Flush buffer after each model
- */
-	punch_flush();
-	return (OK);
-}
-#endif
 /* ---------------------------------------------------------------------- */
 int Phreeqc::
 punch_model(struct inverse *inv_ptr)
@@ -2872,8 +2767,8 @@ shrink(struct inverse *inv_ptr, LDBLE * array_in, LDBLE * array_out,
 
 
 			memcpy(&(array_out[row * max_column_count]),
-				&(array_out[i * max_column_count]),
-				(size_t) (*n + 1) * sizeof(LDBLE));
+				&(array_out[(size_t)i * (size_t)max_column_count]),
+				((size_t)*n + 1) * sizeof(LDBLE));
 		}
 		row_back_l[row] = i;
 		row++;
@@ -2916,8 +2811,8 @@ shrink(struct inverse *inv_ptr, LDBLE * array_in, LDBLE * array_out,
 				assert(false);
 			}
 			memcpy(&(array_out[row * max_column_count]),
-				&(array_out[i * max_column_count]),
-				(size_t) (*n + 1) * sizeof(LDBLE));
+				&(array_out[(size_t)i * (size_t)max_column_count]),
+				((size_t)*n + 1) * sizeof(LDBLE));
 		}
 		row_back_l[row] = i;
 		row++;
@@ -2958,9 +2853,9 @@ shrink(struct inverse *inv_ptr, LDBLE * array_in, LDBLE * array_out,
 			{
 				assert(false);
 			}
-			memcpy(&(array_out[row * max_column_count]),
-				&(array_out[i * max_column_count]),
-				(size_t) (*n + 1) * sizeof(LDBLE));
+			memcpy(&(array_out[(size_t)row * (size_t)max_column_count]),
+				&(array_out[(size_t)i * (size_t)max_column_count]),
+				((size_t)*n + 1) * sizeof(LDBLE));
 		}
 		row_back_l[row] = i;
 		row++;
@@ -3182,16 +3077,16 @@ post_mortem(void)
 		sum = 0;
 		for (j = 0; j < count_unknowns; j++)
 		{
-			sum += inv_delta1[j] * my_array[i * max_column_count + j];
+			sum += inv_delta1[j] * my_array[(size_t)i * (size_t)max_column_count + (size_t)j];
 		}
 
-		if (equal(sum, my_array[(i * max_column_count) + count_unknowns], toler)
+		if (equal(sum, my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns], toler)
 			== FALSE)
 		{
 			output_msg(sformatf(
 					   "\tERROR: equality not satisfied for %s, %e.\n",
 					   row_name[i],
-				   (double) (sum - my_array[(i * max_column_count) + count_unknowns])));
+				   (double) (sum - my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns])));
 		}
 	}
 /*
@@ -3202,15 +3097,15 @@ post_mortem(void)
 		sum = 0;
 		for (j = 0; j < count_unknowns; j++)
 		{
-			sum += inv_delta1[j] * my_array[i * max_column_count + j];
+			sum += inv_delta1[j] * my_array[(size_t)i * (size_t)max_column_count + (size_t)j];
 		}
 
-		if (sum > my_array[(i * max_column_count) + count_unknowns] + toler)
+		if (sum > my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns] + toler)
 		{
 			output_msg(sformatf(
 					   "\tERROR: inequality not satisfied for %s, %e\n",
 					   row_name[i],
-				   (double) (sum - my_array[(i * max_column_count) + count_unknowns])));
+				   (double) (sum - my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns])));
 		}
 	}
 /*
@@ -3259,15 +3154,15 @@ test_cl1_solution(void)
 		sum = 0;
 		for (j = 0; j < count_unknowns; j++)
 		{
-			sum += inv_delta1[j] * my_array[i * max_column_count + j];
+			sum += inv_delta1[j] * my_array[(size_t)i * (size_t)max_column_count + (size_t)j];
 		}
 
-		if (equal(sum, my_array[(i * max_column_count) + count_unknowns], toler) == FALSE)
+		if (equal(sum, my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns], toler) == FALSE)
 		{
 			if (debug_inverse)
 			{
 				output_msg(sformatf("\tERROR: equality not satisfied for %s, %e.\n", row_name[i],
-				   (double) (sum - my_array[(i * max_column_count) + count_unknowns])));
+				   (double) (sum - my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns])));
 			}
 			rv = false;
 		}
@@ -3280,17 +3175,17 @@ test_cl1_solution(void)
 		sum = 0;
 		for (j = 0; j < count_unknowns; j++)
 		{
-			sum += inv_delta1[j] * my_array[i * max_column_count + j];
+			sum += inv_delta1[j] * my_array[(size_t)i * (size_t)max_column_count + (size_t)j];
 		}
 
-		if (sum > my_array[(i * max_column_count) + count_unknowns] + toler)
+		if (sum > my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns] + toler)
 		{
 			if (debug_inverse)
 			{
 				output_msg(sformatf(
 					"\tERROR: inequality not satisfied for %s, %e\n",
 					row_name[i],
-					(double) (sum - my_array[(i * max_column_count) + count_unknowns])));
+					(double) (sum - my_array[((size_t)i * (size_t)max_column_count) + (size_t)count_unknowns])));
 			}
 			rv = false;
 		}
@@ -3543,7 +3438,7 @@ isotope_balance_equation(struct inverse *inv_ptr, int row, int n)
 			if (primary_jit == primary_ptr &&
 				jit->second.Get_isotope_number() == isotope_number)
 			{
-				my_array[row * max_column_count + i] +=
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)i] +=
 					f * jit->second.Get_total() * jit->second.Get_ratio();
 			}
 		}
@@ -3568,7 +3463,7 @@ isotope_balance_equation(struct inverse *inv_ptr, int row, int n)
 						break;
 				}
 				column = col_epsilon + (k * inv_ptr->count_solns) + i;
-				my_array[row * max_column_count + column] +=
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] +=
 					f * jit->second.Get_ratio();
 			}
 		}
@@ -3596,7 +3491,7 @@ isotope_balance_equation(struct inverse *inv_ptr, int row, int n)
 							(i * inv_ptr->count_isotope_unknowns) + k;
 					}
 				}
-				my_array[row * max_column_count + column] +=
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] +=
 					f * jit->second.Get_total();
 			}
 		}
@@ -3616,11 +3511,11 @@ isotope_balance_equation(struct inverse *inv_ptr, int row, int n)
 			{
 				/* term for alpha phase unknowns */
 				column = col_phases + i;
-				my_array[row * max_column_count + column] =
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] =
 					isotope_ptr[j].ratio * isotope_ptr[j].coef;
 				/* term for phase isotope uncertainty unknown */
 				column = col_phase_isotopes + i * inv_ptr->count_isotopes + n;
-				my_array[row * max_column_count + column] = isotope_ptr[j].coef;
+				my_array[(size_t)row * (size_t)max_column_count + (size_t)column] = isotope_ptr[j].coef;
 				break;
 			}
 		}
@@ -3686,11 +3581,8 @@ count_isotope_unknowns(struct inverse *inv_ptr,
 		/* nonredox element */
 		if (primary_ptr->s->secondary == NULL)
 		{
-			isotopes =
-				(struct isotope *) PHRQ_realloc(isotopes,
-												(size_t) (count_isotopes +
-														  1) *
-												sizeof(struct isotope));
+			isotopes = (struct isotope *) PHRQ_realloc(isotopes,
+				((size_t)count_isotopes + 1) * sizeof(struct isotope));
 			if (isotopes == NULL)
 			{
 				malloc_error();
@@ -3708,7 +3600,7 @@ count_isotope_unknowns(struct inverse *inv_ptr,
 		{
 
 			/* find master */
-			for (k = 0; k < count_master; k++)
+			for (k = 0; k < (int)master.size(); k++)
 			{
 				if (master[k] == primary_ptr)
 					break;
@@ -3716,16 +3608,12 @@ count_isotope_unknowns(struct inverse *inv_ptr,
 
 			/* sum all secondary for master */
 			k++;
-			for (; k < count_master; k++)
+			for (; k < (int)master.size(); k++)
 			{
 				if (master[k]->elt->primary != primary_ptr)
 					break;
-				isotopes =
-					(struct isotope *) PHRQ_realloc(isotopes,
-													(size_t) (count_isotopes
-															  +
-															  1) *
-													sizeof(struct isotope));
+				isotopes = (struct isotope *) PHRQ_realloc(isotopes,
+					((size_t)count_isotopes + 1) * sizeof(struct isotope));
 				if (isotopes == NULL)
 				{
 					malloc_error();
@@ -3862,7 +3750,7 @@ check_isotopes(struct inverse *inv_ptr)
 				&& !isnan(inv_ptr->i_u[i].uncertainties[inv_ptr->i_u[i].count_uncertainties - 1]))
 #else
 			else if (inv_ptr->i_u[i].count_uncertainties > 0
-				&& inv_ptr->i_u[i].uncertainties[inv_ptr->i_u[i].count_uncertainties - 1] != NAN)
+				&& inv_ptr->i_u[i].uncertainties[(size_t)inv_ptr->i_u[i].count_uncertainties - 1] != NAN)
 #endif
 			{
 				kit->second.Set_x_ratio_uncertainty(inv_ptr->i_u[i].uncertainties[inv_ptr->i_u[i].count_uncertainties - 1]);
@@ -4008,7 +3896,7 @@ phase_isotope_inequalities(struct inverse *inv_ptr)
 			{
 				for (k = 0; k < count_rows; k++)
 				{
-					my_array[k * max_column_count + column] = 0.0;
+					my_array[(size_t)k * (size_t)max_column_count + (size_t)column] = 0.0;
 				}
 				continue;
 			}
@@ -4016,26 +3904,25 @@ phase_isotope_inequalities(struct inverse *inv_ptr)
 /* 
  *   optimization
  */
-			my_array[(column - col_epsilon) * max_column_count + column] =
-				SCALE_EPSILON /
-				inv_ptr->phases[i].isotopes[j].ratio_uncertainty;
+			my_array[((size_t)column - (size_t)col_epsilon) * (size_t)max_column_count + (size_t)column] =
+				SCALE_EPSILON / inv_ptr->phases[i].isotopes[j].ratio_uncertainty;
 /*
  *   two inequalities to account for absolute value
  */
 			/* for phases constrained to precipitate */
 			if (inv_ptr->phases[i].constraint == PRECIPITATE)
 			{
-				my_array[count_rows * max_column_count + col_phases + i] =
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)col_phases + (size_t)i] =
 					inv_ptr->phases[i].isotopes[j].ratio_uncertainty;
-				my_array[count_rows * max_column_count + column] = 1.0;
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = 1.0;
 				sprintf(token, "%s %s", inv_ptr->phases[i].phase->name,
 						"iso pos");
 				row_name[count_rows] = string_hsave(token);
 				count_rows++;
 
-				my_array[count_rows * max_column_count + col_phases + i] =
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)col_phases + (size_t)i] =
 					inv_ptr->phases[i].isotopes[j].ratio_uncertainty;
-				my_array[count_rows * max_column_count + column] = -1.0;
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = -1.0;
 				sprintf(token, "%s %s", inv_ptr->phases[i].phase->name,
 						"iso neg");
 				row_name[count_rows] = string_hsave(token);
@@ -4045,17 +3932,17 @@ phase_isotope_inequalities(struct inverse *inv_ptr)
 			}
 			else if (inv_ptr->phases[i].constraint == DISSOLVE)
 			{
-				my_array[count_rows * max_column_count + col_phases + i] =
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)col_phases + (size_t)i] =
 					-inv_ptr->phases[i].isotopes[j].ratio_uncertainty;
-				my_array[count_rows * max_column_count + column] = -1.0;
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = -1.0;
 				sprintf(token, "%s %s", inv_ptr->phases[i].phase->name,
 						"iso pos");
 				row_name[count_rows] = string_hsave(token);
 				count_rows++;
 
-				my_array[count_rows * max_column_count + col_phases + i] =
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)col_phases + (size_t)i] =
 					-inv_ptr->phases[i].isotopes[j].ratio_uncertainty;
-				my_array[count_rows * max_column_count + column] = 1.0;
+				my_array[(size_t)count_rows * (size_t)max_column_count + (size_t)column] = 1.0;
 				sprintf(token, "%s %s", inv_ptr->phases[i].phase->name,
 						"iso neg");
 				row_name[count_rows] = string_hsave(token);
@@ -4512,7 +4399,7 @@ dump_netpath_pat(struct inverse *inv_ptr)
 	LDBLE d1, d2, d3;
 	char *ptr;
 	LDBLE sum, sum1, sum_iso, d;
-	LDBLE *array_save, *l_delta_save;
+	std::vector<double> array_save, l_delta_save;
 	int count_unknowns_save, max_row_count_save, max_column_count_save, temp,
 		count_current_solutions, temp_punch;
 	int solnmap[10][2];
@@ -4534,8 +4421,6 @@ dump_netpath_pat(struct inverse *inv_ptr)
 	max_row_count_save = max_row_count;
 	max_column_count_save = max_column_count;
 
-	my_array = NULL;
-	delta = NULL;
 	count_unknowns = 0;
 	max_row_count = 0;
 	max_column_count = 0;
@@ -4973,9 +4858,6 @@ dump_netpath_pat(struct inverse *inv_ptr)
 		fprintf(netpath_file, "%14d     # Well number\n",
 				count_pat_solutions);
 	}
-	//free_model_allocs();
-	my_array = (LDBLE *) free_check_null(my_array);
-	delta = (LDBLE *) free_check_null(delta);
 	my_array = array_save;
 	delta = l_delta_save;
 	count_unknowns = count_unknowns_save;
@@ -5016,7 +4898,7 @@ dump_netpath_pat(struct inverse *inv_ptr)
  * Write elements
  */
 	xsolution_zero();
-	for (j = 0; j < count_master; j++)
+	for (j = 0; j < (int)master.size(); j++)
 	{
 		master[j]->in = FALSE;
 	}
@@ -5036,7 +4918,7 @@ dump_netpath_pat(struct inverse *inv_ptr)
 			continue;
 		master_ptr->in = TRUE;
 	}
-	for (j = 0; j < count_master; j++)
+	for (j = 0; j < (int)master.size(); j++)
 	{
 		if (master[j]->in == TRUE)
 		{
@@ -5204,7 +5086,7 @@ dump_netpath_pat(struct inverse *inv_ptr)
 				std::string::iterator e = string.end();
 				CParser::copy_token(token, b, e);
 				CParser::copy_token(string1, b, e);
-				sscanf(string1.c_str(), SCANFORMAT, &f);
+				(void)sscanf(string1.c_str(), SCANFORMAT, &f);
 				sum += f * rxn_ptr->coef;
 			}
 		}
