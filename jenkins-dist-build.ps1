@@ -4,12 +4,18 @@
 # Sysinternals.  The -UseBasicParsing flag may also be required.
 #
 
+#
 # set DATE
+#
 if ([string]::IsNullOrEmpty($Env:DATE)) {
   $Env:DATE = date +%x
 }
+$Env:DATE = date -d $Env:DATE +%x
 $Env:RELEASE_DATE = date -d $Env:DATE "+%B %e, %G"
+
+#
 # set VER
+#
 if ([string]::IsNullOrEmpty($Env:VER)) {
   $request = Invoke-WebRequest https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/phreeqc-version.txt -UseBasicParsing
   $v = ($request.Content) -split "\."
@@ -22,13 +28,28 @@ if ([string]::IsNullOrEmpty($Env:VER)) {
   $Env:ver_patch = $v[2]
   $Env:VER = $v -join "."
 }
+else {
+  $v = ($Env:VER) -split "\."  
+  $Env:ver_major = $v[0]
+  $Env:ver_minor = $v[1]
+  $Env:ver_patch = $v[2]
+}
+if ([string]::IsNullOrEmpty($v[0]) -or [string]::IsNullOrEmpty($v[1]) -or [string]::IsNullOrEmpty($v[2])) {
+  throw "Bad VER"
+}
+
+#
 # set REL
+#
 Invoke-WebRequest https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/ver.py -OutFile ver.py -UseBasicParsing
 $HEAD=$(python ver.py)
 if ([string]::IsNullOrEmpty($Env:REL)) {
   $Env:REL = $HEAD
 }
-# duplicate build/dist.sh
+
+#
+# replace strings
+#
 $sed_files=@('phreeqc3-doc/RELEASE.TXT', `
              'src/Version.h', `
              'src/IPhreeqc.h')
@@ -45,13 +66,18 @@ foreach ($file in $sed_files) {
   } | Set-Content $file
 }
 
+#
 # doxygen
-cd doc
+#
+Set-Location doc
 doxygen
+
+#
 # hhc seems to return 1 on success and 0 (zero) on failure
 # see https://stackoverflow.com/questions/39012558/html-help-workshop-returns-error-after-successfully-compiled-chm-file
+#
 hhc IPhreeqc.hhp
 if (-Not $?) {
   $LastExitCode = 0
 } 
-cd ..
+Set-Location ..
