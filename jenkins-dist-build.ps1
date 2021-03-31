@@ -1,11 +1,17 @@
-﻿# set DATE
+﻿#
+# To get the Invoke-WebRequest to work under the 'nt authority\system' account, the DOIRootCA2.cer
+# CA needs to be installed by running internet explorer as system using 'psexec -sid cmd' from
+# Sysinternals.  The -UseBasicParsing flag may also be required.
+#
+
+# set DATE
 if ([string]::IsNullOrEmpty($Env:DATE)) {
   $Env:DATE = date +%x
 }
 $Env:RELEASE_DATE = date -d $Env:DATE "+%B %e, %G"
 # set VER
 if ([string]::IsNullOrEmpty($Env:VER)) {
-  $request = Invoke-WebRequest https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/phreeqc-version.txt
+  $request = Invoke-WebRequest https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/phreeqc-version.txt -UseBasicParsing
   $v = ($request.Content) -split "\."
   if ([string]::IsNullOrEmpty($v[2])) {
     $v[2] = 0
@@ -17,7 +23,7 @@ if ([string]::IsNullOrEmpty($Env:VER)) {
   $Env:VER = $v -join "."
 }
 # set REL
-Invoke-WebRequest https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/ver.py -OutFile ver.py
+Invoke-WebRequest https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/ver.py -OutFile ver.py -UseBasicParsing
 $HEAD=$(python ver.py)
 if ([string]::IsNullOrEmpty($Env:REL)) {
   $Env:REL = $HEAD
