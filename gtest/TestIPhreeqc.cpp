@@ -2204,7 +2204,11 @@ TEST(TestIPhreeqc, TestSetOutputFileName)
 		++i;
 	}
 
+#ifndef TESTING
 	ASSERT_EQ((size_t)100, i);
+#else
+	ASSERT_EQ((size_t)96, i);
+#endif
 
 	int line = 0;
 
@@ -2309,9 +2313,11 @@ TEST(TestIPhreeqc, TestSetOutputFileName)
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Reading input data for simulation 2.") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+#ifndef TESTING
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "End of Run after ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
+#endif
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
@@ -2423,7 +2429,11 @@ TEST(TestIPhreeqc, TestGetOutputStringLineCount)
 	obj.SetOutputStringOn(true);
 
 	ASSERT_EQ(0, obj.RunAccumulated());
+#ifndef TESTING
 	ASSERT_EQ(100, obj.GetOutputStringLineCount());
+#else
+	ASSERT_EQ(96, obj.GetOutputStringLineCount());
+#endif
 
 
 	// add solution block
@@ -2486,7 +2496,11 @@ TEST(TestIPhreeqc, TestGetOutputStringLine)
 	obj.SetOutputStringOn(true);
 
 	ASSERT_EQ(0, obj.RunAccumulated());
+#ifndef TESTING
 	ASSERT_EQ(100, obj.GetOutputStringLineCount());
+#else
+	ASSERT_EQ(96, obj.GetOutputStringLineCount());
+#endif
 
 	ASSERT_EQ(std::string("------------------------------------"), std::string(obj.GetOutputStringLine(0)));
 	ASSERT_EQ(std::string("Reading input data for simulation 1."), std::string(obj.GetOutputStringLine(1)));
@@ -2495,8 +2509,12 @@ TEST(TestIPhreeqc, TestGetOutputStringLine)
 	ASSERT_EQ(std::string("----------------------------Description of solution----------------------------"), std::string(obj.GetOutputStringLine(24)));
 	ASSERT_EQ(std::string("----------------------------Distribution of species----------------------------"), std::string(obj.GetOutputStringLine(40)));
 	ASSERT_EQ(std::string("------------------------------Saturation indices-------------------------------"), std::string(obj.GetOutputStringLine(73)));
+#ifndef TESTING
 	ASSERT_EQ(std::string("End of Run"), std::string(obj.GetOutputStringLine(97)).substr(0, 10));
 	ASSERT_EQ(std::string(""), std::string(obj.GetOutputStringLine(100)));
+#else
+	ASSERT_EQ(std::string(""), std::string(obj.GetOutputStringLine(96)));
+#endif
 
 	// add solution block
 	ASSERT_EQ(VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0));
@@ -2567,7 +2585,11 @@ TEST(TestIPhreeqc, TestSetLogFileName)
 		++i;
 	}
 
+#ifndef TESTING
 	ASSERT_EQ((size_t)25, i);
+#else
+	ASSERT_EQ((size_t)21, i);
+#endif
 
 	int line = 0;
 	ASSERT_EQ(std::string("-------------------------------------------"), lines[line++]);
@@ -2591,9 +2613,11 @@ TEST(TestIPhreeqc, TestSetLogFileName)
 	ASSERT_EQ(std::string("Reading input data for simulation 2."), lines[line++]);
 	ASSERT_EQ(std::string("------------------------------------"), lines[line++]);
 	ASSERT_EQ(std::string(""), lines[line++]);
+#ifndef TESTING
 	line++;
 	ASSERT_EQ(std::string("End of Run"), lines[line++].substr(0, 10));
 	line++;
+#endif
 	ASSERT_EQ(std::string(""), lines[line++]);
 
 	if (::FileExists(LOG_FILENAME))
@@ -2715,7 +2739,11 @@ TEST(TestIPhreeqc, TestGetLogStringLineCount)
 	obj.SetLogStringOn(true);
 
 	ASSERT_EQ(0, obj.RunAccumulated());
+#ifndef TESTING
 	ASSERT_EQ(29, obj.GetLogStringLineCount());
+#else
+	ASSERT_EQ(25, obj.GetLogStringLineCount());
+#endif
 
 	// add solution block
 	ASSERT_EQ(VR_OK, ::SOLUTION(obj, 1.0, 1.0, 1.0));
@@ -2789,7 +2817,11 @@ TEST(TestIPhreeqc, TestGetLogStringLine)
 	obj.SetLogStringOn(true);
 
 	ASSERT_EQ(0, obj.RunAccumulated());
+#ifndef TESTING
 	ASSERT_EQ(29, obj.GetLogStringLineCount());
+#else
+	ASSERT_EQ(25, obj.GetLogStringLineCount());
+#endif
 
 	line = 0;
 	ASSERT_EQ(std::string("------------------------------------"), std::string(obj.GetLogStringLine(line++)));
@@ -2817,9 +2849,11 @@ TEST(TestIPhreeqc, TestGetLogStringLine)
 	ASSERT_EQ(std::string("Reading input data for simulation 2."), std::string(obj.GetLogStringLine(line++)));
 	ASSERT_EQ(std::string("------------------------------------"), std::string(obj.GetLogStringLine(line++)));
 	ASSERT_EQ(std::string(""), std::string(obj.GetLogStringLine(line++)));
+#ifndef TESTING
 	ASSERT_EQ(std::string("----------"), std::string(obj.GetLogStringLine(line++)).substr(0, 10));
 	ASSERT_EQ(std::string("End of Run"), std::string(obj.GetLogStringLine(line++)).substr(0, 10));
 	ASSERT_EQ(std::string("----------"), std::string(obj.GetLogStringLine(line++)).substr(0, 10));
+#endif
 	ASSERT_EQ(std::string(""), std::string(obj.GetLogStringLine(line++)));
 
 	// add solution block

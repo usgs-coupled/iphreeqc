@@ -2426,7 +2426,11 @@ TEST(TestIPhreeqcLib, TestSetOutputFileName)
 		++i;
 	}
 
+#ifndef TESTING
 	ASSERT_EQ((size_t)100, i);
+#else
+	ASSERT_EQ((size_t)96, i);
+#endif
 
 	int line = 0;
 
@@ -2526,9 +2530,11 @@ TEST(TestIPhreeqcLib, TestSetOutputFileName)
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Reading input data for simulation 2.") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+#ifndef TESTING
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "End of Run after ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
+#endif
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
@@ -2657,8 +2663,11 @@ TEST(TestIPhreeqcLib, TestGetOutputStringLineCount)
 	ASSERT_EQ(IPQ_OK, ::SetOutputStringOn(n, 1));
 
 	ASSERT_EQ(0, ::RunAccumulated(n));
+#ifndef TESTING
 	ASSERT_EQ(100, ::GetOutputStringLineCount(n));
-
+#else
+	ASSERT_EQ(96, ::GetOutputStringLineCount(n));
+#endif
 
 	// add solution block
 	ASSERT_EQ(IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0));
@@ -2725,7 +2734,11 @@ TEST(TestIPhreeqcLib, TestGetOutputStringLine)
 	ASSERT_EQ(IPQ_OK, ::SetOutputStringOn(n, 1));
 
 	ASSERT_EQ(0, ::RunAccumulated(n));
+#ifndef TESTING
 	ASSERT_EQ(100, ::GetOutputStringLineCount(n));
+#else
+	ASSERT_EQ(96, ::GetOutputStringLineCount(n));
+#endif
 
 	ASSERT_EQ(std::string("------------------------------------"), std::string(::GetOutputStringLine(n, 0)));
 	ASSERT_EQ(std::string("Reading input data for simulation 1."), std::string(::GetOutputStringLine(n, 1)));
@@ -2812,7 +2825,11 @@ TEST(TestIPhreeqcLib, TestSetLogFileName)
 		++i;
 	}
 
+#ifndef TESTING
 	ASSERT_EQ((size_t)25, i);
+#else
+	ASSERT_EQ((size_t)21, i);
+#endif
 
 	int line = 0;
 	ASSERT_EQ(std::string("-------------------------------------------"), lines[line++]);
@@ -2982,7 +2999,11 @@ TEST(TestIPhreeqcLib, TestGetLogStringLineCount)
 	ASSERT_EQ(IPQ_OK, ::SetLogStringOn(n, 1));
 
 	ASSERT_EQ(0, ::RunAccumulated(n));
+#ifndef TESTING
 	ASSERT_EQ(29, ::GetLogStringLineCount(n));
+#else
+	ASSERT_EQ(25, ::GetLogStringLineCount(n));
+#endif
 
 	// add solution block
 	ASSERT_EQ(IPQ_OK, ::SOLUTION(n, 1.0, 1.0, 1.0));
@@ -3062,7 +3083,11 @@ TEST(TestIPhreeqcLib, TestGetLogStringLine)
 	ASSERT_EQ(IPQ_OK, ::SetLogStringOn(n, 1));
 
 	ASSERT_EQ(0, ::RunAccumulated(n));
+#ifndef TESTING
 	ASSERT_EQ(29, ::GetLogStringLineCount(n));
+#else
+	ASSERT_EQ(25, ::GetLogStringLineCount(n));
+#endif
 
 	line = 0;
 	ASSERT_EQ(std::string("------------------------------------"), std::string(::GetLogStringLine(n, line++)));
