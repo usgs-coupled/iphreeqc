@@ -12,7 +12,7 @@
 ##' @aliases phreeqc-package phreeqc
 ##' @docType package
 ##' @author S.R. Charlton, D.L. Parkhurst, and C.A.J. Appelo, with contributions from D. Gillespie for Chipmunk BASIC (p2c) and S.D. Cohen, A.C. Hindmarsh, R. Serban, D. Shumaker, and A.G. Taylor for CVODE (SUNDIALS) \cr Maintainer: S.R. Charlton \email{charlton@@usgs.gov}
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}\cr \url{http://computation.llnl.gov/casc/sundials/main.html}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}\cr \url{http://computation.llnl.gov/casc/sundials/main.html}
 ##' @keywords package
 NULL
 
@@ -32,7 +32,7 @@ NULL
 ##' @param line the line(s) to add for input to phreeqc.
 ##' @return NULL
 ##' @family Accumulate
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrAccumulateLine <-
 function(line) {
@@ -50,7 +50,7 @@ function(line) {
 ##' @useDynLib phreeqc
 ##' @return NULL
 ##' @family Accumulate
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrClearAccumulatedLines <-
 function() {
@@ -67,7 +67,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return A character vector containing the accumulated input.
 ##' @family Accumulate
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetAccumulatedLines <-
 function() {
@@ -81,7 +81,7 @@ function() {
 ##' @export phrGetComponentList
 ##' @useDynLib phreeqc
 ##' @return A list containing the names of the components defined in the current system.
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetComponentList <-
 function() {
@@ -99,7 +99,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the dump file as a string.
 ##' @family Dump
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetDumpFileName <-
 function() {
@@ -117,7 +117,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The dump output as a character vector.
 ##' @family Dump
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##'
 phrGetDumpStrings <-
 function() {
@@ -136,7 +136,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the error file as a string.
 ##' @family Error
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetErrorFileName <-
 function() {
@@ -151,7 +151,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Dump
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetDumpFileOn <-
 function() {
@@ -166,7 +166,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Dump
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetDumpStringsOn <-
 function() {
@@ -181,7 +181,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Error
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetErrorFileOn <-
 function() {
@@ -196,7 +196,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Error
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetErrorStringsOn <-
 function() {
@@ -211,7 +211,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Log
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetLogFileOn <-
 function() {
@@ -241,7 +241,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetOutputFileOn <-
 function() {
@@ -256,7 +256,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return TRUE if errors are currently being written to file.
 ##' @family Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetOutputStringsOn <-
 function() {
@@ -280,7 +280,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The error messages as a character vector.
 ##' @family Error
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' @examples
 ##' 
 ##' # loaddatabase should fail
@@ -303,7 +303,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the log file as a string.
 ##' @family Log
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetLogFileName <-
 function() {
@@ -320,7 +320,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return A character vector containing phreeqc log output.
 ##' @family Log
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetLogStrings <-
 function() {
@@ -337,7 +337,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return The name of the output file as a string.
 ##' @family Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetOutputFileName <-
 function() {
@@ -356,7 +356,7 @@ function() {
 ##' @useDynLib phreeqc
 ##' @return A character vector containing phreeqc output.
 ##' @family Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetOutputStrings <-
 function() {
@@ -381,7 +381,7 @@ function() {
 ##' @param allow_ used for compatibility with R prior to 1.9.0 (default is TRUE).
 ##' @return Returns a named list of data frames containing the selected_output from the previous run.
 ##' @family Selected Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetSelectedOutput <-
 function(allow_ = TRUE) {
@@ -413,7 +413,7 @@ function(allow_ = TRUE) {
 ##' @useDynLib phreeqc
 ##' @return A character vector containing warning messages or NULL.
 ##' @family Warning
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrGetWarningStrings <-
 function() {
@@ -432,7 +432,7 @@ function() {
 ##' @param filename The name of the database file.
 ##' @return This function returns NULL.
 ##' @family Load Database
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrLoadDatabase <-
 function(filename) {
@@ -453,7 +453,7 @@ function(filename) {
 ##' @param input String containing data to be used as the phreeqc database.
 ##' @return This function returns NULL.
 ##' @family Load Database
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' @keywords interface
 ##' 
 phrLoadDatabaseString <-
@@ -480,7 +480,7 @@ function(input) {
 ##' @return This function returns NULL on success.
 ##' @family Accumulate
 ##' @family Run
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 phrRunAccumulated <-
 function() {
   invisible(.Call("runAccum", PACKAGE = .packageName))
@@ -497,7 +497,7 @@ function() {
 ##' @param filename The file name of the phreeqc input file.
 ##' @return This function returns NULL on success.
 ##' @family Run
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrRunFile <-
 function(filename) {
@@ -520,7 +520,7 @@ function(filename) {
 ##' @param input character vector containing phreeqc input
 ##' @return This function returns NULL on success.
 ##' @family Run
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' @keywords interface
 phrRunString <-
 function(input) {
@@ -539,7 +539,7 @@ function(input) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Dump
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetDumpFileName <-
 function(filename) {
@@ -558,7 +558,7 @@ function(filename) {
 ##' @param value if TRUE, captures output normally sent to the dump file into a buffer.
 ##' @return NULL
 ##' @family Dump
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetDumpFileOn <-
 function(value) {
@@ -578,7 +578,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
 ##' @family Dump
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetDumpStringsOn <-
 function(value) {
@@ -596,7 +596,7 @@ function(value) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Error
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 phrSetErrorFileName <-
 function(filename) {
   invisible(.Call("setErrorFileName", as.character(filename), PACKAGE = .packageName))
@@ -616,7 +616,7 @@ function(filename) {
 ##' @param value if TRUE, writes output to the the error file.
 ##' @return NULL
 ##' @family Error
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetErrorFileOn <-
 function(value) {
@@ -638,7 +638,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the error file into a buffer.
 ##' @return NULL
 ##' @family Error
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetErrorStringsOn <-
 function(value) {
@@ -659,7 +659,7 @@ function(value) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Log
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetLogFileName <-
 function(filename) {
@@ -682,7 +682,7 @@ function(filename) {
 ##' @param value if TRUE, writes output to the the log file.
 ##' @return NULL
 ##' @family Log
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetLogFileOn <-
 function(value) {
@@ -702,7 +702,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the log file into a buffer.
 ##' @return NULL
 ##' @family Log
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetLogStringsOn <-
 function(value) {
@@ -722,7 +722,7 @@ function(value) {
 ##' @param filename the name of the file.
 ##' @return NULL
 ##' @family Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 ##' 
 phrSetOutputFileName <-
 function(filename) {
@@ -742,7 +742,7 @@ function(filename) {
 ##' @param value if TRUE, writes output to the the output file.
 ##' @return NULL
 ##' @family Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 phrSetOutputFileOn <-
 function(value) {
   invisible(.Call("setOutputFileOn", as.logical(value), PACKAGE = .packageName))
@@ -765,7 +765,7 @@ function(value) {
 ##' @param value if TRUE, captures output normally sent to the output file into a buffer.
 ##' @return NULL
 ##' @family Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 phrSetOutputStringsOn <-
 function(value) {
   invisible(.Call("setOutputStringOn", as.logical(value), PACKAGE = .packageName))
@@ -784,7 +784,7 @@ function(value) {
 ##' @param nuser the user number specified in the SELECTED_OUTPUT block.
 ##' @return The name of the selected_output file as a string.
 ##' @family Selected Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 phrGetSelectedOutputFileName <-
 function(nuser) {
   invisible(.Call("getSelectedOutputFileName", as.integer(nuser), PACKAGE = .packageName))
@@ -804,7 +804,7 @@ function(nuser) {
 ##' @param filename the name of the selected_output file.
 ##' @return NULL
 ##' @family Selected Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 phrSetSelectedOutputFileName <-
 function(nuser, filename) {
   invisible(.Call("setSelectedOutputFileName", as.integer(nuser), as.character(filename), PACKAGE = .packageName))
@@ -824,7 +824,7 @@ function(nuser, filename) {
 ##' @param value if TRUE, writes output to the the selected_output file.
 ##' @return NULL
 ##' @family Selected Output
-##' @references \url{ftp://brrftp.cr.usgs.gov/pub/charlton/iphreeqc/IPhreeqc.pdf}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}
 phrSetSelectedOutputFileOn <-
 function(nuser, value) {
   invisible(.Call("setSelectedOutputFileOn", as.integer(nuser), as.logical(value), PACKAGE = .packageName))
