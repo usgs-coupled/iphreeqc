@@ -2,13 +2,12 @@ name: CMake
 
 on:
   push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
+  BUILD_TYPE: RelWithDebInfo
 
 jobs:
   build:
@@ -17,17 +16,24 @@ jobs:
     # cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: windows-latest
+
+    # Check all combinations of BUILD_SHARED_LIBS and BUILD_CLR_LIBS
+    strategy:
+      matrix:
+        BUILD_SHARED_LIBS: [ON, OFF]
+        BUILD_CLR_LIBS: [ON, OFF]
+        exclude:
+          - BUILD_SHARED_LIBS: OFF
+            BUILD_CLR_LIBS: ON
+    continue-on-error:
     
     steps:
     - uses: actions/checkout@v2
     
-    - name: Check space
-      run: Get-PSDrive
-
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_SHARED_LIBS=${{matrix.BUILD_SHARED_LIBS}} -DBUILD_CLR_LIBS=${{matrix.BUILD_CLR_LIBS}}
 
     - name: Build
       # Build your program with the given configuration
