@@ -57,174 +57,8 @@ if (STANDALONE_BUILD)
   endif()
 endif()
 
-SET(IPhreeqc_SOURCES
-  src/CSelectedOutput.cpp
-  src/CSelectedOutput.hxx
-  src/CVar.hxx
-  src/Debug.h
-  src/ErrorReporter.hxx
-  src/IPhreeqc.cpp
-  src/IPhreeqc.h
-  src/IPhreeqc.hpp
-  src/IPhreeqc_interface_F.cpp
-  src/IPhreeqcCallbacks.h
-  src/IPhreeqcLib.cpp
-  src/phreeqcpp/advection.cpp
-  src/phreeqcpp/basicsubs.cpp
-  src/phreeqcpp/cl1.cpp
-  src/phreeqcpp/common/Parser.cxx
-  src/phreeqcpp/common/Parser.h
-  src/phreeqcpp/common/PHRQ_base.cxx
-  src/phreeqcpp/common/PHRQ_base.h
-  src/phreeqcpp/common/PHRQ_exports.h
-  src/phreeqcpp/common/PHRQ_io.cpp
-  src/phreeqcpp/common/PHRQ_io.h
-  src/phreeqcpp/common/phrqtype.h
-  src/phreeqcpp/common/Utils.cxx
-  src/phreeqcpp/common/Utils.h
-  src/phreeqcpp/cvdense.cpp
-  src/phreeqcpp/cvdense.h
-  src/phreeqcpp/cvode.cpp
-  src/phreeqcpp/cvode.h
-  src/phreeqcpp/cxxKinetics.cxx
-  src/phreeqcpp/cxxKinetics.h
-  src/phreeqcpp/cxxMix.cxx
-  src/phreeqcpp/cxxMix.h
-  src/phreeqcpp/dense.cpp
-  src/phreeqcpp/dense.h
-  src/phreeqcpp/Dictionary.cpp
-  src/phreeqcpp/Dictionary.h
-  src/phreeqcpp/dumper.cpp
-  src/phreeqcpp/dumper.h
-  src/phreeqcpp/Exchange.cxx
-  src/phreeqcpp/Exchange.h
-  src/phreeqcpp/ExchComp.cxx
-  src/phreeqcpp/ExchComp.h
-  src/phreeqcpp/GasComp.cxx
-  src/phreeqcpp/GasComp.h
-  src/phreeqcpp/gases.cpp
-  src/phreeqcpp/GasPhase.cxx
-  src/phreeqcpp/GasPhase.h
-  src/phreeqcpp/global_structures.h
-  src/phreeqcpp/input.cpp
-  src/phreeqcpp/integrate.cpp
-  src/phreeqcpp/inverse.cpp
-  src/phreeqcpp/ISolution.cxx
-  src/phreeqcpp/ISolution.h
-  src/phreeqcpp/ISolutionComp.cxx
-  src/phreeqcpp/ISolutionComp.h
-  src/phreeqcpp/isotopes.cpp
-  src/phreeqcpp/kinetics.cpp
-  src/phreeqcpp/KineticsComp.cxx
-  src/phreeqcpp/KineticsComp.h
-  src/phreeqcpp/mainsubs.cpp
-  src/phreeqcpp/model.cpp
-  src/phreeqcpp/NA.h
-  src/phreeqcpp/NameDouble.cxx
-  src/phreeqcpp/NameDouble.h
-  src/phreeqcpp/NumKeyword.cxx
-  src/phreeqcpp/NumKeyword.h
-  src/phreeqcpp/nvector.cpp
-  src/phreeqcpp/nvector.h
-  src/phreeqcpp/nvector_serial.cpp
-  src/phreeqcpp/nvector_serial.h
-  src/phreeqcpp/parse.cpp
-  src/phreeqcpp/PBasic.cpp
-  src/phreeqcpp/PBasic.h
-  src/phreeqcpp/phqalloc.cpp
-  src/phreeqcpp/phqalloc.h
-  src/phreeqcpp/Phreeqc.cpp
-  src/phreeqcpp/Phreeqc.h
-  src/phreeqcpp/PhreeqcKeywords/Keywords.cpp
-  src/phreeqcpp/PhreeqcKeywords/Keywords.h
-  src/phreeqcpp/PHRQ_io_output.cpp
-  src/phreeqcpp/pitzer.cpp
-  src/phreeqcpp/pitzer_structures.cpp
-  src/phreeqcpp/PPassemblage.cxx
-  src/phreeqcpp/PPassemblage.h
-  src/phreeqcpp/PPassemblageComp.cxx
-  src/phreeqcpp/PPassemblageComp.h
-  src/phreeqcpp/prep.cpp
-  src/phreeqcpp/Pressure.cxx
-  src/phreeqcpp/Pressure.h
-  src/phreeqcpp/print.cpp
-  src/phreeqcpp/Reaction.cxx
-  src/phreeqcpp/Reaction.h
-  src/phreeqcpp/read.cpp
-  src/phreeqcpp/ReadClass.cxx
-  src/phreeqcpp/readtr.cpp
-  src/phreeqcpp/runner.cpp
-  src/phreeqcpp/runner.h
-  src/phreeqcpp/SelectedOutput.cpp
-  src/phreeqcpp/SelectedOutput.h
-  src/phreeqcpp/Serializer.cxx
-  src/phreeqcpp/Serializer.h
-  src/phreeqcpp/sit.cpp
-  src/phreeqcpp/smalldense.cpp
-  src/phreeqcpp/smalldense.h
-  src/phreeqcpp/Solution.cxx
-  src/phreeqcpp/Solution.h
-  src/phreeqcpp/SolutionIsotope.cxx
-  src/phreeqcpp/SolutionIsotope.h
-  src/phreeqcpp/spread.cpp
-  src/phreeqcpp/SS.cxx
-  src/phreeqcpp/SS.h
-  src/phreeqcpp/SSassemblage.cxx
-  src/phreeqcpp/SSassemblage.h
-  src/phreeqcpp/SScomp.cxx
-  src/phreeqcpp/SScomp.h
-  src/phreeqcpp/step.cpp
-  src/phreeqcpp/StorageBin.cxx
-  src/phreeqcpp/StorageBin.h
-  src/phreeqcpp/StorageBinList.cpp
-  src/phreeqcpp/StorageBinList.h
-  src/phreeqcpp/structures.cpp
-  src/phreeqcpp/sundialsmath.cpp
-  src/phreeqcpp/sundialsmath.h
-  src/phreeqcpp/sundialstypes.h
-  src/phreeqcpp/Surface.cxx
-  src/phreeqcpp/Surface.h
-  src/phreeqcpp/SurfaceCharge.cxx
-  src/phreeqcpp/SurfaceCharge.h
-  src/phreeqcpp/SurfaceComp.cxx
-  src/phreeqcpp/SurfaceComp.h
-  src/phreeqcpp/System.cxx
-  src/phreeqcpp/System.h
-  src/phreeqcpp/tally.cpp
-  src/phreeqcpp/Temperature.cxx
-  src/phreeqcpp/Temperature.h
-  src/phreeqcpp/tidy.cpp
-  src/phreeqcpp/transport.cpp
-  src/phreeqcpp/Use.cpp
-  src/phreeqcpp/Use.h
-  src/phreeqcpp/UserPunch.cpp
-  src/phreeqcpp/UserPunch.h
-  src/phreeqcpp/utilities.cpp
-  src/thread.h
-  src/Var.c
-  src/Var.h
-  src/Version.h
-)
-
 # compile Var.c as c++
 set_source_files_properties(src/Var.c PROPERTIES LANGUAGE CXX)
-
-# fwrap files
-if (NOT IPHREEQC_ENABLE_MODULE)
-  set(IPhreeqc_SOURCES
-    ${IPhreeqc_SOURCES}
-    src/fimpl.h
-    src/fwrap.cpp
-    src/fwrap1.cpp
-    src/fwrap2.cpp
-    src/fwrap3.cpp
-    src/fwrap4.cpp
-    src/fwrap5.cpp
-    src/fwrap6.cpp
-    src/fwrap7.cpp
-    src/fwrap8.cpp
-    )
-endif()
 
 if (STANDALONE_BUILD)
   option(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
@@ -240,22 +74,189 @@ endif()
 if (BUILD_SHARED_LIBS)
   set(LIB_TYPE SHARED)
 endif()
-add_library(IPhreeqc ${LIB_TYPE} ${IPhreeqc_SOURCES})
+
+add_library(IPhreeqc ${LIB_TYPE} src/IPhreeqc.cpp)
+
+target_sources(IPhreeqc
+  PRIVATE
+    src/CSelectedOutput.cpp
+    src/CSelectedOutput.hxx
+    src/CVar.hxx
+    src/Debug.h
+    src/ErrorReporter.hxx
+    src/IPhreeqc.h
+    src/IPhreeqc.hpp
+    src/IPhreeqc_interface_F.cpp
+    src/IPhreeqcCallbacks.h
+    src/IPhreeqcLib.cpp
+    src/phreeqcpp/advection.cpp
+    src/phreeqcpp/basicsubs.cpp
+    src/phreeqcpp/cl1.cpp
+    src/phreeqcpp/common/Parser.cxx
+    src/phreeqcpp/common/Parser.h
+    src/phreeqcpp/common/PHRQ_base.cxx
+    src/phreeqcpp/common/PHRQ_base.h
+    src/phreeqcpp/common/PHRQ_exports.h
+    src/phreeqcpp/common/PHRQ_io.cpp
+    src/phreeqcpp/common/PHRQ_io.h
+    src/phreeqcpp/common/phrqtype.h
+    src/phreeqcpp/common/Utils.cxx
+    src/phreeqcpp/common/Utils.h
+    src/phreeqcpp/cvdense.cpp
+    src/phreeqcpp/cvdense.h
+    src/phreeqcpp/cvode.cpp
+    src/phreeqcpp/cvode.h
+    src/phreeqcpp/cxxKinetics.cxx
+    src/phreeqcpp/cxxKinetics.h
+    src/phreeqcpp/cxxMix.cxx
+    src/phreeqcpp/cxxMix.h
+    src/phreeqcpp/dense.cpp
+    src/phreeqcpp/dense.h
+    src/phreeqcpp/Dictionary.cpp
+    src/phreeqcpp/Dictionary.h
+    src/phreeqcpp/dumper.cpp
+    src/phreeqcpp/dumper.h
+    src/phreeqcpp/Exchange.cxx
+    src/phreeqcpp/Exchange.h
+    src/phreeqcpp/ExchComp.cxx
+    src/phreeqcpp/ExchComp.h
+    src/phreeqcpp/GasComp.cxx
+    src/phreeqcpp/GasComp.h
+    src/phreeqcpp/gases.cpp
+    src/phreeqcpp/GasPhase.cxx
+    src/phreeqcpp/GasPhase.h
+    src/phreeqcpp/global_structures.h
+    src/phreeqcpp/input.cpp
+    src/phreeqcpp/integrate.cpp
+    src/phreeqcpp/inverse.cpp
+    src/phreeqcpp/ISolution.cxx
+    src/phreeqcpp/ISolution.h
+    src/phreeqcpp/ISolutionComp.cxx
+    src/phreeqcpp/ISolutionComp.h
+    src/phreeqcpp/isotopes.cpp
+    src/phreeqcpp/kinetics.cpp
+    src/phreeqcpp/KineticsComp.cxx
+    src/phreeqcpp/KineticsComp.h
+    src/phreeqcpp/mainsubs.cpp
+    src/phreeqcpp/model.cpp
+    src/phreeqcpp/NA.h
+    src/phreeqcpp/NameDouble.cxx
+    src/phreeqcpp/NameDouble.h
+    src/phreeqcpp/NumKeyword.cxx
+    src/phreeqcpp/NumKeyword.h
+    src/phreeqcpp/nvector.cpp
+    src/phreeqcpp/nvector.h
+    src/phreeqcpp/nvector_serial.cpp
+    src/phreeqcpp/nvector_serial.h
+    src/phreeqcpp/parse.cpp
+    src/phreeqcpp/PBasic.cpp
+    src/phreeqcpp/PBasic.h
+    src/phreeqcpp/phqalloc.cpp
+    src/phreeqcpp/phqalloc.h
+    src/phreeqcpp/Phreeqc.cpp
+    src/phreeqcpp/Phreeqc.h
+    src/phreeqcpp/PhreeqcKeywords/Keywords.cpp
+    src/phreeqcpp/PhreeqcKeywords/Keywords.h
+    src/phreeqcpp/PHRQ_io_output.cpp
+    src/phreeqcpp/pitzer.cpp
+    src/phreeqcpp/pitzer_structures.cpp
+    src/phreeqcpp/PPassemblage.cxx
+    src/phreeqcpp/PPassemblage.h
+    src/phreeqcpp/PPassemblageComp.cxx
+    src/phreeqcpp/PPassemblageComp.h
+    src/phreeqcpp/prep.cpp
+    src/phreeqcpp/Pressure.cxx
+    src/phreeqcpp/Pressure.h
+    src/phreeqcpp/print.cpp
+    src/phreeqcpp/Reaction.cxx
+    src/phreeqcpp/Reaction.h
+    src/phreeqcpp/read.cpp
+    src/phreeqcpp/ReadClass.cxx
+    src/phreeqcpp/readtr.cpp
+    src/phreeqcpp/runner.cpp
+    src/phreeqcpp/runner.h
+    src/phreeqcpp/SelectedOutput.cpp
+    src/phreeqcpp/SelectedOutput.h
+    src/phreeqcpp/Serializer.cxx
+    src/phreeqcpp/Serializer.h
+    src/phreeqcpp/sit.cpp
+    src/phreeqcpp/smalldense.cpp
+    src/phreeqcpp/smalldense.h
+    src/phreeqcpp/Solution.cxx
+    src/phreeqcpp/Solution.h
+    src/phreeqcpp/SolutionIsotope.cxx
+    src/phreeqcpp/SolutionIsotope.h
+    src/phreeqcpp/spread.cpp
+    src/phreeqcpp/SS.cxx
+    src/phreeqcpp/SS.h
+    src/phreeqcpp/SSassemblage.cxx
+    src/phreeqcpp/SSassemblage.h
+    src/phreeqcpp/SScomp.cxx
+    src/phreeqcpp/SScomp.h
+    src/phreeqcpp/step.cpp
+    src/phreeqcpp/StorageBin.cxx
+    src/phreeqcpp/StorageBin.h
+    src/phreeqcpp/StorageBinList.cpp
+    src/phreeqcpp/StorageBinList.h
+    src/phreeqcpp/structures.cpp
+    src/phreeqcpp/sundialsmath.cpp
+    src/phreeqcpp/sundialsmath.h
+    src/phreeqcpp/sundialstypes.h
+    src/phreeqcpp/Surface.cxx
+    src/phreeqcpp/Surface.h
+    src/phreeqcpp/SurfaceCharge.cxx
+    src/phreeqcpp/SurfaceCharge.h
+    src/phreeqcpp/SurfaceComp.cxx
+    src/phreeqcpp/SurfaceComp.h
+    src/phreeqcpp/System.cxx
+    src/phreeqcpp/System.h
+    src/phreeqcpp/tally.cpp
+    src/phreeqcpp/Temperature.cxx
+    src/phreeqcpp/Temperature.h
+    src/phreeqcpp/tidy.cpp
+    src/phreeqcpp/transport.cpp
+    src/phreeqcpp/Use.cpp
+    src/phreeqcpp/Use.h
+    src/phreeqcpp/UserPunch.cpp
+    src/phreeqcpp/UserPunch.h
+    src/phreeqcpp/utilities.cpp
+    src/thread.h
+    src/Var.c
+    src/Var.h
+    src/Version.h
+)
 
 target_include_directories(IPhreeqc
   PUBLIC
-  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src>
-  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp>
-  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp/common>
-  $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp>
+    $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp/common>
+    $<BUILD_INTERFACE:${IPhreeqc_SOURCE_DIR}/src/phreeqcpp/PhreeqcKeywords>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   )
 
 target_compile_definitions(IPhreeqc PRIVATE SWIG_SHARED_OBJ)
 target_compile_definitions(IPhreeqc PRIVATE USE_PHRQ_ALLOC)
 
 if (NOT IPHREEQC_ENABLE_MODULE)
-  target_compile_definitions(IPhreeqc PUBLIC IPHREEQC_NO_FORTRAN_MODULE)
+  target_compile_definitions(IPhreeqc
+    PUBLIC
+      IPHREEQC_NO_FORTRAN_MODULE
+  )
+
+  target_sources(IPhreeqc
+    PRIVATE
+      src/fimpl.h
+      src/fwrap.cpp
+      src/fwrap1.cpp
+      src/fwrap2.cpp
+      src/fwrap3.cpp
+      src/fwrap4.cpp
+      src/fwrap5.cpp
+      src/fwrap6.cpp
+      src/fwrap7.cpp
+      src/fwrap8.cpp
+  )
 endif()
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
@@ -310,7 +311,6 @@ else()
     ${PROJECT_SOURCE_DIR}/src/IPhreeqc.f90.inc
     )
 endif()
-
 
 # Setup references for /CLR
 if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
@@ -380,15 +380,16 @@ if (BUILD_CLR_LIBS)
   endif()
 
   # CLR files
-  set(IPhreeqc_SOURCES
-    ${IPhreeqc_SOURCES}
-    src/phreeqcpp/ChartHandler.cpp
-    src/phreeqcpp/ChartHandler.h
-    src/phreeqcpp/ChartObject.cpp
-    src/phreeqcpp/ChartObject.h
-    src/phreeqcpp/CurveObject.cpp
-    src/phreeqcpp/CurveObject.h
-    )
+  target_sources(IPhreeqc
+    PRIVATE
+      src/phreeqcpp/ChartHandler.cpp
+      src/phreeqcpp/ChartHandler.h
+      src/phreeqcpp/ChartObject.cpp
+      src/phreeqcpp/ChartObject.h
+      src/phreeqcpp/CurveObject.cpp
+      src/phreeqcpp/CurveObject.h
+  )
+
 endif()
 
 include (CTest)
