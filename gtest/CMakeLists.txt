@@ -16,6 +16,11 @@ gtest_discover_tests(TestIPhreeqcLib)
 
 add_executable(TestIPhreeqc TestIPhreeqc.cpp FileTest.cpp)
 target_link_libraries(TestIPhreeqc IPhreeqc gtest gtest_main)
+if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
+  # Setup references for /CLR
+  set_target_properties(TestIPhreeqc PROPERTIES VS_DOTNET_REFERENCES "${CMAKE_CURRENT_SOURCE_DIR}/../src/phreeqcpp/ZedGraph.dll")
+endif()
+
 gtest_discover_tests(TestIPhreeqc)
 
 add_executable(TestSelectedOutput TestSelectedOutput.cpp)
