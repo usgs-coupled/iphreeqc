@@ -1,3 +1,4 @@
+// -*- coding: windows-1252 -*-
 #include <gtest/gtest.h>
 
 #include <cmath>
@@ -2250,7 +2251,7 @@ TEST(TestIPhreeqc, TestSetOutputFileName)
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                       Mass of water (kg)  =  ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                 Total alkalinity (eq/kg)  =  ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                       Total CO2 (mol/kg)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                         Temperature (Â°C)  =  ") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                         Temperature (°C)  =  ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                  Electrical balance (eq)  =  ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), " Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                               Iterations  =  ") != NULL);
@@ -2260,7 +2261,7 @@ TEST(TestIPhreeqc, TestSetOutputFileName)
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------------------Distribution of species----------------------------") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                               Log       Log       Log    mole V") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol") != NULL);
+	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma    cm³/mol") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   OH- ") != NULL);
 	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   H+ ") != NULL);
