@@ -190,6 +190,7 @@
 # /unit/
 /unit/*.err
 /unit/*.log
+/unit/*.o
 /unit/*.out
 /unit/.deps
 /unit/Debug
