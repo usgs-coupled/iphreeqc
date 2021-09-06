@@ -12,7 +12,7 @@
 ##' @aliases phreeqc-package phreeqc
 ##' @docType package
 ##' @author S.R. Charlton, D.L. Parkhurst, and C.A.J. Appelo, with contributions from D. Gillespie for Chipmunk BASIC (p2c) and S.D. Cohen, A.C. Hindmarsh, R. Serban, D. Shumaker, and A.G. Taylor for CVODE (SUNDIALS) \cr Maintainer: S.R. Charlton \email{charlton@@usgs.gov}
-##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}\cr \url{http://computation.llnl.gov/casc/sundials/main.html}
+##' @references \url{https://water.usgs.gov/water-resources/software/PHREEQC/IPhreeqc.pdf}\cr \url{https://computing.llnl.gov/projects/sundials}
 ##' @keywords package
 ##' @examples
 ##'
@@ -1448,7 +1448,7 @@ NULL
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{https://dx.doi.org/10.1016/j.gca.2017.06.023}
+##' @references \doi{10.1016/j.gca.2017.06.023}
 ##' @source \url{https://github.com/MarcNeveu/IcyDwarf/blob/master/IcyDwarf/PHREEQC-3.1.2/core10.dat}
 ##' @usage core10.dat  # phrLoadDatabaseString(core10.dat)
 ##' @keywords dataset
