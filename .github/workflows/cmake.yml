@@ -59,7 +59,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: jenkins-dist
         run: |
-          sudo apt-get update && sudo apt install -y doxygen
+          sudo apt-get update && sudo apt install -y \
+            dos2unix \
+            doxygen
           # fake the chm for now
           touch doc/phreeqc3.chm
           /bin/sh jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
