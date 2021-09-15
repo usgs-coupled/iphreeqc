@@ -57,18 +57,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: jenkins-dist
+
+      - name: chm
+        run: touch doc/phreeqc3.chm
+
+      - name: versioning
+        run: jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
+
+      - name: doxygen
+        run: sudo apt-get install -y doxygen && cd doc && doxygen
+
+      - name: autoreconf
+        run: autoreconf -fvi
+
+      - name: mkdir
+        run: mkdir _build
+
+      - name: configure
+        working-directory: ${{github.workspace}}/_build
+        run: ../configure --prefix=$(pwd)/INSTALL
+
+      - name: make
+        working-directory: ${{github.workspace}}/_build
+        run: make -j2 distcheck
+
+      - name: convert
         run: |
-          sudo apt-get update && sudo apt install -y \
-            dos2unix \
-            doxygen
-          # fake the chm for now
-          touch doc/phreeqc3.chm
-          /bin/sh jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
-          cd doc && doxygen && cd ..
-          autoreconf -fvi
-          mkdir _build && cd _build && ../configure && make -j 4 distcheck && cd ..
-          cp doc/README IPhreeqc_ReadMe.txt
+          sudo apt install -y dos2unix
           native="
           doc/Makefile \
           doc/examples/AccumulateLine.c \
@@ -145,7 +160,18 @@ jobs:
           for f in ${native}; do
             unix2dos "${f}"
           done
-          cd _build && make dist-zip && cd ..
+
+      - name: dist-zip
+        working-directory: ${{github.workspace}}/_build
+        run: make dist-zip
+
+      - name: copy
+        run: cp doc/README IPhreeqc_ReadMe.txt
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: readme
+          path: ${{github.workspace}}/IPhreeqc_ReadMe.txt
 
       - uses: actions/upload-artifact@v2
         with:
