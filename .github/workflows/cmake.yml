@@ -60,6 +60,8 @@ jobs:
       - name: jenkins-dist
         run: |
           sudo apt-get update && sudo apt install -y doxygen
+          # fake the chm for now
+          touch doc/phreeqc3.chm
           /bin/sh jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
           cd doc && doxygen && cd ..
           autoreconf -fvi
