@@ -13,10 +13,20 @@ jobs:
 
   init:
     runs-on: ubuntu-latest
+    # Map step outputs to a job outputs
+    outputs:
+      VER: ${{ steps.vars.outputs.VER }}
+      REL: ${{ steps.vars.outputs.REL }}
+      DATE: ${{ steps.vars.outputs.DATE }}
     steps:
-      which curl
-      curl --version
-      exit 1
+      - name: Setup vars
+        id: vars
+        run: |
+          which curl
+          curl --version
+          VER=$(curl https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/phreeqc-version.txt)
+          echo ::set-output name=VER::${VER}
+          exit 1
 
   build:
     # The CMake configure and build commands are platform agnostic and should work equally
