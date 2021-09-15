@@ -52,7 +52,7 @@ jobs:
   #         echo REL=${{ needs.init.outputs.REL }}
   #         echo DATE=${{ needs.init.outputs.DATE }}
 
-  replace:
+  distcheck:
     needs: [init]
     runs-on: ubuntu-latest
     steps:
@@ -146,6 +146,16 @@ jobs:
             unix2dos "${f}"
           done
           cd _build && make dist-zip && cd ..
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: tarball
+          path: ${{github.workspace}}/_build/*.tar.gz
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: zipball
+          path: ${{github.workspace}}/_build/*.zip
 
   # build:
   #   needs: [init]
