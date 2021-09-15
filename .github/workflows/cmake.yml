@@ -25,6 +25,7 @@ jobs:
           which curl
           curl --version
           VER=$(curl https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/phreeqc-version.txt)
+          echo VER=${VER}
           echo ::set-output name=VER::${VER}
           exit 1
 
