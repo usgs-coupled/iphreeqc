@@ -52,11 +52,13 @@ jobs:
           echo DATE=${{ needs.init.outputs.DATE }}
 
   replace:
+    needs: [init]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: jenkins-dist
         run: |
-          /bin/sh jenkins-dist.sh -v ${VER} -r ${REL} -d ${DATE} -pr ${TAG}
+          /bin/sh jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
           cd doc && doxygen && cd ..
           autoreconf -fvi
           mkdir _build && cd _build && ../configure && make -j 4 distcheck && cd ..
