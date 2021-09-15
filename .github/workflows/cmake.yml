@@ -51,38 +51,125 @@ jobs:
           echo REL=${{ needs.init.outputs.REL }}
           echo DATE=${{ needs.init.outputs.DATE }}
 
-
-  build:
-  needs: [init]
-    # The CMake configure and build commands are platform agnostic and should work equally
-    # well on Windows or Mac.  You can convert this to a matrix build if you need
-    # cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: windows-latest
-
-    # Check all combinations of BUILD_SHARED_LIBS and BUILD_CLR_LIBS
-    strategy:
-      matrix:
-        BUILD_SHARED_LIBS: [ON, OFF]
-        BUILD_CLR_LIBS: [ON, OFF]
-        exclude:
-          - BUILD_SHARED_LIBS: OFF
-            BUILD_CLR_LIBS: ON
-
+  replace:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - name: jenkins-dist
+        run: |
+          /bin/sh jenkins-dist.sh -v ${VER} -r ${REL} -d ${DATE} -pr ${TAG}
+          cd doc && doxygen && cd ..
+          autoreconf -fvi
+          mkdir _build && cd _build && ../configure && make -j 4 distcheck && cd ..
+          cp doc/README IPhreeqc_ReadMe.txt
+          native="
+          doc/Makefile \
+          doc/examples/AccumulateLine.c \
+          doc/examples/CreateIPhreeqc.c \
+          doc/examples/F90ClearAccumulatedLines.f90 \
+          doc/examples/F90CreateIPhreeqc.f90 \
+          doc/examples/F90DestroyIPhreeqc.f90 \
+          doc/examples/F90GetComponent.f90 \
+          doc/examples/F90GetDumpStringLine.f90 \
+          doc/examples/F90GetSelectedOutputValue.f90 \
+          doc/examples/F90GetVersionString.f90 \
+          doc/examples/GetComponent.c \
+          doc/examples/GetDumpString.c \
+          doc/examples/GetSelectedOutputValue.c \
+          doc/examples/GetVersionString.c \
+          doc/examples/IPhreeqc.cpp \
+          doc/examples/Makefile \
+          doc/examples/phreeqc.dat \
+          src/CSelectedOutput.cpp \
+          src/CSelectedOutput.hxx \
+          src/CVar.hxx \
+          src/Debug.h \
+          src/ErrorReporter.hxx \
+          src/IPhreeqc.cpp \
+          src/IPhreeqc.f.inc \
+          src/IPhreeqc.f90.inc \
+          src/IPhreeqc.h \
+          src/IPhreeqc.hpp \
+          src/IPhreeqcCallbacks.h \
+          src/IPhreeqcF.f \
+          src/IPhreeqcLib.cpp \
+          src/IPhreeqc_interface.F90 \
+          src/IPhreeqc_interface_F.cpp \
+          src/IPhreeqc_interface_F.h \
+          src/Var.c \
+          src/Var.h \
+          src/Version.h \
+          src/fimpl.h \
+          src/fwrap.cpp \
+          src/fwrap.h \
+          src/fwrap1.cpp \
+          src/fwrap2.cpp \
+          src/fwrap3.cpp \
+          src/fwrap4.cpp \
+          src/fwrap5.cpp \
+          src/fwrap6.cpp \
+          src/fwrap7.cpp \
+          src/fwrap8.cpp \
+          src/pp_sys.cpp \
+          src/thread.h \
+          test/llnl.dat \
+          test/phreeqc.dat \
+          test2/Makefile \
+          test2/wateq4f.dat \
+          test5/Makefile \
+          test5/phreeqc.dat \
+          test5/test5.c \
+          tests/main_fortran.cxx \
+          tests/test_c.c \
+          tests/test_cxx.cxx \
+          tests/test_f90.F90 \
+          unit/TestCVar.cpp \
+          unit/TestCVar.h \
+          unit/TestInterface.cpp \
+          unit/TestInterface.h \
+          unit/TestSelectedOutput.cpp \
+          unit/TestSelectedOutput.h \
+          unit/TestVar.cpp \
+          unit/TestVar.h \
+          unit/llnl.dat.old \
+          unit/missing_e.dat \
+          unit/phreeqc.dat.old \
+          unit/unit.cpp"
+          for f in ${native}; do
+            unix2dos "${f}"
+          done
+          cd _build && make dist-zip && cd ..
 
-    - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_SHARED_LIBS=${{matrix.BUILD_SHARED_LIBS}} -DBUILD_CLR_LIBS=${{matrix.BUILD_CLR_LIBS}}
+  # build:
+  #   needs: [init]
+  #   # The CMake configure and build commands are platform agnostic and should work equally
+  #   # well on Windows or Mac.  You can convert this to a matrix build if you need
+  #   # cross-platform coverage.
+  #   # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  #   runs-on: windows-latest
 
-    - name: Build
-      # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+  #   # Check all combinations of BUILD_SHARED_LIBS and BUILD_CLR_LIBS
+  #   strategy:
+  #     matrix:
+  #       BUILD_SHARED_LIBS: [ON, OFF]
+  #       BUILD_CLR_LIBS: [ON, OFF]
+  #       exclude:
+  #         - BUILD_SHARED_LIBS: OFF
+  #           BUILD_CLR_LIBS: ON
 
-    - name: Test
-      working-directory: ${{github.workspace}}/build
-      # Execute tests defined by the CMake configuration.  
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C ${{env.BUILD_TYPE}}
+  #   steps:
+  #   - uses: actions/checkout@v2
+
+  #   - name: Configure CMake
+  #     # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+  #     # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+  #     run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_SHARED_LIBS=${{matrix.BUILD_SHARED_LIBS}} -DBUILD_CLR_LIBS=${{matrix.BUILD_CLR_LIBS}}
+
+  #   - name: Build
+  #     # Build your program with the given configuration
+  #     run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+  #   - name: Test
+  #     working-directory: ${{github.workspace}}/build
+  #     # Execute tests defined by the CMake configuration.  
+  #     # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+  #     run: ctest -C ${{env.BUILD_TYPE}}
