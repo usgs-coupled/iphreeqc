@@ -69,7 +69,8 @@ jobs:
           cmd /c start /wait .\tmp\setup.exe
           Remove-Item -Recurse -Force .\tmp
           Remove-Item -Recurse -Force .\htmlhelp.exe
-          echo 'C:\Program Files (x86)\HTML Help Workshop' >> $GITHUB_PATH
+          # the next line doesn't seem to work (supposed to set the path)
+          # echo 'C:\Program Files (x86)\HTML Help Workshop' >> $GITHUB_PATH
 
       - name: verify
         shell: bash
@@ -77,7 +78,7 @@ jobs:
           pushd HTML
           bash fixup_html.bash
           popd
-          hhc phreeqc3.hhp
+          'C:\Program Files (x86)\HTML Help Workshop\hhc' phreeqc3.hhp
 
       - uses: actions/upload-artifact@v2
         with:
