@@ -42,6 +42,35 @@ jobs:
           echo ::set-output name=REL::$(python ver.py)
           echo ::set-output name=DATE::$(date "+%x")
 
+
+  chm:
+    needs: [init]
+    runs-on: windows-latest
+
+    steps:
+      - name: install
+        run: |
+          curl -L -O http://web.archive.org/web/20160201063255/http://download.microsoft.com/download/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe
+          cmd /c start /wait .\htmlhelp.exe /q /c /t:$(Get-Location)\tmp
+          $file = "$(Get-Location)\tmp\htmlhelp.inf"
+          (Get-Content $file) | Foreach-Object { $_ `
+            -replace '^BeginPrompt',                                               ';;BeginPrompt' `
+            -replace '^EndPrompt',                                                 ';;EndPrompt' `
+            -replace '^49000=CustomLDID49000, 1',                                  '49000=CustomLDID49000, 5' `
+            -replace '^"hhupd.exe',                                                ';;hhupd.exe' `
+            -replace '^DefaultInstallDir="C:\\Program Files\\HTML Help Workshop"', 'DefaultInstallDir="%ProgramFiles%\\HTML Help Workshop"'
+          } | Set-Content $file
+          cmd /c start /wait .\tmp\setup.exe
+          Remove-Item -Recurse -Force .\tmp
+          Remove-Item -Recurse -Force .\htmlhelp.exe
+          $env:PATH="C:\Program Files (x86)\HTML Help Workshop;$env:PATH"
+          Get-Command hhc
+
+      - name: verify
+        run: |
+          Get-Command hhc
+          hhc /?
+
   # check:
   #   needs: [init]
   #   runs-on: windows-latest
@@ -52,137 +81,138 @@ jobs:
   #         echo REL=${{ needs.init.outputs.REL }}
   #         echo DATE=${{ needs.init.outputs.DATE }}
 
-  distcheck:
-    needs: [init]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
 
-      # @todo 
-      - name: chm
-        run: touch doc/phreeqc3.chm
+  # distcheck:
+  #   needs: [init]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: versioning
-        run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
+  #     # @todo 
+  #     - name: chm
+  #       run: touch doc/phreeqc3.chm
 
-      - name: doxygen
-        run: sudo apt-get install -y doxygen && cd doc && doxygen
+  #     - name: versioning
+  #       run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
-      - name: autoreconf
-        run: autoreconf -fvi
+  #     - name: doxygen
+  #       run: sudo apt-get install -y doxygen && cd doc && doxygen
 
-      - name: mkdir
-        run: mkdir _build
+  #     - name: autoreconf
+  #       run: autoreconf -fvi
 
-      - name: configure
-        working-directory: ${{github.workspace}}/_build
-        run: ../configure --prefix=$(pwd)/INSTALL
+  #     - name: mkdir
+  #       run: mkdir _build
 
-      - name: make
-        working-directory: ${{github.workspace}}/_build
-        run: make -j2 distcheck
+  #     - name: configure
+  #       working-directory: ${{github.workspace}}/_build
+  #       run: ../configure --prefix=$(pwd)/INSTALL
 
-      - name: convert
-        run: |
-          sudo apt install -y dos2unix
-          native="
-          doc/Makefile \
-          doc/examples/AccumulateLine.c \
-          doc/examples/CreateIPhreeqc.c \
-          doc/examples/F90ClearAccumulatedLines.f90 \
-          doc/examples/F90CreateIPhreeqc.f90 \
-          doc/examples/F90DestroyIPhreeqc.f90 \
-          doc/examples/F90GetComponent.f90 \
-          doc/examples/F90GetDumpStringLine.f90 \
-          doc/examples/F90GetSelectedOutputValue.f90 \
-          doc/examples/F90GetVersionString.f90 \
-          doc/examples/GetComponent.c \
-          doc/examples/GetDumpString.c \
-          doc/examples/GetSelectedOutputValue.c \
-          doc/examples/GetVersionString.c \
-          doc/examples/IPhreeqc.cpp \
-          doc/examples/Makefile \
-          doc/examples/phreeqc.dat \
-          src/CSelectedOutput.cpp \
-          src/CSelectedOutput.hxx \
-          src/CVar.hxx \
-          src/Debug.h \
-          src/ErrorReporter.hxx \
-          src/IPhreeqc.cpp \
-          src/IPhreeqc.f.inc \
-          src/IPhreeqc.f90.inc \
-          src/IPhreeqc.h \
-          src/IPhreeqc.hpp \
-          src/IPhreeqcCallbacks.h \
-          src/IPhreeqcF.f \
-          src/IPhreeqcLib.cpp \
-          src/IPhreeqc_interface.F90 \
-          src/IPhreeqc_interface_F.cpp \
-          src/IPhreeqc_interface_F.h \
-          src/Var.c \
-          src/Var.h \
-          src/Version.h \
-          src/fimpl.h \
-          src/fwrap.cpp \
-          src/fwrap.h \
-          src/fwrap1.cpp \
-          src/fwrap2.cpp \
-          src/fwrap3.cpp \
-          src/fwrap4.cpp \
-          src/fwrap5.cpp \
-          src/fwrap6.cpp \
-          src/fwrap7.cpp \
-          src/fwrap8.cpp \
-          src/pp_sys.cpp \
-          src/thread.h \
-          test/llnl.dat \
-          test/phreeqc.dat \
-          test2/Makefile \
-          test2/wateq4f.dat \
-          test5/Makefile \
-          test5/phreeqc.dat \
-          test5/test5.c \
-          tests/main_fortran.cxx \
-          tests/test_c.c \
-          tests/test_cxx.cxx \
-          tests/test_f90.F90 \
-          unit/TestCVar.cpp \
-          unit/TestCVar.h \
-          unit/TestInterface.cpp \
-          unit/TestInterface.h \
-          unit/TestSelectedOutput.cpp \
-          unit/TestSelectedOutput.h \
-          unit/TestVar.cpp \
-          unit/TestVar.h \
-          unit/llnl.dat.old \
-          unit/missing_e.dat \
-          unit/phreeqc.dat.old \
-          unit/unit.cpp"
-          for f in ${native}; do
-            unix2dos "${f}"
-          done
+  #     - name: make
+  #       working-directory: ${{github.workspace}}/_build
+  #       run: make -j2 distcheck
 
-      - name: dist-zip
-        working-directory: ${{github.workspace}}/_build
-        run: make dist-zip
+  #     - name: convert
+  #       run: |
+  #         sudo apt install -y dos2unix
+  #         native="
+  #         doc/Makefile \
+  #         doc/examples/AccumulateLine.c \
+  #         doc/examples/CreateIPhreeqc.c \
+  #         doc/examples/F90ClearAccumulatedLines.f90 \
+  #         doc/examples/F90CreateIPhreeqc.f90 \
+  #         doc/examples/F90DestroyIPhreeqc.f90 \
+  #         doc/examples/F90GetComponent.f90 \
+  #         doc/examples/F90GetDumpStringLine.f90 \
+  #         doc/examples/F90GetSelectedOutputValue.f90 \
+  #         doc/examples/F90GetVersionString.f90 \
+  #         doc/examples/GetComponent.c \
+  #         doc/examples/GetDumpString.c \
+  #         doc/examples/GetSelectedOutputValue.c \
+  #         doc/examples/GetVersionString.c \
+  #         doc/examples/IPhreeqc.cpp \
+  #         doc/examples/Makefile \
+  #         doc/examples/phreeqc.dat \
+  #         src/CSelectedOutput.cpp \
+  #         src/CSelectedOutput.hxx \
+  #         src/CVar.hxx \
+  #         src/Debug.h \
+  #         src/ErrorReporter.hxx \
+  #         src/IPhreeqc.cpp \
+  #         src/IPhreeqc.f.inc \
+  #         src/IPhreeqc.f90.inc \
+  #         src/IPhreeqc.h \
+  #         src/IPhreeqc.hpp \
+  #         src/IPhreeqcCallbacks.h \
+  #         src/IPhreeqcF.f \
+  #         src/IPhreeqcLib.cpp \
+  #         src/IPhreeqc_interface.F90 \
+  #         src/IPhreeqc_interface_F.cpp \
+  #         src/IPhreeqc_interface_F.h \
+  #         src/Var.c \
+  #         src/Var.h \
+  #         src/Version.h \
+  #         src/fimpl.h \
+  #         src/fwrap.cpp \
+  #         src/fwrap.h \
+  #         src/fwrap1.cpp \
+  #         src/fwrap2.cpp \
+  #         src/fwrap3.cpp \
+  #         src/fwrap4.cpp \
+  #         src/fwrap5.cpp \
+  #         src/fwrap6.cpp \
+  #         src/fwrap7.cpp \
+  #         src/fwrap8.cpp \
+  #         src/pp_sys.cpp \
+  #         src/thread.h \
+  #         test/llnl.dat \
+  #         test/phreeqc.dat \
+  #         test2/Makefile \
+  #         test2/wateq4f.dat \
+  #         test5/Makefile \
+  #         test5/phreeqc.dat \
+  #         test5/test5.c \
+  #         tests/main_fortran.cxx \
+  #         tests/test_c.c \
+  #         tests/test_cxx.cxx \
+  #         tests/test_f90.F90 \
+  #         unit/TestCVar.cpp \
+  #         unit/TestCVar.h \
+  #         unit/TestInterface.cpp \
+  #         unit/TestInterface.h \
+  #         unit/TestSelectedOutput.cpp \
+  #         unit/TestSelectedOutput.h \
+  #         unit/TestVar.cpp \
+  #         unit/TestVar.h \
+  #         unit/llnl.dat.old \
+  #         unit/missing_e.dat \
+  #         unit/phreeqc.dat.old \
+  #         unit/unit.cpp"
+  #         for f in ${native}; do
+  #           unix2dos "${f}"
+  #         done
 
-      - name: copy
-        run: cp doc/README IPhreeqc_ReadMe.txt
+  #     - name: dist-zip
+  #       working-directory: ${{github.workspace}}/_build
+  #       run: make dist-zip
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: readme
-          path: ${{github.workspace}}/IPhreeqc_ReadMe.txt
+  #     - name: copy
+  #       run: cp doc/README IPhreeqc_ReadMe.txt
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: tarball
-          path: ${{github.workspace}}/_build/*.tar.gz
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: readme
+  #         path: ${{github.workspace}}/IPhreeqc_ReadMe.txt
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: zipball
-          path: ${{github.workspace}}/_build/*.zip
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: tarball
+  #         path: ${{github.workspace}}/_build/*.tar.gz
+
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: zipball
+  #         path: ${{github.workspace}}/_build/*.zip
 
   # build:
   #   needs: [init]
