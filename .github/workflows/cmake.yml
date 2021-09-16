@@ -81,8 +81,8 @@ jobs:
           # hhc returns 1 on success
           set +e
           'C:\Program Files (x86)\HTML Help Workshop\hhc' phreeqc3.hhp | tee hhc.out
-          set -e
           status=${PIPESTATUS[0]}
+          set -e
           if [ "$status" -eq 1 ]; then
             echo "[OK]"
             exit 0
