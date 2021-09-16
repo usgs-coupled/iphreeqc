@@ -118,7 +118,7 @@ jobs:
           name: chm
 
       - name: mv chm
-        run: mv chm doc/.
+        run: mv phreeqc3.chm doc/.
 
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
