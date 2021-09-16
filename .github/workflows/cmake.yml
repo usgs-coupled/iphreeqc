@@ -48,6 +48,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Checkout phreeqc3-HTMLversion
+        uses: actions/checkout@v2
+        with:
+          repository: usgs-coupled-subtrees/phreeqc3-HTMLversion
+          ref: master
+
       - name: install
         run: |
           curl -L -O http://web.archive.org/web/20160201063255/http://download.microsoft.com/download/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe
@@ -63,14 +69,21 @@ jobs:
           cmd /c start /wait .\tmp\setup.exe
           Remove-Item -Recurse -Force .\tmp
           Remove-Item -Recurse -Force .\htmlhelp.exe
-          $env:PATH="C:\Program Files (x86)\HTML Help Workshop;$env:PATH"
-          Get-Command hhc
+          echo 'C:\Program Files (x86)\HTML Help Workshop' >> $GITHUB_PATH
 
       - name: verify
+        shell: bash
         run: |
-          $env:PATH="C:\Program Files (x86)\HTML Help Workshop;$env:PATH"
-          Get-Command hhc
-          hhc /?
+          pushd HTML
+          bash fixup_html.bash
+          popd
+          hhc phreeqc3.hhp
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: chm
+          path: ${{github.workspace}}/phreeqc3.chm
+
 
   # check:
   #   needs: [init]
