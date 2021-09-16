@@ -44,7 +44,6 @@ jobs:
 
 
   chm:
-    needs: [init]
     runs-on: windows-latest
 
     steps:
@@ -54,7 +53,7 @@ jobs:
           repository: usgs-coupled-subtrees/phreeqc3-HTMLversion
           ref: master
 
-      - name: install
+      - name: install htmlhelp
         run: |
           curl -L -O http://web.archive.org/web/20160201063255/http://download.microsoft.com/download/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe
           cmd /c start /wait .\htmlhelp.exe /q /c /t:$(Get-Location)\tmp
@@ -119,7 +118,7 @@ jobs:
           name: chm
 
       - name: ls
-        run: ls -l
+        run: ls -lR
 
       - name: extract chm
         run: unzip chm.zip -d doc/.
