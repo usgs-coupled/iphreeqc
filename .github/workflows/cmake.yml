@@ -72,15 +72,22 @@ jobs:
           # the next line doesn't seem to work (supposed to set the path)
           # echo 'C:\Program Files (x86)\HTML Help Workshop' >> $GITHUB_PATH
 
-      - name: verify
+      - name: compile chm
         shell: bash
         run: |
           pushd HTML
           bash fixup_html.bash
           popd
-          'C:\Program Files (x86)\HTML Help Workshop\hhc' phreeqc3.hhp
-          popd
-          exit 0
+          # hhc returns 1 on success
+          'C:\Program Files (x86)\HTML Help Workshop\hhc' phreeqc3.hhp | tee hhc.out
+          status=${PIPESTATUS[0]}
+          if [ $status -eq 1 ]; then
+            echo "[OK]"
+            exit 0
+          else
+            echo "[FAILED]"
+            exit 1
+          fi
 
       - uses: actions/upload-artifact@v2
         with:
