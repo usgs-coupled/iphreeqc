@@ -79,6 +79,8 @@ jobs:
           bash fixup_html.bash
           popd
           'C:\Program Files (x86)\HTML Help Workshop\hhc' phreeqc3.hhp
+          popd
+          exit 0
 
       - uses: actions/upload-artifact@v2
         with:
