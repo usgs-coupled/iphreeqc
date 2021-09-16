@@ -68,6 +68,7 @@ jobs:
 
       - name: verify
         run: |
+          $env:PATH="C:\Program Files (x86)\HTML Help Workshop;$env:PATH"
           Get-Command hhc
           hhc /?
 
