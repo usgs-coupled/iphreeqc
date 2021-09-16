@@ -119,7 +119,7 @@ jobs:
           name: chm
 
       - name: ls
-        run: Get-ChildItem
+        run: ls -l
 
       - name: extract chm
         run: unzip chm.zip -d doc/.
