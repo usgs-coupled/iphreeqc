@@ -34,7 +34,7 @@ export VER
 # set REL
 #
 curl https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/ver.py -o ver.py
-HEAD=$(python ver.py)
+HEAD=$(python3 ver.py)
 if [ -z "$REL" ]; then
  REL="$HEAD"
 fi

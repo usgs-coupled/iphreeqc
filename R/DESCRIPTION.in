@@ -4,7 +4,7 @@ Title: R Interface to Geochemical Modeling Software
 License: GPL-3
 NeedsCompilation: yes
 Depends:
-    R (>= 2.10)
+    R (>= 3.5)
 Author: S.R. Charlton, D.L. Parkhurst, and C.A.J. Appelo, with contributions  
     from D. Gillespie for Chipmunk BASIC and S.D. Cohen, A.C. Hindmarsh,  
     R. Serban, D. Shumaker, and A.G. Taylor for CVODE/SUNDIALS
@@ -15,3 +15,4 @@ Description: A geochemical modeling program developed by the US Geological
     reactive-transport, and inverse geochemical calculations.
 Maintainer: S.R. Charlton <charlton@usgs.gov>
 LazyData: yes
+Encoding: UTF-8
