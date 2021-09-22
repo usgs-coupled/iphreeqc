@@ -125,6 +125,10 @@ else
   REPOS_PATH="`echo $REPOS_PATH | sed 's/^\/*//'`"
 fi
 
+if [ -z "$NAME" ]; then
+  NAME="IPhreeqc"
+fi
+
 REPOS_TAG=''
 if [ "$REPOS_PATH" != 'trunk' ]; then
   REPOS_TAG="$REPOS_PATH"
