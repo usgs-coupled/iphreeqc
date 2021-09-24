@@ -810,7 +810,7 @@ $(INST)/ex2 : ../phreeqc3-examples/ex2
 ########################################
 
 check : all
-	R CMD check --as-cran phreeqc
+	Rscript -e "devtools::check('phreeqc')"
 
 valgrind : install
 	R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < valgrind.R 2>&1 | tee valgrind.full.out
