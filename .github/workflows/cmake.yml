@@ -14,7 +14,7 @@ jobs:
 
   init:
     runs-on: ubuntu-latest
-    # Map step outputs to a job outputs
+    # Map step outputs to job outputs
     outputs:
       VER: ${{ steps.vars.outputs.VER }}
       REL: ${{ steps.vars.outputs.REL }}
@@ -23,23 +23,8 @@ jobs:
       - name: Setup vars
         id: vars
         run: |
-          VER=$(curl https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/phreeqc-version.txt)
-          ver_major=$(echo "$VER" | awk -F. '{print $1}')
-          ver_minor=$(echo "$VER" | awk -F. '{print $2}') 
-          if [ -z "$ver_minor" ]; then
-            ver_minor=0
-            ver_patch=0
-          else
-            ver_patch=$(echo "$VER" | awk -F. '{print $3}')
-            if [ -z "$ver_patch" ]; then
-              ver_patch=0
-            else
-              ver_patch=$((ver_patch+1))
-            fi
-          fi
-          curl -L -O https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/ver.py
-          echo ::set-output name=VER::${ver_major}.${ver_minor}.${ver_patch}
-          echo ::set-output name=REL::$(python ver.py)
+          echo ::set-output name=VER::$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/next_ver.sh | sh)
+          echo ::set-output name=REL::$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/rel.py | python3)
           echo ::set-output name=DATE::$(date "+%x")
 
 
