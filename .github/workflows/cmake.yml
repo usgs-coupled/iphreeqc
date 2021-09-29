@@ -102,18 +102,16 @@ jobs:
           use-public-rspm: true
 
       - name: install devtools
-        run: |
-          install.packages("devtools")
-        shell: Rscript {0}
+        run: Rscript -e 'install.packages("devtools")'
 
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
       - name: check
-        run: cd R && make check
+        run: cd R/phreeqc && Rscript -e 'devtools::check()'
 
       - name: build
-        run: cd R && make build
+        run: cd R/phreeqc && Rscript -e 'devtools::build()'
 
       - uses: actions/upload-artifact@v2
         with:
