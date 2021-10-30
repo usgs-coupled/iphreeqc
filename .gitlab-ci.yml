@@ -41,12 +41,8 @@ subtree-sync:
     ##
     - cd ..
     - rm -rf ${CI_PROJECT_NAME}
-    - echo about to clone
-    - echo git clone git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git
     - git clone git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git
-    - echo finished clone
     - cd ${CI_PROJECT_NAME}
-    - exit 9
 
     ##
     ## Sync subtrees
@@ -93,7 +89,8 @@ subtree-sync:
       export GIT_EDITOR=true
 
       for remote in "${!urls[@]}"; do
-        git_subtree "pull" "${prefixes[$remote]}" "$remote" "${urls[$remote]}"
+        # git_subtree "pull" "${prefixes[$remote]}" "$remote" "${urls[$remote]}"
+        git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
       done
 
       for remote in "${!urls[@]}"; do
