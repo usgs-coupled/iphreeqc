@@ -41,8 +41,12 @@ subtree-sync:
     ##
     - cd ..
     - rm -rf ${CI_PROJECT_NAME}
+    - echo about to clone
+    - echo git clone git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git
     - git clone git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git
+    - echo finished clone
     - cd ${CI_PROJECT_NAME}
+    - exit 9
 
     ##
     ## Sync subtrees
