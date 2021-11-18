@@ -23,6 +23,11 @@ endif()
 
 gtest_discover_tests(TestIPhreeqc)
 
+add_executable(TestIPhreeqc-Ex-R TestIPhreeqc-Ex-R.cpp FileTest.cpp)
+target_link_libraries(TestIPhreeqc-Ex-R IPhreeqc gtest gtest_main)
+
+gtest_discover_tests(TestIPhreeqc-Ex-R)
+
 add_executable(TestSelectedOutput TestSelectedOutput.cpp)
 target_link_libraries(TestSelectedOutput IPhreeqc gtest gtest_main)
 gtest_discover_tests(TestSelectedOutput)
@@ -207,3 +212,13 @@ configure_file(
   kinn20140218
   COPYONLY
   )
+
+# examples for TestIPhreeqc-Ex-R
+
+foreach(EX ex1 ex10 ex11 ex12 ex13a ex14 ex15 ex15.dat ex16 ex17 ex18 ex19 ex2 ex20a ex21 ex22 ex3 ex4 ex5 ex6 ex7 ex8 ex9)
+  configure_file(
+    ../phreeqc3-examples/${EX}
+    ${EX}
+    COPYONLY
+    )
+endforeach()
