@@ -38,6 +38,22 @@ std::string LoadFileAsString(std::string file)
 
 TEST(TestIPhreeqc, TestSimulatephreeqcExR)
 {
+	int tmpDbgFlag;
+
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
+	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
+
+	tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+	tmpDbgFlag |= _CRTDBG_DELAY_FREE_MEM_DF;
+	tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
+	tmpDbgFlag |= _CRTDBG_CHECK_ALWAYS_DF;
+
+	_CrtSetDbgFlag(tmpDbgFlag);
+
 	IPhreeqc obj;
 
 	// ex1
