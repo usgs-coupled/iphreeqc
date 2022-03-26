@@ -107,14 +107,8 @@ jobs:
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
-      - name: make directories
-        run: mkdir -p R/phreeqc/R && mkdir -p R/phreeqc/src/phreeqcpp && mkdir -p R/phreeqc/data
-
       - name: check
-        run: cd R/phreeqc && Rscript -e 'devtools::check()'
-
-      - name: build
-        run: cd R/phreeqc && Rscript -e 'devtools::build()'
+        run: cd R && make VERSION=${{ needs.init.outputs.VER }} RELEASE_DATE=${{ needs.init.outputs.DATE }} check_built
 
       - uses: actions/upload-artifact@v2
         with:

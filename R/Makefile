@@ -6,6 +6,8 @@
 # └── src                   IDEST
 #     └── phreeqcpp         DEST
 #
+# see https://r-pkgs.org/
+#
 
 CP=cp -f
 TOPDIR=phreeqc
@@ -19,10 +21,9 @@ DATADIR=phreeqc/data
 EXDIR=../phreeqc3-examples
 MAN=phreeqc/man
 
-SVN_URL := http://internalbrr.cr.usgs.gov/svn_GW
-RELEASE ?= $(shell svn info $(SVN_URL) | egrep "Revision:" | cut -b 10- | ( read one two ; echo $$one ) )
-RELEASE_DATE ?= $(shell date "+%Y-%m-%d")
-VERSION ?= 1.0
+# ?= set only if not already set
+RELEASE_DATE ?= $(shell date --rfc-3339=date)
+VERSION      ?= $(shell curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/next_ver.sh | sh)
 
 DBS = \
 	Amm.ascii \
@@ -292,7 +293,7 @@ $(DATADIR)/examples.rda : $(EXS) build-examples.R
 
 document : $(MAN)/phreeqc-package.Rd
 
-$(MAN)/phreeqc-package.Rd : $(TOPDIR)/R/phreeqc.R $(TOPDIR)/DESCRIPTION $(TOPDIR)/NAMESPACE
+$(MAN)/phreeqc-package.Rd : $(TOPDIR)/R/phreeqc.R $(TOPDIR)/DESCRIPTION $(TOPDIR)/NAMESPACE $(PSRC) $(XSRC) $(DATA)
 	rm -f $(RDFILES)
 	Rscript -e 'devtools::document("phreeqc")'
 
@@ -825,8 +826,6 @@ $(INST)/ex2 : ../phreeqc3-examples/ex2
 check : all
 	R CMD check --as-cran phreeqc
 
-#check_built : phreeqc_$(VERSION).tar.gz
-
 check_built : phreeqc_$(VERSION).tar.gz
 	Rscript -e "devtools::check_built(path=\"phreeqc_$(VERSION).tar.gz\")"
 
@@ -860,15 +859,6 @@ $(TOPDIR)/DESCRIPTION : DESCRIPTION.in DESCRIPTION-$(VERSION).TIMESTAMP
 DESCRIPTION-$(VERSION).TIMESTAMP :
 	touch DESCRIPTION-$(VERSION).TIMESTAMP
 
-# export_sed :
-# 	sed \
-# 	 -e 's/@VERSION@/$(VERSION)/g' \
-# 	< DESCRIPTION.in > $(TOPDIR)/DESCRIPTION
-# 	sed \
-# 	 -e 's/@VERSION@/$(VERSION)/g' \
-# 	 -e 's/@RELEASE_DATE@/$(RELEASE_DATE)/g' \
-# 	< phreeqc.R.in > $(TOPDIR)/R/phreeqc.R
-
 # build : all
 # 	R CMD build --resave-data phreeqc
 
@@ -888,6 +878,15 @@ $(IDEST):
 
 $(DEST):
 	mkdir $(DEST)
+
+# Force directory creation everytime make is executed
+# see https://www.cmcrossroads.com/article/making-directories-gnu-make
+
+$(shell mkdir -p $(TOPDIR)/R)
+
+$(shell mkdir -p $(TOPDIR)/src/phreeqcpp)
+
+$(shell mkdir -p $(TOPDIR)/data)
 
 clean :
 	rm -f $(PSRC) $(XSRC) $(DEST)/*.o $(IDEST)/*.o $(DEST)/*.so
