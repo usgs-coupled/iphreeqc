@@ -10,6 +10,13 @@ DATE=$(date -d $DATE --rfc-3339=date)
 export DATE
 
 #
+# create directories
+#
+mkdir -p R/phreeqc/R
+mkdir -p R/phreeqc/src/phreeqcpp
+mkdir -p R/phreeqc/data
+
+#
 # set VER
 #
 if [ -z "$VER" ]; then
@@ -44,5 +51,4 @@ export REL
 # sed files
 /bin/sh jenkins-dist.sh -v ${VER} -r ${REL} -d ${DATE} -pr ${TAG}
 cd R
-make VERSION=${VER} RELEASE_DATE=${DATE} check
-make VERSION=${VER} RELEASE_DATE=${DATE} build
+make VERSION=${VER} RELEASE_DATE=${DATE} check_built

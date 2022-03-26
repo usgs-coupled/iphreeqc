@@ -21,23 +21,24 @@
 /libx64
 /x64
 
+# dist files
+**/*.dist
+doc/NOTICE
+doc/README
+doc/RELEASE
+
+# TIMESTAMP files
+**/*.TIMESTAMP
+
 # /R/
-/R/Amm.ascii
-/R/iso.ascii
-/R/llnl.ascii
-/R/minteq.ascii
-/R/minteq.v4.ascii
-/R/phreeqc.ascii
-/R/pitzer.ascii
-/R/sit.ascii
-/R/wateq4f.ascii
-/R/phreeqc.Rcheck
-/R/build-databases.Rout
-/R/build-examples.Rout
+/R/*.tar.gz
+/R/*.ascii
 /R/.RData
+/R/*.Rout
+/R/phreeqc.Rcheck
 
 # /R/phreeqc/
-/R/phreeqc/NAMESPACE
+/R/phreeqc
 
 # /R/phreeqc/data/
 /R/phreeqc/data/csv.RData

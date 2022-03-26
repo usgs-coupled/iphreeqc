@@ -269,7 +269,7 @@ DATA = \
 	$(DATADIR)/databases.rda \
 	$(DATADIR)/examples.rda
 
-all: export_sed $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
+all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
 $(DATADIR)/databases.rda : $(DBS) build-databases.R
 	rm -f .RData
@@ -290,12 +290,16 @@ $(DATADIR)/examples.rda : $(EXS) build-examples.R
 	R --no-save --no-restore CMD BATCH build-examples.R
 	rm -f .RData
 
-roxygenize $(MAN)/phreeqc-package.Rd : phreeqc/R/phreeqc.R
-	rm -f $(RDFILES)
-	rm -f .RData
-	R --no-save --no-restore CMD BATCH roxygenize.R
-	touch $(MAN)/phreeqc-package.Rd
+document : $(MAN)/phreeqc-package.Rd
 
+$(MAN)/phreeqc-package.Rd : $(TOPDIR)/R/phreeqc.R $(TOPDIR)/DESCRIPTION $(TOPDIR)/NAMESPACE
+	rm -f $(RDFILES)
+	Rscript -e 'devtools::document("phreeqc")'
+
+build : phreeqc_$(VERSION).tar.gz
+
+phreeqc_$(VERSION).tar.gz : $(MAN)/phreeqc-package.Rd
+	Rscript -e 'devtools::build("phreeqc")'
 
 ##$(PSRC): $(DEST)
 
@@ -821,28 +825,52 @@ $(INST)/ex2 : ../phreeqc3-examples/ex2
 check : all
 	R CMD check --as-cran phreeqc
 
+#check_built : phreeqc_$(VERSION).tar.gz
+
+check_built : phreeqc_$(VERSION).tar.gz
+	Rscript -e "devtools::check_built(path=\"phreeqc_$(VERSION).tar.gz\")"
+
 valgrind : install
-	R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < valgrind.R 2>&1 | tee valgrind.full.out
+	echo R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < valgrind.R 2>&1 | tee valgrind.full.out
 
 install : all
-	R CMD INSTALL --build phreeqc
+	echo R CMD INSTALL --build phreeqc
 
+$(TOPDIR)/NAMESPACE : NAMESPACE
+	$(CP) $< $@
 
-phreeqc/R/phreeqc.R : export_sed
-
-phreeqc/DESCRIPTION : export_sed
-
-export_sed :
-	sed \
-	 -e 's/@VERSION@/$(VERSION)/g' \
-	< DESCRIPTION.in > $(TOPDIR)/DESCRIPTION
+$(TOPDIR)/R/phreeqc.R : phreeqc.R.in phreeqc.R-$(VERSION)_$(RELEASE_DATE).TIMESTAMP
+	rm phreeqc.R-*.TIMESTAMP
 	sed \
 	 -e 's/@VERSION@/$(VERSION)/g' \
 	 -e 's/@RELEASE_DATE@/$(RELEASE_DATE)/g' \
 	< phreeqc.R.in > $(TOPDIR)/R/phreeqc.R
+	touch phreeqc.R-$(VERSION)_$(RELEASE_DATE).TIMESTAMP
 
-build : all
-	R CMD build --resave-data phreeqc
+phreeqc.R-$(VERSION)_$(RELEASE_DATE).TIMESTAMP :
+	touch phreeqc.R-$(VERSION)_$(RELEASE_DATE).TIMESTAMP
+
+$(TOPDIR)/DESCRIPTION : DESCRIPTION.in DESCRIPTION-$(VERSION).TIMESTAMP
+	rm DESCRIPTION-*.TIMESTAMP
+	sed \
+	 -e 's/@VERSION@/$(VERSION)/g' \
+	< DESCRIPTION.in > $(TOPDIR)/DESCRIPTION
+	touch DESCRIPTION-$(VERSION).TIMESTAMP
+
+DESCRIPTION-$(VERSION).TIMESTAMP :
+	touch DESCRIPTION-$(VERSION).TIMESTAMP
+
+# export_sed :
+# 	sed \
+# 	 -e 's/@VERSION@/$(VERSION)/g' \
+# 	< DESCRIPTION.in > $(TOPDIR)/DESCRIPTION
+# 	sed \
+# 	 -e 's/@VERSION@/$(VERSION)/g' \
+# 	 -e 's/@RELEASE_DATE@/$(RELEASE_DATE)/g' \
+# 	< phreeqc.R.in > $(TOPDIR)/R/phreeqc.R
+
+# build : all
+# 	R CMD build --resave-data phreeqc
 
 uninstall :
 	R CMD REMOVE phreeqc
