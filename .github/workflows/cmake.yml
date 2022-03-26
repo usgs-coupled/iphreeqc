@@ -108,7 +108,7 @@ jobs:
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
       - name: check
-        run: cd R && make VERSION=${{ needs.init.outputs.VER }} RELEASE_DATE=${{ needs.init.outputs.DATE }} check_built
+        run: cd R && make VERSION=${{ needs.init.outputs.VER }} check_built
 
       - uses: actions/upload-artifact@v2
         with:
