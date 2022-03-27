@@ -7,7 +7,7 @@ on:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: RelWithDebInfo
+  BUILD_TYPE: Release
   NAME: IPhreeqc
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
 
 
   chm:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
       - name: Checkout phreeqc3-HTMLversion
