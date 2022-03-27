@@ -107,6 +107,12 @@ jobs:
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
+      - name: setup clang
+        run: |
+          mkdir -p ~/.R
+          echo CC=clang -Qunused-arguments > ~/.R/Makevars
+          echo CXX=clang++ -Qunused-arguments >> ~/.R/Makevars
+
       - name: check
         run: cd R && make VERSION=${{ needs.init.outputs.VER }} check_built
 
