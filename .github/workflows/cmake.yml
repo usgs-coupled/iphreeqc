@@ -121,6 +121,45 @@ jobs:
           name: cran
           path: ${{github.workspace}}/R/phreeqc_*.tar.gz
 
+  r-valgrind:
+    needs: [r-build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: cran
+          path: R
+    
+      - name: Display structure of downloaded files
+        working-directory: R
+        run: ls -lR
+      
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          use-public-rspm: true
+
+      - name: install devtools
+        run: Rscript -e 'install.packages("devtools")'
+
+      - name: setup clang
+        run: |
+          mkdir -p ~/.R
+          echo CC=clang -Qunused-arguments > ~/.R/Makevars
+          echo CXX=clang++ -Qunused-arguments >> ~/.R/Makevars
+
+      - name: install
+        run: cd R && R CMD INSTALL --build phreeqc_*.tar.gz
+
+      - name: run
+        run: cd R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < valgrind.R 2>&1 | tee valgrind.full.out
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: valgrind
+          path: ${{github.workspace}}/R/valgrind.full.out
+
   distcheck:
     needs: [init, chm]
     runs-on: ubuntu-latest
