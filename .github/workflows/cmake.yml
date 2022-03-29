@@ -143,6 +143,9 @@ jobs:
       - name: install devtools
         run: Rscript -e 'install.packages("devtools")'
 
+      - name: install valgrind
+        run: apt-get install -y valgrind
+
       - name: setup clang
         run: |
           mkdir -p ~/.R
