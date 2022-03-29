@@ -153,7 +153,7 @@ jobs:
         run: cd R && R CMD INSTALL --build phreeqc_*.tar.gz
 
       - name: run
-        run: cd R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < valgrind.R 2>&1 | tee valgrind.full.out
+        run: cd R && R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < valgrind.R 2>&1 | tee valgrind.full.out
 
       - uses: actions/upload-artifact@v2
         with:
