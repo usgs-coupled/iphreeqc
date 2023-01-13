@@ -15,23 +15,17 @@ jobs:
   init:
     runs-on: ubuntu-latest
     # Map step outputs to job outputs
-    # outputs:
-    #   VER: ${{ steps.vars.outputs.VER }}
-    #   REL: ${{ steps.vars.outputs.REL }}
-    #   DATE: ${{ steps.vars.outputs.DATE }}
-    # steps:
-    #   - name: Setup vars
-    #     id: vars
-    #     run: |
-    #       echo ::set-output name=VER::$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/next_ver.sh | sh)
-    #       echo ::set-output name=REL::$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/rel.py | python3)
-    #       echo ::set-output name=DATE::$(date "+%x")
+    outputs:
+      VER: ${{ steps.vars.outputs.VER }}
+      REL: ${{ steps.vars.outputs.REL }}
+      DATE: ${{ steps.vars.outputs.DATE }}
     steps:
       - name: Setup vars
+        id: vars
         run: |
-          echo VER=$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/next_ver.sh | sh) >> $GITHUB_ENV
-          echo REL=$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/rel.py | python3) >> $GITHUB_ENV
-          echo DATE=$(date "+%x")                                                                                   >> $GITHUB_ENV
+          echo VER=$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/next_ver.sh | sh) >> $GITHUB_OUTPUT
+          echo REL=$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/rel.py | python3) >> $GITHUB_OUTPUT
+          echo DATE=$(date "+%x")                                                                                   >> $GITHUB_OUTPUT
 
 
   # chm:
@@ -93,9 +87,9 @@ jobs:
     steps:
       - name: Display vars
         run: |
-          echo VER=${{ env.VER }}
-          echo REL=${{ env.REL }}
-          echo DATE=${{ env.DATE }}
+          echo VER=${{ needs.init.outputs.VER }}
+          echo REL=${{ needs.init.outputs.REL }}
+          echo DATE=${{ needs.init.outputs.DATE }}
 
   r-build:
     needs: [init]
@@ -104,7 +98,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: versioning
-        run: ./jenkins-dist.sh -v ${{ env.VER }} -r ${{ env.REL }} -d ${{ env.DATE }}
+        run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -113,7 +107,7 @@ jobs:
 
       - name: create source
         working-directory: R
-        run: make VERSION=${{ env.VER }} RELEASE_DATE=${{ env.DATE }} source
+        run: make VERSION=${{ needs.init.outputs.VER }} RELEASE_DATE=${{ needs.init.outputs.DATE }} source
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -145,7 +139,7 @@ jobs:
   #       run: Rscript -e 'install.packages("curl")'
 
   #     - name: versioning
-  #       run: ./jenkins-dist.sh -v ${{ env.VER }} -r ${{ env.REL }} -d ${{ env.DATE }}
+  #       run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
   #     - name: setup clang
   #       run: |
@@ -154,7 +148,7 @@ jobs:
   #         echo CXX=clang++ -Qunused-arguments >> ~/.R/Makevars
 
   #     - name: check
-  #       run: cd R && make VERSION=${{ env.VER }} check_built
+  #       run: cd R && make VERSION=${{ needs.init.outputs.VER }} check_built
 
   #     - uses: actions/upload-artifact@v3
   #       with:
@@ -220,7 +214,7 @@ jobs:
   #       run: mv phreeqc3.chm doc/.
 
   #     - name: versioning
-  #       run: ./jenkins-dist.sh -v ${{ env.VER }} -r ${{ env.REL }} -d ${{ env.DATE }}
+  #       run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
   #     - name: doxygen
   #       run: sudo apt-get install -y doxygen && cd doc && doxygen
