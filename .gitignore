@@ -209,3 +209,6 @@ doc/RELEASE
 /unit/unit.opt
 /unit/unit.plg
 /unit/x64
+
+# builds (folders beginning with _ (underscore)
+/_*

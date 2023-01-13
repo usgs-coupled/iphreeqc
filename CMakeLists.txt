@@ -1,5 +1,5 @@
 # CMAKE_MSVC_RUNTIME_LIBRARY requires 3.15
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.20)
 
 project (
   IPhreeqc
