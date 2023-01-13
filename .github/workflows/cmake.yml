@@ -104,6 +104,9 @@ jobs:
       - name: install devtools
         run: Rscript -e 'install.packages("devtools")'
 
+      - name: install curl
+        run: Rscript -e 'install.packages("curl")'
+
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
@@ -142,6 +145,9 @@ jobs:
 
       - name: install devtools
         run: Rscript -e 'install.packages("devtools")'
+
+      - name: install curl
+        run: Rscript -e 'install.packages("curl")'
 
       - name: install valgrind
         run: sudo apt-get install -y valgrind
