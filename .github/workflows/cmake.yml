@@ -129,6 +129,13 @@ jobs:
         with:
           working-directory: R/phreeqc
 
+      - name: List files
+        run: |
+          pwd
+          ls -lR
+          find -name "*.tar.gz"
+
+
   # r-build:
   #   needs: [init]
   #   runs-on: ubuntu-latest
