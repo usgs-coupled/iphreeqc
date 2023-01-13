@@ -114,11 +114,11 @@ jobs:
         with:
           extra-packages: any::roxygen2
           needs: roxygen2
-          working-directory: R
+          working-directory: R/phreeqc
 
       - name: Document
         run: roxygen2::roxygenise()
-        working-directory: R
+        working-directory: R/phreeqc
         shell: Rscript {0}
 
 
