@@ -91,7 +91,7 @@ jobs:
   #         echo REL=${{ needs.init.outputs.REL }}
   #         echo DATE=${{ needs.init.outputs.DATE }}
 
-    r-build:
+  r-build:
     needs: [init]
     runs-on: ubuntu-latest
     steps:
