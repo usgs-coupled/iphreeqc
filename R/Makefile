@@ -272,7 +272,7 @@ DATA = \
 
 all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
-source: $(PSRC) $(XSRC) $(DATA)
+source: $(TOPDIR)/R/phreeqc.R $(TOPDIR)/DESCRIPTION $(TOPDIR)/NAMESPACE $(PSRC) $(XSRC) $(DATA)
 
 $(DATADIR)/databases.rda : $(DBS) build-databases.R
 	rm -f .RData
