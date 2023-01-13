@@ -115,8 +115,8 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::roxygen2, any::pkgbuild
-          needs: roxygen2, pkgbuild
+          extra-packages: any::roxygen2, any::pkgbuild, any::rcmdcheck
+          needs: roxygen2, pkgbuild, check
           working-directory: R/phreeqc
 
       - name: Document
@@ -124,6 +124,10 @@ jobs:
         working-directory: R/phreeqc
         shell: Rscript {0}
 
+      - name: Check
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          working-directory: R/phreeqc
 
   # r-build:
   #   needs: [init]
