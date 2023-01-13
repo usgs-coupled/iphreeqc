@@ -115,8 +115,8 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::roxygen2
-          needs: roxygen2
+          extra-packages: any::roxygen2, any::pkgbuild
+          needs: roxygen2, pkgbuild
           working-directory: R/phreeqc
 
       - name: Document
