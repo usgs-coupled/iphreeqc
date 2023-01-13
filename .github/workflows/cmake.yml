@@ -19,6 +19,7 @@ jobs:
       VER: ${{ steps.vars.outputs.VER }}
       REL: ${{ steps.vars.outputs.REL }}
       DATE: ${{ steps.vars.outputs.DATE }}
+      DATE_RFC_3339: ${{ steps.vars.outputs.DATE_RFC_3339 }}
     steps:
       - name: Setup vars
         id: vars
@@ -26,6 +27,7 @@ jobs:
           echo VER=$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/next_ver.sh | sh) >> $GITHUB_OUTPUT
           echo REL=$(curl -sS https://raw.githubusercontent.com/usgs-coupled/phreeqc-version/main/rel.py | python3) >> $GITHUB_OUTPUT
           echo DATE=$(date "+%x")                                                                                   >> $GITHUB_OUTPUT
+          echo DATE_RFC_3339=$(date --rfc-3339=date)                                                                >> $GITHUB_OUTPUT
 
 
   # chm:
@@ -90,6 +92,7 @@ jobs:
           echo VER=${{ needs.init.outputs.VER }}
           echo REL=${{ needs.init.outputs.REL }}
           echo DATE=${{ needs.init.outputs.DATE }}
+          echo DATE_RFC_3339=${{ needs.init.outputs.DATE_RFC_3339 }}
 
   r-build:
     needs: [init]
@@ -107,7 +110,7 @@ jobs:
 
       - name: create source
         working-directory: R
-        run: make VERSION=${{ needs.init.outputs.VER }} RELEASE_DATE=${{ needs.init.outputs.DATE }} source
+        run: make VERSION=${{ needs.init.outputs.VER }} RELEASE_DATE=${{ needs.init.outputs.DATE_RFC_3339 }} source
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
