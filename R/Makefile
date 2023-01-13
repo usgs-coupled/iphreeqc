@@ -272,6 +272,8 @@ DATA = \
 
 all: $(PSRC) $(XSRC) $(DATA) $(MAN)/phreeqc-package.Rd
 
+source: $(PSRC) $(XSRC) $(DATA)
+
 $(DATADIR)/databases.rda : $(DBS) build-databases.R
 	rm -f .RData
 	R --no-save --no-restore CMD BATCH build-databases.R
