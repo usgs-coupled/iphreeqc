@@ -30,57 +30,57 @@ jobs:
           echo DATE_RFC_3339=$(date --rfc-3339=date)                                                                >> $GITHUB_OUTPUT
 
 
-  # chm:
-  #   runs-on: windows-latest
+  chm:
+    runs-on: windows-latest
 
-  #   steps:
-  #     - name: Checkout phreeqc3-HTMLversion
-  #       uses: actions/checkout@v3
-  #       with:
-  #         repository: usgs-coupled-subtrees/phreeqc3-HTMLversion
-  #         ref: master
+    steps:
+      - name: Checkout phreeqc3-HTMLversion
+        uses: actions/checkout@v3
+        with:
+          repository: usgs-coupled-subtrees/phreeqc3-HTMLversion
+          ref: master
 
-  #     - name: install htmlhelp
-  #       run: |
-  #         curl -L -O http://web.archive.org/web/20160201063255/http://download.microsoft.com/download/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe
-  #         cmd /c start /wait .\htmlhelp.exe /q /c /t:$(Get-Location)\tmp
-  #         $file = "$(Get-Location)\tmp\htmlhelp.inf"
-  #         (Get-Content $file) | Foreach-Object { $_ `
-  #           -replace '^BeginPrompt',                                               ';;BeginPrompt' `
-  #           -replace '^EndPrompt',                                                 ';;EndPrompt' `
-  #           -replace '^49000=CustomLDID49000, 1',                                  '49000=CustomLDID49000, 5' `
-  #           -replace '^"hhupd.exe',                                                ';;hhupd.exe' `
-  #           -replace '^DefaultInstallDir="C:\\Program Files\\HTML Help Workshop"', 'DefaultInstallDir="%ProgramFiles%\\HTML Help Workshop"'
-  #         } | Set-Content $file
-  #         cmd /c start /wait .\tmp\setup.exe
-  #         Remove-Item -Recurse -Force .\tmp
-  #         Remove-Item -Recurse -Force .\htmlhelp.exe
-  #         # the next line doesn't seem to work (supposed to set the path)
-  #         # echo 'C:\Program Files (x86)\HTML Help Workshop' >> $GITHUB_PATH
+      - name: install htmlhelp
+        run: |
+          curl -L -O http://web.archive.org/web/20160201063255/http://download.microsoft.com/download/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe
+          cmd /c start /wait .\htmlhelp.exe /q /c /t:$(Get-Location)\tmp
+          $file = "$(Get-Location)\tmp\htmlhelp.inf"
+          (Get-Content $file) | Foreach-Object { $_ `
+            -replace '^BeginPrompt',                                               ';;BeginPrompt' `
+            -replace '^EndPrompt',                                                 ';;EndPrompt' `
+            -replace '^49000=CustomLDID49000, 1',                                  '49000=CustomLDID49000, 5' `
+            -replace '^"hhupd.exe',                                                ';;hhupd.exe' `
+            -replace '^DefaultInstallDir="C:\\Program Files\\HTML Help Workshop"', 'DefaultInstallDir="%ProgramFiles%\\HTML Help Workshop"'
+          } | Set-Content $file
+          cmd /c start /wait .\tmp\setup.exe
+          Remove-Item -Recurse -Force .\tmp
+          Remove-Item -Recurse -Force .\htmlhelp.exe
+          # the next line doesn't seem to work (supposed to set the path)
+          # echo 'C:\Program Files (x86)\HTML Help Workshop' >> $GITHUB_PATH
 
-  #     - name: compile chm
-  #       shell: bash
-  #       run: |
-  #         pushd HTML
-  #         bash fixup_html.bash
-  #         popd
-  #         # hhc returns 1 on success
-  #         set +e
-  #         'C:\Program Files (x86)\HTML Help Workshop\hhc' phreeqc3.hhp | tee hhc.out
-  #         status=${PIPESTATUS[0]}
-  #         set -e
-  #         if [ "$status" -eq 1 ]; then
-  #           echo "[OK]"
-  #           exit 0
-  #         else
-  #           echo "[FAILED]"
-  #           exit 1
-  #         fi
+      - name: compile chm
+        shell: bash
+        run: |
+          pushd HTML
+          bash fixup_html.bash
+          popd
+          # hhc returns 1 on success
+          set +e
+          'C:\Program Files (x86)\HTML Help Workshop\hhc' phreeqc3.hhp | tee hhc.out
+          status=${PIPESTATUS[0]}
+          set -e
+          if [ "$status" -eq 1 ]; then
+            echo "[OK]"
+            exit 0
+          else
+            echo "[FAILED]"
+            exit 1
+          fi
 
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: chm
-  #         path: ${{github.workspace}}/phreeqc3.chm
+      - uses: actions/upload-artifact@v3
+        with:
+          name: chm
+          path: ${{github.workspace}}/phreeqc3.chm
 
 
   check:
@@ -237,140 +237,140 @@ jobs:
   #         name: valgrind
   #         path: ${{github.workspace}}/R/valgrind.full.out
 
-  # distcheck:
-  #   needs: [init, chm]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
+  distcheck:
+    needs: [init, chm]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - uses: actions/download-artifact@v3
-  #       with:
-  #         name: chm
+      - uses: actions/download-artifact@v3
+        with:
+          name: chm
 
-  #     - name: mv chm
-  #       run: mv phreeqc3.chm doc/.
+      - name: mv chm
+        run: mv phreeqc3.chm doc/.
 
-  #     - name: versioning
-  #       run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
+      - name: versioning
+        run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
-  #     - name: doxygen
-  #       run: sudo apt-get install -y doxygen && cd doc && doxygen
+      - name: doxygen
+        run: sudo apt-get install -y doxygen && cd doc && doxygen
 
-  #     - name: autoreconf
-  #       run: autoreconf -fvi
+      - name: autoreconf
+        run: autoreconf -fvi
 
-  #     - name: mkdir
-  #       run: mkdir _build
+      - name: mkdir
+        run: mkdir _build
 
-  #     - name: configure
-  #       working-directory: ${{github.workspace}}/_build
-  #       run: ../configure --prefix=$(pwd)/INSTALL
+      - name: configure
+        working-directory: ${{github.workspace}}/_build
+        run: ../configure --prefix=$(pwd)/INSTALL
 
-  #     - name: make
-  #       working-directory: ${{github.workspace}}/_build
-  #       run: make -j2 distcheck
+      - name: make
+        working-directory: ${{github.workspace}}/_build
+        run: make -j2 distcheck
 
-  #     - name: convert
-  #       run: |
-  #         sudo apt install -y dos2unix
-  #         native="
-  #         doc/Makefile \
-  #         doc/examples/AccumulateLine.c \
-  #         doc/examples/CreateIPhreeqc.c \
-  #         doc/examples/F90ClearAccumulatedLines.f90 \
-  #         doc/examples/F90CreateIPhreeqc.f90 \
-  #         doc/examples/F90DestroyIPhreeqc.f90 \
-  #         doc/examples/F90GetComponent.f90 \
-  #         doc/examples/F90GetDumpStringLine.f90 \
-  #         doc/examples/F90GetSelectedOutputValue.f90 \
-  #         doc/examples/F90GetVersionString.f90 \
-  #         doc/examples/GetComponent.c \
-  #         doc/examples/GetDumpString.c \
-  #         doc/examples/GetSelectedOutputValue.c \
-  #         doc/examples/GetVersionString.c \
-  #         doc/examples/IPhreeqc.cpp \
-  #         doc/examples/Makefile \
-  #         doc/examples/phreeqc.dat \
-  #         src/CSelectedOutput.cpp \
-  #         src/CSelectedOutput.hxx \
-  #         src/CVar.hxx \
-  #         src/Debug.h \
-  #         src/ErrorReporter.hxx \
-  #         src/IPhreeqc.cpp \
-  #         src/IPhreeqc.f.inc \
-  #         src/IPhreeqc.f90.inc \
-  #         src/IPhreeqc.h \
-  #         src/IPhreeqc.hpp \
-  #         src/IPhreeqcCallbacks.h \
-  #         src/IPhreeqcF.f \
-  #         src/IPhreeqcLib.cpp \
-  #         src/IPhreeqc_interface.F90 \
-  #         src/IPhreeqc_interface_F.cpp \
-  #         src/IPhreeqc_interface_F.h \
-  #         src/Var.c \
-  #         src/Var.h \
-  #         src/Version.h \
-  #         src/fimpl.h \
-  #         src/fwrap.cpp \
-  #         src/fwrap.h \
-  #         src/fwrap1.cpp \
-  #         src/fwrap2.cpp \
-  #         src/fwrap3.cpp \
-  #         src/fwrap4.cpp \
-  #         src/fwrap5.cpp \
-  #         src/fwrap6.cpp \
-  #         src/fwrap7.cpp \
-  #         src/fwrap8.cpp \
-  #         src/pp_sys.cpp \
-  #         src/thread.h \
-  #         test/llnl.dat \
-  #         test/phreeqc.dat \
-  #         test2/Makefile \
-  #         test2/wateq4f.dat \
-  #         test5/Makefile \
-  #         test5/phreeqc.dat \
-  #         test5/test5.c \
-  #         tests/main_fortran.cxx \
-  #         tests/test_c.c \
-  #         tests/test_cxx.cxx \
-  #         tests/test_f90.F90 \
-  #         unit/TestCVar.cpp \
-  #         unit/TestCVar.h \
-  #         unit/TestInterface.cpp \
-  #         unit/TestInterface.h \
-  #         unit/TestSelectedOutput.cpp \
-  #         unit/TestSelectedOutput.h \
-  #         unit/TestVar.cpp \
-  #         unit/TestVar.h \
-  #         unit/llnl.dat.old \
-  #         unit/missing_e.dat \
-  #         unit/phreeqc.dat.old \
-  #         unit/unit.cpp"
-  #         for f in ${native}; do
-  #           unix2dos "${f}"
-  #         done
+      - name: convert
+        run: |
+          sudo apt install -y dos2unix
+          native="
+          doc/Makefile \
+          doc/examples/AccumulateLine.c \
+          doc/examples/CreateIPhreeqc.c \
+          doc/examples/F90ClearAccumulatedLines.f90 \
+          doc/examples/F90CreateIPhreeqc.f90 \
+          doc/examples/F90DestroyIPhreeqc.f90 \
+          doc/examples/F90GetComponent.f90 \
+          doc/examples/F90GetDumpStringLine.f90 \
+          doc/examples/F90GetSelectedOutputValue.f90 \
+          doc/examples/F90GetVersionString.f90 \
+          doc/examples/GetComponent.c \
+          doc/examples/GetDumpString.c \
+          doc/examples/GetSelectedOutputValue.c \
+          doc/examples/GetVersionString.c \
+          doc/examples/IPhreeqc.cpp \
+          doc/examples/Makefile \
+          doc/examples/phreeqc.dat \
+          src/CSelectedOutput.cpp \
+          src/CSelectedOutput.hxx \
+          src/CVar.hxx \
+          src/Debug.h \
+          src/ErrorReporter.hxx \
+          src/IPhreeqc.cpp \
+          src/IPhreeqc.f.inc \
+          src/IPhreeqc.f90.inc \
+          src/IPhreeqc.h \
+          src/IPhreeqc.hpp \
+          src/IPhreeqcCallbacks.h \
+          src/IPhreeqcF.f \
+          src/IPhreeqcLib.cpp \
+          src/IPhreeqc_interface.F90 \
+          src/IPhreeqc_interface_F.cpp \
+          src/IPhreeqc_interface_F.h \
+          src/Var.c \
+          src/Var.h \
+          src/Version.h \
+          src/fimpl.h \
+          src/fwrap.cpp \
+          src/fwrap.h \
+          src/fwrap1.cpp \
+          src/fwrap2.cpp \
+          src/fwrap3.cpp \
+          src/fwrap4.cpp \
+          src/fwrap5.cpp \
+          src/fwrap6.cpp \
+          src/fwrap7.cpp \
+          src/fwrap8.cpp \
+          src/pp_sys.cpp \
+          src/thread.h \
+          test/llnl.dat \
+          test/phreeqc.dat \
+          test2/Makefile \
+          test2/wateq4f.dat \
+          test5/Makefile \
+          test5/phreeqc.dat \
+          test5/test5.c \
+          tests/main_fortran.cxx \
+          tests/test_c.c \
+          tests/test_cxx.cxx \
+          tests/test_f90.F90 \
+          unit/TestCVar.cpp \
+          unit/TestCVar.h \
+          unit/TestInterface.cpp \
+          unit/TestInterface.h \
+          unit/TestSelectedOutput.cpp \
+          unit/TestSelectedOutput.h \
+          unit/TestVar.cpp \
+          unit/TestVar.h \
+          unit/llnl.dat.old \
+          unit/missing_e.dat \
+          unit/phreeqc.dat.old \
+          unit/unit.cpp"
+          for f in ${native}; do
+            unix2dos "${f}"
+          done
 
-  #     - name: dist-zip
-  #       working-directory: ${{github.workspace}}/_build
-  #       run: make dist-zip
+      - name: dist-zip
+        working-directory: ${{github.workspace}}/_build
+        run: make dist-zip
 
-  #     - name: copy
-  #       run: cp doc/README IPhreeqc_ReadMe.txt
+      - name: copy
+        run: cp doc/README IPhreeqc_ReadMe.txt
 
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: readme
-  #         path: ${{github.workspace}}/IPhreeqc_ReadMe.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: readme
+          path: ${{github.workspace}}/IPhreeqc_ReadMe.txt
 
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: tarball
-  #         path: ${{github.workspace}}/_build/*.tar.gz
+      - uses: actions/upload-artifact@v3
+        with:
+          name: tarball
+          path: ${{github.workspace}}/_build/*.tar.gz
 
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: zipball
-  #         path: ${{github.workspace}}/_build/*.zip
+      - uses: actions/upload-artifact@v3
+        with:
+          name: zipball
+          path: ${{github.workspace}}/_build/*.zip
 
   # build:
   #   needs: [init]
