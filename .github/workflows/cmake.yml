@@ -56,7 +56,7 @@ jobs:
         arch: x64
 
     - name: CTest
-      run: ctest -S ctest.cmake -V --output-on-failure -j 2
+      run: ctest -S ctest.cmake -V --output-on-failure
 
     - name: Upload results
       uses: actions/upload-artifact@v3
