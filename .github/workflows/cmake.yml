@@ -30,6 +30,41 @@ jobs:
           echo DATE_RFC_3339=$(date --rfc-3339=date)                                                                >> $GITHUB_OUTPUT
 
 
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install ninja valgrind (Linux)
+      if: runner.os == 'Linux'
+      run: sudo apt-get install -y ninja-build valgrind
+
+    - name: Install ninja (macOS)
+      if: runner.os == 'macOS'
+      run: brew install ninja
+
+    - name: Set up Visual Studio shell (Windows)
+      if: runner.os == 'Windows'
+      uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
+
+    - name: CTest
+      run: ctest -S ctest.cmake -V --output-on-failure -j 2
+
+    - name: Upload results
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.os }}-test-results
+        path: ${{ github.workspace }}/_ctest/Testing/
+
+
   chm:
     runs-on: windows-latest
 
@@ -83,24 +118,11 @@ jobs:
           path: ${{github.workspace}}/phreeqc3.chm
 
 
-  check:
-    needs: [init]
-    runs-on: windows-2019
-    steps:
-      - name: Display vars
-        run: |
-          echo VER=${{ needs.init.outputs.VER }}
-          echo REL=${{ needs.init.outputs.REL }}
-          echo DATE=${{ needs.init.outputs.DATE }}
-          echo DATE_RFC_3339=${{ needs.init.outputs.DATE_RFC_3339 }}
-
   R-CMD-check:
     needs: [init]
-    ##runs-on: ubuntu-latest
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
 
     strategy:
       fail-fast: false
