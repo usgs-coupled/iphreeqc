@@ -410,8 +410,8 @@ if (STANDALONE_BUILD)
     
     FetchContent_Declare(
       googletest
-      URL https://github.com/google/googletest/archive/release-1.8.1.tar.gz
-      URL_HASH MD5=2e6fbeb6a91310a16efe181886c59596
+      GIT_REPOSITORY https://github.com/google/googletest.git
+      GIT_TAG        58d77fa8070e8cec2dc1ed015d66b454c8d78850 # release-1.12.1
       )
     
     mark_as_advanced(
