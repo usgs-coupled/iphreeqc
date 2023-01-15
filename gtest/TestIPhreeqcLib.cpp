@@ -434,7 +434,7 @@ TEST(TestIPhreeqcLib, TestRunString)
 	ASSERT_TRUE(n >= 0);
 
 	char OUTPUT_FILE[80];
-	sprintf(OUTPUT_FILE, "phreeqc.%d.out", n);
+	snprintf(OUTPUT_FILE, sizeof(OUTPUT_FILE), "phreeqc.%d.out", n);
 
 	if (::FileExists(OUTPUT_FILE))
 	{
@@ -1323,7 +1323,7 @@ TEST(TestIPhreeqcLib, TestCase1)
 	ASSERT_TRUE(n >= 0);
 
 	char SELECTED_OUT[80];
-	sprintf(SELECTED_OUT, "selected_1.%d.out", n);
+	snprintf(SELECTED_OUT, sizeof(SELECTED_OUT), "selected_1.%d.out", n);
 
 	// remove punch file if it exists
 	if (::FileExists(SELECTED_OUT))
@@ -1366,7 +1366,7 @@ TEST(TestIPhreeqcLib, TestCase2)
 	ASSERT_TRUE(n >= 0);
 
 	char SELECTED_OUT[80];
-	sprintf(SELECTED_OUT, "selected_1.%d.out", n);
+	snprintf(SELECTED_OUT, sizeof(SELECTED_OUT), "selected_1.%d.out", n);
 
 	// remove punch files if they exists
 	//
@@ -1543,7 +1543,7 @@ void TestFileOnOff(const char* FILENAME_FORMAT, int output_file_on, int error_fi
 	ASSERT_TRUE(n >= 0);
 
 	char FILENAME[80];
-	sprintf(FILENAME, FILENAME_FORMAT, n);
+	snprintf(FILENAME, sizeof(FILENAME), FILENAME_FORMAT, n);
 
 	// remove FILENAME if it exists
 	//
@@ -2081,7 +2081,7 @@ TEST(TestIPhreeqcLib, TestErrorFileOn)
 	ASSERT_TRUE(n >= 0);
 
 	char FILENAME[80];
-	sprintf(FILENAME, "phreeqc.%d.err", n);
+	snprintf(FILENAME, sizeof(FILENAME), "phreeqc.%d.err", n);
 
 	if (::FileExists(FILENAME))
 	{
@@ -2131,7 +2131,7 @@ TEST(TestIPhreeqcLib, TestLogFileOn)
 	ASSERT_TRUE(n >= 0);
 
 	char FILENAME[80];
-	sprintf(FILENAME, "phreeqc.%d.log", n);
+	snprintf(FILENAME, sizeof(FILENAME), "phreeqc.%d.log", n);
 
 	if (::FileExists(FILENAME))
 	{
@@ -2293,7 +2293,7 @@ TEST(TestIPhreeqcLib, TestClearAccumulatedLines)
 TEST(TestIPhreeqcLib, TestSetDumpFileName)
 {
 	char DUMP_FILENAME[80];
-	sprintf(DUMP_FILENAME, "dump.%06d.out", ::rand());
+	snprintf(DUMP_FILENAME, sizeof(DUMP_FILENAME), "dump.%06d.out", ::rand());
 	if (::FileExists(DUMP_FILENAME))
 	{
 		::DeleteFile(DUMP_FILENAME);
@@ -2385,7 +2385,7 @@ TEST(TestIPhreeqcLib, TestSetDumpFileName)
 TEST(TestIPhreeqcLib, TestSetOutputFileName)
 {
 	char OUTPUT_FILENAME[80];
-	sprintf(OUTPUT_FILENAME, "output.%06d.out", ::rand());
+	snprintf(OUTPUT_FILENAME, sizeof(OUTPUT_FILENAME), "output.%06d.out", ::rand());
 	if (::FileExists(OUTPUT_FILENAME))
 	{
 		::DeleteFile(OUTPUT_FILENAME);
@@ -2578,7 +2578,7 @@ TEST(TestIPhreeqcLib, TestGetOutputString)
 	ASSERT_TRUE(n >= 0);
 
 	char OUTPUT_FILENAME[80];
-	sprintf(OUTPUT_FILENAME, "output.%06d.out", ::rand());
+	snprintf(OUTPUT_FILENAME, sizeof(OUTPUT_FILENAME), "output.%06d.out", ::rand());
 	if (::FileExists(OUTPUT_FILENAME))
 	{
 		::DeleteFile(OUTPUT_FILENAME);
@@ -2782,7 +2782,7 @@ TEST(TestIPhreeqcLib, TestGetOutputStringLine)
 TEST(TestIPhreeqcLib, TestSetLogFileName)
 {
 	char LOG_FILENAME[80];
-	sprintf(LOG_FILENAME, "log.%06d.out", ::rand());
+	snprintf(LOG_FILENAME, sizeof(LOG_FILENAME), "log.%06d.out", ::rand());
 	if (::FileExists(LOG_FILENAME))
 	{
 		::DeleteFile(LOG_FILENAME);
@@ -2889,7 +2889,7 @@ TEST(TestIPhreeqcLib, TestLogStringOnOff)
 TEST(TestIPhreeqcLib, TestGetLogString)
 {
 	char LOG_FILENAME[80];
-	sprintf(LOG_FILENAME, "log.%06d.out", ::rand());
+	snprintf(LOG_FILENAME, sizeof(LOG_FILENAME), "log.%06d.out", ::rand());
 	if (::FileExists(LOG_FILENAME))
 	{
 		::DeleteFile(LOG_FILENAME);
@@ -3159,7 +3159,7 @@ TEST(TestIPhreeqcLib, TestGetLogStringLine)
 TEST(TestIPhreeqcLib, TestSetErrorFileName)
 {
 	char ERR_FILENAME[80];
-	sprintf(ERR_FILENAME, "error.%s.out", "TestIPhreeqcLib-TestSetErrorFileName");
+	snprintf(ERR_FILENAME, sizeof(ERR_FILENAME), "error.%s.out", "TestIPhreeqcLib-TestSetErrorFileName");
 	if (::FileExists(ERR_FILENAME))
 	{
 		::DeleteFile(ERR_FILENAME);
@@ -3246,7 +3246,7 @@ TEST(TestIPhreeqcLib, TestErrorStringOnOff)
 TEST(TestIPhreeqcLib, TestGetErrorString)
 {
 	char ERR_FILENAME[80];
-	sprintf(ERR_FILENAME, "error.%06d.out", ::rand());
+	snprintf(ERR_FILENAME, sizeof(ERR_FILENAME), "error.%06d.out", ::rand());
 	if (::FileExists(ERR_FILENAME))
 	{
 		::DeleteFile(ERR_FILENAME);
@@ -3380,7 +3380,7 @@ TEST(TestIPhreeqcLib, TestGetErrorStringLineCount)
 TEST(TestIPhreeqcLib, TestSetSelectedOutputFileName)
 {
 	char SELOUT_FILENAME[80];
-	sprintf(SELOUT_FILENAME, "selected_output.%06d.out", ::rand());
+	snprintf(SELOUT_FILENAME, sizeof(SELOUT_FILENAME), "selected_output.%06d.out", ::rand());
 	if (::FileExists(SELOUT_FILENAME))
 	{
 		::DeleteFile(SELOUT_FILENAME);
@@ -4020,7 +4020,7 @@ TEST(TestIPhreeqcLib, TestDelete)
 	ASSERT_TRUE(n >= 0);
 
 	char OUTPUT_FILE[80];
-	sprintf(OUTPUT_FILE, "phreeqc.%d.out", n);
+	snprintf(OUTPUT_FILE, sizeof(OUTPUT_FILE), "phreeqc.%d.out", n);
 
 	if (::FileExists(OUTPUT_FILE))
 	{

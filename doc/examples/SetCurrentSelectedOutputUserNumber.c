@@ -28,7 +28,7 @@ int main(void)
 
   for (i = 0; i < GetSelectedOutputCount(id); ++i) {
     n = GetNthSelectedOutputUserNumber(id, i);
-    sprintf(buffer, "sel_out.%d.out", n);
+    snprintf(buffer, sizeof(buffer), "sel_out.%d.out", n);
 
     if ((f = fopen(buffer, "w"))) {
       SetCurrentSelectedOutputUserNumber(id, n);

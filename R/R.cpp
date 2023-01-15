@@ -152,17 +152,17 @@ getCol(int ncol)
         break;
       case TT_LONG:
         if (vv.u.lVal == -99) {
-          sprintf(buffer, "NA");
+          snprintf(buffer, sizeof(buffer), "NA");
         } else {
-          sprintf(buffer, "%ld", vv.u.lVal);
+          snprintf(buffer, sizeof(buffer), "%ld", vv.u.lVal);
         }
         SET_STRING_ELT(ans, r-1, mkChar(buffer));
         break;
       case TT_DOUBLE:
         if (vv.u.dVal == -999.999 || vv.u.dVal == -99.) {
-          sprintf(buffer, "NA");
+          snprintf(buffer, sizeof(buffer), "NA");
         } else {
-          sprintf(buffer, "%g", vv.u.dVal);
+          snprintf(buffer, sizeof(buffer), "%g", vv.u.dVal);
         }
         SET_STRING_ELT(ans, r-1, mkChar(buffer));
         break;
@@ -561,7 +561,7 @@ getSelectedOutputStringsLst(void)
     int save = R::singleton().GetCurrentSelectedOutputUserNumber();
     for (int i = 0; i < n; ++i) {
       int d = R::singleton().GetNthSelectedOutputUserNumber(i);
-      ::sprintf(buffer, "n%d", d);
+      ::snprintf(buffer, sizeof(buffer), "n%d", d);
       SET_STRING_ELT(attr, i, mkChar(buffer));
       R::singleton().SetCurrentSelectedOutputUserNumber(d);
       PROTECT(so = getSelectedOutputStrings());
@@ -652,7 +652,7 @@ getSelOutLst(void)
     int save = R::singleton().GetCurrentSelectedOutputUserNumber();
     for (int i = 0; i < n; ++i) {
       int d = R::singleton().GetNthSelectedOutputUserNumber(i);
-      ::sprintf(buffer, "n%d", d);
+      ::snprintf(buffer, sizeof(buffer), "n%d", d);
       SET_STRING_ELT(attr, i, mkChar(buffer));
       R::singleton().SetCurrentSelectedOutputUserNumber(d);
       PROTECT(so = getSelOut());
