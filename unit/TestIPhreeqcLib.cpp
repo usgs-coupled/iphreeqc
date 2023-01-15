@@ -438,7 +438,7 @@ void TestIPhreeqcLib::TestRunString(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	char OUTPUT_FILE[80];
-	sprintf(OUTPUT_FILE, "phreeqc.%d.out", n);
+	snprintf(OUTPUT_FILE, sizeof(OUTPUT_FILE), "phreeqc.%d.out", n);
 
 	if (::FileExists(OUTPUT_FILE))
 	{
@@ -1325,7 +1325,7 @@ void TestIPhreeqcLib::TestCase1(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	char SELECTED_OUT[80];
-	sprintf(SELECTED_OUT, "selected_1.%d.out", n);
+	snprintf(SELECTED_OUT, sizeof(SELECTED_OUT), "selected_1.%d.out", n);
 
 	// remove punch file if it exists
 	if (::FileExists(SELECTED_OUT))
@@ -1368,7 +1368,7 @@ void TestIPhreeqcLib::TestCase2(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	char SELECTED_OUT[80];
-	sprintf(SELECTED_OUT, "selected_1.%d.out", n);
+	snprintf(SELECTED_OUT, sizeof(SELECTED_OUT), "selected_1.%d.out", n);
 
 	// remove punch files if they exists
 	//
@@ -1544,7 +1544,7 @@ void TestIPhreeqcLib::TestFileOnOff(const char* FILENAME_FORMAT, int output_file
 	CPPUNIT_ASSERT(n >= 0);
 
 	char FILENAME[80];
-	sprintf(FILENAME, FILENAME_FORMAT, n);
+	snprintf(FILENAME, sizeof(FILENAME), FILENAME_FORMAT, n);
 
 	// remove FILENAME if it exists
 	//
@@ -2082,7 +2082,7 @@ void TestIPhreeqcLib::TestErrorFileOn(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	char FILENAME[80];
-	sprintf(FILENAME, "phreeqc.%d.err", n);
+	snprintf(FILENAME, sizeof(FILENAME), "phreeqc.%d.err", n);
 
 	if (::FileExists(FILENAME))
 	{
@@ -2132,7 +2132,7 @@ void TestIPhreeqcLib::TestLogFileOn(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	char FILENAME[80];
-	sprintf(FILENAME, "phreeqc.%d.log", n);
+	snprintf(FILENAME, sizeof(FILENAME), "phreeqc.%d.log", n);
 
 	if (::FileExists(FILENAME))
 	{
@@ -2294,7 +2294,7 @@ void TestIPhreeqcLib::TestClearAccumulatedLines(void)
 void TestIPhreeqcLib::TestSetDumpFileName(void)
 {
 	char DUMP_FILENAME[80];
-	sprintf(DUMP_FILENAME, "dump.%06d.out", ::rand());
+	snprintf(DUMP_FILENAME, sizeof(DUMP_FILENAME), "dump.%06d.out", ::rand());
 	if (::FileExists(DUMP_FILENAME))
 	{
 		::DeleteFile(DUMP_FILENAME);
@@ -2386,7 +2386,7 @@ void TestIPhreeqcLib::TestSetDumpFileName(void)
 void TestIPhreeqcLib::TestSetOutputFileName(void)
 {
 	char OUTPUT_FILENAME[80];
-	sprintf(OUTPUT_FILENAME, "output.%06d.out", ::rand());
+	snprintf(OUTPUT_FILENAME, sizeof(OUTPUT_FILENAME), "output.%06d.out", ::rand());
 	if (::FileExists(OUTPUT_FILENAME))
 	{
 		::DeleteFile(OUTPUT_FILENAME);
@@ -2465,7 +2465,7 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Mass of water (kg)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                 Total alkalinity (eq/kg)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Total CO2 (mol/kg)  =  ")                                   != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                         Temperature (°C)  =  ")                                   != NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                         Temperature (ï¿½C)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                  Electrical balance (eq)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), " Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                               Iterations  =  ")                                   != NULL );
@@ -2475,7 +2475,7 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "----------------------------Distribution of species----------------------------")  != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                               Log       Log       Log    mole V") != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma    cm³/mol")!= NULL );
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma    cmï¿½/mol")!= NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   OH- ")                                                                          != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   H+ ")                                                                           != NULL );
@@ -2572,7 +2572,7 @@ void TestIPhreeqcLib::TestGetOutputString(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	char OUTPUT_FILENAME[80];
-	sprintf(OUTPUT_FILENAME, "output.%06d.out", ::rand());
+	snprintf(OUTPUT_FILENAME, sizeof(OUTPUT_FILENAME), "output.%06d.out", ::rand());
 	if (::FileExists(OUTPUT_FILENAME))
 	{
 		::DeleteFile(OUTPUT_FILENAME);
@@ -2769,7 +2769,7 @@ void TestIPhreeqcLib::TestGetOutputStringLine(void)
 void TestIPhreeqcLib::TestSetLogFileName(void)
 {
 	char LOG_FILENAME[80];
-	sprintf(LOG_FILENAME, "log.%06d.out", ::rand());
+	snprintf(LOG_FILENAME, sizeof(LOG_FILENAME), "log.%06d.out", ::rand());
 	if (::FileExists(LOG_FILENAME))
 	{
 		::DeleteFile(LOG_FILENAME);
@@ -2872,7 +2872,7 @@ void TestIPhreeqcLib::TestLogStringOnOff(void)
 void TestIPhreeqcLib::TestGetLogString(void)
 {
 	char LOG_FILENAME[80];
-	sprintf(LOG_FILENAME, "log.%06d.out", ::rand());
+	snprintf(LOG_FILENAME, sizeof(LOG_FILENAME), "log.%06d.out", ::rand());
 	if (::FileExists(LOG_FILENAME))
 	{
 		::DeleteFile(LOG_FILENAME);
@@ -3134,7 +3134,7 @@ void TestIPhreeqcLib::TestGetLogStringLine(void)
 void TestIPhreeqcLib::TestSetErrorFileName(void)
 {
 	char ERR_FILENAME[80];
-	sprintf(ERR_FILENAME, "error.%s.out", "TestIPhreeqcLib-TestSetErrorFileName");
+	snprintf(ERR_FILENAME, sizeof(ERR_FILENAME), "error.%s.out", "TestIPhreeqcLib-TestSetErrorFileName");
 	if (::FileExists(ERR_FILENAME))
 	{
 		::DeleteFile(ERR_FILENAME);
@@ -3221,7 +3221,7 @@ void TestIPhreeqcLib::TestErrorStringOnOff(void)
 void TestIPhreeqcLib::TestGetErrorString(void)
 {
 	char ERR_FILENAME[80];
-	sprintf(ERR_FILENAME, "error.%06d.out", ::rand());
+	snprintf(ERR_FILENAME, sizeof(ERR_FILENAME), "error.%06d.out", ::rand());
 	if (::FileExists(ERR_FILENAME))
 	{
 		::DeleteFile(ERR_FILENAME);
@@ -3355,7 +3355,7 @@ void TestIPhreeqcLib::TestGetErrorStringLineCount(void)
 void TestIPhreeqcLib::TestSetSelectedOutputFileName(void)
 {
 	char SELOUT_FILENAME[80];
-	sprintf(SELOUT_FILENAME, "selected_output.%06d.out", ::rand());
+	snprintf(SELOUT_FILENAME, sizeof(SELOUT_FILENAME), "selected_output.%06d.out", ::rand());
 	if (::FileExists(SELOUT_FILENAME))
 	{
 		::DeleteFile(SELOUT_FILENAME);
@@ -3995,7 +3995,7 @@ void TestIPhreeqcLib::TestDelete(void)
 	CPPUNIT_ASSERT(n >= 0);
 
 	char OUTPUT_FILE[80];
-	sprintf(OUTPUT_FILE, "phreeqc.%d.out", n);
+	snprintf(OUTPUT_FILE, sizeof(OUTPUT_FILE), "phreeqc.%d.out", n);
 
 	if (::FileExists(OUTPUT_FILE))
 	{

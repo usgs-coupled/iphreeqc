@@ -19,7 +19,7 @@ bool FileExists(const char *szPathName)
 	if (fileHandle == INVALID_HANDLE_VALUE)
 	{
 		char buffer[100];
-		sprintf(buffer, "Could not open file (error %d)\n", GetLastError());
+		snprintf(buffer, sizeof(buffer), "Could not open file (error %d)\n", GetLastError());
 		retValue = false;
 	}
 	else
