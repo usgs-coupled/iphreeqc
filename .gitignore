@@ -211,4 +211,5 @@ doc/RELEASE
 /unit/x64
 
 # builds (folders beginning with _ (underscore)
-/_*
+**/_*/**
+**/.vshistory/**
