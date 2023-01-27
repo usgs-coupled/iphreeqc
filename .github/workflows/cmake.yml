@@ -161,21 +161,20 @@ jobs:
         working-directory: R
         run: make VERSION=${{ needs.init.outputs.VER }} RELEASE_DATE=${{ needs.init.outputs.DATE_RFC_3339 }} source
 
-      - name: Install dependencies (OpenBLAS)
-        if: matrix.config.r == 'openblas'
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::roxygen2, any::pkgbuild, any::rcmdcheck, any::devtools, any::ropenblas
-          needs: roxygen2, pkgbuild, check, devtools, ropenblas
-          working-directory: R/phreeqc
-
       - name: Install dependencies
-        if: matrix.config.r != 'openblas'
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::roxygen2, any::pkgbuild, any::rcmdcheck
           needs: roxygen2, pkgbuild, check
           working-directory: R/phreeqc
+
+      # based on:
+      # https://docs.posit.co/resources/install-r-source/#optional-configure-r-to-use-a-different-blas-library
+      - name: Use alternative BLAS
+        if: matrix.config.r == 'openblas'
+        run: |
+          sudo apt install libopenblas-dev
+          sudo update-alternatives --config libblas.so.3-$(arch)-linux-gnu --skip-auto
 
       - name: roxygen2::roxygenise()
         run: roxygen2::roxygenise()
