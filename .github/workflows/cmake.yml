@@ -131,6 +131,7 @@ jobs:
           - {os: macos-latest,    r: 'release'}
           - {os: windows-latest,  r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-latest,   r: 'openblas', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
@@ -140,7 +141,16 @@ jobs:
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
+      - name: Setup R (OpenBLAS)
+        if: matrix.config == 'openblas'
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'devel'
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
+
       - name: Setup R
+        if: matrix.config != 'openblas'
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
@@ -151,7 +161,16 @@ jobs:
         working-directory: R
         run: make VERSION=${{ needs.init.outputs.VER }} RELEASE_DATE=${{ needs.init.outputs.DATE_RFC_3339 }} source
 
+      - name: Install dependencies (OpenBLAS)
+        if: matrix.config == 'openblas'
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::roxygen2, any::pkgbuild, any::rcmdcheck, any::devtools, any::ropenblas
+          needs: roxygen2, pkgbuild, check, devtools, ropenblas
+          working-directory: R/phreeqc
+
       - name: Install dependencies
+        if: matrix.config != 'openblas'
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::roxygen2, any::pkgbuild, any::rcmdcheck
