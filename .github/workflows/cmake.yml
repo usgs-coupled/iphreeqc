@@ -176,6 +176,11 @@ jobs:
           sudo apt install libopenblas-dev
           sudo update-alternatives --config libblas.so.3-$(arch)-linux-gnu --skip-auto
 
+      - name: Display sessionInfo()
+        run: sessionInfo()
+        working-directory: R/phreeqc
+        shell: Rscript {0}
+
       - name: roxygen2::roxygenise()
         run: roxygen2::roxygenise()
         working-directory: R/phreeqc
