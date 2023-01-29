@@ -56,7 +56,7 @@ jobs:
         arch: x64
 
     - name: CTest
-      run: ctest -S ctest.cmake -V --output-on-failure
+      run: ctest -S ctest.cmake -V --output-on-failure --timeout 900
 
     - name: Upload results
       uses: actions/upload-artifact@v3
@@ -131,7 +131,6 @@ jobs:
           - {os: macos-latest,    r: 'release'}
           - {os: windows-latest,  r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'openblas', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
@@ -141,16 +140,7 @@ jobs:
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
 
-      - name: Setup R (OpenBLAS)
-        if: matrix.config.r == 'openblas'
-        uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: 'devel'
-          http-user-agent: ${{ matrix.config.http-user-agent }}
-          use-public-rspm: true
-
       - name: Setup R
-        if: matrix.config.r != 'openblas'
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
@@ -167,14 +157,6 @@ jobs:
           extra-packages: any::roxygen2, any::pkgbuild, any::rcmdcheck
           needs: roxygen2, pkgbuild, check
           working-directory: R/phreeqc
-
-      # based on:
-      # https://docs.posit.co/resources/install-r-source/#optional-configure-r-to-use-a-different-blas-library
-      - name: Use alternative BLAS
-        if: matrix.config.r == 'openblas'
-        run: |
-          sudo apt install libopenblas-dev
-          sudo update-alternatives --config libblas.so.3-$(arch)-linux-gnu --skip-auto
 
       - name: Display sessionInfo()
         run: sessionInfo()
@@ -203,6 +185,7 @@ jobs:
         with:
           name: cran
           path: ${{ github.workspace }}/R/phreeqc/check/phreeqc_*.tar.gz
+
 
   # r-build:
   #   needs: [init]
@@ -236,6 +219,7 @@ jobs:
   #       with:
   #         name: cran
   #         path: ${{github.workspace}}/R/phreeqc_*.tar.gz
+
 
   # r-valgrind:
   #   needs: [r-build]
@@ -281,6 +265,7 @@ jobs:
   #       with:
   #         name: valgrind
   #         path: ${{github.workspace}}/R/valgrind.full.out
+
 
   distcheck:
     needs: [init, chm]
