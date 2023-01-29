@@ -5,6 +5,9 @@ on:
   pull_request:
     branches: [ master ]
 
+  schedule:
+    -cron:  ''
+
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
@@ -75,7 +78,16 @@ jobs:
           repository: usgs-coupled-subtrees/phreeqc3-HTMLversion
           ref: master
 
+      - name: cache htmlhelp
+        id: cache-htmlhelp
+        uses: actions/cache@v3
+        with:
+          path: "C:/Program Files (x86)/HTML Help Workshop"
+          key: ${{ runner.os }}-htmlhelp
+
       - name: install htmlhelp
+        if: steps.cache-htmlhelp.outputs.cache-hit != 'true'
+        timeout-minutes: 5
         run: |
           curl -L -O --max-time 120 http://web.archive.org/web/20160201063255/http://download.microsoft.com/download/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe
           cmd /c start /wait .\htmlhelp.exe /q /c /t:$(Get-Location)\tmp
