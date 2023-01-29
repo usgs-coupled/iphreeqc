@@ -6,7 +6,7 @@ on:
     branches: [ master ]
 
   schedule:
-    -cron:  '15 14 4,11,18,25 * *'
+    - cron:  '15 14 4,11,18,25 * *'
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
