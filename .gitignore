@@ -210,6 +210,22 @@ doc/RELEASE
 /unit/unit.plg
 /unit/x64
 
+# backup files
+*~
+
+# autotools
+aclocal.m4
+configure
+Makefile.in
+autom4te.cache/
+config/
+m4/libtool.m4
+m4/ltoptions.m4
+m4/ltsugar.m4
+m4/ltversion.m4
+m4/lt~obsolete.m4
+
+
 # builds (folders beginning with _ (underscore)
 **/_*/**
 **/.vshistory/**
