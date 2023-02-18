@@ -149,7 +149,8 @@ fi
 
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
-SED_FILES="$DISTPATH/configure.ac \
+SED_FILES="$DISTPATH/CMakeLists.txt \
+           $DISTPATH/configure.ac \
            $DISTPATH/examples/c/advect/README.txt \
            $DISTPATH/examples/cpp/advect/README.txt \
            $DISTPATH/examples/fortran/advect/README.txt \
@@ -164,6 +165,7 @@ for vsn_file in $SED_FILES
 do
   if [ -e "$vsn_file" ]; then
     sed \
+     -e "s/^  VERSION \(\([0]\|[1-9]\d*\)\.\([0]\|[1-9]\d*\.\)\([0]\|[1-9]\d*\).*\)/  VERSION $VERSION/g" \
      -e "s/AC_INIT(.*)/AC_INIT([$NAME], [$VERSION-$REVISION], [charlton@usgs.gov])/g" \
      -e "s/AM_LDFLAGS=-release.*/AM_LDFLAGS=-release $ver_major.$ver_minor.$ver_patch/g" \
      -e "/#define *VER_MAJOR/s/[0-9]\+/$ver_major/" \
