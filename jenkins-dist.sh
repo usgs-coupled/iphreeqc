@@ -129,16 +129,7 @@ if [ -z "$NAME" ]; then
   NAME="IPhreeqc"
 fi
 
-REPOS_TAG=''
-if [ "$REPOS_PATH" != 'trunk' ]; then
-  REPOS_TAG="$REPOS_PATH"
-  REPOS_TAG="`echo $REPOS_TAG | sed 's|branches/|-|'`"
-  REPOS_TAG="`echo $REPOS_TAG | sed 's|tags/|-|'`"
-fi
-
-DISTNAME="${NAME}${REPOS_TAG}-${VERSION}${VER_NUMTAG}"
-DIST_SANDBOX=.dist_sandbox
-#DISTPATH="$DIST_SANDBOX/$DISTNAME"
+DISTNAME="${NAME}-${VERSION}${VER_NUMTAG}"
 DISTPATH="."
 GIT_COMMIT=`git rev-parse HEAD`
 
@@ -146,61 +137,7 @@ echo "Distribution will be named: $DISTNAME"
 echo " release branch's revision: $REVISION"
 echo "                git commit: $GIT_COMMIT"
 echo "     executable's revision: $REVISION_SVN"
-echo "     constructed from path: /$REPOS_PATH"
 echo "              release date: $RELEASE_DATE"
-
-##rm -rf "$DIST_SANDBOX"
-##mkdir "$DIST_SANDBOX"
-##echo "Removed and recreated $DIST_SANDBOX"
-##
-##echo "Exporting revision $REVISION of IPhreeqc into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/IPhreeqc/$REPOS_PATH" \
-##	     "$DISTNAME")
-##
-##echo "Exporting revision $REVISION of external database into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/database" \
-##	     "$DISTNAME/database")
-##
-##echo "Exporting revision $REVISION of external phreeqcpp into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/src" \
-##	     "$DISTNAME/src/phreeqcpp")
-##
-##echo "Exporting revision $REVISION of external examples/c into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/c" \
-##	     "$DISTNAME/examples/c")
-##
-##echo "Exporting revision $REVISION of external examples/com into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/com" \
-##	     "$DISTNAME/examples/com")
-##
-##echo "Exporting revision $REVISION of external examples/fortran into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/COMManuscript/C&Gfinal/examples/fortran" \
-##	     "$DISTNAME/examples/fortran")
-##
-##echo "Exporting revision $REVISION of external phreeqc3-doc into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/doc" \
-##	     "$DISTNAME/phreeqc3-doc")
-##
-##echo "Exporting revision $REVISION of external HTMLversion/phreeqc3.chm into sandbox..."
-##(cd "$DIST_SANDBOX" && \
-## 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-##	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion/phreeqc3.chm" \
-##	     "$DISTNAME/doc/phreeqc3.chm")
-
 
 ver_major=`echo $VERSION | cut -d '.' -f 1`
 ver_minor=`echo $VERSION | cut -d '.' -f 2`
@@ -235,7 +172,7 @@ do
      -e "/#define *VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
      -e "/#define *GIT_COMMIT/s/[0-9a-f]\{40\}/$GIT_COMMIT/" \
      -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
-     -e "s/@PHREEQC_VER@/$VER/g" \
+     -e "s/@PHREEQC_VER@/$VERSION/g" \
      -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
      -e "s/@REVISION_SVN@/$REVISION_SVN/g" \
      -e "s/@VERSION@/$VERSION/g" \
@@ -260,50 +197,3 @@ fi
 if [ -e $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT ]; then
   cp $DISTPATH/phreeqc3-doc/README.IPhreeqc.TXT $DISTPATH/doc/README
 fi
-
-##(cd "$DISTPATH/doc" && "doxygen")
-##
-##if [ -n "$WIN" ]; then
-##  echo "Rolling $DISTNAME.zip ..."
-##  (cd "$DIST_SANDBOX" > /dev/null && zip -q -r - "$DISTNAME") > \
-##    "$DISTNAME.zip"
-##
-##  echo "Removing sandbox..."
-##  rm -rf "$DIST_SANDBOX"
-##
-##  echo ""
-##  echo "Done:"
-##  ls -l "$DISTNAME.zip"
-##  echo ""
-##  echo "md5sums:"
-##  md5sum "$DISTNAME.zip"
-##  type sha1sum > /dev/null 2>&1
-##  if [ $? -eq 0 ]; then
-##    echo ""
-##    echo "sha1sums:"
-##    sha1sum "$DISTNAME.zip"
-##  fi
-##else
-##  echo "Rolling $DISTNAME.tar ..."
-##  (cd "$DIST_SANDBOX" > /dev/null && tar c "$DISTNAME") > \
-##    "$DISTNAME.tar"
-##
-##  echo "Compressing to $DISTNAME.tar.gz ..."
-##  gzip -9f "$DISTNAME.tar"
-##
-##  echo "Removing sandbox..."
-##  rm -rf "$DIST_SANDBOX"
-##
-##  echo ""
-##  echo "Done:"
-##  ls -l "$DISTNAME.tar.gz"
-##  echo ""
-##  echo "md5sums:"
-##  md5sum "$DISTNAME.tar.gz"
-##  type sha1sum > /dev/null 2>&1
-##  if [ $? -eq 0 ]; then
-##    echo ""
-##    echo "sha1sums:"
-##    sha1sum "$DISTNAME.tar.gz"
-##  fi
-##fi

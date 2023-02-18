@@ -12,8 +12,10 @@ if [ ! -f doc/NOTICE ];then
   cd ..
 fi
 
-if [ ! -f doc/phreeqc3.chm ];then
-  svn export http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/HTMLversion/phreeqc3.chm doc/phreeqc3.chm
+if [ ! -f /doc/html ];then
+  cd doc
+  doxygen
+  cd ..
 fi
 
 if [ ! -f doc/README ];then
