@@ -1,6 +1,7 @@
 // -*- coding: windows-1252 -*-
 #include "TestIPhreeqcLib.h"
 #include "IPhreeqc.h"
+#include "Phreeqc.h" /* snprintf */
 #include "CVar.hxx"
 
 #if defined(_WIN32)
