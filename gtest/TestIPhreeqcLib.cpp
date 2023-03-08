@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 
 #include "IPhreeqc.h"
+#include "Phreeqc.h" /* snprintf */
 #include "CVar.hxx"
 
 #if defined(_WIN32)

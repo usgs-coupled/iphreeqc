@@ -6,6 +6,8 @@
 #include <stdio.h>
 #endif
 
+#include "Phreeqc.h" /* snprintf */
+
 #if defined(_WIN32) || defined(__CYGWIN32__)
 bool FileExists(const char *szPathName)
 {
