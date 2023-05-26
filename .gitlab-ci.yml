@@ -122,6 +122,7 @@ trigger-downstream:
   script:
     - echo triggering webmod
     - curl -X POST -F token=${WEBMOD_TRIGGER} -F ref=master https://code.chs.usgs.gov/api/v4/projects/${WEBMOD_ID}/trigger/pipeline
+    - sleep 180
 
   ## Upstream Projects
   ## iphreeqc-src https://code.chs.usgs.gov/coupled/subtrees/iphreeqc-src
