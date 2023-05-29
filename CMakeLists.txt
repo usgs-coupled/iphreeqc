@@ -36,7 +36,7 @@ endif()
 include(GNUInstallDirs)
 
 if (STANDALONE_BUILD AND MSVC)
-  option (IPHREEQC_STATIC_RUNTIME "Build with a static runtime" OFF)  
+  option (IPHREEQC_STATIC_RUNTIME "Build with a static runtime" OFF)
   if (IPHREEQC_STATIC_RUNTIME)
     # compile with static runtime
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
@@ -331,7 +331,7 @@ set_target_properties(IPhreeqc PROPERTIES
 if (STANDALONE_BUILD)
 
   include(CMakePackageConfigHelpers)
-  
+
   configure_package_config_file(IPhreeqcConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/IPhreeqcConfig.cmake
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/IPhreeqc
@@ -341,11 +341,11 @@ if (STANDALONE_BUILD)
     VERSION ${IPhreeqc_VERSION}
     COMPATIBILITY SameMajorVersion
     )
-  
+
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/IPhreeqcConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/IPhreeqcConfigVersion.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/IPhreeqc
     )
-  
+
   install(TARGETS  IPhreeqc
     EXPORT   IPhreeqcTargets
     LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -357,8 +357,8 @@ if (STANDALONE_BUILD)
     FILE IPhreeqcTargets.cmake
     NAMESPACE IPhreeqc::
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/IPhreeqc
-    )  
-  
+    )
+
   install(FILES ${IPhreeqc_Headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
   if (WIN32)
     install(FILES ${IPhreeqc_SRC} DESTINATION src)
@@ -374,7 +374,7 @@ if (BUILD_CLR_LIBS)
   if (NOT BUILD_SHARED_LIBS)
     message(FATAL_ERROR "BUILD_CLR_LIBS requires that BUILD_SHARED_LIBS be set")
   endif()
-  
+
   if (IPHREEQC_STATIC_RUNTIME)
     message(FATAL_ERROR "BUILD_CLR_LIBS and IPHREEQC_STATIC_RUNTIME are mutually exclusive")
   endif()
@@ -395,25 +395,25 @@ endif()
 include (CTest)
 
 if (STANDALONE_BUILD)
-  
+
   add_subdirectory(database)
   add_subdirectory(doc)
   add_subdirectory(examples)
-  
+
   if (BUILD_TESTING)
     add_subdirectory(tests)
   endif()
-  
-  
+
+
   if (BUILD_TESTING)  # may need to add MSVC version check
     include(FetchContent)
-    
+
     FetchContent_Declare(
       googletest
       GIT_REPOSITORY https://github.com/google/googletest.git
       GIT_TAG        58d77fa8070e8cec2dc1ed015d66b454c8d78850 # release-1.12.1
       )
-    
+
     mark_as_advanced(
       FETCHCONTENT_BASE_DIR
       FETCHCONTENT_FULLY_DISCONNECTED
@@ -426,10 +426,10 @@ if (STANDALONE_BUILD)
     # Prevent GoogleTest from overriding our compiler/linker options
     # when building with Visual Studio
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    
+
     set(BUILD_GTEST ON CACHE BOOL "" FORCE)
-    set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
-    
+    set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
+
     set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
     set(INSTALL_GMOCK OFF CACHE BOOL "" FORCE)
 
@@ -445,7 +445,7 @@ if (STANDALONE_BUILD)
       gtest_force_shared_crt
       gtest_hide_internal_symbols
       )
-    
+
     FetchContent_GetProperties(googletest)
     if (NOT googletest_POPULATED)
       FetchContent_Populate(googletest)

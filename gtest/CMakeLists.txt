@@ -3,19 +3,19 @@ project(unit)
 include(GoogleTest)
 
 add_executable(TestCVar TestCVar.cpp)
-target_link_libraries(TestCVar IPhreeqc gtest gtest_main)
+target_link_libraries(TestCVar IPhreeqc gtest gtest_main gmock)
 gtest_discover_tests(TestCVar)
 
 add_executable(TestVar TestVar.cpp)
-target_link_libraries(TestVar IPhreeqc gtest gtest_main)
+target_link_libraries(TestVar IPhreeqc gtest gtest_main gmock)
 gtest_discover_tests(TestVar)
 
 add_executable(TestIPhreeqcLib TestIPhreeqcLib.cpp FileTest.cpp)
-target_link_libraries(TestIPhreeqcLib IPhreeqc gtest gtest_main)
+target_link_libraries(TestIPhreeqcLib IPhreeqc gtest gtest_main gmock)
 gtest_discover_tests(TestIPhreeqcLib)
 
 add_executable(TestIPhreeqc TestIPhreeqc.cpp FileTest.cpp)
-target_link_libraries(TestIPhreeqc IPhreeqc gtest gtest_main)
+target_link_libraries(TestIPhreeqc IPhreeqc gtest gtest_main gmock)
 if (MSVC AND BUILD_SHARED_LIBS AND BUILD_CLR_LIBS)
   # Setup references for /CLR
   set_target_properties(TestIPhreeqc PROPERTIES VS_DOTNET_REFERENCES "${CMAKE_CURRENT_SOURCE_DIR}/../src/phreeqcpp/ZedGraph.dll")
@@ -24,7 +24,7 @@ endif()
 gtest_discover_tests(TestIPhreeqc)
 
 add_executable(TestSelectedOutput TestSelectedOutput.cpp)
-target_link_libraries(TestSelectedOutput IPhreeqc gtest gtest_main)
+target_link_libraries(TestSelectedOutput IPhreeqc gtest gtest_main gmock)
 gtest_discover_tests(TestSelectedOutput)
 
 if (MSVC AND BUILD_SHARED_LIBS)
@@ -176,7 +176,7 @@ configure_file(
   COPYONLY
   )
 
-# misc files 
+# misc files
 
 configure_file(
   conv_fail.in
