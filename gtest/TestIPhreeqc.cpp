@@ -1,5 +1,5 @@
-// -*- coding: windows-1252 -*-
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 #include <cmath>
 #include <cfloat>
@@ -10,6 +10,8 @@
 #undef true
 #undef false
 #include "CVar.hxx"
+
+using ::testing::HasSubstr;
 
 VRESULT SOLUTION(IPhreeqc& obj, double C, double Ca, double Na);
 VRESULT EQUILIBRIUM_PHASES(IPhreeqc& obj, const char* phase, double si, double amount);
@@ -1927,7 +1929,7 @@ TEST(TestIPhreeqc, TestGetDumpStringLineCount)
 	obj.SetDumpStringOn(true);
 	ASSERT_EQ(true, obj.GetDumpStringOn());
 	ASSERT_EQ(0, obj.RunAccumulated());
-	ASSERT_EQ(33, obj.GetDumpStringLineCount());
+	ASSERT_EQ(34, obj.GetDumpStringLineCount());
 }
 
 TEST(TestIPhreeqc, TestGetDumpStringLine)
@@ -1953,43 +1955,44 @@ TEST(TestIPhreeqc, TestGetDumpStringLine)
 	obj.SetDumpStringOn(true);
 	ASSERT_EQ(true, obj.GetDumpStringOn());
 	ASSERT_EQ(0, obj.RunAccumulated());
-	ASSERT_EQ(33, obj.GetDumpStringLineCount());
+	ASSERT_EQ(34, obj.GetDumpStringLineCount());
 
 	int line = 0;
 
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "SOLUTION_RAW") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-temp") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-pressure") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-potential") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-total_h") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-total_o") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-cb") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-density") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-totals") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " C(4) ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " Ca ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " H(0) ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " Na ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-pH") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-pe") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-mu") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-ah2o") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-mass_water") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-soln_vol") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-total_alkalinity") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-activities") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " C(-4) ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " C(4) ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " Ca ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " E ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " H(0) ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " Na ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), " O(0) ") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "-gammas") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "USE mix none") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "USE reaction none") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "USE reaction_temperature none") != NULL);
-	ASSERT_TRUE(::strstr(obj.GetDumpStringLine(line++), "USE reaction_pressure none") != NULL);
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("SOLUTION_RAW"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-temp"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-pressure"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-potential"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-total_h"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-total_o"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-cb"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-density"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-viscosity"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-totals"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" C(4) "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" Ca "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" H(0) "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" Na "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-pH"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-pe"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-mu"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-ah2o"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-mass_water"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-soln_vol"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-total_alkalinity"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-activities"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" C(-4) "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" C(4) "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" Ca "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" E "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" H(0) "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" Na "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" O(0) "));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-gammas"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("USE mix none"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("USE reaction none"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("USE reaction_temperature none"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("USE reaction_pressure none"));
 
 	// remaining lines should be empty
 	ASSERT_EQ(std::string(""), std::string(obj.GetDumpStringLine(line++)));
@@ -2114,7 +2117,7 @@ TEST(TestIPhreeqc, TestSetDumpFileName)
 
 	ASSERT_EQ(true, ::FileExists(DUMP_FILENAME));
 
-	std::string lines[33];
+	std::string lines[35];
 	std::ifstream ifs(DUMP_FILENAME);
 
 	size_t i = 0;
@@ -2124,39 +2127,40 @@ TEST(TestIPhreeqc, TestSetDumpFileName)
 	}
 
 	int line = 0;
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "SOLUTION_RAW") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-temp") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-pressure") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-potential") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-total_h") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-total_o") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-cb") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-density") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-totals") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " C(4) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " Ca ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " H(0) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " Na ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-pH") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-pe") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-mu") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-ah2o") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-mass_water") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-soln_vol") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-total_alkalinity") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-activities") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " C(-4) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " C(4) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " Ca ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " E ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " H(0) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " Na ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " O(0) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-gammas") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "USE mix none") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "USE reaction none") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "USE reaction_temperature none") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "USE reaction_pressure none") != NULL);
+	EXPECT_THAT(lines[line++], HasSubstr("SOLUTION_RAW"));
+	EXPECT_THAT(lines[line++], HasSubstr("-temp"));
+	EXPECT_THAT(lines[line++], HasSubstr("-pressure"));
+	EXPECT_THAT(lines[line++], HasSubstr("-potential"));
+	EXPECT_THAT(lines[line++], HasSubstr("-total_h"));
+	EXPECT_THAT(lines[line++], HasSubstr("-total_o"));
+	EXPECT_THAT(lines[line++], HasSubstr("-cb"));
+	EXPECT_THAT(lines[line++], HasSubstr("-density"));
+	EXPECT_THAT(lines[line++], HasSubstr("-viscosity"));
+	EXPECT_THAT(lines[line++], HasSubstr("-totals"));
+	EXPECT_THAT(lines[line++], HasSubstr(" C(4) "));
+	EXPECT_THAT(lines[line++], HasSubstr(" Ca "));
+	EXPECT_THAT(lines[line++], HasSubstr(" H(0) "));
+	EXPECT_THAT(lines[line++], HasSubstr(" Na "));
+	EXPECT_THAT(lines[line++], HasSubstr("-pH"));
+	EXPECT_THAT(lines[line++], HasSubstr("-pe"));
+	EXPECT_THAT(lines[line++], HasSubstr("-mu"));
+	EXPECT_THAT(lines[line++], HasSubstr("-ah2o"));
+	EXPECT_THAT(lines[line++], HasSubstr("-mass_water"));
+	EXPECT_THAT(lines[line++], HasSubstr("-soln_vol"));
+	EXPECT_THAT(lines[line++], HasSubstr("-total_alkalinity"));
+	EXPECT_THAT(lines[line++], HasSubstr("-activities"));
+	EXPECT_THAT(lines[line++], HasSubstr(" C(-4) "));
+	EXPECT_THAT(lines[line++], HasSubstr(" C(4) "));
+	EXPECT_THAT(lines[line++], HasSubstr(" Ca "));
+	EXPECT_THAT(lines[line++], HasSubstr(" E "));
+	EXPECT_THAT(lines[line++], HasSubstr(" H(0) "));
+	EXPECT_THAT(lines[line++], HasSubstr(" Na "));
+	EXPECT_THAT(lines[line++], HasSubstr(" O(0) "));
+	EXPECT_THAT(lines[line++], HasSubstr("-gammas"));
+	EXPECT_THAT(lines[line++], HasSubstr("USE mix none"));
+	EXPECT_THAT(lines[line++], HasSubstr("USE reaction none"));
+	EXPECT_THAT(lines[line++], HasSubstr("USE reaction_temperature none"));
+	EXPECT_THAT(lines[line++], HasSubstr("USE reaction_pressure none"));
 
 	if (::FileExists(DUMP_FILENAME))
 	{
@@ -2218,111 +2222,111 @@ TEST(TestIPhreeqc, TestSetOutputFileName)
 	// but seems to not work when BUILD_SHARED_LIBS is set gtest 1.8.1
 	// see aa178fd6fac2d1c0a867385538071031e2ddedde of gtest branch
 	//
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Reading input data for simulation 1.") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	SOLUTION 1") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	C 1") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Ca 1") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Na 1") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	DUMP") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	-solution 1") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-------------------------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Beginning of initial solution calculations.") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-------------------------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Initial solution 1.	") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "-----------------------------Solution composition--------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Elements           Molality       Moles") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	C                ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Ca               ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "	Na               ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------------------Description of solution------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                       pH  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                       pe  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                        Activity of water  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                 Ionic strength (mol/kgw)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                       Mass of water (kg)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                 Total alkalinity (eq/kg)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                       Total CO2 (mol/kg)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                         Temperature (°C)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                  Electrical balance (eq)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), " Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                               Iterations  =  ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                  Total H  = ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                  Total O  = ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------------------Distribution of species----------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "                                               Log       Log       Log    mole V") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma    cm³/mol") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   OH- ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   H+ ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   H2O ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "C(-4) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CH4 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "C(4) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   HCO3- ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CO2 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaHCO3+ ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaCO3 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CO3-2 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaHCO3 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaCO3- ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Ca ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Ca+2 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaHCO3+ ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaCO3 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   CaOH+ ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "H(0) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   H2 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Na ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   Na+ ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaHCO3 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaCO3- ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   NaOH ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "O(0) ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "   O2 ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------Saturation indices-------------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  Phase               SI** log IAP   log K(298 K,   1 atm)") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  Aragonite") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  Calcite") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  CH4(g)") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  CO2(g)") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  H2(g)") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  H2O(g)") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  O2(g)") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "  For ideal gases, phi = 1.") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "End of simulation.") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "Reading input data for simulation 2.") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "------------------------------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	EXPECT_THAT(lines[line++], HasSubstr("------------------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr("Reading input data for simulation 1."));
+	EXPECT_THAT(lines[line++], HasSubstr("------------------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("	SOLUTION 1"));
+	EXPECT_THAT(lines[line++], HasSubstr("	C 1"));
+	EXPECT_THAT(lines[line++], HasSubstr("	Ca 1"));
+	EXPECT_THAT(lines[line++], HasSubstr("	Na 1"));
+	EXPECT_THAT(lines[line++], HasSubstr("	DUMP"));
+	EXPECT_THAT(lines[line++], HasSubstr("	-solution 1"));
+	EXPECT_THAT(lines[line++], HasSubstr("-------------------------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr("Beginning of initial solution calculations."));
+	EXPECT_THAT(lines[line++], HasSubstr("-------------------------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("Initial solution 1.	"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("-----------------------------Solution composition--------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("	Elements           Molality       Moles"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("	C                "));
+	EXPECT_THAT(lines[line++], HasSubstr("	Ca               "));
+	EXPECT_THAT(lines[line++], HasSubstr("	Na               "));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("----------------------------Description of solution------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("                                       pH  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                                       pe  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                        Activity of water  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                 Ionic strength (mol/kgw)  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                       Mass of water (kg)  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                 Total alkalinity (eq/kg)  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                       Total CO2 (mol/kg)  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                         Temperature (Â°C)  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                  Electrical balance (eq)  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr(" Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                               Iterations  =  "));
+	EXPECT_THAT(lines[line++], HasSubstr("                                  Total H  = "));
+	EXPECT_THAT(lines[line++], HasSubstr("                                  Total O  = "));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("----------------------------Distribution of species----------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("                                               Log       Log       Log    mole V"));
+	EXPECT_THAT(lines[line++], HasSubstr("   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("   OH- "));
+	EXPECT_THAT(lines[line++], HasSubstr("   H+ "));
+	EXPECT_THAT(lines[line++], HasSubstr("   H2O "));
+	EXPECT_THAT(lines[line++], HasSubstr("C(-4) "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CH4 "));
+	EXPECT_THAT(lines[line++], HasSubstr("C(4) "));
+	EXPECT_THAT(lines[line++], HasSubstr("   HCO3- "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CO2 "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CaHCO3+ "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CaCO3 "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CO3-2 "));
+	EXPECT_THAT(lines[line++], HasSubstr("   NaHCO3 "));
+	EXPECT_THAT(lines[line++], HasSubstr("   NaCO3- "));
+	EXPECT_THAT(lines[line++], HasSubstr("Ca "));
+	EXPECT_THAT(lines[line++], HasSubstr("   Ca+2 "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CaHCO3+ "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CaCO3 "));
+	EXPECT_THAT(lines[line++], HasSubstr("   CaOH+ "));
+	EXPECT_THAT(lines[line++], HasSubstr("H(0) "));
+	EXPECT_THAT(lines[line++], HasSubstr("   H2 "));
+	EXPECT_THAT(lines[line++], HasSubstr("Na "));
+	EXPECT_THAT(lines[line++], HasSubstr("   Na+ "));
+	EXPECT_THAT(lines[line++], HasSubstr("   NaHCO3 "));
+	EXPECT_THAT(lines[line++], HasSubstr("   NaCO3- "));
+	EXPECT_THAT(lines[line++], HasSubstr("   NaOH "));
+	EXPECT_THAT(lines[line++], HasSubstr("O(0) "));
+	EXPECT_THAT(lines[line++], HasSubstr("   O2 "));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("------------------------------Saturation indices-------------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("  Phase               SI** log IAP   log K(298 K,   1 atm)"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("  Aragonite"));
+	EXPECT_THAT(lines[line++], HasSubstr("  Calcite"));
+	EXPECT_THAT(lines[line++], HasSubstr("  CH4(g)"));
+	EXPECT_THAT(lines[line++], HasSubstr("  CO2(g)"));
+	EXPECT_THAT(lines[line++], HasSubstr("  H2(g)"));
+	EXPECT_THAT(lines[line++], HasSubstr("  H2O(g)"));
+	EXPECT_THAT(lines[line++], HasSubstr("  O2(g)"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm."));
+	EXPECT_THAT(lines[line++], HasSubstr("  For ideal gases, phi = 1."));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr("End of simulation."));
+	EXPECT_THAT(lines[line++], HasSubstr("------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr("------------------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr("Reading input data for simulation 2."));
+	EXPECT_THAT(lines[line++], HasSubstr("------------------------------------"));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
 #ifndef TESTING
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "End of Run after ") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "----------------") != NULL);
+	EXPECT_THAT(lines[line++], HasSubstr("----------------"));
+	EXPECT_THAT(lines[line++], HasSubstr("End of Run after "));
+	EXPECT_THAT(lines[line++], HasSubstr("----------------"));
 #endif
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
-	ASSERT_TRUE(::strstr(lines[line++].c_str(), "") != NULL);
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
+	EXPECT_THAT(lines[line++], HasSubstr(""));
 
 
 	if (::FileExists(OUTPUT_FILENAME))
@@ -3160,66 +3164,66 @@ TEST(TestIPhreeqc, TestGetSelectedOutputString)
 
 	std::string sline(obj.GetSelectedOutputString());
 
-	ASSERT_TRUE(::strstr(sline.c_str(), "sim\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "state\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "soln\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "dist_x\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "time\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "step\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "pH\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "pe\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "C\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "Ca\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "Na\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "m_CO3-2\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "m_CaOH+\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "m_NaCO3-\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "la_CO3-2\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "la_CaOH+\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "la_NaCO3-\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "Calcite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "d_Calcite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "si_CO2(g)\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "si_Siderite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "pressure\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "total mol\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "volume\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "g_CO2(g)\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "g_N2(g)\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "k_Albite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "dk_Albite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "k_Pyrite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "dk_Pyrite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "s_CaSO4\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "s_SrSO4\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "1.name\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "1.type\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "1.moles\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "2.name\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "2.type\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "2.moles\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "3.name\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "3.type\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "3.moles\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "4.name\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "4.type\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "4.moles\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "5.name\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "5.type\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "5.moles\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "6.name\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "6.type\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "6.moles\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "\n") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "i_soln\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "react\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "Ca+2\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "aq\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "CaHCO3+\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "CaCO3\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "CaOH+\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "Calcite\t") != NULL);
-	ASSERT_TRUE(::strstr(sline.c_str(), "equi\t") != NULL);
+	EXPECT_THAT(sline.c_str(), HasSubstr("sim\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("state\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("soln\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("dist_x\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("time\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("step\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("pH\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("pe\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("C\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("Ca\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("Na\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("m_CO3-2\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("m_CaOH+\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("m_NaCO3-\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("la_CO3-2\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("la_CaOH+\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("la_NaCO3-\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("Calcite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("d_Calcite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("si_CO2(g)\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("si_Siderite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("pressure\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("total mol\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("volume\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("g_CO2(g)\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("g_N2(g)\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("k_Albite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("dk_Albite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("k_Pyrite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("dk_Pyrite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("s_CaSO4\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("s_SrSO4\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("1.name\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("1.type\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("1.moles\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("2.name\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("2.type\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("2.moles\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("3.name\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("3.type\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("3.moles\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("4.name\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("4.type\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("4.moles\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("5.name\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("5.type\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("5.moles\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("6.name\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("6.type\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("6.moles\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("\n"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("i_soln\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("react\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("Ca+2\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("aq\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("CaHCO3+\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("CaCO3\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("CaOH+\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("Calcite\t"));
+	EXPECT_THAT(sline.c_str(), HasSubstr("equi\t"));
 }
 
 TEST(TestIPhreeqc, TestGetSelectedOutputStringLineCount)
@@ -4100,12 +4104,12 @@ TEST(TestIPhreeqc, TestMultiPunchCSelectedOutput)
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(6, 0, &var));   ASSERT_NEAR(-7.60411, var.dVal, ::pow(10., -2));
 
 	// si_Calcite
-	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(1, 1, &var));   ASSERT_NEAR(0.692077, var.dVal, ::pow(10., -2));
-	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(2, 1, &var));   ASSERT_NEAR(0.678847, var.dVal, ::pow(10., -2));
-	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(3, 1, &var));   ASSERT_NEAR(0.678847, var.dVal, ::pow(10., -2));
+	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(1, 1, &var));   ASSERT_NEAR(0.702316, var.dVal, ::pow(10., -2));
+	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(2, 1, &var));   ASSERT_NEAR(0.695856, var.dVal, ::pow(10., -2));
+	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(3, 1, &var));   ASSERT_NEAR(0.689518, var.dVal, ::pow(10., -2));
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(4, 1, &var));   ASSERT_NEAR(-999.999, var.dVal, ::pow(10., -2));
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(5, 1, &var));   ASSERT_NEAR(-999.999, var.dVal, ::pow(10., -2));
-	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(6, 1, &var));   ASSERT_NEAR(0.672429, var.dVal, ::pow(10., -2));
+	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(6, 1, &var));   ASSERT_NEAR(0.683300, var.dVal, ::pow(10., -2));
 
 	// DUMMY_1
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(1, 2, &var));   ASSERT_EQ(TT_EMPTY, var.type);
@@ -4129,7 +4133,7 @@ TEST(TestIPhreeqc, TestMultiPunchCSelectedOutput)
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(3, 4, &var));   ASSERT_EQ(TT_EMPTY, var.type);
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(4, 4, &var));   ASSERT_EQ(TT_EMPTY, var.type);
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(5, 4, &var));   ASSERT_EQ(TT_EMPTY, var.type);
-	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(6, 4, &var));   ASSERT_NEAR(3.69E-13, var.dVal, ::pow(10., log10(3.69E-13) - 2));
+	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(6, 4, &var));   ASSERT_NEAR(4.12e-13, var.dVal, ::pow(10., log10(4.12e-13) - 2));
 
 	// Sum_Delta/U
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(1, 5, &var));   ASSERT_EQ(TT_EMPTY, var.type);
@@ -4247,7 +4251,7 @@ TEST(TestIPhreeqc, TestMultiPunchCSelectedOutput)
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(0, ncol++, &var));   ASSERT_EQ(std::string("Halite_max"), std::string(var.sVal));
 
 	// Sum_resid
-	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(1, 0, &var));   ASSERT_NEAR(3.69E-13, var.dVal, ::pow(10., log10(3.69E-13) - 2));
+	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(1, 0, &var));   ASSERT_NEAR(4.12e-13, var.dVal, ::pow(10., log10(4.12e-13) - 2));
 
 	// Sum_Delta/U
 	ASSERT_EQ(VR_OK, obj.GetSelectedOutputValue(1, 1, &var));   ASSERT_NEAR(0, var.dVal, ::pow(10., -3));
