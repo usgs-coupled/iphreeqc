@@ -1176,7 +1176,15 @@ void IPhreeqc::check_database(const char* sz_routine)
 	std::map< int, std::string >::iterator mit = SelectedOutputStringMap.begin();
 	for (; mit != SelectedOutputStringMap.end(); ++mit)
 	{
-		(*mit).second.clear();
+		// save header
+		std::istringstream iss((*mit).second);
+		std::string line;
+		if (std::getline(iss, line))
+		{
+			ASSERT(line.size());
+			(*mit).second.clear();
+			(*mit).second.append(line + "\n");
+		}
 	}
 	std::map< int, std::vector< std::string > >::iterator lit = this->SelectedOutputLinesMap.begin();
 	for (; lit != this->SelectedOutputLinesMap.end(); ++lit)
@@ -1246,18 +1254,6 @@ void IPhreeqc::do_run(const char* sz_routine, std::istream* pis, PFN_PRERUN_CALL
 		this->PhreeqcPtr->dup_print(token, TRUE);
 		if (this->PhreeqcPtr->read_input() == EOF)
 			break;
-		
-		if (this->PhreeqcPtr->simulation == 1)
-		{
-			// force headings for selected output (on every call to do_run)
-			// might want to split tidy_punch to avoid duplicate searches like master_bsearch
-			std::map< int, SelectedOutput >::iterator pit = this->PhreeqcPtr->SelectedOutput_map.begin();
-			for (; pit != this->PhreeqcPtr->SelectedOutput_map.end(); ++pit)
-			{
-				(*pit).second.Set_new_def(true);
-				this->PhreeqcPtr->keycount[Keywords::KEY_SELECTED_OUTPUT] = 1;
-			}
-		}
 
 		// bool bWarning = false;
 		std::map< int, SelectedOutput >::iterator mit = this->PhreeqcPtr->SelectedOutput_map.begin();
