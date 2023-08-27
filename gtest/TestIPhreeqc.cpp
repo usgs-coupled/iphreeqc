@@ -614,11 +614,11 @@ TEST(TestIPhreeqc, TestRunString)
 
 	ASSERT_EQ(false, ::FileExists(OUTPUT_FILE));
 	ASSERT_EQ(0, obj.LoadDatabase("phreeqc.dat"));
-	obj.SetOutputFileOn(1);
-	obj.SetErrorFileOn(0);
-	obj.SetLogFileOn(0);
-	obj.SetSelectedOutputFileOn(0);
-	obj.SetDumpFileOn(0);
+	obj.SetOutputFileOn(true);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpFileOn(false);
 	ASSERT_EQ(false, ::FileExists(OUTPUT_FILE));
 	ASSERT_EQ(0, obj.RunString(input));
 
@@ -662,11 +662,11 @@ TEST(TestIPhreeqc, TestGetSelectedOutputValue)
 	ASSERT_EQ(VR_OK, EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010));
 	ASSERT_EQ(VR_OK, USER_PUNCH(obj, "Ca", max));
 
-	obj.SetOutputFileOn(0);
-	obj.SetErrorFileOn(0);
-	obj.SetLogFileOn(0);
-	obj.SetSelectedOutputFileOn(0);
-	obj.SetDumpFileOn(0);
+	obj.SetOutputFileOn(false);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpFileOn(false);
 	ASSERT_EQ(0, obj.RunAccumulated());
 
 	/*
@@ -1799,11 +1799,11 @@ TEST(TestIPhreeqc, TestLongHeadings)
 	// COMMENT: {10/30/2013 10:39:40 PM}	ASSERT_EQ( VR_OK, obj.AccumulateLine(oss.str().c_str()) );
 	// COMMENT: {10/30/2013 10:39:40 PM}	//}}
 
-	obj.SetOutputFileOn(0);
-	obj.SetErrorFileOn(0);
-	obj.SetLogFileOn(0);
-	obj.SetSelectedOutputFileOn(0);
-	obj.SetDumpFileOn(0);
+	obj.SetOutputFileOn(false);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpFileOn(false);
 	ASSERT_EQ(0, obj.RunAccumulated());
 
 	ASSERT_EQ(2, obj.GetSelectedOutputRowCount());
@@ -1866,12 +1866,12 @@ TEST(TestIPhreeqc, TestDumpString)
 	ASSERT_EQ(VR_OK, DUMP(obj));
 
 	// run
-	obj.SetOutputFileOn(0);
-	obj.SetErrorFileOn(0);
-	obj.SetLogFileOn(0);
-	obj.SetSelectedOutputFileOn(0);
-	obj.SetDumpFileOn(0);
-	obj.SetDumpStringOn(1);
+	obj.SetOutputFileOn(false);
+	obj.SetErrorFileOn(false);
+	obj.SetLogFileOn(false);
+	obj.SetSelectedOutputFileOn(false);
+	obj.SetDumpFileOn(false);
+	obj.SetDumpStringOn(true);
 	ASSERT_EQ(0, obj.RunAccumulated());
 
 	const char* dump_str = obj.GetDumpString();
@@ -3107,7 +3107,7 @@ TEST(TestIPhreeqc, TestSetSelectedOutputFileName)
 	ASSERT_EQ(false, obj.GetDumpFileOn());
 	ASSERT_EQ(false, obj.GetDumpStringOn());
 
-	obj.SetSelectedOutputFileOn(1);
+	obj.SetSelectedOutputFileOn(true);
 	obj.SetSelectedOutputFileName(SELOUT_FILENAME);
 
 	ASSERT_EQ(0, obj.RunAccumulated());
@@ -3249,12 +3249,122 @@ TEST(TestIPhreeqc, TestGetSelectedOutputStringLineCount)
 	ASSERT_EQ(false, obj.GetDumpFileOn());
 	ASSERT_EQ(false, obj.GetDumpStringOn());
 
-	ASSERT_EQ(false, obj.GetSelectedOutputStringOn() != 0);
+	ASSERT_EQ(false, obj.GetSelectedOutputStringOn());
 	obj.SetSelectedOutputStringOn(true);
+	ASSERT_EQ(true, obj.GetSelectedOutputStringOn());
 
 	ASSERT_EQ(0, obj.RunAccumulated());
 
 	ASSERT_EQ(3, obj.GetSelectedOutputStringLineCount());
+}
+
+TEST(TestIPhreeqc, TestGetSelectedOutputStringLineCountMultipleRuns)
+{
+	IPhreeqc obj;
+	int retval = 0;
+
+	ASSERT_EQ(0, obj.LoadDatabase("llnl.dat"));
+	ASSERT_EQ(false, obj.GetSelectedOutputStringOn());
+	obj.SetSelectedOutputStringOn(true);
+	ASSERT_EQ(true, obj.GetSelectedOutputStringOn());
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 1
+		Ca 1
+		Na 1
+
+		EQUILIBRIUM_PHASES
+		calcite 0 0.01
+
+		SELECTED_OUTPUT
+		-totals C Ca Na
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(3, obj.GetSelectedOutputStringLineCount());		// header + i_soln + react
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 2
+		Ca 2
+		Na 2
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(2, obj.GetSelectedOutputStringLineCount());		// header + i_soln
+}
+
+TEST(TestIPhreeqc, TestSelectedOutputFileMultipleRuns)
+{
+	FileTest selout("TestSelectedOutputFileMultipleRuns.sel");
+	ASSERT_TRUE(selout.RemoveExisting());
+
+	IPhreeqc obj;
+	int retval = 0;
+
+	ASSERT_EQ(0, obj.LoadDatabase("llnl.dat"));
+
+	ASSERT_EQ(false, obj.GetSelectedOutputFileOn());
+	obj.SetSelectedOutputFileOn(true);
+	ASSERT_EQ(true, obj.GetSelectedOutputFileOn());
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 1
+		Ca 1
+		Na 1
+
+		EQUILIBRIUM_PHASES
+		calcite 0 0.01
+
+		SELECTED_OUTPUT
+		-file TestSelectedOutputFileMultipleRuns.sel
+		-totals C Ca Na
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(3, selout.LineCount());		// header + i_soln + react
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 2
+		Ca 2
+		Na 2
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(2, selout.LineCount());		// header + i_soln
+}
+
+TEST(TestIPhreeqc, TestGetSelectedOutputRowCountMultipleRuns)
+{
+	IPhreeqc obj;
+
+	ASSERT_EQ(0, obj.LoadDatabase("llnl.dat"));
+
+	obj.RunString(R"(
+		SOLUTION 1
+		C 1
+		Ca 1
+		Na 1
+
+		EQUILIBRIUM_PHASES
+		calcite 0 0.01
+
+		SELECTED_OUTPUT
+		-totals C Ca Na
+		)");
+
+	ASSERT_EQ(3, obj.GetSelectedOutputRowCount());		// header + i_soln + react
+
+	obj.RunString(R"(
+		SOLUTION 1
+		C 2
+		Ca 2
+		Na 2
+		)");
+	ASSERT_EQ(2, obj.GetSelectedOutputRowCount());		// header + i_soln
 }
 
 TEST(TestIPhreeqc, TestGetSelectedOutputStringLine)
@@ -3299,8 +3409,9 @@ TEST(TestIPhreeqc, TestGetSelectedOutputStringLine)
 	ASSERT_EQ(VR_OK, ::EQUILIBRIUM_PHASES(obj, "calcite", 0.0, 0.010));
 	ASSERT_EQ(VR_OK, ::USER_PUNCH(obj, "Ca", max));
 
-	ASSERT_EQ(false, obj.GetSelectedOutputStringOn() != 0);
+	ASSERT_EQ(false, obj.GetSelectedOutputStringOn());
 	obj.SetSelectedOutputStringOn(true);
+	ASSERT_EQ(true, obj.GetSelectedOutputStringOn());
 
 	ASSERT_EQ(0, obj.RunAccumulated());
 	ASSERT_EQ(3, obj.GetSelectedOutputStringLineCount());
