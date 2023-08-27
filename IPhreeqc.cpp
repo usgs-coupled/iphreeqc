@@ -1103,17 +1103,8 @@ void IPhreeqc::UnLoadDatabase(void)
 		delete (*itt).second;
 	}
 	this->SelectedOutputMap.clear();
-
-	std::map< int, std::string >::iterator mit = this->SelectedOutputStringMap.begin();
-	for (; mit != this->SelectedOutputStringMap.begin(); ++mit)
-	{
-		(*mit).second.clear();
-	}
-	std::map< int, std::vector< std::string > >::iterator it = this->SelectedOutputLinesMap.begin();
-	for (; it != this->SelectedOutputLinesMap.begin(); ++it)
-	{
-		(*it).second.clear();
-	}
+	this->SelectedOutputStringMap.clear();
+	this->SelectedOutputLinesMap.clear();
 
 
 	// clear dump string
@@ -1164,6 +1155,8 @@ void IPhreeqc::check_database(const char* sz_routine)
 		delete (*it).second;
 	}
 	this->SelectedOutputMap.clear();
+	this->SelectedOutputStringMap.clear();
+	this->SelectedOutputLinesMap.clear();
 
 	// release
 	this->LogString.clear();
@@ -1171,18 +1164,6 @@ void IPhreeqc::check_database(const char* sz_routine)
 	this->OutputString.clear();
 	this->OutputLines.clear();
 
-	// clear selected_output string storage
-	// GetSelectedOutputStringLine and GetSelectedOutputString
-	std::map< int, std::string >::iterator mit = SelectedOutputStringMap.begin();
-	for (; mit != SelectedOutputStringMap.end(); ++mit)
-	{
-		(*mit).second.clear();
-	}
-	std::map< int, std::vector< std::string > >::iterator lit = this->SelectedOutputLinesMap.begin();
-	for (; lit != this->SelectedOutputLinesMap.end(); ++lit)
-	{
-		(*lit).second.clear();
-	}
 
 	if (!this->DatabaseLoaded)
 	{
