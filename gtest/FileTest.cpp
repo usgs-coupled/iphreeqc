@@ -153,3 +153,19 @@ size_t FileTest::Size(void)
 {
 	return ::FileSize(_fn.c_str());
 }
+
+size_t FileTest::LineCount(void)
+{
+	size_t nlines = 0;
+	if (::FileExists(_fn.c_str()))
+	{
+		std::ifstream ifs(_fn.c_str(), std::ifstream::in);
+		std::string line;
+		while (std::getline(ifs, line))
+		{
+			++nlines;
+		}
+		ifs.close();
+	}
+	return nlines;
+}

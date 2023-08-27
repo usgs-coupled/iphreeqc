@@ -3261,11 +3261,87 @@ TEST(TestIPhreeqc, TestGetSelectedOutputStringLineCount)
 TEST(TestIPhreeqc, TestGetSelectedOutputStringLineCountMultipleRuns)
 {
 	IPhreeqc obj;
+	int retval = 0;
 
-	obj.LoadDatabase("llnl.dat");
+	ASSERT_EQ(0, obj.LoadDatabase("llnl.dat"));
 	ASSERT_EQ(false, obj.GetSelectedOutputStringOn());
 	obj.SetSelectedOutputStringOn(true);
 	ASSERT_EQ(true, obj.GetSelectedOutputStringOn());
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 1
+		Ca 1
+		Na 1
+
+		EQUILIBRIUM_PHASES
+		calcite 0 0.01
+
+		SELECTED_OUTPUT
+		-totals C Ca Na
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(3, obj.GetSelectedOutputStringLineCount());		// header + i_soln + react
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 2
+		Ca 2
+		Na 2
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(2, obj.GetSelectedOutputStringLineCount());		// header + i_soln
+}
+
+TEST(TestIPhreeqc, TestSelectedOutputFileMultipleRuns)
+{
+	FileTest selout("TestSelectedOutputFileMultipleRuns.sel");
+	ASSERT_TRUE(selout.RemoveExisting());
+
+	IPhreeqc obj;
+	int retval = 0;
+
+	ASSERT_EQ(0, obj.LoadDatabase("llnl.dat"));
+
+	ASSERT_EQ(false, obj.GetSelectedOutputFileOn());
+	obj.SetSelectedOutputFileOn(true);
+	ASSERT_EQ(true, obj.GetSelectedOutputFileOn());
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 1
+		Ca 1
+		Na 1
+
+		EQUILIBRIUM_PHASES
+		calcite 0 0.01
+
+		SELECTED_OUTPUT
+		-file TestSelectedOutputFileMultipleRuns.sel
+		-totals C Ca Na
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(3, selout.LineCount());		// header + i_soln + react
+
+	retval = obj.RunString(R"(
+		SOLUTION 1
+		C 2
+		Ca 2
+		Na 2
+		)");
+	ASSERT_EQ(0, retval);
+
+	ASSERT_EQ(2, selout.LineCount());		// header + i_soln
+}
+
+TEST(TestIPhreeqc, TestGetSelectedOutputRowCountMultipleRuns)
+{
+	IPhreeqc obj;
+
+	ASSERT_EQ(0, obj.LoadDatabase("llnl.dat"));
 
 	obj.RunString(R"(
 		SOLUTION 1
@@ -3280,7 +3356,7 @@ TEST(TestIPhreeqc, TestGetSelectedOutputStringLineCountMultipleRuns)
 		-totals C Ca Na
 		)");
 
-	ASSERT_EQ(3, obj.GetSelectedOutputStringLineCount());		// header + i_soln + react
+	ASSERT_EQ(3, obj.GetSelectedOutputRowCount());		// header + i_soln + react
 
 	obj.RunString(R"(
 		SOLUTION 1
@@ -3288,7 +3364,7 @@ TEST(TestIPhreeqc, TestGetSelectedOutputStringLineCountMultipleRuns)
 		Ca 2
 		Na 2
 		)");
-	ASSERT_EQ(2, obj.GetSelectedOutputStringLineCount());		// header + i_soln
+	ASSERT_EQ(2, obj.GetSelectedOutputRowCount());		// header + i_soln
 }
 
 TEST(TestIPhreeqc, TestGetSelectedOutputStringLine)
