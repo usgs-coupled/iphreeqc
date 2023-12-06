@@ -37,7 +37,7 @@ accumLine(SEXP line)
   if (STRING_ELT(line, 0) != NA_STRING) {
     str_in = CHAR(STRING_ELT(line, 0));
     if (R::singleton().AccumulateLine(str_in) != VR_OK) {
-      error(R::singleton().GetErrorString());
+      error("%s", R::singleton().GetErrorString());
     }
   }
 
@@ -61,7 +61,7 @@ accumLineLst(SEXP line)
     if (STRING_ELT(line, i) != NA_STRING) {
       str_in = CHAR(STRING_ELT(line, 0));
       if (R::singleton().AccumulateLine(str_in) != VR_OK) {
-        error(R::singleton().GetErrorString());
+        error("%s", R::singleton().GetErrorString());
       }
     }
   }
@@ -733,7 +733,7 @@ loadDB(SEXP filename)
   name = CHAR(STRING_ELT(filename, 0));
 
   if (R::singleton().LoadDatabase(name) != VR_OK) {
-    error(R::singleton().GetErrorString());
+    error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -759,7 +759,7 @@ loadDBLst(SEXP input)
   if (R::singleton().LoadDatabaseString((*poss).str().c_str()) != VR_OK) {
     // all dtors must be called before error
     delete poss;
-    error(R::singleton().GetErrorString());
+    error("%s", R::singleton().GetErrorString());
   }
 
   delete poss;
@@ -779,7 +779,7 @@ loadDBStr(SEXP input)
   string = CHAR(STRING_ELT(input, 0));
 
   if (R::singleton().LoadDatabaseString(string) != VR_OK) {
-    error(R::singleton().GetErrorString());
+    error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -789,7 +789,7 @@ SEXP
 runAccum(void)
 {
   if (R::singleton().RunAccumulated() != VR_OK) {
-    error(R::singleton().GetErrorString());
+    error("%s", R::singleton().GetErrorString());
   }
   return(R_NilValue);
 }
@@ -806,7 +806,7 @@ runFile(SEXP filename)
 
   name = CHAR(STRING_ELT(filename, 0));
   if (R::singleton().RunFile(name) != VR_OK) {
-    error(R::singleton().GetErrorString());
+    error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -824,7 +824,7 @@ runString(SEXP input)
 
   in = CHAR(STRING_ELT(input, 0));
   if (R::singleton().RunString(in) != VR_OK) {
-    error(R::singleton().GetErrorString());
+    error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -849,7 +849,7 @@ runStringLst(SEXP input)
 
   if (R::singleton().RunString((*poss).str().c_str()) != VR_OK) {
     delete poss;
-    error(R::singleton().GetErrorString());
+    error("%s", R::singleton().GetErrorString());
   }
 
   delete poss;
