@@ -1248,7 +1248,7 @@ function(value) {
 
 ##' Retrieve the name of the selected_output file.
 ##' 
-##' Retrieves the name of the selected_output file. The default value is selected_{nuser}.0.out.
+##' Retrieves the name of the selected_output file. The default value is selected_\{nuser\}.0.out.
 ##'
 ##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
 ##' 
@@ -1291,7 +1291,7 @@ function(nuser) {
 
 ##' Set the name of the selected_output file.
 ##' 
-##' Sets the name of the selected_output file. The default value is selected_{nuser}.0.out.
+##' Sets the name of the selected_output file. The default value is selected_\{nuser\}.0.out.
 ##'
 ##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
 ##' 
