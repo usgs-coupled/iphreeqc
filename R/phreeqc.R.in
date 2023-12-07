@@ -1248,7 +1248,7 @@ function(value) {
 
 ##' Retrieve the name of the selected_output file.
 ##' 
-##' Retrieves the name of the selected_output file. The default value is selected_{nuser}.0.out.
+##' Retrieves the name of the selected_output file. The default value is selected_\{nuser\}.0.out.
 ##'
 ##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
 ##' 
@@ -1291,7 +1291,7 @@ function(nuser) {
 
 ##' Set the name of the selected_output file.
 ##' 
-##' Sets the name of the selected_output file. The default value is selected_{nuser}.0.out.
+##' Sets the name of the selected_output file. The default value is selected_\{nuser\}.0.out.
 ##'
 ##' The selected_output file must be turned on using the \code{\link{phrSetSelectedOutputFileOn}} function.
 ##' 
@@ -1385,7 +1385,7 @@ function(nuser, value) {
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage phreeqc.dat  # phrLoadDatabaseString(phreeqc.dat)
 ##' @keywords dataset
@@ -1400,7 +1400,7 @@ NULL
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage ex15.dat  # phrLoadDatabaseString(ex15.dat)
 ##' @keywords dataset
@@ -1416,7 +1416,7 @@ NULL
 ##' reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage Amm.dat  # phrLoadDatabaseString(Amm.dat)
 ##' @keywords dataset
@@ -1490,7 +1490,7 @@ NULL
 ##' has been reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage wateq4f.dat  # phrLoadDatabaseString(wateq4f.dat)
 ##' @keywords dataset
@@ -1506,7 +1506,7 @@ NULL
 ##' for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @usage llnl.dat  # phrLoadDatabaseString(llnl.dat)
 ##' @keywords dataset
 NULL
@@ -1520,7 +1520,7 @@ NULL
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage minteq.dat  # phrLoadDatabaseString(minteq.dat)
 ##' @keywords dataset
@@ -1535,7 +1535,7 @@ NULL
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage minteq.v4.dat  # phrLoadDatabaseString(minteq.v4.dat)
 ##' @keywords dataset
@@ -1550,7 +1550,7 @@ NULL
 ##' use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage pitzer.dat  # phrLoadDatabaseString(pitzer.dat)
 ##' @keywords dataset
@@ -1566,7 +1566,7 @@ NULL
 ##' for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage sit.dat  # phrLoadDatabaseString(sit.dat)
 ##' @keywords dataset
@@ -1582,7 +1582,7 @@ NULL
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @usage iso.dat  # phrLoadDatabaseString(iso.dat)
 ##' @keywords dataset
@@ -1599,7 +1599,7 @@ NULL
 ##' run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1620,7 +1620,7 @@ NULL
 ##' can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1652,7 +1652,7 @@ NULL
 ##' routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1684,7 +1684,7 @@ NULL
 ##' can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1711,7 +1711,7 @@ NULL
 ##' run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1737,7 +1737,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1772,7 +1772,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1797,7 +1797,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1836,7 +1836,7 @@ NULL
 ##' using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1864,7 +1864,7 @@ NULL
 ##' The example can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1891,7 +1891,7 @@ NULL
 ##' mixing. The example can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1926,7 +1926,7 @@ NULL
 ##' The example can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1956,7 +1956,7 @@ NULL
 ##' The example can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -1989,7 +1989,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2019,7 +2019,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2052,7 +2052,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2084,7 +2084,7 @@ NULL
 ##' example can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2126,7 +2126,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2154,7 +2154,7 @@ NULL
 ##' can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2190,7 +2190,7 @@ NULL
 ##' run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2222,7 +2222,7 @@ NULL
 ##' The example can be run using the \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
@@ -2255,7 +2255,7 @@ NULL
 ##' \code{\link{phrRunString}} routine.
 ##' @docType data
 ##' @family Examples
-##' @references \url{http://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
 ##' @keywords dataset 
 ##' @examples
