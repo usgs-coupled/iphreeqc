@@ -47,7 +47,7 @@ jobs:
 
     - name: Install ninja valgrind (Linux)
       if: runner.os == 'Linux'
-      run: sudo apt-get install -y ninja-build valgrind
+      run: sudo apt-get update && sudo apt-get install -y ninja-build valgrind
 
     - name: Install ninja (macOS)
       if: runner.os == 'macOS'
