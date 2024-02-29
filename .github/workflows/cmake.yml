@@ -2,11 +2,14 @@ name: CMake
 
 on:
   push:
+  
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
   schedule:
     - cron:  '15 14 4,11,18,25 * *'
+  
   workflow_dispatch:
 
 env:
@@ -43,7 +46,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Install ninja valgrind (Linux)
       if: runner.os == 'Linux'
@@ -63,7 +66,7 @@ jobs:
       run: ctest -S ctest.cmake -V --output-on-failure --timeout 900
 
     - name: Upload results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.os }}-test-results
         path: ${{ github.workspace }}/_ctest/Testing/
@@ -74,14 +77,14 @@ jobs:
 
     steps:
       - name: Checkout phreeqc3-HTMLversion
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: usgs-coupled-subtrees/phreeqc3-HTMLversion
           ref: master
 
       - name: cache htmlhelp
         id: cache-htmlhelp
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: "C:/Program Files (x86)/HTML Help Workshop"
           key: ${{ runner.os }}-htmlhelp
@@ -125,7 +128,7 @@ jobs:
             exit 1
           fi
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: chm
           path: ${{github.workspace}}/phreeqc3.chm
@@ -148,7 +151,7 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: versioning
         run: ./jenkins-dist.sh -v ${{ needs.init.outputs.VER }} -r ${{ needs.init.outputs.REL }} -d ${{ needs.init.outputs.DATE }}
@@ -193,7 +196,7 @@ jobs:
           ls -lR
           find -name "*.tar.gz"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
         with:
           name: cran
@@ -204,7 +207,7 @@ jobs:
   #   needs: [init]
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout@v4
 
   #     - uses: r-lib/actions/setup-r@v2
   #       with:
@@ -228,7 +231,7 @@ jobs:
   #     - name: check
   #       run: cd R && make VERSION=${{ needs.init.outputs.VER }} check_built
 
-  #     - uses: actions/upload-artifact@v3
+  #     - uses: actions/upload-artifact@v4
   #       with:
   #         name: cran
   #         path: ${{github.workspace}}/R/phreeqc_*.tar.gz
@@ -238,7 +241,7 @@ jobs:
   #   needs: [r-build]
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout@v4
 
   #     - uses: actions/download-artifact@v3
   #       with:
@@ -274,7 +277,7 @@ jobs:
   #     - name: run
   #       run: cd R && R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < valgrind.R 2>&1 | tee valgrind.full.out
 
-  #     - uses: actions/upload-artifact@v3
+  #     - uses: actions/upload-artifact@v4
   #       with:
   #         name: valgrind
   #         path: ${{github.workspace}}/R/valgrind.full.out
@@ -284,7 +287,7 @@ jobs:
     needs: [init, chm]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v3
         with:
@@ -400,17 +403,17 @@ jobs:
       - name: copy
         run: cp doc/README IPhreeqc_ReadMe.txt
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: readme
           path: ${{github.workspace}}/IPhreeqc_ReadMe.txt
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: tarball
           path: ${{github.workspace}}/_build/*.tar.gz
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: zipball
           path: ${{github.workspace}}/_build/*.zip
@@ -433,7 +436,7 @@ jobs:
   #           BUILD_CLR_LIBS: ON
 
   #   steps:
-  #   - uses: actions/checkout@v3
+  #   - uses: actions/checkout@v4
 
   #   - name: Configure CMake
   #     # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
