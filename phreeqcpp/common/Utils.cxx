@@ -16,6 +16,10 @@
 #  define nullptr NULL
 #endif
 
+#if __cplusplus < 201103L // Check if C++ standard is pre-C++11
+#  define nullptr NULL
+#endif
+
 #if defined(PHREEQCI_GUI)
 #ifdef _DEBUG
 #define new DEBUG_NEW
