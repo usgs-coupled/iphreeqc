@@ -17,7 +17,9 @@
 #endif
 
 #if __cplusplus < 201103L // Check if C++ standard is pre-C++11
-#  define nullptr NULL
+#  ifndef nullptr
+#    define nullptr NULL
+#  endif
 #endif
 
 #if defined(PHREEQCI_GUI)
