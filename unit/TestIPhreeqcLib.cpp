@@ -2330,7 +2330,7 @@ void TestIPhreeqcLib::TestSetDumpFileName(void)
 
 	CPPUNIT_ASSERT_EQUAL( true,   ::FileExists(DUMP_FILENAME) );
 
-	std::string lines[33];
+	std::string lines[44];
 	std::ifstream ifs(DUMP_FILENAME);
 
 	size_t i = 0;
