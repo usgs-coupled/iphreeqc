@@ -1814,7 +1814,7 @@ void TestIPhreeqcLib::TestGetDumpStringLineCount(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 33,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 34,     ::GetDumpStringLineCount(n) );
 
 	if (n >= 0)
 	{
@@ -1843,7 +1843,7 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpFileOn(n, 0) );
 	CPPUNIT_ASSERT_EQUAL( IPQ_OK, ::SetDumpStringOn(n, 1) );
 	CPPUNIT_ASSERT_EQUAL( 0,      ::RunAccumulated(n) );
-	CPPUNIT_ASSERT_EQUAL( 33,     ::GetDumpStringLineCount(n) );
+	CPPUNIT_ASSERT_EQUAL( 34,     ::GetDumpStringLineCount(n) );
 
 	int line = 0;
 
@@ -1855,6 +1855,7 @@ void TestIPhreeqcLib::TestGetDumpStringLine(void)
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-cb")                           != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-density")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-viscosity")                    != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), "-totals")                       != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " C(4) ")                        != NULL);
 	CPPUNIT_ASSERT(::strstr(::GetDumpStringLine(n, line++), " Ca ")                          != NULL);
@@ -2347,6 +2348,7 @@ void TestIPhreeqcLib::TestSetDumpFileName(void)
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-total_o")                      != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-cb")                           != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-density")                      != NULL);
+	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-viscosity")                    != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), "-totals")                       != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " C(4) ")                        != NULL);
 	CPPUNIT_ASSERT(::strstr(lines[line++].c_str(), " Ca ")                          != NULL);
@@ -2466,7 +2468,7 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Mass of water (kg)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                 Total alkalinity (eq/kg)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                       Total CO2 (mol/kg)  =  ")                                   != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                         Temperature (°C)  =  ")                                   != NULL);
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                         Temperature (Â°C)  =  ")                                   != NULL);
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                  Electrical balance (eq)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), " Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  ")                                   != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                               Iterations  =  ")                                   != NULL );
@@ -2476,7 +2478,7 @@ void TestIPhreeqcLib::TestSetOutputFileName(void)
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "----------------------------Distribution of species----------------------------")  != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "                                               Log       Log       Log    mole V") != NULL );
-	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma    cm³/mol")!= NULL);
+	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol") != NULL);
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "")                                                                                 != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   OH- ")                                                                          != NULL );
 	CPPUNIT_ASSERT( ::strstr(lines[line++].c_str(), "   H+ ")                                                                           != NULL );
@@ -4150,12 +4152,12 @@ void TestIPhreeqcLib::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 0, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -7.60411,  var.dVal, ::pow(10., -2) );
 
 	// si_Calcite
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.692077,  var.dVal, ::pow(10., -2) );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.678847,  var.dVal, ::pow(10., -2) );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.678847,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.702316,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 2, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.695856,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.689518,  var.dVal, ::pow(10., -2) );
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( -999.999,  var.dVal, ::pow(10., -2) );
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.672429,  var.dVal, ::pow(10., -2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 1, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.683300,  var.dVal, ::pow(10., -2) );
 
 	// DUMMY_1
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 2, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
@@ -4179,7 +4181,7 @@ void TestIPhreeqcLib::TestMultiPunchCSelectedOutput(void)
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 3, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 4, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 5, 4, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
-	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 4, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 3.69E-13,  var.dVal, ::pow(10., log10(3.69E-13)-2) );
+	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 6, 4, &var));   CPPUNIT_ASSERT_DOUBLES_EQUAL( 4.12e-13,  var.dVal, ::pow(10., log10(4.12e-13)-2) );
 
 	// Sum_Delta/U
 	CPPUNIT_ASSERT_EQUAL(IPQ_OK, ::GetSelectedOutputValue(id, 1, 5, &var));   CPPUNIT_ASSERT_EQUAL(TT_EMPTY,  var.type);
