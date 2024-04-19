@@ -4064,7 +4064,7 @@ TEST(TestIPhreeqcLib, TestMultiPunchCSelectedOutput)
 	int id = ::CreateIPhreeqc();
 	ASSERT_TRUE(id >= 0);
 
-	ASSERT_EQ(0, ::LoadDatabase(id, "phreeqc.dat"));
+	ASSERT_EQ(0, ::LoadDatabase(id, "phreeqc.dat.90a6449"));
 	ASSERT_EQ(0, ::RunFile(id, "multi_punch"));
 
 	ASSERT_EQ(6, ::GetSelectedOutputRowCount(id));

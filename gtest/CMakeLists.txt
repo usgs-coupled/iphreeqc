@@ -93,6 +93,12 @@ configure_file(
   )
 
 configure_file(
+  phreeqc.dat.90a6449
+  phreeqc.dat.90a6449
+  COPYONLY
+  )
+
+configure_file(
   ../database/phreeqc.dat
   phreeqc.dat
   COPYONLY

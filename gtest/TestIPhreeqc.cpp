@@ -4098,7 +4098,7 @@ TEST(TestIPhreeqc, TestMultiPunchCSelectedOutput)
 	CVar var;
 	IPhreeqc obj;
 
-	ASSERT_EQ(0, obj.LoadDatabase("phreeqc.dat"));
+	ASSERT_EQ(0, obj.LoadDatabase("phreeqc.dat.90a6449"));
 	ASSERT_EQ(0, obj.RunFile("multi_punch"));
 
 	ASSERT_EQ(6, obj.GetSelectedOutputRowCount());
