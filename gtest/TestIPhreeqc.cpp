@@ -2608,7 +2608,7 @@ TEST(TestIPhreeqc, TestSetLogFileName)
 	ASSERT_EQ(std::string("Number of infeasible solutions: 0"), lines[line++]);
 	ASSERT_EQ(std::string("Number of basis changes: 0"), lines[line++]);
 	ASSERT_EQ(std::string(""), lines[line++]);
-	ASSERT_EQ(std::string("Number of iterations: 6"), lines[line++]);
+	ASSERT_EQ(std::string("Number of iterations: 8"), lines[line++]);
 	ASSERT_EQ(std::string(""), lines[line++]);
 	ASSERT_EQ(std::string("------------------"), lines[line++]);
 	ASSERT_EQ(std::string("End of simulation."), lines[line++]);
@@ -2844,7 +2844,7 @@ TEST(TestIPhreeqc, TestGetLogStringLine)
 	ASSERT_EQ(std::string("Number of infeasible solutions: 0"), std::string(obj.GetLogStringLine(line++)));
 	ASSERT_EQ(std::string("Number of basis changes: 0"), std::string(obj.GetLogStringLine(line++)));
 	ASSERT_EQ(std::string(""), std::string(obj.GetLogStringLine(line++)));
-	ASSERT_EQ(std::string("Number of iterations: 6"), std::string(obj.GetLogStringLine(line++)));
+	ASSERT_EQ(std::string("Number of iterations: 8"), std::string(obj.GetLogStringLine(line++)));
 	ASSERT_EQ(std::string(""), std::string(obj.GetLogStringLine(line++)));
 	ASSERT_EQ(std::string("------------------"), std::string(obj.GetLogStringLine(line++)));
 	ASSERT_EQ(std::string("End of simulation."), std::string(obj.GetLogStringLine(line++)));
