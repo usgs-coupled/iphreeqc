@@ -30,14 +30,14 @@ accumLine(SEXP line)
   const char* str_in;
 
   // check args
-  if (!isString(line) || length(line) != 1 || STRING_ELT(line, 0) == NA_STRING) {
-    error("AccumulateLine:line is not a single string\n");
+  if (!Rf_isString(line) || Rf_length(line) != 1 || STRING_ELT(line, 0) == NA_STRING) {
+    Rf_error("AccumulateLine:line is not a single string\n");
   }
 
   if (STRING_ELT(line, 0) != NA_STRING) {
     str_in = CHAR(STRING_ELT(line, 0));
     if (R::singleton().AccumulateLine(str_in) != VR_OK) {
-      error("%s", R::singleton().GetErrorString());
+      Rf_error("%s", R::singleton().GetErrorString());
     }
   }
 
@@ -50,18 +50,18 @@ accumLineLst(SEXP line)
   const char* str_in;
 
   // check args
-  if (!isString(line)) {
-    error("a character vector argument expected");
+  if (!Rf_isString(line)) {
+    Rf_error("a character vector argument expected");
   }
 
-  int n = length(line);
+  int n = Rf_length(line);
   //std::ostringstream oss;
 
   for (int i = 0; i < n; ++i) {
     if (STRING_ELT(line, i) != NA_STRING) {
       str_in = CHAR(STRING_ELT(line, 0));
       if (R::singleton().AccumulateLine(str_in) != VR_OK) {
-        error("%s", R::singleton().GetErrorString());
+        Rf_error("%s", R::singleton().GetErrorString());
       }
     }
   }
@@ -90,10 +90,10 @@ getAccumLines(void)
     {
       lines.push_back(line);
     }
-    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lines.size()));
     for (size_t i = 0; i < lines.size(); ++i)
     {
-      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar(lines[i].c_str()));
     }
     UNPROTECT(1);
   }
@@ -132,22 +132,22 @@ getCol(int ncol)
 
   if (ns) {
     // all strings
-    PROTECT(ans = allocVector(STRSXP, rows-1));
+    Rf_protect(ans = Rf_allocVector(STRSXP, rows-1));
     for (int r = 1; r < rows; ++r) {
       VarInit(&vv);
       R::singleton().GetSelectedOutputValue(r, ncol, &vv);
       switch (vv.type) {
       case TT_EMPTY:
-        SET_STRING_ELT(ans, r-1, mkChar(""));
+        SET_STRING_ELT(ans, r-1, Rf_mkChar(""));
         break;
       case TT_ERROR:
         switch (vv.u.vresult) {
-        case VR_OK:          SET_STRING_ELT(ans, r-1, mkChar("VR_OK"));          break;
-        case VR_OUTOFMEMORY: SET_STRING_ELT(ans, r-1, mkChar("VR_OUTOFMEMORY")); break;
-        case VR_BADVARTYPE:  SET_STRING_ELT(ans, r-1, mkChar("VR_BADVARTYPE"));  break;
-        case VR_INVALIDARG:  SET_STRING_ELT(ans, r-1, mkChar("VR_INVALIDARG"));  break;
-        case VR_INVALIDROW:  SET_STRING_ELT(ans, r-1, mkChar("VR_INVALIDROW"));  break;
-        case VR_INVALIDCOL:  SET_STRING_ELT(ans, r-1, mkChar("VR_INVALIDCOL"));  break;
+        case VR_OK:          SET_STRING_ELT(ans, r-1, Rf_mkChar("VR_OK"));          break;
+        case VR_OUTOFMEMORY: SET_STRING_ELT(ans, r-1, Rf_mkChar("VR_OUTOFMEMORY")); break;
+        case VR_BADVARTYPE:  SET_STRING_ELT(ans, r-1, Rf_mkChar("VR_BADVARTYPE"));  break;
+        case VR_INVALIDARG:  SET_STRING_ELT(ans, r-1, Rf_mkChar("VR_INVALIDARG"));  break;
+        case VR_INVALIDROW:  SET_STRING_ELT(ans, r-1, Rf_mkChar("VR_INVALIDROW"));  break;
+        case VR_INVALIDCOL:  SET_STRING_ELT(ans, r-1, Rf_mkChar("VR_INVALIDCOL"));  break;
         }
         break;
       case TT_LONG:
@@ -156,7 +156,7 @@ getCol(int ncol)
         } else {
           snprintf(buffer, sizeof(buffer), "%ld", vv.u.lVal);
         }
-        SET_STRING_ELT(ans, r-1, mkChar(buffer));
+        SET_STRING_ELT(ans, r-1, Rf_mkChar(buffer));
         break;
       case TT_DOUBLE:
         if (vv.u.dVal == -999.999 || vv.u.dVal == -99.) {
@@ -164,10 +164,10 @@ getCol(int ncol)
         } else {
           snprintf(buffer, sizeof(buffer), "%g", vv.u.dVal);
         }
-        SET_STRING_ELT(ans, r-1, mkChar(buffer));
+        SET_STRING_ELT(ans, r-1, Rf_mkChar(buffer));
         break;
       case TT_STRING:
-        SET_STRING_ELT(ans, r-1, mkChar(vv.u.sVal));
+        SET_STRING_ELT(ans, r-1, Rf_mkChar(vv.u.sVal));
         break;
       }
       VarClear(&vv);
@@ -176,7 +176,7 @@ getCol(int ncol)
   } // if (ns)
   else if (nd) {
     // all reals
-    PROTECT(ans = allocVector(REALSXP, rows-1));
+    Rf_protect(ans = Rf_allocVector(REALSXP, rows-1));
     for (int r = 1; r < rows; ++r) {
       VarInit(&vv);
       R::singleton().GetSelectedOutputValue(r, ncol, &vv);
@@ -210,7 +210,7 @@ getCol(int ncol)
   } // if (nd)
   else if (nl) {
     // all ints
-    PROTECT(ans = allocVector(INTSXP, rows-1));
+    Rf_protect(ans = Rf_allocVector(INTSXP, rows-1));
     for (int r = 1; r < rows; ++r) {
       VarInit(&vv);
       R::singleton().GetSelectedOutputValue(r, ncol, &vv);
@@ -237,7 +237,7 @@ getCol(int ncol)
   } // if (nl)
   else {
     // all NA
-    PROTECT(ans = allocVector(INTSXP, rows-1));
+    Rf_protect(ans = Rf_allocVector(INTSXP, rows-1));
     for (int r = 1; r < rows; ++r) {
       INTEGER(ans)[r-1] = NA_INTEGER;
     } // for
@@ -250,8 +250,8 @@ SEXP
 getDumpFileName(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetDumpFileName()));
+  Rf_protect(ans = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(ans, 0, Rf_mkChar(R::singleton().GetDumpFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -270,10 +270,10 @@ getDumpStrings(void)
     {
       lines.push_back(line);
     }
-    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lines.size()));
     for (size_t i = 0; i < lines.size(); ++i)
     {
-      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar(lines[i].c_str()));
     }
     UNPROTECT(1);
   }
@@ -284,8 +284,8 @@ SEXP
 getErrorFileName(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetErrorFileName()));
+  Rf_protect(ans = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(ans, 0, Rf_mkChar(R::singleton().GetErrorFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -294,7 +294,7 @@ SEXP
 getDumpFileOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetDumpFileOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
@@ -309,7 +309,7 @@ SEXP
 getDumpStringOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetDumpStringOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
@@ -324,7 +324,7 @@ SEXP
 getErrorFileOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetErrorFileOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
@@ -339,7 +339,7 @@ SEXP
 getErrorStringOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetErrorStringOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
@@ -354,7 +354,7 @@ SEXP
 getLogFileOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetLogFileOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
@@ -369,7 +369,7 @@ SEXP
 getLogStringOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetLogStringOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
@@ -384,7 +384,7 @@ SEXP
 getOutputStringOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetOutputStringOn()) {
     LOGICAL(ans)[0] = TRUE;
   }
@@ -409,10 +409,10 @@ getErrorStrings(void)
     {
       lines.push_back(line);
     }
-    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lines.size()));
     for (size_t i = 0; i < lines.size(); ++i)
     {
-      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar(lines[i].c_str()));
     }
     UNPROTECT(1);
   }
@@ -423,8 +423,8 @@ SEXP
 getLogFileName(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetLogFileName()));
+  Rf_protect(ans = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(ans, 0, Rf_mkChar(R::singleton().GetLogFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -443,10 +443,10 @@ getLogStrings(void)
     {
       lines.push_back(line);
     }
-    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lines.size()));
     for (size_t i = 0; i < lines.size(); ++i)
     {
-      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar(lines[i].c_str()));
     }
     UNPROTECT(1);
   }
@@ -457,8 +457,8 @@ SEXP
 getOutputFileName(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetOutputFileName()));
+  Rf_protect(ans = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(ans, 0, Rf_mkChar(R::singleton().GetOutputFileName()));
   UNPROTECT(1);
   return ans;
 }
@@ -467,7 +467,7 @@ SEXP
 getOutputFileOn(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(LGLSXP, 1));
+  Rf_protect(ans = Rf_allocVector(LGLSXP, 1));
   if (R::singleton().GetOutputFileOn()) {
     LOGICAL(ans)[0] = 1;
   }
@@ -492,10 +492,10 @@ getOutputStrings(void)
     {
       lines.push_back(line);
     }
-    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lines.size()));
     for (size_t i = 0; i < lines.size(); ++i)
     {
-      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar(lines[i].c_str()));
     }
     UNPROTECT(1);
   }
@@ -507,13 +507,13 @@ getSelectedOutputFileName(SEXP nuser)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isInteger(nuser) || length(nuser) != 1) {
-    error("GetSelectedOutputFileName:nuser must be a single integer\n");
+  if (!Rf_isInteger(nuser) || Rf_length(nuser) != 1) {
+    Rf_error("GetSelectedOutputFileName:nuser must be a single integer\n");
   }
   int save = R::singleton().GetCurrentSelectedOutputUserNumber();
   R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetSelectedOutputFileName()));
+  Rf_protect(ans = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(ans, 0, Rf_mkChar(R::singleton().GetSelectedOutputFileName()));
   UNPROTECT(1);
   R::singleton().SetCurrentSelectedOutputUserNumber(save);
   return ans;
@@ -533,10 +533,10 @@ getSelectedOutputStrings(void)
     {
       lines.push_back(line);
     }
-    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lines.size()));
     for (size_t i = 0; i < lines.size(); ++i)
     {
-      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar(lines[i].c_str()));
     }
     UNPROTECT(1);
   }
@@ -555,16 +555,16 @@ getSelectedOutputStringsLst(void)
     SEXP so;
     char buffer[80];
 
-    PROTECT(list = allocVector(VECSXP, n));
-    PROTECT(attr = allocVector(STRSXP, n));
+    Rf_protect(list = Rf_allocVector(VECSXP, n));
+    Rf_protect(attr = Rf_allocVector(STRSXP, n));
 
     int save = R::singleton().GetCurrentSelectedOutputUserNumber();
     for (int i = 0; i < n; ++i) {
       int d = R::singleton().GetNthSelectedOutputUserNumber(i);
       ::snprintf(buffer, sizeof(buffer), "n%d", d);
-      SET_STRING_ELT(attr, i, mkChar(buffer));
+      SET_STRING_ELT(attr, i, Rf_mkChar(buffer));
       R::singleton().SetCurrentSelectedOutputUserNumber(d);
-      PROTECT(so = getSelectedOutputStrings());
+      Rf_protect(so = getSelectedOutputStrings());
       SET_VECTOR_ELT(list, i, so);
       UNPROTECT(1);
     }
@@ -600,17 +600,17 @@ getSelOut(void)
     return list;
   }
 
-  PROTECT(list = allocVector(VECSXP, cols));
-  PROTECT(attr = allocVector(STRSXP, cols));
+  Rf_protect(list = Rf_allocVector(VECSXP, cols));
+  Rf_protect(attr = Rf_allocVector(STRSXP, cols));
   for (c = 0; c < cols; ++c) {
 
     VarInit(&vn);
     R::singleton().GetSelectedOutputValue(0, c, &vn);
 
-    PROTECT(col = getCol(c));
+    Rf_protect(col = getCol(c));
 
     SET_VECTOR_ELT(list, c, col);
-    SET_STRING_ELT(attr, c, mkChar(vn.u.sVal));
+    SET_STRING_ELT(attr, c, Rf_mkChar(vn.u.sVal));
 
     UNPROTECT(1);
     VarClear(&vn);
@@ -621,11 +621,11 @@ getSelOut(void)
   // Turn the data "list" into a "data.frame"
   // see model.c
 
-  PROTECT(klass = mkString("data.frame"));
+  Rf_protect(klass = mkString("data.frame"));
   setAttrib(list, R_ClassSymbol, klass);
   UNPROTECT(1);
 
-  PROTECT(row_names = allocVector(INTSXP, rows-1));
+  Rf_protect(row_names = Rf_allocVector(INTSXP, rows-1));
   for (r = 0; r < rows-1; ++r) INTEGER(row_names)[r] = r+1;
   setAttrib(list, R_RowNamesSymbol, row_names);
   UNPROTECT(1);
@@ -646,16 +646,16 @@ getSelOutLst(void)
     SEXP so;
     char buffer[80];
 
-    PROTECT(list = allocVector(VECSXP, n));
-    PROTECT(attr = allocVector(STRSXP, n));
+    Rf_protect(list = Rf_allocVector(VECSXP, n));
+    Rf_protect(attr = Rf_allocVector(STRSXP, n));
 
     int save = R::singleton().GetCurrentSelectedOutputUserNumber();
     for (int i = 0; i < n; ++i) {
       int d = R::singleton().GetNthSelectedOutputUserNumber(i);
       ::snprintf(buffer, sizeof(buffer), "n%d", d);
-      SET_STRING_ELT(attr, i, mkChar(buffer));
+      SET_STRING_ELT(attr, i, Rf_mkChar(buffer));
       R::singleton().SetCurrentSelectedOutputUserNumber(d);
-      PROTECT(so = getSelOut());
+      Rf_protect(so = getSelOut());
       SET_VECTOR_ELT(list, i, so);
       UNPROTECT(1);
     }
@@ -671,8 +671,8 @@ SEXP
 getVersionString(void)
 {
   SEXP ans = R_NilValue;
-  PROTECT(ans = allocVector(STRSXP, 1));
-  SET_STRING_ELT(ans, 0, mkChar(R::singleton().GetVersionString()));
+  Rf_protect(ans = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(ans, 0, Rf_mkChar(R::singleton().GetVersionString()));
   UNPROTECT(1);
   return ans;
 }
@@ -691,10 +691,10 @@ getWarningStrings(void)
     {
       lines.push_back(line);
     }
-    PROTECT(ans = allocVector(STRSXP, lines.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lines.size()));
     for (size_t i = 0; i < lines.size(); ++i)
     {
-      SET_STRING_ELT(ans, i, mkChar(lines[i].c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar(lines[i].c_str()));
     }
     UNPROTECT(1);
   }
@@ -708,10 +708,10 @@ listComps(void)
 
   std::list< std::string > lc = R::singleton().ListComponents();
   if (lc.size() > 0) {
-    PROTECT(ans = allocVector(STRSXP, lc.size()));
+    Rf_protect(ans = Rf_allocVector(STRSXP, lc.size()));
     std::list< std::string >::iterator li = lc.begin();
     for (int i = 0; li != lc.end(); ++i, ++li) {
-      SET_STRING_ELT(ans, i, mkChar((*li).c_str()));
+      SET_STRING_ELT(ans, i, Rf_mkChar((*li).c_str()));
     }
     UNPROTECT(1);
     return(ans);
@@ -726,14 +726,14 @@ loadDB(SEXP filename)
   const char* name;
 
   // check args
-  if (!isString(filename) || length(filename) != 1) {
-    error("'filename' is not a single string");
+  if (!Rf_isString(filename) || Rf_length(filename) != 1) {
+    Rf_error("'filename' is not a single string");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
 
   if (R::singleton().LoadDatabase(name) != VR_OK) {
-    error("%s", R::singleton().GetErrorString());
+    Rf_error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -743,11 +743,11 @@ SEXP
 loadDBLst(SEXP input)
 {
   // check args
-  if (!isString(input)) {
-    error("a character vector argument expected");
+  if (!Rf_isString(input)) {
+    Rf_error("a character vector argument expected");
   }
 
-  int n = length(input);
+  int n = Rf_length(input);
   std::ostringstream *poss = new std::ostringstream();
 
   for (int i = 0; i < n; ++i) {
@@ -759,7 +759,7 @@ loadDBLst(SEXP input)
   if (R::singleton().LoadDatabaseString((*poss).str().c_str()) != VR_OK) {
     // all dtors must be called before error
     delete poss;
-    error("%s", R::singleton().GetErrorString());
+    Rf_error("%s", R::singleton().GetErrorString());
   }
 
   delete poss;
@@ -772,14 +772,14 @@ loadDBStr(SEXP input)
   const char* string;
 
   // check args
-  if (!isString(input) || length(input) != 1) {
-    error("'input' is not a single string");
+  if (!Rf_isString(input) || Rf_length(input) != 1) {
+    Rf_error("'input' is not a single string");
   }
 
   string = CHAR(STRING_ELT(input, 0));
 
   if (R::singleton().LoadDatabaseString(string) != VR_OK) {
-    error("%s", R::singleton().GetErrorString());
+    Rf_error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -789,7 +789,7 @@ SEXP
 runAccum(void)
 {
   if (R::singleton().RunAccumulated() != VR_OK) {
-    error("%s", R::singleton().GetErrorString());
+    Rf_error("%s", R::singleton().GetErrorString());
   }
   return(R_NilValue);
 }
@@ -800,13 +800,13 @@ runFile(SEXP filename)
   const char* name;
 
   // check args
-  if (!isString(filename) || length(filename) != 1 || STRING_ELT(filename, 0) == NA_STRING) {
-    error("'filename' must be a single character string");
+  if (!Rf_isString(filename) || Rf_length(filename) != 1 || STRING_ELT(filename, 0) == NA_STRING) {
+    Rf_error("'filename' must be a single character string");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
   if (R::singleton().RunFile(name) != VR_OK) {
-    error("%s", R::singleton().GetErrorString());
+    Rf_error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -818,13 +818,13 @@ runString(SEXP input)
   const char* in;
 
   // check args
-  if (!isString(input)) {
-    error("a character vector argument expected");
+  if (!Rf_isString(input)) {
+    Rf_error("a character vector argument expected");
   }
 
   in = CHAR(STRING_ELT(input, 0));
   if (R::singleton().RunString(in) != VR_OK) {
-    error("%s", R::singleton().GetErrorString());
+    Rf_error("%s", R::singleton().GetErrorString());
   }
 
   return(R_NilValue);
@@ -834,11 +834,11 @@ SEXP
 runStringLst(SEXP input)
 {
   // check args
-  if (!isString(input)) {
-    error("a character vector argument expected");
+  if (!Rf_isString(input)) {
+    Rf_error("a character vector argument expected");
   }
 
-  int n = length(input);
+  int n = Rf_length(input);
   std::ostringstream *poss = new std::ostringstream();
 
   for (int i = 0; i < n; ++i) {
@@ -849,7 +849,7 @@ runStringLst(SEXP input)
 
   if (R::singleton().RunString((*poss).str().c_str()) != VR_OK) {
     delete poss;
-    error("%s", R::singleton().GetErrorString());
+    Rf_error("%s", R::singleton().GetErrorString());
   }
 
   delete poss;
@@ -862,8 +862,8 @@ setDumpFileName(SEXP filename)
   const char* name;
   SEXP ans = R_NilValue;
   // check args
-  if (!isString(filename) || length(filename) != 1) {
-    error("SetDumpFileName:filename is not a single string\n");
+  if (!Rf_isString(filename) || Rf_length(filename) != 1) {
+    Rf_error("SetDumpFileName:filename is not a single string\n");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
@@ -876,9 +876,9 @@ setDumpFileOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1 || LOGICAL(value)[0] == NA_LOGICAL) {
+  if (!Rf_isLogical(value) || Rf_length(value) != 1 || LOGICAL(value)[0] == NA_LOGICAL) {
     R::singleton().AddError("SetDumpFileOn: value must either be \"TRUE\" or \"FALSE\"");
-    error("value must either be \"TRUE\" or \"FALSE\"\n");
+    Rf_error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetDumpFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -889,8 +889,8 @@ setDumpStringOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
-    error("SetDumpStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
+    Rf_error("SetDumpStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetDumpStringOn(LOGICAL(value)[0]);
   return(ans);
@@ -902,8 +902,8 @@ setErrorFileName(SEXP filename)
   const char* name;
   SEXP ans = R_NilValue;
   // check args
-  if (!isString(filename) || length(filename) != 1) {
-    error("SetErrorFileName:filename is not a single string\n");
+  if (!Rf_isString(filename) || Rf_length(filename) != 1) {
+    Rf_error("SetErrorFileName:filename is not a single string\n");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
@@ -916,9 +916,9 @@ setErrorFileOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1 || LOGICAL(value)[0] == NA_LOGICAL) {
+  if (!Rf_isLogical(value) || Rf_length(value) != 1 || LOGICAL(value)[0] == NA_LOGICAL) {
     R::singleton().AddError("SetErrorFileOn: value must either be \"TRUE\" or \"FALSE\"");
-    error("value must either be \"TRUE\" or \"FALSE\"\n");
+    Rf_error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetErrorFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -929,8 +929,8 @@ setErrorStringOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
-    error("SetErrorStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
+    Rf_error("SetErrorStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetErrorStringOn(LOGICAL(value)[0]);
   return(ans);
@@ -942,8 +942,8 @@ setLogFileName(SEXP filename)
   const char* name;
   SEXP ans = R_NilValue;
   // check args
-  if (!isString(filename) || length(filename) != 1) {
-    error("SetLogFileName:filename is not a single string\n");
+  if (!Rf_isString(filename) || Rf_length(filename) != 1) {
+    Rf_error("SetLogFileName:filename is not a single string\n");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
@@ -956,9 +956,9 @@ setLogFileOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
     R::singleton().AddError("SetLogFileOn: value must either be \"TRUE\" or \"FALSE\"");
-    error("value must either be \"TRUE\" or \"FALSE\"");
+    Rf_error("value must either be \"TRUE\" or \"FALSE\"");
   }
   R::singleton().SetLogFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -969,8 +969,8 @@ setLogStringOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
-    error("SetLogStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
+    Rf_error("SetLogStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetLogStringOn(LOGICAL(value)[0]);
   return(ans);
@@ -982,8 +982,8 @@ setOutputFileName(SEXP filename)
   const char* name;
   SEXP ans = R_NilValue;
   // check args
-  if (!isString(filename) || length(filename) != 1) {
-    error("SetOutputFileName:filename is not a single string\n");
+  if (!Rf_isString(filename) || Rf_length(filename) != 1) {
+    Rf_error("SetOutputFileName:filename is not a single string\n");
   }
 
   name = CHAR(STRING_ELT(filename, 0));
@@ -996,8 +996,8 @@ setOutputFileOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
-    error("value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
+    Rf_error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetOutputFileOn(LOGICAL(value)[0]);
   return(ans);
@@ -1008,8 +1008,8 @@ setOutputStringOn(SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isLogical(value) || length(value) != 1) {
-    error("SetOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
+    Rf_error("SetOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
   R::singleton().SetOutputStringOn(LOGICAL(value)[0]);
   return(ans);
@@ -1020,11 +1020,11 @@ setSelectedOutputFileName(SEXP nuser, SEXP filename)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isInteger(nuser) || length(nuser) != 1) {
-    error("SetSelectedOutputFileName:nuser must be a single integer\n");
+  if (!Rf_isInteger(nuser) || Rf_length(nuser) != 1) {
+    Rf_error("SetSelectedOutputFileName:nuser must be a single integer\n");
   }
-  if (!isString(filename) || length(filename) != 1) {
-    error("SetSelectedOutputFileName:filename is not a single string\n");
+  if (!Rf_isString(filename) || Rf_length(filename) != 1) {
+    Rf_error("SetSelectedOutputFileName:filename is not a single string\n");
   }
   int save = R::singleton().GetCurrentSelectedOutputUserNumber();
   const char* name = CHAR(STRING_ELT(filename, 0));
@@ -1039,11 +1039,11 @@ setSelectedOutputFileOn(SEXP nuser, SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isInteger(nuser) || length(nuser) != 1) {
-    error("nuser must be a single integer\n");
+  if (!Rf_isInteger(nuser) || Rf_length(nuser) != 1) {
+    Rf_error("nuser must be a single integer\n");
   }
-  if (!isLogical(value) || length(value) != 1) {
-    error("value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
+    Rf_error("value must either be \"TRUE\" or \"FALSE\"\n");
   }
   int save = R::singleton().GetCurrentSelectedOutputUserNumber();
   R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);
@@ -1057,11 +1057,11 @@ setSelectedOutputStringOn(SEXP nuser, SEXP value)
 {
   SEXP ans = R_NilValue;
   // check args
-  if (!isInteger(nuser) || length(nuser) != 1) {
-    error("SetSelectedOutputStringOn:nuser must be a single integer\n");
+  if (!Rf_isInteger(nuser) || Rf_length(nuser) != 1) {
+    Rf_error("SetSelectedOutputStringOn:nuser must be a single integer\n");
   }
-  if (!isLogical(value) || length(value) != 1) {
-    error("SetSelectedOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
+  if (!Rf_isLogical(value) || Rf_length(value) != 1) {
+    Rf_error("SetSelectedOutputStringOn:value must either be \"TRUE\" or \"FALSE\"\n");
   }
   int save = R::singleton().GetCurrentSelectedOutputUserNumber();
   R::singleton().SetCurrentSelectedOutputUserNumber(INTEGER(nuser)[0]);
