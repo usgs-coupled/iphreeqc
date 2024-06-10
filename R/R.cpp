@@ -569,7 +569,7 @@ getSelectedOutputStringsLst(void)
       UNPROTECT(1);
     }
     R::singleton().SetCurrentSelectedOutputUserNumber(save);
-    setAttrib(list, R_NamesSymbol, attr);
+    Rf_setAttrib(list, R_NamesSymbol, attr);
 
     UNPROTECT(2);
   }
@@ -616,18 +616,18 @@ getSelOut(void)
     VarClear(&vn);
   }
 
-  setAttrib(list, R_NamesSymbol, attr);
+  Rf_setAttrib(list, R_NamesSymbol, attr);
 
   // Turn the data "list" into a "data.frame"
   // see model.c
 
-  Rf_protect(klass = mkString("data.frame"));
-  setAttrib(list, R_ClassSymbol, klass);
+  Rf_protect(klass = Rf_mkString("data.frame"));
+  Rf_setAttrib(list, R_ClassSymbol, klass);
   UNPROTECT(1);
 
   Rf_protect(row_names = Rf_allocVector(INTSXP, rows-1));
   for (r = 0; r < rows-1; ++r) INTEGER(row_names)[r] = r+1;
-  setAttrib(list, R_RowNamesSymbol, row_names);
+  Rf_setAttrib(list, R_RowNamesSymbol, row_names);
   UNPROTECT(1);
 
   UNPROTECT(2);
@@ -660,7 +660,7 @@ getSelOutLst(void)
       UNPROTECT(1);
     }
     R::singleton().SetCurrentSelectedOutputUserNumber(save);
-    setAttrib(list, R_NamesSymbol, attr);
+    Rf_setAttrib(list, R_NamesSymbol, attr);
 
     UNPROTECT(2);
   }
