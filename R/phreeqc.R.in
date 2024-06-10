@@ -1377,37 +1377,6 @@ function(nuser, value) {
 
 
 
-##' @name phreeqc.dat
-##' @title The phreeqc.dat database
-##' @description phreeqc.dat is a phreeqc database file derived from PHREEQE,
-##' which is consistent with wateq4f.dat, but has a smaller set of elements and
-##' aqueous species. The database has been reformatted for use by
-##' \code{\link{phrLoadDatabaseString}}.
-##' @docType data
-##' @family Databases
-##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @usage phreeqc.dat  # phrLoadDatabaseString(phreeqc.dat)
-##' @keywords dataset
-NULL
-
-
-
-##' @name ex15.dat
-##' @title The ex15.dat database
-##' @description ex15.dat is a database used by example 15 (\code{\link{ex15}}).
-##' The database has been reformatted for use by
-##' \code{\link{phrLoadDatabaseString}}.
-##' @docType data
-##' @family Databases
-##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
-##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @usage ex15.dat  # phrLoadDatabaseString(ex15.dat)
-##' @keywords dataset
-NULL
-
-
-
 ##' @name Amm.dat
 ##' @title The Amm.dat database.
 ##' @description Amm.dat is the same as phreeqc.dat, except that ammonia redox
@@ -1456,14 +1425,16 @@ NULL
 
 
 
-##' @name Tipping_Hurley.dat
-##' @title The Tipping_Hurley.dat database
-##' @description Tipping_Hurley.dat is a database for organic-ligand
-##' binding approximating WHAM by Tipping and Hurley.
+##' @name ex15.dat
+##' @title The ex15.dat database
+##' @description ex15.dat is a database used by example 15 (\code{\link{ex15}}).
+##' The database has been reformatted for use by
 ##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
-##' @usage Tipping_Hurley.dat  # phrLoadDatabaseString(Tipping_Hurley.dat)
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage ex15.dat  # phrLoadDatabaseString(ex15.dat)
 ##' @keywords dataset
 NULL
 
@@ -1484,15 +1455,34 @@ NULL
 
 
 
-##' @name wateq4f.dat
-##' @title The wateq4f.dat database.
-##' @description wateq4f.dat is a database derived from WATEQ4F. The database
-##' has been reformatted for use by \code{\link{phrLoadDatabaseString}}.
+##' @name iso.dat
+##' @title The iso.dat database.
+##' @description iso.dat is a partial implementation of the individual component
+##' approach to isotope calculations as described by Thorstenson and Parkhurst.
+##' The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
 ##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @usage wateq4f.dat  # phrLoadDatabaseString(wateq4f.dat)
+##' @usage iso.dat  # phrLoadDatabaseString(iso.dat)
+##' @keywords dataset
+NULL
+
+
+
+##' @name Kinec.v2.dat
+##' @title Thermodynamic and rates database from Oelkers and coworkers.
+##' @description Kinec.v2.dat contains the parameters for calculating mineral
+##' dissolution rates for primary and secondary silicate minerals using the equations
+##' and parameters reported by Hermanska et al. (2022, 2023), and dissolution rates
+##' for other non)-silicate mineral systems using the equations and parameters
+##' reported by Oelkers and Addassi (2024, in preparation).
+##' @docType data
+##' @family Databases
+##' @references Hermanska et al. (2022, 2003) and Oelkers and Addassi (2024, in preparation).
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage Kinec.v2.dat  # phrLoadDatabaseString(Kinec.v2.dat)
 ##' @keywords dataset
 NULL
 
@@ -1543,6 +1533,56 @@ NULL
 
 
 
+##' @name phreeqc_rates.dat
+##' @title Thermodynamic and rates database
+##' @description Same as the phreeqc.dat database, but with new data blocks
+##' RATE_PARAMETERS_HERMANSKA, RATE_PARAMETERS_PK, and
+##' RATE_PARAMETERS_SVD that tabulate rate parameters from Hermanska
+##' and others (2023), Palandri and Kharaka (2004), and Sverdrup and
+##' others (2019). The Sverdrup parameters are only for two minerals
+##' as a demonstration. Basic functions RATE_HERMANSKA, RATE_PK, and
+##' RATE_SVD can be used to calculate rates using the corresponding
+##' parameters.
+##' @docType data
+##' @family Databases
+##' @references Hermanska and others (2023), Palandri and Kharaka (2004),
+##' and Sverdrup and others (2019).
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage phreeqc_rates.dat  # phrLoadDatabaseString(phreeqc_rates.dat)
+##' @keywords dataset
+NULL
+
+
+
+##' @name PHREEQC_ThermoddemV1.10_15Dec2020.dat
+##' @title Thermochemical Database from the BRGM institute (French Geological Survey)
+##' @description Thermochemical Database from the BRGM institute (French Geological Survey)
+##' @docType data
+##' @family Databases
+##' @references \url{https://thermoddem.brgm.fr/}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage PHREEQC_ThermoddemV1.10_15Dec2020.dat  # phrLoadDatabaseString(PHREEQC_ThermoddemV1.10_15Dec2020.dat)
+##' @keywords dataset
+NULL
+
+
+
+##' @name phreeqc.dat
+##' @title The phreeqc.dat database
+##' @description phreeqc.dat is a phreeqc database file derived from PHREEQE,
+##' which is consistent with wateq4f.dat, but has a smaller set of elements and
+##' aqueous species. The database has been reformatted for use by
+##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage phreeqc.dat  # phrLoadDatabaseString(phreeqc.dat)
+##' @keywords dataset
+NULL
+
+
+
 ##' @name pitzer.dat
 ##' @title The pitzer.dat database.
 ##' @description pitzer.dat is a database for the specific-ion-interaction model
@@ -1574,17 +1614,28 @@ NULL
 
 
 
-##' @name iso.dat
-##' @title The iso.dat database.
-##' @description iso.dat is a partial implementation of the individual component
-##' approach to isotope calculations as described by Thorstenson and Parkhurst.
-##' The database has been reformatted for use by
+##' @name Tipping_Hurley.dat
+##' @title The Tipping_Hurley.dat database
+##' @description Tipping_Hurley.dat is a database for organic-ligand
+##' binding approximating WHAM by Tipping and Hurley.
 ##' \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @usage Tipping_Hurley.dat  # phrLoadDatabaseString(Tipping_Hurley.dat)
+##' @keywords dataset
+NULL
+
+
+
+##' @name wateq4f.dat
+##' @title The wateq4f.dat database.
+##' @description wateq4f.dat is a database derived from WATEQ4F. The database
+##' has been reformatted for use by \code{\link{phrLoadDatabaseString}}.
 ##' @docType data
 ##' @family Databases
 ##' @references \url{https://pubs.usgs.gov/tm/06/a43/pdf/tm6-A43.pdf}
 ##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
-##' @usage iso.dat  # phrLoadDatabaseString(iso.dat)
+##' @usage wateq4f.dat  # phrLoadDatabaseString(wateq4f.dat)
 ##' @keywords dataset
 NULL
 
