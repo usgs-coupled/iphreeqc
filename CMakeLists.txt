@@ -408,10 +408,14 @@ if (STANDALONE_BUILD)
   if (BUILD_TESTING)  # may need to add MSVC version check
     include(FetchContent)
 
+    # Avoid warning about DOWNLOAD_EXTRACT_TIMESTAMP in CMake 3.24:
+    if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+      cmake_policy(SET CMP0135 NEW)
+    endif()    
+
     FetchContent_Declare(
       googletest
-      GIT_REPOSITORY https://github.com/google/googletest.git
-      GIT_TAG        58d77fa8070e8cec2dc1ed015d66b454c8d78850 # release-1.12.1
+      URL https://github.com/google/googletest/archive/release-1.12.1.tar.gz
       )
 
     mark_as_advanced(
@@ -448,8 +452,12 @@ if (STANDALONE_BUILD)
 
     FetchContent_GetProperties(googletest)
     if (NOT googletest_POPULATED)
+      # Always build googletest static
+      set(SAVE_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+      set(BUILD_SHARED_LIBS OFF)
       FetchContent_Populate(googletest)
       add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+      set(BUILD_SHARED_LIBS ${SAVE_BUILD_SHARED_LIBS})
     endif()
 
     add_subdirectory(gtest)

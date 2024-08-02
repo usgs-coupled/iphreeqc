@@ -28,59 +28,29 @@ target_link_libraries(TestSelectedOutput IPhreeqc gtest gtest_main gmock)
 gtest_discover_tests(TestSelectedOutput)
 
 if (MSVC AND BUILD_SHARED_LIBS)
-  # copy dlls
+  # copy dlls for TestCVar
   add_custom_command(TARGET TestCVar PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestCVar>
-    )
-  add_custom_command(TARGET TestCVar PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestCVar>
-    )
-  add_custom_command(TARGET TestCVar PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestCVar>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestCVar>
     )
 
-  # copy dlls
+  # copy dlls for TestVar
   add_custom_command(TARGET TestVar PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestVar>
-    )
-  add_custom_command(TARGET TestVar PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestVar>
-    )
-  add_custom_command(TARGET TestVar PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestVar>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestVar>
     )
 
-  # copy dlls
+  # copy dlls for TestIPhreeqcLib
   add_custom_command(TARGET TestIPhreeqcLib PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestIPhreeqcLib>
-    )
-  add_custom_command(TARGET TestIPhreeqcLib PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestIPhreeqcLib>
-    )
-  add_custom_command(TARGET TestIPhreeqcLib PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestIPhreeqcLib>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestIPhreeqcLib>
     )
 
-  # copy dlls
+  # copy dlls for TestIPhreeqc
   add_custom_command(TARGET TestIPhreeqc PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestIPhreeqc>
-    )
-  add_custom_command(TARGET TestIPhreeqc PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestIPhreeqc>
-    )
-  add_custom_command(TARGET TestIPhreeqc PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestIPhreeqc>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestIPhreeqc>
     )
 
-  # copy dlls
+  # copy dlls for TestSelectedOutput
   add_custom_command(TARGET TestSelectedOutput PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestSelectedOutput>
-    )
-  add_custom_command(TARGET TestSelectedOutput PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest> $<TARGET_FILE_DIR:TestSelectedOutput>
-    )
-  add_custom_command(TARGET TestSelectedOutput PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gtest_main> $<TARGET_FILE_DIR:TestSelectedOutput>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:IPhreeqc> $<TARGET_FILE_DIR:TestSelectedOutput>
     )
 endif()
 
