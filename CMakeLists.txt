@@ -270,6 +270,12 @@ if (MSVC_VERSION EQUAL 1400 OR MSVC_VERSION GREATER 1400)
   target_compile_definitions(IPhreeqc PUBLIC _SCL_SECURE_NO_WARNINGS)
 endif()
 
+if (WIN32 AND BUILD_SHARED_LIBS)
+  # Required to build IMPLIB
+  # (Seems to be automatically set when using Visual Studio as the generator)
+  target_compile_definitions(IPhreeqc PRIVATE _WINDLL)
+endif()
+
 # Allow user to override POSTFIX properties (but mandate them so that
 # all builds can be installed to the same directory)
 if (NOT CMAKE_DEBUG_POSTFIX)
