@@ -71,6 +71,39 @@ jobs:
         name: ${{ matrix.os }}-test-results
         path: ${{ github.workspace }}/_ctest/Testing/
 
+  test-shared:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install ninja valgrind (Linux)
+      if: runner.os == 'Linux'
+      run: sudo apt-get update && sudo apt-get install -y ninja-build valgrind
+
+    - name: Install ninja (macOS)
+      if: runner.os == 'macOS'
+      run: brew install ninja
+
+    - name: Set up Visual Studio shell (Windows)
+      if: runner.os == 'Windows'
+      uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
+
+    - name: CTest
+      run: ctest -S ctest-shared.cmake -V --output-on-failure --timeout 900
+
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.os }}-test-shared-results
+        path: ${{ github.workspace }}/_ctest_shared/Testing/
 
   chm:
     runs-on: windows-latest
