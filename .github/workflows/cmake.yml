@@ -44,6 +44,8 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
+    env:
+      BUILD_DIR: _ctest  # set in ctest.cmake
 
     steps:
     - uses: actions/checkout@v4
@@ -68,8 +70,8 @@ jobs:
     - name: Upload results
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.os }}-test-results
-        path: ${{ github.workspace }}/_ctest/Testing/
+        name: ${{ matrix.os }}-${{ github.job }}-results
+        path: ${{ github.workspace }}/${{ env.BUILD_DIR }}/Testing/
 
   test-shared:
     strategy:
@@ -78,6 +80,8 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
+    env:
+      BUILD_DIR: _ctest_shared  # set in ctest-shared.cmake
 
     steps:
     - uses: actions/checkout@v4
@@ -102,8 +106,110 @@ jobs:
     - name: Upload results
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.os }}-test-shared-results
-        path: ${{ github.workspace }}/_ctest_shared/Testing/
+        name: ${{ matrix.os }}-${{ github.job }}-results
+        path: ${{ github.workspace }}/${{ env.BUILD_DIR }}/Testing/
+
+  test-clang:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+    env:
+      BUILD_DIR: _build
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install ninja valgrind (Linux)
+      if: runner.os == 'Linux'
+      run: sudo apt-get update && sudo apt-get install -y ninja-build clang valgrind
+
+    - name: Install ninja (macOS)
+      if: runner.os == 'macOS'
+      run: brew install ninja
+
+    - name: Set up Visual Studio shell (Windows)
+      if: runner.os == 'Windows'
+      uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
+
+    - name: CMake configure
+      if: runner.os == 'Linux'
+      run: CC=clang CXX=clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=OFF -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+
+    - name: CMake configure
+      if: runner.os == 'macOS'
+      run: CC=$(brew --prefix llvm@15)/bin/clang CXX=$(brew --prefix llvm@15)/bin/clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=OFF -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+
+    - name: CMake configure
+      if: runner.os == 'Windows'
+      run: cmake -B ${{ env.BUILD_DIR }} -A x64 -T "ClangCL" -DBUILD_SHARED_LIBS:BOOL=OFF -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+
+    - name: CMake build
+      run: cmake --build ${{ env.BUILD_DIR }}
+
+    - name: CTest
+      run: cmake --test-dir ${{ env.BUILD_DIR }}
+  
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.os }}-${{ github.job }}-results
+        path: ${{ github.workspace }}/${{ env.BUILD_DIR }}/Testing/
+
+  test-shared-clang:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+    env:
+      BUILD_DIR: _build
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install ninja valgrind (Linux)
+      if: runner.os == 'Linux'
+      run: sudo apt-get update && sudo apt-get install -y ninja-build valgrind
+
+    - name: Install ninja (macOS)
+      if: runner.os == 'macOS'
+      run: brew install ninja
+
+    - name: Set up Visual Studio shell (Windows)
+      if: runner.os == 'Windows'
+      uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
+
+    - name: CMake configure
+      if: runner.os == 'Linux'
+      run: CC=clang CXX=clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+
+    - name: CMake configure
+      if: runner.os == 'macOS'
+      run: CC=$(brew --prefix llvm@15)/bin/clang CXX=$(brew --prefix llvm@15)/bin/clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+
+    - name: CMake configure
+      if: runner.os == 'Windows'
+      run: cmake -B ${{ env.BUILD_DIR }} -A x64 -T "ClangCL" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+
+    - name: CMake build
+      run: cmake --build ${{ env.BUILD_DIR }}
+
+    - name: CTest
+      run: cmake --test-dir ${{ env.BUILD_DIR }}
+  
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.os }}-${{ github.job }}-results
+        path: ${{ github.workspace }}/${{ env.BUILD_DIR }}/Testing/
 
   chm:
     runs-on: windows-latest
