@@ -99,7 +99,7 @@ public:
 #endif
 	void register_basic_callback(double (*fcn)(double x1, double x2, const char* str, void* cookie), void* cookie1);
 #ifdef IPHREEQC_NO_FORTRAN_MODULE
-	void register_fortran_basic_callback(double (*fcn)(double* x1, double* x2, char* str, size_t l));
+	void register_fortran_basic_callback(double (*fcn)(double* x1, double* x2, const char* str, size_t l));
 #else
 	void register_fortran_basic_callback(double (*fcn)(double* x1, double* x2, const char* str, int l));
 #endif

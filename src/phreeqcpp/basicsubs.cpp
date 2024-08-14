@@ -4253,7 +4253,7 @@ basic_callback(double x1, double x2, const char * str)
 
 	if (basic_callback_ptr != NULL)
 	{
-		return (*basic_callback_ptr) (x1, x2, (const char *) str, basic_callback_cookie);
+		return (*basic_callback_ptr) (x1, x2, str, basic_callback_cookie);
 	}
 	if (basic_fortran_callback_ptr != NULL)
 	{
