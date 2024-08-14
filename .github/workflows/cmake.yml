@@ -114,6 +114,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
+        enable_module: [OFF, ON]
 
     runs-on: ${{ matrix.os }}
     env:
@@ -138,15 +139,15 @@ jobs:
 
     - name: CMake configure
       if: runner.os == 'Linux'
-      run: CC=clang CXX=clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=OFF -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+      run: CC=clang CXX=clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=OFF -DIPHREEQC_ENABLE_MODULE=${{ matrix.enable_module }} -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
 
     - name: CMake configure
       if: runner.os == 'macOS'
-      run: CC=$(brew --prefix llvm@15)/bin/clang CXX=$(brew --prefix llvm@15)/bin/clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=OFF -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+      run: CC=$(brew --prefix llvm@15)/bin/clang CXX=$(brew --prefix llvm@15)/bin/clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS:BOOL=OFF -DIPHREEQC_ENABLE_MODULE=${{ matrix.enable_module }} -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
 
     - name: CMake configure
       if: runner.os == 'Windows'
-      run: cmake -B ${{ env.BUILD_DIR }} -A x64 -T "ClangCL" -DBUILD_SHARED_LIBS:BOOL=OFF -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+      run: cmake -B ${{ env.BUILD_DIR }} -A x64 -T "ClangCL" -DBUILD_SHARED_LIBS:BOOL=OFF -DIPHREEQC_ENABLE_MODULE=${{ matrix.enable_module }} -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
 
     - name: CMake build
       run: cmake --build ${{ env.BUILD_DIR }}
@@ -157,7 +158,7 @@ jobs:
     - name: Upload results
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.os }}-${{ github.job }}-results
+        name: ${{ matrix.os }}-${{ github.job }}-ENABLE_MODULE=${{ matrix.enable_module }}-results
         path: ${{ github.workspace }}/${{ env.BUILD_DIR }}/Testing/
 
   test-shared-clang:
