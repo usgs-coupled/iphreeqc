@@ -93,7 +93,7 @@ public:
 	int basic_run(char* commands, void* lnbase, void* vbase, void* lpbase);
 	void basic_free(void);
 #ifdef IPHREEQC_NO_FORTRAN_MODULE
-	double basic_callback(double x1, double x2, char* str);
+	double basic_callback(double x1, double x2, const char* str);
 #else
 	double basic_callback(double x1, double x2, const char* str);
 #endif

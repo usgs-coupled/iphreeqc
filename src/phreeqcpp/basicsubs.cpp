@@ -4242,7 +4242,7 @@ basic_callback(double x1, double x2, const char * str)
 
 #ifdef IPHREEQC_NO_FORTRAN_MODULE
 double Phreeqc::
-basic_callback(double x1, double x2, char * str)
+basic_callback(double x1, double x2, const char * str)
 #else
 double Phreeqc::
 basic_callback(double x1, double x2, const char * str)
