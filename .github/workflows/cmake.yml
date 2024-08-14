@@ -152,7 +152,7 @@ jobs:
       run: cmake --build ${{ env.BUILD_DIR }}
 
     - name: CTest
-      run: cmake --test-dir ${{ env.BUILD_DIR }}
+      run: ctest --test-dir ${{ env.BUILD_DIR }}
   
     - name: Upload results
       uses: actions/upload-artifact@v4
@@ -203,7 +203,7 @@ jobs:
       run: cmake --build ${{ env.BUILD_DIR }}
 
     - name: CTest
-      run: cmake --test-dir ${{ env.BUILD_DIR }}
+      run: ctest --test-dir ${{ env.BUILD_DIR }}
   
     - name: Upload results
       uses: actions/upload-artifact@v4
