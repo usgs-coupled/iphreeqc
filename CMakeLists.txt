@@ -461,8 +461,7 @@ if (STANDALONE_BUILD)
       # Always build googletest static
       set(SAVE_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
       set(BUILD_SHARED_LIBS OFF)
-      FetchContent_Populate(googletest)
-      add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+      FetchContent_MakeAvailable(googletest)
       set(BUILD_SHARED_LIBS ${SAVE_BUILD_SHARED_LIBS})
     endif()
 
