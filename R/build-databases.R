@@ -16,6 +16,7 @@ core10.dat                            <- scan("core10.ascii",                   
 ex15.dat                              <- scan("ex15.ascii",                              what="", sep="\n")
 frezchem.dat                          <- scan("frezchem.ascii",                          what="", sep="\n")
 iso.dat                               <- scan("iso.ascii",                               what="", sep="\n")
+Kinec_v3.dat                          <- scan("Kinec_v3.ascii",                          what="", sep="\n")
 Kinec.v2.dat                          <- scan("Kinec.v2.ascii",                          what="", sep="\n")
 llnl.dat                              <- scan("llnl.ascii",                              what="", sep="\n")
 minteq.dat                            <- scan("minteq.ascii",                            what="", sep="\n")

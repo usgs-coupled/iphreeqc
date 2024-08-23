@@ -1471,6 +1471,23 @@ NULL
 
 
 
+##' @name Kinec_v3.dat
+##' @title Thermodynamic and rates database from Oelkers and coworkers.
+##' @description Kinec_v3.dat contains the parameters for calculating mineral
+##' dissolution rates for primary and secondary silicate minerals using the equations
+##' and parameters reported by Hermanska et al. (2022, 2023), and dissolution rates
+##' for other non)-silicate mineral systems using the equations and parameters
+##' reported by Oelkers and Addassi (2024, in preparation).
+##' @docType data
+##' @family Databases
+##' @references Hermanska et al. (2022, 2003) and Oelkers and Addassi (2024, in preparation).
+##' @source \url{http://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc}
+##' @usage Kinec_v3.dat  # phrLoadDatabaseString(Kinec_v3.dat)
+##' @keywords dataset
+NULL
+
+
+
 ##' @name Kinec.v2.dat
 ##' @title Thermodynamic and rates database from Oelkers and coworkers.
 ##' @description Kinec.v2.dat contains the parameters for calculating mineral
