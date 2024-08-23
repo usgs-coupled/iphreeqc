@@ -32,6 +32,7 @@ DBS = \
 	ex15.ascii \
 	frezchem.ascii \
 	iso.ascii \
+	Kinec_v3.ascii \
 	Kinec.v2.ascii \
 	llnl.ascii \
 	minteq.ascii \
