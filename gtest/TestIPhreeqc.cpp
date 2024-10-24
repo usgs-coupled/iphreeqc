@@ -1929,7 +1929,7 @@ TEST(TestIPhreeqc, TestGetDumpStringLineCount)
 	obj.SetDumpStringOn(true);
 	ASSERT_EQ(true, obj.GetDumpStringOn());
 	ASSERT_EQ(0, obj.RunAccumulated());
-	ASSERT_EQ(34, obj.GetDumpStringLineCount());
+	ASSERT_EQ(35, obj.GetDumpStringLineCount());
 }
 
 TEST(TestIPhreeqc, TestGetDumpStringLine)
@@ -1955,7 +1955,7 @@ TEST(TestIPhreeqc, TestGetDumpStringLine)
 	obj.SetDumpStringOn(true);
 	ASSERT_EQ(true, obj.GetDumpStringOn());
 	ASSERT_EQ(0, obj.RunAccumulated());
-	ASSERT_EQ(34, obj.GetDumpStringLineCount());
+	ASSERT_EQ(35, obj.GetDumpStringLineCount());
 
 	int line = 0;
 
@@ -1968,6 +1968,7 @@ TEST(TestIPhreeqc, TestGetDumpStringLine)
 	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-cb"));
 	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-density"));
 	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-viscosity"));
+	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-viscos_0"));
 	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr("-totals"));
 	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" C(4) "));
 	EXPECT_THAT(obj.GetDumpStringLine(line++), HasSubstr(" Ca "));
@@ -2125,6 +2126,7 @@ TEST(TestIPhreeqc, TestSetDumpFileName)
 	{
 		++i;
 	}
+	ifs.close();
 
 	int line = 0;
 	EXPECT_THAT(lines[line++], HasSubstr("SOLUTION_RAW"));
@@ -2136,6 +2138,7 @@ TEST(TestIPhreeqc, TestSetDumpFileName)
 	EXPECT_THAT(lines[line++], HasSubstr("-cb"));
 	EXPECT_THAT(lines[line++], HasSubstr("-density"));
 	EXPECT_THAT(lines[line++], HasSubstr("-viscosity"));
+	EXPECT_THAT(lines[line++], HasSubstr("-viscos_0"));
 	EXPECT_THAT(lines[line++], HasSubstr("-totals"));
 	EXPECT_THAT(lines[line++], HasSubstr(" C(4) "));
 	EXPECT_THAT(lines[line++], HasSubstr(" Ca "));

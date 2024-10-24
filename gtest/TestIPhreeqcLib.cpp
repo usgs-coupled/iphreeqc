@@ -1819,7 +1819,7 @@ TEST(TestIPhreeqcLib, TestGetDumpStringLineCount)
 	ASSERT_EQ(IPQ_OK, ::SetDumpFileOn(n, 0));
 	ASSERT_EQ(IPQ_OK, ::SetDumpStringOn(n, 1));
 	ASSERT_EQ(0, ::RunAccumulated(n));
-	ASSERT_EQ(34, ::GetDumpStringLineCount(n));
+	ASSERT_EQ(35, ::GetDumpStringLineCount(n));
 
 	if (n >= 0)
 	{
@@ -1847,8 +1847,8 @@ TEST(TestIPhreeqcLib, TestGetDumpStringLine)
 	ASSERT_EQ(IPQ_OK, ::SetSelectedOutputFileOn(n, 0));
 	ASSERT_EQ(IPQ_OK, ::SetDumpFileOn(n, 0));
 	ASSERT_EQ(IPQ_OK, ::SetDumpStringOn(n, 1));
-	ASSERT_EQ(0, ::RunAccumulated(n));
-	ASSERT_EQ(34, ::GetDumpStringLineCount(n));
+	ASSERT_EQ(0,      ::RunAccumulated(n));
+	ASSERT_EQ(35,     ::GetDumpStringLineCount(n));
 
 	int line = 0;
 
@@ -1861,6 +1861,7 @@ TEST(TestIPhreeqcLib, TestGetDumpStringLine)
 	EXPECT_THAT(::GetDumpStringLine(n, line++), HasSubstr("-cb"));
 	EXPECT_THAT(::GetDumpStringLine(n, line++), HasSubstr("-density"));
 	EXPECT_THAT(::GetDumpStringLine(n, line++), HasSubstr("-viscosity"));
+	EXPECT_THAT(::GetDumpStringLine(n, line++), HasSubstr("-viscos_0"));
 	EXPECT_THAT(::GetDumpStringLine(n, line++), HasSubstr("-totals"));
 	EXPECT_THAT(::GetDumpStringLine(n, line++), HasSubstr(" C(4) "));
 	EXPECT_THAT(::GetDumpStringLine(n, line++), HasSubstr(" Ca "));
@@ -2343,6 +2344,7 @@ TEST(TestIPhreeqcLib, TestSetDumpFileName)
 	{
 		++i;
 	}
+	ifs.close();
 
 	int line = 0;
 	EXPECT_THAT(lines[line++], HasSubstr("SOLUTION_RAW"));
@@ -2354,6 +2356,7 @@ TEST(TestIPhreeqcLib, TestSetDumpFileName)
 	EXPECT_THAT(lines[line++], HasSubstr("-cb"));
 	EXPECT_THAT(lines[line++], HasSubstr("-density"));
 	EXPECT_THAT(lines[line++], HasSubstr("-viscosity"));
+	EXPECT_THAT(lines[line++], HasSubstr("-viscos_0"));
 	EXPECT_THAT(lines[line++], HasSubstr("-totals"));
 	EXPECT_THAT(lines[line++], HasSubstr(" C(4) "));
 	EXPECT_THAT(lines[line++], HasSubstr(" Ca "));
