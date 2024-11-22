@@ -4,6 +4,10 @@ Version: @VERSION@
 License: GPL-3
 NeedsCompilation: yes
 Depends: R (>= 3.5.0)
+Authors@R: c(person(given = "S.R.",
+                    family = "Charlton",
+                    role = c("aut", "cre"),
+                    email = "charlton@usgs.gov"))
 Author: S.R. Charlton [aut, cre], D.L. Parkhurst [aut], and C.A.J. Appelo [aut], with contributions
     from D. Gillespie [ctb] for Chipmunk BASIC and S.D. Cohen [ctb], A.C. Hindmarsh [ctb],
     R. Serban [ctb], D. Shumaker [ctb], and A.G. Taylor [ctb] for CVODE/SUNDIALS
