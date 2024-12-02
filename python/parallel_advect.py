@@ -214,7 +214,7 @@ class ReactionModel(object):
 class PhreeqcCalculator(object):
     """All PHREEQC calculations happen here.
 
-    This is the only place where we interact wit IPhreeqc.
+    This is the only place where we interact with IPhreeqc.
     Each instance of this class might run in a different
     process using `multiprocessing`.
     """
