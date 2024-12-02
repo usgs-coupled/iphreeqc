@@ -1606,7 +1606,7 @@ so <- phrGetSelectedOutput()
 # plot the results
 attach(so$n1)
 title  <- "Gypsum-Anhydrite Stability"
-xlabel <- "Temperature, in degrees celcius"
+xlabel <- "Temperature, in degrees celsius"
 ylabel <- "Saturation index"
 plot(temp.C., si_gypsum, main = title, xlab = xlabel, ylab = ylabel,
      col = "darkred", xlim = c(25, 75), ylim = c(-0.4, 0.0))

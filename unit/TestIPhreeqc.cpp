@@ -3592,7 +3592,7 @@ void TestIPhreeqc::TestCErrorReporter(void)
 void TestIPhreeqc::TestDelete(void)
 {
 	const char input[] =
-		"SOLUTION 1 # definition of intial condition 1\n"
+		"SOLUTION 1 # definition of initial condition 1\n"
 		"COPY cell 1 7405 # copy cell 1 to placeholder cell with index larger than the number of cells in the model domain\n"
 		"END\n"
 		"DELETE # delete initial condition 1 to allow for a redefinition of all reactions\n"
