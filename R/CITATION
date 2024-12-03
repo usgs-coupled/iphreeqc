@@ -32,7 +32,7 @@ citEntry(entry="Article",
 	 journal      = "Computers & Geosciences",
          volume       = "37",
          pages        = "1653-1663",
-         url          = "http://dx.doi.org/10.1016/j.cageo.2011.02.005",
+         url          = "https://dx.doi.org/10.1016/j.cageo.2011.02.005",
          
 	 textVersion  =
          paste("Charlton, S.R., and Parkhurst, D.L, 2011, Modules based ",
