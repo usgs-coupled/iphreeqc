@@ -4,13 +4,35 @@ Version: @VERSION@
 License: GPL-3
 NeedsCompilation: yes
 Depends: R (>= 3.5.0)
-Authors@R: c(person(given = "S.R.",
-                    family = "Charlton",
-                    role = c("aut", "cre"),
-                    email = "charlton@usgs.gov"))
-Author: S.R. Charlton [aut, cre], D.L. Parkhurst [aut], and C.A.J. Appelo [aut], with contributions
-    from D. Gillespie [ctb] for Chipmunk BASIC and S.D. Cohen [ctb], A.C. Hindmarsh [ctb],
-    R. Serban [ctb], D. Shumaker [ctb], and A.G. Taylor [ctb] for CVODE/SUNDIALS
+Authors@R:
+    c(person(given = "S.R.",
+             family = "Charlton",
+             role = c("aut", "cre"),
+             email = "charlton@usgs.gov"),
+      person(given = "D.L.",
+             family = "Parkhurst",
+             role = "aut"),
+      person(given = "C.A.J.",
+             family = "Appelo",
+             role = "aut"),
+      person(given = c("with", "contributions", "from", "D.", "Gillespie", "for", "Chipmunk"),
+             family = "BASIC",
+             role = "aut"),
+      person(given = "S.D.",
+             family = "Cohen",
+             role = "aut"),
+      person(given = "A.C.",
+             family = "Hindmarsh",
+             role = "aut"),
+      person(given = "R.",
+             family = "Serban",
+             role = "aut"),
+      person(given = "D.",
+             family = "Shumaker",
+             role = "aut"),
+      person(given = c("A.G.", "Taylor", "for"),
+             family = "CVODE/SUNDIALS",
+             role = "aut"))
 URL: https://www.usgs.gov/software/phreeqc-version-3
 Description: A geochemical modeling program developed by the US Geological
     Survey that is designed to perform a wide variety of aqueous geochemical
