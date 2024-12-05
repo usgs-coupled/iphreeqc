@@ -42,7 +42,7 @@ ReleaseDll_Preprocessor_Definitions=-D NDEBUG -D GCC_BUILD -D _LIB
 Release_Preprocessor_Definitions=-D NDEBUG -D GCC_BUILD -D _LIB 
 Release_Preprocessor_Definitions=-D NDEBUG -D GCC_BUILD -D _LIB 
 
-# Implictly linked object files...
+# Implicitly linked object files...
 DebugDll_Implicitly_Linked_Objects=
 DebugDll_Implicitly_Linked_Objects=
 Debug_Implicitly_Linked_Objects=

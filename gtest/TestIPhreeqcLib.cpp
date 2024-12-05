@@ -190,7 +190,7 @@ TEST(TestIPhreeqcLib, TestSetErrorOn)
 	int n = ::CreateIPhreeqc();
 	ASSERT_TRUE(n >= 0);
 
-	ASSERT_EQ(1, ::GetErrorOn(n));			// intial setting is true
+	ASSERT_EQ(1, ::GetErrorOn(n));			// initial setting is true
 	ASSERT_EQ(IPQ_OK, ::SetErrorOn(n, 0));
 	ASSERT_EQ(0, ::GetErrorOn(n));
 
@@ -4005,7 +4005,7 @@ TEST(TestIPhreeqcLib, TestIEEE)
 TEST(TestIPhreeqcLib, TestDelete)
 {
 	const char input[] =
-		"SOLUTION 1 # definition of intial condition 1\n"
+		"SOLUTION 1 # definition of initial condition 1\n"
 		"COPY cell 1 7405 # copy cell 1 to placeholder cell with index larger than the number of cells in the model domain\n"
 		"END\n"
 		"DELETE # delete initial condition 1 to allow for a redefinition of all reactions\n"
