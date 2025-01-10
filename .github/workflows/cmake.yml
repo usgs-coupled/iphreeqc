@@ -297,8 +297,10 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
         with:
-          name: cran
-          path: ${{ github.workspace }}/R/phreeqc/check/phreeqc_*.tar.gz
+          name: cran-${{ github.run_number }}
+          path: |
+            R/phreeqc/check/phreeqc_*.tar.gz
+            R/phreeqc/check/phreeqc.Rcheck/00check.log
 
 
   # r-build:
