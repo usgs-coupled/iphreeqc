@@ -42,6 +42,7 @@ DBS = \
 	phreeqc.ascii \
 	pitzer.ascii \
 	sit.ascii \
+	stimela.ascii \
 	Tipping_Hurley.ascii \
 	wateq4f.ascii
 
