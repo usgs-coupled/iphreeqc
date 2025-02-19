@@ -129,6 +129,12 @@ configure_file(
   )
 
 configure_file(
+  ../database/stimela.dat
+  stimela.dat
+  COPYONLY
+  )
+
+configure_file(
   ../database/ColdChem.dat
   ColdChem.dat
   COPYONLY

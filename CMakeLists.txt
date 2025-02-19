@@ -259,6 +259,9 @@ if (NOT IPHREEQC_ENABLE_MODULE)
   )
 endif()
 
+# c++14
+target_compile_features(IPhreeqc PUBLIC cxx_std_14)
+
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
   target_compile_options(IPhreeqc PRIVATE /wd4251 /wd4275 /wd4793)
 endif()
@@ -421,7 +424,7 @@ if (STANDALONE_BUILD)
 
     FetchContent_Declare(
       googletest
-      URL https://github.com/google/googletest/archive/release-1.12.1.tar.gz
+      URL https://github.com/google/googletest/releases/download/v1.16.0/googletest-1.16.0.tar.gz
       )
 
     mark_as_advanced(

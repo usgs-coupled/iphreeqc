@@ -25,6 +25,7 @@ phreeqc_rates.dat                     <- scan("phreeqc_rates.ascii",            
 PHREEQC_ThermoddemV1.10_15Dec2020.dat <- scan("PHREEQC_ThermoddemV1.10_15Dec2020.ascii", what="", sep="\n")
 pitzer.dat                            <- scan("pitzer.ascii",                            what="", sep="\n")
 sit.dat                               <- scan("sit.ascii",                               what="", sep="\n")
+stimela.dat                           <- scan("stimela.ascii",                           what="", sep="\n")
 Tipping_Hurley.dat                    <- scan("Tipping_Hurley.ascii",                    what="", sep="\n")
 phreeqc.dat                           <- scan("phreeqc.ascii",                           what="", sep="\n")
 wateq4f.dat                           <- scan("wateq4f.ascii",                           what="", sep="\n")

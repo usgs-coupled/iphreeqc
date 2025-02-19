@@ -26,7 +26,7 @@ TEST(TestIPhreeqc, TestLoadDatabase)
 	std::string FILES[] = { "phreeqc.dat", "pitzer.dat", "wateq4f.dat",
 		"Amm.dat", "frezchem.dat", "iso.dat",
 		"llnl.dat", "minteq.dat", "minteq.v4.dat",
-		"sit.dat","ColdChem.dat","core10.dat",
+		"sit.dat", "stimela.dat" ,"ColdChem.dat","core10.dat", 
 		"Tipping_Hurley.dat"
 	};
 

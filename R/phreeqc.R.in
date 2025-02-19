@@ -1631,6 +1631,19 @@ NULL
 
 
 
+##' @name stimela.dat
+##' @title The stimela.dat database.
+##' @description stimela.dat is a database for use in drinking-water and waste-water
+##' treatment from Peter de Moel and Omnisys. The database has been reformatted
+##' for use by \code{\link{phrLoadDatabaseString}}.
+##' @docType data
+##' @family Databases
+##' @usage stimela.dat  # phrLoadDatabaseString(stimela.dat)
+##' @keywords dataset
+NULL
+
+
+
 ##' @name Tipping_Hurley.dat
 ##' @title The Tipping_Hurley.dat database
 ##' @description Tipping_Hurley.dat is a database for organic-ligand
