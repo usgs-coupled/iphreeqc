@@ -26,7 +26,7 @@ jobs:
           echo "GITHUB_WORKFLOW=${GITHUB_WORKFLOW}"
           echo "GITHUB_ACTOR=${GITHUB_ACTOR}"
           echo "https://${CI_SERVER_HOST}:${GROUP}/iphreeqc.git"
-          printenv
+          printenv | sort
           exit -99
       - name: Checkout repository
         uses: actions/checkout@v4
