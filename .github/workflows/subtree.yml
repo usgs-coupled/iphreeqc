@@ -19,6 +19,7 @@ jobs:
     steps:
       - name: Debug
         run: |
+          echo "vars.CI_SERVER_HOST={{ vars.CI_SERVER_HOST }}"
           echo "CI_SERVER_HOST=${CI_SERVER_HOST}"
           echo "GROUP=${GROUP}"
           echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
