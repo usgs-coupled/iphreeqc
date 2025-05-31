@@ -1,0 +1,91 @@
+name: Merge subtrees
+
+on:
+  push:
+    # branches:
+    #   - master
+    # paths-ignore:
+    #   - .github/workflows/subtree.yml
+
+  workflow_dispatch:
+
+jobs:
+  sync-subtrees:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        run: |
+          echo "CI_SERVER_HOST=${CI_SERVER_HOST}"
+          echo "GROUP=${GROUP}"
+          echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
+          echo "GITHUB_REF=${GITHUB_REF}"
+          echo "GITHUB_SHA=${GITHUB_SHA}"
+          echo "GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME}"
+          echo "GITHUB_WORKFLOW=${GITHUB_WORKFLOW}"
+          echo "GITHUB_ACTOR=${GITHUB_ACTOR}"
+          exit -99
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for all branches
+          ref: master  # Checkout the master-subtree branch
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync subtrees
+        run: |
+          #!/bin/bash -ex
+          #
+          # iphreeqc/              git@${CI_SERVER_HOST}:${GROUP}/iphreeqc.git
+          # ├─database/            ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git*                                  database*
+          # ├─examples/            │ └─examples
+          # │ ├─c/                 │   ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git*       examples/c*
+          # │ ├─com/               │   ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git*     examples/com*
+          # │ └─fortran/           │   └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git* examples/fortran*
+          # ├─phreeqc3-doc/        ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git*                                       phreeqc3-doc*
+          # ├─phreeqc3-examples/   ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git*                                  phreeqc3-examples*
+          # └─src/                 └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git%                                       src%
+          #   └─phreeqcpp/           └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-src.git                                      src/phreeqcpp
+          #     └─common/              └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-src-common.git                             src/phreeqcpp/common
+
+          git_subtree() {
+            git subtree "${1}" --prefix="${2}" "${4}" master 2>&1 | grep -v "^[[:digit:]].*/[[:digit:]].*"
+          }
+
+          declare -A urls=( \
+            ["iphreeqc-src"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git" \
+            ["phreeqc-commanuscript-cgfinal-examples-c"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git" \
+            ["phreeqc-commanuscript-cgfinal-examples-com"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git" \
+            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git" \
+            ["phreeqc3-database"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git" \
+            ["phreeqc3-doc"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git" \
+            ["phreeqc3-examples"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git" \
+          )
+
+          declare -A prefixes=( \
+            ["iphreeqc-src"]="src" \
+            ["phreeqc-commanuscript-cgfinal-examples-c"]="examples/c" \
+            ["phreeqc-commanuscript-cgfinal-examples-com"]="examples/com" \
+            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="examples/fortran" \
+            ["phreeqc3-database"]="database" \
+            ["phreeqc3-doc"]="phreeqc3-doc" \
+            ["phreeqc3-examples"]="phreeqc3-examples" \
+          )
+
+          export GIT_EDITOR=true
+
+          for remote in "${!urls[@]}"; do
+            git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
+          done
+
+          for remote in "${!urls[@]}"; do
+            git_subtree "push" "${prefixes[$remote]}" "$remote" "${urls[$remote]}"
+          done
+
+          git push origin master
+          git status
+
+
