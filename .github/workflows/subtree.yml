@@ -9,6 +9,8 @@ on:
 
   workflow_dispatch:
 
+# Variables set in the organization secrets
+
 jobs:
   sync-subtrees:
     runs-on: ubuntu-latest
@@ -23,6 +25,8 @@ jobs:
           echo "GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME}"
           echo "GITHUB_WORKFLOW=${GITHUB_WORKFLOW}"
           echo "GITHUB_ACTOR=${GITHUB_ACTOR}"
+          echo "https://${CI_SERVER_HOST}:${GROUP}/iphreeqc.git"
+          printenv
           exit -99
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,30 +43,34 @@ jobs:
         run: |
           #!/bin/bash -ex
           #
-          # iphreeqc/              git@${CI_SERVER_HOST}:${GROUP}/iphreeqc.git
-          # ├─database/            ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git*                                  database*
+          # Note: need to change the protocol to https
+          # ssh -- git@github.com:usgs-coupled/iphreeqc.git
+          # https -- https://github.com/usgs-coupled/iphreeqc.git
+          #
+          # iphreeqc/              https://${CI_SERVER_HOST}:${GROUP}/iphreeqc.git
+          # ├─database/            ├─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git*                                  database*
           # ├─examples/            │ └─examples
-          # │ ├─c/                 │   ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git*       examples/c*
-          # │ ├─com/               │   ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git*     examples/com*
-          # │ └─fortran/           │   └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git* examples/fortran*
-          # ├─phreeqc3-doc/        ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git*                                       phreeqc3-doc*
-          # ├─phreeqc3-examples/   ├─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git*                                  phreeqc3-examples*
-          # └─src/                 └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git%                                       src%
-          #   └─phreeqcpp/           └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-src.git                                      src/phreeqcpp
-          #     └─common/              └─git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-src-common.git                             src/phreeqcpp/common
+          # │ ├─c/                 │   ├─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git*       examples/c*
+          # │ ├─com/               │   ├─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git*     examples/com*
+          # │ └─fortran/           │   └─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git* examples/fortran*
+          # ├─phreeqc3-doc/        ├─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git*                                       phreeqc3-doc*
+          # ├─phreeqc3-examples/   ├─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git*                                  phreeqc3-examples*
+          # └─src/                 └─https://${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git%                                       src%
+          #   └─phreeqcpp/           └─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-src.git                                      src/phreeqcpp
+          #     └─common/              └─https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-src-common.git                             src/phreeqcpp/common
 
           git_subtree() {
             git subtree "${1}" --prefix="${2}" "${4}" master 2>&1 | grep -v "^[[:digit:]].*/[[:digit:]].*"
           }
 
           declare -A urls=( \
-            ["iphreeqc-src"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git" \
-            ["phreeqc-commanuscript-cgfinal-examples-c"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git" \
-            ["phreeqc-commanuscript-cgfinal-examples-com"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git" \
-            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git" \
-            ["phreeqc3-database"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git" \
-            ["phreeqc3-doc"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git" \
-            ["phreeqc3-examples"]="git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git" \
+            ["iphreeqc-src"]="https://${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git" \
+            ["phreeqc-commanuscript-cgfinal-examples-c"]="https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git" \
+            ["phreeqc-commanuscript-cgfinal-examples-com"]="https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git" \
+            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git" \
+            ["phreeqc3-database"]="https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git" \
+            ["phreeqc3-doc"]="https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git" \
+            ["phreeqc3-examples"]="https://${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git" \
           )
 
           declare -A prefixes=( \
