@@ -9,7 +9,9 @@ on:
 
   workflow_dispatch:
 
-# Variables set in the organization secrets
+# Some variables are set in the organization secrets
+env:
+  GROUP: ${{ github.repository_owner }}
 
 jobs:
   sync-subtrees:
