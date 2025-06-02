@@ -105,6 +105,7 @@ jobs:
           echo "----------------------------------------"
 
           for remote in "${!urls[@]}"; do
+            echo "Pushing changes to ${remote} at ${urls[$remote]} with prefix ${prefixes[$remote]}"
             git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master
           done
 
