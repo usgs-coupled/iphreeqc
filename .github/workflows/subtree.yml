@@ -11,12 +11,16 @@ on:
 
 # Some variables are set in the organization secrets
 env:
+  CI_SERVER_HOST: ${{ secrets.CI_SERVER_HOST }}
   GROUP: ${{ github.repository_owner }}
 
 jobs:
   sync-subtrees:
     runs-on: ubuntu-latest
     steps:
+      - name: Print secret (masked)
+        run: echo "The secret is ${{ secrets.CI_SERVER_HOST }}"
+
       - name: Debug
         run: |
           echo "vars.CI_SERVER_HOST={{ vars.CI_SERVER_HOST }}"
