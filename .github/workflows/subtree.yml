@@ -13,13 +13,17 @@ on:
 env:
   CI_SERVER_HOST: github.com
   GROUP: ${{ github.repository_owner }}
-  AUTH_TOKEN: x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}
+  AUTH_TOKEN: "x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}"
 jobs:
   sync-subtrees:
     runs-on: ubuntu-latest
     steps:
       - name: Debug
         run: |
+          echo "CI_SERVER_HOST: ${CI_SERVER_HOST}"
+          echo "GROUP: ${GROUP}"
+          echo "AUTH_TOKEN: ${AUTH_TOKEN}"
+          echo "https://${AUTH_TOKEN}@${CI_SERVER_HOST}:${GROUP}/iphreeqc.git"
           echo https://${AUTH_TOKEN}@${CI_SERVER_HOST}:${GROUP}/iphreeqc.git
 
 
