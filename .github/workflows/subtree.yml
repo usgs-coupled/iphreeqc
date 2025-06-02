@@ -18,6 +18,10 @@ jobs:
   sync-subtrees:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo https://${AUTH_TOKEN}@${CI_SERVER_HOST}:${GROUP}/iphreeqc.git
+
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -77,14 +81,14 @@ jobs:
           export GIT_EDITOR=true
 
           for remote in "${!urls[@]}"; do
-            git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
+            echo git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
           done
 
           for remote in "${!urls[@]}"; do
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master
+            echo git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master
           done
 
-          git push origin master
-          git status
+          echo git push origin master
+          echo git status
 
 
