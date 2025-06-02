@@ -100,8 +100,12 @@ jobs:
             git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
           done
 
+          echo "----------------------------------------"
+          echo "Subtrees pulled successfully. Now pushing changes back to the subtrees."
+          echo "----------------------------------------"
+
           for remote in "${!urls[@]}"; do
-            echo git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master
+            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master
           done
 
           echo git push origin master
