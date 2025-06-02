@@ -25,7 +25,8 @@ jobs:
           echo "AUTH_TOKEN: ${AUTH_TOKEN}"
           echo "https://${AUTH_TOKEN}@${CI_SERVER_HOST}:${GROUP}/iphreeqc.git"
           echo https://${AUTH_TOKEN}@${CI_SERVER_HOST}:${GROUP}/iphreeqc.git
-
+          echo "https://x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}@github.com/iphreeqc.git"
+          echo https://x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}@github.com/iphreeqc.git
 
       - name: Checkout repository
         uses: actions/checkout@v4
