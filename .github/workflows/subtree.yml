@@ -104,10 +104,12 @@ jobs:
           echo "Subtrees pulled successfully. Now pushing changes back to the subtrees."
           echo "----------------------------------------"
 
-          for remote in "${!urls[@]}"; do
-            echo "Pushing changes to ${remote} at ${urls[$remote]} with prefix ${prefixes[$remote]}"
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test
-          done
+          # for remote in "${!urls[@]}"; do
+          #   echo "Pushing changes to ${remote} at ${urls[$remote]} with prefix ${prefixes[$remote]}"
+          #   git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test
+          # done
+
+          git subtree push --prefix="src" "https://github.com/usgs-coupled-subtrees/iphreeqc-src.git" master
 
           echo git push origin master
           echo git status
