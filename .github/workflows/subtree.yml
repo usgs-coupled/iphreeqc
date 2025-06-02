@@ -34,6 +34,11 @@ jobs:
           fetch-depth: 0  # Fetch all history for all branches
           ref: master     # Checkout the master branch
 
+      - name: Debug 2
+        run: |
+          git status
+          git remote -v
+
       - name: Setup git
         run: |
           git config --global user.name "github-actions[bot]"
