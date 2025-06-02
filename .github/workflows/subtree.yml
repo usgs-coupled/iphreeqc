@@ -36,6 +36,12 @@ jobs:
 
       - name: Debug 2
         run: |
+          echo "Current directory: $(pwd)"
+          echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Current commit: $(git rev-parse HEAD)"
+          echo "Current remote: $(git remote -v)"
+          echo "Current status:"
+          echo "----------------------------------------"
           git status
           git remote -v
 
