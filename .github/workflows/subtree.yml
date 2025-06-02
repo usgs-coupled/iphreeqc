@@ -97,7 +97,7 @@ jobs:
           export GIT_EDITOR=true
 
           for remote in "${!urls[@]}"; do
-            echo git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
+            git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
           done
 
           for remote in "${!urls[@]}"; do
