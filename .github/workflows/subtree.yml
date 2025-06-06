@@ -26,10 +26,11 @@ jobs:
           uname -a
           echo "CI_SERVER_HOST: ${CI_SERVER_HOST}"
           echo "GROUP: ${GROUP}"
-          printenv
+          printenv | sort -u
 
       - name: Debug 2
         run: |
+          git clone ${{ github.repository }}
           git --version
           echo "Current directory: $(pwd)"
           echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
