@@ -48,6 +48,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
       - name: Sync subtrees
+        shell: bash
         run: |
           #!/bin/bash -ex
           #
@@ -66,6 +67,8 @@ jobs:
           # git_subtree() {
           #   # git subtree "${1}" --prefix="${2}" "${4}" master 2>&1 | grep -v "^[[:digit:]].*/[[:digit:]].*"
           # }
+          
+          set -ex
 
           declare -A urls=( \
             ["iphreeqc-src"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git" \
