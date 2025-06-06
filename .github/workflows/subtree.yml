@@ -69,6 +69,7 @@ jobs:
           # }
           
           set -ex
+          cd ${{ github.event.repository.name }}
 
           declare -A urls=( \
             ["iphreeqc-src"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git" \
