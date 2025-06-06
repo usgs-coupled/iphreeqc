@@ -30,7 +30,7 @@ jobs:
 
       - name: Debug 2
         run: |
-          git clone ${{ github.server_url }} / ${{ github.repository }}
+          git clone ${{ github.server_url }}/${{ github.repository }}
           git --version
           echo "Current directory: $(pwd)"
           echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
