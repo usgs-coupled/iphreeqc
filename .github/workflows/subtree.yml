@@ -23,12 +23,10 @@ jobs:
       - name: Debug
         run: |
           git --version
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Fetch all history for all branches
-          ref: master     # Checkout the master branch
+          uname -a
+          echo "CI_SERVER_HOST: ${CI_SERVER_HOST}"
+          echo "GROUP: ${GROUP}"
+          printenv
 
       - name: Debug 2
         run: |
