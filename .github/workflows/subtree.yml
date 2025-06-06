@@ -41,6 +41,7 @@ jobs:
           echo "----------------------------------------"
           git status
           git remote -v
+          echo ${{ secrets.PHREEQC_BOT_TOKEN }} | sha256sum
 
       - name: Setup git
         run: |
