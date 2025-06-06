@@ -23,6 +23,31 @@ jobs:
       - name: Debug
         run: |
           git --version
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for all branches
+          ref: master     # Checkout the master branch
+
+      - name: Debug 2
+        run: |
+          git --version
+          echo "Current directory: $(pwd)"
+          echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Current commit: $(git rev-parse HEAD)"
+          echo "Current remote: $(git remote -v)"
+          echo "Current status:"
+          echo "----------------------------------------"
+          git status
+          git remote -v
+
+      - name: Setup git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"          
+
+
   sync-subtrees:
     runs-on: ubuntu-latest
     steps:
