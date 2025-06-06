@@ -15,11 +15,20 @@ env:
   GROUP: ${{ github.repository_owner }}
   AUTH_TOKEN: "x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}"
 jobs:
+  container-sync-subtrees:
+    runs-on: ubuntu-latest
+    container:
+      image: buildpack-deps:bionic-scm
+    steps:
+      - name: Debug
+        run: |
+          git --version
   sync-subtrees:
     runs-on: ubuntu-latest
     steps:
       - name: Debug
         run: |
+          git --version
           echo "CI_SERVER_HOST: ${CI_SERVER_HOST}"
           echo "GROUP: ${GROUP}"
           echo "AUTH_TOKEN: ${AUTH_TOKEN}"
@@ -27,6 +36,7 @@ jobs:
           echo https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/iphreeqc.git
           echo "https://x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}@github.com/iphreeqc.git"
           echo https://x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}@github.com/iphreeqc.git
+          exit 1
 
       - name: Checkout repository
         uses: actions/checkout@v4
