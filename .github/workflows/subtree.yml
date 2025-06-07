@@ -1,4 +1,4 @@
-name: Merge subtrees
+name: Sync subtrees
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ jobs:
     container:
       image: buildpack-deps:bionic-scm
     steps:
-      - name: Verify PHREEQC_BOT_TOKEN sha256sum
+      - name: Verify AUTH_TOKEN sha256sum
         run: |
           # This step verifies the AUTH_TOKEN by checking its SHA256 hash against a known value.
           # see ${{ github.server_url }}/organizations/${{ github.repository_owner }}/settings/secrets/actions
@@ -33,11 +33,8 @@ jobs:
 
       - name: Clone repository
         run: |
-          # git clone https://x-access-token:${GITHUB_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
           git clone https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
           cd ${{ github.event.repository.name }}
-          # git remote -v
-          # exit 1
 
       - name: Setup git
         run: |
