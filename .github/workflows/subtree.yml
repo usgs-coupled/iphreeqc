@@ -17,7 +17,7 @@ jobs:
       - name: Verify PHREEQC_BOT_TOKEN sha256sum
         run: |
           # This step verifies the AUTH_TOKEN by checking its SHA256 hash against a known value.
-          # see ${{ github.server_url }}/organizations/usgs-coupled/settings/secrets/actions
+          # see ${{ github.server_url }}/organizations/${{ github.repository_owner }}/settings/secrets/actions
           expected="b7ff89ebb635bba5eac9652f5eae8a5123346c1da6ef42852d4494f58b0bf0cb"
           actual=$(echo "$AUTH_TOKEN" | sha256sum | awk '{print $1}' | tr -d '\r')
           if [ "$actual" != "$expected" ]; then
@@ -96,8 +96,9 @@ jobs:
           echo "----------------------------------------"
 
           for remote in "${!urls[@]}"; do
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test | tee >(head -n 1) | tail -n 10
+            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test 2>&1 | tee /dev/tty | { head -n 10; tail -n 10; }
           done
 
-          git push origin master-push-test
+          # git push origin master
+          git push origin HEAD:master-push-test
           git status
