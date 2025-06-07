@@ -35,6 +35,9 @@ jobs:
         run: |
           git clone https://x-access-token:${GITHUB_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
           cd ${{ github.event.repository.name }}
+          # git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
+          git remote -v
+          exit 1
 
       - name: Setup git
         run: |
