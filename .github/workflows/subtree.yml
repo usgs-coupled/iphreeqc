@@ -1,47 +1,40 @@
 name: Merge subtrees
 
 on:
-  # push:
-    # branches:
-    #   - master
-    # paths-ignore:
-    #   - .github/workflows/subtree.yml
-
   workflow_dispatch:
 
 # Some variables are set in the organization secrets
 env:
   CI_SERVER_HOST: github.com
   GROUP: ${{ github.repository_owner }}
-  AUTH_TOKEN: "x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}"
+  AUTH_TOKEN: "x-access-token:${{ secrets.X_ACCESS_TOKEN }}"
 jobs:
-  container-sync-subtrees:
+  sync-subtrees:
     runs-on: ubuntu-latest
     container:
       image: buildpack-deps:bionic-scm
     steps:
-      - name: Debug
+      - name: Verify PHREEQC_BOT_TOKEN sha256sum
+        run: |
+          # This step verifies the AUTH_TOKEN by checking its SHA256 hash against a known value.
+          # see ${{ github.server_url }}/organizations/usgs-coupled/settings/secrets/actions
+          expected="b7ff89ebb635bba5eac9652f5eae8a5123346c1da6ef42852d4494f58b0bf0cb"
+          actual=$(echo "$AUTH_TOKEN" | sha256sum | awk '{print $1}' | tr -d '\r')
+          if [ "$actual" != "$expected" ]; then
+            echo "Bad AUTH_TOKEN" >&2
+            exit 1
+          fi
+
+      - name: Print Git and System Info
         run: |
           git --version
           uname -a
-          echo "CI_SERVER_HOST: ${CI_SERVER_HOST}"
-          echo "GROUP: ${GROUP}"
           printenv | sort -u
 
-      - name: Debug 2
+      - name: Clone repository
         run: |
           git clone ${{ github.server_url }}/${{ github.repository }}
           cd ${{ github.event.repository.name }}
-          git --version
-          echo "Current directory: $(pwd)"
-          echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
-          echo "Current commit: $(git rev-parse HEAD)"
-          echo "Current remote: $(git remote -v)"
-          echo "Current status:"
-          echo "----------------------------------------"
-          git status
-          git remote -v
-          echo ${{ secrets.PHREEQC_BOT_TOKEN }} | sha256sum
 
       - name: Setup git
         run: |
@@ -51,8 +44,8 @@ jobs:
       - name: Sync subtrees
         shell: bash
         run: |
-          #!/bin/bash -ex
-          #
+          # This script pulls subtrees from the specified remotes and pushes changes back to them.
+          # The subtrees are defined in the `urls` associative array, and the prefixes for each subtree are defined in the `prefixes` associative array.          
           # iphreeqc/              https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/iphreeqc.git
           # ├─database/            ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-database.git*                                  database*
           # ├─examples/            │ └─examples
@@ -65,10 +58,6 @@ jobs:
           #   └─phreeqcpp/           └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-src.git                                      src/phreeqcpp
           #     └─common/              └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-src-common.git                             src/phreeqcpp/common
 
-          # git_subtree() {
-          #   # git subtree "${1}" --prefix="${2}" "${4}" master 2>&1 | grep -v "^[[:digit:]].*/[[:digit:]].*"
-          # }
-          
           set -ex
           cd ${{ github.event.repository.name }}
 
@@ -94,6 +83,10 @@ jobs:
 
           export GIT_EDITOR=true
 
+          echo "----------------------------------------"
+          echo "Pulling subtrees from remotes:"
+          echo "----------------------------------------"
+
           for remote in "${!urls[@]}"; do
             git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
           done
@@ -103,111 +96,8 @@ jobs:
           echo "----------------------------------------"
 
           for remote in "${!urls[@]}"; do
-            echo "Pushing changes to ${remote} at ${urls[$remote]} with prefix ${prefixes[$remote]}"
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test
+            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test | tee >(head -n 1) | tail -n 10
           done
 
-          echo git push origin master
-          echo git status
-
-  sync-subtrees:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debug
-        run: |
-          git --version
-          echo "CI_SERVER_HOST: ${CI_SERVER_HOST}"
-          echo "GROUP: ${GROUP}"
-          echo "AUTH_TOKEN: ${AUTH_TOKEN}"
-          echo "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/iphreeqc.git"
-          echo https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/iphreeqc.git
-          echo "https://x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}@github.com/iphreeqc.git"
-          echo https://x-access-token:${{ secrets.PHREEQC_BOT_TOKEN }}@github.com/iphreeqc.git
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Fetch all history for all branches
-          ref: master     # Checkout the master branch
-
-      - name: Debug 2
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
-          echo "Current commit: $(git rev-parse HEAD)"
-          echo "Current remote: $(git remote -v)"
-          echo "Current status:"
-          echo "----------------------------------------"
+          git push origin master-push-test
           git status
-          git remote -v
-
-      - name: Setup git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Sync subtrees
-        run: |
-          #!/bin/bash -ex
-          #
-          # Note: need to change the protocol to https
-          # ssh   -- git@github.com:usgs-coupled/iphreeqc.git
-          # https -- https://${AUTH_TOKEN}@github.com/usgs-coupled/iphreeqc.git
-          #
-          # iphreeqc/              https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/iphreeqc.git
-          # ├─database/            ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-database.git*                                  database*
-          # ├─examples/            │ └─examples
-          # │ ├─c/                 │   ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git*       examples/c*
-          # │ ├─com/               │   ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git*     examples/com*
-          # │ └─fortran/           │   └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git* examples/fortran*
-          # ├─phreeqc3-doc/        ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-doc.git*                                       phreeqc3-doc*
-          # ├─phreeqc3-examples/   ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-examples.git*                                  phreeqc3-examples*
-          # └─src/                 └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git%                                       src%
-          #   └─phreeqcpp/           └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-src.git                                      src/phreeqcpp
-          #     └─common/              └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-src-common.git                             src/phreeqcpp/common
-
-          # git_subtree() {
-          #   # git subtree "${1}" --prefix="${2}" "${4}" master 2>&1 | grep -v "^[[:digit:]].*/[[:digit:]].*"
-          # }
-
-          declare -A urls=( \
-            ["iphreeqc-src"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git" \
-            ["phreeqc-commanuscript-cgfinal-examples-c"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git" \
-            ["phreeqc-commanuscript-cgfinal-examples-com"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git" \
-            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git" \
-            ["phreeqc3-database"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-database.git" \
-            ["phreeqc3-doc"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-doc.git" \
-            ["phreeqc3-examples"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-examples.git" \
-          )
-
-          declare -A prefixes=( \
-            ["iphreeqc-src"]="src" \
-            ["phreeqc-commanuscript-cgfinal-examples-c"]="examples/c" \
-            ["phreeqc-commanuscript-cgfinal-examples-com"]="examples/com" \
-            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="examples/fortran" \
-            ["phreeqc3-database"]="database" \
-            ["phreeqc3-doc"]="phreeqc3-doc" \
-            ["phreeqc3-examples"]="phreeqc3-examples" \
-          )
-
-          export GIT_EDITOR=true
-
-          for remote in "${!urls[@]}"; do
-            git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
-          done
-
-          echo "----------------------------------------"
-          echo "Subtrees pulled successfully. Now pushing changes back to the subtrees."
-          echo "----------------------------------------"
-
-          # for remote in "${!urls[@]}"; do
-          #   echo "Pushing changes to ${remote} at ${urls[$remote]} with prefix ${prefixes[$remote]}"
-          #   git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test
-          # done
-
-          git subtree push --prefix="src" "https://github.com/usgs-coupled-subtrees/iphreeqc-src.git" master
-
-          echo git push origin master
-          echo git status
-
-
