@@ -33,7 +33,7 @@ jobs:
 
       - name: Clone repository
         run: |
-          git clone ${{ github.server_url }}/${{ github.repository }}
+          git clone https://x-access-token:${GITHUB_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
           cd ${{ github.event.repository.name }}
 
       - name: Setup git
@@ -97,7 +97,7 @@ jobs:
 
           for remote in "${!urls[@]}"; do
             # git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test 2>&1 | tee /dev/tty | { head -n 10; tail -n 10; }
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test
+            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test > /dev/null 2>&1
           done
 
           # git push origin master
