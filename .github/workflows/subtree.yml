@@ -8,13 +8,14 @@ env:
   CI_SERVER_HOST: github.com
   GROUP: ${{ github.repository_owner }}
   AUTH_TOKEN: "x-access-token:${{ secrets.X_ACCESS_TOKEN }}"
+  REF: master-push-test
 jobs:
   sync-subtrees:
     runs-on: ubuntu-latest
     container:
       image: buildpack-deps:bionic-scm
     steps:
-      - name: Verify AUTH_TOKEN sha256sum
+      - name: Verify AUTH_TOKEN
         run: |
           # This step verifies the AUTH_TOKEN by checking its SHA256 hash against a known value.
           # see ${{ github.server_url }}/organizations/${{ github.repository_owner }}/settings/secrets/actions
@@ -35,6 +36,7 @@ jobs:
         run: |
           git clone https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
           cd ${{ github.event.repository.name }}
+          git checkout ${REF} || git checkout -b ${REF}
 
       - name: Setup git
         run: |
@@ -96,10 +98,10 @@ jobs:
           echo "----------------------------------------"
 
           for remote in "${!urls[@]}"; do
-            # git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test 2>&1 | tee /dev/tty | { head -n 10; tail -n 10; }
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test > /dev/null 2>&1
+            # git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" ${REF} 2>&1 | tee /dev/tty | { head -n 10; tail -n 10; }
+            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" ${REF} > /dev/null 2>&1
           done
 
           # git push origin master
-          git push origin HEAD:master-push-test
+          git push origin
           git status
