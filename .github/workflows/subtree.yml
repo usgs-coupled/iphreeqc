@@ -96,7 +96,8 @@ jobs:
           echo "----------------------------------------"
 
           for remote in "${!urls[@]}"; do
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test 2>&1 | tee /dev/tty | { head -n 10; tail -n 10; }
+            # git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test 2>&1 | tee /dev/tty | { head -n 10; tail -n 10; }
+            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" master-push-test
           done
 
           # git push origin master
