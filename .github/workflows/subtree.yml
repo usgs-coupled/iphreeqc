@@ -21,7 +21,7 @@ env:
 jobs:
   sync-subtrees:
     env:
-      REF: ${{ github.event.inputs.testing == 'true' && ${TEST_REF} || ${DEFAULT_REF} }}
+      REF: ${{ github.event.inputs.testing == 'true' && env.TEST_REF || env.DEFAULT_REF }}
     runs-on: ubuntu-latest
     container:
       image: buildpack-deps:bionic-scm
