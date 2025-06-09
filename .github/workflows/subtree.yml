@@ -2,22 +2,43 @@ name: Sync subtrees
 
 on:
   workflow_dispatch:
+    inputs:
+      testing:
+        description: 'Choose this option to merge and push to a test branch.'
+        required: false
+        default: false
+        type: boolean    
+
 
 # Some variables are set in the organization secrets
 env:
   CI_SERVER_HOST: github.com
   GROUP: ${{ github.repository_owner }}
   AUTH_TOKEN: "x-access-token:${{ secrets.X_ACCESS_TOKEN }}"
-  REF: master-push-test
+  # REF: master-push-test
+  DEFAULT_REF: master
+  TEST_REF: _gha-${{ github.event.repository.name }}-sync-subtrees-${{ github.run_number }}
 jobs:
   sync-subtrees:
+    env:
+      REF: ${{ github.event.inputs.testing == 'true' && ${TEST_REF} || ${DEFAULT_REF} }}
     runs-on: ubuntu-latest
     container:
       image: buildpack-deps:bionic-scm
     steps:
+      - name: Pretest
+        run: |
+          echo REF=${REF}
+          echo "Testing: ${{ github.event.inputs.testing }}"
+          TARGET_BRANCH=${{ github.event.inputs.pushToSpecialBranch == 'true' && $TEST_REF || $DEFAULT_REF }}
+          echo TARGET_BRANCH=${TARGET_BRANCH}
+          exit 1
+
       - name: Verify AUTH_TOKEN
         run: |
-          # This step verifies the AUTH_TOKEN by checking its SHA256 hash against a known value.
+          # This step is used to verify that the AUTH_TOKEN is set correctly.
+          # It checks the SHA256 hash of the AUTH_TOKEN against a known value.
+          # If the hash does not match, it will exit with an error.
           # see ${{ github.server_url }}/organizations/${{ github.repository_owner }}/settings/secrets/actions
           expected="b7ff89ebb635bba5eac9652f5eae8a5123346c1da6ef42852d4494f58b0bf0cb"
           actual=$(echo "$AUTH_TOKEN" | sha256sum | awk '{print $1}' | tr -d '\r')
@@ -36,7 +57,10 @@ jobs:
         run: |
           git clone https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
           cd ${{ github.event.repository.name }}
-          git checkout ${REF} || git checkout -b ${REF}
+          ## git checkout ${REF} || git checkout -b ${REF}
+          if [ "{{ github.event.inputs.pushToSpecialBranch }}" == 'true' ]; then
+            git checkout ${REF} || git checkout -b ${REF}
+          fi
 
       - name: Setup git
         run: |
