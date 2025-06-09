@@ -3,8 +3,8 @@ name: Sync subtrees
 on:
   workflow_dispatch:
     inputs:
-      testing:
-        description: 'Choose this option to merge and push to a test branch.'
+      testMerge:
+        description: 'Choose this option to test merge  by pushing to a test branch.'
         required: false
         default: false
         type: boolean    
@@ -16,23 +16,22 @@ env:
   GROUP: ${{ github.repository_owner }}
   AUTH_TOKEN: "x-access-token:${{ secrets.X_ACCESS_TOKEN }}"
   # REF: master-push-test
-  DEFAULT_REF: master
+  ##DEFAULT_REF: master
+  DEFAULT_REF: ${{ github.event.repository.default_branch }}
   TEST_REF: _gha-${{ github.event.repository.name }}-sync-subtrees-${{ github.run_number }}
 jobs:
   sync-subtrees:
-    env:
-      REF: ${{ github.event.inputs.testing == 'true' && env.TEST_REF || env.DEFAULT_REF }}
+    # env:
+    #   REF: ${{ github.event.inputs.testing == 'true' && env.TEST_REF || env.DEFAULT_REF }}
     runs-on: ubuntu-latest
     container:
       image: buildpack-deps:bionic-scm
     steps:
       - name: Pretest
         run: |
-          echo REF=${REF}
-          echo "Testing: ${{ github.event.inputs.testing }}"
-          TARGET_BRANCH=${{ github.event.inputs.pushToSpecialBranch == 'true' && $TEST_REF || $DEFAULT_REF }}
-          echo TARGET_BRANCH=${TARGET_BRANCH}
-          exit 1
+          ecch DEFAULT_REF=${DEFAULT_REF}
+          echo TEST_REF=${TEST_REF}
+          echo "Testing: ${{ github.event.inputs.testMerge }}"
 
       - name: Verify AUTH_TOKEN
         run: |
@@ -56,16 +55,45 @@ jobs:
       - name: Clone repository
         run: |
           git clone https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
-          cd ${{ github.event.repository.name }}
-          ## git checkout ${REF} || git checkout -b ${REF}
-          if [ "{{ github.event.inputs.pushToSpecialBranch }}" == 'true' ]; then
-            git checkout ${REF} || git checkout -b ${REF}
-          fi
+          # cd ${{ github.event.repository.name }}
+          # ## git checkout ${REF} || git checkout -b ${REF}
+          # if [ "{{ github.event.inputs.testMerge }}" == 'true' ]; then
+          #   git checkout ${REF} || git checkout -b ${REF}
+          # fi
 
       - name: Setup git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cd ${{ github.event.repository.name }}
+          if [ "${{ github.event.inputs.testMerge }}" == 'true' ]; then
+            echo "REF=${TEST_REF}" >> $GITHUB_ENV
+          else
+            echo "REF=${DEFAULT_REF}" >> $GITHUB_ENV
+          fi
+
+      - name: Verify REF
+        run: |
+          # This step verifies that the REF environment variable is set correctly.
+          # If the REF variable is not set, it will exit with an error.
+          if [ -z "${REF}" ]; then
+            echo "REF is not set" >&2
+            exit 1
+          fi
+          echo "Using REF: ${REF}"
+          exit 1
+
+
+      - name: Checkout branch
+        if: ${{ github.event.inputs.testMerge == 'true' }}
+        run: |
+          # This step checks out the branch specified by the REF environment variable.
+          # If the branch does not exist, it creates a new branch with that name.
+          cd ${{ github.event.repository.name }}
+          git fetch origin
+          git checkout ${REF} || git checkout -b ${REF}
+          git status
+
           
       - name: Sync subtrees
         shell: bash
