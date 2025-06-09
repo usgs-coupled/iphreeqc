@@ -65,7 +65,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ "${{ github.event.inputs.testMerge }}" == "true" ]; then
+          if [[ "${{ github.event.inputs.testMerge }}" == "true" ]]; then
             echo "Running in test merge mode, using test branch."
             echo "REF=${TEST_REF}" >> $GITHUB_ENV
           else
