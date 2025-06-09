@@ -5,7 +5,7 @@ on:
     inputs:
       testMerge:
         description: 'Choose this option to test merge  by pushing to a test branch.'
-        required: false
+        required: true
         default: false
         type: boolean    
 
