@@ -31,7 +31,7 @@ jobs:
         run: |
           echo DEFAULT_REF=${DEFAULT_REF}
           echo TEST_REF=${TEST_REF}
-          echo "Testing: ${{ github.event.inputs.testMerge }}"
+          echo "testMerge: ${{ github.event.inputs.testMerge }}"
 
       - name: Verify AUTH_TOKEN
         run: |
@@ -65,10 +65,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          cd ${{ github.event.repository.name }}
-          if [ "${{ github.event.inputs.testMerge }}" == 'true' ]; then
+          if [ "${{ github.event.inputs.testMerge }}" == "true" ]; then
+            echo "Running in test merge mode, using test branch."
             echo "REF=${TEST_REF}" >> $GITHUB_ENV
           else
+            echo "Running in normal mode, using default branch."
             echo "REF=${DEFAULT_REF}" >> $GITHUB_ENV
           fi
 
