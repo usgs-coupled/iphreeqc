@@ -30,9 +30,9 @@ jobs:
     steps:
       - name: Install GitHub CLI
         run: |
-          apt-get update && apt-get install -y curl unzip gh
-          # curl -fsSL https://github.com/cli/cli/releases/latest/download/gh_2.42.1_linux_amd64.tar.gz | tar -xz
-          # cp gh_*/bin/gh /usr/local/bin
+          apt-get update && apt-get install -y curl unzip
+          curl -fsSL https://github.com/cli/cli/releases/download/v2.74.0/gh_2.74.0_linux_amd64.tar.gz | tar -xz
+          cp gh_*/bin/gh /usr/local/bin
           gh --version
 
       - name: Print Configuration
