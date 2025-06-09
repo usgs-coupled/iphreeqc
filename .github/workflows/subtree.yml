@@ -3,82 +3,80 @@ name: Sync subtrees
 on:
   workflow_dispatch:
     inputs:
+      dryRun:
+        description: 'If true, don’t push any changes (for testing only).'
+        required: true
+        default: true
+        type: boolean
       testMerge:
-        description: 'Choose this option to test merge  by pushing to a test branch.'
+        description: 'Run in test mode, pushing to a test branch.'
         required: true
         default: false
-        type: boolean    
+        type: boolean
 
-
-# Some variables are set in the organization secrets
 env:
   CI_SERVER_HOST: github.com
   GROUP: ${{ github.repository_owner }}
   AUTH_TOKEN: "x-access-token:${{ secrets.X_ACCESS_TOKEN }}"
-  # REF: master-push-test
-  ##DEFAULT_REF: master
   DEFAULT_REF: ${{ github.event.repository.default_branch }}
   TEST_REF: _gha-${{ github.event.repository.name }}-sync-subtrees-${{ github.run_number }}
+
 jobs:
   sync-subtrees:
-    # env:
-    #   REF: ${{ github.event.inputs.testing == 'true' && env.TEST_REF || env.DEFAULT_REF }}
     runs-on: ubuntu-latest
     container:
       image: buildpack-deps:bionic-scm
+
     steps:
-      - name: Pretest
+      - name: Install GitHub CLI
         run: |
-          echo DEFAULT_REF=${DEFAULT_REF}
-          echo TEST_REF=${TEST_REF}
-          echo "testMerge: ${{ github.event.inputs.testMerge }}"
+          apt-get update && apt-get install -y curl unzip
+          curl -fsSL https://github.com/cli/cli/releases/latest/download/gh_2.42.1_linux_amd64.tar.gz | tar -xz
+          cp gh_*/bin/gh /usr/local/bin
+          gh --version
+
+      - name: Print Configuration
+        run: |
+          echo "testMerge:   ${{ github.event.inputs.testMerge }}"
+          echo "dryRun:      ${{ github.event.inputs.dryRun }}"
+          echo "DEFAULT_REF: ${DEFAULT_REF}"
+          echo "TEST_REF:    ${TEST_REF}"
 
       - name: Verify AUTH_TOKEN
         run: |
-          # This step is used to verify that the AUTH_TOKEN is set correctly.
-          # It checks the SHA256 hash of the AUTH_TOKEN against a known value.
-          # If the hash does not match, it will exit with an error.
-          # see ${{ github.server_url }}/organizations/${{ github.repository_owner }}/settings/secrets/actions
           expected="b7ff89ebb635bba5eac9652f5eae8a5123346c1da6ef42852d4494f58b0bf0cb"
           actual=$(echo "$AUTH_TOKEN" | sha256sum | awk '{print $1}' | tr -d '\r')
           if [ "$actual" != "$expected" ]; then
-            echo "Bad AUTH_TOKEN" >&2
+            echo "ERROR: Invalid AUTH_TOKEN" >&2
             exit 1
           fi
 
-      - name: Print Git and System Info
+      - name: System Information
         run: |
-          git --version
           uname -a
-          printenv | sort -u
+          git --version
+          gh --version
+          printenv | sort
 
       - name: Clone repository
         run: |
           git clone https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/${{ github.event.repository.name }}.git
-          # cd ${{ github.event.repository.name }}
-          # ## git checkout ${REF} || git checkout -b ${REF}
-          # if [ "{{ github.event.inputs.testMerge }}" == 'true' ]; then
-          #   git checkout ${REF} || git checkout -b ${REF}
-          # fi
 
-      - name: Setup git
+      - name: Configure Git & Set REF
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           if [ "${{ github.event.inputs.testMerge }}" = "true" ]; then
-            echo "Running in test merge mode, using test branch."
             echo "REF=${TEST_REF}" >> $GITHUB_ENV
           else
-            echo "Running in normal mode, using default branch."
             echo "REF=${DEFAULT_REF}" >> $GITHUB_ENV
           fi
 
-      - name: Verify REF
+      - name: Ensure REF is set
         run: |
-          # This step verifies that the REF environment variable is set correctly.
-          # If the REF variable is not set, it will exit with an error.
           if [ -z "${REF}" ]; then
-            echo "REF is not set" >&2
+            echo "ERROR: REF not set" >&2
             exit 1
           fi
           echo "Using REF: ${REF}"
@@ -86,33 +84,16 @@ jobs:
 
 
       - name: Checkout branch
-        if: ${{ github.event.inputs.testMerge == 'true' }}
         run: |
-          # This step checks out the branch specified by the REF environment variable.
-          # If the branch does not exist, it creates a new branch with that name.
           cd ${{ github.event.repository.name }}
           git fetch origin
           git checkout ${REF} || git checkout -b ${REF}
-          git status
 
           
       - name: Sync subtrees
         shell: bash
         run: |
-          # This script pulls subtrees from the specified remotes and pushes changes back to them.
-          # The subtrees are defined in the `urls` associative array, and the prefixes for each subtree are defined in the `prefixes` associative array.          
-          # iphreeqc/              https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}/iphreeqc.git
-          # ├─database/            ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-database.git*                                  database*
-          # ├─examples/            │ └─examples
-          # │ ├─c/                 │   ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git*       examples/c*
-          # │ ├─com/               │   ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git*     examples/com*
-          # │ └─fortran/           │   └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git* examples/fortran*
-          # ├─phreeqc3-doc/        ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-doc.git*                                       phreeqc3-doc*
-          # ├─phreeqc3-examples/   ├─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-examples.git*                                  phreeqc3-examples*
-          # └─src/                 └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git%                                       src%
-          #   └─phreeqcpp/           └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-src.git                                      src/phreeqcpp
-          #     └─common/              └─https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-src-common.git                             src/phreeqcpp/common
-
+          # See .gitlab-ci.yml for the original script.
           set -ex
           cd ${{ github.event.repository.name }}
 
@@ -138,23 +119,22 @@ jobs:
 
           export GIT_EDITOR=true
 
-          echo "----------------------------------------"
-          echo "Pulling subtrees from remotes:"
-          echo "----------------------------------------"
-
+          echo "---- Pulling subtrees ----"
           for remote in "${!urls[@]}"; do
-            git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
+            git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" ${DEFAULT_REF}
           done
 
-          echo "----------------------------------------"
-          echo "Subtrees pulled successfully. Now pushing changes back to the subtrees."
-          echo "----------------------------------------"
+          echo "---- Completed subtree pulls ----"
 
+          if [ "${{ github.event.inputs.dryRun }}" = "true" ]; then
+            echo "Dry run enabled: skipping pushes"
+            exit 0
+          fi          
+
+          echo "---- Pushing changes to subtrees ----"
           for remote in "${!urls[@]}"; do
-            # git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" ${REF} 2>&1 | tee /dev/tty | { head -n 10; tail -n 10; }
-            git subtree push --prefix="${prefixes[$remote]}" "${urls[$remote]}" ${REF} > /dev/null 2>&1
-          done
+            git subtree push --prefix "${prefixes[$remote]}" "${urls[$remote]}" "${REF}" > /dev/null 2>&1 || echo "Failed to push to ${remote}" >&2
+          done          
 
-          # git push origin master
-          git push origin
-          git status
+          echo "Pushing to origin..."
+          git push origin "${REF}"
