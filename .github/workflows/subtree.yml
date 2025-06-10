@@ -80,15 +80,12 @@ jobs:
             exit 1
           fi
           echo "Using REF: ${REF}"
-          exit 1
-
 
       - name: Checkout branch
         run: |
           cd ${{ github.event.repository.name }}
           git fetch origin
           git checkout ${REF} || git checkout -b ${REF}
-
           
       - name: Sync subtrees
         shell: bash
