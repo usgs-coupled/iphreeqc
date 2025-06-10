@@ -1,0 +1,45 @@
+name: Lint subtrees.json
+
+on:
+  pull_request:
+    paths:
+      - '.github/subtrees.json'
+
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  lint-subtrees:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+
+      - name: Validate subtrees.json
+        run: |
+          set -e
+
+          FILE=".github/subtrees.json"
+
+          echo "Validating $FILE..."
+
+          # Ensure it's valid JSON
+          jq empty "$FILE"
+
+          # Check required structure
+          missing=$(jq 'to_entries | map(select(.value.prefix == null or .value.url == null)) | length' "$FILE")
+          if [ "$missing" -ne 0 ]; then
+            echo "❌ Some subtree entries are missing 'prefix' or 'url'"
+            jq 'to_entries | map(select(.value.prefix == null or .value.url == null))' "$FILE"
+            exit 1
+          fi
+
+          # Optional: check for bad URLs
+          bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("https://.+\\.git$") | not) | .key' "$FILE")
+          if [ -n "$bad_urls" ]; then
+            echo "❌ Invalid URLs found for the following subtrees:"
+            echo "$bad_urls"
+            exit 1
+          fi
+
+          echo "✅ subtrees.json looks good!"
