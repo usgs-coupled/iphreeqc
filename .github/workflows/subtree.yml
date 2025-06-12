@@ -118,54 +118,10 @@ jobs:
           for entry in "${entries[@]}"; do
             read -r prefix url <<< "$entry"
             echo "📤 Pushing $prefix to $url (branch: $REF)"
-            git subtree push --prefix "$prefix" "$url" "$REF" || echo "⚠️ Push failed for $prefix"
+            git subtree push --prefix "${prefixes}" "${urls}" "${REF}" > /dev/null 2>&1 || echo "⚠️ Push failed for $prefix" >&2
           done
-
-          echo "✅ Sync complete."
-          exit 0
-
-          # The following code is the original script from .gitlab-ci.yml, which is now replaced by the above logic.
-          # This section is commented out as the above logic is more robust and uses a JSON configuration.
-          # Original script for reference:
-
-          declare -A urls=( \
-            ["iphreeqc-src"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git" \
-            ["phreeqc-commanuscript-cgfinal-examples-c"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git" \
-            ["phreeqc-commanuscript-cgfinal-examples-com"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git" \
-            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git" \
-            ["phreeqc3-database"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-database.git" \
-            ["phreeqc3-doc"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-doc.git" \
-            ["phreeqc3-examples"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-examples.git" \
-          )
-
-          declare -A prefixes=( \
-            ["iphreeqc-src"]="src" \
-            ["phreeqc-commanuscript-cgfinal-examples-c"]="examples/c" \
-            ["phreeqc-commanuscript-cgfinal-examples-com"]="examples/com" \
-            ["phreeqc-COMManuscript-CGfinal-examples-fortran"]="examples/fortran" \
-            ["phreeqc3-database"]="database" \
-            ["phreeqc3-doc"]="phreeqc3-doc" \
-            ["phreeqc3-examples"]="phreeqc3-examples" \
-          )
-
-          export GIT_EDITOR=true
-
-          echo "---- Pulling subtrees ----"
-          for remote in "${!urls[@]}"; do
-            git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" ${DEFAULT_REF}
-          done
-
-          echo "---- Completed subtree pulls ----"
-
-          if [ "${{ github.event.inputs.dryRun }}" = "true" ]; then
-            echo "Dry run enabled: skipping pushes"
-            exit 0
-          fi          
-
-          echo "---- Pushing changes to subtrees ----"
-          for remote in "${!urls[@]}"; do
-            git subtree push --prefix "${prefixes[$remote]}" "${urls[$remote]}" "${REF}" > /dev/null 2>&1 || echo "Failed to push to ${remote}" >&2
-          done          
 
           echo "Pushing to origin..."
           git push origin "${REF}"
+
+          echo "✅ Sync complete."
