@@ -91,8 +91,41 @@ jobs:
         shell: bash
         run: |
           # See .gitlab-ci.yml for the original script.
-          set -ex
+          set -euo pipefail
           cd ${{ github.event.repository.name }}
+
+          JSON=".github/subtrees.json"
+
+          export GIT_EDITOR=true
+
+          # Read subtrees config
+          mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "${JSON}")
+
+          for entry in "${entries[@]}"; do
+            read -r prefix url <<< "$entry"
+            echo "🧩 Pulling: $url into $prefix"
+            git subtree pull --prefix "$prefix" --squash "$url" ${DEFAULT_REF}
+          done
+
+          if [ "${{ github.event.inputs.dryRun }}" = "true" ]; then
+            echo "✅ Pull complete. Dry run enabled: skipping pushes"
+            exit 0
+          fi
+
+          echo "✅ Pull complete. Pushing subtrees back to remotes..."
+
+          for entry in "${entries[@]}"; do
+            read -r prefix url <<< "$entry"
+            echo "📤 Pushing $prefix to $url (branch: $REF)"
+            git subtree push --prefix "$prefix" "$url" "$REF" || echo "⚠️ Push failed for $prefix"
+          done
+
+          echo "✅ Sync complete."
+          exit 0
+
+          # The following code is the original script from .gitlab-ci.yml, which is now replaced by the above logic.
+          # This section is commented out as the above logic is more robust and uses a JSON configuration.
+          # Original script for reference:
 
           declare -A urls=( \
             ["iphreeqc-src"]="https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git" \
