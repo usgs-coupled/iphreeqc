@@ -91,7 +91,9 @@ jobs:
         shell: bash
         run: |
           # See .gitlab-ci.yml for the original script.
-          set -euo pipefail
+          ## set -euo pipefail
+          set -ex
+          
           cd ${{ github.event.repository.name }}
 
           JSON=".github/subtrees.json"
