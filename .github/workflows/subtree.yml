@@ -105,7 +105,7 @@ jobs:
           for entry in "${entries[@]}"; do
             read -r prefix url <<< "$entry"
             echo "🧩 Pulling: $url into $prefix"
-            git subtree pull --prefix "$prefix" --squash "$url" ${DEFAULT_REF}
+            git subtree pull --prefix "$prefix" --squash "$url" "$DEFAULT_REF""
           done
 
           if [ "${{ github.event.inputs.dryRun }}" = "true" ]; then
@@ -118,7 +118,7 @@ jobs:
           for entry in "${entries[@]}"; do
             read -r prefix url <<< "$entry"
             echo "📤 Pushing $prefix to $url (branch: $REF)"
-            git subtree push --prefix "${prefixes}" "${urls}" "${REF}" > /dev/null 2>&1 || echo "⚠️ Push failed for $prefix" >&2
+            git subtree push --prefix "$prefix" "$url" "$REF" > /dev/null 2>&1 || echo "⚠️ Push failed for $prefix" >&2
           done
 
           echo "Pushing to origin..."
