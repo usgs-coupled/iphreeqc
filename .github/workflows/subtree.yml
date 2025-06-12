@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Install GitHub CLI
         run: |
-          apt-get update && apt-get install -y curl jq unzip
+          apt-get update && apt-get install -y curl gettext jq unzip
           curl -fsSL https://github.com/cli/cli/releases/download/v2.74.0/gh_2.74.0_linux_amd64.tar.gz | tar -xz
           cp gh_*/bin/gh /usr/local/bin
           gh --version
@@ -101,12 +101,10 @@ jobs:
           export GIT_EDITOR=true
 
           # Read subtrees config
-          mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "${JSON}")
+          mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "${JSON}" | envsubst)
 
           for entry in "${entries[@]}"; do
             read -r prefix url <<< "$entry"
-            echo "Pulling: $url into $prefix"
-            echo 'Pulling: $url into $prefix'
             echo "🧩 Pulling: $url into $prefix"
             git subtree pull --prefix "$prefix" --squash "$url" ${DEFAULT_REF}
           done
