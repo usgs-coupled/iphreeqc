@@ -105,7 +105,7 @@ jobs:
           for entry in "${entries[@]}"; do
             read -r prefix url <<< "$entry"
             echo "🧩 Pulling: $url into $prefix"
-            git subtree pull --prefix "$prefix" --squash "$url" "$DEFAULT_REF""
+            git subtree pull --prefix "$prefix" --squash "$url" "$DEFAULT_REF"
           done
 
           if [ "${{ github.event.inputs.dryRun }}" = "true" ]; then
