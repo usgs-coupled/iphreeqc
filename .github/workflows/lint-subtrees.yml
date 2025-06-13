@@ -9,37 +9,51 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint-subtrees:
+  hello_world_job:
     runs-on: ubuntu-latest
+    name: A job to say hello
     steps:
-      - name: Checkout PR code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - id: foo
+        uses: ./.github/actions/hello-world-composite-action
+        with:
+          who-to-greet: 'Mona the Octocat'
+      - run: echo random-number "$RANDOM_NUMBER"
+        shell: bash
+        env:
+          RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}    
 
-      - name: Validate subtrees.json
-        run: |
-          set -e
+  # lint-subtrees:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout PR code
+  #       uses: actions/checkout@v4
 
-          FILE=".github/subtrees.json"
+  #     - name: Validate subtrees.json
+  #       run: |
+  #         set -e
 
-          echo "Validating $FILE..."
+  #         FILE=".github/subtrees.json"
 
-          # Ensure it's valid JSON
-          jq empty "$FILE"
+  #         echo "Validating $FILE..."
 
-          # Check required structure
-          missing=$(jq 'to_entries | map(select(.value.prefix == null or .value.url == null)) | length' "$FILE")
-          if [ "$missing" -ne 0 ]; then
-            echo "❌ Some subtree entries are missing 'prefix' or 'url'"
-            jq 'to_entries | map(select(.value.prefix == null or .value.url == null))' "$FILE"
-            exit 1
-          fi
+  #         # Ensure it's valid JSON
+  #         jq empty "$FILE"
 
-          # Optional: check for bad URLs
-          bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("https://.+\\.git$") | not) | .key' "$FILE")
-          if [ -n "$bad_urls" ]; then
-            echo "❌ Invalid URLs found for the following subtrees:"
-            echo "$bad_urls"
-            exit 1
-          fi
+  #         # Check required structure
+  #         missing=$(jq 'to_entries | map(select(.value.prefix == null or .value.url == null)) | length' "$FILE")
+  #         if [ "$missing" -ne 0 ]; then
+  #           echo "❌ Some subtree entries are missing 'prefix' or 'url'"
+  #           jq 'to_entries | map(select(.value.prefix == null or .value.url == null))' "$FILE"
+  #           exit 1
+  #         fi
 
-          echo "✅ subtrees.json looks good!"
+  #         # Optional: check for bad URLs
+  #         bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("https://.+\\.git$") | not) | .key' "$FILE")
+  #         if [ -n "$bad_urls" ]; then
+  #           echo "❌ Invalid URLs found for the following subtrees:"
+  #           echo "$bad_urls"
+  #           exit 1
+  #         fi
+
+  #         echo "✅ subtrees.json looks good!"
