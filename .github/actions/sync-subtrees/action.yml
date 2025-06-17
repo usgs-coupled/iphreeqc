@@ -1,0 +1,43 @@
+name: Sync Subtrees
+description: Syncs subtrees with optional dry-run and test merge modes.
+inputs:
+  dryRun:
+    description: 'If true, don’t push any changes (for testing only).'
+    required: true
+    default: 'true'
+  testMerge:
+    description: 'Run in test mode, pushing to a test branch.'
+    required: true
+    default: 'false'
+  repo:
+    description: 'Repository name'
+    required: true
+  defaultRef:
+    description: 'Default branch name'
+    required: true
+  runNumber:
+    description: 'GitHub run number'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: |
+        apt-get update && apt-get install -y curl gettext jq unzip
+        curl -fsSL https://github.com/cli/cli/releases/download/v2.74.0/gh_2.74.0_linux_amd64.tar.gz | tar -xz
+        cp gh_*/bin/gh /usr/local/bin
+
+    - name: Execute sync logic
+      shell: bash
+      run: ./.github/actions/sync-subtrees/entrypoint.sh
+      env:
+        CI_SERVER_HOST: github.com
+        GROUP: ${{ github.repository_owner }}
+        AUTH_TOKEN: x-access-token:${{ secrets.X_ACCESS_TOKEN }}
+        DEFAULT_REF: ${{ inputs.defaultRef }}
+        TEST_REF: _gha-${{ inputs.repo }}-sync-subtrees-${{ inputs.runNumber }}
+        DRY_RUN: ${{ inputs.dryRun }}
+        TEST_MERGE: ${{ inputs.testMerge }}
+        REPO_NAME: ${{ inputs.repo }}
