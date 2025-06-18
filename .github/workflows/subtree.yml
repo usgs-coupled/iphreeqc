@@ -4,32 +4,32 @@ on:
   workflow_dispatch:
     inputs:
       dryRun:
-        type: boolean
+        description: 'If true, don’t push any changes (for testing only).'
+        required: true
         default: true
-        required: true
-      testMerge:
         type: boolean
-        default: false
+      testMerge:
+        description: 'Run in test mode, pushing to a test branch.'
         required: true
+        default: false
+        type: boolean
 
 jobs:
-  sync:
+  sync-subtrees:
     runs-on: ubuntu-latest
     container:
       image: buildpack-deps:bionic-scm
     steps:
       # - uses: actions/checkout@v4
-      - name: Run composite action
-        uses: ./.github/actions/sync-subtrees
+      - name: Run sync-subtrees-action
+        uses: usgs-coupled/sync-subtrees-action@main
         with:
           dryRun: ${{ inputs.dryRun }}
           testMerge: ${{ inputs.testMerge }}
-          repo: ${{ github.event.repository.name }}
+          # repo: ${{ github.event.repository.name }}
           defaultRef: ${{ github.event.repository.default_branch }}
-          runNumber: ${{ github.run_number }}
-        env:
-          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-
+          # runNumber: ${{ github.run_number }}
+          authToken: ${{ secrets.X_ACCESS_TOKEN }}
 
 
 # name: Sync subtrees
