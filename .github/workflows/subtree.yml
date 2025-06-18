@@ -18,7 +18,7 @@ jobs:
     container:
       image: buildpack-deps:bionic-scm
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
       - name: Run composite action
         uses: ./.github/actions/sync-subtrees
         with:
