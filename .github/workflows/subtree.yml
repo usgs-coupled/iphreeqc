@@ -32,6 +32,24 @@ jobs:
           sshKey: ${{ secrets.SSH_PRIVATE_KEY }}
           repoOwner: ${{ github.repository_owner }}
 
+  old-sync-subtrees:
+    runs-on: ubuntu-latest
+    container:
+      image: buildpack-deps:bionic-scm
+
+    steps:
+      - name: Test SSH Connection
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          unset SSH_KEY
+          ssh -T git@github.com
+
+        env:
+          sshKey: ${{ secrets.SSH_PRIVATE_KEY }}
+
 
 # name: Sync subtrees
 
