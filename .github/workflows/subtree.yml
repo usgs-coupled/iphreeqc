@@ -44,17 +44,15 @@ jobs:
           SSH_KEY: ${{ secrets.SCHARLTON2_SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
-          mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          SSH_DIR="${HOME}/.ssh"
+          KEY_PATH="${SSH_DIR}/id_ed25519"
+          mkdir -p "$SSH_DIR"
+          chmod 700 "$SSH_DIR"
+          echo "$SSH_KEY" > "$KEY_PATH"
+          chmod 600 "$KEY_PATH"
           unset SSH_KEY
           printenv | sort
-          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
-          echo -e "Host github.com\n  StrictHostKeyChecking no\n" >> ~/.ssh/config
-          ls -la /root/.ssh
-          echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          echo ~/.ssh
-          ls -la ~/.ssh
+          ssh-keyscan -t ed25519 github.com >> "${SSH_DIR}/known_hosts" 2>/dev/null
           ssh -vT git@github.com
 
 
