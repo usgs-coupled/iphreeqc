@@ -44,7 +44,8 @@ jobs:
           SSH_KEY: ${{ secrets.SCHARLTON2_SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
-          SSH_DIR="${HOME}/.ssh"
+          ## SSH_DIR="${HOME}/.ssh"
+          SSH_DIR="/root/.ssh"
           KEY_PATH="${SSH_DIR}/id_ed25519"
           mkdir -p "$SSH_DIR"
           chmod 700 "$SSH_DIR"
