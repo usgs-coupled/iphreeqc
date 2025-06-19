@@ -39,6 +39,7 @@ jobs:
 
     steps:
       - name: Test SSH Connection
+        shell: bash
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
