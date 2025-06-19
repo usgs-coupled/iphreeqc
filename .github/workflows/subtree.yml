@@ -48,7 +48,9 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           unset SSH_KEY
+          printenv | sort
           ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+          echo -e "Host github.com\n  StrictHostKeyChecking no\n" >> ~/.ssh/config
           ssh -T git@github.com
 
 
