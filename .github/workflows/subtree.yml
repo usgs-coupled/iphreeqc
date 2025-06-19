@@ -41,7 +41,7 @@ jobs:
       - name: Test SSH Connection
         shell: bash
         env:
-          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KEY: ${{ secrets.SCHARLTON2_SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
@@ -51,7 +51,7 @@ jobs:
           printenv | sort
           ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
           echo -e "Host github.com\n  StrictHostKeyChecking no\n" >> ~/.ssh/config
-          ssh -T git@github.com
+          ssh -vT git@github.com
 
 
 # name: Sync subtrees
