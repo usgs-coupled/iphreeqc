@@ -51,6 +51,7 @@ jobs:
           printenv | sort
           ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
           echo -e "Host github.com\n  StrictHostKeyChecking no\n" >> ~/.ssh/config
+          ls -la ~/.ssh
           ssh -vT git@github.com
 
 
