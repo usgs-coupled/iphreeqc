@@ -48,6 +48,7 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           unset SSH_KEY
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
           ssh -T git@github.com
 
 
