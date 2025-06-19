@@ -51,6 +51,9 @@ jobs:
           echo "$SSH_KEY" > "$KEY_PATH"
           chmod 600 "$KEY_PATH"
           unset SSH_KEY
+          echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          echo "Lines in SSH key file:"
+          wc --lines "$KEY_PATH"
           # printenv | sort
           echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
           echo "Check tilde expansion"
@@ -63,10 +66,14 @@ jobs:
           cat /etc/ssh/ssh_config
           echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
           ssh-keyscan -t ed25519 github.com >> "${SSH_DIR}/known_hosts" 2>/dev/null
+          eval "$(ssh-agent -s)"
+          ssh-add "$KEY_PATH"          
           echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
           ls -al ${SSH_DIR}
           echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          ssh -vT git@github.com
+          # ssh -vT git@github.com
+          ssh -o BatchMode=yes -vT git@github.com
+
 
 
 # name: Sync subtrees
