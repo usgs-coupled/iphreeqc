@@ -17,10 +17,7 @@ on:
 jobs:
   sync-subtrees:
     runs-on: ubuntu-latest
-    # container:
-    #   image: buildpack-deps:bionic-scm
     steps:
-      # - uses: actions/checkout@v4
       - name: Run sync-subtrees-action
         uses: usgs-coupled/sync-subtrees-action@main
         with:
@@ -32,37 +29,37 @@ jobs:
           sshKey: ${{ secrets.SSH_PRIVATE_KEY }}
           repoOwner: ${{ github.repository_owner }}
 
-  old-sync-subtrees:
-    runs-on: ubuntu-latest
-    container:
-      image: buildpack-deps:bionic-scm
+  # old-sync-subtrees:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: buildpack-deps:bionic-scm
 
-    steps:
-      - name: Test SSH Connection
-        shell: bash
-        env:
-          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          set -euo pipefail
-          # echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          # echo "USER: $USER"
-          echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          echo "HOME: $HOME"
-          echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          eval echo "~"
-          echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          ## SSH_DIR="/root/.ssh"
-          SSH_DIR="$(getent passwd $(whoami) | cut -d: -f6)/.ssh"
-          KEY_PATH="${SSH_DIR}/id_ed25519"
-          mkdir -p "$SSH_DIR"
-          chmod 700 "$SSH_DIR"
-          echo "$SSH_KEY" > "$KEY_PATH"
-          chmod 600 "$KEY_PATH"
-          unset SSH_KEY
-          ssh-keyscan -t ed25519 github.com >> "${SSH_DIR}/known_hosts" 2>/dev/null
-          git clone git@github.com:usgs-coupled/iphreeqc.git
-          echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          ssh -Tv git@github.com
+  #   steps:
+  #     - name: Test SSH Connection
+  #       shell: bash
+  #       env:
+  #         SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+  #       run: |
+  #         set -euo pipefail
+  #         # echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  #         # echo "USER: $USER"
+  #         echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  #         echo "HOME: $HOME"
+  #         echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  #         eval echo "~"
+  #         echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  #         ## SSH_DIR="/root/.ssh"
+  #         SSH_DIR="$(getent passwd $(whoami) | cut -d: -f6)/.ssh"
+  #         KEY_PATH="${SSH_DIR}/id_ed25519"
+  #         mkdir -p "$SSH_DIR"
+  #         chmod 700 "$SSH_DIR"
+  #         echo "$SSH_KEY" > "$KEY_PATH"
+  #         chmod 600 "$KEY_PATH"
+  #         unset SSH_KEY
+  #         ssh-keyscan -t ed25519 github.com >> "${SSH_DIR}/known_hosts" 2>/dev/null
+  #         git clone git@github.com:usgs-coupled/iphreeqc.git
+  #         echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  #         ssh -Tv git@github.com
 
 
 
