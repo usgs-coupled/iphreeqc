@@ -1,30 +1,30 @@
-{
-  "iphreeqc-src": {
+[
+  {
     "prefix": "src",
-    "url": "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/iphreeqc-src.git"
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git"
   },
-  "phreeqc-commanuscript-cgfinal-examples-c": {
+  {
     "prefix": "examples/c",
-    "url": "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git"
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git"
   },
-  "phreeqc-commanuscript-cgfinal-examples-com": {
+  {
     "prefix": "examples/com",
-    "url": "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git"
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git"
   },
-  "phreeqc-COMManuscript-CGfinal-examples-fortran": {
+  {
     "prefix": "examples/fortran",
-    "url": "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git"
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git"
   },
-  "phreeqc3-database": {
+  {
     "prefix": "database",
-    "url": "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-database.git"
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git"
   },
-  "phreeqc3-doc": {
+  {
     "prefix": "phreeqc3-doc",
-    "url": "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-doc.git"
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git"
   },
-  "phreeqc3-examples": {
+  {
     "prefix": "phreeqc3-examples",
-    "url": "https://${AUTH_TOKEN}@${CI_SERVER_HOST}/${GROUP}-subtrees/phreeqc3-examples.git"
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git"
   }
-}
+]
