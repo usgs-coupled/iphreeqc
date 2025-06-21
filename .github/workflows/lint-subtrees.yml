@@ -60,11 +60,26 @@ jobs:
             exit 1
           fi
 
-          mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "$JSON" | envsubst)
+          # prepare test repository
+          mkdir -p /tmp/subtree-push-test
+          pushd /tmp/subtree-push-test
+          # git init -q
+          # git commit --allow-empty -m "Test commit" > /dev/null
+          git init
+          git commit --allow-empty -m "Test commit"
 
+          mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "$JSON" | envsubst)
           for entry in "${entries[@]}"; do
             read -r prefix url <<< "$entry"
-            echo "🧩 Testing: $url"
+            test_branch="__$prefix"
+            # git remote add "$remote" "$url"
+            if git push $url "HEAD:refs/heads/$test_branch"; then
+              echo "✅ Push OK: $url"
+              git push "$remote" --delete "$test_branch" || true
+            else
+              echo "❌ Push FAILED: $url"
+              exit 1
+            fi
           done          
 
           echo "✅ subtrees.json looks good!"
