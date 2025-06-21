@@ -33,27 +33,34 @@ jobs:
         run: |
           set -e
 
-          FILE=".github/subtrees.json"
+          JSON=".github/subtrees.json"
 
-          echo "Validating $FILE..."
+          echo "Validating $JSON..."
 
           # Ensure it's valid JSON
-          jq empty "$FILE"
+          jq empty "$JSON"
 
           # Check required structure
-          missing=$(jq 'to_entries | map(select(.value.prefix == null or .value.url == null)) | length' "$FILE")
+          missing=$(jq 'to_entries | map(select(.value.prefix == null or .value.url == null)) | length' "$JSON")
           if [ "$missing" -ne 0 ]; then
             echo "❌ Some subtree entries are missing 'prefix' or 'url'"
-            jq 'to_entries | map(select(.value.prefix == null or .value.url == null))' "$FILE"
+            jq 'to_entries | map(select(.value.prefix == null or .value.url == null))' "$JSON"
             exit 1
           fi
 
-          # Optional: check for bad URLs
-          bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("git@.+\\.git$") | not) | .value.url' "$FILE")
+          # Check for bad URLs
+          bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("git@.+\\.git$") | not) | .value.url' "$JSON")
           if [ -n "$bad_urls" ]; then
             echo "❌ Invalid URLs found for the following subtrees:"
             echo "$bad_urls"
             exit 1
           fi
+
+          mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "$JSON" | envsubst)
+
+          for entry in "${entries[@]}"; do
+            read -r prefix url <<< "$entry"
+            echo "🧩 Testing: $url"
+          done          
 
           echo "✅ subtrees.json looks good!"
