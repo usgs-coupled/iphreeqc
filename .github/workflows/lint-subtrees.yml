@@ -77,11 +77,10 @@ jobs:
 
           # prepare test repository
           mkdir -p /tmp/subtree-push-test
-          pushd /tmp/subtree-push-test
-          # git init -q
-          # git commit --allow-empty -m "Test commit" > /dev/null
-          git init
-          git commit --allow-empty -m "Test commit"
+          pushd /tmp/subtree-push-test > /dev/null
+          trap 'popd > /dev/null; rm -rf /tmp/subtree-push-test' EXIT          
+          git init -q
+          git commit --allow-empty -m "Test commit" > /dev/null
 
           mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "$JSON" | envsubst)
           for entry in "${entries[@]}"; do
