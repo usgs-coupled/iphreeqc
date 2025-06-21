@@ -25,6 +25,10 @@ jobs:
 
   lint-subtrees:
     runs-on: ubuntu-latest
+    env:
+      CI_SERVER_HOST: github.com
+      GROUP: ${{ github.repository_owner }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
       - name: Checkout PR code
         uses: actions/checkout@v4
