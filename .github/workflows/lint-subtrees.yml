@@ -88,7 +88,7 @@ jobs:
             read -r prefix url <<< "$entry"
             test_branch="__$prefix"
             # git remote add "$remote" "$url"
-            if [ git push --quiet $url "HEAD:refs/heads/$test_branch" 2>/dev/null ]; then
+            if git push --quiet $url "HEAD:refs/heads/$test_branch" 2>/dev/null; then
               echo "✅ Push OK: $url"
               git push --quiet $url --delete "$test_branch" || true
             else
