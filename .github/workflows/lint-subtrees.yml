@@ -89,7 +89,7 @@ jobs:
             # git remote add "$remote" "$url"
             if git push $url "HEAD:refs/heads/$test_branch"; then
               echo "✅ Push OK: $url"
-              git push "$remote" --delete "$test_branch" || true
+              git push $url --delete "$test_branch" || true
             else
               echo "❌ Push FAILED: $url"
               exit 1
