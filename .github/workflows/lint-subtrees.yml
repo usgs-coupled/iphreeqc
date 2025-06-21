@@ -60,6 +60,10 @@ jobs:
             exit 1
           fi
 
+          # prepare git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           # prepare test repository
           mkdir -p /tmp/subtree-push-test
           pushd /tmp/subtree-push-test
