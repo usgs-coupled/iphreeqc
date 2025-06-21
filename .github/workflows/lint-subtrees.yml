@@ -73,6 +73,7 @@ jobs:
           # prepare git
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global init.defaultBranch main
 
           # prepare test repository
           mkdir -p /tmp/subtree-push-test
@@ -87,9 +88,9 @@ jobs:
             read -r prefix url <<< "$entry"
             test_branch="__$prefix"
             # git remote add "$remote" "$url"
-            if git push $url "HEAD:refs/heads/$test_branch"; then
+            if [ git push --quiet $url "HEAD:refs/heads/$test_branch" 2>/dev/null ]; then
               echo "✅ Push OK: $url"
-              git push $url --delete "$test_branch" || true
+              git push --quiet $url --delete "$test_branch" || true
             else
               echo "❌ Push FAILED: $url"
               exit 1
