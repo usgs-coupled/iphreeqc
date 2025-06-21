@@ -37,7 +37,7 @@ jobs:
         run: |
           set -e
 
-          JSON=".github/subtrees.json"
+          JSON="$(pwd)/.github/subtrees.json"
 
           echo "Validating $JSON..."
 
