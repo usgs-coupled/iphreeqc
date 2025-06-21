@@ -49,7 +49,7 @@ jobs:
           fi
 
           # Optional: check for bad URLs
-          bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("https://.+\\.git$") | not) | .key' "$FILE")
+          bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("git@.+\\.git$") | not) | .value.url' "$FILE")
           if [ -n "$bad_urls" ]; then
             echo "❌ Invalid URLs found for the following subtrees:"
             echo "$bad_urls"
