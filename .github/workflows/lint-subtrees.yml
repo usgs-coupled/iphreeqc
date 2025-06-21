@@ -60,6 +60,16 @@ jobs:
             exit 1
           fi
 
+          # prepare ssh for git
+          SSH_DIR="$(getent passwd $(whoami) | cut -d: -f6)/.ssh"
+          KEY_PATH="${SSH_DIR}/id_ed25519"
+          mkdir -p "$SSH_DIR"
+          chmod 700 "$SSH_DIR"
+          echo "$SSH_PRIVATE_KEY" > "$KEY_PATH"
+          chmod 600 "$KEY_PATH"
+          ssh-keyscan -t ed25519 github.com >> ${SSH_DIR}/known_hosts 2>/dev/null
+          unset SSH_KEY
+
           # prepare git
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
