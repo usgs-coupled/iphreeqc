@@ -55,6 +55,7 @@ jobs:
           chmod 600 "$KEY_PATH"
           ssh-keyscan -t ed25519 github.com >> ${SSH_DIR}/known_hosts 2>/dev/null
           unset SSH_KEY
+          trap 'rm -rf "$SSH_DIR"' EXIT
 
           # prepare git
           git config --global user.name "github-actions[bot]"
