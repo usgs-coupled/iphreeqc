@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - '.github/subtrees.json'
-
   workflow_call:
   workflow_dispatch:
 
@@ -16,70 +15,6 @@ jobs:
       GROUP: ${{ github.repository_owner }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
-      - name: Checkout PR code
-        uses: actions/checkout@v4
-
-      - name: Validate subtrees.json
-        run: |
-          set -e
-
-          JSON="$(pwd)/.github/subtrees.json"
-
-          echo "Validating $JSON..."
-
-          # Ensure it's valid JSON
-          jq empty "$JSON"
-
-          # Check required structure
-          missing=$(jq 'to_entries | map(select(.value.prefix == null or .value.url == null)) | length' "$JSON")
-          if [ "$missing" -ne 0 ]; then
-            echo "❌ Some subtree entries are missing 'prefix' or 'url'"
-            jq 'to_entries | map(select(.value.prefix == null or .value.url == null))' "$JSON"
-            exit 1
-          fi
-
-          # Check for bad URLs
-          bad_urls=$(jq -r 'to_entries[] | select(.value.url | test("git@.+\\.git$") | not) | .value.url' "$JSON")
-          if [ -n "$bad_urls" ]; then
-            echo "❌ Invalid URLs found for the following subtrees:"
-            echo "$bad_urls"
-            exit 1
-          fi
-
-          # prepare ssh for git
-          SSH_DIR="$(getent passwd $(whoami) | cut -d: -f6)/.ssh"
-          KEY_PATH="${SSH_DIR}/id_ed25519"
-          mkdir -p "$SSH_DIR"
-          chmod 700 "$SSH_DIR"
-          echo "$SSH_PRIVATE_KEY" > "$KEY_PATH"
-          chmod 600 "$KEY_PATH"
-          ssh-keyscan -t ed25519 github.com >> ${SSH_DIR}/known_hosts 2>/dev/null
-          unset SSH_KEY
-          trap 'rm -rf "$SSH_DIR"' EXIT
-
-          # prepare git
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global init.defaultBranch main
-
-          # prepare test repository
-          mkdir -p /tmp/subtree-push-test
-          pushd /tmp/subtree-push-test > /dev/null
-          git init -q
-          git commit --allow-empty -m "Test commit" > /dev/null
-
-          # Verify each subtree entry can be pushed
-          mapfile -t entries < <(jq -r 'to_entries[] | "\(.value.prefix) \(.value.url)"' "$JSON" | envsubst)
-          for entry in "${entries[@]}"; do
-            read -r prefix url <<< "$entry"
-            test_branch="__$prefix"
-            if git push --quiet $url "HEAD:refs/heads/$test_branch" 2>/dev/null; then
-              echo "✅ Push OK: $url"
-              git push --quiet $url --delete "$test_branch" || true
-            else
-              echo "❌ Push FAILED: $url"
-              exit 1
-            fi
-          done          
-
-          echo "✅ subtrees.json looks good!"
+      - uses: usgs-coupled/sync-subtrees-action/lint-subtrees/@main
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
