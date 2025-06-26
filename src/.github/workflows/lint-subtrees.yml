@@ -1,5 +1,6 @@
 # This workflow lints the subtrees.json file to ensure it is valid and up-to-date.
 # It is triggered on pull requests that modify the subtrees.json file or can be run manually
+# via the GitHub Actions UI.
 name: Lint subtrees.json
 
 on:
