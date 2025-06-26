@@ -1,3 +1,4 @@
+# This workflow lints the subtrees.json file to ensure it is valid and up-to-date.
 name: Lint subtrees.json
 
 on:
