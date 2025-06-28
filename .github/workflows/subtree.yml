@@ -23,7 +23,6 @@ jobs:
         with:
           dryRun: ${{ inputs.dryRun }}
           testMerge: ${{ inputs.testMerge }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository_name: ${{ github.event.repository.name }}
           default_branch: ${{ github.event.repository.default_branch }}
           run_number: ${{ github.run_number }}
