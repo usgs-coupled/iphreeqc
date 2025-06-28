@@ -17,6 +17,9 @@ on:
 jobs:
   sync-subtrees:
     runs-on: ubuntu-latest
+    env:
+      CI_SERVER_HOST: github.com
+      GROUP: usgs-coupled
     steps:
       - name: Run sync-subtrees-action
         uses: usgs-coupled/sync-subtrees-action@main

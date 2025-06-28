@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI_SERVER_HOST: github.com
-      GROUP: ${{ github.repository_owner }}
+      GROUP: usgs-coupled
     steps:
       - uses: usgs-coupled/sync-subtrees-action/lint-subtrees/@main
         with:
