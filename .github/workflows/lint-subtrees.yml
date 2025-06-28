@@ -16,7 +16,6 @@ jobs:
     env:
       CI_SERVER_HOST: github.com
       GROUP: ${{ github.repository_owner }}
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
       - uses: usgs-coupled/sync-subtrees-action/lint-subtrees/@main
         with:
