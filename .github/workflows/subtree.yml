@@ -23,8 +23,8 @@ jobs:
         with:
           dryRun: ${{ inputs.dryRun }}
           testMerge: ${{ inputs.testMerge }}
-          repoName: ${{ github.event.repository.name }}
-          defaultRef: ${{ github.event.repository.default_branch }}
-          runNumber: ${{ github.run_number }}
-          sshKey: ${{ secrets.SSH_PRIVATE_KEY }}
-          repoOwner: ${{ github.repository_owner }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository_name: ${{ github.event.repository.name }}
+          default_branch: ${{ github.event.repository.default_branch }}
+          run_number: ${{ github.run_number }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
