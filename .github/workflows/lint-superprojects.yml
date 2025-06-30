@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint-subtrees:
+  lint-superprojects:
     runs-on: ubuntu-latest
     steps:
       - uses: usgs-coupled/sync-subtrees-action/lint-superprojects/@main
