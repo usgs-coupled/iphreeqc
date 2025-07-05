@@ -20,7 +20,7 @@ jobs:
     env:
       CI_SERVER_HOST: github.com
       GROUP: usgs-coupled
-      GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ secrets.WORKFLOW_PAT }}
     steps:
       - name: Run sync-subtrees-action
         uses: usgs-coupled/sync-subtrees-action@main
