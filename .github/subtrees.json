@@ -1,0 +1,37 @@
+[
+  {
+    "prefix": "src",
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/iphreeqc-src.git",
+    "repo": "usgs-coupled-subtrees/iphreeqc-src"
+  },
+  {
+    "prefix": "examples/c",
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-c.git",
+    "repo": "usgs-coupled-subtrees/phreeqc-commanuscript-cgfinal-examples-c"
+  },
+  {
+    "prefix": "examples/com",
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-commanuscript-cgfinal-examples-com.git",
+    "repo": "usgs-coupled-subtrees/phreeqc-commanuscript-cgfinal-examples-com"
+  },
+  {
+    "prefix": "examples/fortran",
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran.git",
+    "repo": "usgs-coupled-subtrees/phreeqc-COMManuscript-CGfinal-examples-fortran"
+  },
+  {
+    "prefix": "database",
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-database.git",
+    "repo": "usgs-coupled-subtrees/phreeqc3-database"
+  },
+  {
+    "prefix": "phreeqc3-doc",
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-doc.git",
+    "repo": "usgs-coupled-subtrees/phreeqc3-doc"
+  },
+  {
+    "prefix": "phreeqc3-examples",
+    "url": "git@${CI_SERVER_HOST}:${GROUP}-subtrees/phreeqc3-examples.git",
+    "repo": "usgs-coupled-subtrees/phreeqc3-examples"
+  }
+]
