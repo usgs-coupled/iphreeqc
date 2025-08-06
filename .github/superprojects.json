@@ -1,0 +1,9 @@
+{
+  "usgs-coupled-subtrees/phreeqc-commanuscript-cgfinal-examples-com": {
+    "superprojects": [
+      "usgs-coupled-subtrees/iphreeqc",
+      "usgs-coupled-subtrees/iphreeqccom",
+      "usgs-coupled-subtrees/phreeqc"
+    ]
+  }
+}
