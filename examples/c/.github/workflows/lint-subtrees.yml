@@ -14,6 +14,6 @@ jobs:
       CI_SERVER_HOST: github.com
       GROUP: usgs-coupled
     steps:
-      - uses: usgs-coupled/sync-subtrees-action/lint-subtrees/@main
+      - uses: usgs-coupled-subtrees/sync-subtrees-action/lint-subtrees/@main
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
