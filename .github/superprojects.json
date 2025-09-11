@@ -1,0 +1,7 @@
+{
+  "usgs-coupled-subtrees/iphreeqc": {
+    "superprojects": [
+      "usgs-coupled-subtrees/webmod"
+    ]
+  }
+}
