@@ -150,7 +150,7 @@ jobs:
 
     - name: CMake configure
       if: runner.os == 'macOS'
-      run: CC=$(brew --prefix llvm@15)/bin/clang CXX=$(brew --prefix llvm@15)/bin/clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS=${{ matrix.shared_libs }} -DIPHREEQC_ENABLE_MODULE=${{ matrix.enable_module }} -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
+      run: CC=$(brew --prefix llvm@18)/bin/clang CXX=$(brew --prefix llvm@18)/bin/clang++ cmake -B ${{ env.BUILD_DIR }} -DBUILD_SHARED_LIBS=${{ matrix.shared_libs }} -DIPHREEQC_ENABLE_MODULE=${{ matrix.enable_module }} -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON
 
     - name: CMake configure
       if: runner.os == 'Windows'
