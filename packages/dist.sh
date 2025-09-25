@@ -208,7 +208,7 @@ SED_FILES="$DISTPATH/configure.ac \
 for vsn_file in $SED_FILES
 do
   sed \
-   -e "s/AC_INIT(.*)/AC_INIT([IPhreeqc], [$VERSION-$REVISION], [charlton@usgs.gov])/g" \
+   -e "s/AC_INIT(.*)/AC_INIT([IPhreeqc], [$VERSION-$REVISION], [charlton.scott.dev@gmail.com])/g" \
    -e "s/AM_LDFLAGS=-release.*/AM_LDFLAGS=-release $ver_major.$ver_minor.$ver_patch/g" \
    -e "/#define *VER_MAJOR/s/[0-9]\+/$ver_major/" \
    -e "/#define *VER_MINOR/s/[0-9]\+/$ver_minor/" \

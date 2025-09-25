@@ -8,7 +8,7 @@ Authors@R:
     c(person(given = "S.R.",
              family = "Charlton",
              role = c("aut", "cre"),
-             email = "charlton@usgs.gov"),
+             email = "charlton.scott.dev@gmail.com"),
       person(given = "D.L.",
              family = "Parkhurst",
              role = "aut"),
@@ -38,7 +38,7 @@ Description: A geochemical modeling program developed by the US Geological
     Survey that is designed to perform a wide variety of aqueous geochemical
     calculations, including speciation, batch-reaction, one-dimensional 
     reactive-transport, and inverse geochemical calculations.
-Maintainer: S.R. Charlton <charlton@usgs.gov>
+Maintainer: S.R. Charlton <charlton.scott.dev@gmail.com>
 BugReports: https://github.com/usgs-coupled/iphreeqc/issues
 LazyData: yes
 Encoding: UTF-8
